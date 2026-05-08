@@ -151,11 +151,6 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }) => {
               <a href="https://beian.miit.gov.cn" target="_blank" rel="noopener noreferrer" style="color: var(--vp-c-text-2); text-decoration: none;">
                 苏ICP备2024133820号-1
               </a>
-              | 
-              <a href="https://www.rainyun.com/FwindEmi_" target="_blank" rel="noopener noreferrer" style="color: var(--vp-c-brand); text-decoration: none;">
-               雨云
-              </a> 
-              提供计算服务
             </div>
           </div>
         </div>

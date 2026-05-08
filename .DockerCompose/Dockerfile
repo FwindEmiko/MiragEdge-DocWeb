@@ -14,7 +14,7 @@ RUN echo "OK" > /usr/share/nginx/html/health
 EXPOSE 80 88
 
 # 以非 root 用户运行（增强安全性）
-USER nginx
+# USER nginx
 
 # nginx 启动命令
 CMD ["nginx", "-g", "daemon off;"]

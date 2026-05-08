@@ -13,7 +13,7 @@
 ## 简单语音聊天(Simple Voice Chat)
 
 <SmartImage
-  src="https://cloud.miragedge.top/d/Dev/web_image/msreg/mod/svc.jpg"
+  src="https://cloud.miragedge.top/d/ServerResourcesPack/web_image/msreg/mod/svc.jpg"
   maxWidth="80px"
   caption="Simple Voice Chat"
 />
@@ -50,7 +50,7 @@
 ## 遥远地平线(Distant_Horizons)
 
 <SmartImage
-  src="https://cloud.miragedge.top/d/Dev/web_image/msreg/mod/dh.jpg"
+  src="https://cloud.miragedge.top/d/ServerResourcesPack/web_image/msreg/mod/dh.jpg"
   maxWidth="240px"
   caption="ChatImage"
 />
@@ -63,7 +63,7 @@
 ## 聊天图片显示(ChatImage)
 
 <SmartImage
-  src="https://cloud.miragedge.top/d/Dev/web_image/msreg/mod/chatImage.jpg"
+  src="https://cloud.miragedge.top/d/ServerResourcesPack/web_image/msreg/mod/chatImage.jpg"
   maxWidth="240px"
   caption="ChatImage"
 />
@@ -73,7 +73,7 @@
 当客户端安装了此模组，通过群服互通发送的消息包含图片时，可在游戏中显示预览图片
 
 <SmartImage
-  src="https://cloud.miragedge.top/d/Dev/web_image/msreg/mod/chatImage_show.png"
+  src="https://cloud.miragedge.top/d/ServerResourcesPack/web_image/msreg/mod/chatImage_show.png"
   maxWidth="550px"
   caption="ChatImage_show"
 />
@@ -81,7 +81,7 @@
 ## 音乐点播姬(AllMusic)
 
 <SmartImage
-  src="https://cloud.miragedge.top/d/Dev/web_image/msreg/mod/allmusic.jpg"
+  src="https://cloud.miragedge.top/d/ServerResourcesPack/web_image/msreg/mod/allmusic.jpg"
   maxWidth="240px"
   caption="AllMusic"
 />
@@ -137,7 +137,7 @@
 ## 连锁采集(VeinMiner)
 
 <SmartImage
-  src="https://cloud.miragedge.top/d/Dev/web_image/msreg/mod/VeinMiner.jpg"
+  src="https://cloud.miragedge.top/d/ServerResourcesPack/web_image/msreg/mod/VeinMiner.jpg"
   maxWidth="240px"
   caption="VeinMiner"
 />

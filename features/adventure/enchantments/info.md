@@ -105,7 +105,7 @@
 | 50 | 550 | +4/级（稳定） |
 
 <SmartImage
-  src="https://cloud.miragedge.top/d/Dev/web_image/features/adventure/enchantments/anvil_penalty.png"
+  src="https://cloud.miragedge.top/d/ServerResourcesPack/web_image/features/adventure/enchantments/anvil_penalty.png"
   alt="附魔惩罚计算曲线"
   caption="附魔惩罚计算曲线"
   maxWidth="500px"

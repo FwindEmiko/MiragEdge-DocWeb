@@ -68,7 +68,7 @@
 5. 登录微软账户
 
 <SmartImage
-  src="https://cloud.miragedge.top/d/Dev/web_image/msreg/tutorial/BEGame.png"
+  src="https://cloud.miragedge.top/d/ServerResourcesPack/web_image/msreg/tutorial/BEGame.png"
   alt="基岩版群文件目录"
   caption="基岩版群文件目录"
 />
@@ -99,25 +99,25 @@
 
 1. 进入游戏，在游戏主界面点击设置
 
-<SmartImage src="https://cloud.miragedge.top/d/Dev/web_image/msreg/tutorial/msreg1.png" alt="注册" maxWidth="400px" />
+<SmartImage src="https://cloud.miragedge.top/d/ServerResourcesPack/web_image/msreg/tutorial/msreg1.png" alt="注册" maxWidth="400px" />
 
 2. 点击「通用」中的「档案」部分
 
-<SmartImage src="https://cloud.miragedge.top/d/Dev/web_image/msreg/tutorial/msreg2.png" alt="注册" maxWidth="400px" />
+<SmartImage src="https://cloud.miragedge.top/d/ServerResourcesPack/web_image/msreg/tutorial/msreg2.png" alt="注册" maxWidth="400px" />
 
 3. 进入档案设置后，点击【「免费」注册】
 4. 记得开启「使用移动数据」选项，可避免一些不必要的问题
 
-<SmartImage src="https://cloud.miragedge.top/d/Dev/web_image/msreg/tutorial/msreg3.png" alt="注册" maxWidth="400px" />
+<SmartImage src="https://cloud.miragedge.top/d/ServerResourcesPack/web_image/msreg/tutorial/msreg3.png" alt="注册" maxWidth="400px" />
 
 5. 点击免费注册后，会弹出一个提示框（没有就忽略这一步）
 6. 选择「保存至 Microsoft 账户」
 
-<SmartImage src="https://cloud.miragedge.top/d/Dev/web_image/msreg/tutorial/msreg4.png" alt="注册" maxWidth="400px" />
+<SmartImage src="https://cloud.miragedge.top/d/ServerResourcesPack/web_image/msreg/tutorial/msreg4.png" alt="注册" maxWidth="400px" />
 
 7. 进入登陆界面后，点击登陆，如果有账户请直接登陆，没有账户请按提示注册
 
-<SmartImage src="https://cloud.miragedge.top/d/Dev/web_image/msreg/tutorial/msreg5.png" alt="注册" maxWidth="400px" />
+<SmartImage src="https://cloud.miragedge.top/d/ServerResourcesPack/web_image/msreg/tutorial/msreg5.png" alt="注册" maxWidth="400px" />
 
 ### 网页注册
 
@@ -125,6 +125,6 @@
 2. 点击右上角头像图标
 3. 选择「创建账户」根据引导完成注册
 
-<SmartImage src="https://cloud.miragedge.top/d/Dev/web_image/msreg/tutorial/msreg6.png" alt="注册" maxWidth="400px" />
+<SmartImage src="https://cloud.miragedge.top/d/ServerResourcesPack/web_image/msreg/tutorial/msreg6.png" alt="注册" maxWidth="400px" />
 
 > 💡 完成安装了？[前往入服教程](./serverjoin)

@@ -42,7 +42,7 @@
 1. 进入游戏主界面 → 选择「服务器」
 2. 左侧列表滑动至底部点击「添加服务器」
 
-<SmartImage src="https://cloud.miragedge.top/d/Dev/web_image/msreg/tutorial/BEGame.png" alt="添加服务器" maxWidth="400px" />
+<SmartImage src="https://cloud.miragedge.top/d/ServerResourcesPack/web_image/msreg/tutorial/BEGame.png" alt="添加服务器" maxWidth="400px" />
 
 3. 填写连接信息：
    - 服务器名称：我爱狐狸[自定义备注]

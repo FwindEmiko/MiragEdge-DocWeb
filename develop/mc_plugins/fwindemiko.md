@@ -2,19 +2,19 @@
 
 部分为闭源插件，会无法访问仓库
 
+## FE_Pluck（除魔）
+### 基础信息: 
+- 作者：F.windEmiko (狐风轩汐)
+- 代码仓库：https://github.com/fwindemiko/FE_Pluck
+### 功能：
+- 卸魔系统 - 将装备附魔剥离为附魔书
+
 ## FE_Quests（冒险等级任务）
 ### 基础信息: 
 - 作者：F.windEmiko (狐风轩汐)
 - 代码仓库：https://github.com/fwindemiko/FE_Quests
 ### 功能：
 - 为玩家提供教程引导，功能解锁，冒险经验等级升级的功能
-
-## FE_ItemsCore（物品功能核心）
-### 基础信息: 
-- 作者：F.windEmiko (狐风轩汐)
-- 代码仓库：https://github.com/fwindemiko/FE_ItemsCore
-### 功能：
-- 结合各种自定义物品插件，实现物品的特殊效果
 
 ## FE_ItemsCore（物品功能核心）
 ### 基础信息: 

@@ -1,7 +1,7 @@
 # 独特功能
 
 <SmartImage
-  src="https://cloud.miragedge.top/d/Dev/web_image/features/base/function/hero.png"
+  src="https://cloud.miragedge.top/d/ServerResourcesPack/web_image/features/base/function/hero.png"
   alt="独特功能"
   caption="锐界幻境 · 独特功能"
   width="300"
@@ -43,7 +43,7 @@
 - 💪 使用方法：喝下即可获得经验值
 
 <SmartImage
-  src="https://cloud.miragedge.top/d/Dev/web_image/features/base/function/empty_xp_bottle.png"
+  src="https://cloud.miragedge.top/d/ServerResourcesPack/web_image/features/base/function/empty_xp_bottle.png"
   alt="经验之瓶合成"
   caption="合成配方"
   maxWidth="300px"
@@ -64,7 +64,7 @@
 用**空铁桶**右键小史莱姆即可抓获！
 
 <SmartImage
-  src="https://cloud.miragedge.top/d/Dev/web_image/features/base/function/slime_ball.gif"
+  src="https://cloud.miragedge.top/d/ServerResourcesPack/web_image/features/base/function/slime_ball.gif"
   alt="史莱姆桶演示"
   caption="快乐的史莱姆桶"
   maxWidth="300px"
@@ -90,7 +90,7 @@
 - 🌾 右键农田可**范围收获 + 自动补种**
 
 <SmartImage
-  src="https://cloud.miragedge.top/d/Dev/web_image/features/base/function/sickle_show.gif"
+  src="https://cloud.miragedge.top/d/ServerResourcesPack/web_image/features/base/function/sickle_show.gif"
   alt="镰刀演示"
   caption="镰刀收获演示"
   maxWidth="300px"
@@ -106,7 +106,7 @@
 - ✅ 获得**额外产出**（多件物品概率提升）
 
 <SmartImage
-  src="https://cloud.miragedge.top/d/Dev/web_image/features/base/function/better-harvesting.gif"
+  src="https://cloud.miragedge.top/d/ServerResourcesPack/web_image/features/base/function/better-harvesting.gif"
   alt="优化种植演示"
   caption="一键收获+种"
   maxWidth="300px"
@@ -121,7 +121,7 @@
 两个门组成的大门，**右键**或**红石信号**均可同时打开！
 
 <SmartImage
-  src="https://cloud.miragedge.top/d/Dev/web_image/features/base/function/double-doors.gif"
+  src="https://cloud.miragedge.top/d/ServerResourcesPack/web_image/features/base/function/double-doors.gif"
   alt="双开门演示"
   caption="双开门"
   maxWidth="300px"
@@ -141,7 +141,7 @@
 - ⏱️ 冷却时间：1000ms
 
 <SmartImage
-  src="https://cloud.miragedge.top/d/Dev/web_image/features/base/function/箱子整理.gif"
+  src="https://cloud.miragedge.top/d/ServerResourcesPack/web_image/features/base/function/箱子整理.gif"
   alt="箱子整理演示"
   caption="自动整理"
   maxWidth="300px"
@@ -176,7 +176,7 @@
 在**土径**上行走可获得移动加速！现在真的有必要修一条路了！
 
 <SmartImage
-  src="https://cloud.miragedge.top/d/Dev/web_image/features/base/function/土径加速.gif"
+  src="https://cloud.miragedge.top/d/ServerResourcesPack/web_image/features/base/function/土径加速.gif"
   alt="土径加速演示"
   caption="土径加速"
   maxWidth="300px"
@@ -189,7 +189,7 @@
 **凋零**和**苦力怕**爆炸后，被破坏的方块会**慢慢恢复原样**！
 
 <SmartImage
-  src="https://cloud.miragedge.top/d/Dev/web_image/features/base/function/creeper-protection.gif"
+  src="https://cloud.miragedge.top/d/ServerResourcesPack/web_image/features/base/function/creeper-protection.gif"
   alt="爆炸保护演示"
   caption="时间回溯保护"
   maxWidth="300px"

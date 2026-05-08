@@ -271,7 +271,7 @@ export default defineConfig({
                 { text: '品质等级', link: '/features/adventure/enchantments/rarity' },
                 { text: '功能分类', link: '/features/adventure/enchantments/group' },
                 { text: '附魔列表', link: '/features/adventure/enchantments/list' },
-                { text: '祛魔系统', link: '/features/adventure/enchantments/chesed' },
+                { text: '祛魔系统', link: '/features/adventure/enchantments/separator' },
               ]
             },
             {

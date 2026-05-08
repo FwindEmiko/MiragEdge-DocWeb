@@ -4,7 +4,7 @@
 在保持原鞘翅功能属性的情况下，可再提供6点护甲值，并大幅提高装备耐久  
 
 <SmartImage 
-  src="https://cloud.miragedge.top/d/Dev/web_image/features/adventure/mmo/reinforced_elytra.png" 
+  src="https://cloud.miragedge.top/d/ServerResourcesPack/web_image/features/adventure/mmo/reinforced_elytra.png" 
   alt="下界合金鞘翅"
   caption="下界合金鞘翅"
   maxWidth="350px"
@@ -16,7 +16,7 @@
 如果你不会合成镰刀，可以看这个: [镰刀](/features/base/function.md#镰刀)  
 
 <SmartImage 
-  src="https://cloud.miragedge.top/d/Dev/web_image/features/adventure/mmo/netherite_sickle.png" 
+  src="https://cloud.miragedge.top/d/ServerResourcesPack/web_image/features/adventure/mmo/netherite_sickle.png" 
   alt="下界合金镰刀"
   caption="下界合金镰刀"
   maxWidth="350px"

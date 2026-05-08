@@ -71,15 +71,16 @@ jobs:
           name: site
           path: ./
       - name: 部署
-        uses: webfactory/ssh-agent@v0.5.3
+        uses: webfactory/ssh-agent@v0.9.0
         with:
           ssh-private-key: ${{ secrets.actions }}
       - name: 远程部署
         run: |
           set -e
-          ssh-keyscan -H 110.42.45.207 >> ~/.ssh/known_hosts 2>/dev/null || true
-          scp -o ConnectTimeout=60 -o StrictHostKeyChecking=no site.tar.gz root@110.42.45.207:/tmp/
-          ssh -o ConnectTimeout=60 -o StrictHostKeyChecking=no root@110.42.45.207 << 'ENDSSH'
+          ssh-keyscan -H miragedge.top >> ~/.ssh/known_hosts 2>/dev/null || true
+          ssh-keyscan -H deploy.miragedge.top >> ~/.ssh/known_hosts 2>/dev/null || true
+          scp -o ConnectTimeout=60 -o StrictHostKeyChecking=no site.tar.gz root@deploy.miragedge.top:/tmp/
+          ssh -o ConnectTimeout=60 -o StrictHostKeyChecking=no root@deploy.miragedge.top << 'ENDSSH'
             mkdir -p /www/MiragEdge/MiragEdge-DocWeb/build/miragedge.top/
             rm -rf /www/MiragEdge/MiragEdge-DocWeb/build/miragedge.top/*
             tar -xzf /tmp/site.tar.gz -C /www/MiragEdge/MiragEdge-DocWeb/build/miragedge.top/

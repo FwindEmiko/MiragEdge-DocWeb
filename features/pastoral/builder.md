@@ -19,7 +19,7 @@
 - 💵 赚钱功能：还能用来赚钱！
 
 <SmartImage
-  src="https://cloud.miragedge.top/d/Dev/web_image/features/base/建材等价交换.png"
+  src="https://cloud.miragedge.top/d/ServerResourcesPack/web_image/features/base/建材等价交换.png"
   alt="建材等价交换"
   caption="建材等价交换"
   maxWidth="300px"
@@ -37,7 +37,7 @@
 可控制：大小、姿势、无敌、发光、隐形、放置物品等
 
 <SmartImage
-  src="https://cloud.miragedge.top/d/Dev/web_image/features/base/盔甲架编辑器.png"
+  src="https://cloud.miragedge.top/d/ServerResourcesPack/web_image/features/base/盔甲架编辑器.png"
   alt="盔甲架编辑器"
   caption="盔甲架编辑器"
   maxWidth="300px"
@@ -72,7 +72,7 @@
 > ⚠️ 基岩版不兼容切换来源模式
 
 <SmartImage
-  src="https://cloud.miragedge.top/d/Dev/web_image/features/pastoral/builder/trowel.png"
+  src="https://cloud.miragedge.top/d/ServerResourcesPack/web_image/features/pastoral/builder/trowel.png"
   alt="抹刀合成"
   caption="合成配方"
   maxWidth="250px"
@@ -81,7 +81,7 @@
 />
 
 <SmartImage
-  src="https://cloud.miragedge.top/d/Dev/web_image/features/pastoral/builder/trowel_show.gif"
+  src="https://cloud.miragedge.top/d/ServerResourcesPack/web_image/features/pastoral/builder/trowel_show.gif"
   alt="抹刀演示"
   caption="功能展示"
   maxWidth="300px"
@@ -98,7 +98,7 @@
 - 📌 类似：调试棒功能
 
 <SmartImage
-  src="https://cloud.miragedge.top/d/Dev/web_image/features/pastoral/builder/file.png"
+  src="https://cloud.miragedge.top/d/ServerResourcesPack/web_image/features/pastoral/builder/file.png"
   alt="锉刀合成"
   caption="合成配方"
   maxWidth="250px"
