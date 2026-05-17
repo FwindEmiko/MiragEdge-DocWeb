@@ -146,6 +146,8 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }) => {
           <div class="container">
             <div class="doc-footer-content">
               <a href="https://space.bilibili.com/359174372" target="_blank" class="doc-footer-link">© 2020-2026 锐界幻境与贡献者</a>
+              <span style="color: var(--vp-c-text-3); margin: 0 6px;">|</span>
+              <a href="/soul" class="doc-footer-link" style="color: var(--vp-c-brand); font-weight: 600;" title="狐魇星玖 · 灵魂文档">🦊 SOUL</a>
             </div>  
             <div class="doc-footer-content">
               <a href="https://beian.miit.gov.cn" target="_blank" rel="noopener noreferrer" style="color: var(--vp-c-text-2); text-decoration: none;">
