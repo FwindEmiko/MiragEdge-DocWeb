@@ -460,7 +460,9 @@ export default defineConfig({
   // 清理死链警告
   ignoreDeadLinks: [
     '/docs/develop/intro',
-    '/docs/ServerRule'
+    '/docs/ServerRule',
+    '/develop/mc_plugins/emcshop',
+    '/develop/mc_plugins/fe_fly'
   ],
   
   // 自定义 Sitemap(搜索映射表) 生成
