@@ -167,8 +167,8 @@ export default defineConfig({
         activeMatch: '^/develop/'
       },
       { 
-        text: '👥 官方Q群', 
-        link: '/manual/qq_group' 
+        text: '📊 原创插件', 
+        link: '/plugins/' 
       },
       {
        text: '🔗 相关链接', 
@@ -332,7 +332,7 @@ export default defineConfig({
  
       '/develop/': [
         { text: '👥 开发团队', link: '/develop/index' },
-        {
+        /* {
           text: '🎮 插件开发',
           collapsed: false,
           items: [
@@ -345,7 +345,7 @@ export default defineConfig({
               ]
             },
           ]
-        },
+         },*/
         {
           text: '⚙️ 插件配置',
           collapsed: false,
@@ -379,9 +379,26 @@ export default defineConfig({
           ]
         },
       ],
+      
+      '/plugins/': [
+        { text: '📋 项目开发说明', link: '/plugins/index' },
+        { text: '📊 原创插件列表', link: '/plugins/list' },
+        {
+          text: '⚔️ PVP竞技场系统',
+          collapsed: false,
+          items: [
+            { text: '安装配置', link: '/plugins/fepvp/' },
+            { text: '竞技场管理', link: '/plugins/fepvp/arena' },
+            { text: '装备组合管理', link: '/plugins/fepvp/kit' },
+            { text: '玩家指南', link: '/plugins/fepvp/guide' },
+            { text: '配置参考', link: '/plugins/fepvp/config' },
+            { text: '权限节点', link: '/plugins/fepvp/permissions' },
+            { text: '命令参考', link: '/plugins/fepvp/commands' },
+            { text: '数据存储', link: '/plugins/fepvp/storage' },
+          ]
+        },
+      ],
     },
-    
-    
     // 大纲配置
     outline: {
       level: [1, 4],

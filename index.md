@@ -17,6 +17,9 @@ hero:
     - theme: alt
       text: 玩法介绍
       link: /features
+    - theme: alt
+      text: 官方Q群
+      link: /manual/qq_group
 
 features:
   - icon: 🚢

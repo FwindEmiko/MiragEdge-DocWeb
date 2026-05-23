@@ -95,8 +95,19 @@
 - 自动检测显示名、Lora词条、注册名中带有特定关键词的附魔并清除该物品
 - 可用于处理数据包异常加入的特殊附魔
 
+## FE_PVP（PVP竞技场系统）
+### 基础信息:
+- 作者：F.windEmiko (狐风轩汐)
+- 代码仓库：https://github.com/fwindemiko/FE_PVP
+### 功能：
+- 完整的 PVP 竞技场系统，支持单挑（1v1）和团队竞技（2v2/3v3/4v4）
+- ELO 段位排位系统，快速匹配队列
+- 装备组合（Kit）管理，GUI 编辑器
+- PlaceholderAPI 占位符支持
+- 详细文档：[/plugins/fepvp](/plugins/fepvp/)
+
 ## FE_MWSarden
-### 基础信息: 
+### 基础信息:
 - 作者：F.windEmiko (狐风轩汐)
 - 代码仓库：https://github.com/fwindemiko/FE_MWSarden
 ### 功能：
