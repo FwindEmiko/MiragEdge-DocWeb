@@ -243,7 +243,7 @@ const givemoney = [
 </VPTeamPage>
 
 <a href="https://openomy.com/fwindemiko/MiragEdge-DocWeb" target="_blank" style="display: block; width: 100%;" align="center">
-  <img src="https://openomy.com/svg?repo=fwindemiko/MiragEdge-DocWeb&chart=bubble&latestMonth=1" target="_blank" alt="Contribution Leaderboard" style="display: block; width: 100%;" />
+  <img src="https://openomy.com/svg?repo=fwindemiko/MiragEdge-DocWeb&chart=bubble&latestMonth=12" target="_blank" alt="Contribution Leaderboard" style="display: block; width: 100%;" />
 </a>
 
 **以上名单，排名不分前后**  
