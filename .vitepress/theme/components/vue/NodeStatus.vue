@@ -224,6 +224,7 @@ onUnmounted(() => {
   font-weight: bold;
   color: var(--vp-c-text-2);
   min-width: 70px;
+  flex: 0 0 auto;
 }
 
 .detail-value {
