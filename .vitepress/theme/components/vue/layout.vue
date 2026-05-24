@@ -22,6 +22,9 @@ const { route } = useRouter();
 const { isDark, page } = useData();
 const transitionName = ref('scale-in');
 
+const buildId = __BUILD_ID__
+const buildSha = __BUILD_SHA__
+
 // 检测是否为 404 页面
 const is404 = computed(() => page.value.isNotFound);
 
@@ -153,6 +156,10 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }) => {
               <a href="https://beian.miit.gov.cn" target="_blank" rel="noopener noreferrer" style="color: var(--vp-c-text-2); text-decoration: none;">
                 苏ICP备2024133820号-1
               </a>
+            </div>
+            <div class="doc-footer-content" v-if="buildId !== 'dev'" style="margin-top: 4px; font-size: 12px; color: var(--vp-c-text-3);">
+              Build #{{ buildId }}
+              <template v-if="buildSha"> · {{ buildSha }}</template>
             </div>
           </div>
         </div>

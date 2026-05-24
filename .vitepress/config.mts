@@ -60,6 +60,10 @@ export default defineConfig({
   
   // Vite 配置
   vite: {
+    define: {
+      __BUILD_ID__: JSON.stringify(process.env.GITHUB_RUN_NUMBER || 'dev'),
+      __BUILD_SHA__: JSON.stringify(process.env.GITHUB_SHA ? process.env.GITHUB_SHA.substring(0, 7) : ''),
+    },
     plugins: [
       MermaidPlugin(),
       addContributorsPlugin(),
