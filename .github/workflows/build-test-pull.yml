@@ -4,7 +4,6 @@ concurrency:
   group: ci-${{ github.ref }}
   cancel-in-progress: true
 
-# 添加权限以获取完整历史
 permissions:
   contents: read
   pull-requests: read
@@ -22,17 +21,21 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # 获取完整 git 历史，用于 contributors 和 lastUpdated
+          fetch-depth: 0
       - uses: pnpm/action-setup@v2
         with:
           version: ${{ env.PNPM_VERSION }}
       - uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-      - run: pnpm install && pnpm run typecheck 2>&1 || echo "跳过"
+          cache: 'pnpm'
+      - run: pnpm install --frozen-lockfile
+      - name: 类型检查
+        run: pnpm run typecheck
+        continue-on-error: false
 
   test:
-    name: 测试
+    name: 构建测试
     runs-on: ubuntu-latest
     needs: lint
     timeout-minutes: 20
@@ -46,7 +49,17 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-      - run: pnpm install && cp -rf ./.vitepress/mark.js ./node_modules/ && pnpm run build
+          cache: 'pnpm'
+      - run: pnpm install --frozen-lockfile
+      - name: 复制 mark.js
+        run: cp -rf ./.vitepress/mark.js ./node_modules/
+      - name: 构建
+        run: pnpm run build
+      - name: 检查构建产物大小
+        run: |
+          DIST_SIZE=$(du -sh .vitepress/dist | cut -f1)
+          echo "📦 构建产物大小: $DIST_SIZE"
+          echo "## 构建产物大小: $DIST_SIZE" >> $GITHUB_STEP_SUMMARY
       - name: 打包
         if: github.event_name == 'push'
         run: tar -czf site.tar.gz -C .vitepress/dist .
@@ -56,7 +69,7 @@ jobs:
         with:
           name: site
           path: site.tar.gz
-          retention-days: 1
+          retention-days: 3
 
   deploy:
     name: 部署
@@ -77,13 +90,15 @@ jobs:
       - name: 远程部署
         run: |
           set -e
+          mkdir -p ~/.ssh
           ssh-keyscan -H miragedge.top >> ~/.ssh/known_hosts 2>/dev/null || true
           ssh-keyscan -H deploy.miragedge.top >> ~/.ssh/known_hosts 2>/dev/null || true
-          scp -o ConnectTimeout=60 -o StrictHostKeyChecking=no site.tar.gz root@deploy.miragedge.top:/tmp/
-          ssh -o ConnectTimeout=60 -o StrictHostKeyChecking=no root@deploy.miragedge.top << 'ENDSSH'
+          scp -o ConnectTimeout=60 site.tar.gz root@deploy.miragedge.top:/tmp/
+          ssh -o ConnectTimeout=60 root@deploy.miragedge.top << 'ENDSSH'
+            set -e
             mkdir -p /www/MiragEdge/MiragEdge-DocWeb/build/miragedge.top/
             rm -rf /www/MiragEdge/MiragEdge-DocWeb/build/miragedge.top/*
             tar -xzf /tmp/site.tar.gz -C /www/MiragEdge/MiragEdge-DocWeb/build/miragedge.top/
             rm /tmp/site.tar.gz
-            echo "部署成功"
+            echo "✅ 部署成功"
           ENDSSH
