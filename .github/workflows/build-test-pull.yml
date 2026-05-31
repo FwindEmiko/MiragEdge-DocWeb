@@ -28,8 +28,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: 'pnpm'
-      - run: pnpm install --frozen-lockfile
+
+      - run: pnpm install
       - name: 类型检查
         run: pnpm run typecheck
         continue-on-error: false
@@ -49,8 +49,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: 'pnpm'
-      - run: pnpm install --frozen-lockfile
+
+      - run: pnpm install
       - name: 复制 mark.js
         run: cp -rf ./.vitepress/mark.js ./node_modules/
       - name: 构建
@@ -102,3 +102,4 @@ jobs:
             rm /tmp/site.tar.gz
             echo "✅ 部署成功"
           ENDSSH
+
