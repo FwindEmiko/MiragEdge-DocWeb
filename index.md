@@ -114,17 +114,11 @@ features:
 </ClientOnly>
 
 <script setup>
-import { onMounted, onUnmounted, nextTick, ref, watch } from 'vue'
+import { onMounted, onUnmounted } from 'vue'
 import { useRouter } from 'vitepress'
 
 const { route } = useRouter()
 
-const images = [
-  '/title_img/icon-1.png',
-  '/title_img/icon-2.png',
-  '/title_img/icon-3.png',
-]
-const hiddenImage = '/title_img/icon-dis.png'
 
 let animationFrameId = null
 let particles = []
@@ -291,6 +285,18 @@ function animate() {
 }
 
 onMounted(() => {
+  // 随机选择 hero 图片
+  const heroIcons = [
+    '/title_img/icon-1.png',
+    '/title_img/icon-2.png',
+    '/title_img/icon-3.png',
+  ]
+  const randomIcon = heroIcons[Math.floor(Math.random() * heroIcons.length)]
+  const heroImg = document.querySelector('.VPHomeHero img')
+  if (heroImg) {
+    heroImg.src = randomIcon
+  }
+  
   initStarEffect()
 })
 
