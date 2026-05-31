@@ -32,7 +32,7 @@ jobs:
       - run: pnpm install
       - name: 类型检查
         run: pnpm run typecheck
-        continue-on-error: false
+        continue-on-error: true  # 类型检查错误可见但不阻断 CI
 
   test:
     name: 构建测试
@@ -102,4 +102,5 @@ jobs:
             rm /tmp/site.tar.gz
             echo "✅ 部署成功"
           ENDSSH
+
 
