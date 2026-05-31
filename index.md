@@ -287,6 +287,32 @@ function animate() {
   ctx.globalCompositeOperation = 'source-over'
 }
 
+function findHeroImage() {
+  const selectors = [
+    '.VPHomeHero .VPImage img',
+    '.VPHomeHero img',
+    'main .VPImage img',
+    '[alt="MiragEdge"]'
+  ]
+  for (const selector of selectors) {
+    const found = document.querySelector(selector)
+    if (found) return found
+  }
+  return null
+}
+
+function replaceHeroImage(randomImage) {
+  const img = new Image()
+  img.onload = () => {
+    heroImage.src = randomImage
+    heroImage.alt = 'xingjiu'
+  }
+  img.onerror = () => {
+    console.warn('Failed to load hero image:', randomImage)
+  }
+  img.src = randomImage
+}
+
 onMounted(async () => {
   await nextTick()
   
@@ -296,31 +322,25 @@ onMounted(async () => {
   ]
   const randomImage = weightedImages[Math.floor(Math.random() * weightedImages.length)]
   
-  const selectors = [
-    '.VPHomeHero .VPImage img',
-    '.VPHomeHero img',
-    'main .VPImage img',
-    '[alt="MiragEdge"]'
-  ]
-  
-  for (const selector of selectors) {
-    const found = document.querySelector(selector)
-    if (found) {
-      heroImage = found
-      break
-    }
-  }
+  heroImage = findHeroImage()
   
   if (heroImage) {
-    const img = new Image()
-    img.onload = () => {
-      heroImage.src = randomImage
-      heroImage.alt = 'xingjiu'
-    }
-    img.onerror = () => {
-      console.warn('Failed to load hero image:', randomImage)
-    }
-    img.src = randomImage
+    replaceHeroImage(randomImage)
+  } else {
+    // VitePress hydration 可能还没完成，等待元素出现
+    let retries = 0
+    const maxRetries = 30
+    const observer = new MutationObserver(() => {
+      heroImage = findHeroImage()
+      if (heroImage || retries >= maxRetries) {
+        observer.disconnect()
+        if (heroImage) replaceHeroImage(randomImage)
+      }
+      retries++
+    })
+    observer.observe(document.body, { childList: true, subtree: true })
+    // 安全超时：3秒后停止观察
+    setTimeout(() => observer.disconnect(), 3000)
   }
   
   initStarEffect()
