@@ -7,7 +7,7 @@ echo 开始构建项目...
 echo ==============================================
 
 echo [1/2] 正在构建锐界幻境文档站项目...
-call npm run build
+call pnpm run build
 if !errorlevel! neq 0 (
     echo 锐界幻境文档站项目构建失败！
     pause
