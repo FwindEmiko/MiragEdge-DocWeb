@@ -199,17 +199,36 @@ export default {
     }
   },
 
-  // 新增 mounted 钩子，处理图片已缓存或加载完成的情况
   mounted() {
     const img = this.$refs.imageRef;
-    if (img && img.complete) {
+    if (!img) return;
+
+    // 图片已缓存，直接处理
+    if (img.complete) {
       if (img.naturalWidth) {
-        // 图片成功加载，手动触发 onImageLoad
         this.onImageLoad({ target: img });
       } else {
-        // 图片加载失败（naturalWidth 为 0）
         this.onImageError();
       }
+      return;
+    }
+
+    // 懒加载图片：用 IntersectionObserver 等待进入视口
+    if (this.lazy && 'IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            observer.disconnect();
+            // 兜底：浏览器干预 load 事件时，手动处理
+            if (img.complete && img.naturalWidth) {
+              this.onImageLoad({ target: img });
+            }
+            break;
+          }
+        }
+      }, { rootMargin: '200px' });
+      observer.observe(img);
+      setTimeout(() => observer.disconnect(), 5000);
     }
   },
 
