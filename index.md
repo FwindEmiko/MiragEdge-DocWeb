@@ -8,7 +8,7 @@ hero:
   text: "Minecraft 生存服务器"
   tagline: 👼🏻 远离困扰之地（锐界）和天堂般的境地（幻境），在数字荒漠中打造一片绿洲，让每个玩家都能找到属于自己的幻境
   image:
-    src: /images/resourcepack/items_skin/food/sweet_berries_cupcake.png
+    src: /title_img/icon-1.png
     alt: MiragEdge
   actions:
     - theme: brand
@@ -290,96 +290,10 @@ function animate() {
   ctx.globalCompositeOperation = 'source-over'
 }
 
-function findHeroImage() {
-  const selectors = [
-    '.VPHomeHero .VPImage img',
-    '.VPHomeHero img',
-    'main .VPImage img',
-    '[alt="MiragEdge"]'
-  ]
-  for (const selector of selectors) {
-    const found = document.querySelector(selector)
-    if (found) return found
-  }
-  return null
-}
-
-function replaceHeroImage(randomImage) {
-  const img = new Image()
-  img.onload = () => {
-    heroImage.src = randomImage
-    heroImage.alt = 'xingjiu'
-  }
-  img.onerror = () => {
-    console.warn('Failed to load hero image:', randomImage)
-  }
-  img.src = randomImage
-}
-
-function replaceHero(randomImage) {
-  // 选择器：精确匹配 VitePress hero 图片
-  const selectors = [
-    '.VPHomeHero .VPImage img',
-    '.VPHomeHero img',
-    'main .VPImage img',
-    '[alt="MiragEdge"]'
-  ]
-  
-  for (const sel of selectors) {
-    const el = document.querySelector(sel)
-    if (el && el.tagName === 'IMG') {
-      heroImage = el
-      // 直接替换，不检查 naturalWidth（首次加载时可能为 0）
-      const loader = new Image()
-      loader.onload = () => {
-        heroImage.src = randomImage
-        heroImage.alt = 'xingjiu'
-      }
-      loader.src = randomImage
-      return true
-    }
-  }
-  return false
-}
-
-onMounted(async () => {
-  await nextTick()
-  await nextTick() // 双重等待确保 DOM 就绪
-  
-  const weightedImages = [
-    ...images.flatMap(img => Array(5).fill(img)),
-    hiddenImage
-  ]
-  const randomImage = weightedImages[Math.floor(Math.random() * weightedImages.length)]
-  
-  // 立即尝试
-  if (replaceHero(randomImage)) {
-    initStarEffect()
-    return
-  }
-  
-  // 轮询等待 DOM 就绪（最多 10 秒）
-  let attempts = 0
-  const timer = setInterval(() => {
-    attempts++
-    if (replaceHero(randomImage) || attempts >= 100) {
-      clearInterval(timer)
-    }
-  }, 100)
-  
+onMounted(() => {
   initStarEffect()
 })
 
-// 路由变化时重新替换
-watch(() => route.path, async () => {
-  await nextTick()
-  const weightedImages = [
-    ...images.flatMap(img => Array(5).fill(img)),
-    hiddenImage
-  ]
-  const randomImage = weightedImages[Math.floor(Math.random() * weightedImages.length)]
-  replaceHero(randomImage)
-})
 
 onUnmounted(() => {
   if (animationFrameId) {
