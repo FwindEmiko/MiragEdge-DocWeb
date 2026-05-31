@@ -7,18 +7,20 @@ body:
     attributes:
       value: |
         感谢您的反馈！请简要描述您发现的问题或改进建议。
-        
+
   - type: input
     id: page
     attributes:
-      label: 相关页面
+      label: 📄 相关页面
       description: 请提供相关的文档页面链接（如适用）
-      placeholder: 例如：https://miragedge.top/develop/index.md
-        
+      placeholder: "例如：https://miragedge.top/manual/review"
+    validations:
+      required: false
+
   - type: textarea
     id: description
     attributes:
-      label: 问题描述/建议
+      label: 💡 问题描述 / 建议
       description: 请描述您发现的问题或您的建议
       placeholder: |
         我发现...
@@ -30,12 +32,12 @@ body:
   - type: dropdown
     id: type
     attributes:
-      label: 反馈类型
+      label: 🏷️ 反馈类型
       description: 这是什么类型的反馈？
       options:
-        - 文档错误
-        - 内容建议
-        - 功能建议
+        - 文档错误（错别字、链接失效等）
+        - 内容建议（补充说明、优化表述等）
+        - 功能建议（新页面、新交互等）
         - 使用疑问
         - 其他
     validations:
@@ -44,7 +46,7 @@ body:
   - type: checkboxes
     id: contribution
     attributes:
-      label: 贡献意向
+      label: 🤝 贡献意向
       description: 您是否有意向帮助改进文档？
       options:
-        - label: 愿意提交 Pull Request 参与改进 
+        - label: 我愿意提交 Pull Request 参与改进
