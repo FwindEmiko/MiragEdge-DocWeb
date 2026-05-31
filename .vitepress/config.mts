@@ -380,6 +380,7 @@ export default defineConfig({
           items: [
             { text: '📅 更新日志', link: '/develop/logs' },
             { text: '🐚 节点状态', link: '/develop/serverstatus' },
+            { text: '💰 计算服务', link: '/develop/ccs_price_list' },
           ]
         },
       ],
