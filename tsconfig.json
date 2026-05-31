@@ -8,12 +8,19 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "esModuleInterop": true,
-    "lib": ["ESNext", "DOM", "DOM.Iterable"],
+    "lib": [
+      "ESNext",
+      "DOM",
+      "DOM.Iterable"
+    ],
     "skipLibCheck": true,
     "noEmit": true,
     "paths": {
-      "@/*": [".vitepress/theme/*"]
-    }
+      "@/*": [
+        ".vitepress/theme/*"
+      ]
+    },
+    "baseUrl": "."
   },
   "include": [
     ".vitepress/theme/**/*.ts",
