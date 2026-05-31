@@ -13,7 +13,8 @@
     "dev": "vitepress dev",
     "build": "vitepress build",
     "preview": "vitepress preview",
-    "contributors": "node ./.vitepress/theme/components/js/contributors.js"
+    "contributors": "node ./.vitepress/theme/components/js/contributors.js",
+    "typecheck": "vue-tsc --noEmit"
   },
   "keywords": [],
   "author": "F.windEmiko",
@@ -45,7 +46,8 @@
     "vitepress-plugin-mermaid": "^2.0.17",
     "vitepress-sidebar": "^1.31.0",
     "vitepress-theme-website": "^1.0.8",
-    "vitest": "^4.0.17"
+    "vitest": "^4.0.17",
+    "vue-tsc": "^2.2.0"
   },
   "dependencies": {
     "@octokit/rest": "^22.0.1",
