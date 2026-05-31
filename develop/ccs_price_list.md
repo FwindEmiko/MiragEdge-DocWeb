@@ -1,6 +1,6 @@
 # 锐界幻境云计算 · 价格表
 
-> **MiragEdge Cloud Computing Service**  
+> **Welcome to MiragEdge Cloud Elastic Compute Service**  
 > 最后更新：2026-06-01
 
 ## 🖥️ 配置一：i5-14600KF 高频游戏服务器
