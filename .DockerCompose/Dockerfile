@@ -1,5 +1,5 @@
 # 基础镜像：使用具体版本的 nginx Alpine 镜像（更轻量安全）
-FROM nginx:1.25-alpine
+FROM nginx:1.27-alpine
 
 # 安装 wget 用于健康检查
 RUN apk add --no-cache wget
@@ -13,8 +13,9 @@ RUN echo "OK" > /usr/share/nginx/html/health
 # 暴露端口
 EXPOSE 80 88
 
-# 以非 root 用户运行（增强安全性）
-# USER nginx
+# 注意：nginx 需要 root 权限绑定 80 端口
+# worker 进程会自动以 nginx 用户运行
+# 如需完全非 root 运行，请改用 8080 端口
 
 # nginx 启动命令
 CMD ["nginx", "-g", "daemon off;"]
