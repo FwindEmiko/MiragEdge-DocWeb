@@ -316,25 +316,35 @@ function replaceHeroImage(randomImage) {
   img.src = randomImage
 }
 
-function tryReplaceHeroImage(randomImage, attempt) {
-  // 查找 hero image：优先精确匹配，再模糊匹配
-  const精确选择器 = '.VPHomeHero .VPImage img'
-  const模糊选择器 = '.VPHomeHero img, main .VPImage img'
+function replaceHero(randomImage) {
+  // 选择器：精确匹配 VitePress hero 图片
+  const selectors = [
+    '.VPHomeHero .VPImage img',
+    '.VPHomeHero img',
+    'main .VPImage img',
+    '[alt="MiragEdge"]'
+  ]
   
-  let el = document.querySelector(精确选择器)
-  if (!el) el = document.querySelector(模糊选择器)
-  
-  // 确认找到的是 hero 图片（不是其他小图标）
-  if (el && el.naturalWidth > 100) {
-    heroImage = el
-    replaceHeroImage(randomImage)
-    return true
+  for (const sel of selectors) {
+    const el = document.querySelector(sel)
+    if (el && el.tagName === 'IMG') {
+      heroImage = el
+      // 直接替换，不检查 naturalWidth（首次加载时可能为 0）
+      const loader = new Image()
+      loader.onload = () => {
+        heroImage.src = randomImage
+        heroImage.alt = 'xingjiu'
+      }
+      loader.src = randomImage
+      return true
+    }
   }
   return false
 }
 
 onMounted(async () => {
   await nextTick()
+  await nextTick() // 双重等待确保 DOM 就绪
   
   const weightedImages = [
     ...images.flatMap(img => Array(5).fill(img)),
@@ -342,38 +352,33 @@ onMounted(async () => {
   ]
   const randomImage = weightedImages[Math.floor(Math.random() * weightedImages.length)]
   
-  // 尝试立即替换
-  if (tryReplaceHeroImage(randomImage, 0)) {
+  // 立即尝试
+  if (replaceHero(randomImage)) {
     initStarEffect()
     return
   }
   
-  // VitePress hydration 可能还没完成，用轮询等待
-  let attempt = 0
-  const maxAttempts = 50
-  const interval = setInterval(() => {
-    attempt++
-    if (tryReplaceHeroImage(randomImage, attempt) || attempt >= maxAttempts) {
-      clearInterval(interval)
+  // 轮询等待 DOM 就绪（最多 10 秒）
+  let attempts = 0
+  const timer = setInterval(() => {
+    attempts++
+    if (replaceHero(randomImage) || attempts >= 100) {
+      clearInterval(timer)
     }
   }, 100)
-  
-  // 安全超时：5秒后停止
-  setTimeout(() => clearInterval(interval), 5000)
   
   initStarEffect()
 })
 
-// 路由变化时也重新替换图片
-watch(() => route.path, () => {
-  nextTick(() => {
-    const weightedImages = [
-      ...images.flatMap(img => Array(5).fill(img)),
-      hiddenImage
-    ]
-    const randomImage = weightedImages[Math.floor(Math.random() * weightedImages.length)]
-    tryReplaceHeroImage(randomImage, 0)
-  })
+// 路由变化时重新替换
+watch(() => route.path, async () => {
+  await nextTick()
+  const weightedImages = [
+    ...images.flatMap(img => Array(5).fill(img)),
+    hiddenImage
+  ]
+  const randomImage = weightedImages[Math.floor(Math.random() * weightedImages.length)]
+  replaceHero(randomImage)
 })
 
 onUnmounted(() => {
