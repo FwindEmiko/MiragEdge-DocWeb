@@ -8,7 +8,7 @@ hero:
   text: "Minecraft 生存服务器"
   tagline: 👼🏻 远离困扰之地（锐界）和天堂般的境地（幻境），在数字荒漠中打造一片绿洲，让每个玩家都能找到属于自己的幻境
   image:
-    src: /images/resourcepack/items_skin/food/sweet_berries_cupcake.png
+    src: /title_img/icon-1.png
     alt: MiragEdge
   actions:
     - theme: brand
@@ -114,17 +114,11 @@ features:
 </ClientOnly>
 
 <script setup>
-import { onMounted, onUnmounted, nextTick, ref, watch } from 'vue'
+import { onMounted, onUnmounted } from 'vue'
 import { useRouter } from 'vitepress'
 
 const { route } = useRouter()
 
-const images = [
-  '/title_img/icon-1.png',
-  '/title_img/icon-2.png',
-  '/title_img/icon-3.png',
-]
-const hiddenImage = '/title_img/icon-dis.png'
 
 let animationFrameId = null
 let particles = []
@@ -290,91 +284,19 @@ function animate() {
   ctx.globalCompositeOperation = 'source-over'
 }
 
-function findHeroImage() {
-  const selectors = [
-    '.VPHomeHero .VPImage img',
-    '.VPHomeHero img',
-    'main .VPImage img',
-    '[alt="MiragEdge"]'
-  ]
-  for (const selector of selectors) {
-    const found = document.querySelector(selector)
-    if (found) return found
+onMounted(() => {
+  // 随机选择 hero 图片（icon-dis.png 小概率出现）
+  const heroIcons = ['/title_img/icon-1.png', '/title_img/icon-2.png', '/title_img/icon-3.png']
+  const weighted = [...heroIcons.flatMap(i => Array(5).fill(i)), '/title_img/icon-dis.png']
+  const randomIcon = weighted[Math.floor(Math.random() * weighted.length)]
+  const heroImg = document.querySelector('.VPHomeHero img')
+  if (heroImg) {
+    heroImg.src = randomIcon
   }
-  return null
-}
-
-function replaceHeroImage(randomImage) {
-  const img = new Image()
-  img.onload = () => {
-    heroImage.src = randomImage
-    heroImage.alt = 'xingjiu'
-  }
-  img.onerror = () => {
-    console.warn('Failed to load hero image:', randomImage)
-  }
-  img.src = randomImage
-}
-
-function tryReplaceHeroImage(randomImage, attempt) {
-  // 查找 hero image：优先精确匹配，再模糊匹配
-  const精确选择器 = '.VPHomeHero .VPImage img'
-  const模糊选择器 = '.VPHomeHero img, main .VPImage img'
-  
-  let el = document.querySelector(精确选择器)
-  if (!el) el = document.querySelector(模糊选择器)
-  
-  // 确认找到的是 hero 图片（不是其他小图标）
-  if (el && el.naturalWidth > 100) {
-    heroImage = el
-    replaceHeroImage(randomImage)
-    return true
-  }
-  return false
-}
-
-onMounted(async () => {
-  await nextTick()
-  
-  const weightedImages = [
-    ...images.flatMap(img => Array(5).fill(img)),
-    hiddenImage
-  ]
-  const randomImage = weightedImages[Math.floor(Math.random() * weightedImages.length)]
-  
-  // 尝试立即替换
-  if (tryReplaceHeroImage(randomImage, 0)) {
-    initStarEffect()
-    return
-  }
-  
-  // VitePress hydration 可能还没完成，用轮询等待
-  let attempt = 0
-  const maxAttempts = 50
-  const interval = setInterval(() => {
-    attempt++
-    if (tryReplaceHeroImage(randomImage, attempt) || attempt >= maxAttempts) {
-      clearInterval(interval)
-    }
-  }, 100)
-  
-  // 安全超时：5秒后停止
-  setTimeout(() => clearInterval(interval), 5000)
   
   initStarEffect()
 })
 
-// 路由变化时也重新替换图片
-watch(() => route.path, () => {
-  nextTick(() => {
-    const weightedImages = [
-      ...images.flatMap(img => Array(5).fill(img)),
-      hiddenImage
-    ]
-    const randomImage = weightedImages[Math.floor(Math.random() * weightedImages.length)]
-    tryReplaceHeroImage(randomImage, 0)
-  })
-})
 
 onUnmounted(() => {
   if (animationFrameId) {
