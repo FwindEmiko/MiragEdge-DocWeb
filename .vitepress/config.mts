@@ -24,10 +24,9 @@ export default defineConfig({
   
   // 头部配置
   head: [
-    ['link', { rel: 'icon', href: '/title_img/xingjiu.png' }],
-    ['link', { rel: 'icon', type: 'image/jpeg', sizes: '32x32', href: '/title_img/xingjiu.png' }],
-    ['link', { rel: 'icon', type: 'image/jpeg', sizes: '16x16', href: '/title_img/xingjiu.png' }],
-    ['link', { rel: 'apple-touch-icon', sizes: '180x180', href: '/title_img/xingjiu.png' }],
+    ['link', { rel: 'icon', href: '/title_img/favicon-32x32.png', sizes: '32x32' }],
+    ['link', { rel: 'icon', href: '/title_img/favicon-16x16.png', sizes: '16x16' }],
+    ['link', { rel: 'apple-touch-icon', href: '/title_img/apple-touch-icon.png', sizes: '180x180' }],
     ['link', { rel: 'manifest', href: '/site.webmanifest' }],
     ['meta', { name: 'theme-color', content: '#3c8772' }],
     ['meta', { name: 'viewport', content: 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' }],
