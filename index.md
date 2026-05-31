@@ -285,13 +285,10 @@ function animate() {
 }
 
 onMounted(() => {
-  // 随机选择 hero 图片
-  const heroIcons = [
-    '/title_img/icon-1.png',
-    '/title_img/icon-2.png',
-    '/title_img/icon-3.png',
-  ]
-  const randomIcon = heroIcons[Math.floor(Math.random() * heroIcons.length)]
+  // 随机选择 hero 图片（icon-dis.png 小概率出现）
+  const heroIcons = ['/title_img/icon-1.png', '/title_img/icon-2.png', '/title_img/icon-3.png']
+  const weighted = [...heroIcons.flatMap(i => Array(5).fill(i)), '/title_img/icon-dis.png']
+  const randomIcon = weighted[Math.floor(Math.random() * weighted.length)]
   const heroImg = document.querySelector('.VPHomeHero img')
   if (heroImg) {
     heroImg.src = randomIcon
