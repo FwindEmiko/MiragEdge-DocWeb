@@ -27,7 +27,7 @@
 ```bash
 Framework: VitePress 1.6.4
 Language: TypeScript 5.9.3
-Build: Node.js with optimized dependencies
+Build: pnpm + Node.js with optimized dependencies
 Visualization: Mermaid, Canvas-confetti
 ```
 
@@ -39,7 +39,7 @@ Visualization: Mermaid, Canvas-confetti
 - **@octokit/rest**: GitHub API客户端
 
 ## 🤝 贡献与支持
-- **GitHub仓库**：[fwindemiko/MiragEdge-DocWeb](https://github.com/fwindemiko/MiragEdge-DocWeb)
+- **GitHub仓库**：[FwindEmiko/MiragEdge-DocWeb](https://github.com/FwindEmiko/MiragEdge-DocWeb)
 - **提交问题**：访问GitHub仓库提交bug报告或功能建议
 - **开发文档**：查看[开发文档](/develop/index.md)了解插件开发与系统架构
 - **社区支持**：加入QQ群获取实时帮助

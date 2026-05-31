@@ -114,7 +114,10 @@ features:
 </ClientOnly>
 
 <script setup>
-import { onMounted, onUnmounted, nextTick, ref } from 'vue'
+import { onMounted, onUnmounted, nextTick, ref, watch } from 'vue'
+import { useRouter } from 'vitepress'
+
+const { route } = useRouter()
 
 const images = [
   '/title_img/icon-1.png',
@@ -313,6 +316,23 @@ function replaceHeroImage(randomImage) {
   img.src = randomImage
 }
 
+function tryReplaceHeroImage(randomImage, attempt) {
+  // 查找 hero image：优先精确匹配，再模糊匹配
+  const精确选择器 = '.VPHomeHero .VPImage img'
+  const模糊选择器 = '.VPHomeHero img, main .VPImage img'
+  
+  let el = document.querySelector(精确选择器)
+  if (!el) el = document.querySelector(模糊选择器)
+  
+  // 确认找到的是 hero 图片（不是其他小图标）
+  if (el && el.naturalWidth > 100) {
+    heroImage = el
+    replaceHeroImage(randomImage)
+    return true
+  }
+  return false
+}
+
 onMounted(async () => {
   await nextTick()
   
@@ -322,28 +342,38 @@ onMounted(async () => {
   ]
   const randomImage = weightedImages[Math.floor(Math.random() * weightedImages.length)]
   
-  heroImage = findHeroImage()
-  
-  if (heroImage) {
-    replaceHeroImage(randomImage)
-  } else {
-    // VitePress hydration 可能还没完成，等待元素出现
-    let retries = 0
-    const maxRetries = 30
-    const observer = new MutationObserver(() => {
-      heroImage = findHeroImage()
-      if (heroImage || retries >= maxRetries) {
-        observer.disconnect()
-        if (heroImage) replaceHeroImage(randomImage)
-      }
-      retries++
-    })
-    observer.observe(document.body, { childList: true, subtree: true })
-    // 安全超时：3秒后停止观察
-    setTimeout(() => observer.disconnect(), 3000)
+  // 尝试立即替换
+  if (tryReplaceHeroImage(randomImage, 0)) {
+    initStarEffect()
+    return
   }
   
+  // VitePress hydration 可能还没完成，用轮询等待
+  let attempt = 0
+  const maxAttempts = 50
+  const interval = setInterval(() => {
+    attempt++
+    if (tryReplaceHeroImage(randomImage, attempt) || attempt >= maxAttempts) {
+      clearInterval(interval)
+    }
+  }, 100)
+  
+  // 安全超时：5秒后停止
+  setTimeout(() => clearInterval(interval), 5000)
+  
   initStarEffect()
+})
+
+// 路由变化时也重新替换图片
+watch(() => route.path, () => {
+  nextTick(() => {
+    const weightedImages = [
+      ...images.flatMap(img => Array(5).fill(img)),
+      hiddenImage
+    ]
+    const randomImage = weightedImages[Math.floor(Math.random() * weightedImages.length)]
+    tryReplaceHeroImage(randomImage, 0)
+  })
 })
 
 onUnmounted(() => {
