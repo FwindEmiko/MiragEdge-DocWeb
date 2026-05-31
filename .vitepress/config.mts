@@ -35,10 +35,11 @@ export default defineConfig({
     ['meta', { property: 'og:title', content: 'MiragEdge 文档中心' }],
     ['meta', { property: 'og:description', content: '锐界幻境 全方位的指南' }],
     ['meta', { property: 'og:type', content: 'website' }],
-    ['meta', { property: 'og:image', content: '/title_img/og-image.png' }],
-    ['meta', { property: 'og:url', content: 'https://docs.miraged.ge' }],
+    ['meta', { property: 'og:image', content: '/title_img/xingjiu.png' }],
+    ['meta', { property: 'og:url', content: 'https://miragedge.top' }],
     ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
-    ['meta', { name: 'twitter:creator', content: '@test_tool' }],
+    ['meta', { name: 'twitter:image', content: '/title_img/xingjiu.png' }],
+    ['meta', { name: 'twitter:creator', content: '@MiragEdge' }],
     // 百度站点验证（如果需要）
     // ['meta', { name: 'baidu-site-verification', content: 'code-xxxxxxxx' }],
     // 360站点验证（如果需要）
