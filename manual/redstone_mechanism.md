@@ -2,40 +2,96 @@
 
 ## 服务器配置
 
-- **视距**：随客户端设置自动调整，最大支持 32
-- **模拟距离**：固定为 6
-- **服务端内核**：Purpur（Paper 分支）
+| 配置项 | 当前值 | 说明 |
+|--------|--------|------|
+| **服务端核心** | Leaf 1.21.11 | 基于 Pufferfish + Gale，性能优化 |
+| **Java 环境** | GraalVM 25 LTS | JIT 编译优化，22% 内存节省 |
+| **视距** | 随客户端设置 | 最大支持 32 |
+| **模拟距离** | 6 | 固定值 |
+| **安全种子** | ✅ 已启用 | 1024 位种子，无法暴力破解 |
 
 ## 反作弊规则
 
-- 不检测方块放置与破坏相关行为（投影打印机放置检测宽松）
-- 混淆种子，无法暴力破解，不提供原始种子
-- 反矿透混淆较宽松
+- ✅ 不检测方块放置与破坏相关行为（投影打印机宽松）
+- ✅ 安全种子计算（无法破解）
+- ✅ 反矿透混淆较宽松
 
 ## 实体串门限制
 
-实体串门（地狱门）：每 3 分钟检查一次服务器过去 1 分钟 TPS 值，当低于 18 时会禁止除玩家之外的实体通过地狱门，直到下一次检查 TPS 大于 18 才会恢复。
+**地狱门实体限制：**
 
-> 💡 实体串门对性能的影响真的很大！这能有效的避免高峰卡顿，维护全服玩家的游戏体验。
+- 每 3 分钟检查 TPS
+- TPS < 18 时禁止实体通过地狱门
+- TPS > 18 时恢复
+
+> 💡 实体串门对性能的影响真的很大！这能有效避免高峰卡顿，维护全服玩家的游戏体验。
 
 ## 特殊修改
-女巫小屋由于数据包结构的修改，范围变大了！(小心全怪塔变女巫塔)
 
-## 特性列表
+- **女巫小屋范围变大**：数据包结构修改，小心全怪塔变女巫塔
 
-### 启用的特性
+## 生电特性列表
 
-- TNT/地毯/铁轨复制（配置项：allow-piston-duplication）
-- 无头活塞（配置项：allow-headless-pistons）
-- 破基岩、末地门框架、折跃门（配置项：allow-permanent-block-break-exploits）
-- 喷射合成/破基岩连点右键（提升发包速率上限）
-- 漏斗行为（支持二倍速分类机等机器）
-- 地狱门区块加载器（实体串门）
+### ✅ 启用的特性
 
-### 禁用的特性
+| 特性 | 配置文件 | 配置项 | 状态 |
+|------|----------|--------|------|
+| **TNT 复制** | paper-global.yml | allow-piston-duplication | ✅ 启用 |
+| **地毯复制** | paper-global.yml | allow-piston-duplication | ✅ 启用 |
+| **铁轨复制** | paper-global.yml | allow-piston-duplication | ✅ 启用 |
+| **无头活塞** | paper-global.yml | allow-headless-pistons | ✅ 启用 |
+| **破基岩** | paper-global.yml | allow-permanent-block-break-exploits | ✅ 启用 |
+| **末地门框架** | paper-global.yml | allow-permanent-block-break-exploits | ✅ 启用 |
+| **折跃门** | paper-global.yml | allow-permanent-block-break-exploits | ✅ 启用 |
+| **喷射合成** | server.properties | network-compression-threshold | 256（已调高） |
+| **漏斗优化** | leaf-global.yml | use-vanilla-hopper | false（使用优化版） |
+| **地狱门区块加载** | paper-global.yml | enable-nether | true |
 
-- 重力方块复制（Paper 已彻底修复）
-- 虚空交易（Paper 已彻底修复）
-- 光照抑制（Paper 已彻底修复）
-- 末影珍珠滞空（Paper 已彻底修复）
-- RNG 附魔等（可预测随机性事件）
+### ❌ 禁用的特性
+
+| 特性 | 原因 | 配置文件 |
+|------|------|----------|
+| **重力方块复制** | Paper 已彻底修复 | paper-global.yml |
+| **虚空交易** | Paper 已彻底修复 | paper-global.yml |
+| **光照抑制** | Paper 已彻底修复 | paper-global.yml |
+| **末影珍珠滞空** | Paper 已彻底修复 | paper-global.yml |
+| **RNG 附魔** | 可预测随机性事件 | paper-global.yml |
+
+## 性能优化（Leaf 特有）
+
+| 优化项 | 配置文件 | 配置项 | 状态 |
+|--------|----------|--------|------|
+| **异步区块发送** | leaf-global.yml | async-chunk-send | ✅ 启用 |
+| **DAB 距离 AI** | leaf-global.yml | dab.enabled | ✅ 启用 |
+| **异步生物生成** | leaf-global.yml | async-mob-spawning | ✅ 启用 |
+| **异步寻路** | leaf-global.yml | async-pathfinding | ✅ 启用 |
+| **异步实体追踪** | leaf-global.yml | async-entity-tracker | ✅ 启用（实验性） |
+| **随机 tick 优化** | leaf-global.yml | optimize-random-tick | ✅ 启用 |
+| **虚拟线程** | leaf-global.yml | use-virtual-thread | ✅ 启用 |
+| **爆炸优化** | paper-world-defaults.yml | optimize-explosions | ✅ 启用 |
+
+## 配置文件位置
+
+```
+/data/config/
+├── paper-global.yml          # Paper 全局配置
+├── paper-world-defaults.yml  # 世界配置
+├── leaf-global.yml           # Leaf 优化配置
+└── gale-global.yml           # Gale 配置
+
+/data/
+├── server.properties         # 服务器属性
+└── bukkit.yml               # Bukkit 配置
+```
+
+## ⚠️ 注意事项
+
+1. **TNT 复制**：仅限服务器端，客户端无法使用
+2. **破基岩**：需要特定操作，建议先测试
+3. **安全种子**：已启用，无法查看原始种子
+4. **异步优化**：部分功能为实验性，可能有兼容问题
+
+---
+
+_最后更新：2026-06-03_
+_适用版本：Leaf 1.21.11-155 + GraalVM 25_
