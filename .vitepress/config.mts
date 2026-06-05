@@ -268,6 +268,10 @@ export default defineConfig({
               link: '/features/adventure/levelledmobs',
             },
             {
+              text: '💀 死亡轮回',
+              link: '/features/adventure/deathreincarnation',
+            },
+            {
               text: '✨ 更多附魔',
               collapsed: true,
               items: [
