@@ -157,7 +157,7 @@ export default defineConfig({
       { text: '🏠 首页', link: '/' },
       { 
         text: '🎮 玩法介绍',
-        link: '/features/index',
+        link: '/features/',
         activeMatch: '^/features/'
       },
       { 
@@ -208,7 +208,7 @@ export default defineConfig({
     // 侧边栏配置
     sidebar: {
       '/features/': [
-        { text: '📖 玩法总览', link: '/features/index' },
+        { text: '📖 玩法总览', link: '/features/' },
         {
           text: '🏠 基础系统',
           collapsed: false,

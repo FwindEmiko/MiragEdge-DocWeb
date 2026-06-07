@@ -26,6 +26,20 @@
   transform: translateZ(0);
 }
 
+/* ===== 内页内容区淡入过渡 ===== */
+@keyframes docFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.VPDoc .content {
+  animation: docFadeIn 0.3s ease-out forwards;
+}
+
 /* 可访问性：关闭动画 */
 @media (prefers-reduced-motion: reduce) {
   .VPContent {
