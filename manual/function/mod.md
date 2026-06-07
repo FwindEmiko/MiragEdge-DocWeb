@@ -22,7 +22,7 @@
 
 [官方下载页面](https://modrepo.de/minecraft/voicechat/downloads "modrepo")(选择你需要的版本)
 
-> ✔ 便捷安装：直接在 PCL2 中搜索「Simple Voice Chat」即可一键安装
+> <MapIcon name="check" :size="24" /> 便捷安装：直接在 PCL2 中搜索「Simple Voice Chat」即可一键安装
 
 首次安装模组后，进入服务器或单人世界时会收到聊天消息，提示你需要完成语音聊天模组的相关设置。
 双方安装模组后，即可使用范围语音；创建群组并加入，可全局语音聊天。
@@ -37,13 +37,13 @@
 | 禁用语音通话 | `N` | 禁用语音通话，退出语音频道 |
 | 隐藏图标 | `H` | 隐藏本模组的所有图标，但不影响功能使用 |
 
-> ⚠ 注意：语音聊天为加密传输，但模组作者不保证绝对安全性，使用该功能请自行承担风险！
+> <MapIcon name="alert" :size="24" /> 注意：语音聊天为加密传输，但模组作者不保证绝对安全性，使用该功能请自行承担风险！
 
 ## 苹果皮(Appleskin)
 
 [Modrinth下载页](https://modrinth.com/mod/appleskin?version=1.21.11#download "modrepo")(选择你需要的版本)
 
-> ✔ 便捷安装：直接在 PCL2 中搜索「Appleskin」即可一键安装
+> <MapIcon name="check" :size="24" /> 便捷安装：直接在 PCL2 中搜索「Appleskin」即可一键安装
 
 各种与食物相关的HUD改进，通过服务端侧支持，显示准确的饱食度/饱和度
 
@@ -130,7 +130,7 @@
 
 [Modrinth下载页](https://modrinth.com/mod/xaeros-world-map?version=1.21.11#download "modrepo")(选择你需要的版本)
 
-> ✔ 便捷安装：直接在 PCL2 中搜索「Xaero's Minimap」即可一键安装
+> <MapIcon name="check" :size="24" /> 便捷安装：直接在 PCL2 中搜索「Xaero's Minimap」即可一键安装
 
 限制公平模式 —— 无雷达，无洞穴模式
 
@@ -144,7 +144,7 @@
 
 [点击前往modrinth下载](https://modrinth.com/datapack/veinminer?version=1.21.8&loader=fabric#download "modrinth")(选择你需要的版本下载)
 
-> ✔ 便捷安装：直接在 PCL2 中搜索「VeinMiner」即可一键安装
+> <MapIcon name="check" :size="24" /> 便捷安装：直接在 PCL2 中搜索「VeinMiner」即可一键安装
 
 我也不知道为什么连锁挖矿也需要在客户端安装模组，
 可能是为了启用快捷键绑定，快速切换连锁状态？
@@ -152,7 +152,7 @@
 
 ## 外置登录器(Yggdrasil)
 
-> ⚠️  
+> <MapIcon name="alert" :size="24" />  
 > 因兼容性较差，服内暂时已删除外置皮肤库支持
 
 1. 为在客户端使用了 LittleSkin 的 Yggdrasil 外置登录的玩家加载皮肤和披风  

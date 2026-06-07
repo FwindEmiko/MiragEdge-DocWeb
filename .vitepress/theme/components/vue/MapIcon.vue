@@ -195,7 +195,64 @@ const iconMap = {
   'star': 'Star',
   'fox': 'Cat',        // 没有狐狸图标，用猫代替
   'soul': 'Heart',
+
+  // 环境与天气
+  thermometer: 'Thermometer',
+  sun: 'Sun',
+  moon: 'Moon',
+  snowflake: 'Snowflake',
+  flame: 'Flame',
+  wind: 'Wind',
+  'cloud-rain': 'CloudRain',
+  'cloud-lightning': 'CloudLightning',
+  'cloud-snow': 'CloudSnow',
+  droplet: 'Droplet',
+  droplets: 'Droplets',
+  mountain: 'Mountain',
+
+  // 功能与工具
+  trash: 'Trash2',
+  flask: 'FlaskConical',
+  door: 'DoorOpen',
+  leaf: 'Leaf',
+  zap: 'Zap',
+  timer: 'Timer',
+  ruler: 'Ruler',
+  anvil: 'Anvil',
+  lightbulb: 'Lightbulb',
+  footprints: 'Footprints',
+  smartphone: 'Smartphone',
+  'palm-tree': 'Palmtree',
+  'tree-pine': 'TreePine',
+  'brick-wall': 'BrickWall',
+
+  // 社交与标识
+  gift: 'Gift',
+  crown: 'Crown',
+  handshake: 'Handshake',
+  ban: 'Ban',
+  megaphone: 'Megaphone',
+  flag: 'Flag',
+  award: 'Award',
+  'trending-up': 'TrendingUp',
+  'trending-down': 'TrendingDown',
+
+  // 任务规范映射别名（emoji→MapIcon 统一命名）
+  'bar-chart3': 'BarChart3',
+  'plug': 'Plug',
+  'swords': 'Swords',
+  'coins': 'Coins',
+  'sprout': 'Sprout',
+  'volume-2': 'Volume2',
+  'palette': 'Palette',
+  'satellite': 'Satellite',
+  'gem': 'Gem',
+  'wand': 'Wand',
+  'wrench': 'Wrench',
+  'play': 'Play',
+  'building-2': 'Building2',
 }
+
 
 // 额外映射，可根据需要扩展
 const addonMap = {
