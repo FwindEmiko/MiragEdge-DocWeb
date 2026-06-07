@@ -14,6 +14,7 @@ import CornerQuotes from './components/vue/CornerQuotes.vue'
 import CornerSakura from './components/vue/CornerSakura.vue'
 import CornerBubbles from './components/vue/CornerBubbles.vue'
 import ChangelogFromMd from './components/vue/ChangelogFromMd.vue'
+import MapIcon from './components/vue/MapIcon.vue'
 import './css/custom.css'
 
 // 导入所有样式文件
@@ -26,6 +27,7 @@ import './css/components/search.css'
 import './css/layout/blur.css'
 import './css/base/overrides.css'
 import './style/dark.css'
+import './css/icons.css'
 
 // 导入第三方库和组件
 import { inBrowser } from "vitepress"
@@ -58,6 +60,7 @@ export default {
     app.component('CornerSakura', CornerSakura)
     app.component('CornerBubbles', CornerBubbles)
     app.component('ChangelogFromMd', ChangelogFromMd)
+    app.component('MapIcon', MapIcon)
 
     // 仅在浏览器环境下执行
     if (inBrowser) {
