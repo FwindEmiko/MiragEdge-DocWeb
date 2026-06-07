@@ -1,0 +1,25 @@
+/* =============================================
+   MiragEdge 图标系统 — CSS 方案
+   用于导航栏、侧边栏等无法使用 Vue 组件的区域
+   
+   用法：在元素上添加 data-icon 属性
+   <span data-icon="home">首页</span>
+   
+   需配合 JS 在页面加载时注入 data-icon
+   ============================================= */
+
+/* 导航栏图标 */
+.VPNavBar .VPNavBarMenuLink,
+.VPNavBar .VPNavBarMenuGroup .button {
+  position: relative;
+  padding-left: 4px;
+}
+
+/* 侧边栏图标 */
+.VPSidebarItem .item .text {
+  position: relative;
+  padding-left: 4px;
+}
+
+/* Feature 卡片图标 (VitePress 默认使用 emoji) 
+   需在 index.md 的 frontmatter 中使用 MapIcon 组件替代 */
