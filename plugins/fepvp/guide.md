@@ -85,7 +85,7 @@ outline: deep
 
 ## 排行榜
 
-在大厅点击 **🏆 排行榜**，或执行：
+在大厅点击 **<MapIcon name="trophy" :size="24" /> 排行榜**，或执行：
 
 ```
 /fepvp stats          # 查看自己

@@ -22,7 +22,7 @@
 
 ## 生存便利
 
-### 🗑️ 世界垃圾桶
+### <MapIcon name="trash" :size="24" /> 世界垃圾桶
 
 **扫地周期**：每 20 分钟一次  
 **刷新周期**：扫地 5 次后刷新  
@@ -32,15 +32,15 @@
 
 **直接消失的物品**：大量基础方块、装饰植物、地毯、铁轨、种子、雪球
 
-### 🍾 经验之瓶
+### <MapIcon name="flask" :size="24" /> 经验之瓶
 
 可以将经验存储在瓶子中，随身携带！
 
 **特点**：
 - <MapIcon name="package" :size="24" /> 存储方式：右击手持的空经验瓶即可存储
 - <MapIcon name="bar-chart" :size="24" /> 容量变化：根据经验多少变为大/中/小三种
-- ⚠️ 损耗说明：存入过程存在一定损耗
-- 💪 使用方法：喝下即可获得经验值
+- <MapIcon name="warning" :size="24" /> 损耗说明：存入过程存在一定损耗
+- <MapIcon name="tool" :size="24" /> 使用方法：喝下即可获得经验值
 
 <SmartImage
   src="https://oss.miragedge.top/images/web_image/features/base/function/empty_xp_bottle.png"
@@ -51,7 +51,7 @@
   shadow
 />
 
-### 🗡️ 击杀掉头
+### <MapIcon name="sword" :size="24" /> 击杀掉头
 
 玩家被其他玩家击杀后，有 **10% 概率**掉落头颅！
 
@@ -59,7 +59,7 @@
 
 ## 农业相关
 
-### 🪣 史莱姆桶
+### <MapIcon name="package" :size="24" /> 史莱姆桶
 
 用**空铁桶**右键小史莱姆即可抓获！
 
@@ -98,7 +98,7 @@
   shadow
 />
 
-### 🥕 优化种植
+### <MapIcon name="farming" :size="24" /> 优化种植
 
 右键点击**完全长大的植物**即可：
 - <MapIcon name="check" :size="24" /> 立即收获
@@ -116,7 +116,7 @@
 
 ## 建筑与红石
 
-### 🚪 双开门
+### <MapIcon name="door" :size="24" /> 双开门
 
 两个门组成的大门，**右键**或**红石信号**均可同时打开！
 
@@ -129,7 +129,7 @@
   shadow
 />
 
-### 🖼️ 隐形展示框
+### <MapIcon name="image" :size="24" /> 隐形展示框
 
 用**剪刀**右键点击展示框即可使其隐形~
 
@@ -137,8 +137,8 @@
 
 激活按钮后，以按钮为中心 **3×3 范围**内的箱子会自动整理物品！
 
-- 📏 整理范围：3×3 格
-- ⏱️ 冷却时间：1000ms
+- <MapIcon name="ruler" :size="24" /> 整理范围：3×3 格
+- <MapIcon name="timer" :size="24" /> 冷却时间：1000ms
 
 <SmartImage
   src="https://oss.miragedge.top/images/web_image/features/base/function/箱子整理.gif"
@@ -151,19 +151,19 @@
 
 ## 社交与娱乐
 
-### 🌙 跳过夜晚
+### <MapIcon name="moon" :size="24" /> 跳过夜晚
 
 当世界中有 **≥20%** 的玩家睡觉时，即可加速跳过夜晚！
 
 > 再也不用熬夜等天亮啦~
 
-### 🐱 喵式聊天
+### <MapIcon name="fox" :size="24" /> 喵式聊天
 
 使用**星玖姬向导菜单**，进入设置页面即可开启「喵式聊天」功能！
 
 - <MapIcon name="sparkles" :size="24" /> 会在聊天末尾自动添加「喵~」
-- ❌ 不影响系统答题
-- 🐾 可爱捏！
+- <MapIcon name="close" :size="24" /> 不影响系统答题
+- <MapIcon name="pet" :size="24" /> 可爱捏！
 
 ### <MapIcon name="message-circle" :size="24" /> 展示物品
 
@@ -171,7 +171,7 @@
 
 ## 世界优化
 
-### 🚶 土径加速
+### <MapIcon name="footprints" :size="24" /> 土径加速
 
 在**土径**上行走可获得移动加速！现在真的有必要修一条路了！
 
@@ -184,7 +184,7 @@
   shadow
 />
 
-### 💥 爆炸保护
+### <MapIcon name="shield" :size="24" /> 爆炸保护
 
 **凋零**和**苦力怕**爆炸后，被破坏的方块会**慢慢恢复原样**！
 
@@ -199,18 +199,18 @@
 
 > <MapIcon name="home" :size="24" /> 不用担心家被炸没了~
 
-### 🧱 树叶快速腐烂
+### <MapIcon name="leaf" :size="24" /> 树叶快速腐烂
 
 砍伐自然生成的树木后（树叶没有原木挨着），树叶会**快速凋落消失**！
 
 > 领地需要设置相关环境权限才能正常生效  
 > 清理树叶再也不是麻烦事喵~
 
-### ⚒️ 配方解锁
+### <MapIcon name="tool" :size="24" /> 配方解锁
 
 玩家入服后**自动解锁所有合成配方**，不用一个一个慢慢解锁了！
 
-### ⚖️ 铁砧无限制
+### <MapIcon name="anvil" :size="24" /> 铁砧无限制
 
 取消铁砧「过于昂贵」的限制，可以随意使用铁砧进行物品合并！
 

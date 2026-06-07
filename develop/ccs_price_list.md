@@ -3,7 +3,7 @@
 > **Welcome to MiragEdge Cloud Elastic Compute Service**  
 > 最后更新：2026-06-01
 
-## 🖥️ 配置一：i5-14600KF 高频游戏服务器
+## <MapIcon name="monitor" :size="24" /> 配置一：i5-14600KF 高频游戏服务器
 
 **配置概览**
 
@@ -37,7 +37,7 @@
 
 > 比面板配置每月多加 **¥10**，网络可定制。
 
-## 🖥️ 配置二：E5-2690V4 多核性价比服务器
+## <MapIcon name="monitor" :size="24" /> 配置二：E5-2690V4 多核性价比服务器
 
 **配置概览**
 
