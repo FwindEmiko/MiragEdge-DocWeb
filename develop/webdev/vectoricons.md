@@ -85,7 +85,7 @@ import { Home, User, Settings } from 'lucide-vue-next'
 </details>
 
 <details>
-<summary>🎮 游戏 & Minecraft</summary>
+<summary><MapIcon name="gamepad" :size="24" /> 游戏 & Minecraft</summary>
 
 | 语义名称 | 图标 | 预览 |
 |---------|------|------|
@@ -102,7 +102,7 @@ import { Home, User, Settings } from 'lucide-vue-next'
 </details>
 
 <details>
-<summary>🌾 玩法特色</summary>
+<summary><MapIcon name="sprout" :size="24" /> 玩法特色</summary>
 
 | 语义名称 | 图标 | 预览 |
 |---------|------|------|
@@ -117,7 +117,7 @@ import { Home, User, Settings } from 'lucide-vue-next'
 </details>
 
 <details>
-<summary>💬 社区 & 社交</summary>
+<summary><MapIcon name="message-circle" :size="24" /> 社区 & 社交</summary>
 
 | 语义名称 | 图标 | 预览 |
 |---------|------|------|

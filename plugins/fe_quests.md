@@ -108,12 +108,12 @@
 ## 开发状态
 
 本插件已完成基础架构搭建，包括：
-- ✅ 模块化架构设计
-- ✅ 依赖挂钩系统
-- ✅ 命令系统
-- ✅ GUI界面系统
-- ✅ 消息系统（ActionBar、聊天、BossBar）
-- ✅ 双数据库系统（SQLite/MySQL）
-- ✅ 数据访问对象（DAO）层
-- ✅ 配置管理系统
-- ✅ 事件处理系统
+- <MapIcon name="check" :size="24" /> 模块化架构设计
+- <MapIcon name="check" :size="24" /> 依赖挂钩系统
+- <MapIcon name="check" :size="24" /> 命令系统
+- <MapIcon name="check" :size="24" /> GUI界面系统
+- <MapIcon name="check" :size="24" /> 消息系统（ActionBar、聊天、BossBar）
+- <MapIcon name="check" :size="24" /> 双数据库系统（SQLite/MySQL）
+- <MapIcon name="check" :size="24" /> 数据访问对象（DAO）层
+- <MapIcon name="check" :size="24" /> 配置管理系统
+- <MapIcon name="check" :size="24" /> 事件处理系统

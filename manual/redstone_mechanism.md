@@ -8,13 +8,13 @@
 | **Java 环境** | GraalVM 25 LTS | JIT 编译优化，22% 内存节省 |
 | **视距** | 随客户端设置 | 最大支持 32 |
 | **模拟距离** | 6 | 固定值 |
-| **安全种子** | ✅ 已启用 | 1024 位种子，无法暴力破解 |
+| **安全种子** | <MapIcon name="check" :size="24" /> 已启用 | 1024 位种子，无法暴力破解 |
 
 ## 反作弊规则
 
-- ✅ 不检测方块放置与破坏相关行为（投影打印机宽松）
-- ✅ 安全种子计算（无法破解）
-- ✅ 反矿透混淆较宽松
+- <MapIcon name="check" :size="24" /> 不检测方块放置与破坏相关行为（投影打印机宽松）
+- <MapIcon name="check" :size="24" /> 安全种子计算（无法破解）
+- <MapIcon name="check" :size="24" /> 反矿透混淆较宽松
 
 ## 实体串门限制
 
@@ -32,17 +32,17 @@
 
 ## 生电特性列表
 
-### ✅ 启用的特性
+### <MapIcon name="check" :size="24" /> 启用的特性
 
 | 特性 | 配置文件 | 配置项 | 状态 |
 |------|----------|--------|------|
-| **TNT 复制** | paper-global.yml | allow-piston-duplication | ✅ 启用 |
-| **地毯复制** | paper-global.yml | allow-piston-duplication | ✅ 启用 |
-| **铁轨复制** | paper-global.yml | allow-piston-duplication | ✅ 启用 |
-| **无头活塞** | paper-global.yml | allow-headless-pistons | ✅ 启用 |
-| **破基岩** | paper-global.yml | allow-permanent-block-break-exploits | ✅ 启用 |
-| **末地门框架** | paper-global.yml | allow-permanent-block-break-exploits | ✅ 启用 |
-| **折跃门** | paper-global.yml | allow-permanent-block-break-exploits | ✅ 启用 |
+| **TNT 复制** | paper-global.yml | allow-piston-duplication | <MapIcon name="check" :size="24" /> 启用 |
+| **地毯复制** | paper-global.yml | allow-piston-duplication | <MapIcon name="check" :size="24" /> 启用 |
+| **铁轨复制** | paper-global.yml | allow-piston-duplication | <MapIcon name="check" :size="24" /> 启用 |
+| **无头活塞** | paper-global.yml | allow-headless-pistons | <MapIcon name="check" :size="24" /> 启用 |
+| **破基岩** | paper-global.yml | allow-permanent-block-break-exploits | <MapIcon name="check" :size="24" /> 启用 |
+| **末地门框架** | paper-global.yml | allow-permanent-block-break-exploits | <MapIcon name="check" :size="24" /> 启用 |
+| **折跃门** | paper-global.yml | allow-permanent-block-break-exploits | <MapIcon name="check" :size="24" /> 启用 |
 | **喷射合成** | server.properties | network-compression-threshold | 256（已调高） |
 | **漏斗优化** | leaf-global.yml | use-vanilla-hopper | false（使用优化版） |
 | **地狱门区块加载** | paper-global.yml | enable-nether | true |
@@ -61,14 +61,14 @@
 
 | 优化项 | 配置文件 | 配置项 | 状态 |
 |--------|----------|--------|------|
-| **异步区块发送** | leaf-global.yml | async-chunk-send | ✅ 启用 |
-| **DAB 距离 AI** | leaf-global.yml | dab.enabled | ✅ 启用 |
-| **异步生物生成** | leaf-global.yml | async-mob-spawning | ✅ 启用 |
-| **异步寻路** | leaf-global.yml | async-pathfinding | ✅ 启用 |
-| **异步实体追踪** | leaf-global.yml | async-entity-tracker | ✅ 启用（实验性） |
-| **随机 tick 优化** | leaf-global.yml | optimize-random-tick | ✅ 启用 |
-| **虚拟线程** | leaf-global.yml | use-virtual-thread | ✅ 启用 |
-| **爆炸优化** | paper-world-defaults.yml | optimize-explosions | ✅ 启用 |
+| **异步区块发送** | leaf-global.yml | async-chunk-send | <MapIcon name="check" :size="24" /> 启用 |
+| **DAB 距离 AI** | leaf-global.yml | dab.enabled | <MapIcon name="check" :size="24" /> 启用 |
+| **异步生物生成** | leaf-global.yml | async-mob-spawning | <MapIcon name="check" :size="24" /> 启用 |
+| **异步寻路** | leaf-global.yml | async-pathfinding | <MapIcon name="check" :size="24" /> 启用 |
+| **异步实体追踪** | leaf-global.yml | async-entity-tracker | <MapIcon name="check" :size="24" /> 启用（实验性） |
+| **随机 tick 优化** | leaf-global.yml | optimize-random-tick | <MapIcon name="check" :size="24" /> 启用 |
+| **虚拟线程** | leaf-global.yml | use-virtual-thread | <MapIcon name="check" :size="24" /> 启用 |
+| **爆炸优化** | paper-world-defaults.yml | optimize-explosions | <MapIcon name="check" :size="24" /> 启用 |
 
 ## 配置文件位置
 

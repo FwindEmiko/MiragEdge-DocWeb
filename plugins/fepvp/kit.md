@@ -123,6 +123,6 @@ kits:
 
 | 装备类型 | 单挑竞技场 | 团队竞技场 |
 |----------|-----------|-----------|
-| `DUEL` | ✅ 显示 | ❌ 不显示 |
-| `TEAM` | ❌ 不显示 | ✅ 显示 |
-| `BOTH` | ✅ 显示 | ✅ 显示 |
+| `DUEL` | <MapIcon name="check" :size="24" /> 显示 | ❌ 不显示 |
+| `TEAM` | ❌ 不显示 | <MapIcon name="check" :size="24" /> 显示 |
+| `BOTH` | <MapIcon name="check" :size="24" /> 显示 | <MapIcon name="check" :size="24" /> 显示 |
