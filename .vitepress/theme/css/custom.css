@@ -84,3 +84,37 @@
   background: var(--vp-c-divider);
   margin: 32px 0;
 }
+
+/* ===== 内页氛围光效果 ===== */
+/* 与首页极光呼应的微弱环境光，仅在内页（非首页）显示 */
+.VPNavBar.has-sidebar::before,
+.VPDoc::before {
+  content: '';
+  position: fixed;
+  top: -20%;
+  right: -10%;
+  width: 50vw;
+  height: 50vh;
+  background: radial-gradient(ellipse at center, rgba(180, 80, 200, 0.18) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.VPNavBar.has-sidebar::after,
+.VPDoc::after {
+  content: '';
+  position: fixed;
+  bottom: -15%;
+  left: -10%;
+  width: 45vw;
+  height: 45vh;
+  background: radial-gradient(ellipse at center, rgba(60, 180, 220, 0.15) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* 确保氛围光不影响内容可读性 */
+.VPDoc .content-container {
+  position: relative;
+  z-index: 1;
+}

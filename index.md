@@ -24,19 +24,22 @@ hero:
 features:
   - icon: 🚢
     title: 创新玩法
-    details: 独家轻 RPG 系统、星露谷、附魔等多维度玩法
+    details: 独家轻 RPG 体系 × 星露谷田园 × 200+ 附魔 × 装备锻造，4 大维度交织出千人千面的冒险之旅
   - icon: 💾
     title: 高性能优化
-    details: Leaf 服务端 + GraalVM 25 + 异步架构，极致性能体验
+    details: Leaf 服务端 + GraalVM 25 JIT 编译 + 全链路异步架构，TPS 稳定 20，告别卡顿掉帧
   - icon: ❤️
     title: 优秀社区
-    details: 公益化纯净体验，7×24 小时管理在线，跨次元社交生态
+    details: 公益纯净初心，7×24 管理守护，千人群组实时互动，从萌新到大佬都能找到归属
   - icon: 🔧
     title: 稳定保障
-    details: 长期开服不换档，每日增量备份 + 异地容灾，强力反作弊，自动白名单
+    details: 长期开服零换档承诺，每日 4 次增量备份 + 异地容灾，Grim 反作弊 + 自动白名单双保险
   - icon: 🔄
     title: 持续更新
-    details: 长期更新优化，不断添加趣味功能与修复问题
+    details: 周级迭代节奏，每月新增玩法与赛季活动，200+ 版本迭代持续打磨体验
+  - icon: 🌐
+    title: 多端互通
+    details: Java版 + 基岩版全平台支持，手机电脑均可畅玩，数据互通无缝衔接
 ---
 
 ## 🚀 服务器概况
