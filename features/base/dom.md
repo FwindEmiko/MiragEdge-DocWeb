@@ -18,18 +18,18 @@
 **自动回收**：180天未登录自动解除  
 **初始大小**：自动创建 10 格范围  
 
-> 📌 官方详细教程：[dominion领地系统 官方玩家教程](https://dominion.lunadeer.cn/notes/doc/player/dominion/create/)
+> <MapIcon name="pin" :size="24" /> 官方详细教程：[dominion领地系统 官方玩家教程](https://dominion.lunadeer.cn/notes/doc/player/dominion/create/)
 
 ## 创建领地
 
-### 方式一：自动创建 ⭐ 新手推荐
+### 方式一：自动创建 <MapIcon name="star" :size="24" /> 新手推荐
 
 使用 GUI 界面，**以玩家自身为中心点**自动生成领地。
 
-- 📦 范围：10 格 × 10 格
-- ✅ 优点：简单快捷，适合新手
+- <MapIcon name="package" :size="24" /> 范围：10 格 × 10 格
+- <MapIcon name="check" :size="24" /> 优点：简单快捷，适合新手
 
-### 方式二：手动创建 ⭐ 主流方式
+### 方式二：手动创建 <MapIcon name="star" :size="24" /> 主流方式
 
 使用 **木锄头** 手动圈定范围，然后执行命令创建。
 
@@ -38,13 +38,13 @@
 ```
 
 - 🛠️ 工具：木锄头
-- ✅ 优点：可自定义大小和位置
+- <MapIcon name="check" :size="24" /> 优点：可自定义大小和位置
 
 ## 计费规则
 
 ### 基础收费标准
 
-- 📦 创建/扩建：2.5 灵叶 / 格
+- <MapIcon name="package" :size="24" /> 创建/扩建：2.5 灵叶 / 格
 - 🗑️ 删除领地：退还 60%
 
 > 💡 按需圈地更省钱！只圈你需要的高度范围
@@ -55,7 +55,7 @@
 
 - 📈 最高：Y = 384
 - 📉 最低：Y = -64
-- 📊 最小高度：4 格
+- <MapIcon name="bar-chart" :size="24" /> 最小高度：4 格
 
 ### 平面范围 (X轴 / Z轴)
 
@@ -77,10 +77,10 @@
 ## 注意事项
 
 - ⚠️ 自动回收：连续 180 天未登录，领地将被自动解除
-- 🔒 权限组：默认享有「默认权限组」全部权益
+- <MapIcon name="lock" :size="24" /> 权限组：默认享有「默认权限组」全部权益
 - 📱 基岩版：有专用表单界面，但功能不全
 
 > 💡 基岩版功能后续可能会更新完善喵~
 
-> 📌 **相关页面推荐**：
+> <MapIcon name="pin" :size="24" /> **相关页面推荐**：
 > - [独特功能](/features/base/function) - 更多生存便利功能

@@ -10,7 +10,7 @@
   border
 />
 
-> 🎮 区别于原版游戏，锐界幻境添加了许多有趣且实用的功能，快来探索吧~
+> <MapIcon name="gamepad" :size="24" /> 区别于原版游戏，锐界幻境添加了许多有趣且实用的功能，快来探索吧~
 
 ## 目录
 
@@ -37,8 +37,8 @@
 可以将经验存储在瓶子中，随身携带！
 
 **特点**：
-- 📦 存储方式：右击手持的空经验瓶即可存储
-- 📊 容量变化：根据经验多少变为大/中/小三种
+- <MapIcon name="package" :size="24" /> 存储方式：右击手持的空经验瓶即可存储
+- <MapIcon name="bar-chart" :size="24" /> 容量变化：根据经验多少变为大/中/小三种
 - ⚠️ 损耗说明：存入过程存在一定损耗
 - 💪 使用方法：喝下即可获得经验值
 
@@ -74,7 +74,7 @@
 
 > 🍳 也许能用来做菜？（划掉）
 
-### 🌾 镰刀
+### <MapIcon name="sprout" :size="24" /> 镰刀
 
 各种材质的镰刀，是农夫的好帮手！
 
@@ -86,8 +86,8 @@
 - 🟡 金：收获范围最大，最高性价比！
 
 **功能**：
-- ⚔️ 提升攻击速度与伤害
-- 🌾 右键农田可**范围收获 + 自动补种**
+- <MapIcon name="swords" :size="24" /> 提升攻击速度与伤害
+- <MapIcon name="sprout" :size="24" /> 右键农田可**范围收获 + 自动补种**
 
 <SmartImage
   src="https://oss.miragedge.top/images/web_image/features/base/function/sickle_show.gif"
@@ -101,9 +101,9 @@
 ### 🥕 优化种植
 
 右键点击**完全长大的植物**即可：
-- ✅ 立即收获
-- ✅ 自动重新种植
-- ✅ 获得**额外产出**（多件物品概率提升）
+- <MapIcon name="check" :size="24" /> 立即收获
+- <MapIcon name="check" :size="24" /> 自动重新种植
+- <MapIcon name="check" :size="24" /> 获得**额外产出**（多件物品概率提升）
 
 <SmartImage
   src="https://oss.miragedge.top/images/web_image/features/base/function/better-harvesting.gif"
@@ -133,7 +133,7 @@
 
 用**剪刀**右键点击展示框即可使其隐形~
 
-### 📦 箱子整理
+### <MapIcon name="package" :size="24" /> 箱子整理
 
 激活按钮后，以按钮为中心 **3×3 范围**内的箱子会自动整理物品！
 
@@ -161,11 +161,11 @@
 
 使用**星玖姬向导菜单**，进入设置页面即可开启「喵式聊天」功能！
 
-- ✨ 会在聊天末尾自动添加「喵~」
+- <MapIcon name="sparkles" :size="24" /> 会在聊天末尾自动添加「喵~」
 - ❌ 不影响系统答题
 - 🐾 可爱捏！
 
-### 💬 展示物品
+### <MapIcon name="message-circle" :size="24" /> 展示物品
 
 在聊天栏发送 `%i%` 即可把手持物品信息展示在聊天栏中~
 
@@ -197,7 +197,7 @@
   shadow
 />
 
-> 🏠 不用担心家被炸没了~
+> <MapIcon name="home" :size="24" /> 不用担心家被炸没了~
 
 ### 🧱 树叶快速腐烂
 
@@ -214,6 +214,6 @@
 
 取消铁砧「过于昂贵」的限制，可以随意使用铁砧进行物品合并！
 
-> 📌 **相关页面推荐**：
+> <MapIcon name="pin" :size="24" /> **相关页面推荐**：
 > - [季节系统](/features/pastoral/seasons/info) - 探索四季变换的魅力
 > - [附魔系统](/features/adventure/enchantments/info) - 打造你的神兵利器

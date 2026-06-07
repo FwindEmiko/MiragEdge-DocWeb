@@ -90,8 +90,8 @@
 
 [**蓝奏云备用地址下载**](https://wwbkb.lanzouu.com/b002vmtcve "AllMusic")(密码: 3fsb )
 
-> ✅ 适用版本：1.21.x 版本的 Fabric 和 NeoForge 端可用，安装时请寻找最接近自身游戏版本的模组包
-> ✅ 必需前置：[FLK] [Fabric Language Kotlin](https://www.mcmod.cn/class/2126.html "FLK")
+> <MapIcon name="check" :size="24" /> 适用版本：1.21.x 版本的 Fabric 和 NeoForge 端可用，安装时请寻找最接近自身游戏版本的模组包
+> <MapIcon name="check" :size="24" /> 必需前置：[FLK] [Fabric Language Kotlin](https://www.mcmod.cn/class/2126.html "FLK")
 
 ### 服内完整使用指令
 

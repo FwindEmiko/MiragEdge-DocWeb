@@ -2,24 +2,119 @@
    MiragEdge 图标系统 — CSS 方案
    用于导航栏、侧边栏等无法使用 Vue 组件的区域
    
-   用法：在元素上添加 data-icon 属性
-   <span data-icon="home">首页</span>
-   
-   需配合 JS 在页面加载时注入 data-icon
+   导航/侧边栏中的 emoji 通过 JS (nav-icons.js)
+   自动包裹在 .nav-icon-emoji 中以实现统一图标样式。
    ============================================= */
 
-/* 导航栏图标 */
-.VPNavBar .VPNavBarMenuLink,
-.VPNavBar .VPNavBarMenuGroup .button {
-  position: relative;
-  padding-left: 4px;
+/* ========== 导航栏图标样式 ========== */
+
+/* 导航链接中的 emoji 图标 */
+.VPNavBar .nav-icon-emoji {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  font-size: 16px;
+  line-height: 1;
+  margin-right: 4px;
+  vertical-align: middle;
+  flex-shrink: 0;
+  /* 图标居中对齐 */
+  transform: translateY(-1px);
 }
 
-/* 侧边栏图标 */
+/* 导航栏顶层链接项 */
+.VPNavBarMenuLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+}
+
+/* 导航栏下拉分组按钮 */
+.VPNavBarMenuGroup .button {
+  display: inline-flex;
+  align-items: center;
+}
+
+/* 导航下拉菜单中的图标 */
+.VPMenuLink a,
+.VPMenuGroup .title {
+  display: inline-flex;
+  align-items: center;
+}
+
+.VPMenuLink .nav-icon-emoji,
+.VPMenuGroup .title .nav-icon-emoji {
+  width: 20px;
+  height: 20px;
+  font-size: 15px;
+  margin-right: 6px;
+}
+
+/* ========== 侧边栏图标样式 ========== */
+
 .VPSidebarItem .item .text {
-  position: relative;
-  padding-left: 4px;
+  display: inline-flex;
+  align-items: center;
 }
 
-/* Feature 卡片图标 (VitePress 默认使用 emoji) 
-   需在 index.md 的 frontmatter 中使用 MapIcon 组件替代 */
+.VPSidebarItem .nav-icon-emoji {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  font-size: 15px;
+  line-height: 1;
+  margin-right: 6px;
+  vertical-align: middle;
+  flex-shrink: 0;
+  /* 图标居中对齐 */
+  transform: translateY(-1px);
+}
+
+/* 侧边栏分组标题 */
+.VPSidebarItem .item .text .nav-icon-emoji {
+  width: 20px;
+  height: 20px;
+  font-size: 15px;
+}
+
+/* 侧边栏子项目 */
+.VPSidebarItem .items .VPSidebarItem .nav-icon-emoji {
+  width: 18px;
+  height: 18px;
+  font-size: 14px;
+  margin-right: 4px;
+}
+
+/* ========== 暗色模式适配 ========== */
+
+.dark .VPNavBar .nav-icon-emoji,
+.dark .VPSidebarItem .nav-icon-emoji {
+  /* 暗色模式下 emoji 颜色更亮，无需额外处理 */
+}
+
+/* ========== 响应式适配 ========== */
+
+@media (max-width: 768px) {
+  .VPSidebarItem .nav-icon-emoji {
+    width: 18px;
+    height: 18px;
+    font-size: 14px;
+    margin-right: 4px;
+  }
+}
+
+/* ========== 备用方案：未包装 emoji 的直接样式 ========== */
+/* 即使 JS 未能及时执行，emoji 作为纯文本也能保持基本可读 */
+
+/* 导航栏占位（确保空间预留） */
+.VPNavBarMenuLink {
+  padding-left: 0;
+}
+
+.VPSidebarItem .item .text {
+  padding-left: 0;
+}

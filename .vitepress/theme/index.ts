@@ -37,6 +37,9 @@ import Contributors from './components/vue/Contributors.vue'
 // 导入3D倾斜效果
 import { init3DTiltEffect } from './components/js/feature.js'
 
+// 导入导航/侧边栏图标增强
+import { initNavIcons } from './components/js/nav-icons.js'
+
 // 导入自定义通知脚本
 import { showAestheticNotice, showConsoleLogo } from './components/js/notice.js'
 
@@ -65,7 +68,8 @@ export default {
     // 仅在浏览器环境下执行
     if (inBrowser) {
       router.onAfterRouteChanged = () => {
-        // 不蒜子统计已移除
+        // 路由切换后重新增强导航/侧边栏图标
+        initNavIcons();
       }
     }
   },
@@ -78,6 +82,8 @@ export default {
 
         // 初始化3D倾斜效果
         init3DTiltEffect();
+        // 初始化导航/侧边栏图标增强
+        initNavIcons();
 
         // 在控制台输出 F.windEmiko 文字图像
         showConsoleLogo();

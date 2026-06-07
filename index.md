@@ -22,38 +22,38 @@ hero:
       link: /manual/qq_group
 
 features:
-  - icon: 🚢
+  - icon: "<MapIcon name='gamepad' :size='28' />"
     title: 创新玩法
     details: 独家轻 RPG 体系 × 星露谷田园 × 200+ 附魔 × 装备锻造，4 大维度交织出千人千面的冒险之旅
-  - icon: 💾
+  - icon: "<MapIcon name='server' :size='28' />"
     title: 高性能优化
     details: Leaf 服务端 + GraalVM 25 JIT 编译 + 全链路异步架构，TPS 稳定 20，告别卡顿掉帧
-  - icon: ❤️
+  - icon: "<MapIcon name='heart' :size='28' />"
     title: 优秀社区
     details: 公益纯净初心，7×24 管理守护，千人群组实时互动，从萌新到大佬都能找到归属
-  - icon: 🔧
+  - icon: "<MapIcon name='tool' :size='28' />"
     title: 稳定保障
     details: 长期开服零换档承诺，每日 4 次增量备份 + 异地容灾，Grim 反作弊 + 自动白名单双保险
-  - icon: 🔄
+  - icon: "<MapIcon name='refresh-cw' :size='28' />"
     title: 持续更新
     details: 周级迭代节奏，每月新增玩法与赛季活动，200+ 版本迭代持续打磨体验
-  - icon: 🌐
+  - icon: "<MapIcon name='globe' :size='28' />"
     title: 多端互通
     details: Java版 + 基岩版全平台支持，手机电脑均可畅玩，数据互通无缝衔接
 ---
 
-## 🚀 服务器概况
+## <MapIcon name="rocket" :size="24" /> 服务器概况
 
 **锐界幻境** 是一个致力于打造开放创新 Minecraft 游戏平台的公益服务器。我们相信每个玩家都值得拥有一个自由、纯净、有趣的游戏环境。
 
 ### 核心理念
 
-- 🎮 **高品质体验** - 精心配置，只为更好的游戏感受
+- <MapIcon name="gamepad" :size="24" /> **高品质体验** - 精心配置，只为更好的游戏感受
 - 🤝 **社区驱动** - 玩家声音是我们进步的动力
-- 🔒 **安全稳定** - 专业运维，数据安全有保障
+- <MapIcon name="lock" :size="24" /> **安全稳定** - 专业运维，数据安全有保障
 - 💡 **持续创新** - 不断探索新的玩法和可能性
 
-## 💻 硬件配置
+## <MapIcon name="monitor" :size="24" /> 硬件配置
 
 服务器采用高性能硬件配置，确保游戏流畅运行：
 
@@ -70,7 +70,7 @@ features:
 - **三线优化** - 电信/联通/移动用户均可流畅连接
 - **骨干线路** - 直连骨干网，减少跳数，更低延迟
 
-## 🛡️ 软件架构与备份策略
+## <MapIcon name="shield" :size="24" /> 软件架构与备份策略
 
 ### 服务架构
 
@@ -89,11 +89,11 @@ features:
 
 Leaf 服务端启用了多项异步优化：
 
-- ✅ 异步区块发送 - 玩家加载区块更流畅
-- ✅ DAB 距离 AI - 远处生物减少计算
-- ✅ 异步生物生成 - 减少主线程负载
-- ✅ 异步寻路 - 生物寻路不阻塞主线程
-- ✅ 虚拟线程 - 节省内存，提升并发
+- <MapIcon name="check" :size="24" /> 异步区块发送 - 玩家加载区块更流畅
+- <MapIcon name="check" :size="24" /> DAB 距离 AI - 远处生物减少计算
+- <MapIcon name="check" :size="24" /> 异步生物生成 - 减少主线程负载
+- <MapIcon name="check" :size="24" /> 异步寻路 - 生物寻路不阻塞主线程
+- <MapIcon name="check" :size="24" /> 虚拟线程 - 节省内存，提升并发
 
 ### 数据备份
 
@@ -105,11 +105,11 @@ Leaf 服务端启用了多项异步优化：
 
 ## 📢 获取帮助
 
-- 💬 **玩家交流群**: 523914625
+- <MapIcon name="message-circle" :size="24" /> **玩家交流群**: 523914625
 - 🐛 **问题反馈**: [GitHub Issues](https://github.com/fwindemiko/MiragEdge-DocWeb/issues)
-- 💻 **贡献代码**: [GitHub 仓库](https://github.com/fwindemiko/MiragEdge-DocWeb)
+- <MapIcon name="monitor" :size="24" /> **贡献代码**: [GitHub 仓库](https://github.com/fwindemiko/MiragEdge-DocWeb)
 
-## 📝 开发者的话
+## <MapIcon name="edit" :size="24" /> 开发者的话
 
 > 语言学科是我的弱项，若文档有写得不好的地方，恳请指正 🙏
 >

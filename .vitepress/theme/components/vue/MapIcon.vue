@@ -77,6 +77,9 @@ const iconMap = {
   download: 'Download',
   upload: 'Upload',
   share: 'Share2',
+  refresh: 'RefreshCw',
+  sync: 'RefreshCw',
+  globe: 'Globe',
   heart: 'Heart',
   star: 'Star',
   clock: 'Clock',
@@ -166,6 +169,23 @@ const iconMap = {
   online: 'Wifi',
   offline: 'WifiOff',
   
+  // Additional mappings
+  'rocket': 'Rocket',
+  'monitor': 'Monitor',
+  'target': 'Target',
+  'clipboard': 'Clipboard',
+  'help-circle': 'HelpCircle',
+  'message-circle': 'MessageCircle',
+  'pin': 'Pin',
+  'party-popper': 'PartyPopper',
+  'refresh-cw': 'RefreshCw',
+  'refresh': 'RefreshCw',
+  'globe': 'Globe',
+  'bar-chart': 'BarChart3',
+  'edit': 'Pencil',
+  'fox': 'Cat',
+  'sync': 'RefreshCw',
+
   // 锐界幻境特色命名
   'miragedge': 'Globe',
   'edge': 'Mountain',
