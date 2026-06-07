@@ -118,3 +118,14 @@
 .VPSidebarItem .item .text {
   padding-left: 0;
 }
+
+/* MapIcon inline display fix */
+.map-icon-wrapper {
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle;
+}
+.map-icon-wrapper svg {
+  display: inline;
+  vertical-align: middle;
+}

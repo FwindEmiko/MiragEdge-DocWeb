@@ -1,5 +1,7 @@
 <template>
-  <component :is="iconComponent" v-bind="attrs" v-on="$listeners" />
+  <span class="map-icon-wrapper">
+    <component :is="iconComponent" v-bind="attrs" v-on="$listeners" />
+  </span>
 </template>
 
 <script setup>
