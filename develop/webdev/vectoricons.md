@@ -15,8 +15,6 @@ import {
 
 锐界幻境文档站已集成 **Lucide** 图标库（1000+ 开源图标），并通过 `MapIcon` 组件提供语义化调用方式。
 
----
-
 ## 快速使用
 
 ### 方式一：MapIcon 组件（推荐）
@@ -51,8 +49,6 @@ import { Home, User, Settings } from 'lucide-vue-next'
 <User :size="28" class="my-icon" />
 <Settings @click="handleClick" />
 ```
-
----
 
 ## 语义名称映射表
 
@@ -159,8 +155,6 @@ import { Home, User, Settings } from 'lucide-vue-next'
 | `soul` | Heart | <Heart :size="20" /> |
 </details>
 
----
-
 ## 在首页 Feature 卡片中使用
 
 `index.md` 的 feature 卡片 emoji 字段支持直接填写 `<MapIcon name="xxx" />`：
@@ -179,8 +173,6 @@ features:
 <span>PVP 竞技场</span>
 ```
 
----
-
 ## 添加新图标映射
 
 如果需要添加新的语义名称映射，编辑 `.vitepress/theme/components/vue/MapIcon.vue` 中的 `iconMap` 对象：
@@ -194,15 +186,11 @@ const iconMap = {
 
 所有 Lucide 可用图标请参考 [Lucide 图标库官网](https://lucide.dev/icons/)。
 
----
-
 ## 命名规范
 
 - 语义名称使用 **全小写英文 + 连字符**（kebab-case）
 - 按功能/场景归类，例如游戏类以 `game-` 开头、文档类以 `doc-` 开头
 - 名称应直观表达含义，无需查阅文档即可理解
-
----
 
 ## 最佳实践
 
