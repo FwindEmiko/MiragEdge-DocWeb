@@ -72,12 +72,24 @@ export default {
       if (inBrowser) {
         // 在页面挂载后调用通知函数
         showAestheticNotice();
-        
+
         // 初始化3D倾斜效果
         init3DTiltEffect();
-        
+
         // 在控制台输出 F.windEmiko 文字图像
         showConsoleLogo();
+
+        // 滚动进度条
+        const bar = document.createElement('div')
+        bar.className = 'scroll-progress'
+        document.body.appendChild(bar)
+        const update = () => {
+          const scrollTop = window.scrollY
+          const docHeight = document.documentElement.scrollHeight - window.innerHeight
+          bar.style.width = docHeight > 0 ? `${(scrollTop / docHeight) * 100}%` : '0%'
+        }
+        window.addEventListener('scroll', update, { passive: true })
+        update()
       }
     });
   }
