@@ -94,5 +94,29 @@ html:not(.dark) .VPHome .VPFeature:hover {
   transform: translateZ(20px); /* 让内容轻微浮起，产生更强的3D感 */
 }
 
+/* ===== 图标呼吸浮动动画 ===== */
+@keyframes iconBreathe {
+  0%, 100% {
+    transform: translateY(0);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translateY(-3px);
+    opacity: 1;
+  }
+}
+
+.VPHome .VPFeature .icon {
+  animation: iconBreathe 3s ease-in-out infinite;
+}
+
+/* 不同卡片错开动画延迟 */
+.VPHome .VPFeature:nth-child(6n+1) .icon { animation-delay: 0s; }
+.VPHome .VPFeature:nth-child(6n+2) .icon { animation-delay: 0.5s; }
+.VPHome .VPFeature:nth-child(6n+3) .icon { animation-delay: 1s; }
+.VPHome .VPFeature:nth-child(6n+4) .icon { animation-delay: 1.5s; }
+.VPHome .VPFeature:nth-child(6n+5) .icon { animation-delay: 2s; }
+.VPHome .VPFeature:nth-child(6n+6) .icon { animation-delay: 2.5s; }
+
 /* 保持你原有的图标、标题、详情等样式不变，此处省略... */
 /* ... (保留原有的 .icon, .title, .details 样式) ... */
