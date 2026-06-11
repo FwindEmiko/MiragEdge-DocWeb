@@ -83,6 +83,6 @@
 
 ## 联系方式
 
-- **安全相关问题**：`security@miragedge.top`
+- **安全相关问题**：`2011857087@qq.com`
 - **一般问题**：[GitHub Issues](https://github.com/FwindEmiko/MiragEdge-DocWeb/issues)
 - **维护者**：[FwindEmiko](https://github.com/FwindEmiko)
