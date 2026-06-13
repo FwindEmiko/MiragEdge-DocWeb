@@ -51,8 +51,6 @@ jobs:
           node-version: ${{ env.NODE_VERSION }}
 
       - run: pnpm install
-      - name: 复制 mark.js
-        run: cp -rf ./.vitepress/mark.js ./node_modules/
       - name: 构建
         run: pnpm run build
       - name: 检查构建产物大小
