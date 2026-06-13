@@ -32,9 +32,9 @@ onMounted(() => {
       petals.value.push(createPetal())
     }
   }, 3000)
-
-  onUnmounted(() => clearInterval(interval))
 })
+
+onUnmounted(() => clearInterval(interval))
 </script>
 
 <template>

@@ -1,7 +1,7 @@
 // .vitepress/theme/index.ts
 // 自定义主题入口文件
 
-import { h, onMounted } from 'vue'
+import { h, onMounted, onBeforeUnmount } from 'vue'
 import type { Theme } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
 import NotFound from './components/vue/NotFound.vue'
@@ -75,6 +75,9 @@ export default {
   },
   
   setup() {
+    let scrollBar = null
+    let scrollHandler = null
+
     onMounted(() => {
       if (inBrowser) {
         // 在页面挂载后调用通知函数
@@ -92,13 +95,24 @@ export default {
         const bar = document.createElement('div')
         bar.className = 'scroll-progress'
         document.body.appendChild(bar)
+        scrollBar = bar
         const update = () => {
           const scrollTop = window.scrollY
           const docHeight = document.documentElement.scrollHeight - window.innerHeight
           bar.style.width = docHeight > 0 ? `${(scrollTop / docHeight) * 100}%` : '0%'
         }
+        scrollHandler = update
         window.addEventListener('scroll', update, { passive: true })
         update()
+      }
+    });
+
+    onBeforeUnmount(() => {
+      if (inBrowser && scrollHandler) {
+        window.removeEventListener('scroll', scrollHandler)
+        if (scrollBar && scrollBar.parentNode) {
+          scrollBar.parentNode.removeChild(scrollBar)
+        }
       }
     });
   }

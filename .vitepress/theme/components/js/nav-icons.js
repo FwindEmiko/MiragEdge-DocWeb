@@ -89,9 +89,11 @@ export function initNavIcons() {
     enhanceAll();
   }
 
-  // 监听 DOM 变化（VitePress 切换路由时）
+  // 监听 DOM 变化（VitePress 切换路由时），添加防抖避免高频变动导致卡顿
+  let debounceTimer = null;
   const observer = new MutationObserver(() => {
-    enhanceAll();
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(enhanceAll, 150);
   });
 
   observer.observe(document.body || document.documentElement, {

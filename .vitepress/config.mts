@@ -69,12 +69,10 @@ export default defineConfig({
       addContributorsPlugin(),
     ],
     optimizeDeps: {
-      include: ['mermaid', 'vue'],
-      exclude: ['mark.js'] // 排除 mark.js
+      include: ['mermaid', 'vue']
     },
     ssr: {
-      noExternal: ['mermaid', /^vitepress/], // 保持 VitePress 相关包不被外部化
-      external: ['mark.js'] // 外部化 mark.js
+      noExternal: ['mermaid', /^vitepress/]
     },
     // 构建优化
     build: {
@@ -83,33 +81,17 @@ export default defineConfig({
       minify: 'esbuild',
       rollupOptions: {
         output: {
-          manualChunks: (id) => {
-            // 将 node_modules 中的依赖包拆分成更小的 chunks
-            if (id.includes('node_modules')) {
-              if (id.includes('mermaid')) {
-                return 'vendor-mermaid';
-              }
-              if (id.includes('vue') || id.includes('vitepress')) {
-                return 'vendor-vue';
-              }
-              return 'vendor';
-            }
+          manualChunks: {
+            // mermaid 及其生态依赖单独分包，利用 Rollup 自动解析依赖关系避免循环 chunk
+            'vendor-mermaid': ['mermaid'],
           }
         }
-      },
-      // terser 压缩选项
-      //terserOptions: {
-      //  compress: {
-      //    drop_console: false, // 保留 console 输出，方便调试
-      //    drop_debugger: true
-      //  }
-      //}
+      }
     },
     server: {
       fs: {
         allow: ['..', '.'] // 允许访问父目录和当前目录
       },
-      // 添加热重载配置，解决模块加载问题
       hmr: {
         overlay: true // 显示错误覆盖层
       }
