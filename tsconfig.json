@@ -20,13 +20,6 @@
     "noUnusedParameters": false,
     "allowJs": true,
     "checkJs": false,
-    "ignoreDeprecations": "6.0",
-    "baseUrl": ".",
-    "paths": {
-      "@/*": [
-        ".vitepress/theme/*"
-      ]
-    }
   },
   "include": [
     "env.d.ts",
