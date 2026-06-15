@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "ESNext",
     "module": "ESNext",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "jsx": "preserve",
     "resolveJsonModule": true,
     "isolatedModules": true,
@@ -20,6 +20,7 @@
     "noUnusedParameters": false,
     "allowJs": true,
     "checkJs": false,
+    "ignoreDeprecations": "6.0",
     "baseUrl": ".",
     "paths": {
       "@/*": [
