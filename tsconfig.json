@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "ESNext",
     "module": "ESNext",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "jsx": "preserve",
     "resolveJsonModule": true,
     "isolatedModules": true,
@@ -20,12 +20,6 @@
     "noUnusedParameters": false,
     "allowJs": true,
     "checkJs": false,
-    "baseUrl": ".",
-    "paths": {
-      "@/*": [
-        ".vitepress/theme/*"
-      ]
-    }
   },
   "include": [
     "env.d.ts",
