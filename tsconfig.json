@@ -20,9 +20,11 @@
     "noUnusedParameters": false,
     "allowJs": true,
     "checkJs": false,
+    "types": ["node"]
   },
   "include": [
     "env.d.ts",
+    ".vitepress/config.mts",
     ".vitepress/theme/**/*.ts",
     ".vitepress/theme/**/*.vue"
   ],
