@@ -10,18 +10,24 @@
  */
 
 /**
+ * 匹配开头的单个 emoji 簇（含 ZWJ 序列、肤色修饰符、FE0F 变体选择器）。
+ * 例如 🧑‍🌾（person + ZWJ + ear of rice）会被视为一个完整 emoji，
+ * 避免被拆成 🧑 和 🌾 两个图标。
+ */
+const leadingEmojiRegex = /^(\p{Emoji_Presentation}|\p{Extended_Pictographic}\uFE0F?)(?:\p{Emoji_Modifier})?(?:\u200D(\p{Emoji_Presentation}|\p{Extended_Pictographic}\uFE0F?)(?:\p{Emoji_Modifier})?)*/u;
+
+/**
  * 检查字符串开头是否为 emoji
  */
 function hasLeadingEmoji(text) {
-  const emojiRegex = /^(\p{Emoji_Presentation}|\p{Extended_Pictographic}\uFE0F?|\p{Emoji}\u200D[\p{Emoji}\p{Extended_Pictographic}]|\p{Emoji}\uFE0F)/u;
-  return emojiRegex.test(text);
+  return leadingEmojiRegex.test(text);
 }
 
 /**
  * 提取开头的 emoji 字符
  */
 function extractLeadingEmoji(text) {
-  const match = text.match(/^(\p{Emoji_Presentation}|\p{Extended_Pictographic}\uFE0F?|\p{Emoji}\u200D[\p{Emoji}\p{Extended_Pictographic}]|\p{Emoji}\uFE0F?)/u);
+  const match = text.match(leadingEmojiRegex);
   if (match) {
     return { emoji: match[0], text: text.slice(match[0].length).trim() };
   }
