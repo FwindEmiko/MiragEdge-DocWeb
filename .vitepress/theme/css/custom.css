@@ -162,30 +162,4 @@
   margin: 32px 0;
 }
 
-/* ===== 内页氛围光效果 ===== */
-/* 右上角微弱暖金色光晕，极简克制 */
-.VPNavBar.has-sidebar::before,
-.VPDoc::before {
-  content: '';
-  position: fixed;
-  top: -30vh;
-  right: -20vw;
-  width: 80vw;
-  height: 80vw;
-  background: radial-gradient(circle at center, rgba(212, 175, 110, 0.07) 0%, transparent 60%);
-  filter: blur(80px);
-  pointer-events: none;
-  z-index: 0;
-}
 
-/* 移除第二光源，保留伪元素占位避免布局问题 */
-.VPNavBar.has-sidebar::after,
-.VPDoc::after {
-  display: none;
-}
-
-/* 确保氛围光不影响内容可读性 */
-.VPDoc .content-container {
-  position: relative;
-  z-index: 1;
-}
