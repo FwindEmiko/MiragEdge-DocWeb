@@ -1,5 +1,7 @@
 name: CI/CD 持续集成
+
 on: [push, pull_request]
+
 concurrency:
   group: ci-${{ github.ref }}
   cancel-in-progress: true
@@ -14,6 +16,9 @@ env:
   PNPM_VERSION: 10.15.0
 
 jobs:
+  # ============================================================
+  # 代码质量检查
+  # ============================================================
   lint:
     name: 代码质量检查
     runs-on: ubuntu-latest
@@ -34,6 +39,9 @@ jobs:
         run: pnpm run typecheck
         continue-on-error: false
 
+  # ============================================================
+  # 构建测试 + 打包
+  # ============================================================
   test:
     name: 构建测试
     runs-on: ubuntu-latest
@@ -69,6 +77,9 @@ jobs:
           path: site.tar.gz
           retention-days: 3
 
+  # ============================================================
+  # 部署
+  # ============================================================
   deploy:
     name: 部署
     runs-on: ubuntu-latest
@@ -81,18 +92,25 @@ jobs:
         with:
           name: site
           path: ./
-      - name: 部署
+      - name: 配置 SSH
         uses: webfactory/ssh-agent@v0.9.0
         with:
-          ssh-private-key: ${{ secrets.actions }}
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: 连接 WireGuard VPN
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq wireguard-tools
+          echo "${{ secrets.WG_CLIENT_CONFIG }}" | sudo tee /etc/wireguard/github-actions.conf > /dev/null
+          sudo wg-quick up github-actions
+          sudo wg show
+
       - name: 远程部署
         run: |
           set -e
           mkdir -p ~/.ssh
-          ssh-keyscan -H miragedge.top >> ~/.ssh/known_hosts 2>/dev/null || true
-          ssh-keyscan -H deploy.miragedge.top >> ~/.ssh/known_hosts 2>/dev/null || true
-          scp -o ConnectTimeout=60 site.tar.gz root@deploy.miragedge.top:/tmp/
-          ssh -o ConnectTimeout=60 root@deploy.miragedge.top << 'ENDSSH'
+          ssh-keyscan -H 20.20.20.1 >> ~/.ssh/known_hosts 2>/dev/null
+          scp -o ConnectTimeout=60 site.tar.gz root@20.20.20.1:/tmp/
+          ssh -o ConnectTimeout=60 root@20.20.20.1 << 'ENDSSH'
             set -e
             mkdir -p /www/MiragEdge/MiragEdge-DocWeb/build/miragedge.top/
             rm -rf /www/MiragEdge/MiragEdge-DocWeb/build/miragedge.top/*
@@ -101,4 +119,6 @@ jobs:
             echo "✅ 部署成功"
           ENDSSH
 
-
+      - name: 断开 WireGuard VPN
+        if: always()
+        run: sudo wg-quick down github-actions 2>/dev/null || true
