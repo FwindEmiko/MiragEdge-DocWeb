@@ -9,7 +9,7 @@
 ## <MapIcon name="rocket" :size="24" /> 快速访问
 - **官网**：[https://f.windemiko.top](https://f.windemiko.top)  
 - **文档站**：[https://miragedge.top](https://miragedge.top)（当前文档站）  
-- **下载站**：[https://cloud.miragedge.top](https://cloud.miragedge.top)
+- **资源下载**：[https://share.fnnas.net/s/a32874a8ab394948b4](https://share.fnnas.net/s/a32874a8ab394948b4)
 - **QQ交流群**：[523914625](https://qm.qq.com/cgi-bin/qm/qr?k=r_yUquo3bQwX3bL97RwG1aVj41WIEOI3)（入群绑定账号可进服）  
 - **QQ频道**：[锐界幻境互通服务器](https://pd.qq.com/s/9kqtx5dhw)（获取更早更新日志）
 - **Bilibili**：[狐风轩汐](https://space.bilibili.com/359174372)（官方内容创作）

@@ -166,8 +166,8 @@ export default defineConfig({
            rel: 'noopener noreferrer'
          },
          { 
-           text: '☁️ 锐界幻境下载站', 
-           link: 'https://cloud.miragedge.top',
+           text: '☁️ 资源分享下载', 
+           link: 'https://share.fnnas.net/s/a32874a8ab394948b4',
            target: '_blank',
            rel: 'noopener noreferrer'
          },
