@@ -99,6 +99,13 @@ jobs:
 
       - name: 连接 WireGuard VPN
         run: |
+          echo "=== 网络诊断 ==="
+          echo "1. DNS 解析: $(host 8.136.155.46 2>&1 || echo 'fail')"
+          echo "2. ICMP Ping: $(ping -c 2 -W 3 8.136.155.46 2>&1 | tail -1)"
+          echo "3. TCP 80: $(timeout 5 bash -c 'echo >/dev/tcp/8.136.155.46/80' 2>&1 && echo OK || echo FAIL)"
+          echo "4. TCP 443: $(timeout 5 bash -c 'echo >/dev/tcp/8.136.155.46/443' 2>&1 && echo OK || echo FAIL)"
+          echo "5. UDP 51820: $(timeout 5 bash -c 'echo >/dev/udp/8.136.155.46/51820' 2>&1 && echo OK || echo FAIL)"
+          echo ""
           sudo apt-get update -qq && sudo apt-get install -y -qq wireguard-tools
           echo "${{ secrets.WG_CLIENT_CONFIG }}" | sudo tee /etc/wireguard/github-actions.conf > /dev/null
           # 循环尝试建立 WG 隧道，每次 up 后等 5 秒检查握手是否完成
