@@ -103,12 +103,15 @@ jobs:
           echo "${{ secrets.WG_CLIENT_CONFIG }}" | sudo tee /etc/wireguard/github-actions.conf > /dev/null
           sudo wg-quick up github-actions
           sudo wg show
+          # 等待隧道稳定建立，避免 ssh-keyscan 因隧道未就绪而失败
+          sleep 3
+          echo "✅ WireGuard VPN 已就绪"
 
       - name: 远程部署
         run: |
           set -e
           mkdir -p ~/.ssh
-          ssh-keyscan -H 20.20.20.1 >> ~/.ssh/known_hosts 2>/dev/null
+          ssh-keyscan -H 20.20.20.1 >> ~/.ssh/known_hosts 2>&1 || echo "⚠️ ssh-keyscan 警告，继续尝试..."
           scp -o ConnectTimeout=60 site.tar.gz root@20.20.20.1:/tmp/
           ssh -o ConnectTimeout=60 root@20.20.20.1 << 'ENDSSH'
             set -e
