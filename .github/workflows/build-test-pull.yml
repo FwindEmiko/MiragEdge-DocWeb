@@ -101,10 +101,27 @@ jobs:
         run: |
           sudo apt-get update -qq && sudo apt-get install -y -qq wireguard-tools
           echo "${{ secrets.WG_CLIENT_CONFIG }}" | sudo tee /etc/wireguard/github-actions.conf > /dev/null
-          sudo wg-quick up github-actions
-          sudo wg show
-          # 等待隧道稳定建立，避免 ssh-keyscan 因隧道未就绪而失败
-          sleep 3
+          # 循环尝试建立 WG 隧道，每次 up 后等 5 秒检查握手是否完成
+          for i in $(seq 1 5); do
+            echo "⏳ 尝试建立 WG 隧道 (第 $i 次)..."
+            sudo wg-quick up github-actions 2>/dev/null || true
+            sleep 5
+            RX=$(sudo wg show github-actions transfer 2>/dev/null | awk '{print $1}')
+            if [ -n "$RX" ] && [ "$RX" -gt 0 ]; then
+              echo "✅ WG 隧道已建立，收到 $RX 字节"
+              sudo wg show
+              break
+            fi
+            echo "⚠️ 未收到数据，重试..."
+            sudo wg-quick down github-actions 2>/dev/null || true
+          done
+          # 最终检查
+          RX=$(sudo wg show github-actions transfer 2>/dev/null | awk '{print $1}')
+          if [ -z "$RX" ] || [ "$RX" -eq 0 ]; then
+            echo "❌ WG 隧道建立失败"
+            sudo wg show
+            exit 1
+          fi
           echo "✅ WireGuard VPN 已就绪"
 
       - name: 远程部署
