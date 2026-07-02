@@ -108,11 +108,8 @@ jobs:
           echo ""
           sudo apt-get update -qq && sudo apt-get install -y -qq wireguard-tools tcpdump
           echo ""
-          echo "=== WG_CONFIG 内容 ==="
-          echo "${{ secrets.WG_CLIENT_CONFIG }}"
-          echo ""
-          echo "=== 开始建立 WG 隧道 ==="
-          echo "${{ secrets.WG_CLIENT_CONFIG }}" | sudo tee /etc/wireguard/github-actions.conf > /dev/null
+          echo "=== 写入 WG 配置 ==="
+          echo "${{ secrets.WG_CLIENT_CONFIG }}" | base64 -d | sudo tee /etc/wireguard/github-actions.conf
           # 在后台抓包
           sudo tcpdump -i any -n 'udp port 51820' -c 10 &
           TCPDUMP_PID=$!
