@@ -100,40 +100,37 @@ jobs:
       - name: 连接 WireGuard VPN
         run: |
           echo "=== 网络诊断 ==="
-          echo "1. DNS: $(getent hosts 8.136.155.46 2>&1)"
-          echo "2. TCP 443: $(timeout 5 bash -c 'echo >/dev/tcp/8.136.155.46/443' 2>&1 && echo OK || echo FAIL)"
-          echo "3. UDP 51820: $(timeout 5 bash -c 'echo >/dev/udp/8.136.155.46/51820' 2>&1 && echo OK || echo FAIL)"
-          echo "4. 路由表:"
-          ip route show
+          echo "1. TCP 443: $(timeout 5 bash -c 'echo >/dev/tcp/8.136.155.46/443' 2>&1 && echo OK || echo FAIL)"
           echo ""
-          sudo apt-get update -qq && sudo apt-get install -y -qq wireguard-tools tcpdump
+          sudo apt-get update -qq && sudo apt-get install -y -qq wireguard-tools
           echo ""
-          echo "=== 写入 WG 配置 ==="
-          echo "${{ secrets.WG_CLIENT_CONFIG }}" | base64 -d | sudo tee /etc/wireguard/github-actions.conf
-          # 在后台抓包
-          sudo tcpdump -i any -n 'udp port 51820' -c 10 &
-          TCPDUMP_PID=$!
-          # 循环尝试建立
-          for i in $(seq 1 5); do
-            echo "⏳ 尝试 $i/5..."
-            sudo wg-quick up github-actions 2>&1 || true
-            sleep 5
-            echo "--- wg show ---"
-            sudo wg show github-actions
+          echo "=== 解码 WG 配置 ==="
+          CONFIG=$(printf '%s' "${{ secrets.WG_CLIENT_CONFIG }}" | base64 -d)
+          PRIVKEY=$(echo "$CONFIG" | grep 'PrivateKey' | awk '{print $NF}')
+          if [ -z "$PRIVKEY" ]; then echo "❌ 无法提取私钥"; exit 1; fi
+          echo "私钥长度: ${#PRIVKEY}"
+          echo ""
+          echo "=== 手动建立 WG 隧道 ==="
+          sudo ip link add github-actions type wireguard
+          echo "$PRIVKEY" | sudo wg set github-actions private-key /dev/stdin
+          sudo ip addr add 20.20.20.100/32 dev github-actions
+          sudo wg set github-actions peer luXH07SgIgnmWjm2UeC7R9HAYSq6c4ayMY6cJ6Um3D8= allowed-ips 20.20.20.1/32 endpoint 8.136.155.46:51820 persistent-keepalive 25
+          sudo ip link set up github-actions
+          echo ""
+          echo "=== 等待握手完成 ==="
+          for i in $(seq 1 10); do
+            sleep 3
             RX=$(sudo wg show github-actions transfer 2>/dev/null | awk '{print $2}')
-            echo "RX 字节: $RX"
+            echo "  [$i/10] RX: ${RX:-0} 字节"
             if [ -n "$RX" ] && [ "$RX" -gt 0 ] 2>/dev/null; then
               echo "✅ 握手成功！"
+              sudo wg show github-actions
               break
             fi
-            sudo wg-quick down github-actions 2>/dev/null || true
           done
-          kill $TCPDUMP_PID 2>/dev/null || true
-          sleep 2
-          echo "=== tcpdump 抓包输出 ==="
-          # 最终检查
           if ! sudo wg show github-actions transfer 2>/dev/null | awk '{exit !($2>0)}'; then
-            echo "❌ WG 隧道建立失败"
+            echo "❌ WG 握手失败"
+            sudo wg show github-actions
             exit 1
           fi
           echo "✅ WireGuard VPN 已就绪"
