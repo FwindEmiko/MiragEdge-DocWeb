@@ -100,33 +100,43 @@ jobs:
       - name: 连接 WireGuard VPN
         run: |
           echo "=== 网络诊断 ==="
-          echo "1. DNS 解析: $(host 8.136.155.46 2>&1 || echo 'fail')"
-          echo "2. ICMP Ping: $(ping -c 2 -W 3 8.136.155.46 2>&1 | tail -1)"
-          echo "3. TCP 80: $(timeout 5 bash -c 'echo >/dev/tcp/8.136.155.46/80' 2>&1 && echo OK || echo FAIL)"
-          echo "4. TCP 443: $(timeout 5 bash -c 'echo >/dev/tcp/8.136.155.46/443' 2>&1 && echo OK || echo FAIL)"
-          echo "5. UDP 51820: $(timeout 5 bash -c 'echo >/dev/udp/8.136.155.46/51820' 2>&1 && echo OK || echo FAIL)"
+          echo "1. DNS: $(getent hosts 8.136.155.46 2>&1)"
+          echo "2. TCP 443: $(timeout 5 bash -c 'echo >/dev/tcp/8.136.155.46/443' 2>&1 && echo OK || echo FAIL)"
+          echo "3. UDP 51820: $(timeout 5 bash -c 'echo >/dev/udp/8.136.155.46/51820' 2>&1 && echo OK || echo FAIL)"
+          echo "4. 路由表:"
+          ip route show
           echo ""
-          sudo apt-get update -qq && sudo apt-get install -y -qq wireguard-tools
+          sudo apt-get update -qq && sudo apt-get install -y -qq wireguard-tools tcpdump
+          echo ""
+          echo "=== WG_CONFIG 内容 ==="
+          echo "${{ secrets.WG_CLIENT_CONFIG }}"
+          echo ""
+          echo "=== 开始建立 WG 隧道 ==="
           echo "${{ secrets.WG_CLIENT_CONFIG }}" | sudo tee /etc/wireguard/github-actions.conf > /dev/null
-          # 循环尝试建立 WG 隧道，每次 up 后等 5 秒检查握手是否完成
+          # 在后台抓包
+          sudo tcpdump -i any -n 'udp port 51820' -c 10 &
+          TCPDUMP_PID=$!
+          # 循环尝试建立
           for i in $(seq 1 5); do
-            echo "⏳ 尝试建立 WG 隧道 (第 $i 次)..."
-            sudo wg-quick up github-actions 2>/dev/null || true
+            echo "⏳ 尝试 $i/5..."
+            sudo wg-quick up github-actions 2>&1 || true
             sleep 5
-            RX=$(sudo wg show github-actions transfer 2>/dev/null | awk '{print $1}')
-            if [ -n "$RX" ] && [ "$RX" -gt 0 ]; then
-              echo "✅ WG 隧道已建立，收到 $RX 字节"
-              sudo wg show
+            echo "--- wg show ---"
+            sudo wg show github-actions
+            RX=$(sudo wg show github-actions transfer 2>/dev/null | awk '{print $2}')
+            echo "RX 字节: $RX"
+            if [ -n "$RX" ] && [ "$RX" -gt 0 ] 2>/dev/null; then
+              echo "✅ 握手成功！"
               break
             fi
-            echo "⚠️ 未收到数据，重试..."
             sudo wg-quick down github-actions 2>/dev/null || true
           done
+          kill $TCPDUMP_PID 2>/dev/null || true
+          sleep 2
+          echo "=== tcpdump 抓包输出 ==="
           # 最终检查
-          RX=$(sudo wg show github-actions transfer 2>/dev/null | awk '{print $1}')
-          if [ -z "$RX" ] || [ "$RX" -eq 0 ]; then
+          if ! sudo wg show github-actions transfer 2>/dev/null | awk '{exit !($2>0)}'; then
             echo "❌ WG 隧道建立失败"
-            sudo wg show
             exit 1
           fi
           echo "✅ WireGuard VPN 已就绪"
