@@ -259,9 +259,9 @@ export default defineConfig({
               items: [
                 { text: '介绍', link: '/features/adventure/enchantments/info' },
                 { text: '品质等级', link: '/features/adventure/enchantments/rarity' },
-                { text: '功能分类', link: '/features/adventure/enchantments/group' },
                 { text: '附魔列表', link: '/features/adventure/enchantments/list' },
-                { text: '祛魔系统', link: '/features/adventure/enchantments/separator' },
+                { text: '分类搭配', link: '/features/adventure/enchantments/group' },
+                { text: '附魔管理', link: '/features/adventure/enchantments/system' },
               ]
             },
             {
