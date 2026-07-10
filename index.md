@@ -80,7 +80,7 @@ features:
 
 | 组件 | 版本 | 说明 |
 |------|------|------|
-| **服务端** | Leaf 1.21.11 | 基于 Pufferfish + Gale，极致性能 |
+| **服务端** | Leaf 26.1.2 | 基于 Pufferfish + Gale，极致性能 |
 | **Java** | GraalVM 25 LTS | JIT 编译优化，22% 内存节省 |
 | **代理** | Velocity | 高性能反向代理 |
 | **GC** | G1GC (Aikar) | 优化垃圾回收，减少卡顿 |
