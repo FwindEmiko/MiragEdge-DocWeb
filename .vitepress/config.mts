@@ -346,7 +346,14 @@ export default defineConfig({
           items: [
             { text: '贴图字符码', link: '/develop/server_configs/sticker' },
             { text: '自定义作物', link: '/develop/server_configs/customcrops' },
-            { text: '更多附魔', link: '/develop/server_configs/enchanting' },
+            {
+              text: '✨ 更多附魔',
+              collapsed: false,
+              items: [
+                { text: '附魔配置教程', link: '/develop/server_configs/enchanting' },
+                { text: '附魔ID对照表', link: '/develop/server_configs/enchantment_ids' },
+              ]
+            },
           ]
         },
         {

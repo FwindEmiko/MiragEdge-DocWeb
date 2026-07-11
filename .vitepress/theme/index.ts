@@ -15,6 +15,8 @@ import CornerSakura from './components/vue/CornerSakura.vue'
 import CornerBubbles from './components/vue/CornerBubbles.vue'
 import ChangelogFromMd from './components/vue/ChangelogFromMd.vue'
 import MapIcon from './components/vue/MapIcon.vue'
+import EnchantmentList from './components/vue/EnchantmentList.vue'
+import EnchantmentIdTable from './components/vue/EnchantmentIdTable.vue'
 import './css/custom.css'
 
 // 导入所有样式文件
@@ -64,6 +66,8 @@ export default {
     app.component('CornerBubbles', CornerBubbles)
     app.component('ChangelogFromMd', ChangelogFromMd)
     app.component('MapIcon', MapIcon)
+    app.component('EnchantmentList', EnchantmentList)
+    app.component('EnchantmentIdTable', EnchantmentIdTable)
 
     // 仅在浏览器环境下执行
     if (inBrowser) {
