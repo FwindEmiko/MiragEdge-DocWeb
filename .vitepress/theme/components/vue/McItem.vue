@@ -9,10 +9,10 @@
  * 通过 id 可引用 mc-textures 注册表中的原版物品（581 个，含官方中文名）。
  * 自定义物品直接传入 { name, texture } 即可。
  *
- * tooltip 使用 Teleport 传送到 body，避免被父容器的 backdrop-filter
- * 层叠上下文裁剪或遮挡。
+ * tooltip 通过 JS 直接在 document.body 上创建/移除 DOM 元素，
+ * 完全绕过 Vue 渲染周期和父容器 CSS 层叠上下文（backdrop-filter 等）。
  */
-import { computed, ref, onMounted, onBeforeUnmount } from 'vue'
+import { computed, ref, onBeforeUnmount } from 'vue'
 import { resolveMcItem, resolveNameByTexture } from '../../data/mc-textures'
 
 const props = defineProps<{
@@ -61,37 +61,43 @@ function onImgError() {
   imgError.value = true
 }
 
-// ===== Tooltip 位置管理（Teleport 到 body） =====
-const tooltipVisible = ref(false)
-const tooltipX = ref(0)
-const tooltipY = ref(0)
+// ===== Tooltip DOM 管理（直接操作 body 上的元素） =====
+let tooltipEl: HTMLDivElement | null = null
 const elRef = ref<HTMLElement | null>(null)
 
-function onMouseEnter() {
-  if (!elRef.value || !resolved.value.name) return
+function showTooltip() {
+  // 条件检查
   if (props.tooltip === false) return
+  if (!resolved.value.name) return
+  if (!elRef.value) return
+  // 移动端不显示
+  if (window.matchMedia('(hover: none)').matches) return
+
+  // 如果已有 tooltip，先移除
+  hideTooltip()
+
+  // 创建 tooltip 元素
+  tooltipEl = document.createElement('div')
+  tooltipEl.className = 'mc-item-tooltip-portal'
+  tooltipEl.textContent = resolved.value.name
+
+  // 计算位置（基于物品元素的位置）
   const rect = elRef.value.getBoundingClientRect()
-  tooltipX.value = rect.left + rect.width / 2
-  tooltipY.value = rect.top
-  tooltipVisible.value = true
+  tooltipEl.style.left = (rect.left + rect.width / 2) + 'px'
+  tooltipEl.style.top = rect.top + 'px'
+
+  document.body.appendChild(tooltipEl)
 }
 
-function onMouseLeave() {
-  tooltipVisible.value = false
+function hideTooltip() {
+  if (tooltipEl && tooltipEl.parentNode) {
+    tooltipEl.parentNode.removeChild(tooltipEl)
+    tooltipEl = null
+  }
 }
-
-// 滚动时隐藏 tooltip（避免位置错位）
-function onScroll() {
-  tooltipVisible.value = false
-}
-
-onMounted(() => {
-  window.addEventListener('scroll', onScroll, { passive: true, capture: true })
-})
 
 onBeforeUnmount(() => {
-  window.removeEventListener('scroll', onScroll, { capture: true })
-  tooltipVisible.value = false
+  hideTooltip()
 })
 </script>
 
@@ -99,9 +105,9 @@ onBeforeUnmount(() => {
   <div
     ref="elRef"
     class="mc-item"
-    :class="[`mc-item-${size || 'md'}`, { 'has-tooltip': tooltip !== false && resolved.name }]"
-    @mouseenter="onMouseEnter"
-    @mouseleave="onMouseLeave"
+    :class="[`mc-item-${size || 'md'}`]"
+    @mouseenter="showTooltip"
+    @mouseleave="hideTooltip"
   >
     <div class="mc-item-slot">
       <img
@@ -118,19 +124,6 @@ onBeforeUnmount(() => {
       <span v-if="showCount" class="mc-item-count">{{ count }}</span>
     </div>
   </div>
-
-  <!-- tooltip 通过 Teleport 传送到 body，避免层叠上下文问题 -->
-  <ClientOnly>
-    <Teleport to="body">
-      <div
-        v-if="tooltipVisible && resolved.name"
-        class="mc-item-tooltip-portal"
-        :style="{ left: tooltipX + 'px', top: tooltipY + 'px' }"
-      >
-        {{ resolved.name }}
-      </div>
-    </Teleport>
-  </ClientOnly>
 </template>
 
 <style scoped>
@@ -207,7 +200,7 @@ onBeforeUnmount(() => {
 }
 </style>
 
-<!-- tooltip portal 样式（全局，非 scoped，因为被 Teleport 到 body） -->
+<!-- tooltip 全局样式（非 scoped，因为元素直接附加到 body） -->
 <style>
 .mc-item-tooltip-portal {
   position: fixed;
