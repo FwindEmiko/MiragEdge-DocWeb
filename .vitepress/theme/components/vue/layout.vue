@@ -103,7 +103,13 @@ const enableTransitions = () =>
  */
 provide('toggle-appearance', async ({ clientX: x, clientY: y }) => {
   if (!enableTransitions()) {
+    // 不支持 View Transition 时，禁用 transition 后直接切换，避免闪烁
+    document.documentElement.classList.add('theme-transitioning')
     isDark.value = !isDark.value
+    await nextTick()
+    requestAnimationFrame(() => {
+      document.documentElement.classList.remove('theme-transitioning')
+    })
     return
   }
 
@@ -115,10 +121,14 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }) => {
     )}px at ${x}px ${y}px)`
   ]
 
-  await document.startViewTransition(async () => {
+  const transition = document.startViewTransition(async () => {
+    // 禁用所有 CSS transition，防止 View Transition 结束后元素仍在过渡导致闪烁
+    document.documentElement.classList.add('theme-transitioning')
     isDark.value = !isDark.value
     await nextTick()
-  }).ready
+  })
+
+  await transition.ready
 
   document.documentElement.animate(
     { clipPath: isDark.value ? clipPath.reverse() : clipPath },
@@ -128,6 +138,11 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }) => {
       pseudoElement: `::view-transition-${isDark.value ? 'old' : 'new'}(root)`
     }
   )
+
+  // View Transition 完全结束后移除禁用标记，恢复正常 transition 行为
+  transition.finished.finally(() => {
+    document.documentElement.classList.remove('theme-transitioning')
+  })
 })
 </script>
 
@@ -210,6 +225,13 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }) => {
 ::view-transition-new(root),
 .dark::view-transition-old(root) {
   z-index: 2;
+}
+
+/* 主题切换期间禁用所有 CSS transition，防止 View Transition 结束后元素仍在过渡导致闪烁 */
+.theme-transitioning *,
+.theme-transitioning *::before,
+.theme-transitioning *::after {
+  transition: none !important;
 }
 
 .VPSwitchAppearance {
