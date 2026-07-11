@@ -4,10 +4,11 @@ import { ref, onMounted, onBeforeUnmount } from 'vue'
 
 const bubbles = ref([])
 const isVisible = ref(false)
+let showTimer = null
 
 onMounted(() => {
   // 延迟显示，页面加载0.5秒后再出现
-  setTimeout(() => {
+  showTimer = setTimeout(() => {
     isVisible.value = true
   }, 500)
 
@@ -22,6 +23,10 @@ onMounted(() => {
       hue: Math.random() * 60 + 170
     })
   }
+})
+
+onBeforeUnmount(() => {
+  clearTimeout(showTimer)
 })
 </script>
 

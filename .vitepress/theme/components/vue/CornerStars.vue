@@ -12,11 +12,16 @@ const stars = ref([
 ])
 
 const isVisible = ref(false)
+let showTimer = null
 
 onMounted(() => {
-  setTimeout(() => {
+  showTimer = setTimeout(() => {
     isVisible.value = true
   }, 500)
+})
+
+onBeforeUnmount(() => {
+  clearTimeout(showTimer)
 })
 </script>
 

@@ -4,9 +4,10 @@ import { ref, onMounted, onBeforeUnmount } from 'vue'
 
 const fireflies = ref([])
 const isVisible = ref(false)
+let showTimer = null
 
 onMounted(() => {
-  setTimeout(() => {
+  showTimer = setTimeout(() => {
     isVisible.value = true
   }, 500)
 
@@ -23,6 +24,10 @@ onMounted(() => {
       yRange: 20 + Math.random() * 30
     })
   }
+})
+
+onBeforeUnmount(() => {
+  clearTimeout(showTimer)
 })
 </script>
 

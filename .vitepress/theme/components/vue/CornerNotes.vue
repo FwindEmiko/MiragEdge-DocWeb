@@ -4,9 +4,10 @@ import { ref, onMounted, onBeforeUnmount } from 'vue'
 
 const notes = ref([])
 const isVisible = ref(false)
+let showTimer = null
 
 onMounted(() => {
-  setTimeout(() => {
+  showTimer = setTimeout(() => {
     isVisible.value = true
   }, 500)
 
@@ -24,6 +25,10 @@ onMounted(() => {
       hue: Math.random() * 40 + 180
     })
   }
+})
+
+onBeforeUnmount(() => {
+  clearTimeout(showTimer)
 })
 </script>
 

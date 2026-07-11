@@ -34,8 +34,3 @@ export function init3DTiltEffect() {
     });
   });
 }
-
-// 确保 DOM 加载后运行
-if (typeof window !== 'undefined' && typeof init3DTiltEffect !== 'undefined') {
-    setTimeout(init3DTiltEffect, 500);
-}

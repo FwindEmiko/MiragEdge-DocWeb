@@ -4,9 +4,10 @@ import { ref, onMounted, onBeforeUnmount } from 'vue'
 
 const leaves = ref([])
 const isVisible = ref(false)
+let showTimer = null
 
 onMounted(() => {
-  setTimeout(() => {
+  showTimer = setTimeout(() => {
     isVisible.value = true
   }, 500)
 
@@ -21,6 +22,10 @@ onMounted(() => {
       hue: Math.floor(Math.random() * 50)
     })
   }
+})
+
+onBeforeUnmount(() => {
+  clearTimeout(showTimer)
 })
 </script>
 

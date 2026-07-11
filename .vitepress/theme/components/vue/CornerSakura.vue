@@ -4,10 +4,11 @@ import { ref, onMounted, onUnmounted } from 'vue'
 
 const petals = ref([])
 const isVisible = ref(false)
-let interval = null
+let showTimer = null
+let petalIdCounter = 0
 
 const createPetal = () => ({
-  id: Math.random(),
+  id: ++petalIdCounter,
   left: Math.random() * 100,
   delay: Math.random() * 5,
   duration: 8 + Math.random() * 4,
@@ -17,7 +18,7 @@ const createPetal = () => ({
 
 onMounted(() => {
   // 延迟显示
-  setTimeout(() => {
+  showTimer = setTimeout(() => {
     isVisible.value = true
   }, 500)
 
@@ -25,16 +26,9 @@ onMounted(() => {
   for (let i = 0; i < 15; i++) { // 减少数量
     petals.value.push(createPetal())
   }
-
-  // 定时补充樱花
-  interval = setInterval(() => {
-    if (petals.value.length < 15) {
-      petals.value.push(createPetal())
-    }
-  }, 3000)
 })
 
-onUnmounted(() => clearInterval(interval))
+onUnmounted(() => clearTimeout(showTimer))
 </script>
 
 <template>

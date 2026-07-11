@@ -1,22 +1,32 @@
 <script setup>
 // 狐狸看板娘组件 - 简约可爱风格
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onBeforeUnmount } from 'vue'
 
 const isVisible = ref(false)
 const showHeart = ref(false)
+const timers = new Set()
 
 onMounted(() => {
-  setTimeout(() => {
+  const t = setTimeout(() => {
     isVisible.value = true
+    timers.delete(t)
   }, 500)
+  timers.add(t)
 })
 
 const handleClick = () => {
   showHeart.value = true
-  setTimeout(() => {
+  const t = setTimeout(() => {
     showHeart.value = false
+    timers.delete(t)
   }, 1500)
+  timers.add(t)
 }
+
+onBeforeUnmount(() => {
+  timers.forEach(t => clearTimeout(t))
+  timers.clear()
+})
 </script>
 
 <template>

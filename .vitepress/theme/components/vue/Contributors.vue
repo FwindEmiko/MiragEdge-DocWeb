@@ -17,7 +17,7 @@
               :src="person.avatar"
               :alt="person.username"
               class="avatar-image"
-              loading="eager"
+              loading="lazy"
               @error="handleAvatarError"
             />
           </div>
@@ -49,9 +49,13 @@ interface Contributor {
 const { frontmatter } = useData();
 const route = useRoute();
 
-// 头像加载失败处理
+// 头像加载失败处理（通过 data-fallback 标志位避免 fallback 再次失败时形成请求循环）
 const handleAvatarError = (event: Event) => {
   const target = event.target as HTMLImageElement;
+  if (target.dataset.fallback) {
+    return;
+  }
+  target.dataset.fallback = '1';
   target.src = 'https://github.com/identicons/octocat.png';
 };
 

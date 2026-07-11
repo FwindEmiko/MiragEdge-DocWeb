@@ -33,6 +33,11 @@ const hasHalfDrumstick = computed(() => props.hunger % 2 !== 0)
 const saturationPercent = computed(() => {
   return Math.min((props.saturation / 20) * 100, 100)
 })
+
+/** 组件实例唯一 id，避免多实例时 clipPath id 冲突 */
+const instanceId = Math.random().toString(36).slice(2, 8)
+const clipPathId = `half-clip-${instanceId}`
+const clipPathUrl = `url(#${clipPathId})`
 </script>
 
 <template>
@@ -58,11 +63,11 @@ const saturationPercent = computed(() => {
           aria-hidden="true"
         >
           <defs>
-            <clipPath id="half-clip">
+            <clipPath :id="clipPathId">
               <rect x="0" y="0" width="8" height="16"/>
             </clipPath>
           </defs>
-          <path d="M3.5 12.5c-.8.8-.8 2 0 2.8s2 .8 2.8 0c.5-.5.8-1.2.8-1.8l3.2-3.2c.6.2 1.3.1 1.8-.4l1.4-1.4c1.6-1.6 1.6-4.1 0-5.7s-4.1-1.6-5.7 0L6.4 4.2c-.5.5-.6 1.2-.4 1.8L2.8 9.2c-.6 0-1.3.3-1.8.8z" fill="#8B5E3C" stroke="#5C3A1E" stroke-width="0.5" clip-path="url(#half-clip)"/>
+          <path d="M3.5 12.5c-.8.8-.8 2 0 2.8s2 .8 2.8 0c.5-.5.8-1.2.8-1.8l3.2-3.2c.6.2 1.3.1 1.8-.4l1.4-1.4c1.6-1.6 1.6-4.1 0-5.7s-4.1-1.6-5.7 0L6.4 4.2c-.5.5-.6 1.2-.4 1.8L2.8 9.2c-.6 0-1.3.3-1.8.8z" fill="#8B5E3C" stroke="#5C3A1E" stroke-width="0.5" :clip-path="clipPathUrl"/>
           <path d="M0 0 L16 0 L16 16 Z" fill="rgba(0,0,0,0.35)"/>
         </svg>
       </div>
