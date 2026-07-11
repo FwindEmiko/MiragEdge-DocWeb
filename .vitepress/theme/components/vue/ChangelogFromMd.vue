@@ -131,11 +131,8 @@ const parseMarkdown = (content: string): LogItem[] => {
   const items: LogItem[] = []
   const lines = content.split('\n')
   let currentItem: LogItem | null = null
-  let lineNum = 0
-  let lastDate = ''
 
   for (let i = 0; i < lines.length; i++) {
-    lineNum++
     const line = lines[i].trim()
 
     // 跳过空行
@@ -274,11 +271,8 @@ const loadMarkdown = async () => {
   }
 }
 
-const loadMore = async () => {
-  loading.value = true
-  await new Promise(r => setTimeout(r, 300))
+const loadMore = () => {
   displayedCount.value += props.loadMoreCount
-  loading.value = false
 }
 
 defineExpose({ expandAll: () => allLogs.value.forEach(l => expandedItems.value.add(l.date)), collapseAll: () => expandedItems.value.clear() })

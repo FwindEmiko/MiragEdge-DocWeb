@@ -21,9 +21,6 @@
 /* 内容区域进入动画 */
 .VPContent {
   animation: appleFadeInUp 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  will-change: transform, opacity;
-  /* 启用硬件加速 */
-  transform: translateZ(0);
 }
 
 /* ===== 内页内容区淡入过渡 ===== */
@@ -44,5 +41,12 @@
 @media (prefers-reduced-motion: reduce) {
   .VPContent {
     animation: none !important;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
   }
 }

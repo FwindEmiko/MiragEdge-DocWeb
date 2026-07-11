@@ -1,6 +1,6 @@
 <script setup>
 // 萤火虫/光点组件
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onBeforeUnmount } from 'vue'
 
 const fireflies = ref([])
 const isVisible = ref(false)

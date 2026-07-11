@@ -1,6 +1,6 @@
 <script setup>
 // 漂浮泡泡组件
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onBeforeUnmount } from 'vue'
 
 const bubbles = ref([])
 const isVisible = ref(false)

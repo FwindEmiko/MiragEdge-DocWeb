@@ -1,6 +1,6 @@
 <script setup>
 // 漂浮音符组件
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onBeforeUnmount } from 'vue'
 
 const notes = ref([])
 const isVisible = ref(false)

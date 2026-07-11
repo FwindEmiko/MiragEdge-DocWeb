@@ -1,6 +1,6 @@
 <script setup>
 // 漂浮叶子组件
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onBeforeUnmount } from 'vue'
 
 const leaves = ref([])
 const isVisible = ref(false)

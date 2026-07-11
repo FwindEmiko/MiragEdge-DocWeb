@@ -83,55 +83,68 @@ interface StatsData {
 const servers = ref<Server[]>([]);
 const lastUpdated = ref<string>('');
 let refreshInterval: number | null = null;
+let abortController: AbortController | null = null;
 
-// 格式化内存显示
+// 格式化内存显示（输入单位为 MB）
 const formatMemory = (used: number | undefined, total: number | undefined): string => {
   if (used === undefined || total === undefined) return 'N/A';
-  const usedGB = Math.round(used / 1024 / 1024 * 100) / 100;
-  const totalGB = Math.round(total / 1024 / 1024 * 100) / 100;
+  const usedGB = Math.round(used / 1024 * 100) / 100;
+  const totalGB = Math.round(total / 1024 * 100) / 100;
   return `${usedGB}GB / ${totalGB}GB`;
 };
 
-// 格式化硬盘显示
+// 格式化硬盘显示（输入单位为 MB）
 const formatDisk = (used: number | undefined, total: number | undefined): string => {
   if (used === undefined || total === undefined) return 'N/A';
   const usedGB = used / 1024;
   const totalGB = total / 1024;
-  // 保留两位小数，若需要可调整为 toFixed(1) 或动态小数位
   return `${usedGB.toFixed(2)}GB / ${totalGB.toFixed(2)}GB`;
 };
 
 // 获取服务器状态数据
 const fetchServerStatus = async () => {
+  // 取消上一个未完成的请求
+  if (abortController) {
+    abortController.abort();
+  }
+  abortController = new AbortController();
+
   try {
-    const response = await fetch('/ServerStatus/json/stats.json');
+    const response = await fetch('/ServerStatus/json/stats.json', {
+      signal: abortController.signal
+    });
     if (!response.ok) {
       throw new Error(`查询错误: ${response.status}`);
     }
     const data: StatsData = await response.json();
     servers.value = data.servers || [];
-    
+
     // 格式化更新时间
     if (data.updated) {
       const date = new Date(Number(data.updated) * 1000);
       lastUpdated.value = date.toLocaleString('zh-CN');
     }
   } catch (error) {
-    console.error('获取服务器状态失败:', error);
+    if (error.name !== 'AbortError') {
+      console.error('获取服务器状态失败:', error);
+    }
   }
 };
 
 // 初始化数据
 onMounted(() => {
   fetchServerStatus();
-  // 设置每5秒刷新一次
-  refreshInterval = window.setInterval(fetchServerStatus, 5000);
+  // 设置每 15 秒刷新一次（降低频率以减少不必要的网络与渲染开销）
+  refreshInterval = window.setInterval(fetchServerStatus, 15000);
 });
 
-// 组件卸载时清除定时器
+// 组件卸载时清除定时器和未完成请求
 onUnmounted(() => {
   if (refreshInterval) {
     clearInterval(refreshInterval);
+  }
+  if (abortController) {
+    abortController.abort();
   }
 });
 </script>
@@ -205,6 +218,17 @@ onUnmounted(() => {
 .status-offline {
   background-color: #fde2e2;
   color: #f56c6c;
+}
+
+/* 暗色模式适配状态标签 */
+.dark .status-online {
+  background-color: rgba(66, 185, 131, 0.15);
+  color: #67d9a8;
+}
+
+.dark .status-offline {
+  background-color: rgba(245, 108, 108, 0.15);
+  color: #f89999;
 }
 
 .node-details {

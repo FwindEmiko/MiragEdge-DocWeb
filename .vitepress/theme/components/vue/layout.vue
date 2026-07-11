@@ -3,19 +3,21 @@
 <script setup>
 import { useRouter, useData } from "vitepress";
 import DefaultTheme from "vitepress/theme";
-import { ref, watch, nextTick, provide, computed } from "vue";
+import { ref, watch, nextTick, provide, computed, defineAsyncComponent } from "vue";
 import Contributors from './Contributors.vue';
 import NotFound from './NotFound.vue';
-import CornerStars from './CornerStars.vue';
-import CornerQuotes from './CornerQuotes.vue';
-import CornerBubbles from './CornerBubbles.vue';
-import CornerSakura from './CornerSakura.vue';
-import CornerNotes from './CornerNotes.vue';
-import CornerLeaves from './CornerLeaves.vue';
-import CornerSurprise from './CornerSurprise.vue';
-import CornerFireflies from './CornerFireflies.vue';
-import CornerClickEffect from './CornerClickEffect.vue';
 import Live2D from './Live2D.vue';
+
+// Corner 装饰组件改为异步加载，减少主 bundle 体积
+const CornerStars = defineAsyncComponent(() => import('./CornerStars.vue'));
+const CornerQuotes = defineAsyncComponent(() => import('./CornerQuotes.vue'));
+const CornerBubbles = defineAsyncComponent(() => import('./CornerBubbles.vue'));
+const CornerSakura = defineAsyncComponent(() => import('./CornerSakura.vue'));
+const CornerNotes = defineAsyncComponent(() => import('./CornerNotes.vue'));
+const CornerLeaves = defineAsyncComponent(() => import('./CornerLeaves.vue'));
+const CornerSurprise = defineAsyncComponent(() => import('./CornerSurprise.vue'));
+const CornerFireflies = defineAsyncComponent(() => import('./CornerFireflies.vue'));
+const CornerClickEffect = defineAsyncComponent(() => import('./CornerClickEffect.vue'));
 
 const { Layout } = DefaultTheme;
 const { route } = useRouter();
@@ -33,14 +35,18 @@ const isHome = computed(() => route.path === '/' || route.path === '/index.html'
 // 随机角落装饰 - 每次路由变化时重新计算
 const randomCorner = ref(null)
 
-watch(() => route.path, () => {
+// 随机数生成函数，SSR 和客户端分别使用固定值和随机值避免 hydration mismatch
+function pickRandomCorner() {
   // 30% 概率显示装饰
   if (Math.random() <= 0.3) {
     const components = ['stars', 'quotes', 'bubbles', 'sakura', 'notes', 'leaves', 'fireflies'];
-    randomCorner.value = components[Math.floor(Math.random() * components.length)];
-  } else {
-    randomCorner.value = null;
+    return components[Math.floor(Math.random() * components.length)];
   }
+  return null;
+}
+
+watch(() => route.path, () => {
+  randomCorner.value = pickRandomCorner()
 }, { immediate: true })
 
 /**
@@ -157,7 +163,7 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }) => {
     </div>
 
     <!-- 文档页脚 -->
-    <div class="doc-footer" v-if="route.path.includes('/')">
+    <div class="doc-footer">
       <div class="container">
         <div class="doc-footer-content">
           <a href="https://space.bilibili.com/359174372" target="_blank" class="doc-footer-link">© 2020-2026 锐界幻境与贡献者</a>
@@ -313,7 +319,7 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }) => {
 }
 
 /* 清除贡献者组件的底部间距（覆盖组件内部样式） */
-.centerdss .Contributors {
+.centerdss .contributors-container {
   margin-bottom: 0 !important; /* 强制清除组件自带的底部边距 */
   padding-bottom: 0;
 }

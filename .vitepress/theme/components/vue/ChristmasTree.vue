@@ -142,12 +142,18 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 
-// 恋爱开始日期（根据1032天推算）
+// 恋爱开始日期
 const startDate = ref('2022-02-27')
-const loveDays = ref(1032)
 
-// 当前年份
-const currentYear = new Date().getFullYear()
+// 动态计算恋爱天数，避免硬编码
+const loveDays = computed(() => {
+  const start = new Date('2022-02-27')
+  const now = new Date()
+  return Math.floor((now - start) / (1000 * 60 * 60 * 24))
+})
+
+// 当前年份（在 onMounted 中设置以避免 SSR hydration mismatch）
+const currentYear = ref(0)
 
 // 给嵘融的祝福语
 const messages = ref([
@@ -235,8 +241,10 @@ const initTreeDecorations = () => {
 // 自动切换祝福语的定时器
 let messageInterval
 onMounted(() => {
+  // 在客户端设置年份，避免 SSR hydration mismatch
+  currentYear.value = new Date().getFullYear()
   initTreeDecorations()
-  
+
   // 每5秒自动切换一条祝福语
   messageInterval = setInterval(() => {
     currentMessageIndex.value = (currentMessageIndex.value + 1) % messages.value.length

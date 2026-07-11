@@ -1,6 +1,6 @@
 <script setup>
 // 角落浮动小星星组件
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onBeforeUnmount } from 'vue'
 
 const stars = ref([
   { id: 1, top: '10%', left: '5%', delay: 0, duration: 3 },
