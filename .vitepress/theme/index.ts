@@ -17,6 +17,9 @@ import ChangelogFromMd from './components/vue/ChangelogFromMd.vue'
 import MapIcon from './components/vue/MapIcon.vue'
 import EnchantmentList from './components/vue/EnchantmentList.vue'
 import EnchantmentIdTable from './components/vue/EnchantmentIdTable.vue'
+import McItem from './components/vue/McItem.vue'
+import CraftingTable from './components/vue/CraftingTable.vue'
+import Furnace from './components/vue/Furnace.vue'
 import './css/custom.css'
 
 // 导入所有样式文件
@@ -68,6 +71,9 @@ export default {
     app.component('MapIcon', MapIcon)
     app.component('EnchantmentList', EnchantmentList)
     app.component('EnchantmentIdTable', EnchantmentIdTable)
+    app.component('McItem', McItem)
+    app.component('CraftingTable', CraftingTable)
+    app.component('Furnace', Furnace)
 
     // 仅在浏览器环境下执行
     if (inBrowser) {

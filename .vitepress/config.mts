@@ -374,6 +374,7 @@ export default defineConfig({
           items: [
             { text: '自动图像组件', link: '/develop/webdev/autoimage' },
             { text: '矢量图标库', link: '/develop/webdev/vectoricons' },
+            { text: 'MC配方组件', link: '/develop/webdev/mcrecipe' },
           ]
         },
         {
