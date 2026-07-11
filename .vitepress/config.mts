@@ -254,6 +254,10 @@ export default defineConfig({
               link: '/features/adventure/deathreincarnation',
             },
             {
+              text: '🪶 鞘翅绑定',
+              link: '/features/adventure/elytrabind',
+            },
+            {
               text: '✨ 更多附魔',
               collapsed: true,
               items: [
