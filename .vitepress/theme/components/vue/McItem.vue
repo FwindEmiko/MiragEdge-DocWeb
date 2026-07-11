@@ -15,7 +15,7 @@
 import { computed, ref, onBeforeUnmount } from 'vue'
 import { resolveMcItem, resolveNameByTexture } from '../../data/mc-textures'
 
-const props = defineProps<{
+const props = withDefaults(defineProps<{
   /** 物品 id（用于查注册表，如 "wheat"） */
   id?: string
   /** 物品名称（tooltip 显示） */
@@ -26,9 +26,11 @@ const props = defineProps<{
   count?: number | string
   /** 槽位尺寸: sm | md | lg */
   size?: 'sm' | 'md' | 'lg'
-  /** 是否显示 hover tooltip */
+  /** 是否显示 hover tooltip，默认显示 */
   tooltip?: boolean
-}>()
+}>(), {
+  tooltip: true,
+})
 
 const imgError = ref(false)
 
