@@ -102,9 +102,13 @@ const enableTransitions = () =>
  * 提供暗黑模式切换功能
  */
 provide('toggle-appearance', async ({ clientX: x, clientY: y }) => {
+  // 主题切换期间挂 theme-transitioning class：
+  // 1) 禁用所有 CSS transition，避免 VT 结束后元素仍在过渡
+  // 2) 为 backdrop-filter 元素提供不透明 fallback（VT 快照无法捕获 backdrop-filter）
+  document.documentElement.classList.add('theme-transitioning')
+
   if (!enableTransitions()) {
     // 不支持 View Transition 时，禁用 transition 后直接切换，避免闪烁
-    document.documentElement.classList.add('theme-transitioning')
     isDark.value = !isDark.value
     await nextTick()
     requestAnimationFrame(() => {
@@ -113,36 +117,18 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }) => {
     return
   }
 
-  const clipPath = [
-    `circle(0px at ${x}px ${y}px)`,
-    `circle(${Math.hypot(
-      Math.max(x, innerWidth - x),
-      Math.max(y, innerHeight - y)
-    )}px at ${x}px ${y}px)`
-  ]
-
+  // 使用 View Transition 默认的 cross-fade 过渡，不使用 clipPath 圆形扩散动画。
+  // 原因：clipPath 方案需要 `animation: none` + `opacity:1` 关闭默认动画并手动驱动，
+  // 但 `transition.ready` resolve 后到 `element.animate()` 真正应用 clipPath 之间存在
+  // 渲染帧间隙，期间 new 伪元素 opacity:1 且无 clipPath 约束会瞬间完全覆盖屏幕，
+  // dark→light 时整个界面闪白。cross-fade 的 new 伪元素默认 opacity:0 淡入，无此问题。
   const transition = document.startViewTransition(async () => {
-    // 禁用所有 CSS transition，防止 View Transition 结束后元素仍在过渡导致闪烁
-    document.documentElement.classList.add('theme-transitioning')
     isDark.value = !isDark.value
     await nextTick()
   })
 
-  await transition.ready
-
-  document.documentElement.animate(
-    { clipPath: isDark.value ? clipPath.reverse() : clipPath },
-    {
-      duration: 300,
-      easing: 'ease-in',
-      pseudoElement: `::view-transition-${isDark.value ? 'old' : 'new'}(root)`
-    }
-  )
-
-  // View Transition 完全结束后移除禁用标记，恢复正常 transition 行为
-  transition.finished.finally(() => {
-    document.documentElement.classList.remove('theme-transitioning')
-  })
+  await transition.finished
+  document.documentElement.classList.remove('theme-transitioning')
 })
 </script>
 
@@ -210,28 +196,38 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }) => {
 </template>
 
 <style>
-/* 暗黑模式切换相关样式 */
-::view-transition-old(root),
-::view-transition-new(root) {
-  animation: none;
-  mix-blend-mode: normal;
-}
-
-::view-transition-old(root),
-.dark::view-transition-new(root) {
-  z-index: 1;
-}
-
-::view-transition-new(root),
-.dark::view-transition-old(root) {
-  z-index: 2;
-}
-
+/* 暗黑模式切换：使用 View Transition 默认 cross-fade，不覆盖伪元素默认动画。
+   之前用 animation:none + opacity:1 关闭默认动画再手动 clipPath 驱动，但
+   transition.ready resolve 后到 element.animate() 应用 clipPath 之间存在渲染帧间隙，
+   期间 new 伪元素 opacity:1 且无 clipPath 会瞬间全屏覆盖，dark→light 时整个界面闪白。 */
 /* 主题切换期间禁用所有 CSS transition，防止 View Transition 结束后元素仍在过渡导致闪烁 */
 .theme-transitioning *,
 .theme-transitioning *::before,
 .theme-transitioning *::after {
   transition: none !important;
+}
+
+/*
+ * View Transition 快照无法捕获 backdrop-filter（它依赖实时背景渲染），
+ * 导致导航栏等毛玻璃元素在快照中变成透明，切换到白色主题时透出白色背景造成闪烁。
+ * 在 VT 期间用不透明背景色替代 backdrop-filter。
+ */
+.theme-transitioning .VPNavBar,
+.theme-transitioning .VPNavBarSearch,
+.theme-transitioning .VPLocalNav,
+.theme-transitioning .DocSearch-Button {
+  background-color: var(--vp-c-bg) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+.theme-transitioning.dark .VPNavBar,
+.theme-transitioning.dark .VPNavBarSearch,
+.theme-transitioning.dark .VPLocalNav,
+.theme-transitioning.dark .DocSearch-Button {
+  background-color: var(--vp-c-bg) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
 }
 
 .VPSwitchAppearance {

@@ -9,10 +9,10 @@ export default defineConfig({
   
   // 基础路径，如果部署在子路径下需要设置
   base: '/',
-  
+
   // 输出目录
   outDir: '.vitepress/dist',
-  
+
   // 语言配置
   locales: {
     root: {
@@ -21,7 +21,7 @@ export default defineConfig({
       description: '锐界幻境 全方位的指南',
     }
   },
-  
+
   // 头部配置
   head: [
     ['link', { rel: 'icon', href: '/title_img/favicon-32x32.png', sizes: '32x32' }],
@@ -45,7 +45,7 @@ export default defineConfig({
     // 360站点验证（如果需要）
     // ['meta', { name: '360-site-verification', content: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx' }],
   ],
-  
+
   // Markdown 配置
   markdown: {
     theme: {
@@ -57,7 +57,7 @@ export default defineConfig({
       md.use(MermaidMarkdown);
     },
   },
-  
+
   // Vite 配置
   vite: {
     define: {
@@ -186,7 +186,7 @@ export default defineConfig({
        ]
       },
     ],
-    
+
     // 侧边栏配置
     sidebar: {
       '/features/': [
@@ -294,7 +294,7 @@ export default defineConfig({
           ]
         },
       ],
- 
+
       '/manual/': [
         {
           text: '📌 必看指南',
@@ -338,7 +338,7 @@ export default defineConfig({
           ]
         },
       ],
- 
+
       '/develop/': [
         { text: '👥 开发团队', link: '/develop/index' },
         /* {
@@ -398,7 +398,7 @@ export default defineConfig({
           ]
         },
       ],
-      
+
       '/plugins/': [
         { text: '📋 项目开发说明', link: '/plugins/index' },
         { text: '📊 原创插件列表', link: '/plugins/list' },
@@ -447,7 +447,7 @@ export default defineConfig({
         timeStyle: "short",
       },
     },
-    
+
     // 编辑链接 - 动态跳转到当前页的GitHub编辑页
     editLink: {
       pattern: 'https://github.com/fwindemiko/MiragEdge-DocWeb/edit/main/:path',
