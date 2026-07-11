@@ -34,7 +34,7 @@
   quality="rare"
   :hunger="8"
   :saturation="4.0"
-  effect="60秒速度 I + 60秒急迫 I + 30秒生命恢复"
+  effect="🥙 馍力全开：60秒速度 I + 急迫 II + 30秒生命恢复 + 15秒跳跃提升 II（全能打工料理！）"
   quote="超好吃的肉夹馍!!! 吃完整个锐界幻境都能变得超级好吃"
 >
   <CraftingTable
@@ -76,7 +76,7 @@
   quality="rare"
   :hunger="16"
   :saturation="18.0"
-  effect="5秒饱和 + 45秒生命恢复 + 30秒抗性提升 I"
+  effect="🍔 满腹之力：5秒饱和 + 45秒生命恢复 + 30秒抗性 I + 若饱食度>18额外获得 2点伤害吸收"
   quote="锐界幻境星期四风味，比肯德基更健康！满配汉堡的力量"
 >
   <CraftingTable
@@ -118,7 +118,7 @@
   quality="fine"
   :hunger="8"
   :saturation="7.0"
-  effect="食用后在周围生成 2只 僵尸！"
+  effect="🌋 烈焰吐息 20秒：潜行+右键向前方喷吐火焰，3格锥形范围点燃生物 3秒+2点灼烧伤害！"
   quote="歪比歪比，歪比叭卜！吃完感觉周围有什么不对劲..."
 >
   <CraftingTable
@@ -160,7 +160,7 @@
   quality="fine"
   :hunger="8"
   :saturation="8.0"
-  effect="周围被动生物获得 30秒 生命恢复（香气四溢！）"
+  effect="🐔 荷叶奇香：周围 10格被动生物吸引靠近+生命恢复，且可直接骑乘猪/牛/羊/鸡/骆驼！30秒"
   quote="一只鲜嫩的鸡被散发清香的荷叶包裹，奇香无比"
 >
   <CraftingTable
@@ -181,7 +181,7 @@
   quality="rare"
   :hunger="9"
   :saturation="14.0"
-  effect="45秒抗火 + 30秒自发光 + 30秒熔岩行走"
+  effect="🔥🔥 熔岩附体 30秒：自身每秒 0.5心火焰伤害但生命恢复 II 强力抵消，近战攻击者被点燃 5秒！搭配抗火药水→净回血+无敌反伤"
   quote="火热的岩浆 美味的鸡肉 史蒂夫的熔岩烤鸡"
 >
   <CraftingTable

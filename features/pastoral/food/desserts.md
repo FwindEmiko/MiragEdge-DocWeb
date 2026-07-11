@@ -13,7 +13,7 @@
   quality="fine"
   :hunger="8"
   :saturation="6.0"
-  effect="食用后获得 30秒 抗火"
+  effect="🍦 冰火两重天：30秒抗火 + 攻击时 20%概率将目标点燃 3秒（冷与热的碰撞！）"
   quote="冰冰凉凉香香甜甜的冰淇淋！吃下去火热的心都降温了"
 >
   <CraftingTable
@@ -34,7 +34,7 @@
   quality="fine"
   :hunger="9"
   :saturation="7.0"
-  effect="20秒速度 II + 对周围生物施加 15秒缓慢（寒气四溢！）"
+  effect="❄️ 寒冰行者 20秒：走过的水面冻结为临时浮冰，周围 5格生物缓慢 II。搭配水行药水=水面奔跑！"
   quote="香香脆脆冰冰凉凉的巧克力草莓味！！你感到周围都凉快了起来"
 >
   <CraftingTable
@@ -55,7 +55,7 @@
   quality="rare"
   :hunger="14"
   :saturation="12.0"
-  effect="45秒生命恢复 II + 2分钟急迫 I + 20秒失明（太甜了！）"
+  effect="🍯 甜蜜陷阱：45秒生命恢复 II + 2分钟急迫 I + 15秒失明 + 失明期间周围 5格生物也被缓慢 II（大家一起瞎！）"
   quote="满满当当的蜂蜜，和腐竹一样甜美诱人，但吃多会得糖尿病"
 >
   <CraftingTable
