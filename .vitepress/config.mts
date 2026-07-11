@@ -410,8 +410,6 @@ export default defineConfig({
       '/plugins/': [
         { text: '📋 项目开发说明', link: '/plugins/index' },
         { text: '📊 原创插件列表', link: '/plugins/list' },
-        { text: '🌟 星辉锚点', link: '/plugins/miragedgehome' },
-        { text: '🏷️ 称号与入服消息', link: '/plugins/miragedgetitle' },
         {
           text: '⚔️ PVP竞技场系统',
           collapsed: false,
@@ -426,6 +424,8 @@ export default defineConfig({
             { text: '数据存储', link: '/plugins/fepvp/storage' },
           ]
         },
+        { text: '🌟 星辉锚点', link: '/plugins/miragedgehome' },
+        { text: '🏷️ 称号与入服消息', link: '/plugins/miragedgetitle' },
       ],
     },
     // 大纲配置
