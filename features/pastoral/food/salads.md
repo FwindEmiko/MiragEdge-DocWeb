@@ -13,7 +13,7 @@
   quality="fine"
   :hunger="6"
   :saturation="7.0"
-  effect="5秒反胃 → 5秒生命恢复 II → 40秒抗性提升 I（先苦后甜）"
+  effect="5秒反胃，随后 5秒生命恢复 II，随后 15秒抗性提升 I。"
   quote="虽然入口苦涩，但蒲公英确实能治愈一些疾病...先苦后甜"
 >
   <CraftingTable
@@ -34,7 +34,7 @@
   quality="fine"
   :hunger="7"
   :saturation="8.0"
-  effect="30秒生命恢复 + 背刺伤害 +50%。45秒冷却。"
+  effect="5秒生命恢复 + 20秒内背刺伤害 +50%。35秒冷却。"
   quote="幻境森林中的特产，狐狸好像挺喜欢吃的嘛？"
 >
   <CraftingTable
@@ -95,7 +95,7 @@
   quality="fine"
   :hunger="6"
   :saturation="7.0"
-  effect="90秒水下呼吸 + 夜视 + 游泳速度提升 + 水下攻击力 +20%。"
+  effect="30秒水下呼吸 + 夜视 + 游泳速度提升 + 水下攻击力 +20%。"
   quote="看起来很健康，其实...真的很健康！海洋的精华尽在其中"
 >
   <CraftingTable
@@ -114,8 +114,8 @@
 <FoodEntry
   name="幽寂杂拌"
   quality="rare"
-  :hunger="14"
-  :saturation="18.0"
+  :hunger="10"
+  :saturation="12.0"
   effect="5秒饱和 + 4秒反胃 + 8分钟夜视"
   quote="锐界幻境幽匿风味，虽然不好吃但就是忍不住想尝..."
 >

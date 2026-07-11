@@ -35,7 +35,7 @@
   quality="fine"
   :hunger="2"
   :saturation="4.0"
-  effect="15秒内每次跳跃落地时向周围弹射伤害粒子（1点伤害+击退），饮用时附带一次小范围随机传送。"
+  effect="饮用时附带一次小范围随机传送并向周围弹射伤害粒子（1点伤害+击退）。"
   quote="这珍珠...怪怪的？喝起来有种不真实的感觉..."
 >
   <CraftingTable
@@ -43,7 +43,7 @@
       {id:'milk_bucket'},
       {id:'sugar'},
       {id:'sweet_potato'},
-      {id:'glass_bottle'}
+      {id:'ender_pearl'}
     ]"
     :result="{id:'bubble_tea'}"
   />

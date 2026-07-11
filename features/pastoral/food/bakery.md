@@ -34,7 +34,7 @@
   quality="fine"
   :hunger="6"
   :saturation="5.0"
-  effect="8秒生命恢复 + 5秒反胃（太甜了！）"
+  effect="4秒生命恢复 + 5秒反胃（太甜了！）"
   quote="香香软软的，但是一口吃掉好像太腻了..."
 >
   <CraftingTable
@@ -55,7 +55,7 @@
   quality="fine"
   :hunger="7"
   :saturation="3.0"
-  effect="5秒饱和 + 30秒抗性 I + 40秒移动速度 +10%。"
+  effect="3秒饱和 + 30秒抗性 I + 40秒移动速度 +10%。"
   quote="小时候挺爱吃的...长大后好像只能在锐界幻境吃到了，一口回到童年"
 >
   <CraftingTable

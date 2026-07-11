@@ -13,7 +13,7 @@
   quality="fine"
   :hunger="8"
   :saturation="6.0"
-  effect="30秒抗火，期间攻击有 20%概率点燃目标 3秒。"
+  effect="30秒抗火。"
   quote="冰冰凉凉香香甜甜的冰淇淋！吃下去火热的心都降温了"
 >
   <CraftingTable
@@ -76,13 +76,14 @@
   quality="legendary"
   :hunger="4"
   :saturation="20.0"
-  effect="10分钟抗性 V + 力量 III + 速度 II + 生命恢复 II + 生命提升 V。每次击杀怪物全服公告。食用时解锁永久称号「幻境食神」及专属进出服消息。30分钟冷却。"
+  effect="10分钟抗性 V + 力量 III + 速度 II + 生命恢复 II + 生命提升 V。食用时解锁永久称号「幻境食神」及专属进出服消息。30分钟冷却。"
   quote="这...未免太奢侈了些？龙蛋做的蛋羹，吃下去你就是幻境最强战士"
 >
   <CraftingTable
     :ingredients="[
       {name:'龙蛋', texture:'/mc-textures/item/dragon_egg.png'},
       {id:'egg'}, {id:'egg'}, {id:'egg'}, {id:'egg'},
+      {id:'turtle_egg'}, {id:'sniffer_egg'},
       {id:'sugar'},
       {id:'bowl'}
     ]"

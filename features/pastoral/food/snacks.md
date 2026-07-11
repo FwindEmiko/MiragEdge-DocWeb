@@ -13,7 +13,7 @@
   quality="fine"
   :hunger="6"
   :saturation="4.0"
-  effect="50秒缓降 + 免疫摔落伤害。60秒冷却。"
+  effect="20秒缓降 + 免疫摔落伤害。15秒冷却。"
   quote="锐界幻境的云是它组成的？吃下后会变得身轻如燕"
 >
   <CraftingTable
@@ -34,7 +34,7 @@
   quality="fine"
   :hunger="8"
   :saturation="5.0"
-  effect="45秒抗性 I，期间每击杀一个生物回复 1点生命值，最多叠加 5次。"
+  effect="35秒抗性 I，期间每击杀一个生物回复 1点生命值，最多叠加 5次。"
   quote="小时候总会含在嘴里慢慢融化细细品味，仿佛整个世界都是甜的"
 >
   <CraftingTable
@@ -91,7 +91,7 @@
   quality="common"
   :hunger="3"
   :saturation="1.0"
-  effect="无特殊效果"
+  effect="食用后获得 3秒速度 I。"
   quote="马铃薯味的糖果...好吧其实挺特别的"
 >
   <CraftingTable
@@ -110,7 +110,7 @@
   quality="common"
   :hunger="3"
   :saturation="1.5"
-  effect="附近被动生物获得 10秒 生命恢复"
+  effect="附近被动生物获得 3秒生命恢复。"
   quote="干草糖，清新自然风"
 >
   <CraftingTable
@@ -129,7 +129,7 @@
   quality="common"
   :hunger="3"
   :saturation="1.5"
-  effect="食用后获得 15秒 抗火"
+  effect="食用后获得 5秒抗火。"
   quote="下界风味糖果，吃下去全身暖洋洋的"
 >
   <CraftingTable
@@ -167,7 +167,7 @@
   quality="common"
   :hunger="5"
   :saturation="1.0"
-  effect="随机传送至附近位置，并获得 10秒缓降效果。"
+  effect="随机传送至附近位置，并获得 3秒缓降效果。"
   quote="保留了一部分原有的味道，是故意的"
 >
   <CraftingTable
@@ -186,7 +186,7 @@
   quality="fine"
   :hunger="8"
   :saturation="3.0"
-  effect="食用 5秒后自动爆炸（不破坏方块），5格内生物受到 8点伤害并击飞，自身仅受 2点伤害。30秒冷却。"
+  effect="食用后自身爆炸（不破坏方块），5格内生物受到 3点伤害并击飞，自身受到 4点伤害。无冷却。"
   quote="浓浓的火药味...等等这真的能吃吗？！"
 >
   <CraftingTable

@@ -34,7 +34,7 @@
   quality="rare"
   :hunger="8"
   :saturation="4.0"
-  effect="60秒速度 I + 急迫 II + 30秒生命恢复 + 15秒跳跃提升 II。"
+  effect="60秒速度 I + 急迫 II + 5秒生命恢复 + 10秒跳跃提升 II。"
   quote="超好吃的肉夹馍!!! 吃完整个锐界幻境都能变得超级好吃"
 >
   <CraftingTable
@@ -55,7 +55,7 @@
   quality="fine"
   :hunger="9"
   :saturation="8.0"
-  effect="20秒速度 I + 5秒急迫 I"
+  effect="20秒速度 I + 50秒急迫 I。"
   quote="经典风味，简单直接的美味"
 >
   <CraftingTable
@@ -97,7 +97,7 @@
   quality="fine"
   :hunger="12"
   :saturation="10.0"
-  effect="食用后获得 15秒 速度 II（狐狸的灵动！）"
+  effect="食用后获得 55秒 速度 II（狐狸的灵动！）"
   quote="锐界幻境田园风味披萨，长得像狐狸耳朵，吃了会不会变成狐狸？"
 >
   <CraftingTable
@@ -139,7 +139,7 @@
   quality="fine"
   :hunger="8"
   :saturation="5.0"
-  effect="食用后获得 20秒 海豚恩惠"
+  effect="食用后获得 2分钟 海豚恩惠。"
   quote="锐界幻境和风风味，大海被包裹在米饭里"
 >
   <CraftingTable
@@ -160,7 +160,7 @@
   quality="fine"
   :hunger="8"
   :saturation="8.0"
-  effect="30秒内吸引周围 10格被动生物并使其获得生命恢复。期间可骑乘猪、牛、羊、鸡、骆驼。"
+  effect="30秒内吸引周围 10格被动生物并使其获得生命恢复。"
   quote="一只鲜嫩的鸡被散发清香的荷叶包裹，奇香无比"
 >
   <CraftingTable
@@ -202,7 +202,7 @@
   quality="fine"
   :hunger="10"
   :saturation="12.0"
-  effect="食用后获得 60秒 海豚恩惠 + 10秒 生命恢复"
+  effect="食用后获得 120秒 海豚恩惠 + 8秒 生命恢复。"
   quote="美味的鱼肉 健康的萝卜 狐狸的美味鱼汤"
 >
   <CraftingTable
@@ -223,7 +223,7 @@
   quality="rare"
   :hunger="12"
   :saturation="14.0"
-  effect="3分钟温暖效果 + 45秒生命恢复 + 5秒饱和"
+  effect="1分钟抗火 + 15秒生命恢复 + 5秒饱和。"
   quote="荤素搭配，健康美味。一碗下肚，雪山也不怕冷"
 >
   <CraftingTable
