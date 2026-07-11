@@ -1,6 +1,6 @@
 # <MapIcon name="cooking" :size="24" /> 更多食物拓展
 
-<MapIcon name="sparkles" :size="16" /> **基于 CustomCrops 作物系统全面重制**  
+<MapIcon name="sparkles" :size="16" /> **基于 CustomCrops 作物系统全面重制**
 
 锐界幻境的田园生活产出了丰富的农作物，这些新鲜的食材可以加工成 **57种特色食物**。每道食物都有独特的合成配方和食用效果。
 
@@ -11,8 +11,6 @@
 ---
 
 ## 食物品质分级
-
-所有食物按稀有度和效果强度分为四个等级：
 
 | 等级 | 标识 | 特点 | 代表食物 |
 |------|------|------|----------|
@@ -27,157 +25,115 @@
 
 ### 培根
 
-<div class="food-card">
+<CraftingTable
+  :ingredients="[
+    {id:'cooked_porkchop'},
+    {name:'杀猪刀', texture:'/mc-textures/item/iron_sword.png'}
+  ]"
+  :result="{id:'bacon', count:2}"
+/>
 
-<div class="food-main">
+| 饥饿值 | 饱和度 | 品质 |
+|--------|--------|------|
+| 5 | 7.2 | ⭐ 普通 |
 
-![培根](/images/food/bacon.png)
-
-| 属性 | 数值 |
-|------|------|
-| 饥饿值 | 5 |
-| 饱和度 | 7.2 |
-| 品质 | ⭐ 普通 |
-| 制作方式 | 工作台（无序） |
-
-**配方材料**: <img src="/images/food/bacon.png" style="height:24px;vertical-align:middle"> 熟猪排 + 🔪 杀猪刀
-
-**🐾 效果**: 无特殊效果，纯粹的美味
+**效果**: 无特殊效果，纯粹的美味
 
 > 「treetree的炸培根，焦香酥脆，是冒险前的最佳能量补给」
-
-</div>
-</div>
 
 ---
 
 ### 煎蛋
 
-<div class="food-card">
+<Furnace
+  :input="{id:'egg'}"
+  :result="{id:'fried_egg'}"
+  :fuel="{id:'coal'}"
+/>
 
-<div class="food-main">
+| 饥饿值 | 饱和度 | 品质 |
+|--------|--------|------|
+| 4 | 3.0 | ⭐ 普通 |
 
-![煎蛋](/images/food/fried_egg.png)
-
-| 属性 | 数值 |
-|------|------|
-| 饥饿值 | 4 |
-| 饱和度 | 3.0 |
-| 品质 | ⭐ 普通 |
-| 制作方式 | 熔炉烧炼 |
-
-**配方材料**: 🥚 鸡蛋
-
-**🐾 效果**: 无特殊效果
+**效果**: 无特殊效果
 
 > 「早餐的灵魂伴侣」
-
-</div>
-</div>
 
 ---
 
 ### 吐司
 
-<div class="food-card">
+<Furnace
+  :input="{id:'bread'}"
+  :result="{id:'toast'}"
+  :fuel="{id:'coal'}"
+/>
 
-<div class="food-main">
+| 饥饿值 | 饱和度 | 品质 |
+|--------|--------|------|
+| 7 | 8.0 | ⭐ 普通 |
 
-![吐司](/images/food/toast.png)
-
-| 属性 | 数值 |
-|------|------|
-| 饥饿值 | 7 |
-| 饱和度 | 8.0 |
-| 品质 | ⭐ 普通 |
-| 制作方式 | 熔炉烧炼 |
-
-**配方材料**: 🍞 面包
-
-**🐾 效果**: 食用后获得 10秒 生命恢复
+**效果**: 食用后获得 10秒 生命恢复
 
 > 「锐界幻境早餐风味，搭配培根煎蛋食用更佳」
-
-</div>
-</div>
 
 ---
 
 ### 雷霆大面包
 
-<div class="food-card">
+<CraftingTable
+  :ingredients="[
+    {id:'bread'}, {id:'bread'}, {id:'bread'},
+    {name:'锻造锤', texture:'/mc-textures/item/iron_ingot.png'}
+  ]"
+  :result="{id:'double_bread'}"
+/>
 
-<div class="food-main">
+| 饥饿值 | 饱和度 | 品质 |
+|--------|--------|------|
+| 10 | 12.0 | ⭐⭐ 精良 |
 
-![雷霆大面包](/images/food/double_bread.png)
-
-| 属性 | 数值 |
-|------|------|
-| 饥饿值 | 10 |
-| 饱和度 | 12.0 |
-| 品质 | ⭐⭐ 精良 |
-| 制作方式 | 工作台（无序） |
-
-**配方材料**: 🍞 面包×3 + 🔨 锻造锤
-
-**🐾 效果**: 食用后获得 5秒 饱和
+**效果**: 食用后获得 5秒 饱和
 
 > 「三层面包锻造而成，雷霆之力蕴藏其中」
-
-</div>
-</div>
 
 ---
 
 ### 奶酪
 
-<div class="food-card">
+<CraftingTable
+  :ingredients="[
+    {id:'milk_bucket'},
+    {id:'sugar'}
+  ]"
+  :result="{id:'cheese'}"
+/>
 
-<div class="food-main">
+| 饥饿值 | 饱和度 | 品质 |
+|--------|--------|------|
+| 4 | 5.0 | ⭐ 普通 |
 
-![奶酪](/images/food/cheese.png)
-
-| 属性 | 数值 |
-|------|------|
-| 饥饿值 | 4 |
-| 饱和度 | 5.0 |
-| 品质 | ⭐ 普通 |
-| 制作方式 | 工作台（无序） |
-
-**配方材料**: 🥛 牛奶桶 + 🧂 糖
-
-**🐾 效果**: 无特殊效果
+**效果**: 无特殊效果
 
 > 「没错，杰瑞最喜欢这个了」
-
-</div>
-</div>
 
 ---
 
 ### 烤南瓜
 
-<div class="food-card">
+<Furnace
+  :input="{name:'南瓜', texture:'/mc-textures/item/pumpkin_pie.png'}"
+  :result="{id:'roasted_pumpkin'}"
+  :fuel="{id:'coal'}"
+/>
 
-<div class="food-main">
+| 饥饿值 | 饱和度 | 品质 |
+|--------|--------|------|
+| 10 | 6.0 | ⭐ 普通 |
 
-![烤南瓜](/images/food/roasted_pumpkin.png)
-
-| 属性 | 数值 |
-|------|------|
-| 饥饿值 | 10 |
-| 饱和度 | 6.0 |
-| 品质 | ⭐ 普通 |
-| 制作方式 | 熔炉烧炼 |
-
-**配方材料**: 🎃 南瓜
-
-**🐾 效果**: 食用后获得 20秒 生命恢复
+**效果**: 食用后获得 20秒 生命恢复
 
 > 「锐界幻境烧烤风味，自然的香甜」
-
-</div>
-</div>
 
 ---
 
@@ -185,279 +141,205 @@
 
 ### 棉花糖
 
-<div class="food-card">
+<CraftingTable
+  shaped
+  :grid="[
+    [{id:'sugar'}, {id:'string'}, {id:'sugar'}],
+    [{id:'sugar'}, {id:'stick'}, {id:'sugar'}],
+    [{id:'sugar'}, {id:'string'}, {id:'sugar'}]
+  ]"
+  :result="{id:'candy_floss'}"
+/>
 
-<div class="food-main">
-
-![棉花糖](/images/food/candy_floss.png)
-
-| 属性 | 数值 |
-|------|------|
-| 饥饿值 | 6 |
-| 饱和度 | 4.0 |
-| 品质 | ⭐⭐ 精良 |
-| 制作方式 | 工作台（有序） |
-
-**配方**: 糖 + 线 + 木棍
-
-```
-糖  线  糖
-糖  棍  糖
-糖  线  糖
-```
+| 饥饿值 | 饱和度 | 品质 |
+|--------|--------|------|
+| 6 | 4.0 | ⭐⭐ 精良 |
 
 **🕊️ 效果**: 食用后获得 45秒 缓降
 
 > 「锐界幻境的云是它组成的？吃下后会变得身轻如燕」
 
-</div>
-</div>
-
 ---
 
 ### 棒棒糖
 
-<div class="food-card">
+<CraftingTable
+  shaped
+  :grid="[
+    [{id:'sugar'}, {id:'strawberry'}, {id:'sugar'}],
+    [{id:'sugar'}, {id:'stick'}, {id:'sugar'}],
+    [{id:'sugar'}, {id:'sugar'}, {id:'sugar'}]
+  ]"
+  :result="{id:'lollipop'}"
+/>
 
-<div class="food-main">
-
-![棒棒糖](/images/food/lollipop.png)
-
-| 属性 | 数值 |
-|------|------|
-| 饥饿值 | 8 |
-| 饱和度 | 5.0 |
-| 品质 | ⭐⭐ 精良 |
-| 制作方式 | 工作台（有序） |
-
-**配方**: 草莓 + 糖 + 木棍
-
-```
-糖  草  糖
-糖  棍  糖
-糖  糖  糖
-```
+| 饥饿值 | 饱和度 | 品质 |
+|--------|--------|------|
+| 8 | 5.0 | ⭐⭐ 精良 |
 
 **🛡️ 效果**: 食用后获得 45秒 抗性提升 I
 
 > 「小时候总会含在嘴里慢慢融化细细品味，仿佛整个世界都是甜的」
 
-</div>
-</div>
-
 ---
 
 ### 爆米花
 
-<div class="food-card">
+<Furnace
+  :input="{name:'玉米', texture:'/mc-textures/item/melon_seeds.png'}"
+  :result="{id:'popcorn', count:3}"
+  :fuel="{id:'coal'}"
+/>
 
-<div class="food-main">
+| 饥饿值 | 饱和度 | 品质 |
+|--------|--------|------|
+| 7 | 14.0 | ⭐ 普通 |
 
-![爆米花](/images/food/popcorn.png)
-
-| 属性 | 数值 |
-|------|------|
-| 饥饿值 | 7 |
-| 饱和度 | 14.0 |
-| 品质 | ⭐ 普通 |
-| 制作方式 | 熔炉烧炼 |
-
-**配方材料**: 🌽 玉米（CustomCrops）
-
-**🐾 效果**: 无特殊效果
+**效果**: 无特殊效果
 
 > 「金灿灿的像金子一样！闻起来像，吃起来也像！」
-
-</div>
-</div>
 
 ---
 
 ### 胡萝卜糖果
 
-<div class="food-card">
+<CraftingTable
+  :ingredients="[
+    {id:'carrot'},
+    {id:'sugar'}
+  ]"
+  :result="{id:'carrot_candy', count:2}"
+/>
 
-<div class="food-main">
-
-![胡萝卜糖果](/images/food/carrot_candy.png)
-
-| 属性 | 数值 |
-|------|------|
-| 饥饿值 | 4 |
-| 饱和度 | 1.5 |
-| 品质 | ⭐ 普通 |
-| 制作方式 | 工作台（无序） |
-
-**配方材料**: 🥕 胡萝卜 + 糖
+| 饥饿值 | 饱和度 | 品质 |
+|--------|--------|------|
+| 4 | 1.5 | ⭐ 普通 |
 
 **🐰 效果**: 食用后获得 5秒 速度 I
 
 > 「兔兔最爱的糖果！咬一口嘎嘣脆胡萝卜味」
 
-</div>
-</div>
-
 ---
 
 ### 马铃薯糖果
 
-<div class="food-card">
+<CraftingTable
+  :ingredients="[
+    {id:'potato'},
+    {id:'sugar'}
+  ]"
+  :result="{id:'potato_candy', count:2}"
+/>
 
-<div class="food-main">
+| 饥饿值 | 饱和度 | 品质 |
+|--------|--------|------|
+| 3 | 1.0 | ⭐ 普通 |
 
-![马铃薯糖果](/images/food/potato_candy.png)
-
-| 属性 | 数值 |
-|------|------|
-| 饥饿值 | 3 |
-| 饱和度 | 1.0 |
-| 品质 | ⭐ 普通 |
-| 制作方式 | 工作台（无序） |
-
-**配方材料**: 🥔 马铃薯 + 糖
-
-**🐾 效果**: 无特殊效果
+**效果**: 无特殊效果
 
 > 「马铃薯味的糖果...好吧其实挺特别的」
-
-</div>
-</div>
 
 ---
 
 ### 青草糖果
 
-<div class="food-card">
+<CraftingTable
+  :ingredients="[
+    {id:'wheat'},
+    {id:'sugar'}
+  ]"
+  :result="{id:'grass_candy', count:2}"
+/>
 
-<div class="food-main">
-
-![青草糖果](/images/food/grass_candy.png)
-
-| 属性 | 数值 |
-|------|------|
-| 饥饿值 | 3 |
-| 饱和度 | 1.5 |
-| 品质 | ⭐ 普通 |
-| 制作方式 | 工作台（无序） |
-
-**配方材料**: 🌾 小麦 + 糖
+| 饥饿值 | 饱和度 | 品质 |
+|--------|--------|------|
+| 3 | 1.5 | ⭐ 普通 |
 
 **🐄 效果**: 附近被动生物获得 10秒 生命恢复
 
 > 「干草糖，清新自然风」
 
-</div>
-</div>
-
 ---
 
 ### 绯红糖果
 
-<div class="food-card">
+<CraftingTable
+  :ingredients="[
+    {name:'绯红菌', texture:'/mc-textures/item/nether_wart.png'},
+    {id:'sugar'}
+  ]"
+  :result="{id:'crimson_candy', count:2}"
+/>
 
-<div class="food-main">
-
-![绯红糖果](/images/food/crimson_candy.png)
-
-| 属性 | 数值 |
-|------|------|
-| 饥饿值 | 3 |
-| 饱和度 | 1.5 |
-| 品质 | ⭐ 普通 |
-| 制作方式 | 工作台（无序） |
-
-**配方材料**: 🍄 绯红菌（CustomCrops）+ 糖
+| 饥饿值 | 饱和度 | 品质 |
+|--------|--------|------|
+| 3 | 1.5 | ⭐ 普通 |
 
 **🔥 效果**: 食用后获得 15秒 抗火
 
 > 「下界风味糖果，吃下去全身暖洋洋的」
 
-</div>
-</div>
-
 ---
 
 ### 诡异糖果
 
-<div class="food-card">
+<CraftingTable
+  :ingredients="[
+    {name:'诡异菌', texture:'/mc-textures/item/warped_fungus_on_a_stick.png'},
+    {id:'sugar'}
+  ]"
+  :result="{id:'warped_candy', count:2}"
+/>
 
-<div class="food-main">
-
-![诡异糖果](/images/food/warped_candy.png)
-
-| 属性 | 数值 |
-|------|------|
-| 饥饿值 | 3 |
-| 饱和度 | 1.5 |
-| 品质 | ⭐ 普通 |
-| 制作方式 | 工作台（无序） |
-
-**配方材料**: 🍄 诡异菌（CustomCrops）+ 糖
+| 饥饿值 | 饱和度 | 品质 |
+|--------|--------|------|
+| 3 | 1.5 | ⭐ 普通 |
 
 **👹 效果**: 附近疣猪兽获得 30秒 虚弱 II
 
 > 「不！好！吃！但疣猪兽更不喜欢这个味道」
 
-</div>
-</div>
-
 ---
 
 ### 紫颂果糖果
 
-<div class="food-card">
+<CraftingTable
+  :ingredients="[
+    {id:'chorus_fruit'},
+    {id:'sugar'}
+  ]"
+  :result="{id:'chorus_candy', count:2}"
+/>
 
-<div class="food-main">
-
-![紫颂果糖果](/images/food/chorus_candy.png)
-
-| 属性 | 数值 |
-|------|------|
-| 饥饿值 | 5 |
-| 饱和度 | 1.0 |
-| 品质 | ⭐ 普通 |
-| 制作方式 | 工作台（无序） |
-
-**配方材料**: 🍑 紫颂果 + 糖
+| 饥饿值 | 饱和度 | 品质 |
+|--------|--------|------|
+| 5 | 1.0 | ⭐ 普通 |
 
 **🌀 效果**: 食用后随机传送（保留了紫颂果的本性）
 
 > 「保留了一部分原有的味道，是故意的」
 
-</div>
-</div>
-
 ---
 
 ### 苦力怕夹心饼干
 
-<div class="food-card">
+<CraftingTable
+  shaped
+  :grid="[
+    [{id:'wheat'}, {id:'gunpowder'}, {id:'wheat'}],
+    [{id:'wheat'}, {id:'sugar'}, {id:'wheat'}],
+    [{id:'wheat'}, {id:'gunpowder'}, {id:'wheat'}]
+  ]"
+  :result="{id:'creeper_cookie'}"
+/>
 
-<div class="food-main">
-
-![苦力怕夹心饼干](/images/food/creeper_cookie.png)
-
-| 属性 | 数值 |
-|------|------|
-| 饥饿值 | 8 |
-| 饱和度 | 3.0 |
-| 品质 | ⭐⭐ 精良 |
-| 制作方式 | 工作台（有序） |
-
-**配方**: 小麦 + 火药 + 糖
-
-```
-麦  火  麦
-麦  糖  麦
-麦  火  麦
-```
+| 饥饿值 | 饱和度 | 品质 |
+|--------|--------|------|
+| 8 | 3.0 | ⭐⭐ 精良 |
 
 **💥 效果**: 食用后触发小型爆炸（不破坏方块！仅视觉效果 + 少量伤害）
 
 > 「浓浓的火药味...等等这真的能吃吗？！」
-
-</div>
-</div>
 
 ---
 
@@ -465,261 +347,213 @@
 
 ### 蒲公英沙拉
 
-<div class="food-card">
+<CraftingTable
+  :ingredients="[
+    {name:'蒲公英', texture:'/mc-textures/item/dandelion.png'},
+    {name:'生菜', texture:'/mc-textures/item/beetroot_seeds.png'},
+    {name:'番茄', texture:'/mc-textures/item/apple.png'},
+    {id:'bowl'}
+  ]"
+  :result="{id:'dandelion_salad'}"
+/>
 
-<div class="food-main">
-
-![蒲公英沙拉](/images/food/dandelion_salad.png)
-
-| 属性 | 数值 |
-|------|------|
-| 饥饿值 | 6 |
-| 饱和度 | 7.0 |
-| 品质 | ⭐⭐ 精良 |
-| 制作方式 | 工作台（无序） |
-
-**配方材料**: 🌼 蒲公英 + 🥬 生菜（CC）+ 🍅 番茄（CC）+ 🥣 碗
+| 饥饿值 | 饱和度 | 品质 |
+|--------|--------|------|
+| 6 | 7.0 | ⭐⭐ 精良 |
 
 **💊 效果**: 5秒反胃 → 5秒生命恢复 II → 40秒抗性提升 I（先苦后甜）
 
 > 「虽然入口苦涩，但蒲公英确实能治愈一些疾病...先苦后甜」
 
-</div>
-</div>
-
 ---
 
 ### 浆果沙拉
 
-<div class="food-card">
+<CraftingTable
+  :ingredients="[
+    {id:'sweet_berries'}, {id:'sweet_berries'},
+    {id:'glow_berries'},
+    {id:'bowl'}
+  ]"
+  :result="{id:'berry_salad'}"
+/>
 
-<div class="food-main">
-
-![浆果沙拉](/images/food/berry_salad.png)
-
-| 属性 | 数值 |
-|------|------|
-| 饥饿值 | 7 |
-| 饱和度 | 8.0 |
-| 品质 | ⭐⭐ 精良 |
-| 制作方式 | 工作台（无序） |
-
-**配方材料**: 🫐 甜浆果×2 + ✨ 发光浆果 + 🥣 碗
+| 饥饿值 | 饱和度 | 品质 |
+|--------|--------|------|
+| 7 | 8.0 | ⭐⭐ 精良 |
 
 **🦊 效果**: 30秒生命恢复 + 30秒内背刺伤害 +50%
 
 > 「幻境森林中的特产，狐狸好像挺喜欢吃的嘛？」
 
-</div>
-</div>
-
 ---
 
 ### 海草沙拉
 
-<div class="food-card">
+<CraftingTable
+  :ingredients="[
+    {id:'seagrass'}, {id:'seagrass'},
+    {name:'生菜', texture:'/mc-textures/item/beetroot_seeds.png'},
+    {id:'bowl'}
+  ]"
+  :result="{id:'seagrass_salad'}"
+/>
 
-<div class="food-main">
-
-![海草沙拉](/images/food/seagrass_salad.png)
-
-| 属性 | 数值 |
-|------|------|
-| 饥饿值 | 6 |
-| 饱和度 | 7.0 |
-| 品质 | ⭐ 普通 |
-| 制作方式 | 工作台（无序） |
-
-**配方材料**: 🌿 海草×2 + 🥬 生菜（CC）+ 🥣 碗
+| 饥饿值 | 饱和度 | 品质 |
+|--------|--------|------|
+| 6 | 7.0 | ⭐ 普通 |
 
 **🌊 效果**: 食用后获得 30秒 海豚恩惠
 
 > 「好吧，看起来只是一堆草...但是意外地清爽可口」
 
-</div>
-</div>
-
 ---
 
 ### 洞穴杂拌
 
-<div class="food-card">
+<CraftingTable
+  :ingredients="[
+    {id:'glow_berries'},
+    {name:'棕色蘑菇', texture:'/mc-textures/item/brown_mushroom.png'},
+    {name:'红色蘑菇', texture:'/mc-textures/item/red_mushroom.png'},
+    {id:'bowl'}
+  ]"
+  :result="{id:'cave_medley'}"
+/>
 
-<div class="food-main">
-
-![洞穴杂拌](/images/food/cave_medley.png)
-
-| 属性 | 数值 |
-|------|------|
-| 饥饿值 | 6 |
-| 饱和度 | 7.0 |
-| 品质 | ⭐⭐ 精良 |
-| 制作方式 | 工作台（无序） |
-
-**配方材料**: ✨ 发光浆果 + 🍄 棕蘑菇 + 🍄 红蘑菇 + 🥣 碗
+| 饥饿值 | 饱和度 | 品质 |
+|--------|--------|------|
+| 6 | 7.0 | ⭐⭐ 精良 |
 
 **🔦 效果**: 食用后获得 60秒 夜视 + 45秒 急迫 I
 
 > 「幻境洞穴风味，吃下去仿佛黑暗中的明灯」
 
-</div>
-</div>
-
 ---
 
 ### 海洋杂拌
 
-<div class="food-card">
+<CraftingTable
+  :ingredients="[
+    {id:'seagrass'},
+    {id:'cod'},
+    {id:'prismarine_shard'},
+    {id:'bowl'}
+  ]"
+  :result="{id:'ocean_medley'}"
+/>
 
-<div class="food-main">
+| 饥饿值 | 饱和度 | 品质 |
+|--------|--------|------|
+| 6 | 7.0 | ⭐⭐ 精良 |
 
-![海洋杂拌](/images/food/ocean_medley.png)
-
-| 属性 | 数值 |
-|------|------|
-| 饥饿值 | 6 |
-| 饱和度 | 7.0 |
-| 品质 | ⭐⭐ 精良 |
-| 制作方式 | 工作台（无序） |
-
-**配方材料**: 🌿 海草 + 🐟 生鳕鱼 + 💎 海晶碎片 + 🥣 碗
-
-**🌊 效果**: 食用后获得 60秒 潮涌能量 + 45秒 海豚恩惠
+**🌊 效果**: 60秒潮涌能量 + 45秒海豚恩惠
 
 > 「看起来很健康，其实...真的很健康！海洋的精华尽在其中」
-
-</div>
-</div>
 
 ---
 
 ### 幽寂杂拌
 
-<div class="food-card">
+<CraftingTable
+  :ingredients="[
+    {name:'回响碎片', texture:'/mc-textures/item/echo_shard.png'},
+    {name:'幽匿催生体', texture:'/mc-textures/item/sculk_catalyst.png'},
+    {id:'bowl'}
+  ]"
+  :result="{id:'sculk_medley'}"
+/>
 
-<div class="food-main">
-
-![幽寂杂拌](/images/food/sculk_medley.png)
-
-| 属性 | 数值 |
-|------|------|
-| 饥饿值 | 14 |
-| 饱和度 | 18.0 |
-| 品质 | ⭐⭐⭐ 稀有 |
-| 制作方式 | 工作台（无序） |
-
-**配方材料**: 🌀 回响碎片 + 🟢 幽匿催生体 + 🥣 碗
+| 饥饿值 | 饱和度 | 品质 |
+|--------|--------|------|
+| 14 | 18.0 | ⭐⭐⭐ 稀有 |
 
 **🖤 效果**: 15秒饱和 + 8秒反胃 + 30秒夜视
 
 > 「锐界幻境幽匿风味，虽然不好吃但就是忍不住想尝...」
 
-</div>
-</div>
-
 ---
 
 ### 豆腐
 
-<div class="food-card">
+<CraftingTable
+  :ingredients="[
+    {name:'绿豆', texture:'/mc-textures/item/melon_seeds.png'},
+    {name:'绿豆', texture:'/mc-textures/item/melon_seeds.png'},
+    {name:'绿豆', texture:'/mc-textures/item/melon_seeds.png'},
+    {id:'bowl'}
+  ]"
+  :result="{id:'tofu', count:2}"
+/>
 
-<div class="food-main">
+| 饥饿值 | 饱和度 | 品质 |
+|--------|--------|------|
+| 3 | 2.0 | ⭐ 普通 |
 
-![豆腐](/images/food/tofu.png)
-
-| 属性 | 数值 |
-|------|------|
-| 饥饿值 | 3 |
-| 饱和度 | 2.0 |
-| 品质 | ⭐ 普通 |
-| 制作方式 | 工作台（无序） |
-
-**配方材料**: 🫘 绿豆×3（CustomCrops）+ 🥣 碗 → 豆腐×2
-
-**🐾 效果**: 无特殊效果
+**效果**: 无特殊效果
 
 > 「锐界幻境的豆腐...白白嫩嫩的」
-
-</div>
-</div>
 
 ---
 
 ### 臭豆腐
 
-<div class="food-card">
+<CraftingTable
+  :ingredients="[
+    {id:'tofu'},
+    {id:'fermented_spider_eye'}
+  ]"
+  :result="{id:'stinky_tofu'}"
+/>
 
-<div class="food-main">
+| 饥饿值 | 饱和度 | 品质 |
+|--------|--------|------|
+| 6 | 4.0 | ⭐⭐ 精良 |
 
-![臭豆腐](/images/food/stinky_tofu.png)
-
-| 属性 | 数值 |
-|------|------|
-| 饥饿值 | 6 |
-| 饱和度 | 4.0 |
-| 品质 | ⭐⭐ 精良 |
-| 制作方式 | 工作台（无序） |
-
-**配方材料**: 🧈 豆腐 + 🕷️ 发酵蛛眼
-
-**💨 效果**: 食用后周围实体获得 10秒虚弱 + 10秒缓慢 + 5秒反胃
+**💨 效果**: 周围实体获得 10秒虚弱 + 10秒缓慢 + 5秒反胃
 
 > 「好臭！！虽然吃着香，但请不要在公共场合食用！」
-
-</div>
-</div>
 
 ---
 
 ### 草莓酱
 
-<div class="food-card">
+<CraftingTable
+  :ingredients="[
+    {id:'strawberry'}, {id:'strawberry'},
+    {id:'sugar'},
+    {id:'glass_bottle'}
+  ]"
+  :result="{id:'strawberry_jam'}"
+/>
 
-<div class="food-main">
-
-![草莓酱](/images/food/strawberry_jam.png)
-
-| 属性 | 数值 |
-|------|------|
-| 饥饿值 | 6 |
-| 饱和度 | 3.0 |
-| 品质 | ⭐ 普通 |
-| 制作方式 | 工作台（无序） |
-
-**配方材料**: 🍓 草莓×2 + 糖 + 🫙 玻璃瓶
+| 饥饿值 | 饱和度 | 品质 |
+|--------|--------|------|
+| 6 | 3.0 | ⭐ 普通 |
 
 **🍓 效果**: 食用后获得 10秒 速度 I
 
 > 「新鲜的锐界幻境草莓熬制，甜到心里去」
 
-</div>
-</div>
-
 ---
 
 ### 仙人掌切块
 
-<div class="food-card">
+<CraftingTable
+  :ingredients="[
+    {name:'仙人掌', texture:'/mc-textures/item/cactus.png'},
+    {name:'杀猪刀', texture:'/mc-textures/item/iron_sword.png'}
+  ]"
+  :result="{id:'cut_cactus', count:2}"
+/>
 
-<div class="food-main">
+| 饥饿值 | 饱和度 | 品质 |
+|--------|--------|------|
+| 5 | 3.0 | ⭐ 普通 |
 
-![仙人掌切块](/images/food/cut_cactus.png)
-
-| 属性 | 数值 |
-|------|------|
-| 饥饿值 | 5 |
-| 饱和度 | 3.0 |
-| 品质 | ⭐ 普通 |
-| 制作方式 | 工作台（无序） |
-
-**配方材料**: 🌵 仙人掌 + 🔪 杀猪刀 → 仙人掌切块×2
-
-**🐪 效果**: 5秒反胃 + 周围骆驼获得 20秒 生命恢复
+**🐪 效果**: 5秒反胃 + 周围骆驼获得 20秒生命恢复
 
 > 「锐界幻境沙漠风味，对人类来说有点扎嘴...但骆驼很爱」
-
-</div>
-</div>
 
 ---
 
@@ -727,161 +561,111 @@
 
 ### 派
 
-<div class="food-card">
+<CraftingTable
+  shaped
+  :grid="[
+    [{id:'wheat'}, {id:'egg'}, {id:'wheat'}],
+    [{id:'sugar'}, {id:'sweet_berries'}, {id:'sugar'}],
+    [null, {id:'wheat'}, null]
+  ]"
+  :result="{id:'pie'}"
+/>
 
-<div class="food-main">
+| 饥饿值 | 饱和度 | 品质 |
+|--------|--------|------|
+| 9 | 6.0 | ⭐ 普通 |
 
-![派](/images/food/pie.png)
-
-| 属性 | 数值 |
-|------|------|
-| 饥饿值 | 9 |
-| 饱和度 | 6.0 |
-| 品质 | ⭐ 普通 |
-| 制作方式 | 工作台（有序） |
-
-**配方**: 小麦 + 糖 + 鸡蛋 + 甜浆果
-
-```
-麦  蛋  麦
-糖  浆  糖
-空  麦  空
-```
-
-**🐾 效果**: 无特殊效果
+**效果**: 无特殊效果
 
 > 「蛋糕的青春版，一个人也能享受的完美甜点」
-
-</div>
-</div>
 
 ---
 
 ### 草莓甜甜圈
 
-<div class="food-card">
+<CraftingTable
+  shaped
+  :grid="[
+    [null, {id:'wheat'}, null],
+    [{id:'sugar'}, {id:'egg'}, {id:'sugar'}],
+    [null, {id:'strawberry'}, null]
+  ]"
+  :result="{id:'strawberry_donuts', count:2}"
+/>
 
-<div class="food-main">
-
-![草莓甜甜圈](/images/food/strawberry_donuts.png)
-
-| 属性 | 数值 |
-|------|------|
-| 饥饿值 | 6 |
-| 饱和度 | 5.0 |
-| 品质 | ⭐⭐ 精良 |
-| 制作方式 | 工作台（有序） |
-
-**配方**: 小麦 + 糖 + 草莓 + 鸡蛋
-
-```
-空  麦  空
-糖  蛋  糖
-空  莓  空
-```
+| 饥饿值 | 饱和度 | 品质 |
+|--------|--------|------|
+| 6 | 5.0 | ⭐⭐ 精良 |
 
 **💕 效果**: 8秒生命恢复 + 5秒反胃（太甜了！）
 
 > 「香香软软的，但是一口吃掉好像太腻了...」
 
-</div>
-</div>
-
 ---
 
 ### 奶油纸杯蛋糕
 
-<div class="food-card">
+<CraftingTable
+  shaped
+  :grid="[
+    [null, {id:'wheat'}, null],
+    [{id:'sugar'}, {id:'egg'}, {id:'sugar'}],
+    [null, {id:'milk_bucket'}, null]
+  ]"
+  :result="{id:'cream_cupcakes', count:2}"
+/>
 
-<div class="food-main">
-
-![奶油纸杯蛋糕](/images/food/cream_cupcakes.png)
-
-| 属性 | 数值 |
-|------|------|
-| 饥饿值 | 9 |
-| 饱和度 | 10.0 |
-| 品质 | ⭐⭐ 精良 |
-| 制作方式 | 工作台（有序） |
-
-**配方**: 小麦 + 糖 + 鸡蛋 + 牛奶
-
-```
-空  麦  空
-糖  蛋  糖
-空  奶  空
-```
+| 饥饿值 | 饱和度 | 品质 |
+|--------|--------|------|
+| 9 | 10.0 | ⭐⭐ 精良 |
 
 **🍰 效果**: 20秒饱和 + 45秒抗性提升 I + 60秒移动速度 +15%
 
 > 「小时候挺爱吃的...长大后好像只能在锐界幻境吃到了，一口回到童年」
 
-</div>
-</div>
-
 ---
 
 ### 甜浆果纸杯蛋糕
 
-<div class="food-card">
+<CraftingTable
+  shaped
+  :grid="[
+    [null, {id:'wheat'}, null],
+    [{id:'sugar'}, {id:'egg'}, {id:'sugar'}],
+    [null, {id:'sweet_berries'}, null]
+  ]"
+  :result="{id:'sweet_berries_cupcake', count:2}"
+/>
 
-<div class="food-main">
-
-![甜浆果纸杯蛋糕](/images/food/sweet_berries_cupcake.png)
-
-| 属性 | 数值 |
-|------|------|
-| 饥饿值 | 5 |
-| 饱和度 | 5.0 |
-| 品质 | ⭐ 普通 |
-| 制作方式 | 工作台（有序） |
-
-**配方**: 小麦 + 糖 + 鸡蛋 + 甜浆果
-
-```
-空  麦  空
-糖  蛋  糖
-空  浆  空
-```
+| 饥饿值 | 饱和度 | 品质 |
+|--------|--------|------|
+| 5 | 5.0 | ⭐ 普通 |
 
 **🛡️ 效果**: 食用后获得 8秒 抗性提升 I
 
 > 「锐界幻境童年风味，小小的纸杯里装着大大的幸福」
 
-</div>
-</div>
-
 ---
 
 ### 发光浆果纸杯蛋糕
 
-<div class="food-card">
+<CraftingTable
+  shaped
+  :grid="[
+    [null, {id:'wheat'}, null],
+    [{id:'sugar'}, {id:'egg'}, {id:'sugar'}],
+    [null, {id:'glow_berries'}, null]
+  ]"
+  :result="{id:'glow_berries_cupcake', count:2}"
+/>
 
-<div class="food-main">
-
-![发光浆果纸杯蛋糕](/images/food/glow_berries_cupcake.png)
-
-| 属性 | 数值 |
-|------|------|
-| 饥饿值 | 5 |
-| 饱和度 | 5.0 |
-| 品质 | ⭐ 普通 |
-| 制作方式 | 工作台（有序） |
-
-**配方**: 小麦 + 糖 + 鸡蛋 + 发光浆果
-
-```
-空  麦  空
-糖  蛋  糖
-空  光  空
-```
+| 饥饿值 | 饱和度 | 品质 |
+|--------|--------|------|
+| 5 | 5.0 | ⭐ 普通 |
 
 **✨ 效果**: 8秒抗性提升 I + 15秒自发光
 
 > 「发光的纸杯蛋糕！晚上都不用带火把了（虽然只有一会儿）」
-
-</div>
-</div>
 
 ---
 
@@ -889,335 +673,244 @@
 
 ### 大火腿
 
-<div class="food-card">
+<CraftingTable
+  shaped
+  :grid="[
+    [{id:'cooked_porkchop'}, {id:'cooked_porkchop'}, {id:'cooked_porkchop'}],
+    [{id:'cooked_porkchop'}, {id:'bone_meal'}, {id:'cooked_porkchop'}],
+    [{id:'cooked_porkchop'}, {id:'cooked_porkchop'}, {id:'cooked_porkchop'}]
+  ]"
+  :result="{id:'big_ham'}"
+/>
 
-<div class="food-main">
-
-![大火腿](/images/food/big_ham.png)
-
-| 属性 | 数值 |
-|------|------|
-| 饥饿值 | 10 |
-| 饱和度 | 15.0 |
-| 品质 | ⭐⭐⭐ 稀有 |
-| 制作方式 | 工作台（有序） |
-
-**配方**: 熟猪排×8 + 骨粉
-
-```
-排  排  排
-排  粉  排
-排  排  排
-```
+| 饥饿值 | 饱和度 | 品质 |
+|--------|--------|------|
+| 10 | 15.0 | ⭐⭐⭐ 稀有 |
 
 **⚔️ 效果**: 25秒力量 II + 20秒生命恢复 + 40秒暴击伤害 +100%
 
 > 「看起来好像一把棒槌...打人很痛的样子，吃下去战斗力爆表」
 
-</div>
-</div>
-
 ---
 
 ### 肉夹馍
 
-<div class="food-card">
+<CraftingTable
+  :ingredients="[
+    {id:'bread'},
+    {id:'cooked_porkchop'},
+    {name:'生菜', texture:'/mc-textures/item/beetroot_seeds.png'},
+    {name:'辣椒', texture:'/mc-textures/item/red_dye.png'}
+  ]"
+  :result="{id:'sauerkraut_meat_film'}"
+/>
 
-<div class="food-main">
-
-![肉夹馍](/images/food/sauerkraut_meat_film.png)
-
-| 属性 | 数值 |
-|------|------|
-| 饥饿值 | 8 |
-| 饱和度 | 4.0 |
-| 品质 | ⭐⭐⭐ 稀有 |
-| 制作方式 | 工作台（无序） |
-
-**配方材料**: 🍞 面包 + 🥩 熟猪排 + 🥬 生菜（CC）+ 🌶️ 辣椒（CC）
+| 饥饿值 | 饱和度 | 品质 |
+|--------|--------|------|
+| 8 | 4.0 | ⭐⭐⭐ 稀有 |
 
 **🏃 效果**: 60秒速度 I + 60秒急迫 I + 30秒生命恢复
 
 > 「超好吃的肉夹馍!!! 吃完整个锐界幻境都能变得超级好吃」
 
-</div>
-</div>
-
 ---
 
 ### 热狗
 
-<div class="food-card">
+<CraftingTable
+  shaped
+  :grid="[
+    [null, {id:'bread'}, null],
+    [{id:'cooked_porkchop'}, {name:'番茄', texture:'/mc-textures/item/apple.png'}, {id:'cooked_porkchop'}],
+    [null, {id:'bread'}, null]
+  ]"
+  :result="{id:'hotdog'}"
+/>
 
-<div class="food-main">
-
-![热狗](/images/food/hotdog.png)
-
-| 属性 | 数值 |
-|------|------|
-| 饥饿值 | 9 |
-| 饱和度 | 14.0 |
-| 品质 | ⭐⭐ 精良 |
-| 制作方式 | 工作台（有序） |
-
-**配方**: 面包 + 熟猪排 + 番茄
-
-```
-空  包  空
-排  茄  排
-空  包  空
-```
+| 饥饿值 | 饱和度 | 品质 |
+|--------|--------|------|
+| 9 | 14.0 | ⭐⭐ 精良 |
 
 **🌭 效果**: 15秒速度 I + 10秒生命恢复
 
 > 「经典风味，简单直接的美味」
 
-</div>
-</div>
-
 ---
 
 ### 汉堡
 
-<div class="food-card">
+<CraftingTable
+  shaped
+  :grid="[
+    [null, {id:'bread'}, null],
+    [{name:'生菜', texture:'/mc-textures/item/beetroot_seeds.png'}, {id:'cooked_beef'}, {name:'番茄', texture:'/mc-textures/item/apple.png'}],
+    [null, {id:'cheese'}, null]
+  ]"
+  :result="{id:'hamburger'}"
+/>
 
-<div class="food-main">
-
-![汉堡](/images/food/hamburger.png)
-
-| 属性 | 数值 |
-|------|------|
-| 饥饿值 | 16 |
-| 饱和度 | 18.0 |
-| 品质 | ⭐⭐⭐ 稀有 |
-| 制作方式 | 工作台（有序） |
-
-**配方**: 面包×2 + 熟牛排 + 生菜 + 番茄 + 奶酪
-
-```
-空  包  空
-菜  排  茄
-空  酪  空
-```
+| 饥饿值 | 饱和度 | 品质 |
+|--------|--------|------|
+| 16 | 18.0 | ⭐⭐⭐ 稀有 |
 
 **🍔 效果**: 20秒饱和 + 45秒生命恢复 + 30秒抗性提升 I
 
 > 「锐界幻境星期四风味，比肯德基更健康！满配汉堡的力量」
 
-</div>
-</div>
-
 ---
 
 ### 披萨
 
-<div class="food-card">
+<CraftingTable
+  shaped
+  :grid="[
+    [{id:'wheat'}, {name:'番茄', texture:'/mc-textures/item/apple.png'}, {id:'wheat'}],
+    [{id:'cooked_porkchop'}, {id:'cheese'}, {id:'cooked_porkchop'}],
+    [null, {id:'wheat'}, null]
+  ]"
+  :result="{id:'pizza'}"
+/>
 
-<div class="food-main">
-
-![披萨](/images/food/pizza.png)
-
-| 属性 | 数值 |
-|------|------|
-| 饥饿值 | 12 |
-| 饱和度 | 14.0 |
-| 品质 | ⭐⭐ 精良 |
-| 制作方式 | 工作台（有序） |
-
-**配方**: 小麦×3 + 番茄 + 奶酪 + 熟猪肉
-
-```
-麦  番  麦
-肉  酪  肉
-空  麦  空
-```
+| 饥饿值 | 饱和度 | 品质 |
+|--------|--------|------|
+| 12 | 14.0 | ⭐⭐ 精良 |
 
 **🦊 效果**: 食用后获得 45秒 生命恢复
 
 > 「锐界幻境田园风味披萨，长得像狐狸耳朵，吃了会不会变成狐狸？」
 
-</div>
-</div>
-
 ---
 
 ### 墨西哥塔可
 
-<div class="food-card">
+<CraftingTable
+  shaped
+  :grid="[
+    [null, {name:'玉米', texture:'/mc-textures/item/melon_seeds.png'}, null],
+    [{name:'生菜', texture:'/mc-textures/item/beetroot_seeds.png'}, {id:'cooked_beef'}, {name:'番茄', texture:'/mc-textures/item/apple.png'}],
+    [null, {name:'辣椒', texture:'/mc-textures/item/red_dye.png'}, null]
+  ]"
+  :result="{id:'tacos'}"
+/>
 
-<div class="food-main">
-
-![墨西哥塔可](/images/food/tacos.png)
-
-| 属性 | 数值 |
-|------|------|
-| 饥饿值 | 8 |
-| 饱和度 | 7.0 |
-| 品质 | ⭐⭐ 精良 |
-| 制作方式 | 工作台（有序） |
-
-**配方**: 玉米 + 熟牛排 + 生菜 + 番茄 + 辣椒
-
-```
-空  玉  空
-菜  排  茄
-空  辣  空
-```
+| 饥饿值 | 饱和度 | 品质 |
+|--------|--------|------|
+| 8 | 7.0 | ⭐⭐ 精良 |
 
 **🧟 效果**: 食用后在周围生成 2只 僵尸！
 
 > 「歪比歪比，歪比叭卜！吃完感觉周围有什么不对劲...」
 
-</div>
-</div>
-
 ---
 
 ### 寿司
 
-<div class="food-card">
+<CraftingTable
+  shaped
+  :grid="[
+    [null, {id:'cooked_salmon'}, null],
+    [{id:'wheat'}, {id:'seagrass'}, {id:'wheat'}],
+    [null, {id:'cooked_salmon'}, null]
+  ]"
+  :result="{id:'sushi', count:2}"
+/>
 
-<div class="food-main">
-
-![寿司](/images/food/sushi.png)
-
-| 属性 | 数值 |
-|------|------|
-| 饥饿值 | 8 |
-| 饱和度 | 5.0 |
-| 品质 | ⭐⭐ 精良 |
-| 制作方式 | 工作台（有序） |
-
-**配方**: 熟鲑鱼 + 海草 + 小麦
-
-```
-空  鲑  空
-麦  海  麦
-空  鲑  空
-```
+| 饥饿值 | 饱和度 | 品质 |
+|--------|--------|------|
+| 8 | 5.0 | ⭐⭐ 精良 |
 
 **🍣 效果**: 食用后获得 20秒 海豚恩惠
 
 > 「锐界幻境和风风味，大海被包裹在米饭里」
 
-</div>
-</div>
-
 ---
 
 ### 叫花鸡
 
-<div class="food-card">
+<CraftingTable
+  shaped
+  :grid="[
+    [null, {name:'泥土', texture:'/mc-textures/item/dirt.png'}, null],
+    [{name:'荷叶', texture:'/mc-textures/item/lily_pad.png'}, {id:'cooked_chicken'}, {name:'荷叶', texture:'/mc-textures/item/lily_pad.png'}],
+    [null, {name:'泥土', texture:'/mc-textures/item/dirt.png'}, null]
+  ]"
+  :result="{id:'beggars_style_chicken'}"
+/>
 
-<div class="food-main">
-
-![叫花鸡](/images/food/beggars_style_chicken.png)
-
-| 属性 | 数值 |
-|------|------|
-| 饥饿值 | 8 |
-| 饱和度 | 14.0 |
-| 品质 | ⭐⭐ 精良 |
-| 制作方式 | 工作台（有序） |
-
-**配方**: 熟鸡肉 + 荷叶 + 泥土
-
-```
-空  泥  空
-叶  鸡  叶
-空  泥  空
-```
+| 饥饿值 | 饱和度 | 品质 |
+|--------|--------|------|
+| 8 | 14.0 | ⭐⭐ 精良 |
 
 **🐔 效果**: 周围被动生物获得 30秒 生命恢复（香气四溢！）
 
 > 「一只鲜嫩的鸡被散发清香的荷叶包裹，奇香无比」
 
-</div>
-</div>
-
 ---
 
 ### 熔岩烤鸡
 
-<div class="food-card">
+<CraftingTable
+  shaped
+  :grid="[
+    [null, {id:'blaze_powder'}, null],
+    [{id:'magma_cream'}, {id:'cooked_chicken'}, {id:'magma_cream'}],
+    [null, {id:'blaze_powder'}, null]
+  ]"
+  :result="{id:'lava_chicken'}"
+/>
 
-<div class="food-main">
-
-![熔岩烤鸡](/images/food/lava_chicken.png)
-
-| 属性 | 数值 |
-|------|------|
-| 饥饿值 | 9 |
-| 饱和度 | 14.0 |
-| 品质 | ⭐⭐⭐ 稀有 |
-| 制作方式 | 工作台（有序） |
-
-**配方**: 熟鸡肉 + 烈焰粉 + 岩浆膏
-
-```
-空  粉  空
-膏  鸡  膏
-空  粉  空
-```
+| 饥饿值 | 饱和度 | 品质 |
+|--------|--------|------|
+| 9 | 14.0 | ⭐⭐⭐ 稀有 |
 
 **🔥 效果**: 45秒抗火 + 30秒自发光 + 30秒熔岩行走
 
 > 「火热的岩浆🔥美味的鸡肉🤤史蒂夫的熔岩烤鸡😍」
 
-</div>
-</div>
-
 ---
 
 ### 炖鱼汤
 
-<div class="food-card">
+<CraftingTable
+  :ingredients="[
+    {id:'cooked_cod'},
+    {id:'carrot'},
+    {id:'potato'},
+    {id:'bowl'}
+  ]"
+  :result="{id:'fish_soup'}"
+/>
 
-<div class="food-main">
-
-![炖鱼汤](/images/food/fish_soup.png)
-
-| 属性 | 数值 |
-|------|------|
-| 饥饿值 | 10 |
-| 饱和度 | 12.0 |
-| 品质 | ⭐⭐ 精良 |
-| 制作方式 | 工作台（无序） |
-
-**配方材料**: 🐟 熟鳕鱼 + 🥕 胡萝卜 + 🥔 马铃薯 + 🥣 碗
+| 饥饿值 | 饱和度 | 品质 |
+|--------|--------|------|
+| 10 | 12.0 | ⭐⭐ 精良 |
 
 **🍲 效果**: 食用后获得 45秒 生命恢复
 
 > 「美味的鱼肉❤️健康的萝卜😍狐狸的美味鱼汤🤤」
 
-</div>
-</div>
-
 ---
 
 ### 牛肉炖
 
-<div class="food-card">
+<CraftingTable
+  :ingredients="[
+    {id:'cooked_beef'},
+    {id:'carrot'},
+    {id:'potato'},
+    {name:'洋葱', texture:'/mc-textures/item/beetroot.png'},
+    {id:'bowl'}
+  ]"
+  :result="{id:'beef_stew'}"
+/>
 
-<div class="food-main">
-
-![牛肉炖](/images/food/beef_stew.png)
-
-| 属性 | 数值 |
-|------|------|
-| 饥饿值 | 14 |
-| 饱和度 | 24.0 |
-| 品质 | ⭐⭐⭐ 稀有 |
-| 制作方式 | 工作台（无序） |
-
-**配方材料**: 🥩 熟牛排 + 🥕 胡萝卜 + 🥔 马铃薯 + 🧅 洋葱（CC）+ 🥣 碗
+| 饥饿值 | 饱和度 | 品质 |
+|--------|--------|------|
+| 14 | 24.0 | ⭐⭐⭐ 稀有 |
 
 **🔥 效果**: 3分钟温暖效果 + 45秒生命恢复 + 30秒饱和
 
 > 「荤素搭配，健康美味。一碗下肚，雪山也不怕冷」
-
-</div>
-</div>
 
 ---
 
@@ -1225,84 +918,69 @@
 
 ### 啤酒
 
-<div class="food-card">
+<CraftingTable
+  :ingredients="[
+    {name:'啤酒花', texture:'/mc-textures/item/wheat_seeds.png'},
+    {name:'啤酒花', texture:'/mc-textures/item/wheat_seeds.png'},
+    {id:'wheat'},
+    {id:'glass_bottle'}
+  ]"
+  :result="{id:'beer'}"
+/>
 
-<div class="food-main">
-
-![啤酒](/images/food/beer.png)
-
-| 属性 | 数值 |
-|------|------|
-| 饥饿值 | 2 |
-| 饱和度 | 4.0 |
-| 品质 | ⭐⭐ 精良 |
-| 制作方式 | 工作台（无序） |
-
-**配方材料**: 🌿 啤酒花×2（CC）+ 🌾 小麦 + 🫙 玻璃瓶
+| 饥饿值 | 饱和度 | 品质 |
+|--------|--------|------|
+| 2 | 4.0 | ⭐⭐ 精良 |
 
 **🍺 效果**: 10秒饱和 + 5秒失明 + 5秒反胃 + 5秒力量 II
+
 ::: warning ⚠️ 饮酒警告
 60秒内饮用超过3次 → 物品栏随机打乱！
 :::
 
 > 「小麦果汁！有很强的饱腹感，但喝多会醉...注意适量！」
 
-</div>
-</div>
-
 ---
 
 ### 珍珠奶茶
 
-<div class="food-card">
+<CraftingTable
+  :ingredients="[
+    {id:'milk_bucket'},
+    {id:'sugar'},
+    {name:'红薯', texture:'/mc-textures/item/potato.png'},
+    {id:'glass_bottle'}
+  ]"
+  :result="{id:'bubble_tea'}"
+/>
 
-<div class="food-main">
+| 饥饿值 | 饱和度 | 品质 |
+|--------|--------|------|
+| 2 | 4.0 | ⭐⭐ 精良 |
 
-![珍珠奶茶](/images/food/bubble_tea.png)
-
-| 属性 | 数值 |
-|------|------|
-| 饥饿值 | 2 |
-| 饱和度 | 4.0 |
-| 品质 | ⭐⭐ 精良 |
-| 制作方式 | 工作台（无序） |
-
-**配方材料**: 🥛 牛奶桶 + 糖 + 🍠 红薯（CC）+ 🫙 玻璃瓶
-
-**🧋 效果**: 8秒生命恢复 + 随机小范围传送（珍珠的魔力！）
+**🧋 效果**: 8秒生命恢复 + 随机小范围传送
 
 > 「这珍珠...怪怪的？喝起来有种不真实的感觉...」
 
-</div>
-</div>
-
 ---
 
-### 可口可乐 · 百事可乐 · 雪碧 · 芬达
+### 汽水四兄弟
 
-<div class="food-card">
-
-<div class="food-main">
-
-<div style="display:flex;gap:16px;flex-wrap:wrap;justify-content:center;margin-bottom:16px">
-<img src="/images/food/coca_cola.png" alt="可口可乐" style="height:64px">
-<img src="/images/food/pepsi_cola.png" alt="百事可乐" style="height:64px">
-<img src="/images/food/sprite.png" alt="雪碧" style="height:64px">
-<img src="/images/food/fanta.png" alt="芬达" style="height:64px">
+<div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:12px 0">
+  <McItem id="coca_cola" /><span>可口可乐</span>
+  <McItem id="pepsi_cola" /><span>百事可乐</span>
+  <McItem id="sprite" /><span>雪碧</span>
+  <McItem id="fanta" /><span>芬达</span>
 </div>
 
 | 属性 | 可口可乐 | 百事可乐 | 雪碧 | 芬达 |
 |------|----------|----------|------|------|
 | 饥饿值 | 5 | 5 | 5 | 5 |
 | 饱和度 | 4.0 | 4.0 | 4.0 | 4.0 |
-| 品质 | ⭐ 普通 | ⭐ 普通 | ⭐ 普通 | ⭐ 普通 |
 | 获取方式 | 特殊渠道 | 特殊渠道 | 特殊渠道 | 特殊渠道 |
 | 效果 | 15秒速度 I | 15秒跳跃 I | 15秒缓降 | 15秒抗火 |
 
 > 「锐界幻境特供汽水系列，活动/任务获取」
-
-</div>
-</div>
 
 ---
 
@@ -1310,125 +988,89 @@
 
 ### 草莓甜筒
 
-<div class="food-card">
+<CraftingTable
+  shaped
+  :grid="[
+    [null, {id:'sugar'}, null],
+    [{id:'milk_bucket'}, {id:'strawberry'}, {id:'snowball'}],
+    [null, {id:'sugar'}, null]
+  ]"
+  :result="{id:'strawberry_ice_cream'}"
+/>
 
-<div class="food-main">
-
-![草莓甜筒](/images/food/strawberry_ice_cream.png)
-
-| 属性 | 数值 |
-|------|------|
-| 饥饿值 | 8 |
-| 饱和度 | 6.0 |
-| 品质 | ⭐⭐ 精良 |
-| 制作方式 | 工作台（有序） |
-
-**配方**: 牛奶桶 + 糖 + 草莓 + 雪球
-
-```
-空  糖  空
-奶  莓  雪
-空  糖  空
-```
+| 饥饿值 | 饱和度 | 品质 |
+|--------|--------|------|
+| 8 | 6.0 | ⭐⭐ 精良 |
 
 **🔥 效果**: 食用后获得 30秒 抗火
 
 > 「冰冰凉凉香香甜甜的冰淇淋！吃下去火热的心都降温了」
 
-</div>
-</div>
-
 ---
 
 ### 草莓巧克力冰淇淋
 
-<div class="food-card">
+<CraftingTable
+  shaped
+  :grid="[
+    [null, {id:'sugar'}, null],
+    [{id:'cocoa_beans'}, {id:'strawberry'}, {id:'milk_bucket'}],
+    [null, {id:'snowball'}, null]
+  ]"
+  :result="{id:'strawberry_chocolate_ice_cream'}"
+/>
 
-<div class="food-main">
-
-![草莓巧克力冰淇淋](/images/food/strawberry_chocolate_ice_cream.png)
-
-| 属性 | 数值 |
-|------|------|
-| 饥饿值 | 9 |
-| 饱和度 | 7.0 |
-| 品质 | ⭐⭐ 精良 |
-| 制作方式 | 工作台（有序） |
-
-**配方**: 牛奶桶 + 糖 + 草莓 + 可可豆 + 雪球
-
-```
-空  糖  空
-可  莓  奶
-空  雪  空
-```
+| 饥饿值 | 饱和度 | 品质 |
+|--------|--------|------|
+| 9 | 7.0 | ⭐⭐ 精良 |
 
 **❄️ 效果**: 20秒速度 II + 对周围生物施加 15秒缓慢（寒气四溢！）
 
 > 「香香脆脆冰冰凉凉的巧克力草莓味！！你感到周围都凉快了起来」
 
-</div>
-</div>
-
 ---
 
 ### 蜂蜜陶罐
 
-<div class="food-card">
+<CraftingTable
+  shaped
+  :grid="[
+    [{id:'honey_bottle'}, {id:'honey_bottle'}, {id:'honey_bottle'}],
+    [{id:'honey_bottle'}, {id:'clay_ball'}, {id:'honey_bottle'}],
+    [{id:'honey_bottle'}, {id:'honey_bottle'}, {id:'honey_bottle'}]
+  ]"
+  :result="{id:'honey_clay_pots'}"
+/>
 
-<div class="food-main">
-
-![蜂蜜陶罐](/images/food/honey_clay_pots.png)
-
-| 属性 | 数值 |
-|------|------|
-| 饥饿值 | 20 |
-| 饱和度 | 14.0 |
-| 品质 | ⭐⭐⭐ 稀有 |
-| 制作方式 | 工作台（有序） |
-
-**配方**: 蜂蜜瓶×8 + 黏土球
-
-```
-蜜  蜜  蜜
-蜜  土  蜜
-蜜  蜜  蜜
-```
+| 饥饿值 | 饱和度 | 品质 |
+|--------|--------|------|
+| 20 | 14.0 | ⭐⭐⭐ 稀有 |
 
 **🍯 效果**: 45秒生命恢复 II + 2分钟急迫 I + 20秒失明（太甜了！）
 
 > 「满满当当的蜂蜜，和腐竹一样甜美诱人，但吃多会得"糖尿病"」
 
-</div>
-</div>
-
 ---
 
 ### 七彩蛋羹
 
-<div class="food-card">
+<CraftingTable
+  :ingredients="[
+    {name:'龙蛋', texture:'/mc-textures/item/dragon_egg.png'},
+    {id:'egg'}, {id:'egg'}, {id:'egg'}, {id:'egg'},
+    {id:'sugar'},
+    {id:'bowl'}
+  ]"
+  :result="{id:'colorful_egg_custard'}"
+/>
 
-<div class="food-main">
+| 饥饿值 | 饱和度 | 品质 |
+|--------|--------|------|
+| 4 | 20.0 | ⭐⭐⭐⭐ 传说 |
 
-![七彩蛋羹](/images/food/colorful_egg_custard.png)
-
-| 属性 | 数值 |
-|------|------|
-| 饥饿值 | 4 |
-| 饱和度 | 20.0 |
-| 品质 | ⭐⭐⭐⭐ 传说 |
-| 制作方式 | 工作台（无序） |
-
-**配方材料**: 🐉 龙蛋 + 🥚 鸡蛋×4 + 糖 + 🥣 碗
-
-**🌈 效果**: 10分钟抗性提升 V + 5分钟速度 II + 5分钟生命恢复 II + 10分钟生命提升 V
-
-**终极战斗料理！**
+**🌈 终极战斗料理**：10分钟抗性提升 V + 5分钟速度 II + 5分钟生命恢复 II + 10分钟生命提升 V
 
 > 「这...未免太奢侈了些？龙蛋做的蛋羹，吃下去你就是幻境最强战士」
-
-</div>
-</div>
 
 ---
 
@@ -1436,81 +1078,55 @@
 
 ### 煎海龟蛋
 
-<div class="food-card">
+<Furnace
+  :input="{id:'turtle_egg'}"
+  :result="{id:'fried_turtle_egg'}"
+  :fuel="{id:'coal'}"
+/>
 
-<div class="food-main">
-
-![煎海龟蛋](/images/food/fried_turtle_egg.png)
-
-| 属性 | 数值 |
-|------|------|
-| 饥饿值 | 3 |
-| 饱和度 | 2.0 |
-| 品质 | ⭐ 普通 |
-| 制作方式 | 熔炉烧炼 |
-
-**配方材料**: 🐢 海龟蛋
+| 饥饿值 | 饱和度 | 品质 |
+|--------|--------|------|
+| 3 | 2.0 | ⭐ 普通 |
 
 **🐢 效果**: 食用后获得 10秒 缓慢
 
 > 「好吃但是不建议吃，这...毕竟是一颗未来的小海龟」
 
-</div>
-</div>
-
 ---
 
 ### 煎嗅探兽蛋
 
-<div class="food-card">
+<Furnace
+  :input="{id:'sniffer_egg'}"
+  :result="{id:'fried_sniffer_egg'}"
+  :fuel="{id:'coal'}"
+/>
 
-<div class="food-main">
+| 饥饿值 | 饱和度 | 品质 |
+|--------|--------|------|
+| 7 | 4.0 | ⭐⭐⭐ 稀有 |
 
-![煎嗅探兽蛋](/images/food/fried_sniffer_egg.png)
-
-| 属性 | 数值 |
-|------|------|
-| 饥饿值 | 7 |
-| 饱和度 | 4.0 |
-| 品质 | ⭐⭐⭐ 稀有 |
-| 制作方式 | 熔炉烧炼 |
-
-**配方材料**: 🐲 嗅探兽蛋
-
-**🕰️ 效果**: 45秒生命恢复 + 2分钟抗性提升 I（远古力量！）
+**🕰️ 效果**: 45秒生命恢复 + 2分钟抗性提升 I
 
 > 「来自远古的味道...唇齿留香，蕴含远古生命之力」
-
-</div>
-</div>
 
 ---
 
 ### 煎龙蛋
 
-<div class="food-card">
+<Furnace
+  :input="{name:'龙蛋', texture:'/mc-textures/item/dragon_egg.png'}"
+  :result="{id:'fried_dragon_egg'}"
+  :fuel="{id:'coal'}"
+/>
 
-<div class="food-main">
+| 饥饿值 | 饱和度 | 品质 |
+|--------|--------|------|
+| 2 | 20.0 | ⭐⭐⭐⭐ 传说 |
 
-![煎龙蛋](/images/food/fried_dragon_egg.png)
-
-| 属性 | 数值 |
-|------|------|
-| 饥饿值 | 2 |
-| 饱和度 | 20.0 |
-| 品质 | ⭐⭐⭐⭐ 传说 |
-| 制作方式 | 熔炉烧炼 |
-
-**配方材料**: 🐉 龙蛋
-
-**🐉 效果**: 30分钟抗性提升 II + 30分钟生命恢复 I + 30分钟伤害吸收 V
-
-**近乎无敌级增益！**
+**🐉 近乎无敌**：30分钟抗性提升 II + 30分钟生命恢复 I + 30分钟伤害吸收 V
 
 > 「奢侈中的奢侈，真的可以吃得起吗...吃下去就是半个创造模式」
-
-</div>
-</div>
 
 ---
 
@@ -1518,57 +1134,37 @@
 
 ### 粽子
 
-<div class="food-card">
+<CraftingTable
+  shaped
+  :grid="[
+    [null, {id:'string'}, null],
+    [{id:'wheat'}, {id:'sweet_berries'}, {id:'wheat'}],
+    [null, {id:'seagrass'}, null]
+  ]"
+  :result="{id:'zongzi', count:2}"
+/>
 
-<div class="food-main">
-
-![粽子](/images/food/zongzi.png)
-
-| 属性 | 数值 |
-|------|------|
-| 饥饿值 | 6 |
-| 饱和度 | 4.0 |
-| 品质 | ⭐ 普通 |
-| 制作方式 | 工作台（有序） |
-
-**配方**: 小麦 + 海草 + 线 + 甜浆果
-
-```
-空  线  空
-麦  浆  麦
-空  海  空
-```
+| 饥饿值 | 饱和度 | 品质 |
+|--------|--------|------|
+| 6 | 4.0 | ⭐ 普通 |
 
 **🐉 效果**: 5秒跳跃提升 II + 8秒生命恢复
 
 > 「锐界幻境黏糊糊端午风味，感觉像吃下了一整个端午」
 
-</div>
-</div>
-
 ---
 
 ### 草莓
 
-<div class="food-card">
+<McItem id="strawberry" size="lg" />
 
-<div class="food-main">
+| 饥饿值 | 饱和度 | 品质 | 获取 |
+|--------|--------|------|------|
+| 3 | 1.0 | ⭐ 普通 | 作物种植 |
 
-![草莓](/images/food/strawberry.png)
-
-| 属性 | 数值 |
-|------|------|
-| 饥饿值 | 3 |
-| 饱和度 | 1.0 |
-| 品质 | ⭐ 普通 |
-| 获取方式 | 自定义作物种植 |
-
-**🐾 效果**: 无特殊效果，但很好吃
+**效果**: 无特殊效果，但很好吃
 
 > 「新鲜采摘的草莓，酸甜可口。也是制作多种甜品的基础原料」
-
-</div>
-</div>
 
 ---
 
@@ -1618,7 +1214,7 @@
 | 熔岩烤鸡 | 9 | 14.0 | ⭐⭐⭐ | 抗火+发光+熔岩行 |
 | 炖鱼汤 | 10 | 12.0 | ⭐⭐ | 45s 生命恢复 |
 | 牛肉炖 | 14 | 24.0 | ⭐⭐⭐ | 温暖+回复+饱和 |
-| 啤酒 | 2 | 4.0 | ⭐⭐ | 饱和+醉了⚠️ |
+| 啤酒 | 2 | 4.0 | ⭐⭐ | 饱和+醉了⚠ |
 | 珍珠奶茶 | 2 | 4.0 | ⭐⭐ | 回复+传送 |
 | 可口可乐 | 5 | 4.0 | ⭐ | 15s 速度 I |
 | 百事可乐 | 5 | 4.0 | ⭐ | 15s 跳跃 I |
@@ -1648,4 +1244,3 @@
 ---
 
 *本页面为锐界幻境食物系统完整参考 · 设计与数值可能随游戏版本调整*
-
