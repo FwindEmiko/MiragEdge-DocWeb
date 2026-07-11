@@ -116,7 +116,7 @@
   quality="rare"
   :hunger="14"
   :saturation="18.0"
-  effect="15秒饱和 + 8秒反胃 + 30秒夜视"
+  effect="5秒饱和 + 4秒反胃 + 8分钟夜视"
   quote="锐界幻境幽匿风味，虽然不好吃但就是忍不住想尝..."
 >
   <CraftingTable

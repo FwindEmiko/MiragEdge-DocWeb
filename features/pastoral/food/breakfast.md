@@ -102,13 +102,13 @@
 <FoodEntry
   name="烤南瓜"
   quality="common"
-  :hunger="10"
-  :saturation="6.0"
-  effect="食用后获得 20秒 生命恢复"
+  :hunger="5"
+  :saturation="4.0"
+  effect="食用后获得 5秒 生命恢复"
   quote="锐界幻境烧烤风味，自然的香甜"
 >
   <Furnace
-    :input="{name:'南瓜', texture:'/mc-textures/item/pumpkin_pie.png'}"
+    :input="{name:'南瓜', texture:'/mc-textures/item/pumpkin.png'}"
     :result="{id:'roasted_pumpkin'}"
     :fuel="{id:'coal'}"
   />

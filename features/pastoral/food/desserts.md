@@ -53,8 +53,8 @@
 <FoodEntry
   name="蜂蜜陶罐"
   quality="rare"
-  :hunger="20"
-  :saturation="14.0"
+  :hunger="14"
+  :saturation="12.0"
   effect="45秒生命恢复 II + 2分钟急迫 I + 20秒失明（太甜了！）"
   quote="满满当当的蜂蜜，和腐竹一样甜美诱人，但吃多会得糖尿病"
 >
@@ -76,7 +76,7 @@
   quality="legendary"
   :hunger="4"
   :saturation="20.0"
-  effect="终极战斗料理：10分钟抗性提升 V + 5分钟速度 II + 5分钟生命恢复 II + 10分钟生命提升 V"
+  effect="终极战斗料理：10分钟抗性提升 V + 5分钟速度 II + 5分钟生命恢复 II + 10分钟生命提升 V | 🌟 食用时全服公告 + 永久称号「幻境食神」+ 专属进出服消息"
   quote="这...未免太奢侈了些？龙蛋做的蛋羹，吃下去你就是幻境最强战士"
 >
   <CraftingTable

@@ -13,7 +13,7 @@
   quality="rare"
   :hunger="10"
   :saturation="15.0"
-  effect="25秒力量 II + 20秒生命恢复 + 40秒暴击伤害 +100%"
+  effect="30秒力量 II + 40秒暴击伤害 +100%"
   quote="看起来好像一把棒槌...打人很痛的样子，吃下去战斗力爆表"
 >
   <CraftingTable
@@ -54,8 +54,8 @@
   name="热狗"
   quality="fine"
   :hunger="9"
-  :saturation="14.0"
-  effect="15秒速度 I + 10秒生命恢复"
+  :saturation="8.0"
+  effect="20秒速度 I + 5秒急迫 I"
   quote="经典风味，简单直接的美味"
 >
   <CraftingTable
@@ -76,7 +76,7 @@
   quality="rare"
   :hunger="16"
   :saturation="18.0"
-  effect="20秒饱和 + 45秒生命恢复 + 30秒抗性提升 I"
+  effect="5秒饱和 + 45秒生命恢复 + 30秒抗性提升 I"
   quote="锐界幻境星期四风味，比肯德基更健康！满配汉堡的力量"
 >
   <CraftingTable
@@ -96,8 +96,8 @@
   name="披萨"
   quality="fine"
   :hunger="12"
-  :saturation="14.0"
-  effect="食用后获得 45秒 生命恢复"
+  :saturation="10.0"
+  effect="食用后获得 15秒 速度 II（狐狸的灵动！）"
   quote="锐界幻境田园风味披萨，长得像狐狸耳朵，吃了会不会变成狐狸？"
 >
   <CraftingTable
@@ -159,7 +159,7 @@
   name="叫花鸡"
   quality="fine"
   :hunger="8"
-  :saturation="14.0"
+  :saturation="8.0"
   effect="周围被动生物获得 30秒 生命恢复（香气四溢！）"
   quote="一只鲜嫩的鸡被散发清香的荷叶包裹，奇香无比"
 >
@@ -202,7 +202,7 @@
   quality="fine"
   :hunger="10"
   :saturation="12.0"
-  effect="食用后获得 45秒 生命恢复"
+  effect="食用后获得 60秒 海豚恩惠 + 10秒 生命恢复"
   quote="美味的鱼肉 健康的萝卜 狐狸的美味鱼汤"
 >
   <CraftingTable
@@ -221,9 +221,9 @@
 <FoodEntry
   name="牛肉炖"
   quality="rare"
-  :hunger="14"
-  :saturation="24.0"
-  effect="3分钟温暖效果 + 45秒生命恢复 + 30秒饱和"
+  :hunger="12"
+  :saturation="14.0"
+  effect="3分钟温暖效果 + 45秒生命恢复 + 5秒饱和"
   quote="荤素搭配，健康美味。一碗下肚，雪山也不怕冷"
 >
   <CraftingTable

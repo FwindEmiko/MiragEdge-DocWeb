@@ -53,8 +53,8 @@
 <FoodEntry
   name="爆米花"
   quality="common"
-  :hunger="7"
-  :saturation="14.0"
+  :hunger="4"
+  :saturation="3.0"
   effect="无特殊效果"
   quote="金灿灿的像金子一样！闻起来像，吃起来也像！"
 >
