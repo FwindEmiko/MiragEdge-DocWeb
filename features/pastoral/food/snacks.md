@@ -13,7 +13,7 @@
   quality="fine"
   :hunger="6"
   :saturation="4.0"
-  effect="☁️ 云朵漫步：50秒缓降 + 跳跃时飘出棉花糖粒子 + 免疫所有摔落伤害！"
+  effect="50秒缓降 + 免疫摔落伤害。60秒冷却。"
   quote="锐界幻境的云是它组成的？吃下后会变得身轻如燕"
 >
   <CraftingTable
@@ -34,7 +34,7 @@
   quality="fine"
   :hunger="8"
   :saturation="5.0"
-  effect="🍭 甜蜜护盾：45秒抗性 I + 期间每击杀一个怪物回复 1点生命（最高叠加 5次）"
+  effect="45秒抗性 I，期间每击杀一个生物回复 1点生命值，最多叠加 5次。"
   quote="小时候总会含在嘴里慢慢融化细细品味，仿佛整个世界都是甜的"
 >
   <CraftingTable
@@ -167,7 +167,7 @@
   quality="common"
   :hunger="5"
   :saturation="1.0"
-  effect="🌀 紫颂漂浮：随机传送 + 10秒缓降，传送到虚空也不怕摔死！"
+  effect="随机传送至附近位置，并获得 10秒缓降效果。"
   quote="保留了一部分原有的味道，是故意的"
 >
   <CraftingTable
@@ -186,7 +186,7 @@
   quality="fine"
   :hunger="8"
   :saturation="3.0"
-  effect="💣 延时爆破：5秒倒计时后以食用者为中心爆炸（不破坏方块），5格内生物 8点伤害+击飞，自身仅受 2点伤害。倒计时屏幕中央有粒子预警！"
+  effect="食用 5秒后自动爆炸（不破坏方块），5格内生物受到 8点伤害并击飞，自身仅受 2点伤害。30秒冷却。"
   quote="浓浓的火药味...等等这真的能吃吗？！"
 >
   <CraftingTable
