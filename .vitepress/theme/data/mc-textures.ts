@@ -637,6 +637,11 @@ export const mcTextures: Record<string, McItemData> = {
   wind_charge: { name: '风弹', texture: '/mc-textures/item/wind_charge.png' },
   writable_book: { name: '书与笔', texture: '/mc-textures/item/writable_book.png' },
   written_book: { name: '成书', texture: '/mc-textures/item/written_book.png' },
+  // ===== 锐界幻境自定义工具 =====
+  forging_hammer: { name: '锻造锤', texture: '/mc-textures/item/forging_hammer.png' },
+  pig_slayer: { name: '厨刀', texture: '/mc-textures/item/pig_slayer.png' },
+  kitchen_knife: { name: '菜刀', texture: '/mc-textures/item/kitchen_knife.png' },
+  carrot_knife: { name: '胡萝卜刀', texture: '/mc-textures/item/carrot_knife.png' },
   // ===== 锐界幻境自定义食物 =====
   bacon: { name: '培根', texture: '/mc-textures/item/bacon.png' },
   beef_stew: { name: '牛肉炖', texture: '/mc-textures/item/beef_stew.png' },

@@ -202,7 +202,7 @@
   <CraftingTable
     :ingredients="[
       {name:'仙人掌', texture:'/mc-textures/item/cactus.png'},
-      {name:'杀猪刀', texture:'/mc-textures/item/iron_sword.png'}
+      {id:'pig_slayer'}
     ]"
     :result="{id:'cut_cactus', count:2}"
   />
