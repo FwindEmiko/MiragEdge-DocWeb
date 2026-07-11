@@ -1,21 +1,9 @@
 /**
 * 黑暗模式切换动画
 * -------------------------------------------------------------------------- */
-::view-transition-old(*) {
-  animation: none;
-}
-::view-transition-new(*) {
-  animation: globalDark .8s ease-in;
-}
-
-@keyframes globalDark {
-  from {
-    clip-path: circle(0% at var(--darkX) var(--darkY));
-  }
-  to {
-    clip-path: circle(100% at var(--darkX) var(--darkY));
-  }
-}
+/* 主题切换的视图过渡动画由 layout.vue 中的 Web Animations API 统一驱动
+   （圆形扩散 + z-index 分层），此处不再用 CSS 动画覆盖，避免与 --darkX/--darkY
+   未定义导致的非法 clip-path 闪屏、以及与 WAAPI 的时长/属性冲突。 */
 
 /**
 * 黑暗模式下图片低亮度化
