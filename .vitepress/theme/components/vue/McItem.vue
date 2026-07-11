@@ -8,8 +8,11 @@
  *
  * 通过 id 可引用 mc-textures 注册表中的原版物品（581 个，含官方中文名）。
  * 自定义物品直接传入 { name, texture } 即可。
+ *
+ * tooltip 使用 Teleport 传送到 body，避免被父容器的 backdrop-filter
+ * 层叠上下文裁剪或遮挡。
  */
-import { computed, ref } from 'vue'
+import { computed, ref, onMounted, onBeforeUnmount } from 'vue'
 import { resolveMcItem, resolveNameByTexture } from '../../data/mc-textures'
 
 const props = defineProps<{
@@ -57,12 +60,48 @@ const fallbackChar = computed(() => {
 function onImgError() {
   imgError.value = true
 }
+
+// ===== Tooltip 位置管理（Teleport 到 body） =====
+const tooltipVisible = ref(false)
+const tooltipX = ref(0)
+const tooltipY = ref(0)
+const elRef = ref<HTMLElement | null>(null)
+
+function onMouseEnter() {
+  if (!elRef.value || !resolved.value.name) return
+  if (props.tooltip === false) return
+  const rect = elRef.value.getBoundingClientRect()
+  tooltipX.value = rect.left + rect.width / 2
+  tooltipY.value = rect.top
+  tooltipVisible.value = true
+}
+
+function onMouseLeave() {
+  tooltipVisible.value = false
+}
+
+// 滚动时隐藏 tooltip（避免位置错位）
+function onScroll() {
+  tooltipVisible.value = false
+}
+
+onMounted(() => {
+  window.addEventListener('scroll', onScroll, { passive: true, capture: true })
+})
+
+onBeforeUnmount(() => {
+  window.removeEventListener('scroll', onScroll, { capture: true })
+  tooltipVisible.value = false
+})
 </script>
 
 <template>
   <div
+    ref="elRef"
     class="mc-item"
     :class="[`mc-item-${size || 'md'}`, { 'has-tooltip': tooltip !== false && resolved.name }]"
+    @mouseenter="onMouseEnter"
+    @mouseleave="onMouseLeave"
   >
     <div class="mc-item-slot">
       <img
@@ -78,11 +117,20 @@ function onImgError() {
 
       <span v-if="showCount" class="mc-item-count">{{ count }}</span>
     </div>
-
-    <div v-if="tooltip !== false && resolved.name" class="mc-item-tooltip">
-      {{ resolved.name }}
-    </div>
   </div>
+
+  <!-- tooltip 通过 Teleport 传送到 body，避免层叠上下文问题 -->
+  <ClientOnly>
+    <Teleport to="body">
+      <div
+        v-if="tooltipVisible && resolved.name"
+        class="mc-item-tooltip-portal"
+        :style="{ left: tooltipX + 'px', top: tooltipY + 'px' }"
+      >
+        {{ resolved.name }}
+      </div>
+    </Teleport>
+  </ClientOnly>
 </template>
 
 <style scoped>
@@ -148,37 +196,6 @@ function onImgError() {
   user-select: none;
 }
 
-/* tooltip */
-.mc-item-tooltip {
-  position: absolute;
-  bottom: calc(100% + 6px);
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(16, 16, 16, 0.95);
-  color: #fff;
-  font-size: 12px;
-  line-height: 1.4;
-  padding: 4px 10px;
-  border-radius: 4px;
-  white-space: nowrap;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.15s ease;
-  z-index: 9999;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(4px);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
-}
-
-.mc-item.has-tooltip:hover .mc-item-tooltip {
-  opacity: 1;
-}
-
-/* 悬停时提升整个 mc-item 的层叠优先级 */
-.mc-item.has-tooltip:hover {
-  z-index: 999;
-}
-
 /* 暗色模式微调 */
 :deep(.dark) .mc-item-slot {
   background: rgba(0, 0, 0, 0.45);
@@ -188,10 +205,31 @@ function onImgError() {
 :deep(.dark) .mc-item:hover .mc-item-slot {
   background: rgba(0, 0, 0, 0.35);
 }
+</style>
 
-/* 移动端 tooltip 不显示（hover 不可用） */
+<!-- tooltip portal 样式（全局，非 scoped，因为被 Teleport 到 body） -->
+<style>
+.mc-item-tooltip-portal {
+  position: fixed;
+  transform: translate(-50%, calc(-100% - 8px));
+  background: rgba(16, 16, 16, 0.95);
+  color: #fff;
+  font-size: 12px;
+  line-height: 1.4;
+  padding: 5px 12px;
+  border-radius: 4px;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 99999;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+/* 移动端不显示（hover 不可用） */
 @media (hover: none) {
-  .mc-item-tooltip {
+  .mc-item-tooltip-portal {
     display: none;
   }
 }

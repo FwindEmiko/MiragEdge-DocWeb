@@ -20,7 +20,6 @@ import Live2D from './Live2D.vue';
 const { Layout } = DefaultTheme;
 const { route } = useRouter();
 const { isDark, page } = useData();
-const transitionName = ref('scale-in');
 
 const buildId = __BUILD_ID__
 const buildSha = __BUILD_SHA__
@@ -55,16 +54,35 @@ const scrollToTop = () => {
 };
 
 /**
- * 监听路由变化，设置过渡动画名称
+ * 监听路由变化，为内容区域触发进入动画（CSS animation，不依赖 :key 重建组件）
+ * 这样 VPSidebar 不会被销毁重建，侧边栏滚动位置得以保持
  */
 watch(
-  route,
-  (newRoute, oldRoute) => {
-    const newIndex = newRoute.path.split('/').length
-    const oldIndex = oldRoute.path.split('/').length
-    transitionName.value = newIndex > oldIndex ? 'scale-in' : 'scale-out'
+  () => route.path,
+  () => {
+    nextTick(() => {
+      // 页面进入动画
+      const target = document.querySelector('.vp-doc') || document.querySelector('#VPContent')
+      if (target) {
+        target.classList.remove('page-enter')
+        // 触发重排以重启动画
+        void target.offsetWidth
+        target.classList.add('page-enter')
+      }
+
+      // 侧边栏滚动追踪：若当前活动项不在可视区域内，平滑滚动到它
+      const sidebar = document.querySelector('.VPSidebar')
+      const activeItem = sidebar?.querySelector('.VPSidebarItem.is-active')
+      if (sidebar && activeItem) {
+        const sRect = sidebar.getBoundingClientRect()
+        const iRect = activeItem.getBoundingClientRect()
+        if (iRect.top < sRect.top || iRect.bottom > sRect.bottom) {
+          activeItem.scrollIntoView({ block: 'nearest', behavior: 'smooth' })
+        }
+      }
+    })
   }
-);
+)
 
 /**
  * 检查是否支持视图过渡动画
@@ -122,50 +140,42 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }) => {
     <!-- Live2D 看板娘 - 只在首页显示 -->
     <Live2D v-if="isHome" />
 
-    <!-- 页面过渡动画 -->
-    <transition
-      :name="transitionName"
-      mode="out-in"
-    >
-      <div :key="route.path">
-        <!-- 404 页面 -->
-        <NotFound v-if="is404" />
-        <!-- 正常页面 -->
-        <Layout v-else />
+    <!-- 404 页面 / 正常页面 -->
+    <!-- Layout 常驻挂载，不随路由变化销毁重建，以保持侧边栏滚动位置 -->
+    <NotFound v-if="is404" />
+    <Layout v-else />
 
-        <!-- 贡献者组件 -->
-        <div class="centerdss">
-          <div class="content-wrapper">
-            <div class="vp-doc">
-              <!-- 这里是Markdown内容 -->
-            </div>
-            <!-- 在内容之后、页脚之前插入贡献者 -->
-            <Contributors />
-          </div>
+    <!-- 贡献者组件 -->
+    <div class="centerdss">
+      <div class="content-wrapper">
+        <div class="vp-doc">
+          <!-- 这里是Markdown内容 -->
         </div>
+        <!-- 在内容之后、页脚之前插入贡献者 -->
+        <Contributors />
+      </div>
+    </div>
 
-        <!-- 文档页脚 -->
-        <div class="doc-footer" v-if="route.path.includes('/')">
-          <div class="container">
-            <div class="doc-footer-content">
-              <a href="https://space.bilibili.com/359174372" target="_blank" class="doc-footer-link">© 2020-2026 锐界幻境与贡献者</a>
-              <span style="color: var(--vp-c-text-3); margin: 0 6px;">|</span>
-              <a href="/soul" class="doc-footer-link" style="color: var(--vp-c-brand); font-weight: 600;" title="狐魇星玖 · 灵魂文档">🦊 SOUL</a>
-            </div>  
-            <div class="doc-footer-content">
-              <a href="https://beian.miit.gov.cn" target="_blank" rel="noopener noreferrer" style="color: var(--vp-c-text-2); text-decoration: none;">
-                苏ICP备2024133820号-1
-              </a>
-            </div>
-            <div class="doc-footer-content" v-if="buildId !== 'dev'" style="margin-top: 4px; font-size: 12px; color: var(--vp-c-text-3);">
-              Build #{{ buildId }}
-              <template v-if="buildSha"> · {{ buildSha }}</template>
-            </div>
-          </div>
+    <!-- 文档页脚 -->
+    <div class="doc-footer" v-if="route.path.includes('/')">
+      <div class="container">
+        <div class="doc-footer-content">
+          <a href="https://space.bilibili.com/359174372" target="_blank" class="doc-footer-link">© 2020-2026 锐界幻境与贡献者</a>
+          <span style="color: var(--vp-c-text-3); margin: 0 6px;">|</span>
+          <a href="/soul" class="doc-footer-link" style="color: var(--vp-c-brand); font-weight: 600;" title="狐魇星玖 · 灵魂文档">🦊 SOUL</a>
+        </div>
+        <div class="doc-footer-content">
+          <a href="https://beian.miit.gov.cn" target="_blank" rel="noopener noreferrer" style="color: var(--vp-c-text-2); text-decoration: none;">
+            苏ICP备2024133820号-1
+          </a>
+        </div>
+        <div class="doc-footer-content" v-if="buildId !== 'dev'" style="margin-top: 4px; font-size: 12px; color: var(--vp-c-text-3);">
+          Build #{{ buildId }}
+          <template v-if="buildSha"> · {{ buildSha }}</template>
         </div>
       </div>
-    </transition>
-    
+    </div>
+
     <!-- 悬浮按钮区域 -->
     <div class="float-buttons" v-if="route.path.includes('/docs/')">
       <button class="float-button" @click="scrollToTop" title="返回顶部">
@@ -210,7 +220,7 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }) => {
   min-height: 100vh;
 }
 
-/* 页面进入动画 */
+/* 页面进入动画（通过 .page-enter 类触发，不依赖 :key 重建组件） */
 @keyframes scaleIn {
   0% {
     transform: scale(0.98);
@@ -222,10 +232,8 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }) => {
   }
 }
 
-/* 页面离开动画 */
-@keyframes fadeOut {
-  0% { opacity: 1; }
-  100% { opacity: 0; }
+.page-enter {
+  animation: scaleIn 0.25s ease;
 }
 
 /* 文档页脚样式 */
