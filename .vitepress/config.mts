@@ -241,7 +241,17 @@ export default defineConfig({
               text: '🍲 更多食物',
               collapsed: true,
               items: [
-                { text: '介绍', link: '/features/pastoral/food/info' },
+                { text: '食物总览', link: '/features/pastoral/food/info' },
+                { text: '早餐简餐', link: '/features/pastoral/food/breakfast' },
+                { text: '糖果零食', link: '/features/pastoral/food/snacks' },
+                { text: '沙拉凉菜', link: '/features/pastoral/food/salads' },
+                { text: '烘焙糕点', link: '/features/pastoral/food/bakery' },
+                { text: '主菜肉食', link: '/features/pastoral/food/mains' },
+                { text: '饮品', link: '/features/pastoral/food/drinks' },
+                { text: '甜品', link: '/features/pastoral/food/desserts' },
+                { text: '煎蛋系列', link: '/features/pastoral/food/eggs' },
+                { text: '特色食物', link: '/features/pastoral/food/special' },
+                { text: '食物速查表', link: '/features/pastoral/food/reference' },
               ]
             },
           ]

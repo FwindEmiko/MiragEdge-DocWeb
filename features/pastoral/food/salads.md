@@ -1,0 +1,286 @@
+# <MapIcon name="cooking" :size="24" /> 沙拉凉菜
+
+健康清淡的田园风味，用新鲜的蔬菜与浆果拌成的凉菜。部分杂拌料理蕴含意想不到的强力效果。
+
+::: tip 分类说明
+本页收录 10 种沙拉凉菜，从普通到稀有品质，涵盖生命恢复、夜视、海豚恩惠等多种实用效果。
+:::
+
+---
+
+## 蒲公英沙拉
+
+<FoodEntry
+  name="蒲公英沙拉"
+  quality="fine"
+  :hunger="6"
+  :saturation="7.0"
+  effect="5秒反胃 → 5秒生命恢复 II → 40秒抗性提升 I（先苦后甜）"
+  quote="虽然入口苦涩，但蒲公英确实能治愈一些疾病...先苦后甜"
+>
+  <CraftingTable
+    :ingredients="[
+      {name:'蒲公英', texture:'/mc-textures/item/dandelion.png'},
+      {name:'生菜', texture:'/mc-textures/item/beetroot_seeds.png'},
+      {name:'番茄', texture:'/mc-textures/item/apple.png'},
+      {id:'bowl'}
+    ]"
+    :result="{id:'dandelion_salad'}"
+  />
+</FoodEntry>
+
+---
+
+## 浆果沙拉
+
+<FoodEntry
+  name="浆果沙拉"
+  quality="fine"
+  :hunger="7"
+  :saturation="8.0"
+  effect="30秒生命恢复 + 30秒内背刺伤害 +50%"
+  quote="幻境森林中的特产，狐狸好像挺喜欢吃的嘛？"
+>
+  <CraftingTable
+    :ingredients="[
+      {id:'sweet_berries'}, {id:'sweet_berries'},
+      {id:'glow_berries'},
+      {id:'bowl'}
+    ]"
+    :result="{id:'berry_salad'}"
+  />
+</FoodEntry>
+
+---
+
+## 海草沙拉
+
+<FoodEntry
+  name="海草沙拉"
+  quality="common"
+  :hunger="6"
+  :saturation="7.0"
+  effect="食用后获得 30秒 海豚恩惠"
+  quote="好吧，看起来只是一堆草...但是意外地清爽可口"
+>
+  <CraftingTable
+    :ingredients="[
+      {id:'seagrass'}, {id:'seagrass'},
+      {name:'生菜', texture:'/mc-textures/item/beetroot_seeds.png'},
+      {id:'bowl'}
+    ]"
+    :result="{id:'seagrass_salad'}"
+  />
+</FoodEntry>
+
+---
+
+## 洞穴杂拌
+
+<FoodEntry
+  name="洞穴杂拌"
+  quality="fine"
+  :hunger="6"
+  :saturation="7.0"
+  effect="食用后获得 60秒 夜视 + 45秒 急迫 I"
+  quote="幻境洞穴风味，吃下去仿佛黑暗中的明灯"
+>
+  <CraftingTable
+    :ingredients="[
+      {id:'glow_berries'},
+      {name:'棕色蘑菇', texture:'/mc-textures/item/brown_mushroom.png'},
+      {name:'红色蘑菇', texture:'/mc-textures/item/red_mushroom.png'},
+      {id:'bowl'}
+    ]"
+    :result="{id:'cave_medley'}"
+  />
+</FoodEntry>
+
+---
+
+## 海洋杂拌
+
+<FoodEntry
+  name="海洋杂拌"
+  quality="fine"
+  :hunger="6"
+  :saturation="7.0"
+  effect="60秒潮涌能量 + 45秒海豚恩惠"
+  quote="看起来很健康，其实...真的很健康！海洋的精华尽在其中"
+>
+  <CraftingTable
+    :ingredients="[
+      {id:'seagrass'},
+      {id:'cod'},
+      {id:'prismarine_shard'},
+      {id:'bowl'}
+    ]"
+    :result="{id:'ocean_medley'}"
+  />
+</FoodEntry>
+
+---
+
+## 幽寂杂拌
+
+<FoodEntry
+  name="幽寂杂拌"
+  quality="rare"
+  :hunger="14"
+  :saturation="18.0"
+  effect="15秒饱和 + 8秒反胃 + 30秒夜视"
+  quote="锐界幻境幽匿风味，虽然不好吃但就是忍不住想尝..."
+>
+  <CraftingTable
+    :ingredients="[
+      {name:'回响碎片', texture:'/mc-textures/item/echo_shard.png'},
+      {name:'幽匿催生体', texture:'/mc-textures/item/sculk_catalyst.png'},
+      {id:'bowl'}
+    ]"
+    :result="{id:'sculk_medley'}"
+  />
+</FoodEntry>
+
+---
+
+## 豆腐
+
+<FoodEntry
+  name="豆腐"
+  quality="common"
+  :hunger="3"
+  :saturation="2.0"
+  effect="无特殊效果"
+  quote="锐界幻境的豆腐...白白嫩嫩的"
+>
+  <CraftingTable
+    :ingredients="[
+      {name:'绿豆', texture:'/mc-textures/item/melon_seeds.png'},
+      {name:'绿豆', texture:'/mc-textures/item/melon_seeds.png'},
+      {name:'绿豆', texture:'/mc-textures/item/melon_seeds.png'},
+      {id:'bowl'}
+    ]"
+    :result="{id:'tofu', count:2}"
+  />
+</FoodEntry>
+
+---
+
+## 臭豆腐
+
+<FoodEntry
+  name="臭豆腐"
+  quality="fine"
+  :hunger="6"
+  :saturation="4.0"
+  effect="周围实体获得 10秒虚弱 + 10秒缓慢 + 5秒反胃"
+  quote="好臭！！虽然吃着香，但请不要在公共场合食用！"
+>
+  <CraftingTable
+    :ingredients="[
+      {id:'tofu'},
+      {id:'fermented_spider_eye'}
+    ]"
+    :result="{id:'stinky_tofu'}"
+  />
+</FoodEntry>
+
+---
+
+## 草莓酱
+
+<FoodEntry
+  name="草莓酱"
+  quality="common"
+  :hunger="6"
+  :saturation="3.0"
+  effect="食用后获得 10秒 速度 I"
+  quote="新鲜的锐界幻境草莓熬制，甜到心里去"
+>
+  <CraftingTable
+    :ingredients="[
+      {id:'strawberry'}, {id:'strawberry'},
+      {id:'sugar'},
+      {id:'glass_bottle'}
+    ]"
+    :result="{id:'strawberry_jam'}"
+  />
+</FoodEntry>
+
+---
+
+## 仙人掌切块
+
+<FoodEntry
+  name="仙人掌切块"
+  quality="common"
+  :hunger="5"
+  :saturation="3.0"
+  effect="5秒反胃 + 周围骆驼获得 20秒生命恢复"
+  quote="锐界幻境沙漠风味，对人类来说有点扎嘴...但骆驼很爱"
+>
+  <CraftingTable
+    :ingredients="[
+      {name:'仙人掌', texture:'/mc-textures/item/cactus.png'},
+      {name:'杀猪刀', texture:'/mc-textures/item/iron_sword.png'}
+    ]"
+    :result="{id:'cut_cactus', count:2}"
+  />
+</FoodEntry>
+
+---
+
+## 页面导航
+
+<div class="food-nav">
+  <a href="/features/pastoral/food/snacks" class="nav-card nav-prev">
+    <span class="nav-label">← 上一分类</span>
+    <span class="nav-title">糖果零食</span>
+  </a>
+  <a href="/features/pastoral/food/bakery" class="nav-card nav-next">
+    <span class="nav-label">下一分类 →</span>
+    <span class="nav-title">烘焙糕点</span>
+  </a>
+</div>
+
+<style>
+.food-nav {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 24px 0;
+}
+.nav-card {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.03);
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+.nav-card:hover {
+  border-color: rgba(255,255,255,0.25);
+  background: rgba(255,255,255,0.06);
+  transform: translateY(-1px);
+}
+.nav-next { text-align: right; }
+.nav-label {
+  font-size: 12px;
+  color: var(--vp-c-text-2, rgba(255,255,255,0.5));
+}
+.nav-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--vp-c-text-1, rgba(255,255,255,0.9));
+}
+@media (max-width: 640px) {
+  .food-nav { grid-template-columns: 1fr; }
+}
+</style>
+
+---
+
+*本页为沙拉凉菜分类 · 设计与数值可能随游戏版本调整*

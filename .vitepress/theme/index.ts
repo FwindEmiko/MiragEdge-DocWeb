@@ -20,6 +20,8 @@ import EnchantmentIdTable from './components/vue/EnchantmentIdTable.vue'
 import McItem from './components/vue/McItem.vue'
 import CraftingTable from './components/vue/CraftingTable.vue'
 import Furnace from './components/vue/Furnace.vue'
+import FoodStats from './components/vue/FoodStats.vue'
+import FoodEntry from './components/vue/FoodEntry.vue'
 import './css/custom.css'
 
 // 导入所有样式文件
@@ -74,6 +76,8 @@ export default {
     app.component('McItem', McItem)
     app.component('CraftingTable', CraftingTable)
     app.component('Furnace', Furnace)
+    app.component('FoodStats', FoodStats)
+    app.component('FoodEntry', FoodEntry)
 
     // 仅在浏览器环境下执行
     if (inBrowser) {
