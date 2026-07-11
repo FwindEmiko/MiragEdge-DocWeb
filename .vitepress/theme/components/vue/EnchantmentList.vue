@@ -125,6 +125,15 @@ let observer = null
 
 const total = enchantments.length
 
+// 预构建 rarity 查找表，避免每行 find
+const rarityMap = computed(() => {
+  const map = {}
+  for (const r of rarities) {
+    map[r.key] = r
+  }
+  return map
+})
+
 const countByRarity = computed(() => {
   const map = {}
   for (const r of rarities) {
@@ -158,7 +167,7 @@ const hasMore = computed(() => visibleCount.value < filteredItems.value.length)
 const remaining = computed(() => filteredItems.value.length - visibleCount.value)
 
 function rarityColor(key) {
-  const r = rarities.find(r => r.key === key)
+  const r = rarityMap.value[key]
   return r ? r.color : '#999'
 }
 
@@ -171,9 +180,15 @@ function loadMore() {
   visibleCount.value += pageSize
 }
 
-// 搜索或切换品质时重置可见数量
+// 搜索或切换品质时重置可见数量，并重新观察哨兵
 watch([searchQuery, activeRarity], () => {
   visibleCount.value = pageSize
+  // 切换后哨兵 DOM 会被销毁重建，需重新观察
+  nextTick(() => {
+    if (observer && sentinelRef.value) {
+      observer.observe(sentinelRef.value)
+    }
+  })
 })
 
 // 哨兵自动加载

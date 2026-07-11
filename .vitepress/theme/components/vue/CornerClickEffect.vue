@@ -11,6 +11,8 @@ const particles = ref([])
 let idCounter = 0
 let animationFrameId = null
 let lastTime = 0
+let mountTimer = null
+let listenerAdded = false
 const particleLifetime = 1000 // 粒子存活时间 ms
 
 const handleClick = (e) => {
@@ -73,13 +75,22 @@ const updateAnimations = (currentTime) => {
 
 onMounted(() => {
   // 延迟显示，页面加载0.5秒后再启用点击特效
-  setTimeout(() => {
+  mountTimer = setTimeout(() => {
     document.addEventListener('click', handleClick)
+    listenerAdded = true
   }, 500)
 })
 
 onUnmounted(() => {
-  document.removeEventListener('click', handleClick)
+  if (mountTimer) {
+    clearTimeout(mountTimer)
+    mountTimer = null
+  }
+  // 只有真正添加过监听器时才移除
+  if (listenerAdded) {
+    document.removeEventListener('click', handleClick)
+    listenerAdded = false
+  }
   if (animationFrameId) {
     cancelAnimationFrame(animationFrameId)
     animationFrameId = null

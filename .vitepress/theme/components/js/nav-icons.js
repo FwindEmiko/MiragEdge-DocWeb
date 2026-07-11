@@ -84,7 +84,10 @@ function enhanceAll() {
 
 /**
  * 初始化导航图标增强
+ * 使用单例 MutationObserver，避免路由切换时累积创建多个 observer
  */
+let observerInstance = null;
+
 export function initNavIcons() {
   if (typeof window === 'undefined') return;
 
@@ -95,19 +98,25 @@ export function initNavIcons() {
     enhanceAll();
   }
 
+  // 已有 observer 则不重复创建（避免累积泄漏）
+  if (observerInstance) return;
+
   // 监听 DOM 变化（VitePress 切换路由时），添加防抖避免高频变动导致卡顿
   let debounceTimer = null;
-  const observer = new MutationObserver(() => {
+  observerInstance = new MutationObserver(() => {
     clearTimeout(debounceTimer);
     debounceTimer = setTimeout(enhanceAll, 150);
   });
 
-  observer.observe(document.body || document.documentElement, {
+  observerInstance.observe(document.body || document.documentElement, {
     childList: true,
     subtree: true,
   });
 
   window.addEventListener('beforeunload', () => {
-    observer.disconnect();
+    if (observerInstance) {
+      observerInstance.disconnect();
+      observerInstance = null;
+    }
   });
 }

@@ -248,24 +248,24 @@ const normalizedGrid = computed<ItemData[][]>(() => {
 }
 
 /* ===== 暗色模式 ===== */
-:deep(.dark) .crafting-table {
+.dark .crafting-table {
   background: rgba(80, 80, 90, 0.12);
   border-color: rgba(255, 255, 255, 0.08);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
-:deep(.dark) .ct-grid,
-:deep(.dark) .ct-result {
+.dark .ct-grid,
+.dark .ct-result {
   background: rgba(0, 0, 0, 0.35);
   border-color: rgba(0, 0, 0, 0.6) rgba(255, 255, 255, 0.1) rgba(255, 255, 255, 0.1) rgba(0, 0, 0, 0.6);
 }
 
-:deep(.dark) .ct-cell:not(:has(.mc-item)) {
+.dark .ct-cell:not(:has(.mc-item)) {
   background: rgba(0, 0, 0, 0.4);
   border-color: rgba(0, 0, 0, 0.6) rgba(255, 255, 255, 0.08) rgba(255, 255, 255, 0.08) rgba(0, 0, 0, 0.6);
 }
 
-:deep(.dark) .ct-arrow {
+.dark .ct-arrow {
   color: rgba(255, 255, 255, 0.4);
 }
 

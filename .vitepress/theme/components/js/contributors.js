@@ -9,8 +9,8 @@ try {
   // 动态加载 ts-node/register
   require('ts-node/register');
   
-  // 运行主脚本
-  const scriptPath = path.join(__dirname, './.vitepress/theme/addContributors.ts');
+  // 运行主脚本（__dirname 是 .vitepress/theme/components/js/，需向上回到 theme/）
+  const scriptPath = path.join(__dirname, '../../addContributors.ts');
   require(scriptPath);
 } catch (error) {
   console.error('启动失败:', error.message);

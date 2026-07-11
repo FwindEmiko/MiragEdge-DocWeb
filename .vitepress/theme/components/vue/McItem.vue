@@ -192,12 +192,12 @@ onBeforeUnmount(() => {
 }
 
 /* 暗色模式微调 */
-:deep(.dark) .mc-item-slot {
+.dark .mc-item-slot {
   background: rgba(0, 0, 0, 0.45);
   border-color: rgba(0, 0, 0, 0.6) rgba(255, 255, 255, 0.15) rgba(255, 255, 255, 0.15) rgba(0, 0, 0, 0.6);
 }
 
-:deep(.dark) .mc-item:hover .mc-item-slot {
+.dark .mc-item:hover .mc-item-slot {
   background: rgba(0, 0, 0, 0.35);
 }
 </style>

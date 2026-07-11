@@ -33,27 +33,28 @@ const octokit = new Octokit({
  */
 async function getRepoContributors(): Promise<EmailWithSha1[]> {
   try {
-    const logOutput = await git.log(['--format=%ae %H']);
-    const logLines = logOutput.latest?.hash.split('\n');
-    
-    if (!logLines) {
+    // 使用 git.raw 获取原始输出，避免 simple-git log() 对自定义 format 的解析问题
+    const rawOutput = await git.raw(['log', '--format=%ae %H']);
+    const logLines = rawOutput.split('\n').filter(line => line.trim());
+
+    if (logLines.length === 0) {
       console.warn('No commits found in repository');
       return [];
     }
-    
+
     const contributors = new Map<string, string>();
-    
-    // 去重，只保留每个Email的第一个commit
+
+    // 去重，只保留每个Email的第一个commit（reverse 后最早提交优先）
     logLines.reverse().forEach((commit) => {
       const [email, sha1] = commit.split(' ');
       if (email && sha1 && !contributors.has(email)) {
         contributors.set(email, sha1);
       }
     });
-    
-    return Array.from(contributors).map(([email, sha1]) => ({ 
-      email: email.trim(), 
-      sha1 
+
+    return Array.from(contributors).map(([email, sha1]) => ({
+      email: email.trim(),
+      sha1
     }));
   } catch (error) {
     console.error('Error getting repo contributors:', error);
@@ -146,23 +147,17 @@ async function queryFullDataList(
  */
 async function getEmailList(filePath: string): Promise<string[]> {
   try {
-    const logOutput = await git.log([
-      '--format=%ae',
-      '--follow',
-      '--no-merges',
-      filePath,
-    ]);
-    
-    const logLines = logOutput.latest?.hash
+    // 使用 git.raw 获取原始输出
+    const rawOutput = await git.raw(['log', '--format=%ae', '--follow', '--no-merges', filePath]);
+    const logLines = rawOutput
       .split('\n')
-      .reverse()
       .filter(email => email && email.trim() !== '');
-    
-    if (!logLines || logLines.length === 0) {
+
+    if (logLines.length === 0) {
       console.log(`No contributors found for file: ${filePath}`);
       return [];
     }
-    
+
     // 去重
     return Array.from(new Set(logLines.map(email => email.trim())));
   } catch (error) {

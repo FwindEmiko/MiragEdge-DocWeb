@@ -1,12 +1,28 @@
 <template>
   <span class="map-icon-wrapper">
-    <component :is="iconComponent" v-bind="attrs" v-on="$listeners" />
+    <component :is="iconComponent" v-bind="attrs" />
   </span>
 </template>
 
 <script setup>
 import { computed, useAttrs } from 'vue'
-import * as LucideIcons from 'lucide-vue-next'
+import {
+  Anvil, ArrowDown, ArrowLeft, ArrowRight, ArrowUp, Award, Ban, Book, BookOpen,
+  BrickWall, Building2, Calendar, Castle, Cat, Check, ChefHat, ChevronDown,
+  ChevronLeft, ChevronRight, ChevronUp, Clipboard, Clock, Cloud, CloudLightning,
+  CloudRain, CloudSnow, Code, Coins, Compass, Copy, Cpu, Crown, Database, Dog,
+  DoorOpen, Download, Droplet, Droplets, ExternalLink, File, FileText, Fish,
+  Flag, Flame, FlaskConical, Folder, FolderOpen, Footprints, Gamepad2, Gem,
+  Gift, GitBranch, GitMerge, GitPullRequest, Github, Globe, Handshake, HardDrive,
+  Headphones, Heart, Image, Info, Leaf, Lightbulb, Link, Loader, Lock, Map,
+  Megaphone, Menu, MessageCircle, MessageSquare, MessageSquareText, Monitor,
+  Moon, Mountain, Music, Network, Package, Palette, PartyPopper, Pencil, Pin,
+  Pickaxe, Play, Plug, Puzzle, RefreshCw, Rocket, Ruler, Satellite, Search,
+  Server, Settings, Share2, Shield, Skull, Smartphone, Snowflake, Sparkles,
+  Sprout, Star, Sun, Sword, Swords, Target, Terminal, Thermometer, Timer, Trash2,
+  TreePine, TrendingDown, TrendingUp, Trophy, Upload, User, Users, Video,
+  Volume2, Wand, Wifi, WifiOff, Wind, Wrench, X, Zap
+} from 'lucide-vue-next'
 
 /**
  * MiragEdge 统一图标组件 (MapIcon)
@@ -44,12 +60,33 @@ const props = defineProps({
 const attrs = useAttrs()
 
 /**
+ * Lucide 图标组件映射表（PascalCase 名称 → 组件）
+ * 仅包含上方按需 import 的图标，便于动态渲染并保留 tree-shaking。
+ */
+const lucideIcons = {
+  Anvil, ArrowDown, ArrowLeft, ArrowRight, ArrowUp, Award, Ban, Book, BookOpen,
+  BrickWall, Building2, Calendar, Castle, Cat, Check, ChefHat, ChevronDown,
+  ChevronLeft, ChevronRight, ChevronUp, Clipboard, Clock, Cloud, CloudLightning,
+  CloudRain, CloudSnow, Code, Coins, Compass, Copy, Cpu, Crown, Database, Dog,
+  DoorOpen, Download, Droplet, Droplets, ExternalLink, File, FileText, Fish,
+  Flag, Flame, FlaskConical, Folder, FolderOpen, Footprints, Gamepad2, Gem,
+  Gift, GitBranch, GitMerge, GitPullRequest, Github, Globe, Handshake, HardDrive,
+  Headphones, Heart, Image, Info, Leaf, Lightbulb, Link, Loader, Lock, Map,
+  Megaphone, Menu, MessageCircle, MessageSquare, MessageSquareText, Monitor,
+  Moon, Mountain, Music, Network, Package, Palette, PartyPopper, Pencil, Pin,
+  Pickaxe, Play, Plug, Puzzle, RefreshCw, Rocket, Ruler, Satellite, Search,
+  Server, Settings, Share2, Shield, Skull, Smartphone, Snowflake, Sparkles,
+  Sprout, Star, Sun, Sword, Swords, Target, Terminal, Thermometer, Timer, Trash2,
+  TreePine, TrendingDown, TrendingUp, Trophy, Upload, User, Users, Video,
+  Volume2, Wand, Wifi, WifiOff, Wind, Wrench, X, Zap
+}
+
+/**
  * 语义名称 → Lucide 图标组件映射
  * 
  * 命名规则:
  * - 全小写英文 + 连字符 (kebab-case)
  * - 按功能/场景归类
- * - 见下方 addonMap 为扩展映射
  */
 const iconMap = {
   // 导航 & 通用
@@ -103,7 +140,6 @@ const iconMap = {
   // 游戏 & MC
   gamepad: 'Gamepad2',
   sword: 'Sword',
-  shield: 'Shield',
   'pickaxe': 'Pickaxe',
   'treasure': 'TreasureChest',
   map: 'Map',
@@ -133,12 +169,10 @@ const iconMap = {
   document: 'FileText',
   wiki: 'BookOpen',
   code: 'Code',
-  terminal: 'Terminal',
   
   // 开发 & 工具
   plugin: 'Puzzle',
   tool: 'Wrench',
-  code: 'Code',
   git: 'GitBranch',
   'git-merge': 'GitMerge',
   'git-pull': 'GitPullRequest',
@@ -181,19 +215,13 @@ const iconMap = {
   'pin': 'Pin',
   'party-popper': 'PartyPopper',
   'refresh-cw': 'RefreshCw',
-  'refresh': 'RefreshCw',
-  'globe': 'Globe',
   'bar-chart': 'BarChart3',
-  'edit': 'Pencil',
   'fox': 'Cat',
-  'sync': 'RefreshCw',
 
   // 锐界幻境特色命名
   'miragedge': 'Globe',
   'edge': 'Mountain',
   'dream': 'Moon',
-  'star': 'Star',
-  'fox': 'Cat',        // 没有狐狸图标，用猫代替
   'soul': 'Heart',
 
   // 环境与天气
@@ -253,24 +281,17 @@ const iconMap = {
   'building-2': 'Building2',
 }
 
-
-// 额外映射，可根据需要扩展
-const addonMap = {
-  // 以下为预留扩展位
-}
-
 function resolveIcon(name) {
-  const iconName = iconMap[name] || addonMap[name]
+  const iconName = iconMap[name]
   if (!iconName) return null
   // Lucide 导出使用 PascalCase
-  const component = LucideIcons[iconName]
-  return component || null
+  return lucideIcons[iconName] || null
 }
 
 const iconComponent = computed(() => {
   const comp = resolveIcon(props.name)
   if (comp) return comp
   // 回退：如果直接传入了 Lucide 组件名也尝试
-  return LucideIcons[props.name] || null
+  return lucideIcons[props.name] || null
 })
 </script>

@@ -273,20 +273,20 @@ const props = withDefaults(defineProps<{
 }
 
 /* ===== 暗色模式 ===== */
-:deep(.dark) .furnace {
+.dark .furnace {
   background: linear-gradient(135deg, rgba(80, 60, 55, 0.14), rgba(40, 35, 35, 0.12));
   border-color: rgba(255, 255, 255, 0.08);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
-:deep(.dark) .fn-input,
-:deep(.dark) .fn-fuel,
-:deep(.dark) .fn-result {
+.dark .fn-input,
+.dark .fn-fuel,
+.dark .fn-result {
   background: rgba(0, 0, 0, 0.35);
   border-color: rgba(0, 0, 0, 0.6) rgba(255, 255, 255, 0.1) rgba(255, 255, 255, 0.1) rgba(0, 0, 0, 0.6);
 }
 
-:deep(.dark) .fn-arrow {
+.dark .fn-arrow {
   color: rgba(255, 255, 255, 0.4);
 }
 

@@ -3,7 +3,9 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 
 const surprises = ref([])
-let interval = null
+let scheduleTimer = null
+let startTimer = null
+const removeTimers = new Set()
 
 const surpriseItems = [
   { emoji: '🎁', text: '恭喜发现隐藏惊喜！' },
@@ -31,17 +33,19 @@ const createSurprise = () => {
   })
 
   // 3秒后移除
-  setTimeout(() => {
+  const removeTimer = setTimeout(() => {
     surprises.value = surprises.value.filter(s => s.id !== id)
+    removeTimers.delete(removeTimer)
   }, 3000)
+  removeTimers.add(removeTimer)
 }
 
 onMounted(() => {
   // 延迟启动惊喜计时器，页面加载5秒后再开始
-  setTimeout(() => {
+  startTimer = setTimeout(() => {
     const scheduleNext = () => {
       const delay = 360000 + Math.random() * 60000
-      interval = setTimeout(() => {
+      scheduleTimer = setTimeout(() => {
         createSurprise()
         scheduleNext()
       }, delay)
@@ -51,7 +55,10 @@ onMounted(() => {
 })
 
 onUnmounted(() => {
-  if (interval) clearTimeout(interval)
+  if (startTimer) clearTimeout(startTimer)
+  if (scheduleTimer) clearTimeout(scheduleTimer)
+  removeTimers.forEach(t => clearTimeout(t))
+  removeTimers.clear()
 })
 </script>
 

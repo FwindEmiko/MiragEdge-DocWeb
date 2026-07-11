@@ -1,6 +1,6 @@
 <script setup>
 // 角落随机格言组件
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onBeforeUnmount } from 'vue'
 
 const quotes = [
   { text: '每一页文档都是一段旅程~', author: '狐魇星玖' },
@@ -30,20 +30,30 @@ const quotes = [
 const currentQuote = ref(quotes[0])
 const showQuote = ref(false)
 
+let showTimer = null
+let switchInterval = null
+let hideTimer = null
+
 onMounted(() => {
   // 延迟显示，页面加载1秒后再出现
-  setTimeout(() => {
+  showTimer = setTimeout(() => {
     showQuote.value = true
   }, 1000)
 
   // 每30秒切换一次格言
-  setInterval(() => {
+  switchInterval = setInterval(() => {
     showQuote.value = false
-    setTimeout(() => {
+    hideTimer = setTimeout(() => {
       currentQuote.value = quotes[Math.floor(Math.random() * quotes.length)]
       showQuote.value = true
     }, 300)
   }, 30000)
+})
+
+onBeforeUnmount(() => {
+  if (showTimer) clearTimeout(showTimer)
+  if (switchInterval) clearInterval(switchInterval)
+  if (hideTimer) clearTimeout(hideTimer)
 })
 </script>
 

@@ -352,25 +352,25 @@ export default {
 }
 
 /* 深色模式适配 */
-:deep(.dark) .image-wrapper img {
+.dark .image-wrapper img {
   background: linear-gradient(45deg, #2d2d2d 25%, #3d3d3d 25%, #3d3d3d 50%, #2d2d2d 50%, #2d2d2d 75%, #3d3d3d 75%);
   background-size: 20px 20px;
 }
 
-:deep(.dark) .image-placeholder {
+.dark .image-placeholder {
   background: linear-gradient(45deg, #2d2d2d 25%, #3d3d3d 25%, #3d3d3d 50%, #2d2d2d 50%, #2d2d2d 75%, #3d3d3d 75%);
   background-size: 20px 20px;
 }
 
-:deep(.dark) .alt-text {
+.dark .alt-text {
   color: #aaa;
 }
 
-:deep(.dark) .image-caption {
+.dark .image-caption {
   color: #aaa;
 }
 
-:deep(.dark) .has-shadow .image-wrapper img {
+.dark .has-shadow .image-wrapper img {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 

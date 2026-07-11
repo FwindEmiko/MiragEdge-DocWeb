@@ -359,6 +359,7 @@ export default defineConfig({
           text: '⚙️ 插件配置',
           collapsed: false,
           items: [
+            { text: '钓鱼系统', link: '/develop/server_configs/fishing' },
             { text: '贴图字符码', link: '/develop/server_configs/sticker' },
             { text: '自定义作物', link: '/develop/server_configs/customcrops' },
             {
