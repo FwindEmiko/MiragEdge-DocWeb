@@ -9,10 +9,6 @@ import SmartImage from './components/vue/SmartImage.vue'
 import ChristmasTree from './components/vue/ChristmasTree.vue'
 import NodeStatus from './components/vue/NodeStatus.vue'
 import FeatureCard from './components/vue/FeatureCard.vue'
-import CornerStars from './components/vue/CornerStars.vue'
-import CornerQuotes from './components/vue/CornerQuotes.vue'
-import CornerSakura from './components/vue/CornerSakura.vue'
-import CornerBubbles from './components/vue/CornerBubbles.vue'
 import ChangelogFromMd from './components/vue/ChangelogFromMd.vue'
 import MapIcon from './components/vue/MapIcon.vue'
 import EnchantmentList from './components/vue/EnchantmentList.vue'
@@ -58,17 +54,13 @@ export default {
   },
 
   enhanceApp({ app, router, siteData }) {
-    // 注册全局组件
+    // 注册全局组件（Corner 装饰组件由 layout.vue 异步加载，无需全局注册）
     app.component("LayoutComponent", LayoutComponent)
     app.component('Contributors', Contributors)
     app.component('SmartImage', SmartImage)
     app.component('ChristmasTree', ChristmasTree)
     app.component('NodeStatus', NodeStatus)
     app.component('FeatureCard', FeatureCard)
-    app.component('CornerStars', CornerStars)
-    app.component('CornerQuotes', CornerQuotes)
-    app.component('CornerSakura', CornerSakura)
-    app.component('CornerBubbles', CornerBubbles)
     app.component('ChangelogFromMd', ChangelogFromMd)
     app.component('MapIcon', MapIcon)
     app.component('EnchantmentList', EnchantmentList)
