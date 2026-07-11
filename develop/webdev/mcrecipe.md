@@ -4,8 +4,6 @@
 
 本组件套件用于在文档中以可视化的方式展示 Minecraft 配方，支持 **有序合成**、**无序合成** 和 **熔炉烧炼** 三种模式，内置 **581 个原版物品材质**（MC Java 1.21.11），并支持自定义物品材质。
 
----
-
 ## 组件总览
 
 | 组件 | 用途 | 全局注册名 |
@@ -15,8 +13,6 @@
 | `<Furnace>` | 熔炉烧炼界面 | `Furnace` |
 
 组件已在主题中全局注册，无需在 Markdown 中手动 import，直接使用标签即可。
-
----
 
 ## 原版材质
 
@@ -29,8 +25,6 @@ public/mc-textures/item/{id}.png
 ```
 
 在组件中只需传入 `id`，即可自动匹配材质和中文名称，无需额外配置。
-
----
 
 ## 自定义物品材质
 
@@ -85,8 +79,6 @@ export const mcTextures: Record<string, McItemData> = {
 - **背景**：透明（不要用纯色背景）
 - 组件会自动以 `image-rendering: pixelated` 像素化渲染，确保放大不模糊
 :::
-
----
 
 ## McItem — 物品槽组件
 
@@ -144,8 +136,6 @@ texture（图片材质） → name 首字（文字回退）
 <McItem id="diamond" size="md" />
 <McItem id="diamond" size="lg" />
 ```
-
----
 
 ## CraftingTable — 工作台合成表
 
@@ -317,8 +307,6 @@ texture（图片材质） → name 首字（文字回退）
 />
 ```
 
----
-
 ## Furnace — 熔炉烧炼组件
 
 ### 属性
@@ -379,8 +367,6 @@ texture（图片材质） → name 首字（文字回退）
 />
 ```
 
----
-
 ## 在 Markdown 中使用
 
 组件已全局注册，在任意 `.md` 文件中直接写标签即可：
@@ -404,8 +390,6 @@ texture（图片材质） → name 首字（文字回退）
 - 自定义物品只需传 `name` + `texture`，无需注册
 :::
 
----
-
 ## 扩展注册表
 
 如需添加新的原版物品或自定义物品到注册表，编辑 [.vitepress/theme/data/mc-textures.ts](https://github.com/fwindemiko/MiragEdge-DocWeb/blob/main/.vitepress/theme/data/mc-textures.ts)：
@@ -423,8 +407,6 @@ export const mcTextures: Record<string, McItemData> = {
 ```
 
 添加后即可在任意组件中通过 `id="bacon"` 引用。
-
----
 
 ## 设计特性
 
@@ -456,8 +438,6 @@ export const mcTextures: Record<string, McItemData> = {
 - `will-change` 标记动画元素，提示浏览器优化
 - 图片加载失败时自动回退到文字，无额外网络请求
 - 组件 `scoped` 样式，无全局 CSS 污染
-
----
 
 ## 已注册物品速查
 
@@ -631,8 +611,6 @@ export const mcTextures: Record<string, McItemData> = {
 
 > 完整注册表请查看源文件：[mc-textures.ts](https://github.com/fwindemiko/MiragEdge-DocWeb/blob/main/.vitepress/theme/data/mc-textures.ts)
 
----
-
 ## 文件位置
 
 | 文件 | 说明 |
@@ -643,7 +621,5 @@ export const mcTextures: Record<string, McItemData> = {
 | `.vitepress/theme/data/mc-textures.ts` | 物品材质注册表（581 个物品） |
 | `public/mc-textures/item/` | 原版物品材质 PNG 文件（792 个） |
 | `.vitepress/theme/index.ts` | 组件全局注册 |
-
----
 
 *本组件套件设计为可扩展架构 — 后续如需支持高炉、烟熏炉、切石机等配方类型，只需参照 Furnace 组件新增同类组件即可。*

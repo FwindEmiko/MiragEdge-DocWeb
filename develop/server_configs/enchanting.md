@@ -5,8 +5,17 @@
 > 附魔 ID 对照表见 [附魔ID对照表](/develop/server_configs/enchantment_ids)。
 
 ::: tip 官方文档
-插件官方文档：<https://wiki.polarastrum.cc/plugin/aiyatsbus/start/ench/basic/>  
-（可作参考，本页内容以服务器实际使用的源码与配置为准）
+- **Aiyatsbus Wiki 主页**：<https://wiki.polarastrum.cc/plugin/aiyatsbus/>
+- **附魔结构总览**：<https://wiki.polarastrum.cc/plugin/aiyatsbus/start/ench/main>
+- **基本元数据**：<https://wiki.polarastrum.cc/plugin/aiyatsbus/start/ench/basic/>
+- **可选元数据（alternative）**：<https://wiki.polarastrum.cc/plugin/aiyatsbus/start/ench/basic/alternative>
+- **限制配置（limitations）**：<https://wiki.polarastrum.cc/plugin/aiyatsbus/start/ench/basic/limitations>
+- **变量配置**：<https://wiki.polarastrum.cc/plugin/aiyatsbus/start/ench/variables/main>
+- **触发器配置**：<https://wiki.polarastrum.cc/plugin/aiyatsbus/start/ench/trigger/main>
+- **内建触发器（Java/Kotlin）**：<https://wiki.polarastrum.cc/plugin/aiyatsbus/start/ench/trigger/builtin>
+- **Q&A**：<https://wiki.polarastrum.cc/plugin/aiyatsbus/qa>
+
+本页内容以服务器实际使用的源码与配置为准，官方 wiki 可作补充参考。
 :::
 
 ## 目录结构
@@ -176,7 +185,6 @@ mechanisms:             # 机制
         // fluxon 脚本
   tickers:
     on-tick:
-      type: fluxon
       interval: 40
       handle: |-
         // 周期执行的脚本
@@ -320,8 +328,7 @@ variables:
 
 当指定事件发生时执行脚本。每个 listener 包含：
 - `listen`：事件标识符（见下方事件列表）。
-- `handle`：执行的脚本（默认 fluxon）。
-- `type`（可选）：脚本类型，`fluxon`（默认）/ `kether` / `javascript`。
+- `handle`：执行的 fluxon 脚本。
 
 ```yaml
 mechanisms:
@@ -361,7 +368,7 @@ mechanisms:
 #### tickers · 周期任务
 
 按固定间隔（tick）周期执行脚本，适用于需要持续检查状态的附魔（如飞行、耐久消耗、光环效果）。每个 ticker 包含：
-- `type`：脚本类型，默认 `fluxon`。
+- `type`：脚本类型，固定为 `fluxon`（可省略）。
 - `interval`：执行间隔（tick），默认 20（1 秒）。
 - `pre-handle`：**预处理**脚本，在该玩家首次满足触发条件（装备了带此附魔的物品）时执行一次。
 - `handle`：**主处理**脚本，每个 `interval` 周期执行。
@@ -420,54 +427,132 @@ rarity: 优良
 
 ## 脚本语言
 
-附魔的 `mechanisms.listeners.handle` 和 `tickers.handle` 等字段使用脚本编写逻辑。支持三种脚本类型（通过 `type` 字段指定，默认 `fluxon`）：
+附魔的 `mechanisms.listeners.handle` 和 `tickers.handle` 等字段使用 **fluxon** 脚本语言编写逻辑。
 
-- **fluxon**（默认）：Aiyatsbus 自研脚本语言，语法类似 Kotlin/JavaScript 混合体。本服务器所有附魔均使用 fluxon。
-- **kether**：TabooLib 的脚本系统（旧版默认，现已不推荐）。
-- **javascript**：标准 JavaScript。
-
-::: warning 注意
-旧版文档中的 kether 示例（`add-potion-effect`、`set ... to`、`&event[block.world]` 等语法）已过时，当前服务器**默认且推荐使用 fluxon**。
+::: warning 关于 Kether
+服务器**已完全切换到 fluxon 脚本语言，不再使用 Kether**。旧版文档中基于 Kether 的示例（`add-potion-effect`、`set ... to`、`&event[block.world]`、`tell "..."` 等语法）均已**失效**，请勿参考。本页所有示例均为 fluxon 语法。
 :::
 
-### fluxon 语法速览
+### fluxon 简介
 
-```text
-// 变量声明
-damage = &event::damage()           // 从事件读取伤害
-total = int(variables::modifiable(&enchant, &item, "当前累计"))  // 读取可修改变量
+fluxon 是 Aiyatsbus 自研的脚本语言，语法风格类似 Kotlin 与 JavaScript 的混合体：
 
-// 条件
-if &total >= &击杀累计 then {
-    &event::setDamage(&damage * 2.0)
-}
+- **变量声明**：`名称 = 值`（无需关键字）
+- **方法调用**：用 `::` 访问对象方法，如 `&player::setVelocity(...)`
+- **变量引用**：用 `&` 前缀引用上下文变量和自定义变量，如 `&level`、`&冷却`
+- **控制流**：`if ... then { ... }`、`for x in ... then { ... }`
+- **闭包**：`|| { ... }`（用于 `submit()::run(...)` 等异步任务）
+- **内置函数**：`int()`、`double()`、`string()`、`min()`、`max()`、`random()`、`vector()` 等
 
-// 调用方法（用 :: 访问）
-&player::setVelocity(vector(0, 1, 0))
-&event::setCancelled(true)
+### 内置上下文变量
 
-// 引用变量（& 前缀）
-&冷却       // 引用 variables 中定义的"冷却"
-&level      // 当前附魔等级
-&player     // 玩家
-&item       // 物品
-&enchant    // 附魔对象
+脚本中可直接使用的上下文变量（用 `&` 前缀引用）：
 
-// 周期任务
-submit()::period(1)::on(&arrow)::run(|| {
-    // 每 tick 执行
-})
+| 变量 | 含义 | 适用场景 |
+|---|---|---|
+| `&player` | 触发附魔的玩家 | listeners / tickers |
+| `&item` | 带有该附魔的物品 | listeners / tickers |
+| `&level` | 当前附魔等级 | listeners / tickers |
+| `&enchant` | 附魔对象本身 | listeners / tickers |
+| `&event` | 当前事件对象 | 仅 listeners |
+| `&triggerSlot` | 触发槽位（HAND/OFF_HAND 等） | listeners / tickers |
+| `&maxLevel` | 附魔最大等级 | listeners / tickers |
 
-// 冷却
-cooldown::isReady(&player, &enchant, &冷却)   // 是否就绪
-cooldown::addCooldown(&player, &enchant)      // 添加冷却
+### 自定义变量引用
 
-// 读写可修改变量
-variables::setModifiable(&enchant, &item, "当前累计", 0)
-variables::modifiable(&enchant, &item, "当前累计")
+在 `variables` 中定义的变量，在脚本中用 `&变量名` 引用：
+
+```yaml
+variables:
+  leveled:
+    冷却: 秒:6
+    伤害提高: 点:0.5*{level}+0.5
+  modifiable:
+    当前累计: test_current_total=0
 ```
 
-详细的 fluxon/Kether 脚本语句参考：<https://taboolib.hhhhhy.kim/kether-list>
+```text
+// 脚本中引用
+if &total >= &击杀累计 then { ... }      // 引用 leveled 变量
+variables::setModifiable(&enchant, &item, "当前累计", 0)  // 读写 modifiable 变量
+```
+
+### 常用 API
+
+```text
+// 事件操作（listeners 中）
+&event::damage()                      // 获取伤害值
+&event::setDamage(新伤害)              // 修改伤害值
+&event::setCancelled(true)            // 取消事件
+&event::cause()                       // 获取伤害原因（FALL/FIRE 等）
+&event::entity()                      // 获取受害实体
+&event::projectile()                  // 获取抛射物（射箭事件）
+
+// 玩家操作
+&player::setVelocity(vector(0, 1, 0)) // 设置速度
+&player::setAllowFlight(true)         // 允许飞行
+&player::isOnGround()                 // 是否在地面
+&player::isSneaking()                 // 是否下蹲
+&player::gameMode()                   // 游戏模式
+&player::location()                   // 位置
+&player::getNearbyEntities(x, y, z)   // 附近实体
+&player::setMeta("key", "value")      // 设置临时元数据
+&player::hasMeta("key")               // 检查元数据
+&player::removeMeta("key")            // 移除元数据
+&player::addPotionEffect(...)         // 添加药水效果
+
+// 物品操作
+&item::durability()                   // 当前耐久
+&item::setDurability(值)               // 设置耐久
+&item::isUnbreakable()                // 是否不可破坏
+&item::type()                         // 物品类型
+
+// 实体操作
+&entity::setVelocity(...)
+&entity::damage(伤害, 攻击者)
+&entity::addPotionEffect(实体, "SLOWNESS", 持续时间, 等级)
+&entity::removePotionEffect(实体, "SLOWNESS")
+&entity::isDead()
+
+// 冷却系统
+cooldown::isReady(&player, &enchant, &冷却)   // 冷却是否就绪
+cooldown::addCooldown(&player, &enchant)      // 添加冷却（时长取 &冷却 变量值）
+
+// 可修改变量读写
+variables::modifiable(&enchant, &item, "变量名")              // 读取
+variables::setModifiable(&enchant, &item, "变量名", 新值)      // 写入
+
+// 异步周期任务
+submit()::delay(延迟tick)::run(|| { ... })                      // 延迟执行
+submit()::period(间隔tick)::on(对象)::run(|| { ... })           // 周期执行
+// 在闭包内可用 &it::cancel() 取消任务
+
+// 类型转换
+int(值)      // 转整数
+double(值)   // 转小数
+string(值)   // 转字符串
+float(值)    // 转单精度
+
+// 数学
+min(a, b) / max(a, b) / pow(a, b) / random(最小, 最大) / abs(值)
+
+// 向量
+vector(x, y, z)                      // 创建向量
+&vec::normalize() / &vec::multiply(n) / &vec::add(vec) / &vec::length()
+
+// 守卫检查（伤害前合法性校验）
+guard::canDamage(&player, &entity)   // 是否可以伤害目标
+guard::canBreak(&player, &location)  // 是否可以破坏方块
+```
+
+### 脚本参考资源
+
+- **TabooLib 脚本动作大全**：<https://taboolib.hhhhhy.kim/kether-list>  
+  （含 Aiyatsbus 提供的 295 个动作，按类别分类：世界与坐标、实体控制、物品管理、药水效果、视觉特效等）
+
+::: tip 关于脚本动作大全
+该站点虽名为 "Kether Explorer"，但实际收录了 Aiyatsbus 在 TabooLib 框架上注册的所有脚本动作，可按"提供者 = Aiyatsbus"筛选查看。fluxon 复用这些动作的底层实现。
+:::
 
 ## 完整示例
 
@@ -625,7 +710,6 @@ mechanisms:
         }
   tickers:
     durability:
-      type: fluxon
       interval: 40
       pre-handle: |-
         // 装备时：允许飞行
