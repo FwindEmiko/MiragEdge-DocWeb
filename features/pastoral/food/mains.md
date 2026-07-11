@@ -41,8 +41,8 @@
     :ingredients="[
       {id:'bread'},
       {id:'cooked_porkchop'},
-      {name:'生菜', texture:'/mc-textures/item/beetroot_seeds.png'},
-      {name:'辣椒', texture:'/mc-textures/item/red_dye.png'}
+      {id:'lettuce'},
+      {id:'pepper'}
     ]"
     :result="{id:'sauerkraut_meat_film'}"
   />
@@ -62,7 +62,7 @@
     shaped
     :grid="[
       [null, {id:'bread'}, null],
-      [{id:'cooked_porkchop'}, {name:'番茄', texture:'/mc-textures/item/apple.png'}, {id:'cooked_porkchop'}],
+      [{id:'cooked_porkchop'}, {id:'tomato'}, {id:'cooked_porkchop'}],
       [null, {id:'bread'}, null]
     ]"
     :result="{id:'hotdog'}"
@@ -83,7 +83,7 @@
     shaped
     :grid="[
       [null, {id:'bread'}, null],
-      [{name:'生菜', texture:'/mc-textures/item/beetroot_seeds.png'}, {id:'cooked_beef'}, {name:'番茄', texture:'/mc-textures/item/apple.png'}],
+      [{id:'lettuce'}, {id:'cooked_beef'}, {id:'tomato'}],
       [null, {id:'cheese'}, null]
     ]"
     :result="{id:'hamburger'}"
@@ -103,7 +103,7 @@
   <CraftingTable
     shaped
     :grid="[
-      [{id:'wheat'}, {name:'番茄', texture:'/mc-textures/item/apple.png'}, {id:'wheat'}],
+      [{id:'wheat'}, {id:'tomato'}, {id:'wheat'}],
       [{id:'cooked_porkchop'}, {id:'cheese'}, {id:'cooked_porkchop'}],
       [null, {id:'wheat'}, null]
     ]"
@@ -124,9 +124,9 @@
   <CraftingTable
     shaped
     :grid="[
-      [null, {name:'玉米', texture:'/mc-textures/item/melon_seeds.png'}, null],
-      [{name:'生菜', texture:'/mc-textures/item/beetroot_seeds.png'}, {id:'cooked_beef'}, {name:'番茄', texture:'/mc-textures/item/apple.png'}],
-      [null, {name:'辣椒', texture:'/mc-textures/item/red_dye.png'}, null]
+      [null, {id:'corn'}, null],
+      [{id:'lettuce'}, {id:'cooked_beef'}, {id:'tomato'}],
+      [null, {id:'pepper'}, null]
     ]"
     :result="{id:'tacos'}"
   />
@@ -231,7 +231,7 @@
       {id:'cooked_beef'},
       {id:'carrot'},
       {id:'potato'},
-      {name:'洋葱', texture:'/mc-textures/item/beetroot.png'},
+      {id:'onion'},
       {id:'bowl'}
     ]"
     :result="{id:'beef_stew'}"

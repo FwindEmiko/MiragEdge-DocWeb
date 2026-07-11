@@ -19,8 +19,8 @@
   <CraftingTable
     :ingredients="[
       {name:'蒲公英', texture:'/mc-textures/item/dandelion.png'},
-      {name:'生菜', texture:'/mc-textures/item/beetroot_seeds.png'},
-      {name:'番茄', texture:'/mc-textures/item/apple.png'},
+      {id:'lettuce'},
+      {id:'tomato'},
       {id:'bowl'}
     ]"
     :result="{id:'dandelion_salad'}"
@@ -60,7 +60,7 @@
   <CraftingTable
     :ingredients="[
       {id:'seagrass'}, {id:'seagrass'},
-      {name:'生菜', texture:'/mc-textures/item/beetroot_seeds.png'},
+      {id:'lettuce'},
       {id:'bowl'}
     ]"
     :result="{id:'seagrass_salad'}"
@@ -141,9 +141,9 @@
 >
   <CraftingTable
     :ingredients="[
-      {name:'绿豆', texture:'/mc-textures/item/melon_seeds.png'},
-      {name:'绿豆', texture:'/mc-textures/item/melon_seeds.png'},
-      {name:'绿豆', texture:'/mc-textures/item/melon_seeds.png'},
+      {id:'green_bean'},
+      {id:'green_bean'},
+      {id:'green_bean'},
       {id:'bowl'}
     ]"
     :result="{id:'tofu', count:2}"

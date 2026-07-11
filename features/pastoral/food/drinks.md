@@ -19,8 +19,8 @@
 >
   <CraftingTable
     :ingredients="[
-      {name:'啤酒花', texture:'/mc-textures/item/wheat_seeds.png'},
-      {name:'啤酒花', texture:'/mc-textures/item/wheat_seeds.png'},
+      {id:'hop'},
+      {id:'hop'},
       {id:'wheat'},
       {id:'glass_bottle'}
     ]"
@@ -42,7 +42,7 @@
     :ingredients="[
       {id:'milk_bucket'},
       {id:'sugar'},
-      {name:'红薯', texture:'/mc-textures/item/potato.png'},
+      {id:'sweet_potato'},
       {id:'glass_bottle'}
     ]"
     :result="{id:'bubble_tea'}"

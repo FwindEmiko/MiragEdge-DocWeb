@@ -59,7 +59,7 @@
   quote="金灿灿的像金子一样！闻起来像，吃起来也像！"
 >
   <Furnace
-    :input="{name:'玉米', texture:'/mc-textures/item/melon_seeds.png'}"
+    :input="{id:'corn'}"
     :result="{id:'popcorn', count:3}"
     :fuel="{id:'coal'}"
   />
@@ -134,7 +134,7 @@
 >
   <CraftingTable
     :ingredients="[
-      {name:'绯红菌', texture:'/mc-textures/item/nether_wart.png'},
+      {id:'crimson_bracket_fungus'},
       {id:'sugar'}
     ]"
     :result="{id:'crimson_candy', count:2}"
@@ -153,7 +153,7 @@
 >
   <CraftingTable
     :ingredients="[
-      {name:'诡异菌', texture:'/mc-textures/item/warped_fungus_on_a_stick.png'},
+      {id:'warped_glow_fungus'},
       {id:'sugar'}
     ]"
     :result="{id:'warped_candy', count:2}"
