@@ -1,6 +1,6 @@
 # <MapIcon name="cooking" :size="24" /> 更多食物拓展
 
-<MapIcon name="sparkles" :size="16" /> **基于 CustomCrops 作物系统全面重制**
+<MapIcon name="sparkles" :size="16" /> **食物系统全面重制！**
 
 锐界幻境的田园生活产出了丰富的农作物，这些新鲜的食材可以加工成 **57 种特色食物**。每道食物都有独特的合成配方和食用效果。
 
@@ -23,8 +23,6 @@
 
 按类型浏览所有食物，点击进入对应分类页面。
 
-### 早餐简餐
-
 <FeatureCard
   icon="🥐"
   title="早餐简餐"
@@ -32,8 +30,6 @@
   link="/features/pastoral/food/breakfast"
   accent="amber"
 />
-
-### 糖果零食
 
 <FeatureCard
   icon="🍬"
@@ -43,8 +39,6 @@
   accent="pink"
 />
 
-### 沙拉凉菜
-
 <FeatureCard
   icon="🥗"
   title="沙拉凉菜"
@@ -52,8 +46,6 @@
   link="/features/pastoral/food/salads"
   accent="green"
 />
-
-### 烘焙糕点
 
 <FeatureCard
   icon="🥧"
@@ -63,8 +55,6 @@
   accent="orange"
 />
 
-### 主菜肉食
-
 <FeatureCard
   icon="🍖"
   title="主菜肉食"
@@ -72,8 +62,6 @@
   link="/features/pastoral/food/mains"
   accent="red"
 />
-
-### 饮品
 
 <FeatureCard
   icon="🥤"
@@ -83,8 +71,6 @@
   accent="cyan"
 />
 
-### 甜品
-
 <FeatureCard
   icon="🍦"
   title="甜品"
@@ -93,8 +79,6 @@
   accent="purple"
 />
 
-### 煎蛋系列
-
 <FeatureCard
   icon="🥚"
   title="煎蛋系列"
@@ -102,8 +86,6 @@
   link="/features/pastoral/food/eggs"
   accent="yellow"
 />
-
-### 特色食物
 
 <FeatureCard
   icon="🎋"
