@@ -712,3 +712,18 @@ export const defaultFuel: McItemData = {
 export function resolveMcItem(id: string): McItemData | null {
   return mcTextures[id] ?? null
 }
+
+/**
+ * 通过材质路径反查物品名称（用于只有 texture 没有 id 的场景）
+ * 例如 texture='/mc-textures/item/dandelion.png' → '蒲公英'
+ */
+const textureCache: Record<string, string> = {}
+for (const [, data] of Object.entries(mcTextures)) {
+  if (data.texture && !textureCache[data.texture]) {
+    textureCache[data.texture] = data.name
+  }
+}
+
+export function resolveNameByTexture(texture: string): string | null {
+  return textureCache[texture] ?? null
+}

@@ -10,7 +10,7 @@
  * 自定义物品直接传入 { name, texture } 即可。
  */
 import { computed, ref } from 'vue'
-import { resolveMcItem } from '../../data/mc-textures'
+import { resolveMcItem, resolveNameByTexture } from '../../data/mc-textures'
 
 const props = defineProps<{
   /** 物品 id（用于查注册表，如 "wheat"） */
@@ -30,11 +30,15 @@ const props = defineProps<{
 const imgError = ref(false)
 
 // 合并注册表数据与显式 props（显式 props 优先）
+// 查找优先级：显式 name > id 注册表 > texture 反查注册表
 const resolved = computed(() => {
   const regData = props.id ? resolveMcItem(props.id) : null
+  const texturePath = props.texture ?? regData?.texture ?? ''
+  // 如果没有显式 name，尝试通过 texture 反查注册表中的中文名
+  const reverseName = texturePath ? resolveNameByTexture(texturePath) : null
   return {
-    name: props.name ?? regData?.name ?? '',
-    texture: props.texture ?? regData?.texture ?? '',
+    name: props.name ?? regData?.name ?? reverseName ?? '',
+    texture: texturePath,
   }
 })
 
@@ -150,23 +154,29 @@ function onImgError() {
   bottom: calc(100% + 6px);
   left: 50%;
   transform: translateX(-50%);
-  background: rgba(16, 16, 16, 0.92);
+  background: rgba(16, 16, 16, 0.95);
   color: #fff;
   font-size: 12px;
   line-height: 1.4;
-  padding: 4px 8px;
+  padding: 4px 10px;
   border-radius: 4px;
   white-space: nowrap;
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.15s ease;
-  z-index: 100;
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  z-index: 9999;
+  border: 1px solid rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(4px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
 }
 
 .mc-item.has-tooltip:hover .mc-item-tooltip {
   opacity: 1;
+}
+
+/* 悬停时提升整个 mc-item 的层叠优先级 */
+.mc-item.has-tooltip:hover {
+  z-index: 999;
 }
 
 /* 暗色模式微调 */

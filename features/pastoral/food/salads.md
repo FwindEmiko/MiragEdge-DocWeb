@@ -6,8 +6,6 @@
 本页收录 10 种沙拉凉菜，从普通到稀有品质，涵盖生命恢复、夜视、海豚恩惠等多种实用效果。
 :::
 
----
-
 ## 蒲公英沙拉
 
 <FoodEntry
@@ -29,8 +27,6 @@
   />
 </FoodEntry>
 
----
-
 ## 浆果沙拉
 
 <FoodEntry
@@ -51,8 +47,6 @@
   />
 </FoodEntry>
 
----
-
 ## 海草沙拉
 
 <FoodEntry
@@ -72,8 +66,6 @@
     :result="{id:'seagrass_salad'}"
   />
 </FoodEntry>
-
----
 
 ## 洞穴杂拌
 
@@ -96,8 +88,6 @@
   />
 </FoodEntry>
 
----
-
 ## 海洋杂拌
 
 <FoodEntry
@@ -119,8 +109,6 @@
   />
 </FoodEntry>
 
----
-
 ## 幽寂杂拌
 
 <FoodEntry
@@ -140,8 +128,6 @@
     :result="{id:'sculk_medley'}"
   />
 </FoodEntry>
-
----
 
 ## 豆腐
 
@@ -164,8 +150,6 @@
   />
 </FoodEntry>
 
----
-
 ## 臭豆腐
 
 <FoodEntry
@@ -184,8 +168,6 @@
     :result="{id:'stinky_tofu'}"
   />
 </FoodEntry>
-
----
 
 ## 草莓酱
 
@@ -207,8 +189,6 @@
   />
 </FoodEntry>
 
----
-
 ## 仙人掌切块
 
 <FoodEntry
@@ -228,59 +208,5 @@
   />
 </FoodEntry>
 
----
-
-## 页面导航
-
-<div class="food-nav">
-  <a href="/features/pastoral/food/snacks" class="nav-card nav-prev">
-    <span class="nav-label">← 上一分类</span>
-    <span class="nav-title">糖果零食</span>
-  </a>
-  <a href="/features/pastoral/food/bakery" class="nav-card nav-next">
-    <span class="nav-label">下一分类 →</span>
-    <span class="nav-title">烘焙糕点</span>
-  </a>
-</div>
-
-<style>
-.food-nav {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  margin: 24px 0;
-}
-.nav-card {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  padding: 12px 16px;
-  border-radius: 8px;
-  border: 1px solid rgba(255,255,255,0.1);
-  background: rgba(255,255,255,0.03);
-  text-decoration: none;
-  transition: all 0.2s ease;
-}
-.nav-card:hover {
-  border-color: rgba(255,255,255,0.25);
-  background: rgba(255,255,255,0.06);
-  transform: translateY(-1px);
-}
-.nav-next { text-align: right; }
-.nav-label {
-  font-size: 12px;
-  color: var(--vp-c-text-2, rgba(255,255,255,0.5));
-}
-.nav-title {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--vp-c-text-1, rgba(255,255,255,0.9));
-}
-@media (max-width: 640px) {
-  .food-nav { grid-template-columns: 1fr; }
-}
-</style>
-
----
 
 *本页为沙拉凉菜分类 · 设计与数值可能随游戏版本调整*

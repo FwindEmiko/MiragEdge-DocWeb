@@ -6,8 +6,6 @@
 下表按品质从低到高排列，同品质内按饥饿值排序。品质颜色含义见 [总览页](/features/pastoral/food/info#食物品质分级)。
 :::
 
----
-
 ## 完整速查表
 
 <div class="food-ref-table">
@@ -93,8 +91,6 @@
 }
 </style>
 
----
-
 ## 按效果分类
 
 需要特定 buff 时，可按效果快速查找：
@@ -152,8 +148,6 @@
 | 肉夹馍 | 60s 速度 I | <span style="color:#3b82f6;font-weight:700">稀有</span> |
 | 七彩蛋羹 | 5min 速度 II | <span style="color:#f59e0b;font-weight:700">传说</span> |
 
----
-
 ## 技术说明
 
 <MapIcon name="info" :size="20" /> 食物特殊效果通过 **FwindEmiCore** 物品功能核心 + **CustomCrops** 自定义词条联合实现：
@@ -163,59 +157,5 @@
 - **合成配方**：由 CustomCrops/Minecraft 配方系统共同管理
 - **饮品杯具回收**：饮用后自动返还空瓶/空桶（`consume-replacement` 机制）
 
----
-
-## 页面导航
-
-<div class="food-nav">
-  <a href="/features/pastoral/food/special" class="nav-card nav-prev">
-    <span class="nav-label">← 上一分类</span>
-    <span class="nav-title">特色食物</span>
-  </a>
-  <a href="/features/pastoral/food/info" class="nav-card nav-back">
-    <span class="nav-label">返回总览</span>
-    <span class="nav-title">食物系统总览</span>
-  </a>
-</div>
-
-<style>
-.food-nav {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  margin: 24px 0;
-}
-.nav-card {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  padding: 12px 16px;
-  border-radius: 8px;
-  border: 1px solid rgba(255,255,255,0.1);
-  background: rgba(255,255,255,0.03);
-  text-decoration: none;
-  transition: all 0.2s ease;
-}
-.nav-card:hover {
-  border-color: rgba(255,255,255,0.25);
-  background: rgba(255,255,255,0.06);
-  transform: translateY(-1px);
-}
-.nav-back { text-align: right; }
-.nav-label {
-  font-size: 12px;
-  color: var(--vp-c-text-2, rgba(255,255,255,0.5));
-}
-.nav-title {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--vp-c-text-1, rgba(255,255,255,0.9));
-}
-@media (max-width: 640px) {
-  .food-nav { grid-template-columns: 1fr; }
-}
-</style>
-
----
 
 *本页为食物速查表与技术说明 · 设计与数值可能随游戏版本调整*

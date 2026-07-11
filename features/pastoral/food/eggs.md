@@ -6,8 +6,6 @@
 本页收录 3 种煎蛋料理，品质从普通到传说，全部通过熔炉煎制而成。
 :::
 
----
-
 ## 煎海龟蛋
 
 <FoodEntry
@@ -24,8 +22,6 @@
     :fuel="{id:'coal'}"
   />
 </FoodEntry>
-
----
 
 ## 煎嗅探兽蛋
 
@@ -44,8 +40,6 @@
   />
 </FoodEntry>
 
----
-
 ## 煎龙蛋
 
 <FoodEntry
@@ -63,59 +57,5 @@
   />
 </FoodEntry>
 
----
-
-## 页面导航
-
-<div class="food-nav">
-  <a href="/features/pastoral/food/desserts" class="nav-card nav-prev">
-    <span class="nav-label">← 上一分类</span>
-    <span class="nav-title">甜品</span>
-  </a>
-  <a href="/features/pastoral/food/special" class="nav-card nav-next">
-    <span class="nav-label">下一分类 →</span>
-    <span class="nav-title">特色食物</span>
-  </a>
-</div>
-
-<style>
-.food-nav {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  margin: 24px 0;
-}
-.nav-card {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  padding: 12px 16px;
-  border-radius: 8px;
-  border: 1px solid rgba(255,255,255,0.1);
-  background: rgba(255,255,255,0.03);
-  text-decoration: none;
-  transition: all 0.2s ease;
-}
-.nav-card:hover {
-  border-color: rgba(255,255,255,0.25);
-  background: rgba(255,255,255,0.06);
-  transform: translateY(-1px);
-}
-.nav-next { text-align: right; }
-.nav-label {
-  font-size: 12px;
-  color: var(--vp-c-text-2, rgba(255,255,255,0.5));
-}
-.nav-title {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--vp-c-text-1, rgba(255,255,255,0.9));
-}
-@media (max-width: 640px) {
-  .food-nav { grid-template-columns: 1fr; }
-}
-</style>
-
----
 
 *本页为煎蛋系列分类 · 设计与数值可能随游戏版本调整*

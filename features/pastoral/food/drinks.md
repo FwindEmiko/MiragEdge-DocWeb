@@ -6,8 +6,6 @@
 本页收录 7 种饮品（含汽水系列 4 种），以精良品质为主，饮用后返还空瓶/空杯。
 :::
 
----
-
 ## 啤酒
 
 <FoodEntry
@@ -30,8 +28,6 @@
   />
 </FoodEntry>
 
----
-
 ## 珍珠奶茶
 
 <FoodEntry
@@ -52,8 +48,6 @@
     :result="{id:'bubble_tea'}"
   />
 </FoodEntry>
-
----
 
 ## 汽水四兄弟
 
@@ -139,59 +133,5 @@
 }
 </style>
 
----
-
-## 页面导航
-
-<div class="food-nav">
-  <a href="/features/pastoral/food/mains" class="nav-card nav-prev">
-    <span class="nav-label">← 上一分类</span>
-    <span class="nav-title">主菜肉食</span>
-  </a>
-  <a href="/features/pastoral/food/desserts" class="nav-card nav-next">
-    <span class="nav-label">下一分类 →</span>
-    <span class="nav-title">甜品</span>
-  </a>
-</div>
-
-<style>
-.food-nav {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  margin: 24px 0;
-}
-.nav-card {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  padding: 12px 16px;
-  border-radius: 8px;
-  border: 1px solid rgba(255,255,255,0.1);
-  background: rgba(255,255,255,0.03);
-  text-decoration: none;
-  transition: all 0.2s ease;
-}
-.nav-card:hover {
-  border-color: rgba(255,255,255,0.25);
-  background: rgba(255,255,255,0.06);
-  transform: translateY(-1px);
-}
-.nav-next { text-align: right; }
-.nav-label {
-  font-size: 12px;
-  color: var(--vp-c-text-2, rgba(255,255,255,0.5));
-}
-.nav-title {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--vp-c-text-1, rgba(255,255,255,0.9));
-}
-@media (max-width: 640px) {
-  .food-nav { grid-template-columns: 1fr; }
-}
-</style>
-
----
 
 *本页为饮品分类 · 设计与数值可能随游戏版本调整*

@@ -99,7 +99,6 @@ const cardStyle = computed(() => ({
   border-radius: 10px;
   border: 1px solid var(--qe-border, rgba(255,255,255,0.1));
   background: linear-gradient(135deg, var(--qe-glow, transparent), transparent 60%);
-  overflow: hidden;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -117,6 +116,7 @@ const cardStyle = computed(() => ({
   padding: 10px 14px;
   border-bottom: 1px solid var(--qe-border, rgba(255,255,255,0.06));
   background: var(--qe-bg, transparent);
+  border-radius: 10px 10px 0 0;
 }
 
 .fe-name {
@@ -200,6 +200,12 @@ const cardStyle = computed(() => ({
   font-style: italic;
   line-height: 1.6;
   border-top: 1px dashed rgba(255, 255, 255, 0.06);
+  border-radius: 0 0 10px 10px;
+}
+
+/* 无引言时 body 需要底部圆角 */
+.fe-body:last-child {
+  border-radius: 0 0 10px 10px;
 }
 
 .fe-quote::before {

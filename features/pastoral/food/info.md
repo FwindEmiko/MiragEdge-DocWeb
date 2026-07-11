@@ -8,8 +8,6 @@
 所有农作物的种子都可以在游戏内获取，种植系统详见「[更多种植](/features/pastoral/croups/info)」页面。
 :::
 
----
-
 ## 食物品质分级
 
 食物按稀有度分为四个品质等级，品质越高，效果越强力，材料也越稀有。
@@ -20,8 +18,6 @@
 | <span style="color:#22c55e;font-weight:700">精良</span> | 进阶食物 | 有实用 buff 效果 | 草莓甜筒、热狗、棉花糖 |
 | <span style="color:#3b82f6;font-weight:700">稀有</span> | 强力食物 | 强力战斗 buff | 大火腿、牛肉炖、汉堡 |
 | <span style="color:#f59e0b;font-weight:700">传说</span> | 终极食物 | 终极增益，材料极稀有 | 七彩蛋羹、煎龙蛋 |
-
----
 
 ## 食物分类
 
@@ -117,14 +113,10 @@
   accent="teal"
 />
 
----
-
 ## 快速导航
 
 - **按品质查找**：前往 [食物速查表](/features/pastoral/food/reference) 查看所有食物的属性对比
 - **按效果查找**：速查表按核心效果分类，可快速找到所需 buff 的食物
 - **技术说明**：食物系统的实现原理详见 [速查表页面底部](/features/pastoral/food/reference#技术说明)
-
----
 
 *本页面为锐界幻境食物系统总览 · 设计与数值可能随游戏版本调整*
