@@ -2,6 +2,33 @@
 
 部分为闭源插件，会无法访问仓库
 
+## MiragEdgeHome（星辉锚点系统）
+### 基础信息：
+- 作者：F.windEmiko (狐风轩汐)
+- 代码仓库：*待上传*
+### 功能：
+- 星辉锚点系统 — 玩家可设置个人家园锚点，自由命名与自定图标
+- 数量数据驱动 — 管理员可单独调整各玩家的锚点上限
+- 公共星辉锚点 — 公开家园供其他玩家传送，可设置访问费用（灵叶），费用自动转账给主人
+- 星辉信使 — TPA 传送请求系统，含跨服支持、灵叶消耗机制和连续拒绝黑名单保护
+- 传送后效果 — 成功传送后施加缓慢+失明效果，防迷惑定位
+- 双端体验 — Java 版 MiniMessage 背包 GUI + 基岩版 Floodgate 表单
+- Vault 经济集成 — 递增费用机制、TPA 消耗
+- PlaceholderAPI 占位符支持（导航栏/计分板显示锚点数量）
+- 跨服数据同步 — MySQL + Redis 双模式，Velocity 代理网络全兼容
+- 替代旧版米饭 PlayerWarp
+
+## MiragEdgeTitle（称号与入服消息）
+### 基础信息: 
+- 作者：F.windEmiko (狐风轩汐)
+- 代码仓库：https://github.com/fwindemiko/MiragEdgeTitle
+### 功能：
+- 称号系统：称号商城 / 称号仓库 / 自定义称号，聊天前缀显示
+- 入服消息系统：成就式解锁的个性化进/退服消息广播
+- 基岩版 Floodgate 完整支持
+- PlaceholderAPI 变量扩展
+- 替代旧 FE_HelloBro 入服消息插件
+
 ## FE_Pluck（除魔）
 ### 基础信息: 
 - 作者：F.windEmiko (狐风轩汐)
@@ -61,14 +88,6 @@
 - 代码仓库：https://github.com/fwindemiko/FE_RefreshPapi
 ### 功能：
 - 锐界幻境服务器的自定义占位符变量系统
-
-## FE_HelloBro
-### 基础信息: 
-- 作者：F.windEmiko (狐风轩汐)
-- 代码仓库：https://github.com/fwindemiko/FE_HelloBro
-### 功能：
-- 锐界幻境服务器的自定义加入退出消息插件
-- 支持权限控制有权重的特殊身份消息
 
 ## FE_NoWeaponFlight
 ### 基础信息: 

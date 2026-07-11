@@ -269,8 +269,16 @@ export default defineConfig({
               link: '/features/adventure/deathreincarnation',
             },
             {
+              text: '🌟 星辉锚点',
+              link: '/features/adventure/miragedgehome',
+            },
+            {
               text: '🪶 鞘翅绑定',
               link: '/features/adventure/elytrabind',
+            },
+            {
+              text: '🏷️ 称号与登场',
+              link: '/features/adventure/identity',
             },
             {
               text: '✨ 更多附魔',
@@ -402,6 +410,8 @@ export default defineConfig({
       '/plugins/': [
         { text: '📋 项目开发说明', link: '/plugins/index' },
         { text: '📊 原创插件列表', link: '/plugins/list' },
+        { text: '🌟 星辉锚点', link: '/plugins/miragedgehome' },
+        { text: '🏷️ 称号与入服消息', link: '/plugins/miragedgetitle' },
         {
           text: '⚔️ PVP竞技场系统',
           collapsed: false,
