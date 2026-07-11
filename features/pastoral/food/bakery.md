@@ -53,9 +53,9 @@
 <FoodEntry
   name="奶油纸杯蛋糕"
   quality="fine"
-  :hunger="9"
-  :saturation="10.0"
-  effect="20秒饱和 + 45秒抗性提升 I + 60秒移动速度 +15%"
+  :hunger="7"
+  :saturation="3.0"
+  effect="5秒饱和 + 30秒抗性提升 I + 40秒移动速度 +10%"
   quote="小时候挺爱吃的...长大后好像只能在锐界幻境吃到了，一口回到童年"
 >
   <CraftingTable

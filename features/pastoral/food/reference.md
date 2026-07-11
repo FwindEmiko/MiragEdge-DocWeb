@@ -20,8 +20,10 @@
 | 草莓 | 3 | 1.0 | <span style="color:#9ca3af;font-weight:700">普通</span> | - | 特色食物 |
 | 煎海龟蛋 | 3 | 2.0 | <span style="color:#9ca3af;font-weight:700">普通</span> | 10s 缓慢 | 煎蛋系列 |
 | 煎蛋 | 4 | 3.0 | <span style="color:#9ca3af;font-weight:700">普通</span> | - | 早餐简餐 |
+| 爆米花 | 4 | 3.0 | <span style="color:#9ca3af;font-weight:700">普通</span> | - | 糖果零食 |
 | 奶酪 | 4 | 5.0 | <span style="color:#9ca3af;font-weight:700">普通</span> | - | 早餐简餐 |
 | 胡萝卜糖果 | 4 | 1.5 | <span style="color:#9ca3af;font-weight:700">普通</span> | 5s 速度 I | 糖果零食 |
+| 烤南瓜 | 5 | 4.0 | <span style="color:#9ca3af;font-weight:700">普通</span> | 5s 生命恢复 | 早餐简餐 |
 | 可口可乐 | 5 | 4.0 | <span style="color:#9ca3af;font-weight:700">普通</span> | 15s 速度 I | 饮品 |
 | 百事可乐 | 5 | 4.0 | <span style="color:#9ca3af;font-weight:700">普通</span> | 15s 跳跃 I | 饮品 |
 | 雪碧 | 5 | 4.0 | <span style="color:#9ca3af;font-weight:700">普通</span> | 15s 缓降 | 饮品 |
@@ -31,13 +33,11 @@
 | 紫颂果糖果 | 5 | 1.0 | <span style="color:#9ca3af;font-weight:700">普通</span> | 随机传送 | 糖果零食 |
 | 甜浆果纸杯蛋糕 | 5 | 5.0 | <span style="color:#9ca3af;font-weight:700">普通</span> | 8s 抗性提升 | 烘焙糕点 |
 | 发光浆果纸杯蛋糕 | 5 | 5.0 | <span style="color:#9ca3af;font-weight:700">普通</span> | 抗性+自发光 | 烘焙糕点 |
-| 爆米花 | 7 | 14.0 | <span style="color:#9ca3af;font-weight:700">普通</span> | - | 糖果零食 |
 | 吐司 | 7 | 8.0 | <span style="color:#9ca3af;font-weight:700">普通</span> | 10s 生命恢复 | 早餐简餐 |
 | 海草沙拉 | 6 | 7.0 | <span style="color:#9ca3af;font-weight:700">普通</span> | 30s 海豚恩惠 | 沙拉凉菜 |
 | 草莓酱 | 6 | 3.0 | <span style="color:#9ca3af;font-weight:700">普通</span> | 10s 速度 I | 沙拉凉菜 |
 | 粽子 | 6 | 4.0 | <span style="color:#9ca3af;font-weight:700">普通</span> | 跳跃+回复 | 特色食物 |
 | 派 | 9 | 6.0 | <span style="color:#9ca3af;font-weight:700">普通</span> | - | 烘焙糕点 |
-| 烤南瓜 | 10 | 6.0 | <span style="color:#9ca3af;font-weight:700">普通</span> | 20s 生命恢复 | 早餐简餐 |
 | 棉花糖 | 6 | 4.0 | <span style="color:#22c55e;font-weight:700">精良</span> | 45s 缓降 | 糖果零食 |
 | 草莓甜甜圈 | 6 | 5.0 | <span style="color:#22c55e;font-weight:700">精良</span> | 回复+反胃 | 烘焙糕点 |
 | 蒲公英沙拉 | 6 | 7.0 | <span style="color:#22c55e;font-weight:700">精良</span> | 先苦后甜 | 沙拉凉菜 |
@@ -45,16 +45,16 @@
 | 海洋杂拌 | 6 | 7.0 | <span style="color:#22c55e;font-weight:700">精良</span> | 潮涌+海豚 | 沙拉凉菜 |
 | 臭豆腐 | 6 | 4.0 | <span style="color:#22c55e;font-weight:700">精良</span> | 范围负面 | 沙拉凉菜 |
 | 浆果沙拉 | 7 | 8.0 | <span style="color:#22c55e;font-weight:700">精良</span> | 背刺 +50% | 沙拉凉菜 |
+| 奶油纸杯蛋糕 | 7 | 3.0 | <span style="color:#22c55e;font-weight:700">精良</span> | 饱和+抗性+加速 | 烘焙糕点 |
 | 雷霆大面包 | 10 | 12.0 | <span style="color:#22c55e;font-weight:700">精良</span> | 5s 饱和 | 早餐简餐 |
 | 棒棒糖 | 8 | 5.0 | <span style="color:#22c55e;font-weight:700">精良</span> | 45s 抗性提升 I | 糖果零食 |
 | 苦力怕饼干 | 8 | 3.0 | <span style="color:#22c55e;font-weight:700">精良</span> | 小型爆炸 | 糖果零食 |
-| 热狗 | 9 | 14.0 | <span style="color:#22c55e;font-weight:700">精良</span> | 速度+回复 | 主菜肉食 |
+| 热狗 | 9 | 8.0 | <span style="color:#22c55e;font-weight:700">精良</span> | 速度+急迫 | 主菜肉食 |
 | 寿司 | 8 | 5.0 | <span style="color:#22c55e;font-weight:700">精良</span> | 20s 海豚恩惠 | 主菜肉食 |
-| 叫花鸡 | 8 | 14.0 | <span style="color:#22c55e;font-weight:700">精良</span> | 动物回复 | 主菜肉食 |
+| 叫花鸡 | 8 | 8.0 | <span style="color:#22c55e;font-weight:700">精良</span> | 动物回复 | 主菜肉食 |
 | 墨西哥塔可 | 8 | 7.0 | <span style="color:#22c55e;font-weight:700">精良</span> | 生成僵尸 | 主菜肉食 |
-| 披萨 | 12 | 14.0 | <span style="color:#22c55e;font-weight:700">精良</span> | 45s 生命恢复 | 主菜肉食 |
-| 炖鱼汤 | 10 | 12.0 | <span style="color:#22c55e;font-weight:700">精良</span> | 45s 生命恢复 | 主菜肉食 |
-| 奶油纸杯蛋糕 | 9 | 10.0 | <span style="color:#22c55e;font-weight:700">精良</span> | 饱和+抗性+加速 | 烘焙糕点 |
+| 披萨 | 12 | 10.0 | <span style="color:#22c55e;font-weight:700">精良</span> | 15s 速度 II | 主菜肉食 |
+| 炖鱼汤 | 10 | 12.0 | <span style="color:#22c55e;font-weight:700">精良</span> | 海豚+回复 | 主菜肉食 |
 | 草莓甜筒 | 8 | 6.0 | <span style="color:#22c55e;font-weight:700">精良</span> | 30s 抗火 | 甜品 |
 | 草莓巧克力冰淇淋 | 9 | 7.0 | <span style="color:#22c55e;font-weight:700">精良</span> | 速度II+寒气 | 甜品 |
 | 啤酒 | 2 | 4.0 | <span style="color:#22c55e;font-weight:700">精良</span> | 饱和+醉了 | 饮品 |
@@ -63,12 +63,12 @@
 | 大火腿 | 10 | 15.0 | <span style="color:#3b82f6;font-weight:700">稀有</span> | 力量II+暴击 | 主菜肉食 |
 | 汉堡 | 16 | 18.0 | <span style="color:#3b82f6;font-weight:700">稀有</span> | 饱和+回复+抗性 | 主菜肉食 |
 | 熔岩烤鸡 | 9 | 14.0 | <span style="color:#3b82f6;font-weight:700">稀有</span> | 抗火+发光+熔岩行 | 主菜肉食 |
-| 牛肉炖 | 14 | 24.0 | <span style="color:#3b82f6;font-weight:700">稀有</span> | 温暖+回复+饱和 | 主菜肉食 |
-| 幽寂杂拌 | 14 | 18.0 | <span style="color:#3b82f6;font-weight:700">稀有</span> | 饱和+夜视 | 沙拉凉菜 |
-| 蜂蜜陶罐 | 20 | 14.0 | <span style="color:#3b82f6;font-weight:700">稀有</span> | 回复II+急迫+失明 | 甜品 |
+| 牛肉炖 | 12 | 14.0 | <span style="color:#3b82f6;font-weight:700">稀有</span> | 温暖+回复+饱和 | 主菜肉食 |
+| 幽寂杂拌 | 14 | 18.0 | <span style="color:#3b82f6;font-weight:700">稀有</span> | 饱和+夜视(8min) | 沙拉凉菜 |
+| 蜂蜜陶罐 | 14 | 12.0 | <span style="color:#3b82f6;font-weight:700">稀有</span> | 回复II+急迫+失明 | 甜品 |
 | 煎嗅探兽蛋 | 7 | 4.0 | <span style="color:#3b82f6;font-weight:700">稀有</span> | 回复+抗性 | 煎蛋系列 |
-| 七彩蛋羹 | 4 | 20.0 | <span style="color:#f59e0b;font-weight:700">传说</span> | 全属性暴涨 | 甜品 |
-| 煎龙蛋 | 2 | 20.0 | <span style="color:#f59e0b;font-weight:700">传说</span> | 近乎无敌 | 煎蛋系列 |
+| 七彩蛋羹 | 4 | 20.0 | <span style="color:#f59e0b;font-weight:700">传说</span> | 全属性暴涨🌟 | 甜品 |
+| 煎龙蛋 | 2 | 20.0 | <span style="color:#f59e0b;font-weight:700">传说</span> | 近乎无敌🌟 | 煎蛋系列 |
 
 </div>
 
@@ -100,15 +100,16 @@
 | 食物 | 效果 | 品质 |
 |------|------|------|
 | 吐司 | 10s 生命恢复 | <span style="color:#9ca3af;font-weight:700">普通</span> |
-| 烤南瓜 | 20s 生命恢复 | <span style="color:#9ca3af;font-weight:700">普通</span> |
+| 烤南瓜 | 5s 生命恢复 | <span style="color:#9ca3af;font-weight:700">普通</span> |
 | 蒲公英沙拉 | 5s 生命恢复 II | <span style="color:#22c55e;font-weight:700">精良</span> |
 | 浆果沙拉 | 30s 生命恢复 | <span style="color:#22c55e;font-weight:700">精良</span> |
-| 披萨 | 45s 生命恢复 | <span style="color:#22c55e;font-weight:700">精良</span> |
-| 炖鱼汤 | 45s 生命恢复 | <span style="color:#22c55e;font-weight:700">精良</span> |
+| 草莓甜甜圈 | 8s 生命恢复 | <span style="color:#22c55e;font-weight:700">精良</span> |
 | 珍珠奶茶 | 8s 生命恢复 | <span style="color:#22c55e;font-weight:700">精良</span> |
+| 炖鱼汤 | 10s 生命恢复 | <span style="color:#22c55e;font-weight:700">精良</span> |
 | 肉夹馍 | 30s 生命恢复 | <span style="color:#3b82f6;font-weight:700">稀有</span> |
 | 汉堡 | 45s 生命恢复 | <span style="color:#3b82f6;font-weight:700">稀有</span> |
 | 蜂蜜陶罐 | 45s 生命恢复 II | <span style="color:#3b82f6;font-weight:700">稀有</span> |
+| 牛肉炖 | 45s 生命恢复 | <span style="color:#3b82f6;font-weight:700">稀有</span> |
 | 煎嗅探兽蛋 | 45s 生命恢复 | <span style="color:#3b82f6;font-weight:700">稀有</span> |
 | 七彩蛋羹 | 5min 生命恢复 II | <span style="color:#f59e0b;font-weight:700">传说</span> |
 | 煎龙蛋 | 30min 生命恢复 I | <span style="color:#f59e0b;font-weight:700">传说</span> |
