@@ -49,7 +49,7 @@
   quality="common"
   :hunger="7"
   :saturation="8.0"
-  effect="🍞 早餐能量：15秒生命恢复 + 接下来 3秒移动速度 +30%（热乎的吐司最香！）"
+  effect="15秒生命恢复 + 10秒速度 I。"
   quote="锐界幻境早餐风味，搭配培根煎蛋食用更佳"
 >
   <Furnace
@@ -66,7 +66,7 @@
   quality="fine"
   :hunger="10"
   :saturation="12.0"
-  effect="⚡ 雷霆充能：10秒饱和 + 5秒后若仍满饱食→释放一次无伤雷击（纯视觉+震慑生物！）"
+  effect="10秒饱和。5秒后若仍处于满饱食状态，额外回复 4点生命值。"
   quote="三层面包锻造而成，雷霆之力蕴藏其中"
 >
   <CraftingTable
@@ -104,7 +104,7 @@
   quality="common"
   :hunger="5"
   :saturation="4.0"
-  effect="🎃 南瓜护盾：8秒生命恢复 + 8秒内受到伤害降低 15%"
+  effect="8秒生命恢复 + 8秒内受到伤害降低 15%。"
   quote="锐界幻境烧烤风味，自然的香甜"
 >
   <Furnace

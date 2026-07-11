@@ -33,42 +33,42 @@
 | 紫颂果糖果 | 5 | 1.0 | <span style="color:#9ca3af;font-weight:700">普通</span> | 漂浮传送 | 糖果零食 |
 | 甜浆果纸杯蛋糕 | 5 | 5.0 | <span style="color:#9ca3af;font-weight:700">普通</span> | 8s 抗性提升 | 烘焙糕点 |
 | 发光浆果纸杯蛋糕 | 5 | 5.0 | <span style="color:#9ca3af;font-weight:700">普通</span> | 抗性+自发光 | 烘焙糕点 |
-| 吐司 | 7 | 8.0 | <span style="color:#9ca3af;font-weight:700">普通</span> | 早餐能量 | 早餐简餐 |
+| 吐司 | 7 | 8.0 | <span style="color:#9ca3af;font-weight:700">普通</span> | 回复+速度 | 早餐简餐 |
 | 海草沙拉 | 6 | 7.0 | <span style="color:#9ca3af;font-weight:700">普通</span> | 30s 海豚恩惠 | 沙拉凉菜 |
 | 草莓酱 | 6 | 3.0 | <span style="color:#9ca3af;font-weight:700">普通</span> | 10s 速度 I | 沙拉凉菜 |
 | 粽子 | 6 | 4.0 | <span style="color:#9ca3af;font-weight:700">普通</span> | 跳跃+回复 | 特色食物 |
 | 派 | 9 | 6.0 | <span style="color:#9ca3af;font-weight:700">普通</span> | - | 烘焙糕点 |
-| 棉花糖 | 6 | 4.0 | <span style="color:#22c55e;font-weight:700">精良</span> | 云朵漫步 | 糖果零食 |
+| 棉花糖 | 6 | 4.0 | <span style="color:#22c55e;font-weight:700">精良</span> | 缓降免摔(CD) | 糖果零食 |
 | 草莓甜甜圈 | 6 | 5.0 | <span style="color:#22c55e;font-weight:700">精良</span> | 回复+反胃 | 烘焙糕点 |
 | 蒲公英沙拉 | 6 | 7.0 | <span style="color:#22c55e;font-weight:700">精良</span> | 先苦后甜 | 沙拉凉菜 |
-| 洞穴杂拌 | 6 | 7.0 | <span style="color:#22c55e;font-weight:700">精良</span> | 矿工之魂 | 沙拉凉菜 |
+| 洞穴杂拌 | 6 | 7.0 | <span style="color:#22c55e;font-weight:700">精良</span> | 夜视+急迫III | 沙拉凉菜 |
 | 海洋杂拌 | 6 | 7.0 | <span style="color:#22c55e;font-weight:700">精良</span> | 海洋之子 | 沙拉凉菜 |
-| 臭豆腐 | 6 | 4.0 | <span style="color:#22c55e;font-weight:700">精良</span> | 臭气熏天 | 沙拉凉菜 |
-| 浆果沙拉 | 7 | 8.0 | <span style="color:#22c55e;font-weight:700">精良</span> | 背刺 +50% | 沙拉凉菜 |
-| 奶油纸杯蛋糕 | 7 | 3.0 | <span style="color:#22c55e;font-weight:700">精良</span> | 童年疾跑 | 烘焙糕点 |
-| 雷霆大面包 | 10 | 12.0 | <span style="color:#22c55e;font-weight:700">精良</span> | 雷霆充能 | 早餐简餐 |
-| 棒棒糖 | 8 | 5.0 | <span style="color:#22c55e;font-weight:700">精良</span> | 甜蜜护盾 | 糖果零食 |
-| 苦力怕饼干 | 8 | 3.0 | <span style="color:#22c55e;font-weight:700">精良</span> | 延时爆破 | 糖果零食 |
+| 臭豆腐 | 6 | 4.0 | <span style="color:#22c55e;font-weight:700">精良</span> | 削弱+力量 | 沙拉凉菜 |
+| 浆果沙拉 | 7 | 8.0 | <span style="color:#22c55e;font-weight:700">精良</span> | 回复+背刺(CD) | 沙拉凉菜 |
+| 奶油纸杯蛋糕 | 7 | 3.0 | <span style="color:#22c55e;font-weight:700">精良</span> | 饱和+抗性+加速 | 烘焙糕点 |
+| 雷霆大面包 | 10 | 12.0 | <span style="color:#22c55e;font-weight:700">精良</span> | 饱和+满腹回复 | 早餐简餐 |
+| 棒棒糖 | 8 | 5.0 | <span style="color:#22c55e;font-weight:700">精良</span> | 抗性+击杀回血 | 糖果零食 |
+| 苦力怕饼干 | 8 | 3.0 | <span style="color:#22c55e;font-weight:700">精良</span> | 延时爆破(CD) | 糖果零食 |
 | 热狗 | 9 | 8.0 | <span style="color:#22c55e;font-weight:700">精良</span> | 速度+急迫 | 主菜肉食 |
 | 寿司 | 8 | 5.0 | <span style="color:#22c55e;font-weight:700">精良</span> | 20s 海豚恩惠 | 主菜肉食 |
-| 叫花鸡 | 8 | 8.0 | <span style="color:#22c55e;font-weight:700">精良</span> | 荷叶奇香 | 主菜肉食 |
-| 墨西哥塔可 | 8 | 7.0 | <span style="color:#22c55e;font-weight:700">精良</span> | 烈焰吐息 | 主菜肉食 |
+| 叫花鸡 | 8 | 8.0 | <span style="color:#22c55e;font-weight:700">精良</span> | 吸引+骑乘 | 主菜肉食 |
+| 墨西哥塔可 | 8 | 7.0 | <span style="color:#22c55e;font-weight:700">精良</span> | 自动喷火 | 主菜肉食 |
 | 披萨 | 12 | 10.0 | <span style="color:#22c55e;font-weight:700">精良</span> | 15s 速度 II | 主菜肉食 |
 | 炖鱼汤 | 10 | 12.0 | <span style="color:#22c55e;font-weight:700">精良</span> | 海豚+回复 | 主菜肉食 |
-| 草莓甜筒 | 8 | 6.0 | <span style="color:#22c55e;font-weight:700">精良</span> | 冰火两重天 | 甜品 |
+| 草莓甜筒 | 8 | 6.0 | <span style="color:#22c55e;font-weight:700">精良</span> | 抗火+点燃 | 甜品 |
 | 草莓巧克力冰淇淋 | 9 | 7.0 | <span style="color:#22c55e;font-weight:700">精良</span> | 寒冰行者 | 甜品 |
-| 啤酒 | 2 | 4.0 | <span style="color:#22c55e;font-weight:700">精良</span> | 微醺之力 | 饮品 |
-| 珍珠奶茶 | 2 | 4.0 | <span style="color:#22c55e;font-weight:700">精良</span> | 珍珠弹跳 | 饮品 |
+| 啤酒 | 2 | 4.0 | <span style="color:#22c55e;font-weight:700">精良</span> | 力量+醉拳 | 饮品 |
+| 珍珠奶茶 | 2 | 4.0 | <span style="color:#22c55e;font-weight:700">精良</span> | 弹跳+传送 | 饮品 |
 | 肉夹馍 | 8 | 4.0 | <span style="color:#3b82f6;font-weight:700">稀有</span> | 馍力全开 | 主菜肉食 |
-| 大火腿 | 10 | 15.0 | <span style="color:#3b82f6;font-weight:700">稀有</span> | 力量II+暴击 | 主菜肉食 |
+| 大火腿 | 10 | 15.0 | <span style="color:#3b82f6;font-weight:700">稀有</span> | 力量II+暴击(CD) | 主菜肉食 |
 | 汉堡 | 16 | 18.0 | <span style="color:#3b82f6;font-weight:700">稀有</span> | 满腹之力 | 主菜肉食 |
 | 熔岩烤鸡 | 9 | 14.0 | <span style="color:#3b82f6;font-weight:700">稀有</span> | 熔岩附体 | 主菜肉食 |
 | 牛肉炖 | 12 | 14.0 | <span style="color:#3b82f6;font-weight:700">稀有</span> | 温暖+回复+饱和 | 主菜肉食 |
-| 幽寂杂拌 | 14 | 18.0 | <span style="color:#3b82f6;font-weight:700">稀有</span> | 饱和+夜视(8min) | 沙拉凉菜 |
-| 蜂蜜陶罐 | 14 | 12.0 | <span style="color:#3b82f6;font-weight:700">稀有</span> | 甜蜜陷阱 | 甜品 |
+| 幽寂杂拌 | 14 | 18.0 | <span style="color:#3b82f6;font-weight:700">稀有</span> | 饱和+8min夜视 | 沙拉凉菜 |
+| 蜂蜜陶罐 | 14 | 12.0 | <span style="color:#3b82f6;font-weight:700">稀有</span> | 回复II+急迫+失明 | 甜品 |
 | 煎嗅探兽蛋 | 7 | 4.0 | <span style="color:#3b82f6;font-weight:700">稀有</span> | 回复+抗性 | 煎蛋系列 |
-| 七彩蛋羹 | 4 | 20.0 | <span style="color:#f59e0b;font-weight:700">传说</span> | 食神降临🌟 | 甜品 |
-| 煎龙蛋 | 2 | 20.0 | <span style="color:#f59e0b;font-weight:700">传说</span> | 龙神附体🌟 | 煎蛋系列 |
+| 七彩蛋羹 | 4 | 20.0 | <span style="color:#f59e0b;font-weight:700">传说</span> | 食神降临(CD) | 甜品 |
+| 煎龙蛋 | 2 | 20.0 | <span style="color:#f59e0b;font-weight:700">传说</span> | 龙神附体(CD) | 煎蛋系列 |
 
 </div>
 
@@ -149,32 +149,32 @@
 | 肉夹馍 | 60s 速度 I | <span style="color:#3b82f6;font-weight:700">稀有</span> |
 | 七彩蛋羹 | 5min 速度 II | <span style="color:#f59e0b;font-weight:700">传说</span> |
 
-## 🧪 食物搭配指南
+## 食物搭配指南
 
-巧妙组合不同食物与药水，触发隐藏的强大协同效果：
+巧妙组合不同食物与药水，触发协同效果：
 
 | 搭配 | 效果 | 场景 |
 |------|------|------|
-| 🍗 熔岩烤鸡 + 🧪 抗火药水 | 火焰反伤无自伤=无敌近战 | Boss战 |
-| ⛏️ 洞穴杂拌 + ⚡ 急迫信标 | 急迫III+双倍掉落=采矿机 | 深层挖矿 |
-| 🌊 海洋杂拌 + 🔱 激流三叉戟 | 水下鱼雷模式 | 海底神殿 |
-| ❄️ 草莓巧克力冰淇淋 + 🏃 水行药水 | 水面奔跑+冻结成冰 | 跨海旅行 |
-| 🍺 啤酒×3 + 🥛 牛奶 | 10秒力量III后秒解负面 | PVP爆发 |
-| 🍔 汉堡 + 🍖 大火腿 | 满腹护盾+暴击=站撸一切 | 袭击/团战 |
-| 🧋 珍珠奶茶 + 🌀 末影珍珠 | 超远弹跳传送 | 快速旅行 |
-| 🌈 七彩蛋羹 + 🍎 附魔金苹果 | 10分钟真·创造模式 | 终极决战 |
+| 熔岩烤鸡 + 抗火药水 | 火焰反伤无自伤，近战无敌 | Boss战 |
+| 洞穴杂拌 + 急迫信标 | 急迫叠加，采掘速度极限 | 深层挖矿 |
+| 海洋杂拌 + 激流三叉戟 | 水下高速机动战斗 | 海底神殿 |
+| 草莓巧克力冰淇淋 + 水行药水 | 水面冻结+奔跑 | 跨海旅行 |
+| 啤酒 x3 + 牛奶 | 10秒力量III后秒解负面 | PVP爆发 |
+| 汉堡 + 大火腿 | 吸收护盾+暴击站撸 | 袭击/团战 |
+| 珍珠奶茶 + 末影珍珠 | 超远弹跳传送 | 快速旅行 |
+| 七彩蛋羹 + 附魔金苹果 | 10分钟创造模式级战斗力 | 终极决战 |
 
 ## 按效果场景速查
 
 | 场景 | 推荐食物 | 说明 |
 |------|----------|------|
-| 抗火/下界 | 绯红糖果, 草莓甜筒, 熔岩烤鸡 | 下界探索+战斗 |
-| 探索/空岛 | 棉花糖(免摔), 紫颂果糖果(漂浮), 雪碧(缓降) | 空岛+末地+海洋 |
-| 挖矿 | 洞穴杂拌(双倍+急迫II), 幽寂杂拌(8min夜视) | 矿工终极配置 |
-| 水下 | 海洋杂拌(海洋之子), 海草沙拉, 寿司 | 海底神殿攻略 |
-| 战斗PVP | 大火腿(暴击), 臭豆腐(力量), 叫花鸡(骑乘) | PVP/Boss战 |
-| 防御持久 | 棒棒糖(击杀回血), 烤南瓜(减伤), 汉堡(护盾) | 持久战 |
-| 控场 | 蜂蜜陶罐(范围缓慢), 啤酒(醉拳), 苦力怕饼干(爆破) | 群怪/突围 |
+| 抗火/下界 | 绯红糖果, 草莓甜筒, 熔岩烤鸡 | 抗火+反伤 |
+| 探索/空岛 | 棉花糖(免摔), 紫颂果糖果(漂浮), 雪碧(缓降) | 空岛安全移动 |
+| 挖矿 | 洞穴杂拌(急迫III), 幽寂杂拌(8min夜视) | 矿工配置 |
+| 水下 | 海洋杂拌, 海草沙拉, 寿司 | 海底攻略 |
+| 战斗 | 大火腿(暴击), 臭豆腐(力量), 叫花鸡(骑乘) | PVP/Boss |
+| 防御 | 棒棒糖(击杀回血), 烤南瓜(减伤), 汉堡(护盾) | 持久战 |
+| 控场 | 蜂蜜陶罐(范围缓慢), 啤酒(醉拳), 苦力怕饼干(爆破) | 群怪突围 |
 
 ## 技术说明
 

@@ -34,7 +34,7 @@
   quality="fine"
   :hunger="7"
   :saturation="8.0"
-  effect="30秒生命恢复 + 30秒内背刺伤害 +50%"
+  effect="30秒生命恢复 + 背刺伤害 +50%。45秒冷却。"
   quote="幻境森林中的特产，狐狸好像挺喜欢吃的嘛？"
 >
   <CraftingTable
@@ -74,7 +74,7 @@
   quality="fine"
   :hunger="6"
   :saturation="7.0"
-  effect="⛏️ 矿工之魂：60秒夜视 + 45秒急迫 II + 挖矿时 10%概率双倍掉落！"
+  effect="60秒夜视 + 45秒急迫 III。"
   quote="幻境洞穴风味，吃下去仿佛黑暗中的明灯"
 >
   <CraftingTable
@@ -95,7 +95,7 @@
   quality="fine"
   :hunger="6"
   :saturation="7.0"
-  effect="🌊 海洋之子 90秒：水下呼吸+夜视+游泳速度+50%+水下攻击力+20%，三叉戟距离+30%！"
+  effect="90秒水下呼吸 + 夜视 + 游泳速度提升 + 水下攻击力 +20%。"
   quote="看起来很健康，其实...真的很健康！海洋的精华尽在其中"
 >
   <CraftingTable
@@ -157,7 +157,7 @@
   quality="fine"
   :hunger="6"
   :saturation="4.0"
-  effect="💨 臭气熏天：周围生物 8秒虚弱+缓慢+反胃，自身获得 15秒力量 I —— 臭到极致就是强！"
+  effect="周围生物获得 8秒虚弱、缓慢、反胃，自身获得 15秒力量 I。"
   quote="好臭！！虽然吃着香，但请不要在公共场合食用！"
 >
   <CraftingTable
