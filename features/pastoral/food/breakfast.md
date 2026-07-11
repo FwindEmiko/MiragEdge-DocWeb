@@ -19,7 +19,7 @@
   <CraftingTable
     :ingredients="[
       {id:'cooked_porkchop'},
-      {name:'杀猪刀', texture:'/mc-textures/item/iron_sword.png'}
+      {id:'pig_slayer'}
     ]"
     :result="{id:'bacon', count:2}"
   />
@@ -72,7 +72,7 @@
   <CraftingTable
     :ingredients="[
       {id:'bread'}, {id:'bread'}, {id:'bread'},
-      {name:'锻造锤', texture:'/mc-textures/item/iron_ingot.png'}
+      {id:'forging_hammer'}
     ]"
     :result="{id:'double_bread'}"
   />
