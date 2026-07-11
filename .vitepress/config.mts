@@ -223,6 +223,11 @@ export default defineConfig({
               collapsed: true,
               items: [
                 { text: '介绍', link: '/features/pastoral/fishing/info' },
+                { text: '鱼竿进阶', link: '/features/pastoral/fishing/rods' },
+                { text: '鱼类图鉴', link: '/features/pastoral/fishing/fish' },
+                { text: '钓鱼比赛', link: '/features/pastoral/fishing/competitions' },
+                { text: '鱼饵系统', link: '/features/pastoral/fishing/baits' },
+                { text: '维度钓鱼', link: '/features/pastoral/fishing/dimensions' },
               ]
             },
             {
