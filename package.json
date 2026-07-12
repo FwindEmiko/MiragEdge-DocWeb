@@ -11,10 +11,12 @@
     "test:unit": "vitest run --config .vitepress/vitest.config.mts --dir .vitepress/test/unit",
     "test:config": "vitest run --config .vitepress/vitest.config.mts --dir .vitepress/test/config",
     "dev": "vitepress dev",
-    "build": "vitepress build",
+    "build": "vitepress build && node scripts/watermark.mjs",
     "preview": "vitepress preview",
     "contributors": "node ./.vitepress/theme/components/js/contributors.js",
-    "typecheck": "vue-tsc --noEmit"
+    "typecheck": "vue-tsc --noEmit",
+    "watermark": "node scripts/watermark.mjs",
+    "watermark:generate": "node scripts/generate-watermark.mjs"
   },
   "keywords": [],
   "author": "F.windEmiko",
@@ -42,6 +44,7 @@
     "jsdom": "^23.2.0",
     "mermaid": "^11.15.0",
     "node-fetch": "^2.7.0",
+    "sharp": "^0.35.3",
     "terser": "^5.44.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3",
