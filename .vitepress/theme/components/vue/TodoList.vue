@@ -22,7 +22,6 @@ interface TodoItem {
   date?: string
   title: string
   scope?: string
-  scope_legacy?: string
   category?: string
   status?: string
   note?: string
@@ -104,7 +103,7 @@ const getCategoryColor = (cat?: string): string => {
 }
 
 /** 备注重要路径：长才截断 */
-const NOTE_PREVIEW_LEN = 90
+const NOTE_PREVIEW_LEN = 150
 const shouldCollapse = (note?: string) => !!note && note.length > NOTE_PREVIEW_LEN
 const notePreview = (note?: string) => {
   if (!note) return ''
@@ -112,7 +111,7 @@ const notePreview = (note?: string) => {
 }
 
 /** 已完成项目：旧字段 scope 兼容新版 */
-const getScope = (item: TodoItem): string => item.scope ?? item.scope_legacy ?? ''
+const getScope = (item: TodoItem): string => item.scope ?? ''
 
 /** 过滤后的分组计算 */
 const filteredGroups = computed(() => {
@@ -128,6 +127,13 @@ const filteredCompleted = computed(() => {
     .map((g) => ({ ...g, items: g.items.filter(matchesFilter) }))
     .filter((g) => g.items.length > 0)
 })
+
+/** Total pending/done count */
+const totalItemsCount = computed(() => {
+  const pending = data.value?.groups.reduce((s, g) => s + g.items.length, 0) ?? 0
+  const done = data.value?.completed.reduce((s, g) => s + g.items.length, 0) ?? 0
+  return { pending, done, total: pending + done }
+})
 </script>
 
 <template>
@@ -140,7 +146,8 @@ const filteredCompleted = computed(() => {
 
       <!-- 顶部筛选栏 -->
       <div class="todo-filter" role="group" aria-label="按类别筛选">
-        <span class="todo-filter-label">类别筛选</span>
+        <span class="todo-filter-label">{{ activeFilters.size > 0 ? '筛选 ' + activeFilters.size + ' 类' : '类别筛选' }}</span>
+        <span v-if="activeFilters.size === 0" class="todo-filter-count">{{ totalItemsCount.pending }} 进行中 / {{ totalItemsCount.total }} 总计</span>
         <button
           v-for="(cfg, key) in data.categories"
           :key="key"
@@ -278,6 +285,22 @@ const filteredCompleted = computed(() => {
           </article>
         </div>
       </section>
+
+      <!-- 空状态 -->
+      <div
+        v-if="filteredGroups.length === 0 && filteredCompleted.length === 0"
+        class="todo-empty"
+      >
+        <p class="todo-empty-text">没有匹配的待办条目</p>
+        <button
+          v-if="activeFilters.size > 0"
+          type="button"
+          class="todo-empty-reset"
+          @click="activeFilters = new Set()"
+        >
+          清除筛选，显示全部
+        </button>
+      </div>
 
       <p class="todo-footer-hint">
         超过 15 天的完成条目滚动归档至 <a href="/develop/logs">更新日志</a>。
@@ -655,6 +678,49 @@ const filteredCompleted = computed(() => {
 }
 
 /* 减少动效 */
+/* 空状态 */
+.todo-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 48px 24px;
+  text-align: center;
+  border-radius: 10px;
+  border: 1px dashed var(--vp-c-divider, rgba(0,0,0,0.15));
+  background: var(--vp-c-bg-soft, rgba(0,0,0,0.02));
+}
+
+.todo-empty-text {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--vp-c-text-2, rgba(255,255,255,0.45));
+}
+
+.todo-empty-reset {
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 16px;
+  border-radius: 20px;
+  border: 1px solid var(--vp-c-brand, #E05252);
+  color: var(--vp-c-brand, #E05252);
+  background: var(--vp-c-brand-soft, rgba(224, 82, 82, 0.1));
+  cursor: pointer;
+  transition: filter 0.15s ease;
+}
+
+.todo-empty-reset:hover {
+  filter: brightness(1.15);
+}
+
+.todo-filter-count {
+  font-size: 11px;
+  color: var(--vp-c-text-2, rgba(255,255,255,0.45));
+  margin-right: auto;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .todo-chip,
   .todo-card,
