@@ -18,6 +18,7 @@ import CraftingTable from './components/vue/CraftingTable.vue'
 import Furnace from './components/vue/Furnace.vue'
 import FoodStats from './components/vue/FoodStats.vue'
 import FoodEntry from './components/vue/FoodEntry.vue'
+import TodoList from './components/vue/TodoList.vue'
 import './css/custom.css'
 
 // 导入所有样式文件
@@ -70,6 +71,7 @@ export default {
     app.component('Furnace', Furnace)
     app.component('FoodStats', FoodStats)
     app.component('FoodEntry', FoodEntry)
+    app.component('TodoList', TodoList)
 
     // 仅在浏览器环境下执行
     if (inBrowser) {

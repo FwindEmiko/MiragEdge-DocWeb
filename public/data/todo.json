@@ -1,0 +1,179 @@
+{
+  "version": "2026.07.13",
+  "subtitle": "F.windEmiko 的开发待办面板。条目长期滚动保留；完成 15 天后归档到 /develop/logs。",
+  "categories": {
+    "添加":   { "label": "添加",   "color": "#22c55e" },
+    "调整":   { "label": "调整",   "color": "#3b82f6" },
+    "修复":   { "label": "修复",   "color": "#ef4444" },
+    "升级":   { "label": "升级",   "color": "#a855f7" },
+    "兼容":   { "label": "兼容",   "color": "#06b6d4" }
+  },
+  "statuses": {
+    "待开始":   { "label": "待开始",   "tone": "neutral", "icon": "·" },
+    "进行中":   { "label": "进行中",   "tone": "active",  "icon": "›" },
+    "等待验收": { "label": "等待验收", "tone": "warn",    "icon": "…" },
+    "卡住":     { "label": "卡住",     "tone": "danger",  "icon": "!" },
+    "构思中":   { "label": "构思中",   "tone": "think",   "icon": "?" },
+    "已完成":   { "label": "已完成",   "tone": "done",    "icon": "✓" }
+  },
+  "groups": [
+    {
+      "key": "weekly",
+      "title": "本周内（高优先级）",
+      "subtitle": "紧急且工作量小，先做这部分。",
+      "items": [
+        {
+          "id": "w-2026-07-15-wishingpool",
+          "due":   "2026-07-15",
+          "title": "许愿池（钓鱼随机抽奖机制）",
+          "scope": "服务端",
+          "category": "添加",
+          "status":  "待开始",
+          "note":    "钓鱼钩上钩时随机从奖池抽一件；奖池可配置；支持 LuckPerms / 灵叶经济接入；与 EvenMoreFish 钩物事件对接。"
+        },
+        {
+          "id": "w-2026-07-15-floatingwood",
+          "due":   "2026-07-15",
+          "title": "新特殊物品「浮木」（飞行后自杀）",
+          "scope": "服务端 · 物品装备",
+          "category": "添加",
+          "status":  "待开始",
+          "note":    "使用后像漏气气球乱飞，最后被浮木自身击杀；飞行时间 + 摔落伤害曲线需平衡；建议飞行 8~12 秒后判定坠亡。"
+        },
+        {
+          "id": "w-2026-07-15-knockoutdrug",
+          "due":   "2026-07-15",
+          "title": "新特殊物品「蒙汗药」（强制休息）",
+          "scope": "服务端 · 战斗系统",
+          "category": "添加",
+          "status":  "待开始",
+          "note":    "喝下后原地强制进入休息（睡眠 / 静止 N 秒），可能作为 PvP 中的限制手段；需配合饥饿值或抗药 buff 留破绽。"
+        },
+        {
+          "id": "w-2026-07-15-squeakytoy",
+          "due":   "2026-07-15",
+          "title": "新特殊物品「尖叫鸡」（右键嘲讽）",
+          "scope": "服务端 · 玩法机制",
+          "category": "添加",
+          "status":  "待开始",
+          "note":    "右键触发「你干嘛诶呦」类似气泡，广播周围玩家；可关；装饰 / 派对向。"
+        },
+        {
+          "id": "w-2026-07-15-pigbook",
+          "due":   "2026-07-15",
+          "title": "新特殊物品《母猪产后护理》图书（繁殖强化）",
+          "scope": "服务端 · 玩法机制",
+          "category": "添加",
+          "status":  "待开始",
+          "note":    "使用后让附近猪多生几只（breeding multiplier 临时 buff）；靠近手持书右键加速繁殖。"
+        },
+        {
+          "id": "w-2026-07-15-youthpot",
+          "due":   "2026-07-15",
+          "title": "新特殊物品「青 春 版 药水」（强制跟随 + 幼崽孵化）",
+          "scope": "服务端 · 战斗系统",
+          "category": "添加",
+          "status":  "待开始",
+          "note":    "强制跟随目标头顶冒爱心 + 无法攻击；4 格内贴贴 60s 随机刷生物幼崽（含凋零等非生物）。"
+        },
+        {
+          "id": "w-2026-07-15-digestivetab",
+          "due":   "2026-07-15",
+          "title": "新特殊物品「健胃消食片」（饱食度快速消耗）",
+          "scope": "服务端 · 玩法机制",
+          "category": "添加",
+          "status":  "待开始",
+          "note":    "食用后 5 秒内消耗一整条饥饿条；饥饿系统调试 / 表演用。"
+        }
+      ]
+    },
+    {
+      "key": "monthly",
+      "title": "本月内（中等优先级）",
+      "subtitle": "有节奏地补齐，不与本周并列。",
+      "items": [
+        {
+          "id": "m-placeholder-1",
+          "due":   "—",
+          "title": "（占位）等后续真实条目",
+          "scope": "—",
+          "category": "添加",
+          "status":  "待开始",
+          "note":    ""
+        }
+      ]
+    },
+    {
+      "key": "longterm",
+      "title": "长期规划",
+      "subtitle": "方向性条目；月底回顾再决定是否调整。",
+      "items": [
+        {
+          "id": "l-placeholder-1",
+          "due":   "—",
+          "title": "（占位）等战略级条目",
+          "scope": "—",
+          "category": "升级",
+          "status":  "构思中",
+          "note":    ""
+        }
+      ]
+    }
+  ],
+  "completed": [
+    {
+      "key": "recent",
+      "title": "本周 · 已完成",
+      "items": [
+        {
+          "id": "d-2026-07-13-todopage",
+          "date":   "2026-07-13",
+          "title":  "创建待办事项页（TodoList 组件）",
+          "scope":  "前端",
+          "note":   "首版搭建：JSON 数据源 + 三档卡片 + 5 类筛选 + 折叠备注"
+        },
+        {
+          "id": "d-2026-07-13-tododoc",
+          "date":   "2026-07-13",
+          "title":  "填充第一批真实待办（许愿池 + 6 新物品）",
+          "scope":  "服务端 · 添加",
+          "note":   "服务端-物品装备 / 战斗系统 / 玩法机制 三大类"
+        },
+        {
+          "id": "d-2026-07-12-baselinerange",
+          "date":   "2026-07-12",
+          "title":  "调整基岩版兼容性范围至 26.0 - 26.33",
+          "scope":  "服务端 · 兼容",
+          "note":   "见 /develop/logs"
+        },
+        {
+          "id": "d-2026-07-11-foodsystem",
+          "date":   "2026-07-11",
+          "title":  "添加全新食物系统，原创物品功能核心增强",
+          "scope":  "服务端 · 添加",
+          "note":   "CraftEngine + 58 个食物注册"
+        }
+      ]
+    },
+    {
+      "key": "lastweek",
+      "title": "上周（7-13 天前）",
+      "items": [
+        {
+          "id": "d-2026-07-09-enchsort",
+          "date":   "2026-07-09",
+          "title":  "修复同品质同等级附魔在跨服重启排序不稳定",
+          "scope":  "服务端 · 修复",
+          "note":   "见 /develop/logs"
+        },
+        {
+          "id": "d-2026-07-09-pityhash",
+          "date":   "2026-07-09",
+          "title":  "修复附魔书保底计数 hash 共享问题",
+          "scope":  "服务端 · 修复",
+          "note":   "按各自存储附魔独立累计失败次数"
+        }
+      ]
+    }
+  ]
+}
