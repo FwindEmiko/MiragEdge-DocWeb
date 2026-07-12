@@ -2,19 +2,58 @@
   "version": "2026.07.13",
   "subtitle": "F.windEmiko 的开发待办面板。条目长期滚动保留；完成 15 天后归档到 /develop/logs。",
   "categories": {
-    "添加": { "label": "添加", "color": "#22c55e" },
-    "调整": { "label": "调整", "color": "#3b82f6" },
-    "修复": { "label": "修复", "color": "#ef4444" },
-    "升级": { "label": "升级", "color": "#a855f7" },
-    "兼容": { "label": "兼容", "color": "#06b6d4" }
+    "添加": {
+      "label": "添加",
+      "color": "#22c55e"
+    },
+    "调整": {
+      "label": "调整",
+      "color": "#3b82f6"
+    },
+    "修复": {
+      "label": "修复",
+      "color": "#ef4444"
+    },
+    "升级": {
+      "label": "升级",
+      "color": "#a855f7"
+    },
+    "兼容": {
+      "label": "兼容",
+      "color": "#06b6d4"
+    }
   },
   "statuses": {
-    "待开始":    { "label": "待开始",   "tone": "neutral", "icon": "·" },
-    "进行中":    { "label": "进行中",   "tone": "active",  "icon": "›" },
-    "等待验收":  { "label": "等待验收", "tone": "warn",    "icon": "…" },
-    "卡住":      { "label": "卡住",     "tone": "danger",  "icon": "!" },
-    "构思中":    { "label": "构思中",   "tone": "think",   "icon": "?" },
-    "已完成":    { "label": "已完成",   "tone": "done",    "icon": "✓" }
+    "待开始": {
+      "label": "待开始",
+      "tone": "neutral",
+      "icon": "·"
+    },
+    "进行中": {
+      "label": "进行中",
+      "tone": "active",
+      "icon": "›"
+    },
+    "等待验收": {
+      "label": "等待验收",
+      "tone": "warn",
+      "icon": "…"
+    },
+    "卡住": {
+      "label": "卡住",
+      "tone": "danger",
+      "icon": "!"
+    },
+    "构思中": {
+      "label": "构思中",
+      "tone": "think",
+      "icon": "?"
+    },
+    "已完成": {
+      "label": "已完成",
+      "tone": "done",
+      "icon": "✓"
+    }
   },
   "groups": [
     {
@@ -58,7 +97,8 @@
           "status": "待开始",
           "note": "方块存入/取出价值表、稀有方块兑换率、通胀控制策略设计"
         }
-      ]
+      ],
+      "priority": "high"
     },
     {
       "key": "mid-system",
@@ -110,7 +150,8 @@
           "status": "待开始",
           "note": "提取数据包内嵌材质，合并到主材质包中，确保基岩版玩家可见"
         }
-      ]
+      ],
+      "priority": "medium"
     },
     {
       "key": "low-content",
@@ -189,7 +230,8 @@
           "status": "待开始",
           "note": "食用后 5 秒内消耗一整条饥饿条；饥饿系统调试 / 表演用。"
         }
-      ]
+      ],
+      "priority": "low"
     }
   ],
   "completed": [
@@ -247,5 +289,25 @@
         }
       ]
     }
-  ]
+  ],
+  "priorities": {
+    "high": {
+      "label": "高优先级",
+      "color": "#ef4444",
+      "bg": "rgba(239,68,68,0.08)",
+      "border": "rgba(239,68,68,0.25)"
+    },
+    "medium": {
+      "label": "中优先级",
+      "color": "#f59e0b",
+      "bg": "rgba(245,158,11,0.08)",
+      "border": "rgba(245,158,11,0.25)"
+    },
+    "low": {
+      "label": "低优先级",
+      "color": "#6b7280",
+      "bg": "rgba(107,114,128,0.08)",
+      "border": "rgba(107,114,128,0.25)"
+    }
+  }
 }
