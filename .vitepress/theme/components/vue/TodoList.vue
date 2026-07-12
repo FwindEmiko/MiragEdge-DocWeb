@@ -27,10 +27,18 @@ interface TodoItem {
   note?: string
 }
 
+interface PriorityDef {
+  label: string
+  color: string
+  bg: string
+  border: string
+}
+
 interface TodoGroup {
   key: string
   title: string
   subtitle?: string
+  priority?: string
   items: TodoItem[]
 }
 
@@ -39,6 +47,7 @@ interface TodoData {
   subtitle?: string
   categories: Record<string, { label: string; color: string }>
   statuses:   Record<string, { label: string; tone: string; icon: string }>
+  priorities?: Record<string, PriorityDef>
   groups:      TodoGroup[]
   completed:   TodoGroup[]
 }
@@ -80,6 +89,19 @@ const toggleNote = (id: string) => {
   if (next.has(id)) next.delete(id)
   else next.add(id)
   expandedNotes.value = next
+}
+
+/** 优先级徽章样式 */
+const getPriorityBadgeStyle = (priority?: string) => {
+  if (!priority || !data.value?.priorities?.[priority]) return {}
+  const p = data.value.priorities[priority]
+  return { color: p.color, background: p.bg, borderColor: p.border }
+}
+
+/** 分组头部下划线颜色 = 优先级色 */
+const getPriorityBorderStyle = (priority?: string) => {
+  if (!priority || !data.value?.priorities?.[priority]) return {}
+  return { borderBottomColor: data.value.priorities[priority].border }
 }
 
 /** 状态 tone → 颜色 token */
@@ -175,7 +197,12 @@ const totalItemsCount = computed(() => {
 
       <!-- 待完成 -->
       <section v-for="group in filteredGroups" :key="`p-${group.key}`" class="todo-section">
-        <header class="todo-section-head">
+        <header class="todo-section-head" :style="getPriorityBorderStyle(group.priority)">
+          <span
+            v-if="group.priority && data?.priorities?.[group.priority]"
+            class="todo-priority-badge"
+            :style="getPriorityBadgeStyle(group.priority)"
+          >{{ data.priorities[group.priority].label }}</span>
           <h3 class="todo-section-title">{{ group.title }}</h3>
           <span v-if="group.subtitle" class="todo-section-sub">{{ group.subtitle }}</span>
         </header>
@@ -675,6 +702,22 @@ const totalItemsCount = computed(() => {
   .todo-section-title {
     font-size: 16px;
   }
+}
+
+/* 优先级徽章 */
+.todo-priority-badge {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 10px;
+  border-radius: 20px;
+  border-width: 1px;
+  border-style: solid;
+  letter-spacing: 1px;
+  white-space: nowrap;
+  text-transform: uppercase;
 }
 
 /* 减少动效 */
