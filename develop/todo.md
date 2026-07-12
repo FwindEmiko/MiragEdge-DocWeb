@@ -1,6 +1,6 @@
 ---
 title: 待办事项
-description: F.windEmiko 的开发待办与近期计划
+description: 开发待办与近期计划
 aside: false
 ---
 
