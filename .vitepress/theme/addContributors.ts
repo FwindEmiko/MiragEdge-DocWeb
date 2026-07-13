@@ -4,6 +4,7 @@ import { Octokit } from '@octokit/rest';
 import * as fs from 'fs';
 import * as path from 'path';
 import * as dotenv from 'dotenv';
+import { execSync } from "child_process";
 
 // 加载环境变量
 dotenv.config();
@@ -237,9 +238,29 @@ async function fetchAndSaveActivityData(): Promise<void> {
     fs.mkdirSync(dir, { recursive: true });
   }
   try {
-    const resp = await octokit.request("GET /repos/{owner}/{repo}/stats/contributors", { owner, repo });
-    if (resp.status === 200 && Array.isArray(resp.data)) {
-      const simplified = resp.data.map((contrib: any) => ({
+    // Get token from env or fallback to gh CLI (local dev)
+    let token = process.env.GITHUB_TOKEN;
+    if (!token) {
+      try {
+        token = execSync('gh auth token', { encoding: 'utf-8' }).trim();
+      } catch { /* gh not available, will try unauthenticated */ }
+    }
+    const localApi = token
+      ? new Octokit({ auth: token })
+      : octokit;
+    // GitHub stats endpoint returns 202 while generating cache — retry up to 5x
+    let data: any = null;
+    for (let attempt = 0; attempt < 5; attempt++) {
+      const resp = await localApi.request("GET /repos/{owner}/{repo}/stats/contributors", { owner, repo });
+      if (resp.status === 200 && Array.isArray(resp.data)) {
+        data = resp.data;
+        break;
+      }
+      console.log("[activity] Attempt " + (attempt + 1) + " got " + resp.status + ", retrying in 3s...");
+      await new Promise(r => setTimeout(r, 3000));
+    }
+    if (data) {
+      const simplified = data.map((contrib: any) => ({
         author: { login: contrib.author.login },
         total: contrib.total,
         weeks: contrib.weeks.map((w: any) => ({ w: w.w, c: w.c })),
@@ -247,7 +268,7 @@ async function fetchAndSaveActivityData(): Promise<void> {
       fs.writeFileSync(outputPath, JSON.stringify(simplified), "utf-8");
       console.log("[activity] Saved " + simplified.length + " contributors");
     } else {
-      console.warn("[activity] API status " + resp.status + ", fallback");
+      console.warn("[activity] All 5 attempts failed, writing empty data");
       fs.writeFileSync(outputPath, JSON.stringify([]), "utf-8");
     }
   } catch (error) {
