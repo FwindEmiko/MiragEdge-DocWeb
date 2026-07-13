@@ -113,13 +113,13 @@ jobs:
           ENDSSH
 
   # ============================================================
-  # 构建预览（dev push）
+  # 构建预览
   # ============================================================
   preview-build:
     name: Dev预览测试构建
     runs-on: ubuntu-22.04
     needs: lint
-    if: github.event_name == 'push' && github.ref == 'refs/heads/dev'
+    if: github.event_name == 'push' && github.ref != 'refs/heads/main'
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
@@ -148,13 +148,13 @@ jobs:
           path: .vitepress/dist
 
   # ============================================================
-  # 部署到 GitHub Pages（仅 dev push）
+  # 部署到 GitHub Pages
   # ============================================================
   deploy-pages:
     name: 部署到 GH Pages完成预览部署
     runs-on: ubuntu-22.04
     needs: preview-build
-    if: github.event_name == 'push' && github.ref == 'refs/heads/dev'
+    if: github.event_name == 'push' && github.ref != 'refs/heads/main'
     permissions:
       pages: write
       id-token: write
