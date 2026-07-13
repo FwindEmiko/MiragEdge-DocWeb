@@ -61,6 +61,19 @@ interface WeekData {
   shortLabel: string; commits: number; percent: number
 }
 
+const CONTRIBUTOR_COLORS = [
+  "#4CAF50", "#2196F3", "#FF9800", "#9C27B0",
+  "#F44336", "#00BCD4", "#FF5722", "#3F51B5",
+]
+
+interface SegmentData {
+  login: string; commits: number; barPx: number; color: string
+}
+
+interface ContributorData {
+  login: string; totalCommits: number; color: string
+}
+
 const loading = ref(true)
 const error = ref(false)
 const rawData = ref<RawWeek[]>([])
