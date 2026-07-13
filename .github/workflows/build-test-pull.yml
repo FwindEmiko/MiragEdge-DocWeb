@@ -1,6 +1,10 @@
 name: CI/CD 持续集成
 
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - main
+      - dev
 
 concurrency:
   group: ci-${{ github.ref }}
@@ -17,7 +21,7 @@ env:
 
 jobs:
   # ============================================================
-  # 代码质量检查
+  # 代码质量检查（main + dev 均执行）
   # ============================================================
   lint:
     name: 代码质量检查
@@ -33,20 +37,20 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-
       - run: pnpm install
       - name: 类型检查
         run: pnpm run typecheck
         continue-on-error: false
 
   # ============================================================
-  # 构建测试 + 打包
+  # 构建测试 + 生产部署（仅 main）
   # ============================================================
-  test:
-    name: 构建测试
+  test-deploy:
+    name: 构建测试 & 部署
     runs-on: ubuntu-22.04
     needs: lint
-    timeout-minutes: 20
+    if: github.ref == 'refs/heads/main'
+    timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
         with:
@@ -57,7 +61,6 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-
       - run: pnpm install
       - name: 构建
         run: pnpm run build
@@ -67,37 +70,17 @@ jobs:
           echo "📦 构建产物大小: $DIST_SIZE"
           echo "## 构建产物大小: $DIST_SIZE" >> $GITHUB_STEP_SUMMARY
       - name: 打包
-        if: github.event_name == 'push'
         run: tar -czf site.tar.gz -C .vitepress/dist .
       - name: 上传构建产物
-        if: github.event_name == 'push'
         uses: actions/upload-artifact@v4
         with:
           name: site
           path: site.tar.gz
           retention-days: 3
-
-  # ============================================================
-  # 生产部署 (ECS)
-  # 仅当 push 到 main 分支时触发
-  # ============================================================
-  deploy:
-    name: 部署
-    runs-on: ubuntu-22.04
-    needs: test
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-    timeout-minutes: 60
-    steps:
-      - name: 下载构建产物
-        uses: actions/download-artifact@v4
-        with:
-          name: site
-          path: ./
       - name: 配置 SSH
         uses: webfactory/ssh-agent@v0.9.0
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-
       - name: 远程部署
         run: |
           set -e
@@ -113,3 +96,57 @@ jobs:
             rm /tmp/site.tar.gz
             echo "✅ 部署成功"
           ENDSSH
+
+  # ============================================================
+  # GitHub Pages 预览部署（仅 dev）
+  # ============================================================
+  preview:
+    name: GitHub Pages 预览
+    runs-on: ubuntu-22.04
+    needs: lint
+    if: github.ref == 'refs/heads/dev'
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v2
+        with:
+          version: ${{ env.PNPM_VERSION }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - run: pnpm install
+      - name: 适配 GitHub Pages base 路径
+        run: |
+          python3 << 'PYEOF'
+          import re
+          path = '.vitepress/config.mts'
+          with open(path) as f:
+              c = f.read()
+          c = re.sub(r"base: '/'", "base: '/MiragEdge-DocWeb/'", c)
+          with open(path, 'w') as f:
+              f.write(c)
+          print('base updated')
+          PYEOF
+      - run: pnpm run build
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: .vitepress/dist
+
+  # ============================================================
+  # GitHub Pages 部署（仅 dev）
+  # ============================================================
+  deploy-pages:
+    name: 部署到 GitHub Pages
+    runs-on: ubuntu-22.04
+    needs: preview
+    if: github.ref == 'refs/heads/dev'
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: 部署
+        id: deployment
+        uses: actions/deploy-pages@v4
