@@ -1,6 +1,9 @@
 name: CI/CD 持续集成
 
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - main
 
 concurrency:
   group: ci-${{ github.ref }}
