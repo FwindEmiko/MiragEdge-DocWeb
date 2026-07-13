@@ -228,7 +228,36 @@ function isHomePage(code: string, id: string): boolean {
 }
 
 /**
- * Vite插件
+ * 获取仓库提交活跃数据并保存为静态JSON
+ */
+async function fetchAndSaveActivityData(): Promise<void> {
+  const outputPath = path.resolve(process.cwd(), "public", "data", "contributors-activity.json");
+  const dir = path.dirname(outputPath);
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir, { recursive: true });
+  }
+  try {
+    const resp = await octokit.request("GET /repos/{owner}/{repo}/stats/contributors", { owner, repo });
+    if (resp.status === 200 && Array.isArray(resp.data)) {
+      const simplified = resp.data.map((contrib: any) => ({
+        author: { login: contrib.author.login },
+        total: contrib.total,
+        weeks: contrib.weeks.map((w: any) => ({ w: w.w, c: w.c })),
+      }));
+      fs.writeFileSync(outputPath, JSON.stringify(simplified), "utf-8");
+      console.log("[activity] Saved " + simplified.length + " contributors");
+    } else {
+      console.warn("[activity] API status " + resp.status + ", fallback");
+      fs.writeFileSync(outputPath, JSON.stringify([]), "utf-8");
+    }
+  } catch (error) {
+    console.warn("[activity] Failed:", (error as Error).message);
+    fs.writeFileSync(outputPath, JSON.stringify([]), "utf-8");
+  }
+}
+
+/**
+ * VitePlugin
  */
 export default function addContributorsPlugin(): Plugin {
   let fullContributorData: FullContributorData[] = [];
@@ -243,6 +272,7 @@ export default function addContributorsPlugin(): Plugin {
       if (!dataLoaded) {
         console.log('Loading contributor data...');
         fullContributorData = await getAllContributors();
+        await fetchAndSaveActivityData();
         dataLoaded = true;
       }
     },

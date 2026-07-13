@@ -33,10 +33,15 @@
 
       <div class="chart-container">
         <div v-for="(week, idx) in chartData" :key="week.week" class="bar-column" :title="week.label" role="img" :aria-label="week.label">
-          <div class="bar-wrapper">
-            <div class="bar" :style="{ height: week.percent + '%', opacity: week.commits > 0 ? 0.85 : 0.25 }"></div>
+
+          <div class="bar-wrap" :style="{ height: week.barPx + 'px' }">
+            <div v-if="week.segments && week.segments.length > 0" class="bar-segments">
+              <div v-for="seg in week.segments" :key="seg.login" class="bar-segment" :style="{ height: seg.barPx + 'px', backgroundColor: seg.color }" :title="seg.login + ': ' + seg.commits + ' 次提交'">
+              </div>
+            </div>
+            <div v-else class="bar-empty"></div>
           </div>
-          <div class="bar-label">{{ week.shortLabel }}</div>
+          <div class="bar-label"> week.shortLabel }}</div>
         </div>
       </div>
     </div>
@@ -50,34 +55,91 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, computed } from 'vue'
+import { withBase } from 'vitepress'
 
 const props = withDefaults(defineProps<{
   repo?: string
 }>(), { repo: 'fwindemiko/MiragEdge-DocWeb' })
 
-interface RawWeek { total: number; week: number }
+interface ContributorWeek { w: number; a: number; d: number; c: number; author?: { login: string } }
+interface SegmentData {
+  login: string; commits: number; barPx: number; color: string
+}
+
+interface ContributorData {
+  login: string; totalCommits: number; color: string
+}
+
 interface WeekData {
   week: number; total: number; label: string
   shortLabel: string; commits: number; percent: number
+  barPx: number
+  segments: SegmentData[]
 }
 
 const loading = ref(true)
 const error = ref(false)
-const rawData = ref<RawWeek[]>([])
+const rawData = ref<{ author: { login: string }; total: number; weeks: { w: number; c: number }[] }[]>([])
 const controller = new AbortController()
+
+
+const MAX_BAR_PX = 120
+const CONTRIBUTOR_COLORS = [
+  "#4CAF50", "#2196F3", "#FF9800", "#9C27B0",
+  "#F44336", "#00BCD4", "#FF5722", "#3F51B5",
+]
+
 
 const chartData = computed<WeekData[]>(() => {
   if (!rawData.value.length) return []
-  const last12 = rawData.value.slice(-12)
-  const maxCommits = Math.max(...last12.map(w => w.total), 1)
-  return last12.map(w => {
-    const d = new Date(w.week * 1000)
-    const month = d.getMonth() + 1, day = d.getDate()
+  const allWeeks = new Set<number>()
+  const colorMap: Record<string, string> = {}
+  let colorIdx = 0
+  for (const contrib of rawData.value) {
+    const login = contrib.author.login
+    if (!colorMap[login]) {
+      colorMap[login] = CONTRIBUTOR_COLORS[colorIdx % CONTRIBUTOR_COLORS.length]
+      colorIdx++
+    }
+  }
+  for (const contrib of rawData.value) {
+    for (const w of contrib.weeks || []) {
+      allWeeks.add(w.w)
+    }
+  }
+  const sortedWeeks = [...allWeeks].sort().slice(-12)
+  const maxTotal = Math.max(1, ...sortedWeeks.map(week =>
+    rawData.value.reduce((s, contrib) => {
+      const wd = (contrib.weeks || []).find((w) => w.w === week)
+      return s + (wd ? wd.c : 0)
+    }, 0)
+  ))
+  return sortedWeeks.map(weekTs => {
+    const d = new Date(weekTs * 1000)
+    const m = d.getMonth() + 1, day = d.getDate()
+    let weekTotal = 0
+    for (const contrib of rawData.value) {
+      const wd = (contrib.weeks || []).find((w) => w.w === weekTs)
+      weekTotal += wd ? wd.c : 0
+    }
+    const barPx = Math.max((weekTotal / maxTotal) * MAX_BAR_PX, 2)
+    const segments: SegmentData[] = []
+    for (const contrib of rawData.value) {
+      const login = contrib.author.login
+      const wd = (contrib.weeks || []).find((w) => w.w === weekTs)
+      const commits = wd ? wd.c : 0
+      const segPx = weekTotal > 0 ? (commits / weekTotal) * barPx : 0
+      if (segPx > 0) {
+        segments.push({ login, commits, barPx: segPx, color: colorMap[login] })
+      }
+    }
     return {
-      week: w.week, total: w.total,
-      label: month + '月' + day + '日 - ' + w.total + ' 次提交',
-      shortLabel: month + '/' + day,
-      commits: w.total, percent: (w.total / maxCommits) * 100
+      week: weekTs, total: weekTotal,
+      label: m + "月" + day + "日 - " + weekTotal + " 次提交",
+      shortLabel: m + "/" + day,
+      commits: weekTotal,
+      percent: maxTotal > 0 ? (weekTotal / maxTotal) * 100 : 0,
+      barPx, segments
     }
   })
 })
@@ -89,41 +151,23 @@ const avgWeekly = computed(() => {
 })
 const activeWeeks = computed(() => chartData.value.filter(w => w.commits > 0).length)
 
-let retryCount = 0
-const MAX_RETRIES = 2
-
 async function fetchData() {
   try {
     loading.value = true
     error.value = false
-    const repo = props.repo
-    const res = await fetch('https://api.github.com/repos/' + repo + '/stats/commit_activity', {
-      signal: controller.signal
-    })
-
-    // 处理 HTTP 202 — GitHub 还在计算中
-    if (res.status === 202) {
-      if (retryCount < MAX_RETRIES) {
-        retryCount++
-        await new Promise(r => setTimeout(r, 3000))
-        return fetchData()
-      }
-      throw new Error('GitHub stats temporarily unavailable (timed out)')
-    }
-
-    if (!res.ok) throw new Error('HTTP ' + res.status)
+    const res = await fetch(withBase("/data/contributors-activity.json"), { signal: controller.signal })
+    if (!res.ok) throw new Error("HTTP " + res.status)
     const data = await res.json()
-    if (!Array.isArray(data) || data.length === 0) throw new Error('No data')
+    if (!Array.isArray(data) || data.length === 0) throw new Error("No data")
     rawData.value = data
   } catch (e) {
-    if (e instanceof DOMException && e.name === 'AbortError') return
-    console.error('GitHub Activity fetch failed:', e)
+    if (e instanceof DOMException && e.name === "AbortError") return
+    console.error("Activity data fetch failed:", e)
     error.value = true
   } finally {
     loading.value = false
   }
 }
-
 onUnmounted(() => controller.abort())
 onMounted(fetchData)
 </script>
@@ -143,13 +187,24 @@ onMounted(fetchData)
 .summary-label { font-size: 0.78rem; color: var(--vp-c-text-2); }
 .chart-container { display: flex; align-items: flex-end; gap: 4px; height: 140px; padding: 0 4px; }
 .bar-column { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; min-width: 0; cursor: default; }
-.bar-wrapper { flex: 1; width: 100%; display: flex; align-items: flex-end; justify-content: center; }
+.bar-wrap { flex: 1; width: 100%; display: flex; align-items: flex-end; justify-content: center; position: relative; }
+.bar-segments { position: absolute; bottom: 0; left: 0; right: 0; height: 100%; display: flex; flex-direction: column-reverse; }
+.bar-segment { width: 70%; margin: 0 auto; min-height: 2px; border-radius: 3px 3px 1px 1px; transition: all 0.3s ease; flex-shrink: 0; }
+.bar-column:hover .bar-segment { opacity: 1 !important; filter: brightness(1.15); }
+.bar-empty { width: 70%; height: 100%; background: linear-gradient(180deg, var(--vp-c-brand-2, #7c5cfc), var(--vp-c-brand)); border-radius: 3px 3px 1px 1px; min-height: 2px; }
+.contributors-legend { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--vp-c-divider); }
+.legend-item { display: flex; align-items: center; gap: 0.4rem; font-size: 0.8rem; color: var(--vp-c-text-2); }
+.legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.legend-name { font-weight: 600; color: var(--vp-c-text-1); }
+.legend-commits { color: var(--vp-c-text-3); }
 .bar { width: 70%; min-height: 2px; max-height: 100%; background: linear-gradient(180deg, var(--vp-c-brand-2, #7c5cfc), var(--vp-c-brand)); border-radius: 3px 3px 1px 1px; transition: height 0.3s ease, opacity 0.3s ease; }
-.bar-column:hover .bar { opacity: 1 !important; filter: brightness(1.15); }
+
 .bar-label { font-size: 0.65rem; color: var(--vp-c-text-3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; text-align: center; }
 .error-state { display: flex; justify-content: center; align-items: center; padding: 2rem; color: var(--vp-c-text-2); font-size: 0.9rem; gap: 0.5rem; }
 .retry-btn { padding: 4px 12px; font-size: 0.8rem; color: var(--vp-c-brand); background: transparent; border: 1px solid var(--vp-c-brand); border-radius: 6px; cursor: pointer; transition: all 0.2s; }
 .retry-btn:hover { background: var(--vp-c-brand); color: white; }
-.dark .bar { background: linear-gradient(180deg, var(--vp-c-brand-2), var(--vp-c-brand)); }
+
+.dark .bar-empty { background: linear-gradient(180deg, var(--vp-c-brand-2), var(--vp-c-brand)); }
+
 @media (max-width: 640px) { .github-activity { padding: 1.25rem; margin: 2rem 0; } .chart-container { height: 100px; gap: 2px; } .bar { width: 80%; } .summary-row { gap: 1rem; } .summary-value { font-size: 1.2rem; } }
 </style>
