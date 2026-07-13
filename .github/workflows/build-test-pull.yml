@@ -124,7 +124,7 @@ jobs:
     name: 预览部署 (Cloudflare Pages)
     runs-on: ubuntu-22.04
     needs: lint
-    if: ${{ github.event_name == 'pull_request' && vars.CF_PAGES_PROJECT != '' }}
+    if: github.event_name == 'pull_request'
     continue-on-error: true
     timeout-minutes: 15
     steps:
@@ -146,9 +146,10 @@ jobs:
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          command: pages deploy .vitepress/dist --project-name=${{ vars.CF_PAGES_PROJECT }}
+          command: pages deploy .vitepress/dist --project-name=miragedge-docweb
 
       - name: 展示预览地址到 Actions 结果
+        if: steps.cloudflare.outcome == 'success'
         run: |
           echo "## :cloud: Cloudflare Pages 预览" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
