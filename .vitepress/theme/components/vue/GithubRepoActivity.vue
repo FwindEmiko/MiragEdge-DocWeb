@@ -41,9 +41,7 @@
             </div>
             <div v-else class="bar-empty"></div>
           </div>
-
-          </div>
-          <div class="bar-label">{{ week.shortLabel }}</div>
+          <div class="bar-label"> week.shortLabel }}</div>
         </div>
       </div>
     </div>
@@ -62,7 +60,7 @@ const props = withDefaults(defineProps<{
   repo?: string
 }>(), { repo: 'fwindemiko/MiragEdge-DocWeb' })
 
-interface RawWeek { total: number; week: number }
+interface ContributorWeek { w: number; a: number; d: number; c: number; author?: { login: string } }
 interface SegmentData {
   login: string; commits: number; barPx: number; color: string
 }
@@ -75,11 +73,12 @@ interface WeekData {
   week: number; total: number; label: string
   shortLabel: string; commits: number; percent: number
   barPx: number
+  segments: SegmentData[]
 }
 
 const loading = ref(true)
 const error = ref(false)
-const rawData = ref<RawWeek[]>([])
+const rawData = ref<{ author: { login: string }; total: number; weeks: { w: number; c: number }[] }[]>([])
 const controller = new AbortController()
 
 
@@ -92,17 +91,54 @@ const CONTRIBUTOR_COLORS = [
 
 const chartData = computed<WeekData[]>(() => {
   if (!rawData.value.length) return []
-  const last12 = rawData.value.slice(-12)
-  const maxCommits = Math.max(...last12.map(w => w.total), 1)
-  return last12.map(w => {
-    const d = new Date(w.week * 1000)
-    const month = d.getMonth() + 1, day = d.getDate()
+  const allWeeks = new Set<number>()
+  const colorMap: Record<string, string> = {}
+  let colorIdx = 0
+  for (const contrib of rawData.value) {
+    const login = contrib.author.login
+    if (!colorMap[login]) {
+      colorMap[login] = CONTRIBUTOR_COLORS[colorIdx % CONTRIBUTOR_COLORS.length]
+      colorIdx++
+    }
+  }
+  for (const contrib of rawData.value) {
+    for (const w of contrib.weeks || []) {
+      allWeeks.add(w.w)
+    }
+  }
+  const sortedWeeks = [...allWeeks].sort().slice(-12)
+  const maxTotal = Math.max(1, ...sortedWeeks.map(week =>
+    rawData.value.reduce((s, contrib) => {
+      const wd = (contrib.weeks || []).find((w) => w.w === week)
+      return s + (wd ? wd.c : 0)
+    }, 0)
+  ))
+  return sortedWeeks.map(weekTs => {
+    const d = new Date(weekTs * 1000)
+    const m = d.getMonth() + 1, day = d.getDate()
+    let weekTotal = 0
+    for (const contrib of rawData.value) {
+      const wd = (contrib.weeks || []).find((w) => w.w === weekTs)
+      weekTotal += wd ? wd.c : 0
+    }
+    const barPx = Math.max((weekTotal / maxTotal) * MAX_BAR_PX, 2)
+    const segments: SegmentData[] = []
+    for (const contrib of rawData.value) {
+      const login = contrib.author.login
+      const wd = (contrib.weeks || []).find((w) => w.w === weekTs)
+      const commits = wd ? wd.c : 0
+      const segPx = weekTotal > 0 ? (commits / weekTotal) * barPx : 0
+      if (segPx > 0) {
+        segments.push({ login, commits, barPx: segPx, color: colorMap[login] })
+      }
+    }
     return {
-      week: w.week, total: w.total,
-      label: month + '月' + day + '日 - ' + w.total + ' 次提交',
-      shortLabel: month + '/' + day,
-      commits: w.total, percent: (w.total / maxCommits) * 100,
-      barPx: Math.max((w.total / maxCommits) * MAX_BAR_PX, 2)
+      week: weekTs, total: weekTotal,
+      label: m + "月" + day + "日 - " + weekTotal + " 次提交",
+      shortLabel: m + "/" + day,
+      commits: weekTotal,
+      percent: maxTotal > 0 ? (weekTotal / maxTotal) * 100 : 0,
+      barPx, segments
     }
   })
 })
