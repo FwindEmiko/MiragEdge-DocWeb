@@ -150,43 +150,23 @@ const avgWeekly = computed(() => {
 })
 const activeWeeks = computed(() => chartData.value.filter(w => w.commits > 0).length)
 
-let retryCount = 0
-const MAX_RETRIES = 2
-
 async function fetchData() {
   try {
     loading.value = true
     error.value = false
-    const repo = props.repo
-
-    const res = await fetch('https://api.github.com/repos/' + repo + '/stats/contributors', {
-
-      signal: controller.signal
-    })
-
-    // 处理 HTTP 202 — GitHub 还在计算中
-    if (res.status === 202) {
-      if (retryCount < MAX_RETRIES) {
-        retryCount++
-        await new Promise(r => setTimeout(r, 3000))
-        return fetchData()
-      }
-      throw new Error('GitHub stats temporarily unavailable (timed out)')
-    }
-
-    if (!res.ok) throw new Error('HTTP ' + res.status)
+    const res = await fetch("/data/contributors-activity.json", { signal: controller.signal })
+    if (!res.ok) throw new Error("HTTP " + res.status)
     const data = await res.json()
-    if (!Array.isArray(data) || data.length === 0) throw new Error('No data')
+    if (!Array.isArray(data) || data.length === 0) throw new Error("No data")
     rawData.value = data
   } catch (e) {
-    if (e instanceof DOMException && e.name === 'AbortError') return
-    console.error('GitHub Activity fetch failed:', e)
+    if (e instanceof DOMException && e.name === "AbortError") return
+    console.error("Activity data fetch failed:", e)
     error.value = true
   } finally {
     loading.value = false
   }
 }
-
 onUnmounted(() => controller.abort())
 onMounted(fetchData)
 </script>
