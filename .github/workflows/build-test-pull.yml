@@ -41,10 +41,11 @@ jobs:
         continue-on-error: false
 
   # ============================================================
-  # 构建（main 分支）
+  # 构建测试（main 分支）
+  # 构建完成后检查产物大小，验证构建是否正常
   # ============================================================
-  build:
-    name: 构建
+  test:
+    name: 构建测试
     runs-on: ubuntu-22.04
     needs: lint
     if: github.ref == 'refs/heads/main'
@@ -62,10 +63,11 @@ jobs:
       - run: pnpm install
       - name: 构建
         run: pnpm run build
-      - name: 构建产物大小
+      - name: 检查构建产物大小
         run: |
           DIST_SIZE=$(du -sh .vitepress/dist | cut -f1)
-          echo "📦 $DIST_SIZE"
+          echo "📦 构建产物大小: $DIST_SIZE"
+          echo "## 构建产物大小: $DIST_SIZE" >> $GITHUB_STEP_SUMMARY
       - name: 打包
         run: tar -czf site.tar.gz -C .vitepress/dist .
       - name: 上传构建产物
@@ -76,12 +78,12 @@ jobs:
           retention-days: 3
 
   # ============================================================
-  # 部署到 ECS（仅 main，依赖 build 成功）
+  # 部署到 ECS（仅 main，依赖 test 成功）
   # ============================================================
   deploy:
     name: 部署
     runs-on: ubuntu-22.04
-    needs: build
+    needs: test
     if: github.ref == 'refs/heads/main'
     timeout-minutes: 60
     steps:
@@ -111,7 +113,7 @@ jobs:
           ENDSSH
 
   # ============================================================
-  # GitHub Pages 预览构建（非 main 分支）
+  # 构建预览（非 main 分支）
   # ============================================================
   preview-build:
     name: Pages 预览构建
@@ -146,7 +148,7 @@ jobs:
           path: .vitepress/dist
 
   # ============================================================
-  # GitHub Pages 部署（依赖 preview-build 成功）
+  # 部署到 GitHub Pages（依赖 preview-build 成功）
   # ============================================================
   deploy-pages:
     name: 部署到 Pages
