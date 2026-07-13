@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - dev
 
 concurrency:
   group: ci-${{ github.ref }}
@@ -11,8 +12,6 @@ concurrency:
 
 permissions:
   contents: read
-  pull-requests: write
-  actions: read
 
 env:
   NODE_VERSION: 22.x
@@ -20,7 +19,7 @@ env:
 
 jobs:
   # ============================================================
-  # 代码质量检查
+  # 代码质量检查（始终执行）
   # ============================================================
   lint:
     name: 代码质量检查
@@ -36,19 +35,19 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-
       - run: pnpm install
       - name: 类型检查
         run: pnpm run typecheck
         continue-on-error: false
 
   # ============================================================
-  # 构建测试 + 打包
+  # 构建（main 分支）
   # ============================================================
-  test:
-    name: 构建测试
+  build:
+    name: 构建
     runs-on: ubuntu-22.04
     needs: lint
+    if: github.ref == 'refs/heads/main'
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
@@ -60,20 +59,16 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-
       - run: pnpm install
       - name: 构建
         run: pnpm run build
-      - name: 检查构建产物大小
+      - name: 构建产物大小
         run: |
           DIST_SIZE=$(du -sh .vitepress/dist | cut -f1)
-          echo "📦 构建产物大小: $DIST_SIZE"
-          echo "## 构建产物大小: $DIST_SIZE" >> $GITHUB_STEP_SUMMARY
+          echo "📦 $DIST_SIZE"
       - name: 打包
-        if: github.event_name == 'push'
         run: tar -czf site.tar.gz -C .vitepress/dist .
       - name: 上传构建产物
-        if: github.event_name == 'push'
         uses: actions/upload-artifact@v4
         with:
           name: site
@@ -81,14 +76,13 @@ jobs:
           retention-days: 3
 
   # ============================================================
-  # 生产部署 (ECS)
-  # 仅当 push 到 main 分支时触发
+  # 部署到 ECS（仅 main，依赖 build 成功）
   # ============================================================
   deploy:
     name: 部署
     runs-on: ubuntu-22.04
-    needs: test
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: build
+    if: github.ref == 'refs/heads/main'
     timeout-minutes: 60
     steps:
       - name: 下载构建产物
@@ -100,13 +94,12 @@ jobs:
         uses: webfactory/ssh-agent@v0.9.0
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-
       - name: 远程部署
         run: |
           set -e
           HOST="dev.miragedge.top"
           mkdir -p ~/.ssh
-          ssh-keyscan -H "$HOST" >> ~/.ssh/known_hosts 2>&1 || echo "⚠️ ssh-keyscan 警告，继续尝试..."
+          ssh-keyscan -H "$HOST" >> ~/.ssh/known_hosts 2>&1 || echo "⚠️ ssh-keyscan 警告"
           scp -o ConnectTimeout=60 site.tar.gz root@"$HOST":/tmp/
           ssh -o ConnectTimeout=60 root@"$HOST" << 'ENDSSH'
             set -e
@@ -116,3 +109,57 @@ jobs:
             rm /tmp/site.tar.gz
             echo "✅ 部署成功"
           ENDSSH
+
+  # ============================================================
+  # GitHub Pages 预览构建（非 main 分支）
+  # ============================================================
+  preview-build:
+    name: Pages 预览构建
+    runs-on: ubuntu-22.04
+    needs: lint
+    if: github.ref != 'refs/heads/main'
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v2
+        with:
+          version: ${{ env.PNPM_VERSION }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - run: pnpm install
+      - name: 适配 Pages base 路径
+        run: |
+          python3 << 'PYEOF'
+          import re
+          path = '.vitepress/config.mts'
+          with open(path) as f:
+              c = f.read()
+          c = re.sub(r"base: '/'", "base: '/MiragEdge-DocWeb/'", c)
+          with open(path, 'w') as f:
+              f.write(c)
+          print('base updated')
+          PYEOF
+      - run: pnpm run build
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: .vitepress/dist
+
+  # ============================================================
+  # GitHub Pages 部署（依赖 preview-build 成功）
+  # ============================================================
+  deploy-pages:
+    name: 部署到 Pages
+    runs-on: ubuntu-22.04
+    needs: preview-build
+    if: github.ref != 'refs/heads/main'
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: 部署
+        id: deployment
+        uses: actions/deploy-pages@v4

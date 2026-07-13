@@ -13,6 +13,7 @@
  * 完全绕过 Vue 渲染周期和父容器 CSS 层叠上下文（backdrop-filter 等）。
  */
 import { computed, ref, onBeforeUnmount } from 'vue'
+import { withBase } from 'vitepress'
 import { resolveMcItem, resolveNameByTexture } from '../../data/mc-textures'
 
 const props = withDefaults(defineProps<{
@@ -43,7 +44,7 @@ const resolved = computed(() => {
   const reverseName = texturePath ? resolveNameByTexture(texturePath) : null
   return {
     name: props.name ?? regData?.name ?? reverseName ?? '',
-    texture: texturePath,
+    texture: withBase(texturePath),
   }
 })
 
