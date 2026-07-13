@@ -32,7 +32,7 @@
     >
       <img
         ref="imageRef"
-        :src="src"
+        :src="baseSrc"
         :alt="alt || 'Image'"
         :style="imageStyle"
         :class="{ 'loaded': loaded }"
@@ -50,6 +50,8 @@
 </template>
 
 <script>
+import { withBase } from 'vitepress'
+
 export default {
   name: 'SmartImage',
   
@@ -114,6 +116,7 @@ export default {
   },
 
   computed: {
+    baseSrc() { return withBase(this.src) },
     // 新增：根据 lazy prop 返回 loading 属性的值
     loadingAttr() {
       return this.lazy ? 'lazy' : 'eager';
