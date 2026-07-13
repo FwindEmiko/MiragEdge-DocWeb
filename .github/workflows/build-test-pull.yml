@@ -6,6 +6,7 @@ on:
       - main
       - dev
 
+
 concurrency:
   group: ci-${{ github.ref }}
   cancel-in-progress: true
@@ -77,6 +78,7 @@ jobs:
 
   # ============================================================
   # 部署到 ECS（仅 main，依赖 build 成功）
+
   # ============================================================
   deploy:
     name: 部署
@@ -163,3 +165,4 @@ jobs:
       - name: 部署
         id: deployment
         uses: actions/deploy-pages@v4
+

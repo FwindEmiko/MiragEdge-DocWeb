@@ -33,8 +33,15 @@
 
       <div class="chart-container">
         <div v-for="(week, idx) in chartData" :key="week.week" class="bar-column" :title="week.label" role="img" :aria-label="week.label">
-          <div class="bar-wrapper">
-            <div class="bar" :style="{ height: week.percent + '%', opacity: week.commits > 0 ? 0.85 : 0.25 }"></div>
+
+          <div class="bar-wrap" :style="{ height: week.barPx + 'px' }">
+            <div v-if="week.segments && week.segments.length > 0" class="bar-segments">
+              <div v-for="seg in week.segments" :key="seg.login" class="bar-segment" :style="{ height: seg.barPx + 'px', backgroundColor: seg.color }" :title="seg.login + ': ' + seg.commits + ' 次提交'">
+              </div>
+            </div>
+            <div v-else class="bar-empty"></div>
+          </div>
+
           </div>
           <div class="bar-label">{{ week.shortLabel }}</div>
         </div>
@@ -56,15 +63,32 @@ const props = withDefaults(defineProps<{
 }>(), { repo: 'fwindemiko/MiragEdge-DocWeb' })
 
 interface RawWeek { total: number; week: number }
+interface SegmentData {
+  login: string; commits: number; barPx: number; color: string
+}
+
+interface ContributorData {
+  login: string; totalCommits: number; color: string
+}
+
 interface WeekData {
   week: number; total: number; label: string
   shortLabel: string; commits: number; percent: number
+  barPx: number
 }
 
 const loading = ref(true)
 const error = ref(false)
 const rawData = ref<RawWeek[]>([])
 const controller = new AbortController()
+
+
+const MAX_BAR_PX = 120
+const CONTRIBUTOR_COLORS = [
+  "#4CAF50", "#2196F3", "#FF9800", "#9C27B0",
+  "#F44336", "#00BCD4", "#FF5722", "#3F51B5",
+]
+
 
 const chartData = computed<WeekData[]>(() => {
   if (!rawData.value.length) return []
@@ -77,7 +101,8 @@ const chartData = computed<WeekData[]>(() => {
       week: w.week, total: w.total,
       label: month + '月' + day + '日 - ' + w.total + ' 次提交',
       shortLabel: month + '/' + day,
-      commits: w.total, percent: (w.total / maxCommits) * 100
+      commits: w.total, percent: (w.total / maxCommits) * 100,
+      barPx: Math.max((w.total / maxCommits) * MAX_BAR_PX, 2)
     }
   })
 })
@@ -97,7 +122,9 @@ async function fetchData() {
     loading.value = true
     error.value = false
     const repo = props.repo
-    const res = await fetch('https://api.github.com/repos/' + repo + '/stats/commit_activity', {
+
+    const res = await fetch('https://api.github.com/repos/' + repo + '/stats/contributors', {
+
       signal: controller.signal
     })
 
@@ -143,13 +170,24 @@ onMounted(fetchData)
 .summary-label { font-size: 0.78rem; color: var(--vp-c-text-2); }
 .chart-container { display: flex; align-items: flex-end; gap: 4px; height: 140px; padding: 0 4px; }
 .bar-column { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; min-width: 0; cursor: default; }
-.bar-wrapper { flex: 1; width: 100%; display: flex; align-items: flex-end; justify-content: center; }
+.bar-wrap { flex: 1; width: 100%; display: flex; align-items: flex-end; justify-content: center; position: relative; }
+.bar-segments { position: absolute; bottom: 0; left: 0; right: 0; height: 100%; display: flex; flex-direction: column-reverse; }
+.bar-segment { width: 70%; margin: 0 auto; min-height: 2px; border-radius: 3px 3px 1px 1px; transition: all 0.3s ease; flex-shrink: 0; }
+.bar-column:hover .bar-segment { opacity: 1 !important; filter: brightness(1.15); }
+.bar-empty { width: 70%; height: 100%; background: linear-gradient(180deg, var(--vp-c-brand-2, #7c5cfc), var(--vp-c-brand)); border-radius: 3px 3px 1px 1px; min-height: 2px; }
+.contributors-legend { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--vp-c-divider); }
+.legend-item { display: flex; align-items: center; gap: 0.4rem; font-size: 0.8rem; color: var(--vp-c-text-2); }
+.legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.legend-name { font-weight: 600; color: var(--vp-c-text-1); }
+.legend-commits { color: var(--vp-c-text-3); }
 .bar { width: 70%; min-height: 2px; max-height: 100%; background: linear-gradient(180deg, var(--vp-c-brand-2, #7c5cfc), var(--vp-c-brand)); border-radius: 3px 3px 1px 1px; transition: height 0.3s ease, opacity 0.3s ease; }
-.bar-column:hover .bar { opacity: 1 !important; filter: brightness(1.15); }
+
 .bar-label { font-size: 0.65rem; color: var(--vp-c-text-3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; text-align: center; }
 .error-state { display: flex; justify-content: center; align-items: center; padding: 2rem; color: var(--vp-c-text-2); font-size: 0.9rem; gap: 0.5rem; }
 .retry-btn { padding: 4px 12px; font-size: 0.8rem; color: var(--vp-c-brand); background: transparent; border: 1px solid var(--vp-c-brand); border-radius: 6px; cursor: pointer; transition: all 0.2s; }
 .retry-btn:hover { background: var(--vp-c-brand); color: white; }
-.dark .bar { background: linear-gradient(180deg, var(--vp-c-brand-2), var(--vp-c-brand)); }
+
+.dark .bar-empty { background: linear-gradient(180deg, var(--vp-c-brand-2), var(--vp-c-brand)); }
+
 @media (max-width: 640px) { .github-activity { padding: 1.25rem; margin: 2rem 0; } .chart-container { height: 100px; gap: 2px; } .bar { width: 80%; } .summary-row { gap: 1rem; } .summary-value { font-size: 1.2rem; } }
 </style>
