@@ -97,10 +97,6 @@ const controller = new AbortController()
 
 
 const MAX_BAR_PX = 120
-const CONTRIBUTOR_COLORS = [
-  "#4CAF50", "#2196F3", "#FF9800", "#9C27B0",
-  "#F44336", "#00BCD4", "#FF5722", "#3F51B5",
-]
 
 
 const chartData = computed<WeekData[]>(() => {
