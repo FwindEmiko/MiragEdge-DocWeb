@@ -45,7 +45,7 @@ jobs:
   # 构建完成后检查产物大小，验证构建是否正常
   # ============================================================
   test:
-    name: 构建测试
+    name: 测试与构建
     runs-on: ubuntu-22.04
     needs: lint
     if: github.ref == 'refs/heads/main'
@@ -81,7 +81,7 @@ jobs:
   # 部署到 ECS（仅 main，依赖 test 成功）
   # ============================================================
   deploy:
-    name: 部署
+    name: 部署远端服务器
     runs-on: ubuntu-22.04
     needs: test
     if: github.ref == 'refs/heads/main'
@@ -116,7 +116,7 @@ jobs:
   # 构建预览（非 main 分支）
   # ============================================================
   preview-build:
-    name: Pages 预览构建
+    name: Dev预览测试构建
     runs-on: ubuntu-22.04
     needs: lint
     if: github.ref != 'refs/heads/main'
@@ -151,7 +151,7 @@ jobs:
   # 部署到 GitHub Pages（依赖 preview-build 成功）
   # ============================================================
   deploy-pages:
-    name: 部署到 Pages
+    name: 部署到 GH Pages完成预览部署
     runs-on: ubuntu-22.04
     needs: preview-build
     if: github.ref != 'refs/heads/main'
