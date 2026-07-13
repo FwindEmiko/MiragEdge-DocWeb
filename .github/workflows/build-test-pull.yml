@@ -5,7 +5,7 @@ on:
     branches:
       - main
       - dev
-
+  pull_request:
 
 concurrency:
   group: ci-${{ github.ref }}
@@ -20,7 +20,7 @@ env:
 
 jobs:
   # ============================================================
-  # 代码质量检查（始终执行）
+  # 代码质量检查（所有事件）
   # ============================================================
   lint:
     name: 代码质量检查
@@ -42,14 +42,13 @@ jobs:
         continue-on-error: false
 
   # ============================================================
-  # 构建测试（main 分支）
-  # 构建完成后检查产物大小，验证构建是否正常
+  # 构建测试（main push 和 PR 事件）
   # ============================================================
   test:
-    name: 测试与构建
+    name: 构建测试
     runs-on: ubuntu-22.04
     needs: lint
-    if: github.ref == 'refs/heads/main'
+    if: github.event_name != 'push' || github.ref == 'refs/heads/main'
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
@@ -79,13 +78,13 @@ jobs:
           retention-days: 3
 
   # ============================================================
-  # 部署到 ECS（仅 main，依赖 test 成功）
+  # 部署到 ECS（仅 main push，依赖 test 成功）
   # ============================================================
   deploy:
-    name: 部署远端服务器
+    name: 部署
     runs-on: ubuntu-22.04
     needs: test
-    if: github.ref == 'refs/heads/main'
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     timeout-minutes: 60
     steps:
       - name: 下载构建产物
@@ -114,13 +113,13 @@ jobs:
           ENDSSH
 
   # ============================================================
-  # 构建预览（非 main 分支）
+  # 构建预览（dev push）
   # ============================================================
   preview-build:
-    name: Dev预览测试构建
+    name: Pages 预览构建
     runs-on: ubuntu-22.04
     needs: lint
-    if: github.ref != 'refs/heads/main'
+    if: github.event_name == 'push' && github.ref == 'refs/heads/dev'
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
@@ -149,13 +148,13 @@ jobs:
           path: .vitepress/dist
 
   # ============================================================
-  # 部署到 GitHub Pages（依赖 preview-build 成功）
+  # 部署到 GitHub Pages（仅 dev push）
   # ============================================================
   deploy-pages:
-    name: 部署到 GH Pages完成预览部署
+    name: 部署到 Pages
     runs-on: ubuntu-22.04
     needs: preview-build
-    if: github.ref != 'refs/heads/main'
+    if: github.event_name == 'push' && github.ref == 'refs/heads/dev'
     permissions:
       pages: write
       id-token: write
@@ -166,4 +165,3 @@ jobs:
       - name: 部署
         id: deployment
         uses: actions/deploy-pages@v4
-
