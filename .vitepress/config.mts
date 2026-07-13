@@ -65,8 +65,8 @@ export default defineConfig({
       __BUILD_SHA__: JSON.stringify(process.env.GITHUB_SHA ? process.env.GITHUB_SHA.substring(0, 7) : ''),
     },
     plugins: [
-      MermaidPlugin(),
-      addContributorsPlugin(),
+      MermaidPlugin() as any,
+      addContributorsPlugin() as any,
     ],
     optimizeDeps: {
       include: ['mermaid', 'vue']
