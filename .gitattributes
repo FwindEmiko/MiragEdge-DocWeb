@@ -1,4 +1,5 @@
-﻿# 统一所有文本文件 LF 行尾（Windows 端虽 CRLF，Git 识别为 LF）
+# unified LF line endings for all text files
+# orig first line was Chinese comment - git does not parse it
 * text=auto eol=lf
 
 # 显式指定 markdown YAML/JSON 也按文本

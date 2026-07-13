@@ -24,6 +24,7 @@ import './css/custom.css'
 // 导入所有样式文件
 import './css/base/colors.css'
 import './css/layout/hero.css'
+import GithubRepoActivity from './components/vue/GithubRepoActivity.vue'
 import './css/components/animation.css'
 import './css/components/button.css'
 import './css/components/feature.css'
@@ -71,6 +72,7 @@ export default {
     app.component('Furnace', Furnace)
     app.component('FoodStats', FoodStats)
     app.component('FoodEntry', FoodEntry)
+    app.component('GithubRepoActivity', GithubRepoActivity)
     app.component('TodoList', TodoList)
 
     // 仅在浏览器环境下执行
