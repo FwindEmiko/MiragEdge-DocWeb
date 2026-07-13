@@ -4,6 +4,7 @@ import { Octokit } from '@octokit/rest';
 import * as fs from 'fs';
 import * as path from 'path';
 import * as dotenv from 'dotenv';
+import { execSync } from "child_process";
 
 // 加载环境变量
 dotenv.config();
@@ -24,8 +25,12 @@ const repo = 'MiragEdge-DocWeb'; // 你的仓库名
 
 // 初始化
 const git = simpleGit();
+let ghToken = process.env.GITHUB_TOKEN;
+if (!ghToken) {
+  try { ghToken = execSync('gh auth token', { encoding: 'utf-8' }).trim(); } catch {}
+}
 const octokit = new Octokit({
-  auth: process.env.GITHUB_TOKEN,
+  auth: ghToken,
 });
 
 /**
@@ -230,29 +235,91 @@ function isHomePage(code: string, id: string): boolean {
 /**
  * 获取仓库提交活跃数据并保存为静态JSON
  */
-async function fetchAndSaveActivityData(): Promise<void> {
+async function fetchAndSaveActivityData(emailMap: Record<string, string>): Promise<void> {
   const outputPath = path.resolve(process.cwd(), "public", "data", "contributors-activity.json");
   const dir = path.dirname(outputPath);
   if (!fs.existsSync(dir)) {
     fs.mkdirSync(dir, { recursive: true });
   }
   try {
-    const resp = await octokit.request("GET /repos/{owner}/{repo}/stats/contributors", { owner, repo });
-    if (resp.status === 200 && Array.isArray(resp.data)) {
-      const simplified = resp.data.map((contrib: any) => ({
-        author: { login: contrib.author.login },
-        total: contrib.total,
-        weeks: contrib.weeks.map((w: any) => ({ w: w.w, c: w.c })),
-      }));
-      fs.writeFileSync(outputPath, JSON.stringify(simplified), "utf-8");
-      console.log("[activity] Saved " + simplified.length + " contributors");
-    } else {
-      console.warn("[activity] API status " + resp.status + ", fallback");
-      fs.writeFileSync(outputPath, JSON.stringify([]), "utf-8");
+    // Use local git log instead of GitHub API (/stats/contributors often stuck at 202)
+    // Format: %ae = author email, %at = author timestamp (unix)
+    const rawLog = execSync('git log --format="%ae %at" --since="3 months ago" --no-merges', { encoding: 'utf-8' });
+    const lines = rawLog.trim().split('\n').filter(Boolean);
+
+    // Group commits by author email, then by week
+    const emailCommits: Record<string, { w: number; c: number }[]> = {};
+    const emailTotals: Record<string, number> = {};
+
+    for (const line of lines) {
+      const [email, ts] = line.split(' ');
+      const t = parseInt(ts, 10);
+      if (!email || isNaN(t)) continue;
+      // Align to Monday of the week (GitHub uses Monday-based weeks)
+      const d = new Date(t * 1000);
+      const day = d.getDay();
+      const monOffset = day === 0 ? 6 : day - 1; // Sunday=0 -> Monday=0 offset
+      const monday = new Date(d);
+      monday.setDate(d.getDate() - monOffset);
+      monday.setHours(0, 0, 0, 0);
+      const weekTs = Math.floor(monday.getTime() / 1000);
+
+      if (!emailCommits[email]) {
+        emailCommits[email] = [];
+        emailTotals[email] = 0;
+      }
+      emailTotals[email]++;
+
+      const existing = emailCommits[email].find(w => w.w === weekTs);
+      if (existing) {
+        existing.c++;
+      } else {
+        emailCommits[email].push({ w: weekTs, c: 1 });
+      }
     }
+
+    // Sort weeks for each email
+    for (const email of Object.keys(emailCommits)) {
+      emailCommits[email].sort((a, b) => a.w - b.w);
+    }
+
+    // Map emails to GitHub usernames and merge duplicates
+    const merged = new Map();
+    for (const [email, weeks] of Object.entries(emailCommits)) {
+      const username = emailMap[email] || email.split('@')[0];
+      if (!merged.has(username)) {
+        merged.set(username, { login: username, total: 0, weeks: new Map() });
+      }
+      const entry = merged.get(username);
+      entry.total += emailTotals[email];
+      for (const w of weeks) {
+        entry.weeks.set(w.w, (entry.weeks.get(w.w) || 0) + w.c);
+      }
+    }
+
+    // Convert merged map to result format
+    const result = [];
+    for (const entry of merged.values()) {
+      const weeksArr = [];
+      for (const [w, c] of entry.weeks) {
+        weeksArr.push({ w, c });
+      }
+      weeksArr.sort((a, b) => a.w - b.w);
+      result.push({
+        author: { login: entry.login },
+        total: entry.total,
+        weeks: weeksArr,
+      });
+    }
+
+    // Sort by total commits descending
+    result.sort((a, b) => b.total - a.total);
+
+    fs.writeFileSync(outputPath, JSON.stringify(result), "utf-8");
+    console.log("[activity] Saved " + result.length + " contributors (" + lines.length + " commits) from git log");
   } catch (error) {
     console.warn("[activity] Failed:", (error as Error).message);
-    fs.writeFileSync(outputPath, JSON.stringify([]), "utf-8");
+    try { fs.writeFileSync(outputPath, JSON.stringify([]), "utf-8"); } catch {}
   }
 }
 
@@ -272,7 +339,14 @@ export default function addContributorsPlugin(): Plugin {
       if (!dataLoaded) {
         console.log('Loading contributor data...');
         fullContributorData = await getAllContributors();
-        await fetchAndSaveActivityData();
+        // Build email→username map from contributor data
+        const emailMap: Record<string, string> = {};
+        for (const c of fullContributorData) {
+          for (const email of c.emails) {
+            emailMap[email] = c.username;
+          }
+        }
+        await fetchAndSaveActivityData(emailMap);
         dataLoaded = true;
       }
     },
