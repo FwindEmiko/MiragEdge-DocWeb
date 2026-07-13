@@ -149,7 +149,7 @@ export default defineConfig({
       },
       { 
         text: '💻 开发文档', 
-        link: '/develop/index',
+        link: '/develop/team',
         activeMatch: '^/develop/'
       },
       { 
@@ -348,7 +348,7 @@ export default defineConfig({
       ],
 
       '/develop/': [
-        { text: '👥 开发团队', link: '/develop/index' },
+        { text: '👥 开发团队', link: '/develop/team' },
         { text: '📌 待办事项', link: '/develop/todo' },
         /* {
           text: '🎮 插件开发',

@@ -18,7 +18,7 @@
 文档按功能模块分类，主要包含：
 - **新手引导**：客户端安装、入服教程、基础玩法（[查看](/manual/review.md)）
 - **功能玩法**：装备升级、高级附魔、食物系统、工作系统（[查看](/features/index.md)）
-- **开发协作**：内容设计流程、团队协作规范（[查看](/develop/index.md)）
+- **开发协作**：内容设计流程、团队协作规范（[查看](/develop/team.md)）
 - **版本日志**：游戏更新（功能优化/BUG修复）与网站迭代（界面/内容更新）（[查看](/develop/logs.md)）
 - **规则说明**：玩家守则、交流群规范（[查看](/manual/eula.md)）
 
@@ -41,7 +41,7 @@ Visualization: Mermaid, Canvas-confetti
 ## 🤝 贡献与支持
 - **GitHub仓库**：[FwindEmiko/MiragEdge-DocWeb](https://github.com/FwindEmiko/MiragEdge-DocWeb)
 - **提交问题**：访问GitHub仓库提交bug报告或功能建议
-- **开发文档**：查看[开发文档](/develop/index.md)了解插件开发与系统架构
+- **开发文档**：查看[开发文档](/develop/team.md)了解插件开发与系统架构
 - **社区支持**：加入QQ群获取实时帮助
 
 ## <MapIcon name="target" :size="24" /> 愿景与使命
