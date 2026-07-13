@@ -1,6 +1,9 @@
 name: CI/CD 持续集成
 
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - main
 
 concurrency:
   group: ci-${{ github.ref }}
@@ -79,6 +82,7 @@ jobs:
 
   # ============================================================
   # 生产部署 (ECS)
+  # 仅当 push 到 main 分支时触发
   # ============================================================
   deploy:
     name: 部署
@@ -112,47 +116,3 @@ jobs:
             rm /tmp/site.tar.gz
             echo "✅ 部署成功"
           ENDSSH
-
-  # ============================================================
-  # 预览部署 (Cloudflare Pages)
-  # 前提: 在 GitHub 仓库 Settings → Secrets and variables →
-  #       Actions → Variables 中设置 CF_PAGES_PROJECT
-  #       在 Secrets 中设置 CLOUDFLARE_API_TOKEN
-  #       未配置时自动跳过，不影响现有流程
-  # ============================================================
-  preview:
-    name: 预览部署 (Cloudflare Pages)
-    runs-on: ubuntu-22.04
-    needs: lint
-    if: github.event_name == 'pull_request' || github.ref == 'refs/heads/dev'
-    continue-on-error: true
-    timeout-minutes: 15
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - uses: pnpm/action-setup@v2
-        with:
-          version: ${{ env.PNPM_VERSION }}
-      - uses: actions/setup-node@v4
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-
-      - run: pnpm install
-      - run: pnpm run build
-
-      - name: 部署到 Cloudflare Pages
-        id: cloudflare
-        uses: cloudflare/wrangler-action@v3
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          command: pages deploy .vitepress/dist --project-name=miragedge-docweb
-
-      - name: 展示预览地址到 Actions 结果
-        if: steps.cloudflare.outcome == 'success'
-        run: |
-          echo "## :cloud: Cloudflare Pages 预览" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "- **预览地址**: [${{ steps.cloudflare.outputs.deployment-url }}](${{ steps.cloudflare.outputs.deployment-url }})" >> $GITHUB_STEP_SUMMARY
-          echo "- **分支**: ${{ github.head_ref }}" >> $GITHUB_STEP_SUMMARY
-          echo "- **PR**: [#${{ github.event.number }}](${{ github.server_url }}/${{ github.repository }}/pull/${{ github.event.number }})" >> $GITHUB_STEP_SUMMARY
