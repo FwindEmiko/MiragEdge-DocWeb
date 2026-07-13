@@ -50,6 +50,7 @@
 </template>
 
 <script>
+import { withBase } from "vitepress"
 export default {
   name: 'SmartImage',
   
