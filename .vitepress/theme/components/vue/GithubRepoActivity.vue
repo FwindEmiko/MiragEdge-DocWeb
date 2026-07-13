@@ -33,8 +33,8 @@
 
       <div class="chart-container">
         <div v-for="(week, idx) in chartData" :key="week.week" class="bar-column" :title="week.label" role="img" :aria-label="week.label">
-          <div class="bar-wrapper">
-            <div class="bar" :style="{ height: week.percent + '%', opacity: week.commits > 0 ? 0.85 : 0.25 }"></div>
+          <div class="bar-wrap">
+            <div class="bar" :style="{ height: week.barPx + 'px', opacity: week.commits > 0 ? 0.85 : 0.25 }"></div>
           </div>
           <div class="bar-label">{{ week.shortLabel }}</div>
         </div>
@@ -59,12 +59,15 @@ interface RawWeek { total: number; week: number }
 interface WeekData {
   week: number; total: number; label: string
   shortLabel: string; commits: number; percent: number
+  barPx: number
 }
 
 const loading = ref(true)
 const error = ref(false)
 const rawData = ref<RawWeek[]>([])
 const controller = new AbortController()
+
+const MAX_BAR_PX = 120
 
 const chartData = computed<WeekData[]>(() => {
   if (!rawData.value.length) return []
@@ -77,7 +80,8 @@ const chartData = computed<WeekData[]>(() => {
       week: w.week, total: w.total,
       label: month + '月' + day + '日 - ' + w.total + ' 次提交',
       shortLabel: month + '/' + day,
-      commits: w.total, percent: (w.total / maxCommits) * 100
+      commits: w.total, percent: (w.total / maxCommits) * 100,
+      barPx: Math.max((w.total / maxCommits) * MAX_BAR_PX, 2)
     }
   })
 })
@@ -143,7 +147,7 @@ onMounted(fetchData)
 .summary-label { font-size: 0.78rem; color: var(--vp-c-text-2); }
 .chart-container { display: flex; align-items: flex-end; gap: 4px; height: 140px; padding: 0 4px; }
 .bar-column { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; min-width: 0; cursor: default; }
-.bar-wrapper { flex: 1; width: 100%; display: flex; align-items: flex-end; justify-content: center; }
+.bar-wrap { flex: 1; width: 100%; display: flex; align-items: flex-end; justify-content: center; }
 .bar { width: 70%; min-height: 2px; max-height: 100%; background: linear-gradient(180deg, var(--vp-c-brand-2, #7c5cfc), var(--vp-c-brand)); border-radius: 3px 3px 1px 1px; transition: height 0.3s ease, opacity 0.3s ease; }
 .bar-column:hover .bar { opacity: 1 !important; filter: brightness(1.15); }
 .bar-label { font-size: 0.65rem; color: var(--vp-c-text-3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; text-align: center; }
