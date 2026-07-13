@@ -1,5 +1,5 @@
 <template>
-  <div class="github-activity" v-if="!error">
+  <div class="github-activity">
     <h3 class="activity-title">
       <span class="title-icon">
         <svg viewBox="0 0 16 16" fill="currentColor" width="20" height="20">
@@ -15,7 +15,7 @@
       <span>正在获取仓库活跃数据...</span>
     </div>
 
-    <div v-else class="activity-content">
+    <div v-else-if="!error" class="activity-content">
       <div class="summary-row">
         <div class="summary-item">
           <span class="summary-value">{{ totalCommits }}</span>
@@ -32,7 +32,7 @@
       </div>
 
       <div class="chart-container">
-        <div v-for="(week, idx) in chartData" :key="idx" class="bar-column" :title="week.label">
+        <div v-for="(week, idx) in chartData" :key="week.week" class="bar-column" :title="week.label" role="img" :aria-label="week.label">
           <div class="bar-wrapper">
             <div class="bar" :style="{ height: week.percent + '%', opacity: week.commits > 0 ? 0.85 : 0.25 }"></div>
           </div>
@@ -43,12 +43,17 @@
 
     <div v-if="error" class="error-state">
       <span>⚠ 暂时无法获取仓库活跃数据</span>
+      <button class="retry-btn" @click="fetchData">重新加载</button>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, computed } from 'vue'
+import { ref, onMounted, onUnmounted, computed } from 'vue'
+
+const props = withDefaults(defineProps<{
+  repo?: string
+}>(), { repo: 'fwindemiko/MiragEdge-DocWeb' })
 
 interface RawWeek { total: number; week: number }
 interface WeekData {
@@ -59,6 +64,7 @@ interface WeekData {
 const loading = ref(true)
 const error = ref(false)
 const rawData = ref<RawWeek[]>([])
+const controller = new AbortController()
 
 const chartData = computed<WeekData[]>(() => {
   if (!rawData.value.length) return []
@@ -83,21 +89,43 @@ const avgWeekly = computed(() => {
 })
 const activeWeeks = computed(() => chartData.value.filter(w => w.commits > 0).length)
 
-onMounted(async () => {
+let retryCount = 0
+const MAX_RETRIES = 2
+
+async function fetchData() {
   try {
-    const repo = 'fwindemiko/MiragEdge-DocWeb'
-    const res = await fetch('https://api.github.com/repos/' + repo + '/stats/commit_activity')
+    loading.value = true
+    error.value = false
+    const repo = props.repo
+    const res = await fetch('https://api.github.com/repos/' + repo + '/stats/commit_activity', {
+      signal: controller.signal
+    })
+
+    // 处理 HTTP 202 — GitHub 还在计算中
+    if (res.status === 202) {
+      if (retryCount < MAX_RETRIES) {
+        retryCount++
+        await new Promise(r => setTimeout(r, 3000))
+        return fetchData()
+      }
+      throw new Error('GitHub stats temporarily unavailable (timed out)')
+    }
+
     if (!res.ok) throw new Error('HTTP ' + res.status)
     const data = await res.json()
     if (!Array.isArray(data) || data.length === 0) throw new Error('No data')
     rawData.value = data
   } catch (e) {
+    if (e instanceof DOMException && e.name === 'AbortError') return
     console.error('GitHub Activity fetch failed:', e)
     error.value = true
   } finally {
     loading.value = false
   }
-})
+}
+
+onUnmounted(() => controller.abort())
+onMounted(fetchData)
 </script>
 
 <style scoped>
@@ -120,6 +148,8 @@ onMounted(async () => {
 .bar-column:hover .bar { opacity: 1 !important; filter: brightness(1.15); }
 .bar-label { font-size: 0.65rem; color: var(--vp-c-text-3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; text-align: center; }
 .error-state { display: flex; justify-content: center; align-items: center; padding: 2rem; color: var(--vp-c-text-2); font-size: 0.9rem; gap: 0.5rem; }
-.dark .bar { background: linear-gradient(180deg, var(--vp-c-brand-2, #a78bfa), var(--vp-c-brand)); }
+.retry-btn { padding: 4px 12px; font-size: 0.8rem; color: var(--vp-c-brand); background: transparent; border: 1px solid var(--vp-c-brand); border-radius: 6px; cursor: pointer; transition: all 0.2s; }
+.retry-btn:hover { background: var(--vp-c-brand); color: white; }
+.dark .bar { background: linear-gradient(180deg, var(--vp-c-brand-2), var(--vp-c-brand)); }
 @media (max-width: 640px) { .github-activity { padding: 1.25rem; margin: 2rem 0; } .chart-container { height: 100px; gap: 2px; } .bar { width: 80%; } .summary-row { gap: 1rem; } .summary-value { font-size: 1.2rem; } }
 </style>
