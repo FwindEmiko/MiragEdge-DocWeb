@@ -41,7 +41,7 @@
             </div>
             <div v-else class="bar-empty"></div>
           </div>
-          <div class="bar-label"> week.shortLabel }}</div>
+          <div class="bar-label">{{ week.shortLabel }}</div>
         </div>
       </div>
     </div>
