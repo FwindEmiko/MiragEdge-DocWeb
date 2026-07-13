@@ -55,6 +55,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, computed } from 'vue'
+import { withBase } from 'vitepress'
 
 const props = withDefaults(defineProps<{
   repo?: string
@@ -154,7 +155,7 @@ async function fetchData() {
   try {
     loading.value = true
     error.value = false
-    const res = await fetch("/data/contributors-activity.json", { signal: controller.signal })
+    const res = await fetch(withBase("/data/contributors-activity.json"), { signal: controller.signal })
     if (!res.ok) throw new Error("HTTP " + res.status)
     const data = await res.json()
     if (!Array.isArray(data) || data.length === 0) throw new Error("No data")
