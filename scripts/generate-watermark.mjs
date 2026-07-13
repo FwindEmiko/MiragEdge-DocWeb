@@ -1,14 +1,11 @@
 /**
- * 水印生成脚本 — 一次性运行，生成水印 PNG 资源
+ * 水印生成脚本 v2 — 狐狸耳 + 斜向重复水印
  *
- * 运行方式: node scripts/generate-watermark.mjs
- * 
- * 设计说明：
- * 采用纯几何图形（无需系统字体），包含：
- * 1. 小号耳朵形标（16x16，用于中型图片）
- * 2. 大号品牌水印（包含 "锐界" 文字，用于大型图片，依赖系统 CJK 字体）
+ * 设计：
+ * - 狐狸耳：两个三角形组成耳朵轮廓，代表狐魇星玖
+ * - 斜向文字：「锐界幻境」45° 重复铺满，半透明
  *
- * 生成的文件放在 public/watermark/ 下，提交到仓库
+ * 运行: node scripts/generate-watermark.mjs
  */
 
 import sharp from 'sharp';
@@ -17,154 +14,159 @@ import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const PUBLIC_DIR = join(__dirname, 'assets');
+const ASSETS_DIR = join(__dirname, 'assets');
 
-if (!existsSync(PUBLIC_DIR)) {
-  mkdirSync(PUBLIC_DIR, { recursive: true });
+if (!existsSync(ASSETS_DIR)) {
+  mkdirSync(ASSETS_DIR, { recursive: true });
 }
 
-// =============== 方案 A：纯几何水印（无字体依赖，始终可用）===============
+// 品牌色
+const BRAND = '#E05252';
 
-/**
- * 生成「星弧」水印 — 品牌色渐变弧线 + 小星点
- * 设计灵感：星辰轨迹划过角落，代表「锐界幻境」
- * @param {number} size - 水印尺寸（正方形）
- * @param {number} opacity - 不透明度
- */
-async function createArcWatermark(size = 48, opacity = 0.15) {
-  const svgContent = `
-    <svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <linearGradient id="arcGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%"   stop-color="#ffffff" stop-opacity="0" />
-          <stop offset="50%"  stop-color="#E05252" stop-opacity="${opacity}" />
-          <stop offset="100%" stop-color="#E05252" stop-opacity="${opacity * 0.7}" />
-        </linearGradient>
-      </defs>
-      <!-- 弧线：从底部向左上弯曲 -->
-      <path d="M ${size} ${size * 0.85} 
-               Q ${size * 0.85} ${size * 0.6} 
-                 ${size * 0.55} ${size * 0.35}"
-            fill="none" stroke="url(#arcGrad)" stroke-width="${Math.max(1, size * 0.04)}"
-            stroke-linecap="round"/>
-      <!-- 小星点：弧线终点处 -->
-      <circle cx="${size * 0.52}" cy="${size * 0.32}" 
-              r="${Math.max(1, size * 0.04)}" 
-              fill="#E05252" opacity="${opacity * 0.8}"/>
-      <!-- 小星点：弧线起点处 -->
-      <circle cx="${size * 0.97}" cy="${size * 0.83}" 
-              r="${Math.max(0.5, size * 0.02)}" 
-              fill="#ffffff" opacity="${opacity * 0.5}"/>
-    </svg>`;
-
-  // 用透明背景创建水印
-  const svgBuffer = Buffer.from(svgContent);
-  
-  // 保持原始透明度，导出为 RGBA PNG
-  return sharp(svgBuffer).png().toBuffer();
+// =============== 1. 超小狐狸耳 (8×8) — 用于 16×16 贴图 ===============
+async function createFoxTiny() {
+  const svg = `<svg width="8" height="8" viewBox="0 0 8 8" xmlns="http://www.w3.org/2000/svg">
+    <polygon points="1,7 4,1 4.5,5" fill="${BRAND}" opacity="0.12" />
+    <polygon points="4,1 7,7 3.5,5" fill="${BRAND}" opacity="0.08" />
+  </svg>`;
+  return sharp(Buffer.from(svg)).png().toBuffer();
 }
 
-/**
- * 生成小号水印（16px，用于中/小型图片）
- * 更简洁：只有一个微小的星点
- */
-async function createSmallDotWatermark() {
-  const svgContent = `
-    <svg width="12" height="12" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
-      <!-- 极简标记：用一个微型星形折线 -->
-      <polygon points="9,1 9.5,4 12,5 9.5,6 9,9 8.5,6 6,5 8.5,4" 
-               fill="#E05252" opacity="0.12" />
-    </svg>`;
-  return sharp(Buffer.from(svgContent)).png().toBuffer();
+// =============== 2. 小狐狸耳 (16×16) — 用于 32-64px 图片 ===============
+async function createFoxSmall() {
+  const svg = `<svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="fg" x1="0%" y1="100%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="${BRAND}" stop-opacity="0"/>
+        <stop offset="100%" stop-color="${BRAND}" stop-opacity="0.15"/>
+      </linearGradient>
+    </defs>
+    <!-- 左耳尖 -->
+    <polygon points="2,14 8,1 10,8" fill="url(#fg)" />
+    <!-- 右耳尖 -->
+    <polygon points="8,1 14,14 6,8" fill="url(#fg)" />
+  </svg>`;
+  return sharp(Buffer.from(svg)).png().toBuffer();
 }
 
-// =============== 方案 B：带文字水印（需要系统 CJK 字体）===============
+// =============== 3. 中狐狸耳 (32×32) — 用于 64-128px 图片 ===============
+async function createFoxMedium() {
+  const svg = `<svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="fg" x1="0%" y1="100%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="${BRAND}" stop-opacity="0"/>
+        <stop offset="60%" stop-color="${BRAND}" stop-opacity="0.18"/>
+        <stop offset="100%" stop-color="${BRAND}" stop-opacity="0.10"/>
+      </linearGradient>
+    </defs>
+    <!-- 左耳 -->
+    <polygon points="4,28 16,2 19,14" fill="url(#fg)" stroke="${BRAND}" stroke-width="0.5" stroke-opacity="0.12"/>
+    <!-- 右耳 -->
+    <polygon points="16,2 28,28 13,14" fill="url(#fg)" stroke="${BRAND}" stroke-width="0.5" stroke-opacity="0.12"/>
+    <!-- 面部轮廓 -->
+    <ellipse cx="16" cy="22" rx="10" ry="7" fill="${BRAND}" opacity="0.06"/>
+    <!-- 鼻子点 -->
+    <circle cx="16" cy="20" r="1" fill="${BRAND}" opacity="0.15"/>
+  </svg>`;
+  return sharp(Buffer.from(svg)).png().toBuffer();
+}
 
-/**
- * 生成品牌文字水印 — 「锐界幻境」+ 小星标
- * 需要系统安装 Noto Sans CJK 或类似中文字体
- * 在 GitHub Actions 上需要安装 fonts-noto-cjk
- * @param {number} size 水印高度
- */
-async function createTextWatermark(size = 24) {
-  const fontSize = Math.round(size * 0.55);
-  const padding = Math.round(size * 0.15);
-  
-  // 尝试检测系统是否含 CJK 字体
-  const svgContent = `
-    <svg width="${size * 5}" height="${size}" 
-         viewBox="0 0 ${size * 5} ${size}" 
-         xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <linearGradient id="txtGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%"   stop-color="#ffffff" stop-opacity="0" />
-          <stop offset="20%"  stop-color="#ffffff" stop-opacity="0.08" />
-          <stop offset="100%" stop-color="#ffffff" stop-opacity="0.20" />
-        </linearGradient>
-      </defs>
-      <!-- 背景淡化条 -->
-      <rect x="0" y="0" width="${size * 5}" height="${size}" 
-            fill="url(#txtGrad)" rx="${Math.round(size * 0.15)}" />
-      <!-- 小星标 -->
-      <circle cx="${size * 0.5}" cy="${size * 0.5}" r="${Math.round(size * 0.06)}" 
-              fill="#E05252" opacity="0.35" />
-      <!-- 品牌文字 -->
-      <text x="${size * 1.2}" y="${size * 0.68}" 
-            font-family="'Noto Sans SC', 'Microsoft YaHei', 'PingFang SC', sans-serif"
-            font-size="${fontSize}" font-weight="600"
-            fill="#ffffff" opacity="0.16">锐界幻境</text>
-    </svg>`;
-  
-  return sharp(Buffer.from(svgContent)).png().toBuffer();
+// =============== 4. 斜向重复水印拼贴 (800×800) — 用于 >128px 图片 ===============
+async function createTileWatermark() {
+  const svg = `<svg width="800" height="800" viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <pattern id="grid" x="0" y="0" width="240" height="240" patternUnits="userSpaceOnUse">
+        <text x="120" y="120" transform="rotate(-35, 120, 120)"
+              font-family="'Noto Sans SC', 'Microsoft YaHei', sans-serif"
+              font-size="28" font-weight="700"
+              fill="#ffffff" opacity="0.07"
+              text-anchor="middle" dominant-baseline="central">
+          锐界幻境 MiragEdge
+        </text>
+        <text x="120" y="12" transform="rotate(-35, 120, 12)"
+              font-family="'Noto Sans SC', 'Microsoft YaHei', sans-serif"
+              font-size="14" font-weight="400"
+              fill="#E05252" opacity="0.04"
+              text-anchor="middle">
+          miragedge.top
+        </text>
+      </pattern>
+      <pattern id="fox" x="0" y="0" width="240" height="240" patternUnits="userSpaceOnUse">
+        <!-- 小狐狸耳点缀在文字间隙 -->
+        <polygon points="220,228 232,208 236,220" fill="#E05252" opacity="0.04"/>
+        <polygon points="232,208 244,228 228,220" fill="#E05252" opacity="0.03"/>
+      </pattern>
+    </defs>
+    <rect width="800" height="800" fill="url(#grid)" />
+    <rect width="800" height="800" fill="url(#fox)" />
+  </svg>`;
+  return sharp(Buffer.from(svg)).png().toBuffer();
+}
+
+// =============== 5. 狐狸图案拼贴 (32×32) — 用于小尺寸图片的全图覆盖 ===============
+async function createFoxTile() {
+  const svg = `<svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <pattern id="f" x="0" y="0" width="32" height="32" patternUnits="userSpaceOnUse">
+        <!-- 狐狸耳朵重复图案，足够密集以覆盖小图 -->
+        <polygon points="4,28 16,2 19,14" fill="#E05252" opacity="0.12" stroke="none"/>
+        <polygon points="16,2 28,28 13,14" fill="#E05252" opacity="0.08" stroke="none"/>
+        <circle cx="16" cy="22" r="3" fill="#E05252" opacity="0.06"/>
+        <!-- 对角辅助标记 -->
+        <line x1="0" y1="32" x2="32" y2="0" stroke="#E05252" stroke-width="0.5" opacity="0.06"/>
+        <line x1="0" y1="18" x2="18" y2="0" stroke="#E05252" stroke-width="0.3" opacity="0.04"/>
+      </pattern>
+    </defs>
+    <rect width="32" height="32" fill="url(#f)"/>
+  </svg>`;
+  return sharp(Buffer.from(svg)).png().toBuffer();
+}
+
+// =============== 6. 大字斜标 (200×60) — 用于超大图的角标 ===============
+async function createTextCorner() {
+  const svg = `<svg width="200" height="60" viewBox="0 0 200 60" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="${BRAND}" stop-opacity="0"/>
+        <stop offset="30%" stop-color="${BRAND}" stop-opacity="0.08"/>
+        <stop offset="100%" stop-color="${BRAND}" stop-opacity="0.15"/>
+      </linearGradient>
+    </defs>
+    <rect x="0" y="0" width="200" height="60" rx="8" fill="url(#bg)"/>
+    <text x="100" y="28" text-anchor="middle"
+          font-family="'Noto Sans SC', 'Microsoft YaHei', sans-serif"
+          font-size="22" font-weight="700"
+          fill="#ffffff" opacity="0.20">锐界幻境</text>
+    <text x="100" y="48" text-anchor="middle"
+          font-family="'Noto Sans SC', 'Microsoft YaHei', sans-serif"
+          font-size="11" font-weight="400"
+          fill="#ffffff" opacity="0.10">MiragEdge</text>
+  </svg>`;
+  return sharp(Buffer.from(svg)).png().toBuffer();
 }
 
 // =============== 主流程 ===============
 
 async function main() {
-  console.log('🦊 生成水印资源...\n');
+  console.log('🦊 星玖水印引擎 v2 — 生成狐狸耳 + 斜向重复水印\n');
 
-  // 1. 大号几何水印 (48px) — 用于大图
-  const arcLarge = await createArcWatermark(48, 0.18);
-  const arcLargePath = join(PUBLIC_DIR, 'arc-large.png');
-  writeFileSync(arcLargePath, arcLarge);
-  console.log(`  ✅ arc-large.png (48x48) — 大图几何水印`);
+  const items = [
+    ['fox-tiny.png',      await createFoxTiny(),      '8×8',     '极微狐狸耳 — 16×16 贴图'],
+    ['fox-small.png',     await createFoxSmall(),     '16×16',   '小狐狸耳 — 32-64px 图片'],
+    ['fox-medium.png',    await createFoxMedium(),    '32×32',   '中狐狸耳 — 64-128px 图片'],
+    ['fox-tile.png',      await createFoxTile(),      '32×32',   '狐狸图案拼贴 — 小尺寸全图覆盖'],
+    ['tile-watermark.png', await createTileWatermark(), '800×800', '斜向重复文字拼贴 — >128px 图片'],
+    ['text-corner.png',   await createTextCorner(),   '200×60',  '大图角标 — 大尺寸截图'],
+  ];
 
-  // 2. 中号几何水印 (24px) — 用于中等图片
-  const arcMedium = await createArcWatermark(24, 0.15);
-  const arcMediumPath = join(PUBLIC_DIR, 'arc-medium.png');
-  writeFileSync(arcMediumPath, arcMedium);
-  console.log(`  ✅ arc-medium.png (24x24) — 中图几何水印`);
-
-  // 3. 小号星点 (12x12) — 用于小图标记
-  const dotSmall = await createSmallDotWatermark();
-  const dotSmallPath = join(PUBLIC_DIR, 'dot-small.png');
-  writeFileSync(dotSmallPath, dotSmall);
-  console.log(`  ✅ dot-small.png (12x12) — 小图标记`);
-
-  // 4. 带文字水印 — 需要 CJK 字体
-  try {
-    const textWm = await createTextWatermark(28);
-    const textPath = join(PUBLIC_DIR, 'text-watermark.png');
-    writeFileSync(textPath, textWm);
-    console.log(`  ✅ text-watermark.png (140x28) — 品牌文字水印`);
-  } catch (e) {
-    console.log(`  ⚠️  文字水印生成失败（无 CJK 字体?）: ${e.message}`);
-    console.log(`      安装 fonts-noto-cjk 后可重试`);
+  for (const [name, buf, dim, desc] of items) {
+    const path = join(ASSETS_DIR, name);
+    writeFileSync(path, buf);
+    const sizeKb = (buf.length / 1024).toFixed(1);
+    console.log(`  ✅ ${name.padEnd(20)} ${dim.padEnd(10)} ${sizeKb.padStart(5)} KB  — ${desc}`);
   }
 
-  // 输出文件列表
-  console.log('\n📦 生成文件:');
-  const { readdirSync } = await import('fs');
-  for (const f of readdirSync(PUBLIC_DIR)) {
-    const { statSync } = await import('fs');
-    const size = statSync(join(PUBLIC_DIR, f)).size;
-    console.log(`  📄 ${f} (${(size / 1024).toFixed(1)} KB)`);
-  }
-
-  console.log('\n✨ 完成! 这些文件应提交到仓库。');
+  console.log('\n✨ 完成！');
 }
 
-main().catch(e => {
-  console.error('❌ 生成失败:', e);
-  process.exit(1);
-});
+main().catch(e => { console.error('❌', e); process.exit(1); });
