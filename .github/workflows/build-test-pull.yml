@@ -124,7 +124,7 @@ jobs:
     name: 预览部署 (Cloudflare Pages)
     runs-on: ubuntu-22.04
     needs: lint
-    if: github.event_name == 'pull_request' && vars.CF_PAGES_PROJECT != ''
+    if: ${{ github.event_name == 'pull_request' && vars.CF_PAGES_PROJECT != '' }}
     continue-on-error: true
     timeout-minutes: 15
     steps:
