@@ -33,6 +33,7 @@
 
       <div class="chart-container">
         <div v-for="(week, idx) in chartData" :key="week.week" class="bar-column" :title="week.label" role="img" :aria-label="week.label">
+
           <div class="bar-wrap" :style="{ height: week.barPx + 'px' }">
             <div v-if="week.segments && week.segments.length > 0" class="bar-segments">
               <div v-for="seg in week.segments" :key="seg.login" class="bar-segment" :style="{ height: seg.barPx + 'px', backgroundColor: seg.color }" :title="seg.login + ': ' + seg.commits + ' 次提交'">
@@ -40,6 +41,7 @@
             </div>
             <div v-else class="bar-empty"></div>
           </div>
+
           </div>
           <div class="bar-label">{{ week.shortLabel }}</div>
         </div>
@@ -80,11 +82,13 @@ const error = ref(false)
 const rawData = ref<RawWeek[]>([])
 const controller = new AbortController()
 
+
 const MAX_BAR_PX = 120
 const CONTRIBUTOR_COLORS = [
   "#4CAF50", "#2196F3", "#FF9800", "#9C27B0",
   "#F44336", "#00BCD4", "#FF5722", "#3F51B5",
 ]
+
 
 const chartData = computed<WeekData[]>(() => {
   if (!rawData.value.length) return []
@@ -118,7 +122,9 @@ async function fetchData() {
     loading.value = true
     error.value = false
     const repo = props.repo
+
     const res = await fetch('https://api.github.com/repos/' + repo + '/stats/contributors', {
+
       signal: controller.signal
     })
 
@@ -180,6 +186,8 @@ onMounted(fetchData)
 .error-state { display: flex; justify-content: center; align-items: center; padding: 2rem; color: var(--vp-c-text-2); font-size: 0.9rem; gap: 0.5rem; }
 .retry-btn { padding: 4px 12px; font-size: 0.8rem; color: var(--vp-c-brand); background: transparent; border: 1px solid var(--vp-c-brand); border-radius: 6px; cursor: pointer; transition: all 0.2s; }
 .retry-btn:hover { background: var(--vp-c-brand); color: white; }
+
 .dark .bar-empty { background: linear-gradient(180deg, var(--vp-c-brand-2), var(--vp-c-brand)); }
+
 @media (max-width: 640px) { .github-activity { padding: 1.25rem; margin: 2rem 0; } .chart-container { height: 100px; gap: 2px; } .bar { width: 80%; } .summary-row { gap: 1rem; } .summary-value { font-size: 1.2rem; } }
 </style>
