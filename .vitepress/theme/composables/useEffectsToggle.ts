@@ -14,7 +14,11 @@ if (inBrowser) {
   try {
     stored = localStorage.getItem(STORAGE_KEY)
   } catch {}
-  const initial = stored === null ? true : stored === 'true'
+
+  // 移动端（宽度 <= 767px）默认关闭特效；桌面端默认开启
+  const isMobile = window.innerWidth <= 767
+  const defaultValue = isMobile ? false : true
+  const initial = stored === null ? defaultValue : stored === 'true'
 
   Promise.resolve().then(() => {
     effectsEnabled.value = initial

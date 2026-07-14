@@ -1,6 +1,10 @@
 import { defineConfig } from 'vitepress'
 import { MermaidPlugin, MermaidMarkdown } from "vitepress-plugin-mermaid";
 import addContributorsPlugin from './theme/addContributors';
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -73,6 +77,14 @@ export default defineConfig({
       MermaidPlugin() as any,
       addContributorsPlugin() as any,
     ],
+    resolve: {
+      alias: [
+        {
+          find: /^.*\/VPNavBarExtra\.vue$/,
+          replacement: path.resolve(__dirname, './theme/components/vue/CustomNavBarExtra.vue')
+        }
+      ]
+    },
     optimizeDeps: {
       include: ['mermaid', 'vue']
     },

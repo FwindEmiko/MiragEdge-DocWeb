@@ -153,8 +153,12 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }) => {
     <!-- Layout 常驻挂载，不随路由变化销毁重建，以保持侧边栏滚动位置 -->
     <NotFound v-if="is404" />
     <Layout v-else>
-      <template #nav-bar-content-after>
-        <EffectsToggle />
+      <!-- 移动端汉堡菜单中的特效开关 -->
+      <template #nav-screen-content-after>
+        <div class="VPNavScreenEffects">
+          <p class="text">页面特效</p>
+          <EffectsToggle />
+        </div>
       </template>
     </Layout>
 
@@ -346,6 +350,23 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }) => {
 .centerdss .contributors-container {
   margin-bottom: 0 !important; /* 强制清除组件自带的底部边距 */
   padding-bottom: 0;
+}
+
+/* 移动端菜单中的特效开关项 */
+.VPNavScreenEffects {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 8px;
+  padding: 12px 14px 12px 16px;
+  background-color: var(--vp-c-bg-soft);
+  margin-top: 16px;
+}
+.VPNavScreenEffects .text {
+  line-height: 24px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--vp-c-text-2);
 }
 
 </style>
