@@ -62,26 +62,6 @@ const onClick = () => {
   --et-thumb-shadow: 0 1px 3px rgba(0, 0, 0, 0.45);
   --et-spark-color: #a1a1aa;
 }
-
-/* 防闪烁：SSR 首帧按钮带 is-on（默认 true），但 head 脚本已为关闭/手机端
-   设置 html.effects-disabled。此时强制呈现 OFF 外观，待 onMounted 修正 class。
-   这样关闭态用户刷新后不会看到按钮先亮后灭。 */
-html.effects-disabled .effects-toggle.is-on .et-track {
-  background: var(--et-track-bg);
-  border-color: var(--et-track-border);
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.18);
-}
-
-html.effects-disabled .effects-toggle.is-on .et-thumb {
-  transform: translateX(0);
-  background: var(--et-thumb-bg);
-  box-shadow: var(--et-thumb-shadow);
-}
-
-html.effects-disabled .effects-toggle.is-on .et-spark {
-  fill: var(--et-spark-color);
-  animation: none;
-}
 </style>
 
 <style scoped>
@@ -97,7 +77,7 @@ html.effects-disabled .effects-toggle.is-on .et-spark {
   background: none;
   border: none;
   padding: 0;
-  margin: 0;
+  margin: 0 6px;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
   border-radius: 12px;

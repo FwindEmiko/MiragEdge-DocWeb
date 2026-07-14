@@ -3,12 +3,12 @@
 <script setup>
 import { useRouter, useData } from "vitepress";
 import DefaultTheme from "vitepress/theme";
-import { ref, watch, nextTick, provide, computed, onMounted, defineAsyncComponent } from "vue";
+import { ref, watch, nextTick, provide, computed, defineAsyncComponent } from "vue";
 import Contributors from './Contributors.vue';
 import NotFound from './NotFound.vue';
 import Live2D from './Live2D.vue';
-import AppearanceGroup from './AppearanceGroup.vue';
-import { effectsEnabled, effectsMounted, initEffects } from '../../composables/useEffectsToggle';
+import EffectsToggle from './EffectsToggle.vue';
+import { effectsEnabled } from '../../composables/useEffectsToggle';
 
 // Corner 装饰组件改为异步加载，减少主 bundle 体积
 const CornerStars = defineAsyncComponent(() => import('./CornerStars.vue'));
@@ -50,11 +50,6 @@ function pickRandomCorner() {
 watch(() => route.path, () => {
   randomCorner.value = pickRandomCorner()
 }, { immediate: true })
-
-// 初始化特效偏好（读取 localStorage，手机端默认关闭）
-onMounted(() => {
-  initEffects()
-})
 
 /**
  * 滚动到页面顶部
@@ -141,16 +136,16 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }) => {
 
 <template>
   <div class="router-wrapper">
-    <!-- 随机角落装饰元素（受特效开关控制；mounted 门控避免 SSR 水合不一致） -->
-    <CornerStars v-if="effectsMounted && effectsEnabled && randomCorner === 'stars'" />
-    <CornerQuotes v-if="effectsMounted && effectsEnabled && randomCorner === 'quotes'" />
-    <CornerBubbles v-if="effectsMounted && effectsEnabled && randomCorner === 'bubbles'" />
-    <CornerSakura v-if="effectsMounted && effectsEnabled && randomCorner === 'sakura'" />
-    <CornerNotes v-if="effectsMounted && effectsEnabled && randomCorner === 'notes'" />
-    <CornerLeaves v-if="effectsMounted && effectsEnabled && randomCorner === 'leaves'" />
-    <CornerFireflies v-if="effectsMounted && effectsEnabled && randomCorner === 'fireflies'" />
-    <CornerSurprise v-if="effectsMounted && effectsEnabled" />
-    <CornerClickEffect v-if="effectsMounted && effectsEnabled" />
+    <!-- 随机角落装饰元素（受特效开关控制） -->
+    <CornerStars v-if="effectsEnabled && randomCorner === 'stars'" />
+    <CornerQuotes v-if="effectsEnabled && randomCorner === 'quotes'" />
+    <CornerBubbles v-if="effectsEnabled && randomCorner === 'bubbles'" />
+    <CornerSakura v-if="effectsEnabled && randomCorner === 'sakura'" />
+    <CornerNotes v-if="effectsEnabled && randomCorner === 'notes'" />
+    <CornerLeaves v-if="effectsEnabled && randomCorner === 'leaves'" />
+    <CornerFireflies v-if="effectsEnabled && randomCorner === 'fireflies'" />
+    <CornerSurprise v-if="effectsEnabled" />
+    <CornerClickEffect v-if="effectsEnabled" />
     <!-- Live2D 看板娘 - 只在首页显示 -->
     <Live2D v-if="isHome" />
 
@@ -158,13 +153,8 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }) => {
     <!-- Layout 常驻挂载，不随路由变化销毁重建，以保持侧边栏滚动位置 -->
     <NotFound v-if="is404" />
     <Layout v-else>
-      <!-- 桌面导航栏：合并的主题+特效开关（>=1280内联 / 768-1279折叠为...） -->
       <template #nav-bar-content-after>
-        <AppearanceGroup variant="bar" />
-      </template>
-      <!-- 移动端菜单（<768）：主题+特效开关 -->
-      <template #nav-screen-content-after>
-        <AppearanceGroup variant="screen" />
+        <EffectsToggle />
       </template>
     </Layout>
 
