@@ -64,6 +64,18 @@
   pointer-events: none;
 }
 
+/* ===== 外观控制由 AppearanceGroup 统一接管 =====
+   隐藏 VitePress 默认的三处外观开关，避免与合并控件重复：
+   - .VPNavBarAppearance  (>=1280px 导航栏内)
+   - .VPNavBarExtra       (768-1279px「...」悬浮，当前仅含外观)
+   - .VPNavScreenAppearance (<768px 移动端菜单)
+   注：若日后启用 socialLinks / 多语言，需重新评估是否保留 .VPNavBarExtra */
+.VPNavBarAppearance,
+.VPNavBarExtra,
+.VPNavScreenAppearance {
+  display: none !important;
+}
+
 /* ===== 代码块美化 ===== */
 /* macOS 风格圆点装饰 */
 .markdown-content div[class*='language-'] {

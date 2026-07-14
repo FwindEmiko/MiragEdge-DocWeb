@@ -29,6 +29,10 @@ export default defineConfig({
     ['link', { rel: 'apple-touch-icon', href: '/title_img/apple-touch-icon.png', sizes: '180x180' }],
     ['link', { rel: 'manifest', href: '/site.webmanifest' }],
     ['meta', { name: 'theme-color', content: '#3c8772' }],
+    // 页面特效开关：在 Vue 水合前同步读取偏好并设置 <html>.effects-disabled
+    // 避免首帧闪烁，且对 ESA 边端缓存/bfcache 场景稳健（不依赖 JS 模块重新执行时机）
+    // 未存过偏好时：手机（<768px）默认关闭，桌面默认开启
+    ['script', {}, "(function(){try{var k='miragedge-effects-enabled';var s=localStorage.getItem(k);var m=window.matchMedia('(max-width: 767px)').matches;var e=s===null?!m:s==='true';document.documentElement.classList.toggle('effects-disabled',!e);}catch(e){}})();"],
     ['meta', { name: 'viewport', content: 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' }],
     ['meta', { name: 'keywords', content: 'MiragEdge, 锐界幻境, Minecraft, 我的世界, 服务器, 文档, 玩家手册, 狐风轩汐, FwindEmi, F.windEmiko' }],
     ['meta', { name: 'author', content: 'F.windEmiko' }],
