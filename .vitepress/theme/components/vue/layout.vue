@@ -8,7 +8,7 @@ import Contributors from './Contributors.vue';
 import NotFound from './NotFound.vue';
 import Live2D from './Live2D.vue';
 import EffectsToggle from './EffectsToggle.vue';
-import { effectsEnabled } from '../../composables/useEffectsToggle';
+import { effectsEnabled, initEffectsToggleState } from '../../composables/useEffectsToggle';
 
 // Corner 装饰组件改为异步加载，减少主 bundle 体积
 const CornerStars = defineAsyncComponent(() => import('./CornerStars.vue'));
@@ -48,6 +48,7 @@ function pickRandomCorner() {
 }
 
 onMounted(() => {
+  initEffectsToggleState()
   randomCorner.value = pickRandomCorner()
 })
 

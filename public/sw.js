@@ -190,7 +190,7 @@ function drawTileWatermark(ctx, w, h, minDim) {
 
   ctx.globalAlpha = 0.06;
   ctx.fillStyle = '#ffffff';
-  ctx.font = `bold ${fontSize}px sans-serif`;
+  ctx.font = `bold ${fontSize}px "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", sans-serif`;
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
 
@@ -242,10 +242,10 @@ function drawTextCorner(ctx, w, h, minDim) {
   ctx.textBaseline = 'middle';
   ctx.fillStyle = '#ffffff';
   ctx.globalAlpha = 0.20;
-  ctx.font = `bold ${Math.round(boxH * 0.45)}px sans-serif`;
+  ctx.font = `bold ${Math.round(boxH * 0.45)}px "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", sans-serif`;
   ctx.fillText('锐界幻境', x + boxW / 2, y + boxH * 0.4);
   ctx.globalAlpha = 0.10;
-  ctx.font = `${Math.round(boxH * 0.22)}px sans-serif`;
+  ctx.font = `${Math.round(boxH * 0.22)}px "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", sans-serif`;
   ctx.fillText('MiragEdge', x + boxW / 2, y + boxH * 0.75);
   ctx.restore();
 }
