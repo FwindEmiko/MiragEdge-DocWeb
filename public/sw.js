@@ -13,7 +13,7 @@
  * 前提：OSS 需配置 CORS 允许 miragedge.top，否则 fetch 跨域图片会失败。
  */
 
-const CACHE_NAME = 'external-wm-v2';
+const CACHE_NAME = 'external-wm-v3';
 let forwardMap = null; // originalUrl → localPath
 let reverseMap = null; // localPath → originalUrl
 let urlSet = null;     // Set<originalUrl> — 快速判断是否需要拦截
@@ -270,8 +270,14 @@ async function handleWatermark(request, originalUrl, isRewrittenPath) {
   if (cached) return cached;
 
   // 2. 从 OSS 下载（使用 cors 模式）
+  //    必须显式设置 referrer：SW 环境下 fetch 默认不发送 Referer，
+  //    会导致 OSS Referer 防盗链拒绝（403）
   try {
-    const res = await fetch(originalUrl, { mode: 'cors' });
+    const res = await fetch(originalUrl, {
+      mode: 'cors',
+      referrer: self.location.origin + '/',
+      referrerPolicy: 'no-referrer-when-downgrade',
+    });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
     const blob = await res.blob();
