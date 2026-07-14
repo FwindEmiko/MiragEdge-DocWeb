@@ -1,46 +1,38 @@
 /**
- * 水印引擎 v2.1 — 统一斜向覆盖 + 狐狸耳角标
+ * 水印引擎 v3.0 — 尺寸自适应动态水印
  *
- * 策略：
- *   所有 >= 16px 的图片 → tile 斜向文字覆盖全图（缩放匹配尺寸）
- *   >= 64px 额外 + 狐狸耳（右下角）
- *   >= 600px 额外 + 品牌角标（右下角）
+ * 策略（按最短边分层，SVG 动态生成，避免缩放失真）：
+ *   < 16px        → 跳过（太小无法加水印）
+ *   16-48px       → 右下角 1-2px 品牌色像素标记（不破坏像素艺术）
+ *   49-127px      → 低透明度对角线 + 右下角小角标
+ *   128-599px     → 斜向文字覆盖（字号按尺寸自适应）+ 狐狸耳角标
+ *   >= 600px      → 斜向文字覆盖 + 品牌文字角标
  *
- * 斜向 tile 保证整个图片被覆盖，低透明度不影响阅读但阻止盗图。
- * 狐狸耳提供品牌辨识度。
+ * v3 改进：
+ *   - 不再用固定 PNG 缩放，改用 SVG 按目标尺寸精确生成
+ *   - 超小图（MC 贴图）不再全图覆盖，保护像素艺术可读性
+ *   - 文字字号随图片尺寸自适应，大图文字更清晰
  */
 
 import sharp from "sharp";
 import {
   readdirSync,
   existsSync,
-  statSync,
   renameSync,
   unlinkSync,
   openSync,
   readSync,
   closeSync,
 } from "fs";
-import { join, extname, relative, dirname } from "path";
+import { join, extname, dirname } from "path";
 import { fileURLToPath } from "url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, "..");
 const DIST = join(ROOT, ".vitepress", "dist");
-const WM_DIR = join(ROOT, "scripts", "assets");
 
-// =============== 水印层级 ===============
-
-const TIERS = [
-  // 小图用狐狸拼贴全图覆盖（16-127px）
-  { key: "foxtile", file: "fox-tile.png",       minEdge: 16, maxEdge: 127, isTile: true },
-  // 中大图用斜向文字拼贴全图覆盖
-  { key: "tile",   file: "tile-watermark.png",  minEdge: 128,            isTile: true },
-  // 狐狸耳角标
-  { key: "fox",    file: "fox-medium.png",      minEdge: 64,  isTile: false, padding: 4,  maxScale: 0.12 },
-  // 品牌文字角标（大图）
-  { key: "corner", file: "text-corner.png",     minEdge: 600, isTile: false, padding: 10, maxScale: 0.10 },
-];
+// 品牌色
+const BRAND = "#E05252";
 
 // =============== 快速尺寸检测 ===============
 
@@ -82,44 +74,191 @@ function getImageSize(filePath) {
   return null;
 }
 
-// =============== 水印选择 ===============
+// =============== SVG 水印动态生成 ===============
 
-function selectLayers(w, h) {
+/**
+ * 生成斜向文字覆盖水印 SVG（按图片尺寸自适应字号和间距）
+ */
+function buildTileSvg(w, h) {
   const minDim = Math.min(w, h);
-  if (minDim < 16) return null;
-  return TIERS.filter((t) => minDim >= t.minEdge && (!t.maxEdge || minDim <= t.maxEdge));
+  // 字号自适应：小图用较小字，大图用较大字，但有上下限
+  const fontSize = Math.max(12, Math.min(48, Math.round(minDim / 8)));
+  const text = "锐界幻境 MiragEdge";
+  // 间距随字号缩放
+  const stepX = fontSize * 8;
+  const stepY = fontSize * 3;
+
+  // 计算旋转后覆盖整个图片所需的范围（扩大 50%）
+  const expandW = w * 1.5;
+  const expandH = h * 1.5;
+  const offsetX = (expandW - w) / 2;
+  const offsetY = (expandH - h) / 2;
+
+  let texts = "";
+  for (let y = -offsetY; y < expandH; y += stepY) {
+    for (let x = -offsetX; x < expandW; x += stepX) {
+      texts += `<text x="${x}" y="${y}" font-family="'Noto Sans SC','Microsoft YaHei',sans-serif" font-size="${fontSize}" font-weight="700" fill="#ffffff" opacity="0.06" text-anchor="middle" dominant-baseline="central">${text}</text>`;
+    }
+  }
+
+  return `<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" xmlns="http://www.w3.org/2000/svg">
+    <g transform="rotate(-35 ${w/2} ${h/2}) translate(${-offsetX} ${-offsetY})">
+      ${texts}
+    </g>
+  </svg>`;
+}
+
+/**
+ * 生成狐狸耳角标 SVG（右下角，按图片尺寸缩放）
+ */
+function buildFoxCornerSvg(w, h) {
+  const minDim = Math.min(w, h);
+  // 角标尺寸：图片最短边的 15%，但限制在 16-80px
+  const size = Math.max(16, Math.min(80, Math.round(minDim * 0.15)));
+  const padding = Math.max(2, Math.round(minDim * 0.02));
+  const x = w - size - padding;
+  const y = h - size - padding;
+
+  return `<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" xmlns="http://www.w3.org/2000/svg">
+    <g transform="translate(${x} ${y})">
+      <polygon points="${size*0.1},${size*0.9} ${size*0.5},${size*0.05} ${size*0.6},${size*0.45}" fill="${BRAND}" opacity="0.18"/>
+      <polygon points="${size*0.5},${size*0.05} ${size*0.9},${size*0.9} ${size*0.4},${size*0.45}" fill="${BRAND}" opacity="0.12"/>
+      <ellipse cx="${size*0.5}" cy="${size*0.7}" rx="${size*0.3}" ry="${size*0.2}" fill="${BRAND}" opacity="0.06"/>
+    </g>
+  </svg>`;
+}
+
+/**
+ * 生成品牌文字角标 SVG（右下角，大图用）
+ */
+function buildTextCornerSvg(w, h) {
+  const minDim = Math.min(w, h);
+  const boxW = Math.max(120, Math.min(300, Math.round(minDim * 0.3)));
+  const boxH = Math.round(boxW * 0.3);
+  const padding = Math.max(8, Math.round(minDim * 0.015));
+  const x = w - boxW - padding;
+  const y = h - boxH - padding;
+  const fontSize1 = Math.round(boxH * 0.45);
+  const fontSize2 = Math.round(boxH * 0.22);
+
+  return `<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="${BRAND}" stop-opacity="0"/>
+        <stop offset="30%" stop-color="${BRAND}" stop-opacity="0.06"/>
+        <stop offset="100%" stop-color="${BRAND}" stop-opacity="0.12"/>
+      </linearGradient>
+    </defs>
+    <rect x="${x}" y="${y}" width="${boxW}" height="${boxH}" rx="${Math.round(boxH*0.15)}" fill="url(#bg)"/>
+    <text x="${x + boxW/2}" y="${y + boxH*0.45}" text-anchor="middle" font-family="'Noto Sans SC','Microsoft YaHei',sans-serif" font-size="${fontSize1}" font-weight="700" fill="#ffffff" opacity="0.20">锐界幻境</text>
+    <text x="${x + boxW/2}" y="${y + boxH*0.8}" text-anchor="middle" font-family="'Noto Sans SC','Microsoft YaHei',sans-serif" font-size="${fontSize2}" font-weight="400" fill="#ffffff" opacity="0.10">MiragEdge</text>
+  </svg>`;
+}
+
+/**
+ * 生成全图品牌色偏移 SVG（整图叠加一层品牌色）
+ * 作用：让盗图者去除后颜色失真，无法完美还原
+ * 透明度按尺寸调整：小图偏色更强（贴图像素少，偏色影响大）
+ */
+function buildTintOverlaySvg(w, h) {
+  const minDim = Math.min(w, h);
+  // 小图偏色更强：16px 用 10%，48px 用 7%，128px+ 用 4%
+  const opacity = minDim < 49 ? 0.10 : minDim < 128 ? 0.07 : 0.04;
+  return `<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" xmlns="http://www.w3.org/2000/svg">
+    <rect width="${w}" height="${h}" fill="${BRAND}" opacity="${opacity}"/>
+  </svg>`;
+}
+
+/**
+ * 生成中心狐狸耳水印 SVG（覆盖图像核心区域）
+ * 关键防盗措施：覆盖中心，无法通过裁剪去除，PS 修复需重建像素
+ * 尺寸越小，狐狸耳占比越大（16px 占 55%，128px 占 30%）
+ */
+function buildCenterFoxSvg(w, h) {
+  const minDim = Math.min(w, h);
+  // 狐狸耳占图片比例：小图占更大比例
+  const ratio = minDim < 49 ? 0.55 : minDim < 128 ? 0.45 : 0.30;
+  const size = Math.round(minDim * ratio);
+  const cx = w / 2;
+  const cy = h / 2;
+  // 透明度：小图更透明避免完全遮挡，但足够留下印记
+  const op1 = minDim < 49 ? 0.28 : 0.20;
+  const op2 = minDim < 49 ? 0.20 : 0.14;
+  const op3 = minDim < 49 ? 0.12 : 0.08;
+
+  // 以中心为原点绘制狐狸耳
+  const x0 = cx - size / 2;
+  const y0 = cy - size / 2;
+
+  return `<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" xmlns="http://www.w3.org/2000/svg">
+    <g transform="translate(${x0} ${y0})">
+      <!-- 左耳 -->
+      <polygon points="${size*0.1},${size*0.9} ${size*0.5},${size*0.05} ${size*0.6},${size*0.45}" fill="${BRAND}" opacity="${op1}"/>
+      <!-- 右耳 -->
+      <polygon points="${size*0.5},${size*0.05} ${size*0.9},${size*0.9} ${size*0.4},${size*0.45}" fill="${BRAND}" opacity="${op2}"/>
+      <!-- 面部轮廓 -->
+      <ellipse cx="${size*0.5}" cy="${size*0.7}" rx="${size*0.3}" ry="${size*0.2}" fill="${BRAND}" opacity="${op3}"/>
+    </g>
+  </svg>`;
+}
+
+/**
+ * 生成小图对角线水印 SVG（低透明度，不破坏可读性）
+ */
+function buildDiagonalLinesSvg(w, h) {
+  const spacing = Math.max(8, Math.round(Math.min(w, h) / 6));
+  let lines = "";
+  for (let i = -h; i < w + h; i += spacing) {
+    lines += `<line x1="${i}" y1="0" x2="${i + h}" y2="${h}" stroke="${BRAND}" stroke-width="1" opacity="0.04"/>`;
+  }
+  return `<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" xmlns="http://www.w3.org/2000/svg">${lines}</svg>`;
+}
+
+// =============== 水印层级选择 ===============
+
+function buildWatermarkLayers(w, h) {
+  const minDim = Math.min(w, h);
+  if (minDim < 16) return [];
+
+  const layers = [];
+
+  if (minDim < 49) {
+    // 超小图（16-48px，MC 贴图）：全图偏色 + 中心狐狸耳
+    // 中心覆盖是核心防盗，PS 抠图无法完美去除
+    layers.push({ svg: buildTintOverlaySvg(w, h) });
+    layers.push({ svg: buildCenterFoxSvg(w, h) });
+  } else if (minDim < 128) {
+    // 小图（49-127px）：偏色 + 对角线 + 中心狐狸耳 + 角标
+    layers.push({ svg: buildTintOverlaySvg(w, h) });
+    layers.push({ svg: buildDiagonalLinesSvg(w, h) });
+    layers.push({ svg: buildCenterFoxSvg(w, h) });
+    layers.push({ svg: buildFoxCornerSvg(w, h) });
+  } else if (minDim < 600) {
+    // 中图（128-599px）：偏色 + 斜向文字 + 中心狐狸耳 + 角标
+    layers.push({ svg: buildTintOverlaySvg(w, h) });
+    layers.push({ svg: buildTileSvg(w, h) });
+    layers.push({ svg: buildCenterFoxSvg(w, h) });
+    layers.push({ svg: buildFoxCornerSvg(w, h) });
+  } else {
+    // 大图（600px+）：斜向文字 + 中心狐狸耳 + 品牌角标
+    layers.push({ svg: buildTileSvg(w, h) });
+    layers.push({ svg: buildCenterFoxSvg(w, h) });
+    layers.push({ svg: buildTextCornerSvg(w, h) });
+  }
+
+  return layers;
 }
 
 // =============== 缓存 ===============
 
-const wmCache = new Map();
+const svgCache = new Map();
 
-async function prepLayer(tier, imgW, imgH) {
-  const key = `${tier.key}@${imgW}x${imgH}`;
-  if (wmCache.has(key)) return wmCache.get(key);
-
-  const wmPath = join(WM_DIR, tier.file);
-  if (!existsSync(wmPath)) return null;
-
-  const meta = await sharp(wmPath).metadata();
-  let buf, w, h;
-
-  if (tier.isTile) {
-    // Tile: 精确缩放匹配图片尺寸，确保全图覆盖
-    w = imgW;
-    h = imgH;
-    buf = await sharp(wmPath).resize(imgW, imgH, { fit: "fill" }).png({ compressionLevel: 9 }).toBuffer();
-  } else {
-    const maxSize = Math.round(imgW * tier.maxScale);
-    const scale = Math.min(1, maxSize / meta.width);
-    w = Math.max(Math.round(meta.width * scale), 8);
-    h = Math.max(Math.round(meta.height * scale), 8);
-    buf = await sharp(wmPath).resize(w, h, { fit: "contain", withoutEnlargement: true }).png().toBuffer();
-  }
-
-  const result = { buf, w, h, isTile: tier.isTile, padding: tier.padding || 0 };
-  wmCache.set(key, result);
-  return result;
+async function renderLayer(layer, w, h) {
+  const key = `${layer.svg.length}@${w}x${h}`;
+  if (svgCache.has(key)) return svgCache.get(key);
+  const buf = await sharp(Buffer.from(layer.svg)).png({ compressionLevel: 9 }).toBuffer();
+  svgCache.set(key, buf);
+  return buf;
 }
 
 // =============== 处理单图 ===============
@@ -134,26 +273,14 @@ async function processImage(filePath) {
   }
   if (!size) return false;
 
-  const layers = selectLayers(size.width, size.height);
-  if (!layers) return false;
+  const layers = buildWatermarkLayers(size.width, size.height);
+  if (layers.length === 0) return false;
 
   const composites = [];
-  for (const tier of layers) {
-    const layer = await prepLayer(tier, size.width, size.height);
-    if (!layer) continue;
-
-    if (layer.isTile) {
-      composites.push({ input: layer.buf, top: 0, left: 0 });
-    } else {
-      composites.push({
-        input: layer.buf,
-        top: size.height - layer.h - layer.padding,
-        left: size.width - layer.w - layer.padding,
-      });
-    }
+  for (const layer of layers) {
+    const buf = await renderLayer(layer, size.width, size.height);
+    composites.push({ input: buf, top: 0, left: 0 });
   }
-
-  if (composites.length === 0) return false;
 
   const tmpPath = filePath + ".wmtmp";
   const ext = extname(filePath).toLowerCase();
@@ -177,23 +304,12 @@ async function processImage(filePath) {
 
 // =============== 导出（供 external-watermark.mjs 复用） ===============
 
-export { processImage, getImageSize, selectLayers, prepLayer, TIERS, wmCache };
+export { processImage, getImageSize, buildWatermarkLayers };
 
 // =============== 入口 ===============
 
 async function main() {
-  console.log("\nF 星玖水印引擎 v2.1 — 斜向覆盖 + 狐狸耳\n");
-
-  for (const t of TIERS) {
-    const p = join(WM_DIR, t.file);
-    if (!existsSync(p)) {
-      console.error("Missing watermark:", t.file);
-      process.exit(1);
-    }
-    const st = statSync(p);
-    const mode = t.isTile ? "FULL" : "CORNER";
-    console.log(`  [${mode}] ${t.key.padEnd(8)} ${t.file.padEnd(22)} ${(st.size / 1024).toFixed(1)} KB`);
-  }
+  console.log("\nF 星玖水印引擎 v3.0 — 尺寸自适应动态水印\n");
 
   if (!existsSync(DIST)) {
     console.error("No dist directory:", DIST);
@@ -216,7 +332,7 @@ async function main() {
     }
   })(DIST);
 
-  console.log(`\n  Scanned ${images.length} images\n`);
+  console.log(`  Scanned ${images.length} images\n`);
 
   let processed = 0, skipped = 0, failed = 0;
   for (let i = 0; i < images.length; i++) {
@@ -233,7 +349,7 @@ async function main() {
   }
 
   console.log(`\n\nDone: ${processed} ok, ${skipped} skip, ${failed} fail / ${images.length} total`);
-  wmCache.clear();
+  svgCache.clear();
 }
 
 // 仅在直接运行时执行 main，被 import 时不自动执行

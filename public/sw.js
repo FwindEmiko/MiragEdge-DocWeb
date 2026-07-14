@@ -13,7 +13,7 @@
  * 前提：OSS 需配置 CORS 允许 miragedge.top，否则 fetch 跨域图片会失败。
  */
 
-const CACHE_NAME = 'external-wm-v1';
+const CACHE_NAME = 'external-wm-v2';
 let forwardMap = null; // originalUrl → localPath
 let reverseMap = null; // localPath → originalUrl
 let urlSet = null;     // Set<originalUrl> — 快速判断是否需要拦截
@@ -44,9 +44,12 @@ async function loadMap() {
 
 /**
  * 用 OffscreenCanvas 给图片加水印
- * 策略与构建时 watermark.mjs 一致：
- *   ≥16px → 斜向文字覆盖全图
- *   ≥64px → 右下角品牌角标
+ * 策略与构建时 watermark.mjs v3 一致（尺寸自适应）：
+ *   <16px       → 跳过
+ *   16-48px     → 全图偏色 + 中心狐狸耳（核心防盗）
+ *   49-127px    → 偏色 + 对角线 + 中心狐狸耳 + 角标
+ *   128-599px   → 偏色 + 斜向文字 + 中心狐狸耳 + 角标
+ *   >=600px     → 斜向文字 + 中心狐狸耳 + 品牌角标
  */
 async function addWatermark(blob) {
   const bitmap = await createImageBitmap(blob);
@@ -61,10 +64,27 @@ async function addWatermark(blob) {
   ctx.drawImage(bitmap, 0, 0);
   bitmap.close();
 
-  drawTileWatermark(ctx, w, h, minDim);
-
-  if (minDim >= 64) {
-    drawCornerWatermark(ctx, w, h, minDim);
+  if (minDim < 49) {
+    // 超小图：全图偏色 + 中心狐狸耳
+    drawTintOverlay(ctx, w, h, minDim);
+    drawCenterFox(ctx, w, h, minDim);
+  } else if (minDim < 128) {
+    // 小图：偏色 + 对角线 + 中心狐狸耳 + 角标
+    drawTintOverlay(ctx, w, h, minDim);
+    drawDiagonalLines(ctx, w, h);
+    drawCenterFox(ctx, w, h, minDim);
+    drawFoxCorner(ctx, w, h, minDim);
+  } else if (minDim < 600) {
+    // 中图：偏色 + 斜向文字 + 中心狐狸耳 + 角标
+    drawTintOverlay(ctx, w, h, minDim);
+    drawTileWatermark(ctx, w, h, minDim);
+    drawCenterFox(ctx, w, h, minDim);
+    drawFoxCorner(ctx, w, h, minDim);
+  } else {
+    // 大图：斜向文字 + 中心狐狸耳 + 品牌角标
+    drawTileWatermark(ctx, w, h, minDim);
+    drawCenterFox(ctx, w, h, minDim);
+    drawTextCorner(ctx, w, h, minDim);
   }
 
   const type = blob.type || 'image/png';
@@ -75,23 +95,119 @@ async function addWatermark(blob) {
   return canvas.convertToBlob({ type: outType, quality });
 }
 
+// 全图品牌色偏移（整图叠加，去除后颜色失真）
+function drawTintOverlay(ctx, w, h, minDim) {
+  const opacity = minDim < 49 ? 0.10 : minDim < 128 ? 0.07 : 0.04;
+  ctx.save();
+  ctx.globalAlpha = opacity;
+  ctx.fillStyle = '#E05252';
+  ctx.fillRect(0, 0, w, h);
+  ctx.restore();
+}
+
+// 中心狐狸耳（覆盖图像核心区域，无法裁剪去除）
+function drawCenterFox(ctx, w, h, minDim) {
+  const ratio = minDim < 49 ? 0.55 : minDim < 128 ? 0.45 : 0.30;
+  const size = Math.round(minDim * ratio);
+  const x0 = w / 2 - size / 2;
+  const y0 = h / 2 - size / 2;
+  const op1 = minDim < 49 ? 0.28 : 0.20;
+  const op2 = minDim < 49 ? 0.20 : 0.14;
+  const op3 = minDim < 49 ? 0.12 : 0.08;
+
+  ctx.save();
+  ctx.fillStyle = '#E05252';
+  // 左耳
+  ctx.globalAlpha = op1;
+  ctx.beginPath();
+  ctx.moveTo(x0 + size * 0.1, y0 + size * 0.9);
+  ctx.lineTo(x0 + size * 0.5, y0 + size * 0.05);
+  ctx.lineTo(x0 + size * 0.6, y0 + size * 0.45);
+  ctx.closePath();
+  ctx.fill();
+  // 右耳
+  ctx.globalAlpha = op2;
+  ctx.beginPath();
+  ctx.moveTo(x0 + size * 0.5, y0 + size * 0.05);
+  ctx.lineTo(x0 + size * 0.9, y0 + size * 0.9);
+  ctx.lineTo(x0 + size * 0.4, y0 + size * 0.45);
+  ctx.closePath();
+  ctx.fill();
+  // 面部轮廓
+  ctx.globalAlpha = op3;
+  ctx.beginPath();
+  ctx.ellipse(x0 + size * 0.5, y0 + size * 0.7, size * 0.3, size * 0.2, 0, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.restore();
+}
+
+// 小图对角线（低透明度，不破坏可读性）
+function drawDiagonalLines(ctx, w, h) {
+  const spacing = Math.max(8, Math.round(Math.min(w, h) / 6));
+  ctx.save();
+  ctx.globalAlpha = 0.04;
+  ctx.strokeStyle = '#E05252';
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  for (let i = -h; i < w + h; i += spacing) {
+    ctx.moveTo(i, 0);
+    ctx.lineTo(i + h, h);
+  }
+  ctx.stroke();
+  ctx.restore();
+}
+
+// 狐狸耳角标（右下角，按图片尺寸缩放）
+function drawFoxCorner(ctx, w, h, minDim) {
+  const size = Math.max(16, Math.min(80, Math.round(minDim * 0.15)));
+  const padding = Math.max(2, Math.round(minDim * 0.02));
+  const x = w - size - padding;
+  const y = h - size - padding;
+
+  ctx.save();
+  // 左耳
+  ctx.globalAlpha = 0.18;
+  ctx.fillStyle = '#E05252';
+  ctx.beginPath();
+  ctx.moveTo(x + size * 0.1, y + size * 0.9);
+  ctx.lineTo(x + size * 0.5, y + size * 0.05);
+  ctx.lineTo(x + size * 0.6, y + size * 0.45);
+  ctx.closePath();
+  ctx.fill();
+  // 右耳
+  ctx.globalAlpha = 0.12;
+  ctx.beginPath();
+  ctx.moveTo(x + size * 0.5, y + size * 0.05);
+  ctx.lineTo(x + size * 0.9, y + size * 0.9);
+  ctx.lineTo(x + size * 0.4, y + size * 0.45);
+  ctx.closePath();
+  ctx.fill();
+  // 面部轮廓
+  ctx.globalAlpha = 0.06;
+  ctx.beginPath();
+  ctx.ellipse(x + size * 0.5, y + size * 0.7, size * 0.3, size * 0.2, 0, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.restore();
+}
+
+// 斜向文字覆盖（字号自适应）
 function drawTileWatermark(ctx, w, h, minDim) {
+  const fontSize = Math.max(12, Math.min(48, Math.round(minDim / 8)));
   ctx.save();
   ctx.translate(w / 2, h / 2);
   ctx.rotate(-35 * Math.PI / 180);
   ctx.translate(-w / 2, -h / 2);
 
-  ctx.globalAlpha = 0.07;
+  ctx.globalAlpha = 0.06;
   ctx.fillStyle = '#ffffff';
-  const fontSize = Math.max(14, Math.round(minDim / 10));
   ctx.font = `bold ${fontSize}px sans-serif`;
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
 
   const text = '锐界幻境 MiragEdge';
   const metrics = ctx.measureText(text);
-  const stepX = Math.max(metrics.width + 60, minDim / 2);
-  const stepY = Math.max(fontSize * 3, minDim / 2);
+  const stepX = Math.max(metrics.width + fontSize * 2, fontSize * 8);
+  const stepY = fontSize * 3;
 
   for (let y = -h; y < h * 2; y += stepY) {
     for (let x = -w; x < w * 2; x += stepX) {
@@ -101,15 +217,46 @@ function drawTileWatermark(ctx, w, h, minDim) {
   ctx.restore();
 }
 
-function drawCornerWatermark(ctx, w, h, minDim) {
+// 品牌文字角标（右下角，大图用）
+function drawTextCorner(ctx, w, h, minDim) {
+  const boxW = Math.max(120, Math.min(300, Math.round(minDim * 0.3)));
+  const boxH = Math.round(boxW * 0.3);
+  const padding = Math.max(8, Math.round(minDim * 0.015));
+  const x = w - boxW - padding;
+  const y = h - boxH - padding;
+
   ctx.save();
+  // 渐变背景
+  const grad = ctx.createLinearGradient(x, y, x + boxW, y);
+  grad.addColorStop(0, 'rgba(224, 82, 82, 0)');
+  grad.addColorStop(0.3, 'rgba(224, 82, 82, 0.06)');
+  grad.addColorStop(1, 'rgba(224, 82, 82, 0.12)');
+  ctx.fillStyle = grad;
+  // 圆角矩形
+  const r = Math.round(boxH * 0.15);
+  ctx.beginPath();
+  ctx.moveTo(x + r, y);
+  ctx.lineTo(x + boxW - r, y);
+  ctx.quadraticCurveTo(x + boxW, y, x + boxW, y + r);
+  ctx.lineTo(x + boxW, y + boxH - r);
+  ctx.quadraticCurveTo(x + boxW, y + boxH, x + boxW - r, y + boxH);
+  ctx.lineTo(x + r, y + boxH);
+  ctx.quadraticCurveTo(x, y + boxH, x, y + boxH - r);
+  ctx.lineTo(x, y + r);
+  ctx.quadraticCurveTo(x, y, x + r, y);
+  ctx.closePath();
+  ctx.fill();
+
+  // 文字
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillStyle = '#ffffff';
+  ctx.globalAlpha = 0.20;
+  ctx.font = `bold ${Math.round(boxH * 0.45)}px sans-serif`;
+  ctx.fillText('锐界幻境', x + boxW / 2, y + boxH * 0.4);
   ctx.globalAlpha = 0.10;
-  ctx.fillStyle = '#E05252';
-  const fontSize = Math.max(10, Math.round(minDim * 0.035));
-  ctx.font = `bold ${fontSize}px sans-serif`;
-  ctx.textAlign = 'right';
-  ctx.textBaseline = 'bottom';
-  ctx.fillText('MiragEdge', w - 10, h - 10);
+  ctx.font = `${Math.round(boxH * 0.22)}px sans-serif`;
+  ctx.fillText('MiragEdge', x + boxW / 2, y + boxH * 0.75);
   ctx.restore();
 }
 
