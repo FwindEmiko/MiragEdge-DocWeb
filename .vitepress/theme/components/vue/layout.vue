@@ -3,7 +3,7 @@
 <script setup>
 import { useRouter, useData } from "vitepress";
 import DefaultTheme from "vitepress/theme";
-import { ref, watch, nextTick, provide, computed, defineAsyncComponent } from "vue";
+import { ref, watch, nextTick, provide, computed, defineAsyncComponent, onMounted } from "vue";
 import Contributors from './Contributors.vue';
 import NotFound from './NotFound.vue';
 import Live2D from './Live2D.vue';
@@ -47,9 +47,13 @@ function pickRandomCorner() {
   return null;
 }
 
+onMounted(() => {
+  randomCorner.value = pickRandomCorner()
+})
+
 watch(() => route.path, () => {
   randomCorner.value = pickRandomCorner()
-}, { immediate: true })
+})
 
 /**
  * 滚动到页面顶部

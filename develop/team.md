@@ -28,8 +28,8 @@ head:
 
 | 插件 | 说明 | 文档 |
 |------|------|------|
-| EMCShop | 等价交换商店，集成物品银行系统，支持物品与货币双向兑换 | [EMCShop 文档](/develop/mc_plugins/emcshop.md) |
-| FE_Fly | 幻空翼飞行，限时飞行权限管理系统，支持飞行时长配置 | [FE_Fly 文档](/develop/mc_plugins/fe_fly.md) |
+| EMCShop | 等价交换商店，集成物品银行系统，支持物品与货币双向兑换 | [EMCShop 文档](/plugins/emcshop) |
+| FE_Fly | 幻空翼飞行，限时飞行权限管理系统，支持飞行时长配置 | [FE_Fly 文档](/plugins/fe_fly) |
 
 ### <MapIcon name="ruler" :size="24" /> 开发规范与协作
 - [贡献指南 v1.0](#贡献指南v1-0) - 插件开发、内容创作、测试反馈的贡献流程与标准
