@@ -7,13 +7,16 @@
  *
  * 处理流程：
  *   1. 检查 Cache API → 命中则直接返回
- *   2. 未命中 → fetch 原始 OSS 图片 → Canvas 加水印 → 缓存 → 返回
- *   3. 失败 → 透传原始请求（无水印兜底）
+ *   2. cors 模式 fetch OSS → Canvas 加水印 → 缓存 → 返回
+ *   3. cors 失败 → no-cors 模式 fetch（仅显示，无水印）
+ *   4. 均失败 → 重写路径 302 重定向 / 直接 URL 透传原始请求
  *
- * 前提：OSS 需配置 CORS 允许 miragedge.top，否则 fetch 跨域图片会失败。
+ * 前提：OSS 需配置 CORS 允许 miragedge.top。
+ * 若 OSS 启用了 Referer 防盗链，需勾选"允许空 Referer"，
+ * 否则 SW 环境下的 fetch 可能因 Referer 为空被拒绝。
  */
 
-const CACHE_NAME = 'external-wm-v4';
+const CACHE_NAME = 'external-wm-v5';
 let forwardMap = null; // originalUrl → localPath
 let reverseMap = null; // localPath → originalUrl
 let urlSet = null;     // Set<originalUrl> — 快速判断是否需要拦截
@@ -46,9 +49,9 @@ async function loadMap() {
  * 用 OffscreenCanvas 给图片加水印
  * 策略与构建时 watermark.mjs v3 一致（尺寸自适应）：
  *   <16px       → 跳过
- *   16-48px     → 全图偏色 + 中心狐狸耳（核心防盗）
- *   49-127px    → 偏色 + 对角线 + 中心狐狸耳 + 角标
- *   128-599px   → 偏色 + 斜向文字 + 中心狐狸耳 + 角标
+ *   16-48px     → 中心狐狸耳（核心防盗）
+ *   49-127px    → 对角线 + 中心狐狸耳 + 角标
+ *   128-599px   → 斜向文字 + 中心狐狸耳 + 角标
  *   >=600px     → 斜向文字 + 中心狐狸耳 + 品牌角标
  */
 async function addWatermark(blob) {
@@ -68,14 +71,12 @@ async function addWatermark(blob) {
     // 超小图：仅中心狐狸耳
     drawCenterFox(ctx, w, h, minDim);
   } else if (minDim < 128) {
-    // 小图：偏色 + 对角线 + 中心狐狸耳 + 角标
-    drawTintOverlay(ctx, w, h, minDim);
+    // 小图：对角线 + 中心狐狸耳 + 角标（无全图偏色）
     drawDiagonalLines(ctx, w, h);
     drawCenterFox(ctx, w, h, minDim);
     drawFoxCorner(ctx, w, h, minDim);
   } else if (minDim < 600) {
-    // 中图：偏色 + 斜向文字 + 中心狐狸耳 + 角标
-    drawTintOverlay(ctx, w, h, minDim);
+    // 中图：斜向文字 + 中心狐狸耳 + 角标（无全图偏色）
     drawTileWatermark(ctx, w, h, minDim);
     drawCenterFox(ctx, w, h, minDim);
     drawFoxCorner(ctx, w, h, minDim);
@@ -92,16 +93,6 @@ async function addWatermark(blob) {
     : 'image/png';
   const quality = type.includes('jpeg') ? 0.92 : type.includes('webp') ? 0.90 : undefined;
   return canvas.convertToBlob({ type: outType, quality });
-}
-
-// 全图品牌色偏移（整图叠加，去除后颜色失真）
-function drawTintOverlay(ctx, w, h, minDim) {
-  const opacity = minDim < 49 ? 0.10 : minDim < 128 ? 0.07 : 0.04;
-  ctx.save();
-  ctx.globalAlpha = opacity;
-  ctx.fillStyle = '#E05252';
-  ctx.fillRect(0, 0, w, h);
-  ctx.restore();
 }
 
 // 中心狐狸耳（覆盖图像核心区域，无法裁剪去除）
@@ -269,14 +260,22 @@ async function handleWatermark(request, originalUrl, isRewrittenPath) {
   const cached = await cache.match(cacheKey);
   if (cached) return cached;
 
-  // 2. 从 OSS 下载（使用 cors 模式）
-  //    SW 环境下 fetch 默认不发送 Referer，需显式设置：
-  //    - 使用原始请求的 referrer（页面 URL，匹配 OSS Referer 白名单）
-  //    - unsafe-url 策略确保 Referer 始终发送
+  // 2. 准备 Referer
+  //    SW 环境下 request.referrer 可能是 "about:client"（无效值）或空字符串
+  //    需确保使用有效的 https URL 匹配 OSS Referer 白名单
+  let referrerUrl = request.referrer;
+  if (!referrerUrl || !referrerUrl.startsWith('http')) {
+    referrerUrl = self.location.origin + '/';
+  }
+
+  // 3. 从 OSS 下载（cors 模式，需要读取内容做水印）
+  //    cache: 'no-cache' 避免浏览器复用 <img> 标签的 non-cors 缓存响应
+  //    （该响应不含 Access-Control-Allow-Origin 头，会导致 CORS 失败）
   try {
-    const referrerUrl = request.referrer || (self.location.origin + '/');
     const res = await fetch(originalUrl, {
       mode: 'cors',
+      credentials: 'omit',
+      cache: 'no-cache',
       referrer: referrerUrl,
       referrerPolicy: 'unsafe-url',
     });
@@ -285,7 +284,7 @@ async function handleWatermark(request, originalUrl, isRewrittenPath) {
     const blob = await res.blob();
     const contentType = blob.type || 'image/png';
 
-    // 3. Canvas 加水印
+    // 4. Canvas 加水印
     let watermarkedBlob;
     try {
       watermarkedBlob = await addWatermark(blob);
@@ -294,7 +293,7 @@ async function handleWatermark(request, originalUrl, isRewrittenPath) {
       watermarkedBlob = blob;
     }
 
-    // 4. 构建响应并缓存
+    // 5. 构建响应并缓存
     const response = new Response(watermarkedBlob, {
       headers: {
         'Content-Type': watermarkedBlob.type || contentType,
@@ -304,10 +303,27 @@ async function handleWatermark(request, originalUrl, isRewrittenPath) {
     cache.put(cacheKey, response.clone());
     return response;
   } catch (e) {
-    console.error('[SW] 下载失败，兜底处理:', originalUrl, e.message);
-    // 5. 失败兜底：
-    //    - 重写路径（/external-wm/*）：302 重定向到原始 OSS URL，图片仍能加载
-    //    - 直接 OSS URL：透传原始请求（无水印）
+    console.error('[SW] CORS 下载失败:', originalUrl, e.message);
+
+    // 6. 兜底 1: no-cors 模式（仅显示，无水印）
+    //    返回 opaque 响应，<img> 可直接显示，但无法读取内容做水印
+    try {
+      const opaqueRes = await fetch(originalUrl, {
+        mode: 'no-cors',
+        credentials: 'omit',
+        cache: 'no-cache',
+        referrer: referrerUrl,
+        referrerPolicy: 'unsafe-url',
+      });
+      if (opaqueRes && opaqueRes.type === 'opaque') {
+        return opaqueRes;
+      }
+    } catch (e2) {
+      console.error('[SW] no-cors 兜底也失败:', e2.message);
+    }
+
+    // 7. 兜底 2: 重写路径 → 302 重定向到 OSS（浏览器直接加载，带正确 Referer）
+    //          直接 URL → 透传原始请求
     if (isRewrittenPath) {
       return Response.redirect(originalUrl, 302);
     }

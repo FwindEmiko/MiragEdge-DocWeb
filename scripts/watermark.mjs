@@ -156,20 +156,6 @@ function buildTextCornerSvg(w, h) {
 }
 
 /**
- * 生成全图品牌色偏移 SVG（整图叠加一层品牌色）
- * 作用：让盗图者去除后颜色失真，无法完美还原
- * 透明度按尺寸调整：小图偏色更强（贴图像素少，偏色影响大）
- */
-function buildTintOverlaySvg(w, h) {
-  const minDim = Math.min(w, h);
-  // 小图偏色更强：16px 用 10%，48px 用 7%，128px+ 用 4%
-  const opacity = minDim < 49 ? 0.10 : minDim < 128 ? 0.07 : 0.04;
-  return `<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" xmlns="http://www.w3.org/2000/svg">
-    <rect width="${w}" height="${h}" fill="${BRAND}" opacity="${opacity}"/>
-  </svg>`;
-}
-
-/**
  * 生成中心狐狸耳水印 SVG（覆盖图像核心区域）
  * 关键防盗措施：覆盖中心，无法通过裁剪去除，PS 修复需重建像素
  * 尺寸越小，狐狸耳占比越大（16px 占 55%，128px 占 30%）
@@ -226,14 +212,12 @@ function buildWatermarkLayers(w, h) {
     // 超小图（16-48px，MC 贴图）：仅中心狐狸耳
     layers.push({ svg: buildCenterFoxSvg(w, h) });
   } else if (minDim < 128) {
-    // 小图（49-127px）：偏色 + 对角线 + 中心狐狸耳 + 角标
-    layers.push({ svg: buildTintOverlaySvg(w, h) });
+    // 小图（49-127px）：对角线 + 中心狐狸耳 + 角标（无全图偏色）
     layers.push({ svg: buildDiagonalLinesSvg(w, h) });
     layers.push({ svg: buildCenterFoxSvg(w, h) });
     layers.push({ svg: buildFoxCornerSvg(w, h) });
   } else if (minDim < 600) {
-    // 中图（128-599px）：偏色 + 斜向文字 + 中心狐狸耳 + 角标
-    layers.push({ svg: buildTintOverlaySvg(w, h) });
+    // 中图（128-599px）：斜向文字 + 中心狐狸耳 + 角标（无全图偏色）
     layers.push({ svg: buildTileSvg(w, h) });
     layers.push({ svg: buildCenterFoxSvg(w, h) });
     layers.push({ svg: buildFoxCornerSvg(w, h) });
