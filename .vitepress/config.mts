@@ -86,6 +86,18 @@ export default defineConfig({
         'query-input': 'required name=search_term_string'
       }
     })],
+    // 页面特效开关：在 Vue 水合前同步读取 localStorage 并设置 effects-disabled 类
+    // 避免刷新后开关显示与实际状态不一致的问题
+    ['script', {}, `(
+      function() {
+        try {
+          var stored = localStorage.getItem('miragedge-effects-enabled');
+          var isMobile = window.innerWidth <= 767;
+          var enabled = stored === null ? !isMobile : stored === 'true';
+          if (!enabled) document.documentElement.classList.add('effects-disabled');
+        } catch(e) {}
+      }
+    )()`],
     // 百度站点验证（如果需要）
     // ['meta', { name: 'baidu-site-verification', content: 'code-xxxxxxxx' }],
     // 360站点验证（如果需要）

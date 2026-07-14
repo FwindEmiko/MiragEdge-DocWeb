@@ -1,30 +1,28 @@
 // 页面特殊效果开关：全局单例状态 + localStorage 持久化
 // 默认开启；用户偏好长期保存在 localStorage，并在 <html> 上同步 effects-disabled 类
+// config.mts 中的内联 head 脚本会在 Vue 水合前同步设置 effects-disabled 类
 import { ref } from 'vue'
 import { inBrowser } from 'vitepress'
 
 const STORAGE_KEY = 'miragedge-effects-enabled'
 
-// SSR 与客户端首帧均使用默认 true，保证水合一致；
-// 真实偏好延后一个微任务再应用，避免水合不一致告警
-const effectsEnabled = ref(true)
-
-if (inBrowser) {
-  let stored: string | null = null
+// 同步读取 localStorage 初始化状态，确保刷新后开关显示与实际状态一致
+function getInitialValue(): boolean {
+  if (!inBrowser) return true
+  // 优先从 <html> class 读取（head 内联脚本已设置）
+  if (document.documentElement.classList.contains('effects-disabled')) {
+    return false
+  }
+  // 兜底：直接读 localStorage
   try {
-    stored = localStorage.getItem(STORAGE_KEY)
+    const stored = localStorage.getItem(STORAGE_KEY)
+    if (stored !== null) return stored === 'true'
   } catch {}
-
-  // 移动端（宽度 <= 767px）默认关闭特效；桌面端默认开启
-  const isMobile = window.innerWidth <= 767
-  const defaultValue = isMobile ? false : true
-  const initial = stored === null ? defaultValue : stored === 'true'
-
-  Promise.resolve().then(() => {
-    effectsEnabled.value = initial
-    document.documentElement.classList.toggle('effects-disabled', !initial)
-  })
+  // 无存储记录时，移动端默认关闭
+  return window.innerWidth > 767
 }
+
+const effectsEnabled = ref(getInitialValue())
 
 function persist(v: boolean) {
   if (!inBrowser) return
