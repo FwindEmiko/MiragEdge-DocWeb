@@ -40,6 +40,5 @@ yarn-error.log*
 .env.*.local
 
 # pnpm
-pnpm-lock.yaml
 .pnpm-store/
 .npm
