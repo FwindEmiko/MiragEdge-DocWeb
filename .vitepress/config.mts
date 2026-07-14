@@ -2,15 +2,22 @@ import { defineConfig } from 'vitepress'
 import { MermaidPlugin, MermaidMarkdown } from "vitepress-plugin-mermaid";
 import addContributorsPlugin from './theme/addContributors';
 import path from 'node:path'
+import fs from 'node:fs'
 import { fileURLToPath } from 'node:url'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
+// 站点常量：用于 OG / canonical / JSON-LD 等绝对地址
+const SITE_HOST = 'https://miragedge.top'
+const SITE_TITLE = 'MiragEdge 文档中心'
+const SITE_DESCRIPTION = '锐界幻境 Minecraft 互通生存服务器官方文档中心，提供玩家指南、玩法介绍、附魔图鉴、钓鱼/季节/食物系统、开发教程与原创插件文档。'
+const SITE_OG_IMAGE = `${SITE_HOST}/title_img/xingjiu.png`
+
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  title: "MiragEdge 文档中心",
-  description: "锐界幻境 全方位的指南",
-  
+  title: SITE_TITLE,
+  description: SITE_DESCRIPTION,
+
   // 基础路径，如果部署在子路径下需要设置
   base: '/',
 
@@ -22,7 +29,7 @@ export default defineConfig({
     root: {
       label: '中文',
       lang: 'zh-CN',
-      description: '锐界幻境 全方位的指南',
+      description: SITE_DESCRIPTION,
     }
   },
 
@@ -32,6 +39,8 @@ export default defineConfig({
     ['link', { rel: 'icon', href: '/title_img/favicon-16x16.png', sizes: '16x16' }],
     ['link', { rel: 'apple-touch-icon', href: '/title_img/apple-touch-icon.png', sizes: '180x180' }],
     ['link', { rel: 'manifest', href: '/site.webmanifest' }],
+    // 预连接关键第三方域名，加速 OG 图片与字体加载
+    ['link', { rel: 'preconnect', href: 'https://oss.miragedge.top' }],
     ['meta', { name: 'theme-color', content: '#3c8772' }],
     // 构建版本标识：注入到每个 HTML 的 <head>，供前端版本检测对比 /version.json
     // 值与 vite define 中的 __BUILD_ID__ / __BUILD_SHA__ 保持一致（构建时求值）
@@ -39,21 +48,183 @@ export default defineConfig({
     ['meta', { name: 'x-build-id', content: process.env.GITHUB_RUN_NUMBER || 'dev' }],
     ['meta', { name: 'x-build-sha', content: process.env.GITHUB_SHA ? process.env.GITHUB_SHA.substring(0, 7) : '' }],
     ['meta', { name: 'viewport', content: 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' }],
-    ['meta', { name: 'keywords', content: 'MiragEdge, 锐界幻境, Minecraft, 我的世界, 服务器, 文档, 玩家手册, 狐风轩汐, FwindEmi, F.windEmiko' }],
-    ['meta', { name: 'author', content: 'F.windEmiko' }],
-    ['meta', { property: 'og:title', content: 'MiragEdge 文档中心' }],
-    ['meta', { property: 'og:description', content: '锐界幻境 全方位的指南' }],
+    // 全局关键词：覆盖品牌词、品类词、玩法词、技术词，提升长尾检索命中率
+    ['meta', { name: 'keywords', content: 'MiragEdge, 锐界幻境, Minecraft, 我的世界, 我的世界服务器, 生存服务器, 互通服务器, Java版, 基岩版, 1.21, 文档, 玩家手册, 入服教程, 附魔, 更多附魔, 钓鱼, 季节系统, 食物, 经济系统, 领地, PVP, 插件, 狐风轩汐, FwindEmi, F.windEmiko, Aiyatsbus, EvenMoreFish, CustomCrops' }],
+    ['meta', { name: 'author', content: 'F.windEmiko (狐风轩汐)' }],
+    ['meta', { name: 'robots', content: 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' }],
+    ['meta', { name: 'language', content: 'zh-CN' }],
+    ['meta', { name: 'referrer', content: 'strict-origin-when-cross-origin' }],
+    // Open Graph：使用绝对地址，确保社交平台/搜索引擎正确抓取卡片
+    ['meta', { property: 'og:site_name', content: SITE_TITLE }],
+    ['meta', { property: 'og:title', content: SITE_TITLE }],
+    ['meta', { property: 'og:description', content: SITE_DESCRIPTION }],
     ['meta', { property: 'og:type', content: 'website' }],
-    ['meta', { property: 'og:image', content: '/title_img/xingjiu.png' }],
-    ['meta', { property: 'og:url', content: 'https://miragedge.top' }],
+    ['meta', { property: 'og:image', content: SITE_OG_IMAGE }],
+    ['meta', { property: 'og:image:alt', content: '锐界幻境 MiragEdge 文档中心' }],
+    ['meta', { property: 'og:image:width', content: '1200' }],
+    ['meta', { property: 'og:image:height', content: '630' }],
+    ['meta', { property: 'og:url', content: SITE_HOST }],
+    ['meta', { property: 'og:locale', content: 'zh_CN' }],
+    // Twitter Card
     ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
-    ['meta', { name: 'twitter:image', content: '/title_img/xingjiu.png' }],
+    ['meta', { name: 'twitter:image', content: SITE_OG_IMAGE }],
+    ['meta', { name: 'twitter:image:alt', content: '锐界幻境 MiragEdge 文档中心' }],
     ['meta', { name: 'twitter:creator', content: '@MiragEdge' }],
+    ['meta', { name: 'twitter:site', content: '@MiragEdge' }],
+    // JSON-LD 结构化数据：WebSite schema，帮助搜索引擎理解站点结构并启用站内搜索框 (Sitelinks Search Box)
+    ['script', { type: 'application/ld+json' }, JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      'name': SITE_TITLE,
+      'alternateName': '锐界幻境文档',
+      'url': SITE_HOST,
+      'description': SITE_DESCRIPTION,
+      'inLanguage': 'zh-CN',
+      'potentialAction': {
+        '@type': 'SearchAction',
+        'target': `${SITE_HOST}/?q={search_term_string}`,
+        'query-input': 'required name=search_term_string'
+      }
+    })],
     // 百度站点验证（如果需要）
     // ['meta', { name: 'baidu-site-verification', content: 'code-xxxxxxxx' }],
     // 360站点验证（如果需要）
     // ['meta', { name: '360-site-verification', content: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx' }],
   ],
+
+  // 自动注入每页 SEO：canonical / og:url / og:title / og:description / description / article meta
+  // 通过 transformHead 钩子基于 pageData 动态生成，避免在每个 md frontmatter 重复配置
+  transformHead(context) {
+    const page = context.pageData
+    // 规范化相对路径：去掉 .md / index 结尾，得到干净的 URL 路径
+    // pageData.relativePath 在 VitePress 1.x 中始终可用
+    const rawRel = (page.relativePath || '').replace(/\\/g, '/')
+    let relPath = rawRel
+      .replace(/\.md$/, '')
+      .replace(/(^|\/)index$/, '$1')
+    const canonicalUrl = relPath ? `${SITE_HOST}/${relPath}` : `${SITE_HOST}/`
+
+    // 页面标题：优先用 frontmatter title，其次 frontmatter 中无则用页内第一个 H1
+    const pageTitle = page.frontmatter.title
+      ? `${page.frontmatter.title} | ${SITE_TITLE}`
+      : page.title
+        ? `${page.title} | ${SITE_TITLE}`
+        : SITE_TITLE
+
+    // 页面描述：优先 frontmatter.description，否则留空（由 transformPageData 自动补全）
+    const pageDescription = page.frontmatter.description || page.description || SITE_DESCRIPTION
+
+    // 文章类型页面使用 article OG，列表/首页使用 website
+    const isArticle = !page.frontmatter.layout
+      && rawRel !== 'index.md'
+      && rawRel !== ''
+
+    const tags: any[] = [
+      // canonical：避免重复内容惩罚，统一权重到规范 URL
+      ['link', { rel: 'canonical', href: canonicalUrl }],
+      // 每页覆盖 og 标签，确保社交分享卡片准确
+      ['meta', { property: 'og:url', content: canonicalUrl }],
+      ['meta', { property: 'og:title', content: pageTitle }],
+      ['meta', { property: 'og:description', content: pageDescription }],
+      ['meta', { name: 'twitter:title', content: pageTitle }],
+      ['meta', { name: 'twitter:description', content: pageDescription }],
+    ]
+
+    if (isArticle) {
+      tags.push(['meta', { property: 'og:type', content: 'article' }])
+      tags.push(['meta', { property: 'article:author', content: 'F.windEmiko (狐风轩汐)' }])
+      tags.push(['meta', { property: 'article:section', content: '锐界幻境文档' }])
+      if (page.frontmatter.lastUpdated) {
+        tags.push(['meta', { property: 'article:modified_time', content: new Date(page.frontmatter.lastUpdated).toISOString() }])
+      }
+    } else {
+      tags.push(['meta', { property: 'og:type', content: 'website' }])
+    }
+
+    // 面包屑 JSON-LD：为非首页注入 BreadcrumbList，提升搜索结果展示层级
+    if (relPath) {
+      const segments = relPath.split('/').filter(Boolean)
+      const itemList: any[] = [{
+        '@type': 'ListItem',
+        position: 1,
+        name: '首页',
+        item: SITE_HOST
+      }]
+      let acc = ''
+      segments.forEach((seg, idx) => {
+        acc += '/' + seg
+        const name = page.frontmatter.title || decodeURIComponent(seg)
+        itemList.push({
+          '@type': 'ListItem',
+          position: idx + 2,
+          name,
+          item: `${SITE_HOST}${acc}`
+        })
+      })
+      tags.push(['script', { type: 'application/ld+json' }, JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: itemList
+      })])
+    }
+
+    return tags
+  },
+
+  // 自动补全页面描述：当 md 未声明 description 时，从源文件正文首段提取摘要作为 meta description
+  // 提取规则：跳过 frontmatter / 代码块 / Vue 组件标签 / 引用块，取第一段纯文本，截断到约 150 字
+  transformPageData(pageData, ctx) {
+    if (pageData.frontmatter.description) {
+      // 已显式声明，保留原值并同步到 description 字段（VitePress 会读取该字段生成 meta）
+      pageData.description = pageData.frontmatter.description
+      return
+    }
+    // pageData 没有 content 字段，需从磁盘读取源 markdown 文件
+    const rel = (pageData.relativePath || '').replace(/\\/g, '/')
+    if (!rel) return
+    const srcDir = ctx?.siteConfig?.srcDir || process.cwd()
+    const fullPath = path.resolve(srcDir, rel)
+    let raw = ''
+    try {
+      raw = fs.readFileSync(fullPath, 'utf-8')
+    } catch {
+      return
+    }
+    // 去掉 YAML frontmatter（--- 包裹块）
+    raw = raw.replace(/^---\r?\n[\s\S]*?\r?\n---\r?\n?/, '')
+    const lines = raw.split(/\r?\n/)
+    let desc = ''
+    let inCodeFence = false
+    for (const line of lines) {
+      const trimmed = line.trim()
+      if (trimmed.startsWith('```')) { inCodeFence = !inCodeFence; continue }
+      if (inCodeFence) continue
+      // 跳过标题、引用、Vue 组件、HTML 标签、列表符号、容器提示
+      if (!trimmed) continue
+      if (trimmed.startsWith('#')) continue
+      if (trimmed.startsWith('>')) continue
+      if (trimmed.startsWith('<')) continue
+      if (trimmed.startsWith(':::')) continue
+      if (/^[-*+\d]/.test(trimmed)) continue
+      // 去除行内 Markdown 语法，保留纯文本
+      const text = trimmed
+        .replace(/`([^`]+)`/g, '$1')
+        .replace(/\*\*([^*]+)\*\*/g, '$1')
+        .replace(/\*([^*]+)\*/g, '$1')
+        .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+        .replace(/!\[[^\]]*\]\([^)]+\)/g, '')
+        .trim()
+      if (text.length >= 8) {
+        desc = text
+        break
+      }
+    }
+    if (desc) {
+      // 截断到 150 字符，避免搜索结果摘要过长被截断
+      pageData.description = desc.length > 150 ? desc.slice(0, 150) + '…' : desc
+      pageData.frontmatter.description = pageData.description
+    }
+  },
 
   // Markdown 配置
   markdown: {
@@ -143,10 +314,14 @@ export default defineConfig({
         detailedView: true,
         miniSearch: {
           searchOptions: {
-            fuzzy: true,
+            // 模糊匹配 + 前缀匹配，兼顾拼写容错与关键词前缀命中
+            fuzzy: 0.2,
             prefix: true,
-            boost: { title: 2, content: 1 }
-          },
+            combineWith: 'AND',
+            // 权重分配：标题命中权重最高（优先展示标题匹配的页面），
+            // 内容命中作为补充，提升关键词检索的精准度与排序质量
+            boost: { title: 6, content: 1, heading: 3 }
+          }
         }
       }
     },

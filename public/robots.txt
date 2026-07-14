@@ -1,0 +1,32 @@
+# MiragEdge 文档中心 robots.txt
+# 允许所有搜索引擎抓取全站内容
+
+User-agent: *
+Allow: /
+
+# 禁止抓取构建中间产物与缓存目录（避免索引无意义页面）
+Disallow: /.vitepress/
+Disallow: /assets/*.map
+Disallow: /*?q=
+
+# 主要搜索引擎单独放行，确保收录
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+User-agent: Sogou web spider
+Allow: /
+
+User-agent: 360Spider
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+# 站点地图：VitePress 构建时自动生成 sitemap.xml
+Sitemap: https://miragedge.top/sitemap.xml

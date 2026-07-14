@@ -1,3 +1,12 @@
+---
+title: 入服指南
+description: 锐界幻境 Minecraft 服务器入服指南：服务器地址、客户端安装、白名单绑定与连接教程，助你快速加入幻境世界。
+head:
+  - - meta
+    - name: keywords
+      content: 锐界幻境入服, Minecraft 入服指南, 服务器地址, 入服教程, 连接服务器
+---
+
 # 入服指南
 
 > 💡 还不会安装客户端？[前往查看客户端安装教程](./clientinstall)

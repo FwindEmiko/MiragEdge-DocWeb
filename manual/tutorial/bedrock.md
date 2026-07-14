@@ -1,3 +1,12 @@
+---
+title: 基岩版玩家指南
+description: 锐界幻境 Minecraft 基岩版（手机/Win10）玩家专属入服指南：Geyser 互通方案、基岩版客户端配置与已知功能限制说明。
+head:
+  - - meta
+    - name: keywords
+      content: 锐界幻境基岩版, Minecraft 基岩版, 手机版入服, Geyser, 基岩版指南, 互通
+---
+
 # 基岩版玩家指南
 
 > <MapIcon name="smartphone" :size="24" /> 手机玩家的专属指南喵~

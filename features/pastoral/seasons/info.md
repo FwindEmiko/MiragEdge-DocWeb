@@ -1,3 +1,12 @@
+---
+title: 真实季节系统
+description: 锐界幻境 Minecraft 真实季节系统介绍：春、夏、秋、冬四季轮转，配合温度系统影响作物生长与生物生成，带来沉浸式生存体验。
+head:
+  - - meta
+    - name: keywords
+      content: 锐界幻境季节, Minecraft 季节系统, 真实季节, 春夏秋冬, 温度系统
+---
+
 # 真实季节系统
 
 <SmartImage

@@ -1,3 +1,12 @@
+---
+title: MiragEdgeTitle 称号与入服消息插件
+description: MiragEdgeTitle 锐界幻境自研称号与入服消息插件：自定义玩家称号与入服消息展示。
+head:
+  - - meta
+    - name: keywords
+      content: MiragEdgeTitle, 称号插件, 入服消息, Minecraft 称号, 自研插件
+---
+
 # 🏷️ MiragEdgeTitle — 称号与入服消息
 
 **项目状态：C**

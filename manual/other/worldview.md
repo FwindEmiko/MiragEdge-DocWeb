@@ -1,3 +1,12 @@
+---
+title: 世界观设定
+description: 锐界幻境 Minecraft 服务器世界观设定：梦始之空、零境等区域的故事背景与设定，了解幻境世界的来龙去脉。
+head:
+  - - meta
+    - name: keywords
+      content: 锐界幻境世界观, Minecraft 世界观, 故事背景, 梦始之空, 零境, 幻境设定
+---
+
 # 世界观设定
 
 <SmartImage

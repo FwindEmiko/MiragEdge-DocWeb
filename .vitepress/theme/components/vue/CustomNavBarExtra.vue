@@ -5,11 +5,16 @@
  * 注意：后续 VitePress 更新时需检查原版是否有变更
  */
 import { computed } from 'vue'
+// @ts-ignore VitePress 内部组件无类型声明
 import VPFlyout from 'vitepress/dist/client/theme-default/components/VPFlyout.vue'
+// @ts-ignore VitePress 内部组件无类型声明
 import VPMenuLink from 'vitepress/dist/client/theme-default/components/VPMenuLink.vue'
+// @ts-ignore VitePress 内部组件无类型声明
 import VPSwitchAppearance from 'vitepress/dist/client/theme-default/components/VPSwitchAppearance.vue'
+// @ts-ignore VitePress 内部组件无类型声明
 import VPSocialLinks from 'vitepress/dist/client/theme-default/components/VPSocialLinks.vue'
 import { useData } from 'vitepress'
+// @ts-ignore VitePress 内部 composable 无类型声明
 import { useLangs } from 'vitepress/dist/client/theme-default/composables/langs'
 import EffectsToggle from './EffectsToggle.vue'
 

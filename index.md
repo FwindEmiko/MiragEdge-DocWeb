@@ -2,6 +2,14 @@
 # https://vitepress.dev/reference/default-theme-home-page
 layout: home
 title: MiragEdge 文档中心
+description: 锐界幻境 Minecraft Java/基岩互通生存服务器官方文档中心。提供玩家入服指南、玩法介绍（经济/领地/季节/钓鱼/食物/附魔/装备锻造）、开发教程与原创插件文档，助你快速融入幻境世界。
+head:
+  - - meta
+    - name: keywords
+      content: 锐界幻境, MiragEdge, Minecraft 服务器, 互通服务器, 生存服务器, 入服教程, 玩法介绍, 玩家指南
+  - - meta
+    - property: article:tag
+      content: Minecraft, 锐界幻境, 生存服务器, 文档中心
 
 hero:
   name: "锐界幻境"

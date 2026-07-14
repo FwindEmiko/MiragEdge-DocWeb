@@ -1,3 +1,12 @@
+---
+title: 装备升级
+description: 锐界幻境 Minecraft 装备升级系统：通过改变材质、镶嵌宝石等方式永久或临时提升装备属性，提供特殊技能效果，打造专属强力装备。
+head:
+  - - meta
+    - name: keywords
+      content: 锐界幻境装备升级, Minecraft 装备, 装备锻造, 宝石镶嵌, 属性提升, MMO 装备
+---
+
 # 装备升级
 
 ## 简介

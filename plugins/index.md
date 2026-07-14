@@ -1,3 +1,12 @@
+---
+title: 插件内容开发协作流程
+description: 锐界幻境服务器原创插件开发协作流程与规范，标准化插件开发、审核与发布环节，含 FEPVP、MiragEdgeHome、MiragEdgeTitle、SkyElytra、EMCShop 等插件文档。
+head:
+  - - meta
+    - name: keywords
+      content: 锐界幻境插件, Minecraft 插件开发, Paper 插件, FEPVP, MiragEdgeHome, 原创插件, 开发协作
+---
+
 # 插件内容开发协作流程
 
 ### <MapIcon name="pin" :size="24" /> 流程说明

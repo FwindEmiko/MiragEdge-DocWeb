@@ -1,31 +1,40 @@
 {
-  "name": "MiragEdge Documentation",
-  "short_name": "MiragEdge Docs",
-  "description": "全方位的指南",
+  "name": "MiragEdge 文档中心 - 锐界幻境 Minecraft 服务器",
+  "short_name": "MiragEdge 文档",
+  "description": "锐界幻境 Minecraft 互通生存服务器官方文档中心：玩家指南、玩法介绍、附魔图鉴、钓鱼/季节/食物系统、开发教程与原创插件文档。",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
+  "orientation": "portrait-primary",
   "background_color": "#ffffff",
   "theme_color": "#3c8772",
+  "lang": "zh-CN",
+  "dir": "ltr",
+  "categories": ["education", "games", "reference"],
   "icons": [
     {
-      "src": "/title_img/xingjiu.png",
+      "src": "/title_img/favicon-16x16.png",
       "sizes": "16x16",
-      "type": "image/jpeg"
+      "type": "image/png",
+      "purpose": "any"
     },
     {
-      "src": "/title_img/xingjiu.png",
+      "src": "/title_img/favicon-32x32.png",
       "sizes": "32x32",
-      "type": "image/jpeg"
+      "type": "image/png",
+      "purpose": "any"
     },
     {
-      "src": "/title_img/xingjiu.png",
-      "sizes": "192x192",
-      "type": "image/jpeg"
+      "src": "/title_img/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
     },
     {
       "src": "/title_img/xingjiu_256x.svg",
       "sizes": "512x512",
-      "type": "image/svg+xml"
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
     }
   ]
 }

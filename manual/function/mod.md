@@ -1,3 +1,12 @@
+---
+title: 服内模组支持
+description: 锐界幻境 Minecraft 服务器支持的客户端模组清单：简单语音聊天、光影等模组说明与安装指引。
+head:
+  - - meta
+    - name: keywords
+      content: 锐界幻境模组, Minecraft 客户端模组, 简单语音聊天, Simple Voice Chat, 光影
+---
+
 # 服内模组支持
 
 本服务器支持以下客户端模组，点击即可跳转到对应说明：

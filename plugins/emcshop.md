@@ -1,3 +1,12 @@
+---
+title: EMCShop 等价交换商店插件
+description: EMCShop 为 Minecraft Paper 服务器设计的经济插件：提供物品转换、购买和预览功能，允许玩家将基础物品转换为更有价值的物品或直接购买解锁物品。
+head:
+  - - meta
+    - name: keywords
+      content: EMCShop, 等价交换, Minecraft 商店插件, 经济插件, 物品转换, Paper 插件
+---
+
 # EMCShop（等价交换商店）
 
 ## 项目概述

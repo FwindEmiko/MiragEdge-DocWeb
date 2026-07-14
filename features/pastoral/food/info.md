@@ -1,3 +1,7 @@
+---
+title: 更多食物拓展
+---
+
 # <MapIcon name="cooking" :size="24" /> 更多食物拓展
 
 <MapIcon name="sparkles" :size="16" /> **食物系统全面重制！**

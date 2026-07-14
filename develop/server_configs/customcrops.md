@@ -1,3 +1,12 @@
+---
+title: 自定义作物
+description: 锐界幻境服务器自定义作物配置教程：基于 CustomCrops 插件实现自定义作物体系，含作物制作方法与配置说明。
+head:
+  - - meta
+    - name: keywords
+      content: 锐界幻境自定义作物, CustomCrops 配置, 作物制作, 自定义种植, 插件配置
+---
+
 # 自定义作物
 
 这东西非常蛋疼，我自己写42个作物得写2个月不止（

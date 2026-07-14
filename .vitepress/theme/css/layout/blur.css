@@ -87,29 +87,28 @@
 }
 
 /* 补偿导航栏 border-bottom 增加的 1px，防止侧边栏内容被顶栏遮挡 */
+/* 使用 !important 覆盖 VitePress scoped CSS */
 @media (min-width: 960px) {
   .VPSidebar {
-    padding-top: calc(var(--vp-nav-height) + 2px);
+    padding-top: calc(var(--vp-nav-height) + 4px) !important;
   }
   .curtain {
-    margin-top: calc((var(--vp-nav-height) + 2px) * -1);
-    height: calc(var(--vp-nav-height) + 2px);
+    margin-top: calc((var(--vp-nav-height) + 4px) * -1) !important;
+    height: calc(var(--vp-nav-height) + 4px) !important;
   }
 }
 
-/* 限制有侧边栏时 logo 区域宽度，避免宽屏幕上过度延伸推挤搜索框 */
-@media (min-width: 1440px) {
+/* 让有侧边栏时的标题容器宽度自适应内容，避免 logo 右侧出现大片空白区域 */
+/* 使用 !important 覆盖 VitePress scoped CSS */
+@media (min-width: 960px) {
   .VPNavBar.has-sidebar .title {
-    width: var(--vp-sidebar-width) !important;
-    padding-left: max(32px, calc((100% - (var(--vp-layout-max-width) - 64px)) / 2));
-  }
-  .VPNavBar.has-sidebar .content {
-    padding-left: var(--vp-sidebar-width) !important;
-    padding-right: 32px !important;
+    width: auto !important;
+    min-width: 0 !important;
+    padding-right: 16px !important;
   }
 }
 
-/* 让导航栏标题宽度自适应内容，避免文字logo右侧出现多余空白 */
+/* 让导航栏标题内部元素宽度自适应内容 */
 .VPNavBarTitle .title {
   width: auto !important;
 }

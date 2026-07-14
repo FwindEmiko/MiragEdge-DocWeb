@@ -1,3 +1,12 @@
+---
+title: 狐风轩汐原创插件列表
+description: 锐界幻境狐风轩汐原创与二创插件列表：含 MiragEdgeHome、MiragEdgeTitle、SkyElytra、EMCShop、FE_Fly、FE_ItemsCore、FE_Quests、FEPVP 等插件（部分闭源）。
+head:
+  - - meta
+    - name: keywords
+      content: 锐界幻境插件列表, 原创插件, 狐风轩汐插件, Minecraft 插件, Paper 插件
+---
+
 # 🦊 狐风轩汐の原创/二创插件
 
 部分为闭源插件，会无法访问仓库

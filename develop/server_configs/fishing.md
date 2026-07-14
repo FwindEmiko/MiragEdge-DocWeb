@@ -1,3 +1,12 @@
+---
+title: 钓鱼系统配置
+description: 锐界幻境服务器钓鱼系统配置教程：基于 EvenMoreFish 插件实现自定义钓鱼体系，涵盖新增鱼类、钓竿、鱼饵、比赛的完整配置方法。
+head:
+  - - meta
+    - name: keywords
+      content: 锐界幻境钓鱼配置, EvenMoreFish 配置, 钓鱼插件, 鱼类配置, 钓竿配置, 鱼饵配置
+---
+
 # 钓鱼系统配置
 
 服务器使用 **EvenMoreFish** 插件实现自定义钓鱼体系。本页涵盖新增鱼类、钓竿、鱼饵、比赛的完整配置方法。

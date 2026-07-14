@@ -1,3 +1,12 @@
+---
+title: 客户端安装指南
+description: 锐界幻境 Minecraft 服务器客户端安装指南：当前服务器版本 26.1.2，支持 Java 版与基岩版互通，含客户端下载、配置与连接教程。
+head:
+  - - meta
+    - name: keywords
+      content: 锐界幻境客户端, Minecraft 客户端安装, 客户端下载, 1.21 客户端, Java版, 基岩版
+---
+
 # 客户端安装指南
 
 > 服务器当前版本：`26.1.2`

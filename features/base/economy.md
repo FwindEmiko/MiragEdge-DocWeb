@@ -1,3 +1,12 @@
+---
+title: 经济系统
+description: 锐界幻境 Minecraft 服务器经济系统详解：基础货币灵叶（Spirit Leaf）与高级货币星痕石（Starscar Gem）的定义、用途、获取方式与名称备注，方便玩家理解交易规则。
+head:
+  - - meta
+    - name: keywords
+      content: 锐界幻境经济系统, Minecraft 货币, 灵叶, 星痕石, 点卷, 服务器货币, 灵叶获取
+---
+
 # 经济系统
 以下为本服务器货币体系的详细定义、用途及名称说明，方便大家清晰理解交易规则：
 

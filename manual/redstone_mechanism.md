@@ -1,3 +1,12 @@
+---
+title: 生电与特性
+description: 锐界幻境 Minecraft 服务器生电与特性说明：服务器配置、红石机制、生电玩法支持情况与相关特性调整。
+head:
+  - - meta
+    - name: keywords
+      content: 锐界幻境生电, Minecraft 红石, 生电特性, 红石机制, 服务器特性, 技术性生存
+---
+
 # 生电与特性
 
 ## 服务器配置

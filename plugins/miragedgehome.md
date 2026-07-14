@@ -1,3 +1,12 @@
+---
+title: MiragEdgeHome 星辉锚点插件
+description: MiragEdgeHome 锐界幻境自研家园与传送系统插件，替换旧版米饭 PlayerWarp，基于 Paper API 1.21.1 开发，采用 Java 25 + Maven 构建。
+head:
+  - - meta
+    - name: keywords
+      content: MiragEdgeHome, 星辉锚点插件, Minecraft 传送插件, Paper 插件, Java 25, 自研插件
+---
+
 # MiragEdgeHome
 
 > 锐界幻境自研的家园与传送系统，替换旧版米饭 PlayerWarp。基于 Paper API 1.21.1 开发，采用 Java 25 + Maven 构建。
