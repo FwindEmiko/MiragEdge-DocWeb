@@ -7,6 +7,8 @@ import { ref, watch, nextTick, provide, computed, defineAsyncComponent } from "v
 import Contributors from './Contributors.vue';
 import NotFound from './NotFound.vue';
 import Live2D from './Live2D.vue';
+import EffectsToggle from './EffectsToggle.vue';
+import { effectsEnabled } from '../../composables/useEffectsToggle';
 
 // Corner 装饰组件改为异步加载，减少主 bundle 体积
 const CornerStars = defineAsyncComponent(() => import('./CornerStars.vue'));
@@ -134,23 +136,27 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }) => {
 
 <template>
   <div class="router-wrapper">
-    <!-- 随机角落装饰元素 -->
-    <CornerStars v-if="randomCorner === 'stars'" />
-    <CornerQuotes v-if="randomCorner === 'quotes'" />
-    <CornerBubbles v-if="randomCorner === 'bubbles'" />
-    <CornerSakura v-if="randomCorner === 'sakura'" />
-    <CornerNotes v-if="randomCorner === 'notes'" />
-    <CornerLeaves v-if="randomCorner === 'leaves'" />
-    <CornerFireflies v-if="randomCorner === 'fireflies'" />
-    <CornerSurprise />
-    <CornerClickEffect />
+    <!-- 随机角落装饰元素（受特效开关控制） -->
+    <CornerStars v-if="effectsEnabled && randomCorner === 'stars'" />
+    <CornerQuotes v-if="effectsEnabled && randomCorner === 'quotes'" />
+    <CornerBubbles v-if="effectsEnabled && randomCorner === 'bubbles'" />
+    <CornerSakura v-if="effectsEnabled && randomCorner === 'sakura'" />
+    <CornerNotes v-if="effectsEnabled && randomCorner === 'notes'" />
+    <CornerLeaves v-if="effectsEnabled && randomCorner === 'leaves'" />
+    <CornerFireflies v-if="effectsEnabled && randomCorner === 'fireflies'" />
+    <CornerSurprise v-if="effectsEnabled" />
+    <CornerClickEffect v-if="effectsEnabled" />
     <!-- Live2D 看板娘 - 只在首页显示 -->
     <Live2D v-if="isHome" />
 
     <!-- 404 页面 / 正常页面 -->
     <!-- Layout 常驻挂载，不随路由变化销毁重建，以保持侧边栏滚动位置 -->
     <NotFound v-if="is404" />
-    <Layout v-else />
+    <Layout v-else>
+      <template #nav-bar-content-after>
+        <EffectsToggle />
+      </template>
+    </Layout>
 
     <!-- 贡献者组件 -->
     <div class="centerdss">
