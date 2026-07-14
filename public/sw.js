@@ -65,8 +65,7 @@ async function addWatermark(blob) {
   bitmap.close();
 
   if (minDim < 49) {
-    // 超小图：全图偏色 + 中心狐狸耳
-    drawTintOverlay(ctx, w, h, minDim);
+    // 超小图：仅中心狐狸耳
     drawCenterFox(ctx, w, h, minDim);
   } else if (minDim < 128) {
     // 小图：偏色 + 对角线 + 中心狐狸耳 + 角标
@@ -262,7 +261,7 @@ function drawTextCorner(ctx, w, h, minDim) {
 
 // =============== 请求处理 ===============
 
-async function handleWatermark(request, originalUrl) {
+async function handleWatermark(request, originalUrl, isRewrittenPath) {
   const cache = await caches.open(CACHE_NAME);
 
   // 1. 检查缓存（用 originalUrl 作为缓存键）
@@ -297,8 +296,13 @@ async function handleWatermark(request, originalUrl) {
     cache.put(cacheKey, response.clone());
     return response;
   } catch (e) {
-    console.error('[SW] 下载失败，透传原始请求:', originalUrl, e);
-    // 5. 失败兜底：透传原始请求（无水印）
+    console.error('[SW] 下载失败，兜底处理:', originalUrl, e.message);
+    // 5. 失败兜底：
+    //    - 重写路径（/external-wm/*）：302 重定向到原始 OSS URL，图片仍能加载
+    //    - 直接 OSS URL：透传原始请求（无水印）
+    if (isRewrittenPath) {
+      return Response.redirect(originalUrl, 302);
+    }
     return fetch(request);
   }
 }
@@ -326,7 +330,7 @@ self.addEventListener('fetch', (event) => {
       loadMap().then(() => {
         const originalUrl = reverseMap[url.pathname];
         if (!originalUrl) return fetch(event.request);
-        return handleWatermark(event.request, originalUrl);
+        return handleWatermark(event.request, originalUrl, true);
       })
     );
     return;
@@ -341,7 +345,7 @@ self.addEventListener('fetch', (event) => {
         const cleanUrl = url.origin + url.pathname;
         if (urlSet.has(cleanUrl) || urlSet.has(event.request.url)) {
           const originalUrl = urlSet.has(event.request.url) ? event.request.url : cleanUrl;
-          return handleWatermark(event.request, originalUrl);
+          return handleWatermark(event.request, originalUrl, false);
         }
         // 不在映射表中，透传
         return fetch(event.request);

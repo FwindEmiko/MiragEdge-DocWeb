@@ -235,6 +235,13 @@ export default defineConfig({
     lineNumbers: true, // 显示代码行号
     config(md) {
       md.use(MermaidMarkdown);
+      // 给所有 markdown 图片自动加 loading="lazy",减少非首屏图片并发请求
+      const defaultImage = md.renderer.rules.image
+      md.renderer.rules.image = (tokens, idx, options, env, self) => {
+        const token = tokens[idx]
+        if (token.attrIndex('loading') < 0) token.attrPush(['loading', 'lazy'])
+        return defaultImage(tokens, idx, options, env, self)
+      }
     },
   },
 

@@ -223,9 +223,7 @@ function buildWatermarkLayers(w, h) {
   const layers = [];
 
   if (minDim < 49) {
-    // 超小图（16-48px，MC 贴图）：全图偏色 + 中心狐狸耳
-    // 中心覆盖是核心防盗，PS 抠图无法完美去除
-    layers.push({ svg: buildTintOverlaySvg(w, h) });
+    // 超小图（16-48px，MC 贴图）：仅中心狐狸耳
     layers.push({ svg: buildCenterFoxSvg(w, h) });
   } else if (minDim < 128) {
     // 小图（49-127px）：偏色 + 对角线 + 中心狐狸耳 + 角标
@@ -287,11 +285,12 @@ async function processImage(filePath) {
   try {
     let pipeline = sharp(filePath).composite(composites);
     if (ext === ".png") {
-      pipeline = pipeline.png({ compressionLevel: 9 });
+      // 调色板量化 + 高压缩,避免水印重编码后体积反弹(PNG 真彩色体积过大)
+      pipeline = pipeline.png({ compressionLevel: 9, palette: true, quality: 85, effort: 10 });
     } else if (ext === ".jpg" || ext === ".jpeg") {
-      pipeline = pipeline.jpeg({ quality: 92 });
+      pipeline = pipeline.jpeg({ quality: 85, mozjpeg: true, progressive: true });
     } else if (ext === ".webp") {
-      pipeline = pipeline.webp({ quality: 90 });
+      pipeline = pipeline.webp({ quality: 85, effort: 4 });
     }
     await pipeline.toFile(tmpPath);
     renameSync(tmpPath, filePath);

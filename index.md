@@ -16,7 +16,7 @@ hero:
   text: "Minecraft 生存服务器"
   tagline: 👼🏻 远离困扰之地（锐界）和天堂般的境地（幻境），在数字荒漠中打造一片绿洲，让每个玩家都能找到属于自己的幻境
   image:
-    src: /title_img/icon-1.png
+    src: /title_img/icon-1.webp
     alt: MiragEdge
   actions:
     - theme: brand
@@ -323,9 +323,9 @@ function animate() {
 }
 
 onMounted(() => {
-  // 随机选择 hero 图片（icon-dis.png 小概率出现）
-  const heroIcons = ['/title_img/icon-1.png', '/title_img/icon-2.png', '/title_img/icon-3.png']
-  const weighted = [...heroIcons.flatMap(i => Array(5).fill(i)), '/title_img/icon-dis.png']
+  // 随机选择 hero 图片（icon-dis.webp 小概率出现）
+  const heroIcons = ['/title_img/icon-1.webp', '/title_img/icon-2.webp', '/title_img/icon-3.webp']
+  const weighted = [...heroIcons.flatMap(i => Array(5).fill(i)), '/title_img/icon-dis.webp']
   const randomIcon = weighted[Math.floor(Math.random() * weighted.length)]
   const heroImg = document.querySelector('.VPHomeHero img')
   if (heroImg) {
