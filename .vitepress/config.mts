@@ -29,6 +29,11 @@ export default defineConfig({
     ['link', { rel: 'apple-touch-icon', href: '/title_img/apple-touch-icon.png', sizes: '180x180' }],
     ['link', { rel: 'manifest', href: '/site.webmanifest' }],
     ['meta', { name: 'theme-color', content: '#3c8772' }],
+    // 构建版本标识：注入到每个 HTML 的 <head>，供前端版本检测对比 /version.json
+    // 值与 vite define 中的 __BUILD_ID__ / __BUILD_SHA__ 保持一致（构建时求值）
+    // 用于 ESA 边缘缓存场景下检测旧 HTML 并触发自动刷新
+    ['meta', { name: 'x-build-id', content: process.env.GITHUB_RUN_NUMBER || 'dev' }],
+    ['meta', { name: 'x-build-sha', content: process.env.GITHUB_SHA ? process.env.GITHUB_SHA.substring(0, 7) : '' }],
     // 页面特效开关：在 Vue 水合前同步读取偏好并设置 <html>.effects-disabled
     // 避免首帧闪烁，且对 ESA 边端缓存/bfcache 场景稳健（不依赖 JS 模块重新执行时机）
     // 未存过偏好时：手机（<768px）默认关闭，桌面默认开启

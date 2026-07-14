@@ -48,6 +48,9 @@ import { initNavIcons } from './components/js/nav-icons.js'
 // 导入自定义通知脚本
 import { showAestheticNotice, showConsoleLogo } from './components/js/notice.js'
 
+// ESA 边端缓存适配：版本检测自动刷新 + chunk 加载失败兜底
+import { initVersionCheck, checkVersionOnRouteChange } from './composables/useVersionCheck'
+
 export default {
   extends: DefaultTheme,
 
@@ -80,6 +83,8 @@ export default {
       router.onAfterRouteChanged = () => {
         // 路由切换后重新增强导航/侧边栏图标
         initNavIcons();
+        // 路由切换后检测是否有新部署（延迟 2s，避免与路由过渡冲突）
+        checkVersionOnRouteChange();
       }
     }
   },
@@ -100,6 +105,9 @@ export default {
 
         // 在控制台输出 F.windEmiko 文字图像
         showConsoleLogo();
+
+        // ESA 适配：启动版本检测（定时 + chunk 失败兜底）
+        initVersionCheck();
 
         // 滚动进度条
         const bar = document.createElement('div')

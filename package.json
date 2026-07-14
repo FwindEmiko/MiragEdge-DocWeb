@@ -11,7 +11,7 @@
     "test:unit": "vitest run --config .vitepress/vitest.config.mts --dir .vitepress/test/unit",
     "test:config": "vitest run --config .vitepress/vitest.config.mts --dir .vitepress/test/config",
     "dev": "vitepress dev",
-    "build": "vitepress build && node scripts/watermark.mjs",
+    "build": "vitepress build && node scripts/watermark.mjs && node scripts/generate-version.mjs",
     "preview": "vitepress preview",
     "contributors": "node ./.vitepress/theme/components/js/contributors.js",
     "typecheck": "vue-tsc --noEmit",
