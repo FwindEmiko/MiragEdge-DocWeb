@@ -109,6 +109,13 @@ export default {
         // ESA 适配：启动版本检测（定时 + chunk 失败兜底）
         initVersionCheck();
 
+        // 注册 Service Worker（仅生产环境）——用于外部图片按需水印
+        if (import.meta.env.PROD && 'serviceWorker' in navigator) {
+          navigator.serviceWorker.register('/sw.js').catch((e) => {
+            console.warn('[SW] 注册失败:', e)
+          })
+        }
+
         // 滚动进度条
         const bar = document.createElement('div')
         bar.className = 'scroll-progress'

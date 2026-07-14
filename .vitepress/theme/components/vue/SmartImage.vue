@@ -51,6 +51,9 @@
 
 <script>
 import { withBase } from 'vitepress'
+import externalWmMap from '../../../../public/external-wm-map.json'
+
+const wmMap = externalWmMap
 
 export default {
   name: 'SmartImage',
@@ -116,7 +119,13 @@ export default {
   },
 
   computed: {
-    baseSrc() { return withBase(this.src) },
+    baseSrc() {
+      // 外部图片水印重写：如果映射表中存在本地水印版本，则使用本地路径
+      if (this.src && this.src.startsWith('http') && wmMap[this.src]) {
+        return withBase(wmMap[this.src])
+      }
+      return withBase(this.src)
+    },
     // 新增：根据 lazy prop 返回 loading 属性的值
     loadingAttr() {
       return this.lazy ? 'lazy' : 'eager';

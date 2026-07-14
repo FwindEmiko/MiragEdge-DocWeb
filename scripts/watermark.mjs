@@ -175,6 +175,10 @@ async function processImage(filePath) {
   }
 }
 
+// =============== 导出（供 external-watermark.mjs 复用） ===============
+
+export { processImage, getImageSize, selectLayers, prepLayer, TIERS, wmCache };
+
 // =============== 入口 ===============
 
 async function main() {
@@ -200,7 +204,11 @@ async function main() {
   (function walk(dir) {
     for (const e of readdirSync(dir, { withFileTypes: true })) {
       const fp = join(dir, e.name);
-      if (e.isDirectory()) walk(fp);
+      if (e.isDirectory()) {
+        // 跳过已水印的外部图片目录，避免双重水印
+        if (e.name === "external-wm") continue;
+        walk(fp);
+      }
       else if (e.isFile()) {
         const ext = extname(e.name).toLowerCase();
         if ([".png", ".jpg", ".jpeg", ".webp"].includes(ext)) images.push(fp);
@@ -228,4 +236,8 @@ async function main() {
   wmCache.clear();
 }
 
-main().catch((e) => { console.error(e); process.exit(1); });
+// 仅在直接运行时执行 main，被 import 时不自动执行
+const __isMain = process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1];
+if (__isMain) {
+  main().catch((e) => { console.error(e); process.exit(1); });
+}

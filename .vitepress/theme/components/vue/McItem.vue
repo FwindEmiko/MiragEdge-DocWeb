@@ -15,6 +15,9 @@
 import { computed, ref, onBeforeUnmount } from 'vue'
 import { withBase } from 'vitepress'
 import { resolveMcItem, resolveNameByTexture } from '../../data/mc-textures'
+import externalWmMap from '../../../../public/external-wm-map.json'
+
+const wmMap = externalWmMap as Record<string, string>
 
 const props = withDefaults(defineProps<{
   /** 物品 id（用于查注册表，如 "wheat"） */
@@ -42,9 +45,13 @@ const resolved = computed(() => {
   const texturePath = props.texture ?? regData?.texture ?? ''
   // 如果没有显式 name，尝试通过 texture 反查注册表中的中文名
   const reverseName = texturePath ? resolveNameByTexture(texturePath) : null
+  // 外部图片水印重写：映射表中存在则使用本地水印代理路径
+  const finalPath = (texturePath && texturePath.startsWith('http') && wmMap[texturePath])
+    ? wmMap[texturePath]
+    : texturePath
   return {
     name: props.name ?? regData?.name ?? reverseName ?? '',
-    texture: withBase(texturePath),
+    texture: withBase(finalPath),
   }
 })
 
