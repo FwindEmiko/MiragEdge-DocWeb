@@ -275,14 +275,74 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }) => {
   animation: scaleIn 0.25s ease;
 }
 
-/* 文档页脚样式 */
+/* 文档页脚样式 - 带流光分割线与散落星点装饰 */
 .doc-footer {
-  padding: 24px 0;
-  border-top: 1px solid var(--vp-c-divider);
+  position: relative;
+  padding: 28px 0 36px;
   margin-top: 10px;
   text-align: center;
+  overflow: hidden;
   /* 桌面端有侧边栏时，让页脚顺滑地偏移到文档内容区 */
   transition: padding-left 0.3s ease, padding-right 0.3s ease;
+}
+
+/* 顶部装饰线：底层静态渐变分隔 + 上层品牌色光斑来回扫描 */
+.doc-footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background:
+    /* 上层：30% 宽的流光光斑 */
+    linear-gradient(90deg, transparent, var(--vp-c-brand-1), transparent) no-repeat,
+    /* 下层：静态渐变分隔线（两端淡出） */
+    linear-gradient(90deg, transparent, var(--vp-c-divider) 15%, var(--vp-c-divider) 85%, transparent);
+  background-size: 30% 100%, 100% 100%;
+  animation: footer-scan 5s ease-in-out infinite;
+}
+
+@keyframes footer-scan {
+  0%   { background-position: -30% 0, 0 0; }
+  100% { background-position: 130% 0, 0 0; }
+}
+
+/* 散落星点：用多重 box-shadow 在内容两侧对称分布，整体闪烁 */
+.doc-footer::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  background: transparent;
+  /* 星点相对于页脚中心左右散布，避免遮挡居中文字 */
+  box-shadow:
+    -190px -10px 0 0 var(--vp-c-brand-1),
+    -135px   8px 0 0 var(--vp-c-brand-soft),
+    -75px   -6px 0 0 var(--vp-c-brand-1),
+     85px    9px 0 0 var(--vp-c-brand-soft),
+    145px   -7px 0 0 var(--vp-c-brand-1),
+    205px    5px 0 0 var(--vp-c-brand-soft);
+  animation: footer-twinkle 3.2s ease-in-out infinite;
+  pointer-events: none;
+  /* 让星点中心跟随侧边栏偏移顺滑滑动（与 .doc-footer 的 padding 过渡同步） */
+  transition: left 0.3s ease;
+}
+
+@keyframes footer-twinkle {
+  0%, 100% { opacity: 0.35; transform: scale(0.85); }
+  50%      { opacity: 1;    transform: scale(1.1); }
+}
+
+/* 尊重用户的减少动画偏好 */
+@media (prefers-reduced-motion: reduce) {
+  .doc-footer::before,
+  .doc-footer::after {
+    animation: none;
+  }
 }
 
 .doc-footer-content {
@@ -412,6 +472,18 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }) => {
   .router-wrapper:has(.VPContent.has-sidebar) .centerdss,
   .router-wrapper:has(.VPContent.has-sidebar) .doc-footer {
     padding-left: var(--vp-sidebar-width);
+  }
+
+  /*
+   * 星点中心从「整页 50%」修正到「content-box 50%」。
+   * ::after 的 left 是相对 padding-box，padding-box 中心 = 整元素中心；
+   * content-box 中心 = 整元素中心 + (padding-left - padding-right) / 2。
+   * 有侧边栏时 padding-left = sidebar-width，padding-right = 0，
+   * 故需向右额外偏移 sidebar-width / 2。
+   * ≥1440px 时 PL-PR 仍等于 sidebar-width，偏移量不变，无需重复定义。
+   */
+  .router-wrapper:has(.VPContent.has-sidebar) .doc-footer::after {
+    left: calc(50% + var(--vp-sidebar-width) / 2);
   }
 }
 
