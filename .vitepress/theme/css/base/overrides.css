@@ -170,3 +170,89 @@
   background-color: var(--vp-c-brand-2) !important;
   transform: translateY(-2px);
 }
+
+/* ==============================================
+   滚动条美化 (Apple Style Slim Scrollbar)
+   ============================================== */
+
+/* --- 全局滚动条（WebKit 内核：Chrome / Edge / Safari） --- */
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: rgba(142, 142, 147, 0.35);
+  border-radius: 8px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  transition: background-color 0.2s ease;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: rgba(224, 82, 82, 0.55);
+  background-clip: padding-box;
+  border: 2px solid transparent;
+}
+
+*::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* --- 全局滚动条（Firefox） --- */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(142, 142, 147, 0.35) transparent;
+}
+
+/* --- 侧边栏滚动条：更细更精致 --- */
+.VPSidebar::-webkit-scrollbar {
+  width: 5px;
+}
+
+.VPSidebar::-webkit-scrollbar-thumb {
+  background: rgba(142, 142, 147, 0.25);
+  border-radius: 5px;
+  border: none;
+}
+
+.VPSidebar::-webkit-scrollbar-thumb:hover {
+  background: var(--vp-c-brand-1);
+}
+
+.VPSidebar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(142, 142, 147, 0.25) transparent;
+}
+
+/* --- 深色模式适配 --- */
+.dark *::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  background-clip: padding-box;
+  border: 2px solid transparent;
+}
+
+.dark *::-webkit-scrollbar-thumb:hover {
+  background: rgba(229, 100, 100, 0.6);
+  background-clip: padding-box;
+}
+
+.dark * {
+  scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
+}
+
+.dark .VPSidebar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.dark .VPSidebar::-webkit-scrollbar-thumb:hover {
+  background: var(--vp-c-brand-1);
+}
+
+.dark .VPSidebar {
+  scrollbar-color: rgba(255, 255, 255, 0.12) transparent;
+}
