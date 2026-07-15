@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites name="vitest tests" tests="52" failures="0" errors="0" time="0.0242061">
+    <testsuite name=".vitepress/test/config/config.test.ts" timestamp="2026-07-15T09:08:59.533Z" hostname="TUF-Air-F" tests="22" failures="0" errors="0" skipped="0" time="0.0063704">
+        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; 文件存在性 &gt; config.mts 文件应存在" time="0.0017304">
+        </testcase>
+        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; 文件存在性 &gt; 应使用 defineConfig 导出配置" time="0.0002798">
+        </testcase>
+        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; 顶层必要字段 &gt; 应配置 title（字符串字面量或常量引用）" time="0.0002142">
+        </testcase>
+        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; 顶层必要字段 &gt; 应配置 description（字符串字面量或常量引用）" time="0.0002894">
+        </testcase>
+        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; 顶层必要字段 &gt; 应配置 base 路径" time="0.0001297">
+        </testcase>
+        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; 顶层必要字段 &gt; 应配置 outDir 输出目录" time="0.000568">
+        </testcase>
+        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; locales 与 head 配置 &gt; 应配置 locales 多语言" time="0.0002169">
+        </testcase>
+        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; locales 与 head 配置 &gt; 应配置中文根 locale" time="0.0000933">
+        </testcase>
+        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; locales 与 head 配置 &gt; 应配置 head 数组（SEO/OG 标签）" time="0.0001161">
+        </testcase>
+        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; locales 与 head 配置 &gt; head 应包含 Open Graph 元数据" time="0.0000974">
+        </testcase>
+        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; locales 与 head 配置 &gt; head 应包含 canonical 或 JSON-LD 结构化数据" time="0.0001136">
+        </testcase>
+        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; themeConfig 配置 &gt; 应配置 themeConfig 对象" time="0.0001087">
+        </testcase>
+        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; themeConfig 配置 &gt; 应配置本地搜索" time="0.000107">
+        </testcase>
+        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; themeConfig 配置 &gt; 应配置 nav 导航栏数组" time="0.0000976">
+        </testcase>
+        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; themeConfig 配置 &gt; 应配置 sidebar 侧边栏" time="0.0000629">
+        </testcase>
+        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; themeConfig 配置 &gt; 应配置 outline 本页目录" time="0.0001253">
+        </testcase>
+        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; Markdown 与 Vite 配置 &gt; 应配置 markdown 主题" time="0.0000761">
+        </testcase>
+        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; Markdown 与 Vite 配置 &gt; 应启用代码行号" time="0.0000814">
+        </testcase>
+        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; Markdown 与 Vite 配置 &gt; 应配置 vite 插件（mermaid 等）" time="0.0000807">
+        </testcase>
+        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; SEO 与构建版本 &gt; 应注入构建版本标识 meta（x-build-id）" time="0.0000628">
+        </testcase>
+        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; SEO 与构建版本 &gt; 应配置 transformHead 钩子（自动注入每页 SEO）" time="0.0000932">
+        </testcase>
+        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; SEO 与构建版本 &gt; 应配置 transformPageData 钩子（自动补全描述）" time="0.0000626">
+        </testcase>
+    </testsuite>
+    <testsuite name=".vitepress/test/unit/components/nav-icons.test.ts" timestamp="2026-07-15T09:08:59.541Z" hostname="TUF-Air-F" tests="18" failures="0" errors="0" skipped="0" time="0.0115024">
+        <testcase classname=".vitepress/test/unit/components/nav-icons.test.ts" name="nav-icons: emoji 提取逻辑 &gt; hasLeadingEmoji &gt; 单字符 emoji 开头应返回 true" time="0.002001">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/components/nav-icons.test.ts" name="nav-icons: emoji 提取逻辑 &gt; hasLeadingEmoji &gt; ZWJ 序列 emoji 开头应返回 true" time="0.0001583">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/components/nav-icons.test.ts" name="nav-icons: emoji 提取逻辑 &gt; hasLeadingEmoji &gt; 纯文本开头应返回 false" time="0.0001586">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/components/nav-icons.test.ts" name="nav-icons: emoji 提取逻辑 &gt; hasLeadingEmoji &gt; 空字符串应返回 false" time="0.0000785">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/components/nav-icons.test.ts" name="nav-icons: emoji 提取逻辑 &gt; hasLeadingEmoji &gt; 数字开头应返回 false（数字不是 emoji）" time="0.0001006">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/components/nav-icons.test.ts" name="nav-icons: emoji 提取逻辑 &gt; hasLeadingEmoji &gt; emoji 不在开头时应返回 false" time="0.0001083">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/components/nav-icons.test.ts" name="nav-icons: emoji 提取逻辑 &gt; extractLeadingEmoji &gt; 应正确提取单字符 emoji 与剩余文本" time="0.0002123">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/components/nav-icons.test.ts" name="nav-icons: emoji 提取逻辑 &gt; extractLeadingEmoji &gt; 应正确提取 ZWJ 序列 emoji（不拆分）" time="0.0001112">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/components/nav-icons.test.ts" name="nav-icons: emoji 提取逻辑 &gt; extractLeadingEmoji &gt; 应正确提取肤色修饰符 emoji" time="0.0001386">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/components/nav-icons.test.ts" name="nav-icons: emoji 提取逻辑 &gt; extractLeadingEmoji &gt; 无 emoji 时应返回 null" time="0.0000827">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/components/nav-icons.test.ts" name="nav-icons: emoji 提取逻辑 &gt; extractLeadingEmoji &gt; 无空格分隔时应正确提取" time="0.0000915">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/components/nav-icons.test.ts" name="nav-icons: emoji 提取逻辑 &gt; extractLeadingEmoji &gt; 应去除剩余文本的首尾空白" time="0.0001014">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/components/nav-icons.test.ts" name="nav-icons: 元素增强逻辑 &gt; 应将开头 emoji 包裹到 nav-icon-emoji span 中" time="0.0045611">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/components/nav-icons.test.ts" name="nav-icons: 元素增强逻辑 &gt; 无 emoji 时不应修改元素" time="0.0004181">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/components/nav-icons.test.ts" name="nav-icons: 元素增强逻辑 &gt; 已处理过的元素不应重复处理（幂等）" time="0.0007524">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/components/nav-icons.test.ts" name="nav-icons: 元素增强逻辑 &gt; 传入 null 应安全跳过" time="0.0006608">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/components/nav-icons.test.ts" name="nav-icons: 元素增强逻辑 &gt; 已有子元素的节点应跳过（避免破坏嵌套结构）" time="0.0001928">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/components/nav-icons.test.ts" name="nav-icons: 元素增强逻辑 &gt; 空文本元素应安全跳过" time="0.0001299">
+        </testcase>
+    </testsuite>
+    <testsuite name=".vitepress/test/unit/composables/effects-toggle.test.ts" timestamp="2026-07-15T09:08:59.544Z" hostname="TUF-Air-F" tests="12" failures="0" errors="0" skipped="0" time="0.0063333">
+        <testcase classname=".vitepress/test/unit/composables/effects-toggle.test.ts" name="useEffectsToggle: 特效开关 composable &gt; initEffectsToggleState: 状态初始化 &gt; 无存储偏好时桌面端应默认开启" time="0.0022269">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/composables/effects-toggle.test.ts" name="useEffectsToggle: 特效开关 composable &gt; initEffectsToggleState: 状态初始化 &gt; 无存储偏好时移动端应默认关闭" time="0.0003945">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/composables/effects-toggle.test.ts" name="useEffectsToggle: 特效开关 composable &gt; initEffectsToggleState: 状态初始化 &gt; 移动端断点 767px 应判定为移动端（默认关闭）" time="0.0001623">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/composables/effects-toggle.test.ts" name="useEffectsToggle: 特效开关 composable &gt; initEffectsToggleState: 状态初始化 &gt; 桌面端断点 768px 应判定为桌面端（默认开启）" time="0.0001738">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/composables/effects-toggle.test.ts" name="useEffectsToggle: 特效开关 composable &gt; initEffectsToggleState: 状态初始化 &gt; localStorage 存储为 &quot;true&quot; 时应恢复开启状态" time="0.0001436">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/composables/effects-toggle.test.ts" name="useEffectsToggle: 特效开关 composable &gt; initEffectsToggleState: 状态初始化 &gt; localStorage 存储为 &quot;false&quot; 时应恢复关闭状态" time="0.0001094">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/composables/effects-toggle.test.ts" name="useEffectsToggle: 特效开关 composable &gt; initEffectsToggleState: 状态初始化 &gt; localStorage 存储值优先于移动端默认值" time="0.0000853">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/composables/effects-toggle.test.ts" name="useEffectsToggle: 特效开关 composable &gt; useEffectsToggle: 切换与持久化 &gt; 初始状态为 true 时 toggle 应切换为 false" time="0.00024">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/composables/effects-toggle.test.ts" name="useEffectsToggle: 特效开关 composable &gt; useEffectsToggle: 切换与持久化 &gt; 当前状态为 false 时 toggle 应切换为 true" time="0.0001763">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/composables/effects-toggle.test.ts" name="useEffectsToggle: 特效开关 composable &gt; useEffectsToggle: 切换与持久化 &gt; 连续 toggle 应在 true/false 间来回切换并同步持久化" time="0.0001512">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/composables/effects-toggle.test.ts" name="useEffectsToggle: 特效开关 composable &gt; useEffectsToggle: 切换与持久化 &gt; toggle 后 DOM 类名应同步更新" time="0.0001318">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/composables/effects-toggle.test.ts" name="useEffectsToggle: 特效开关 composable &gt; useEffectsToggle: 切换与持久化 &gt; useEffectsToggle 返回的 effectsEnabled 应与全局 ref 同步" time="0.0001176">
+        </testcase>
+    </testsuite>
+</testsuites>

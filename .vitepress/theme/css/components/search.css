@@ -33,25 +33,28 @@
 /*
  * 1. 弹窗容器优化
  * 模仿 macOS Spotlight 的圆角和阴影
+ *
+ * 动画方案：用 transition + .search-open class 控制（而非 animation）。
+ * 原因：VitePress 用 v-if 直接销毁组件，关闭时无 leave 阶段；
+ * 通过 JS 拦截关闭动作，先移除 .search-open 触发关闭 transition，
+ * 动画结束再放行真正的关闭，从而实现开启/关闭双向动画。
  */
 .VPLocalSearchBox .shell {
   border-radius: 16px !important; /* 大圆角 */
-  /* 柔和双层投影：近处定形 + 远处扩散，避免生硬的"大阴影" */
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08), 0 12px 32px rgba(0, 0, 0, 0.1) !important;
   border: 1px solid rgba(128, 128, 128, 0.1); /* 边框 */
-  /* 进入动画：缩放 + 上浮 + 淡入 */
-  animation: searchShellIn 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  /* 初始隐藏态：缩放 + 上浮 + 透明 */
+  opacity: 0;
+  transform: scale(0.96) translateY(-10px);
+  transition: opacity 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
 }
 
-@keyframes searchShellIn {
-  from {
-    opacity: 0;
-    transform: scale(0.96) translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-  }
+/* 显示态：由 JS 在弹窗挂载后下一帧添加 */
+.VPLocalSearchBox .shell.search-open {
+  opacity: 1;
+  transform: scale(1) translateY(0);
 }
 
 /* 深色模式下搜索弹窗阴影：黑色投影收得住，配合品牌色微光体现悬浮 */
@@ -59,16 +62,29 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3), 0 12px 32px rgba(0, 0, 0, 0.25) !important;
 }
 
-/* 背景遮罩 - 毛玻璃效果 + 淡入 */
+/* 背景遮罩 - 毛玻璃效果 + 淡入淡出（同样用 .search-open 控制） */
 .VPLocalSearchBox .backdrop {
   backdrop-filter: blur(8px); /* 毛玻璃模糊效果 */
   background: rgba(0, 0, 0, 0.2); /* 背景遮罩颜色 */
-  animation: searchBackdropIn 0.2s ease-out;
+  /* 覆盖 VitePress 默认的 transition: opacity 0.5s，缩短为 0.2s */
+  opacity: 0;
+  transition: opacity 0.2s ease-out;
+  will-change: opacity;
 }
 
-@keyframes searchBackdropIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
+.VPLocalSearchBox .backdrop.search-open {
+  opacity: 1;
+}
+
+/* 移动端：.shell 为全屏无圆角，scale 动画在全屏时变形明显，降级为纯淡入 */
+@media (max-width: 767px) {
+  .VPLocalSearchBox .shell {
+    transform: none;
+    transition: opacity 0.18s ease-out;
+  }
+  .VPLocalSearchBox .shell.search-open {
+    transform: none;
+  }
 }
 
 /* 

@@ -1,172 +1,130 @@
-import { describe, it, expect, vi } from 'vitest'
-import fs from 'fs'
-import path from 'path'
+import { describe, it, expect } from 'vitest'
+import fs from 'node:fs'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
 
-// 配置文件验证工具函数
-export const validateConfigStructure = (config: any): { isValid: boolean; errors: string[] } => {
-  const errors: string[] = []
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
+const configPath = path.resolve(__dirname, '../../config.mts')
 
-  // 检查必要的顶层属性
-  const requiredTopLevelProps = ['title', 'description']
-  requiredTopLevelProps.forEach(prop => {
-    if (!config[prop]) {
-      errors.push(`Missing required top-level property: ${prop}`)
-    } else if (typeof config[prop] !== 'string') {
-      errors.push(`Property "${prop}" must be a string`)
-    }
-  })
+/**
+ * 配置文件结构自动化验证
+ *
+ * 设计目标：免维护——直接读取真实 config.mts 源码做静态分析，
+ * 无需执行 vitepress 构建即可验证配置完整性。当 config.mts 结构
+ * 发生破坏性变更（如缺失必要字段）时自动失败，提前在 CI 暴露问题。
+ */
+describe('VitePress 配置文件验证', () => {
+  const configSource = fs.readFileSync(configPath, 'utf-8')
 
-  // 检查 lang 属性（如果存在）
-  if (config.lang && typeof config.lang !== 'string') {
-    errors.push('Property "lang" must be a string if provided')
-  }
-
-  // 检查 base 属性（如果存在）
-  if (config.base && typeof config.base !== 'string') {
-    errors.push('Property "base" must be a string if provided')
-  }
-
-  // 检查 head 属性（如果存在）
-  if (config.head && !Array.isArray(config.head)) {
-    errors.push('Property "head" must be an array if provided')
-  }
-
-  return {
-    isValid: errors.length === 0,
-    errors
-  }
-}
-
-// 检查配置文件是否存在
-export const checkConfigFileExists = (configPath: string): boolean => {
-  try {
-    return fs.existsSync(configPath)
-  } catch {
-    return false
-  }
-}
-
-// 模拟配置文件加载
-export const loadMockConfig = async (): Promise<any> => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve({
-        title: 'My Vitepress Site',
-        description: 'A modern documentation site',
-        lang: 'zh-CN',
-        base: '/',
-        head: [
-          ['link', { rel: 'icon', href: '/favicon.ico' }]
-        ],
-        themeConfig: {
-          logo: '/logo.svg',
-          nav: [],
-          sidebar: {},
-          footer: {
-            message: 'Released under the MIT License.',
-            copyright: 'Copyright © 2024-present'
-          }
-        }
-      })
-    }, 100)
-  })
-}
-
-describe('配置文件验证测试', () => {
-  describe('validateConfigStructure', () => {
-    it('应该验证有效的配置结构', () => {
-      const validConfig = {
-        title: 'Test Site',
-        description: 'Test Description',
-        lang: 'en-US',
-        base: '/docs/',
-        head: []
-      }
-
-      const result = validateConfigStructure(validConfig)
-      expect(result.isValid).toBe(true)
-      expect(result.errors).toHaveLength(0)
+  describe('文件存在性', () => {
+    it('config.mts 文件应存在', () => {
+      expect(fs.existsSync(configPath)).toBe(true)
     })
 
-    it('应该检测缺失的标题', () => {
-      const invalidConfig = {
-        description: 'Test Description'
-      }
-
-      const result = validateConfigStructure(invalidConfig)
-      expect(result.isValid).toBe(false)
-      expect(result.errors).toContain('Missing required top-level property: title')
-    })
-
-    it('应该检测类型错误', () => {
-      const invalidConfig = {
-        title: 'Test Site',
-        description: 123, // 应该是字符串
-        head: 'not an array' // 应该是数组
-      }
-
-      const result = validateConfigStructure(invalidConfig)
-      expect(result.isValid).toBe(false)
-      expect(result.errors).toContain('Property "description" must be a string')
-      expect(result.errors).toContain('Property "head" must be an array if provided')
+    it('应使用 defineConfig 导出配置', () => {
+      expect(configSource).toMatch(/export\s+default\s+defineConfig\s*\(/)
     })
   })
 
-  describe('checkConfigFileExists', () => {
-    it('应该检查文件是否存在', () => {
-      // 模拟一个存在的文件路径
-      const mockPath = path.join(__dirname, 'config.test.ts')
-      expect(checkConfigFileExists(mockPath)).toBe(true)
+  describe('顶层必要字段', () => {
+    it('应配置 title（字符串字面量或常量引用）', () => {
+      // 允许字符串字面量或常量引用（如 SITE_TITLE）
+      const hasLiteral = /title:\s*['"`][^'"`]+['"`]/.test(configSource)
+      const hasConstRef = /title:\s*[A-Z_][A-Z0-9_]*/.test(configSource)
+      expect(hasLiteral || hasConstRef).toBe(true)
     })
 
-    it('应该返回 false 当文件不存在时', () => {
-      const nonExistentPath = '/path/to/nonexistent/file.mts'
-      expect(checkConfigFileExists(nonExistentPath)).toBe(false)
-    })
-  })
-
-  describe('loadMockConfig', () => {
-    it('应该异步加载模拟配置', async () => {
-      const config = await loadMockConfig()
-      
-      expect(config).toBeDefined()
-      expect(config.title).toBe('My Vitepress Site')
-      expect(config.description).toBe('A modern documentation site')
-      expect(config.lang).toBe('zh-CN')
-      expect(config.base).toBe('/')
-      expect(Array.isArray(config.head)).toBe(true)
+    it('应配置 description（字符串字面量或常量引用）', () => {
+      // 允许字符串字面量或常量引用（如 SITE_DESCRIPTION）
+      const hasLiteral = /description:\s*['"`][^'"`]+['"`]/.test(configSource)
+      const hasConstRef = /description:\s*[A-Z_][A-Z0-9_]*/.test(configSource)
+      expect(hasLiteral || hasConstRef).toBe(true)
     })
 
-    it('应该在指定时间内完成加载', async () => {
-      const startTime = Date.now()
-      await loadMockConfig()
-      const endTime = Date.now()
-      
-      expect(endTime - startTime).toBeLessThan(200)
+    it('应配置 base 路径', () => {
+      expect(configSource).toMatch(/base:\s*['"`][^'"`]+['"`]/)
+    })
+
+    it('应配置 outDir 输出目录', () => {
+      expect(configSource).toMatch(/outDir:\s*['"`][^'"`]+['"`]/)
     })
   })
 
-  describe('配置属性验证', () => {
-    it('应该验证配置对象的属性类型', async () => {
-      const config = await loadMockConfig()
-      
-      expect(typeof config.title).toBe('string')
-      expect(typeof config.description).toBe('string')
-      expect(typeof config.lang).toBe('string')
-      expect(typeof config.base).toBe('string')
-      expect(Array.isArray(config.head)).toBe(true)
-      expect(typeof config.themeConfig).toBe('object')
+  describe('locales 与 head 配置', () => {
+    it('应配置 locales 多语言', () => {
+      expect(configSource).toMatch(/locales:\s*\{/)
     })
 
-    it('应该包含正确的主题配置结构', async () => {
-      const config = await loadMockConfig()
-      
-      expect(config.themeConfig).toHaveProperty('logo')
-      expect(config.themeConfig).toHaveProperty('nav')
-      expect(config.themeConfig).toHaveProperty('sidebar')
-      expect(config.themeConfig).toHaveProperty('footer')
-      expect(typeof config.themeConfig.footer.message).toBe('string')
-      expect(typeof config.themeConfig.footer.copyright).toBe('string')
+    it('应配置中文根 locale', () => {
+      expect(configSource).toMatch(/lang:\s*['"`]zh-CN['"`]/)
+    })
+
+    it('应配置 head 数组（SEO/OG 标签）', () => {
+      expect(configSource).toMatch(/head:\s*\[/)
+    })
+
+    it('head 应包含 Open Graph 元数据', () => {
+      expect(configSource).toMatch(/og:title/)
+      expect(configSource).toMatch(/og:description/)
+      expect(configSource).toMatch(/og:image/)
+    })
+
+    it('head 应包含 canonical 或 JSON-LD 结构化数据', () => {
+      const hasCanonical = /rel:\s*['"`]canonical['"`]/.test(configSource)
+      const hasJsonLd = /application\/ld\+json/.test(configSource)
+      expect(hasCanonical || hasJsonLd).toBe(true)
+    })
+  })
+
+  describe('themeConfig 配置', () => {
+    it('应配置 themeConfig 对象', () => {
+      expect(configSource).toMatch(/themeConfig:\s*\{/)
+    })
+
+    it('应配置本地搜索', () => {
+      expect(configSource).toMatch(/search:\s*\{/)
+      expect(configSource).toMatch(/provider:\s*['"`]local['"`]/)
+    })
+
+    it('应配置 nav 导航栏数组', () => {
+      expect(configSource).toMatch(/nav:\s*\[/)
+    })
+
+    it('应配置 sidebar 侧边栏', () => {
+      expect(configSource).toMatch(/sidebar/)
+    })
+
+    it('应配置 outline 本页目录', () => {
+      expect(configSource).toMatch(/outline:\s*\{/)
+      expect(configSource).toMatch(/label:\s*['"`]本页目录['"`]/)
+    })
+  })
+
+  describe('Markdown 与 Vite 配置', () => {
+    it('应配置 markdown 主题', () => {
+      expect(configSource).toMatch(/markdown:\s*\{/)
+    })
+
+    it('应启用代码行号', () => {
+      expect(configSource).toMatch(/lineNumbers:\s*true/)
+    })
+
+    it('应配置 vite 插件（mermaid 等）', () => {
+      expect(configSource).toMatch(/plugins:\s*\[/)
+    })
+  })
+
+  describe('SEO 与构建版本', () => {
+    it('应注入构建版本标识 meta（x-build-id）', () => {
+      expect(configSource).toMatch(/x-build-id/)
+    })
+
+    it('应配置 transformHead 钩子（自动注入每页 SEO）', () => {
+      expect(configSource).toMatch(/transformHead\s*\(/)
+    })
+
+    it('应配置 transformPageData 钩子（自动补全描述）', () => {
+      expect(configSource).toMatch(/transformPageData\s*\(/)
     })
   })
 })

@@ -19,14 +19,14 @@ const leadingEmojiRegex = /^(\p{Emoji_Presentation}|\p{Extended_Pictographic}\uF
 /**
  * 检查字符串开头是否为 emoji
  */
-function hasLeadingEmoji(text) {
+export function hasLeadingEmoji(text) {
   return leadingEmojiRegex.test(text);
 }
 
 /**
  * 提取开头的 emoji 字符
  */
-function extractLeadingEmoji(text) {
+export function extractLeadingEmoji(text) {
   const match = text.match(leadingEmojiRegex);
   if (match) {
     return { emoji: match[0], text: text.slice(match[0].length).trim() };
@@ -37,7 +37,7 @@ function extractLeadingEmoji(text) {
 /**
  * 增强单个元素：将开头 emoji 包裹到 span 中
  */
-function enhanceElement(el) {
+export function enhanceElement(el) {
   if (!el || el.dataset.navIconProcessed) return;
 
   // 如果已经有子元素（嵌套标签），跳过

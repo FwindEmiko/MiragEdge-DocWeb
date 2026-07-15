@@ -48,6 +48,99 @@ const showFloatButtons = computed(() => {
 // 随机角落装饰 - 每次路由变化时重新计算
 const randomCorner = ref(null)
 
+// 搜索弹窗动画的 MutationObserver 引用（onUnmounted 时断开）
+let searchAnimObserver = null
+
+/**
+ * 搜索弹窗开关动画
+ * VitePress 的 VPLocalSearchBox 用 v-if 直接挂载/销毁，无 leave 过渡阶段，
+ * 关闭时瞬间消失。这里用 MutationObserver 监听弹窗挂载，通过 .search-open
+ * class 控制 transition 实现开启动画；并拦截关闭触发点（backdrop 点击、
+ * 返回按钮点击、Escape 键），先播放关闭 transition 再放行真正的关闭。
+ *
+ * 拦截机制：capture 阶段 stopImmediatePropagation 阻止 VitePress 的事件处理，
+ * 动画结束后用 approved flag 放行并重新触发原事件。
+ */
+function initSearchAnimations() {
+  const mo = new MutationObserver(() => {
+    const box = document.querySelector('.VPLocalSearchBox')
+    if (box && !box.__searchAnimInit) {
+      box.__searchAnimInit = true
+      hookupSearchBox(box)
+    }
+  })
+  mo.observe(document.body, { childList: true, subtree: true })
+
+  function hookupSearchBox(box) {
+    const shell = box.querySelector('.shell')
+    const backdrop = box.querySelector('.backdrop')
+
+    // 开启动画：双 rAF 确保初始隐藏态已渲染，再添加 .search-open 触发 transition
+    requestAnimationFrame(() =>
+      requestAnimationFrame(() => {
+        shell?.classList.add('search-open')
+        backdrop?.classList.add('search-open')
+      })
+    )
+
+    let approved = false
+    // 关闭动画时长需与 CSS transition (0.22s) 对齐，留少量余量
+    const CLOSE_MS = 240
+
+    const animateClose = (retrigger) => {
+      if (approved) return
+      approved = true
+      shell?.classList.remove('search-open')
+      backdrop?.classList.remove('search-open')
+      setTimeout(() => {
+        // 先移除 Escape 监听，避免 retrigger 时再次被拦截
+        document.removeEventListener('keydown', escHandler, true)
+        retrigger()
+      }, CLOSE_MS)
+    }
+
+    // 拦截 backdrop 点击（点遮罩关闭）
+    backdrop?.addEventListener(
+      'click',
+      (e) => {
+        if (approved) return
+        e.stopPropagation()
+        e.stopImmediatePropagation()
+        animateClose(() => backdrop.click())
+      },
+      true
+    )
+
+    // 拦截返回按钮点击
+    const backBtn = box.querySelector('.back-button')
+    backBtn?.addEventListener(
+      'click',
+      (e) => {
+        if (approved) return
+        e.stopPropagation()
+        e.stopImmediatePropagation()
+        animateClose(() => backBtn.click())
+      },
+      true
+    )
+
+    // 拦截 Escape 键（capture 阶段先于 VitePress 的 window keydown 监听）
+    const escHandler = (e) => {
+      if (e.key !== 'Escape' || approved) return
+      e.stopPropagation()
+      e.stopImmediatePropagation()
+      animateClose(() => {
+        window.dispatchEvent(
+          new KeyboardEvent('keydown', { key: 'Escape', bubbles: true })
+        )
+      })
+    }
+    document.addEventListener('keydown', escHandler, true)
+  }
+
+  return mo
+}
+
 // 随机数生成函数，SSR 和客户端分别使用固定值和随机值避免 hydration mismatch
 function pickRandomCorner() {
   // 30% 概率显示装饰
@@ -64,10 +157,14 @@ onMounted(() => {
   // 返回顶部按钮：注册滚动监听并做初始计算（passive 避免阻塞滚动）
   window.addEventListener('scroll', updateScrollProgress, { passive: true })
   updateScrollProgress()
+  // 搜索弹窗开关动画：VitePress 用 v-if 直接销毁组件无 leave 阶段，
+  // 需 JS 拦截关闭动作，先播放关闭 transition 再放行真正关闭
+  searchAnimObserver = initSearchAnimations()
 })
 
 onUnmounted(() => {
   window.removeEventListener('scroll', updateScrollProgress)
+  searchAnimObserver?.disconnect()
 })
 
 watch(() => route.path, () => {

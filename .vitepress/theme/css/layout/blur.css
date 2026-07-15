@@ -50,6 +50,25 @@
   }
 }
 
+/* 导航栏内容区位移过渡：首页(无 sidebar) ↔ 文档页(有 sidebar) 切换时，
+   .content 的 padding-left 从 0 变为 sidebar 宽度，搜索框等元素会整体右移。
+   给 padding 加 transition 让位移平滑，而非瞬间跳变。
+   保留 VitePress 原有的 background-color 过渡。 */
+@media (min-width: 960px) {
+  .VPNavBar .content,
+  .VPNavBar .content-body {
+    transition: padding-left 0.32s cubic-bezier(0.4, 0, 0.2, 1),
+      padding-right 0.32s cubic-bezier(0.4, 0, 0.2, 1),
+      background-color 0.5s ease;
+  }
+
+  /* logo 区 .title 在有 sidebar 时宽度/内边距也会变化，一并平滑 */
+  .VPNavBar .title {
+    transition: padding-left 0.32s cubic-bezier(0.4, 0, 0.2, 1),
+      width 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}
+
 /* ==================================================
    2. 搜索框 (Search Box)
    ================================================== */

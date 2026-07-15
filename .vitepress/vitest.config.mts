@@ -13,11 +13,12 @@ export default defineConfig({
       provider: 'v8',
       reporter: ['text', 'json', 'html'],
       reportsDirectory: resolve(outputDir, 'coverage'),
+      // 仅纳入具备可测试纯逻辑且已有测试覆盖的真实源码
+      // DOM 副作用型模块（useTocAutoScroll/useVersionCheck/feature.js）
+      // 依赖大量浏览器运行时，单测成本高且脆弱，不纳入覆盖率统计
       include: [
-        // '**/.vitepress/**/*.{ts,js,vue}', // 包含 .vitepress 目录下的所有 TypeScript、JavaScript 和 Vue 文件
-        // '**/components/**/*.{ts,js,vue}', // 包含组件文件
-        // '**/utils/**/*.{ts,js}', // 包含工具函数
-        './.vitepress/test/**/*.{ts,js,vue,test.ts}',
+        './.vitepress/theme/composables/useEffectsToggle.ts',
+        './.vitepress/theme/components/js/nav-icons.js',
       ],
       exclude: [
         './node_modules/**',
@@ -25,33 +26,37 @@ export default defineConfig({
         '**/test_tool/**',
         '**/*.config.*',
         '**/*.d.ts',
-        '**/*.spec.{ts,js}', // 排除测试文件
+        '**/*.test.ts',
+        '**/*.spec.ts',
+        './.vitepress/test/**',
       ],
       enabled: true,
       clean: true,
       cleanOnRerun: true,
+      // 阈值设定为 50%：覆盖被测模块的核心路径，同时为难以单测的
+      // 错误处理分支与 SSR 守卫分支留出余量，避免后续维护频繁失败
       thresholds: {
-        lines: 30,      // 初始覆盖率要求 30%
-        functions: 30,
-        branches: 20,   // 分支覆盖率通常较低
-        statements: 30
-      }
+        lines: 50,
+        functions: 50,
+        branches: 40,
+        statements: 50,
+      },
     },
     reporters: [
       'default',
-      ['junit', { 
-        outputFile: resolve(outputDir, 'test-results/junit.xml')
-      }]
+      ['junit', {
+        outputFile: resolve(outputDir, 'test-results/junit.xml'),
+      }],
     ],
     outputFile: resolve(outputDir, 'test-results/test-output.json'),
     include: ['**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
-    exclude: ['**/node_modules/**', '**/dist/**', '**/test_tool/**']
+    exclude: ['**/node_modules/**', '**/dist/**', '**/test_tool/**'],
   },
   resolve: {
     alias: {
       '@': resolve(__dirname, '../'),
       '@components': resolve(__dirname, '../components'),
-      '@utils': resolve(__dirname, 'utils')
-    }
-  }
+      '@utils': resolve(__dirname, 'utils'),
+    },
+  },
 })
