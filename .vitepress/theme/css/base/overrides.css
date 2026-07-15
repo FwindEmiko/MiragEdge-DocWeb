@@ -129,6 +129,29 @@
   color: var(--vp-c-brand-2) !important;
 }
 
+/* 移动端侧边栏（抽屉式 VPNavScreen 内）优化：
+   1) 启用旧 iOS 惯性滚动
+   2) 激活项胶囊在多级嵌套 + 窄屏下可能挤压文字，移动端缩小胶囊 padding
+   3) 侧边栏项触摸热区放大到 40px，提升点击精度 */
+@media (max-width: 959px) {
+  .VPNavScreen {
+    -webkit-overflow-scrolling: touch;
+  }
+  .VPSidebarItem.is-active > .item > .link,
+  .VPSidebarItem.is-active > .item > .text {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+  .VPSidebarItem > .item {
+    min-height: 40px;
+  }
+  .VPSidebarItem > .item > .link,
+  .VPSidebarItem > .item > .text {
+    min-height: 40px;
+    line-height: 40px;
+  }
+}
+
 /* --- 3. 右侧大纲 (Outline) · 玻璃卡片样式 ---
    说明：VitePress 1.6 实际渲染的链接类名为 .outline-link（非旧版 .link），
    活动指示器为 .outline-marker（由 JS 设置 top/opacity，CSS 仅控制外观）。
@@ -301,6 +324,34 @@
 .dark .VPLocalNavOutlineDropdown .items,
 .dark .VPMenu {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35), 0 1px 2px rgba(0, 0, 0, 0.25) !important;
+}
+
+/* ==============================================
+   移动端「本页目录」下拉浮层（VPLocalNavOutlineDropdown）优化
+   ==============================================
+   原生 VitePress 默认无 max-height 限制，长目录会撑出屏幕无法滚动；
+   目录项触摸热区偏小（约 28px），低于 44px 推荐值，移动端点击精度低。
+   仅在移动端（<960px，此时 aside 隐藏，目录通过此下拉访问）生效。 */
+@media (max-width: 959px) {
+  /* 限制浮层最大高度为视口 60%，超出则内部滚动 */
+  .VPLocalNavOutlineDropdown .items {
+    max-height: 60vh;
+    max-height: 60dvh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  /* 目录链接触摸热区放大到 40px（44px 在多级嵌套时略显拥挤，40px 是平衡值） */
+  .VPLocalNavOutlineDropdown .outline-link {
+    min-height: 40px;
+    line-height: 40px !important;
+    padding-top: 4px !important;
+    padding-bottom: 4px !important;
+  }
+  /* 标题也加高，避免与目录项视觉断裂 */
+  .VPLocalNavOutlineDropdown .outline-title {
+    min-height: 40px;
+    line-height: 40px !important;
+  }
 }
 
 /* ==============================================

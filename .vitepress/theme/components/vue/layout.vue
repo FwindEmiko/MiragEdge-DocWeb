@@ -3,7 +3,7 @@
 <script setup>
 import { useRouter, useData } from "vitepress";
 import DefaultTheme from "vitepress/theme";
-import { ref, watch, nextTick, provide, computed, defineAsyncComponent, onMounted } from "vue";
+import { ref, watch, nextTick, provide, computed, defineAsyncComponent, onMounted, onUnmounted } from "vue";
 import Contributors from './Contributors.vue';
 import NotFound from './NotFound.vue';
 import Live2D from './Live2D.vue';
@@ -38,6 +38,13 @@ const is404 = computed(() => page.value.isNotFound);
 // 检测是否为首页
 const isHome = computed(() => route.path === '/' || route.path === '/index.html');
 
+// 悬浮按钮显示条件：所有文档内容路径（含长文档需要返回顶部），排除首页与 404
+// 覆盖原本仅 /docs/ 的窄范围，扩展到 features/manual/develop/plugins 等实际文档区
+const showFloatButtons = computed(() => {
+  if (is404.value || isHome.value) return false
+  return /^\/(features|manual|develop|plugins|docs)\//.test(route.path)
+});
+
 // 随机角落装饰 - 每次路由变化时重新计算
 const randomCorner = ref(null)
 
@@ -54,10 +61,20 @@ function pickRandomCorner() {
 onMounted(() => {
   initEffectsToggleState()
   randomCorner.value = pickRandomCorner()
+  // 返回顶部按钮：注册滚动监听并做初始计算（passive 避免阻塞滚动）
+  window.addEventListener('scroll', updateScrollProgress, { passive: true })
+  updateScrollProgress()
+})
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', updateScrollProgress)
 })
 
 watch(() => route.path, () => {
   randomCorner.value = pickRandomCorner()
+  // 路由切换后重置返回顶部按钮状态（VitePress 默认会滚动到顶部）
+  showBackToTop.value = false
+  scrollProgress.value = 0
 })
 
 /**
@@ -69,6 +86,27 @@ const scrollToTop = () => {
     behavior: 'smooth'
   });
 };
+
+/**
+ * 返回顶部按钮的显示控制与阅读进度
+ * - 仅在移动端文档页显示（桌面端由 CSS display:none 强制隐藏）
+ * - 阅读进度达到 1/3 后才出现（progress = scrollY / maxScroll >= 1/3）
+ * - scrollProgress（0~1）实时驱动按钮外圈进度环
+ */
+const showBackToTop = ref(false)
+const scrollProgress = ref(0)
+
+const updateScrollProgress = () => {
+  const scrollHeight = document.documentElement.scrollHeight - window.innerHeight
+  if (scrollHeight <= 0) {
+    scrollProgress.value = 0
+    showBackToTop.value = false
+    return
+  }
+  const progress = Math.min(window.scrollY / scrollHeight, 1)
+  scrollProgress.value = progress
+  showBackToTop.value = progress >= 1 / 3
+}
 
 /**
  * 监听路由变化，为内容区域触发进入动画（CSS animation，不依赖 :key 重建组件）
@@ -88,14 +126,23 @@ watch(
       }
 
       // 侧边栏滚动追踪：若当前活动项不在可视区域内，平滑滚动到它
-      const sidebar = document.querySelector('.VPSidebar')
-      const activeItem = sidebar?.querySelector('.VPSidebarItem.is-active')
-      if (sidebar && activeItem) {
-        const sRect = sidebar.getBoundingClientRect()
-        const iRect = activeItem.getBoundingClientRect()
-        if (iRect.top < sRect.top || iRect.bottom > sRect.bottom) {
-          activeItem.scrollIntoView({ block: 'nearest', behavior: 'smooth' })
+      // 用 requestIdleCallback 延迟到空闲时段执行，避免在移动端低性能机型上
+      // 与页面进入动画、DOM 重建抢占主线程导致掉帧
+      const scrollSidebarActive = () => {
+        const sidebar = document.querySelector('.VPSidebar')
+        const activeItem = sidebar?.querySelector('.VPSidebarItem.is-active')
+        if (sidebar && activeItem) {
+          const sRect = sidebar.getBoundingClientRect()
+          const iRect = activeItem.getBoundingClientRect()
+          if (iRect.top < sRect.top || iRect.bottom > sRect.bottom) {
+            activeItem.scrollIntoView({ block: 'nearest', behavior: 'smooth' })
+          }
         }
+      }
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(scrollSidebarActive, { timeout: 200 })
+      } else {
+        scrollSidebarActive()
       }
     })
   }
@@ -162,8 +209,8 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }) => {
     <!-- Layout 常驻挂载，不随路由变化销毁重建，以保持侧边栏滚动位置 -->
     <NotFound v-if="is404" />
     <Layout v-else>
-      <!-- 移动端汉堡菜单中的特效开关 -->
-      <template #nav-screen-content-after>
+      <!-- 移动端汉堡菜单中的特效开关：置于菜单顶部，作为「外观设置」区，避免被长导航/侧边栏挤到底部 -->
+      <template #nav-screen-content-before>
         <div class="VPNavScreenEffects">
           <p class="text">页面特效</p>
           <EffectsToggle />
@@ -202,15 +249,20 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }) => {
       </div>
     </div>
 
-    <!-- 悬浮按钮区域 -->
-    <div class="float-buttons" v-if="route.path.includes('/docs/')">
-      <button class="float-button" @click="scrollToTop" title="返回顶部">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-up"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
-      </button>
-      <a class="float-button" href="https://github.com/fwindemiko/MiragEdge-DocWeb/issues/new?template=issue_template.yml" target="_blank" title="反馈问题">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-circle"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
-      </a>
-    </div>
+    <!-- 返回顶部按钮：仅移动端文档页显示，阅读进度达 1/3 后出现，外圈进度环实时反映阅读进度 -->
+    <button
+      v-if="showFloatButtons"
+      class="back-to-top"
+      :class="{ visible: showBackToTop }"
+      :style="{ '--progress': scrollProgress }"
+      @click="scrollToTop"
+      title="返回顶部"
+      aria-label="返回顶部"
+    >
+      <svg class="btt-arrow" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M12 5l-7 7h4v7h6v-7h4l-7-7z" fill="currentColor"/>
+      </svg>
+    </button>
   </div>
 </template>
 
@@ -283,6 +335,8 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }) => {
 .doc-footer {
   position: relative;
   padding: 28px 0 36px;
+  /* 底部留出 iPhone Home Indicator 安全区，桌面端 env() 返回 0 不影响 */
+  padding-bottom: calc(36px + env(safe-area-inset-bottom));
   margin-top: 10px;
   text-align: center;
   overflow: hidden;
@@ -311,7 +365,8 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }) => {
 
 @keyframes footer-scan {
   0%   { background-position: -30% 0, 0 0; }
-  100% { background-position: 130% 0, 0 0; }
+  50%  { background-position: 130% 0, 0 0; }
+  100% { background-position: -30% 0, 0 0; }
 }
 
 /* 散落星点：用多重 box-shadow 在内容两侧对称分布，整体闪烁 */
@@ -351,6 +406,14 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }) => {
   }
 }
 
+/* 移动端：页脚星点用固定 px 偏移（-190px ~ 205px），窄屏全部落在视口外属无效渲染
+   隐藏 ::after 星点层，保留 ::before 流光线（流光线是 100% 宽的渐变，窄屏仍可见） */
+@media (max-width: 767px) {
+  .doc-footer::after {
+    display: none;
+  }
+}
+
 .doc-footer-content {
   font-size: 14px;
   color: var(--vp-c-text-2);
@@ -366,38 +429,106 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }) => {
   color: var(--vp-c-brand-dark);
 }
 
-/* 悬浮按钮样式 */
-.float-buttons {
+/* 返回顶部按钮：玻璃磨砂 + conic-gradient 进度环 + 弹性淡入
+   仅移动端文档页显示，桌面端 display:none 强制隐藏 */
+.back-to-top {
   position: fixed;
-  right: 20px;
-  bottom: 100px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  z-index: 100;
-}
-
-.float-button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 44px;
-  height: 44px;
-  background-color: var(--vp-c-brand);
-  color: white;
-  border-radius: 50%;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-  cursor: pointer;
-  transition: all 0.3s ease;
-  border: none;
-  outline: none;
+  right: 16px;
+  bottom: calc(80px + env(safe-area-inset-bottom));
+  width: 48px;
+  height: 48px;
   padding: 0;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 100;
+  /* 外圈进度环：conic-gradient 由 --progress(0~1) 驱动，已读部分品牌色，未读灰色 */
+  background: conic-gradient(
+    var(--vp-c-brand-1) calc(var(--progress, 0) * 360deg),
+    rgba(128, 128, 128, 0.18) 0
+  );
+  /* 默认隐藏：opacity + pointer-events，由 .visible 类触发淡入 */
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(12px) scale(0.8);
+  /* 弹性回弹缓动，让出现更生动 */
+  transition:
+    opacity 0.35s ease,
+    transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.3s ease;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.float-button:hover {
-  background-color: var(--vp-c-brand-dark);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+/* 阅读进度达 1/3 后触发可见态 */
+.back-to-top.visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0) scale(1);
+}
+
+/* 内圈：玻璃磨砂背景，挖空进度环中心，承载箭头图标 */
+.back-to-top::before {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(12px) saturate(150%);
+  -webkit-backdrop-filter: blur(12px) saturate(150%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+/* 深色模式内圈：半透明深灰玻璃 */
+.dark .back-to-top::before {
+  background: rgba(28, 28, 30, 0.72);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+/* 向上箭头图标：品牌色，居中覆盖于内圈之上 */
+.back-to-top .btt-arrow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  color: var(--vp-c-brand-1);
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  transition: transform 0.3s ease;
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.08));
+}
+
+/* 悬浮/点按微交互：光晕扩散 + 箭头上移 */
+.back-to-top:hover {
+  transform: translateY(-3px) scale(1.06);
+  box-shadow: 0 8px 24px rgba(224, 82, 82, 0.35);
+}
+
+.back-to-top:hover .btt-arrow {
+  transform: translate(-50%, -60%);
+}
+
+.back-to-top:active {
+  transform: translateY(0) scale(0.94);
+  transition-duration: 0.12s;
+}
+
+/* 尊重减少动效偏好：关闭弹性动画与位移 */
+@media (prefers-reduced-motion: reduce) {
+  .back-to-top,
+  .back-to-top .btt-arrow {
+    transition: opacity 0.2s ease;
+  }
+  .back-to-top:hover {
+    transform: none;
+  }
+}
+
+/* 桌面端（>=960px）不显示返回顶部按钮 */
+@media (min-width: 960px) {
+  .back-to-top {
+    display: none !important;
+  }
 }
 
 /* 确保内容区域有正确的边距 */
@@ -448,7 +579,7 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }) => {
   }
 }
 
-/* 移动端菜单中的特效开关项 */
+/* 移动端菜单中的特效开关项（置于菜单顶部，下方留间距与导航项分隔） */
 .VPNavScreenEffects {
   display: flex;
   justify-content: space-between;
@@ -456,7 +587,7 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }) => {
   border-radius: 8px;
   padding: 12px 14px 12px 16px;
   background-color: var(--vp-c-bg-soft);
-  margin-top: 16px;
+  margin-bottom: 16px;
 }
 .VPNavScreenEffects .text {
   line-height: 24px;

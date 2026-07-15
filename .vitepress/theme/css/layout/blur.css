@@ -76,6 +76,15 @@
   background-color: rgba(255, 255, 255, 0.15) !important;
 }
 
+/* 移动端搜索按钮降级：移除 backdrop-filter，因 .VPLocalNav 父级已有 blur，
+   搜索按钮内层 blur 在移动端低端机滚动时易掉帧，且视觉差异极小 */
+@media (max-width: 767px) {
+  .DocSearch-Button {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
+
 /* ==================================================
    3. 移动端与侧边栏遮罩 (Curtains & Mobile)
    ================================================== */
@@ -130,15 +139,21 @@
   display: none !important;
 }
 
-/* 移动端顶部导航 */
+/* 移动端顶部导航：顶部留出刘海安全区，避免状态栏遮挡「菜单/本页」按钮 */
 .VPLocalNav {
   background-color: var(--glass-bg-color) !important;
   backdrop-filter: blur(var(--blur-radius)) saturate(var(--glass-saturate));
   -webkit-backdrop-filter: blur(var(--blur-radius)) saturate(var(--glass-saturate));
   border-bottom: 1px solid var(--glass-border-color) !important;
+  /* env() 在非刘海设备返回 0，不影响普通布局；viewport-fit=cover 已在 config.mts 启用 */
+  padding-top: env(safe-area-inset-top) !important;
 }
 
-/* 移动端侧边栏弹窗背景 */
+/* 移动端侧边栏弹窗（汉堡菜单）背景与顶部安全区 */
 .VPNavScreen {
   background-color: var(--vp-c-bg) !important; /* 保持实色或稍微透明，防止内容混杂 */
+  /* 顶部留出刘海空间，避免导航项被状态栏遮挡 */
+  padding-top: env(safe-area-inset-top) !important;
+  /* 旧 iOS 友好的惯性滚动 */
+  -webkit-overflow-scrolling: touch;
 }

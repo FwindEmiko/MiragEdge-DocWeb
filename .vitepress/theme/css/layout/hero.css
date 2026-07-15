@@ -27,7 +27,10 @@ body {
   top: 0;
   left: 0;
   width: 100vw;
+  /* 100dvh 随移动端地址栏收起/展开动态调整，避免首屏抖动；
+     不支持 dvh 的旧浏览器回退到 100vh */
   height: 100vh;
+  height: 100dvh;
   filter: blur(130px) saturate(150%);
   will-change: transform, opacity;
 }

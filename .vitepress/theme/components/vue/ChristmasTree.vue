@@ -260,7 +260,9 @@ onUnmounted(() => {
 
 <style scoped>
 .christmas-container {
+  /* 100dvh 随移动端地址栏动态调整；旧浏览器回退 100vh */
   min-height: 100vh;
+  min-height: 100dvh;
   background: linear-gradient(to bottom, #0a2e38 0%, #1a5f7a 100%);
   color: #fff;
   padding: 20px;

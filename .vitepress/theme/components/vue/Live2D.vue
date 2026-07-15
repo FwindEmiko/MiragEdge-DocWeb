@@ -210,11 +210,11 @@ onBeforeUnmount(() => {
   100% { opacity: 0; transform: translateY(-15px) scale(1); }
 }
 
-/* 移动端 */
-@media (max-width: 768px) {
+/* 移动端：首页右下角空间有限，看板娘会遮挡首页按钮/内容，直接隐藏
+   首页是移动端用户进入最频繁的页面，优先保证内容可读性与可点击性 */
+@media (max-width: 767px) {
   .fox-wrapper {
-    transform: scale(0.8);
-    right: 5px;
+    display: none;
   }
 }
 </style>

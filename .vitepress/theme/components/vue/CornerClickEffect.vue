@@ -74,6 +74,9 @@ const updateAnimations = (currentTime) => {
 }
 
 onMounted(() => {
+  // 移动端不绑定全局 click 监听：触摸事件路径长，且点击粒子与触摸滚动易冲突
+  // 移动端特效默认关闭，此处仅防御用户主动开启特效的低性能场景
+  if (window.matchMedia('(max-width: 767px)').matches) return
   // 延迟显示，页面加载0.5秒后再启用点击特效
   mountTimer = setTimeout(() => {
     document.addEventListener('click', handleClick)

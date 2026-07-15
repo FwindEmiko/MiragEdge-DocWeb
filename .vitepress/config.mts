@@ -47,7 +47,9 @@ export default defineConfig({
     // 用于 ESA 边缘缓存场景下检测旧 HTML 并触发自动刷新
     ['meta', { name: 'x-build-id', content: process.env.GITHUB_RUN_NUMBER || 'dev' }],
     ['meta', { name: 'x-build-sha', content: process.env.GITHUB_SHA ? process.env.GITHUB_SHA.substring(0, 7) : '' }],
-    ['meta', { name: 'viewport', content: 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' }],
+    // 移除 maximum-scale/user-scalable=no（违反 WCAG 1.4.4，阻止视力不佳用户缩放）
+    // 启用 viewport-fit=cover 让安全区 env(safe-area-inset-*) 生效（iPhone 刘海/Home Indicator）
+    ['meta', { name: 'viewport', content: 'width=device-width, initial-scale=1.0, viewport-fit=cover' }],
     // 全局关键词：覆盖品牌词、品类词、玩法词、技术词，提升长尾检索命中率
     ['meta', { name: 'keywords', content: 'MiragEdge, 锐界幻境, Minecraft, 我的世界, 我的世界服务器, 生存服务器, 互通服务器, Java版, 基岩版, 1.21, 文档, 玩家手册, 入服教程, 附魔, 更多附魔, 钓鱼, 季节系统, 食物, 经济系统, 领地, PVP, 插件, 狐风轩汐, FwindEmi, F.windEmiko, Aiyatsbus, EvenMoreFish, CustomCrops' }],
     ['meta', { name: 'author', content: 'F.windEmiko (狐风轩汐)' }],
