@@ -30,7 +30,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div class="leaves-container" :class="{ visible: isVisible }">
+  <div class="leaves-container" :class="{ visible: isVisible }" aria-hidden="true">
     <div
       v-for="leaf in leaves"
       :key="leaf.id"

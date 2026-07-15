@@ -43,16 +43,14 @@
   animation: docFadeIn 0.3s ease-out forwards;
 }
 
-/* 可访问性：关闭动画 */
+/* 可访问性：尊重用户的 reduced-motion 偏好。
+   仅关闭装饰性 animation，保留 transition —— transition 是状态切换的微交互
+   （hover/focus 反馈），关闭会让界面跳跃突兀，且不属于 WCAG 2.3.3 约束的"动画"。 */
 @media (prefers-reduced-motion: reduce) {
-  .VPContent {
-    animation: none !important;
-  }
-
+  .VPContent,
   *,
   *::before,
   *::after {
     animation: none !important;
-    transition: none !important;
   }
 }

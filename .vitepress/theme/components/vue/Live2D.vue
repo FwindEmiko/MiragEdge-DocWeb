@@ -31,7 +31,7 @@ onBeforeUnmount(() => {
 
 <template>
   <div class="fox-wrapper" :class="{ visible: isVisible }">
-    <div class="fox" @click="handleClick">
+    <div class="fox" @click="handleClick" @keydown.enter="handleClick" tabindex="0" role="button" aria-label="点击与狐狸互动">
       <!-- 头 -->
       <div class="head">
         <div class="ear left"></div>

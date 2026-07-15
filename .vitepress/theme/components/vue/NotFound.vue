@@ -64,6 +64,13 @@
 </template>
 
 <script setup>
+import { defineAsyncComponent } from 'vue'
+
+// Corner 装饰组件异步加载，减少主 bundle 体积（与 layout.vue 保持一致）
+const CornerSakura = defineAsyncComponent(() => import('./CornerSakura.vue'))
+const CornerStars = defineAsyncComponent(() => import('./CornerStars.vue'))
+const CornerQuotes = defineAsyncComponent(() => import('./CornerQuotes.vue'))
+
 const goBack = () => {
   window.history.back()
 }

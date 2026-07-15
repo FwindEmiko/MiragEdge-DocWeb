@@ -30,7 +30,7 @@
           class="log-card"
           :class="{ expanded: expandedItems.has(item.date) }"
         >
-          <div class="log-header" @click="toggleItem(item.date)">
+          <div class="log-header" @click="toggleItem(item.date)" @keydown.enter="toggleItem(item.date)" tabindex="0" role="button" :aria-expanded="expandedItems.has(item.date)">
             <div class="log-date-version">
               <span class="log-date">{{ item.date }}</span>
               <span v-if="item.version" class="log-version">v{{ item.version }}</span>
@@ -249,8 +249,13 @@ const getDetailClass = (type: string): string => {
   return map[type] || 'type-default'
 }
 
+const escapeHtml = (s: string): string =>
+  s.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c] as string))
+
 const formatContent = (content: string): string => {
-  return content.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank">$1</a>')
+  // 先转义 HTML，防止日志正文中的 HTML 标签被 v-html 当作真实标签解析（XSS 防护）
+  // markdown 链接语法 [text](url) 不含被转义的字符，转义后再做链接替换仍可正常匹配
+  return escapeHtml(content).replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
 }
 
 const loadMarkdown = async () => {

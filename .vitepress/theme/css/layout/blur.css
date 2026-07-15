@@ -51,42 +51,7 @@
 }
 
 /* ==================================================
-   2. 搜索框 (Search Box)
-   ================================================== */
-/* 让搜索按钮变成一个磨砂胶囊 */
-.DocSearch-Button {
-  background-color: rgba(0, 0, 0, 0.05) !important; /* 浅色模式微调 */
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border-radius: 8px !important;
-  border: 1px solid transparent;
-  margin-left: 12px;
-}
-
-.DocSearch-Button:hover {
-  background-color: rgba(0, 0, 0, 0.1) !important;
-  border-color: var(--vp-c-brand-1) !important;
-}
-
-.dark .DocSearch-Button {
-  background-color: rgba(255, 255, 255, 0.1) !important; /* 深色模式微调 */
-}
-
-.dark .DocSearch-Button:hover {
-  background-color: rgba(255, 255, 255, 0.15) !important;
-}
-
-/* 移动端搜索按钮降级：移除 backdrop-filter，因 .VPLocalNav 父级已有 blur，
-   搜索按钮内层 blur 在移动端低端机滚动时易掉帧，且视觉差异极小 */
-@media (max-width: 767px) {
-  .DocSearch-Button {
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-  }
-}
-
-/* ==================================================
-   3. 移动端与侧边栏遮罩 (Curtains & Mobile)
+   2. 移动端与侧边栏遮罩 (Curtains & Mobile)
    ================================================== */
 
 /* 文档页侧边栏顶部的遮罩 */
@@ -134,7 +99,7 @@
   width: auto !important;
 }
 
-/* 隐藏默认的顶部主题切换按钮（>=1280px），因为主题切换已收进 CustomNavBarExtra 下拉菜单 */
+/* 隐藏 VitePress 默认的主题切换按钮，因为主题切换已收进 CustomNavBarExtra 下拉菜单 */
 .VPNavBarAppearance {
   display: none !important;
 }

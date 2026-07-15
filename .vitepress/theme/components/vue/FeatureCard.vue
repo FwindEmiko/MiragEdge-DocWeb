@@ -16,16 +16,17 @@ defineProps({
 </script>
 
 <template>
-  <a :href="link" class="feature-card">
-    <div class="card-icon">{{ icon }}</div>
+  <!-- link 为空时渲染为 div，避免 <a href=""> 点击刷新当前页的语义错误 -->
+  <component :is="link ? 'a' : 'div'" :href="link || undefined" class="feature-card">
+    <div class="card-icon" aria-hidden="true">{{ icon }}</div>
     <div class="card-content">
       <div class="card-title">{{ title }}</div>
       <div class="card-text">
         <slot></slot>
       </div>
-      <div class="card-link">查看详情 →</div>
+      <div v-if="link" class="card-link">查看详情 →</div>
     </div>
-  </a>
+  </component>
 </template>
 
 <style scoped>

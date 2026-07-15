@@ -9,7 +9,7 @@
         placeholder="搜索附魔名称 / 效果 / 适用装备…"
         aria-label="搜索附魔"
       />
-      <span v-if="searchQuery" class="ench-search-clear" @click="searchQuery = ''">✕</span>
+      <span v-if="searchQuery" class="ench-search-clear" @click="searchQuery = ''" @keydown.enter="searchQuery = ''" tabindex="0" role="button" aria-label="清除搜索">✕</span>
     </div>
 
     <!-- 品质标签栏 -->

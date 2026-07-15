@@ -61,10 +61,14 @@ async function checkOnce() {
 }
 
 let timer: number | null = null
+let routeCheckTimer: number | null = null
+let chunkHandlerInstalled = false
 
 /** 在 theme setup 的 onMounted 调用：启动定时版本检测 + chunk 失败兜底 */
 export function initVersionCheck() {
   if (!inBrowser) return
+  // 幂等守卫：dev HMR 或组件重挂时避免重复启动定时器与监听器
+  if (timer !== null) return
   setTimeout(checkOnce, FIRST_CHECK_DELAY)
   timer = window.setInterval(checkOnce, CHECK_INTERVAL)
   initChunkErrorHandler()
@@ -73,7 +77,12 @@ export function initVersionCheck() {
 /** 在 router.onAfterRouteChanged 调用：路由切换后延迟检测一次 */
 export function checkVersionOnRouteChange() {
   if (!inBrowser) return
-  setTimeout(checkOnce, 2000)
+  // 快速连续路由切换时只保留最后一次检测，避免 timeout 堆积
+  if (routeCheckTimer !== null) clearTimeout(routeCheckTimer)
+  routeCheckTimer = window.setTimeout(() => {
+    routeCheckTimer = null
+    checkOnce()
+  }, 2000)
 }
 
 /**
@@ -83,7 +92,8 @@ export function checkVersionOnRouteChange() {
  * - sessionStorage 标记防循环：同一 session 只 reload 一次
  */
 function initChunkErrorHandler() {
-  if (!inBrowser) return
+  if (!inBrowser || chunkHandlerInstalled) return
+  chunkHandlerInstalled = true
   // 资源加载失败（捕获阶段）
   window.addEventListener('error', (event) => {
     const t = event.target as HTMLElement | null

@@ -82,14 +82,6 @@ const CONTRIBUTOR_COLORS = [
   "#F44336", "#00BCD4", "#FF5722", "#3F51B5",
 ]
 
-interface SegmentData {
-  login: string; commits: number; barPx: number; color: string
-}
-
-interface ContributorData {
-  login: string; totalCommits: number; color: string
-}
-
 const loading = ref(true)
 const error = ref(false)
 const rawData = ref<{ author: { login: string }; total: number; weeks: { w: number; c: number }[] }[]>([])

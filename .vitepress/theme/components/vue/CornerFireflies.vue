@@ -32,7 +32,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div class="fireflies-container" :class="{ visible: isVisible }">
+  <div class="fireflies-container" :class="{ visible: isVisible }" aria-hidden="true">
     <div
       v-for="fly in fireflies"
       :key="fly.id"

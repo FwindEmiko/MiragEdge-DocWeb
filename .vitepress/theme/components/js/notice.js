@@ -21,7 +21,8 @@ export function showConsoleLogo() {
 export function showAestheticNotice() {
   // 配置项
   const NOTICE_KEY = 'hasSeenAestheticNotice_2024_v1'
-  const EXPIRY_DATE_STRING = '2026-6-20'
+  // 注意：此过期日已过（2026-06-20），通知将不再展示。如需重新启用请更新日期。
+  const EXPIRY_DATE_STRING = '2026-06-20'
   const ISSUE_URL = 'https://github.com/fwindemiko/MiragEdge-DocWeb/issues/new?template=issue_template.yml'
 
   try {
@@ -56,11 +57,16 @@ export function showAestheticNotice() {
     `
     
     const closeButton = noticeWrapper.querySelector('.close-button')
+    let closing = false
     closeButton.onclick = () => {
+      // 防止动画期间重复点击导致 removeChild 抛 NotFoundError
+      if (closing) return
+      closing = true
       noticeWrapper.classList.add('hiding')
-      
+
       setTimeout(() => {
-        document.body.removeChild(noticeWrapper)
+        // remove() 在节点已脱离 DOM 时不会抛错，比 removeChild 更安全
+        noticeWrapper.remove()
         localStorage.setItem(NOTICE_KEY, 'true')
       }, 300)
     }

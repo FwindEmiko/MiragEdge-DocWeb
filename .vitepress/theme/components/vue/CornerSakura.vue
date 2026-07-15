@@ -32,7 +32,7 @@ onUnmounted(() => clearTimeout(showTimer))
 </script>
 
 <template>
-  <div class="sakura-container" :class="{ visible: isVisible }">
+  <div class="sakura-container" :class="{ visible: isVisible }" aria-hidden="true">
     <div
       v-for="petal in petals"
       :key="petal.id"

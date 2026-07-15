@@ -63,7 +63,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="surprises-container">
+  <div class="surprises-container" aria-hidden="true">
     <transition-group name="surprise">
       <div
         v-for="surprise in surprises"

@@ -102,7 +102,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="particle-effects">
+  <div class="particle-effects" aria-hidden="true">
     <div
       v-for="p in particles"
       :key="p.id"

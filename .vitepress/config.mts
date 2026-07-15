@@ -702,10 +702,7 @@ export default defineConfig({
   
   // 清理死链警告
   ignoreDeadLinks: [
-    '/docs/develop/intro',
-    '/docs/ServerRule',
-    '/develop/mc_plugins/emcshop',
-    '/develop/mc_plugins/fe_fly'
+    // 预留页面：文件尚未创建但在 nav/sidebar 中引用时在此忽略
   ],
   
   // 自定义 Sitemap(搜索映射表) 生成

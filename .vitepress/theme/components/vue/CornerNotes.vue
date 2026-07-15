@@ -33,7 +33,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div class="notes-container" :class="{ visible: isVisible }">
+  <div class="notes-container" :class="{ visible: isVisible }" aria-hidden="true">
     <div
       v-for="note in notes"
       :key="note.id"

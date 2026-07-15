@@ -8,6 +8,8 @@
 /**
 * 黑暗模式下图片低亮度化
 * -------------------------------------------------------------------------- */
-.dark .vp-doc img {
-    filter: brightness(0.8);
-  }
+/* 深色模式下降低内容区光栅图片亮度，避免白色背景截图刺眼；
+   排除 SmartImage 组件（自带深色处理）与 SVG/图标，避免误伤 */
+.dark .vp-doc img:not(.smart-image-content):not([src$=".svg"]) {
+  filter: brightness(0.8);
+}

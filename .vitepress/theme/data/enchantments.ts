@@ -1,5 +1,5 @@
 // 附魔数据 - 提取的结构化数据
-// 共 237 个附魔（诅咒 11 + 普通 20 + 优良 41 + 稀有 89 + 史诗 59 + 传说 10 + 至宝 7）
+// 共 236 个附魔（诅咒 11 + 普通 20 + 优良 41 + 稀有 89 + 史诗 59 + 传说 10 + 至宝 6）
 
 export interface Enchantment {
   name: string
@@ -284,7 +284,6 @@ export const enchantments: Enchantment[] = [
   { name: '回溯', id: 'flash_back', maxLevel: 3, equipment: '剑 / 斧 / 弓 / 弩 / 三叉戟', effect: '右击在原地记录状态，一段时间后闪回到该位置与状态（冷却时间: 360秒）', rarity: 'mythic' },
   { name: '立方', id: 'blast_mining', maxLevel: 1, equipment: '镐', effect: '每次挖掘立方范围的方块', rarity: 'mythic' },
   { name: '索敌', id: 'aiming', maxLevel: 5, equipment: '弓', effect: '射出的箭矢将自动追踪目标', rarity: 'mythic' },
-  { name: '索敌', id: 'aiming', maxLevel: 3, equipment: '弓', effect: '箭矢会自动追踪目标', rarity: 'mythic' },
   { name: '跃动', id: 'bouncy_arrow', maxLevel: 3, equipment: '弓 / 弩', effect: '射箭撞方块反弹并有概率分裂', rarity: 'mythic' },
   { name: '震地', id: 'tremor', maxLevel: 3, equipment: '弓', effect: '蓄力范围真伤并减速, 满蓄力追加击飞效果', rarity: 'mythic' },
 ]

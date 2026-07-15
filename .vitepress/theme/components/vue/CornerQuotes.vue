@@ -58,7 +58,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div class="quote-container bottom-right">
+  <div class="quote-container bottom-right" aria-hidden="true">
     <transition name="fade">
       <div v-if="showQuote" class="quote-box">
         <p class="quote-text">"{{ currentQuote.text }}"</p>

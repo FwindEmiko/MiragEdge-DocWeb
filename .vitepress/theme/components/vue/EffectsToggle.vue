@@ -1,6 +1,6 @@
 <!-- 页面特殊效果开关：玻璃磨砂 + 极光星辉，置于导航栏右侧 -->
 <script setup>
-import { ref } from 'vue'
+import { ref, onBeforeUnmount } from 'vue'
 import { useEffectsToggle } from '../../composables/useEffectsToggle'
 
 const { effectsEnabled, toggleEffects } = useEffectsToggle()
@@ -8,18 +8,28 @@ const { effectsEnabled, toggleEffects } = useEffectsToggle()
 // 切换瞬间的星火迸发动画
 const bursting = ref(false)
 let burstTimer = null
+let rafId = null
 const onClick = () => {
   toggleEffects()
   bursting.value = false
   // 触发重排以重启动画
-  requestAnimationFrame(() => {
+  if (rafId) cancelAnimationFrame(rafId)
+  rafId = requestAnimationFrame(() => {
+    rafId = null
     bursting.value = true
     clearTimeout(burstTimer)
     burstTimer = setTimeout(() => {
       bursting.value = false
+      burstTimer = null
     }, 650)
   })
 }
+
+// 卸载时清理定时器与 RAF，避免在已卸载组件上修改 ref 触发 Vue 警告
+onBeforeUnmount(() => {
+  if (rafId) cancelAnimationFrame(rafId)
+  clearTimeout(burstTimer)
+})
 </script>
 
 <template>

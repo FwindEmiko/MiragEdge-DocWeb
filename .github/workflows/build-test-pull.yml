@@ -33,6 +33,7 @@ jobs:
       - uses: actions/setup-node@v5
         with:
           node-version: ${{ env.NODE_VERSION }}
+          cache: 'pnpm'
       - run: pnpm install
       - name: 类型检查
         run: pnpm run typecheck
@@ -55,7 +56,11 @@ jobs:
       - uses: actions/setup-node@v5
         with:
           node-version: ${{ env.NODE_VERSION }}
+          cache: 'pnpm'
       - run: pnpm install
+      - name: 单元测试
+        run: pnpm run test
+        continue-on-error: false
       - name: 构建
         run: pnpm run build
       - name: 检查构建产物大小
@@ -118,10 +123,13 @@ jobs:
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
       - uses: pnpm/action-setup@v5
       - uses: actions/setup-node@v5
         with:
           node-version: ${{ env.NODE_VERSION }}
+          cache: 'pnpm'
       - run: pnpm install
       - name: 适配 Pages base 路径
         run: |

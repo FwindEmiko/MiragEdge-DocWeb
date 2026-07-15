@@ -85,7 +85,7 @@ html:not(.dark) .VPHomeHero::after {
 }
 
 /* 移动端性能降级：静态背景 & 单层光斑 */
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .VPHomeHero::before,
   .VPHomeHero::after {
     animation: none;
@@ -95,46 +95,12 @@ html:not(.dark) .VPHomeHero::after {
   .VPHomeHero::after { display: none; }
 }
 
-/* 设计变量：品牌色、玻璃拟态、光斑透明度 */
-:root {
-  --vp-c-brand-1: #E05252;
-  --vp-c-brand-2: #C94242;
-  --vp-c-brand-3: #B03030;
-  --vp-c-brand-soft: rgba(224, 82, 82, 0.12);
-
-  --hero-orb-1: rgba(224, 82, 82, 0.15);
-  --hero-orb-2: rgba(245, 158, 11, 0.15);
-  --hero-orb-3: rgba(168, 85, 247, 0.12);
-
-  --glass-blur: 20px;
-  --glass-saturate: 180%;
-  --glass-bg-light: rgba(255, 255, 255, 0.7);
-  --glass-bg-dark:  rgba(28, 28, 30, 0.7);
-
-  --vp-c-tip-1: #007AFF;
-}
-.dark {
-  --vp-c-brand-1: #E56464;
-  --vp-c-brand-2: #E05252;
-  --vp-c-brand-3: #C94242;
-  --vp-c-brand-soft: rgba(229, 100, 100, 0.16);
-
-  --hero-orb-1: rgba(224, 82, 82, 0.4);
-  --hero-orb-2: rgba(245, 158, 11, 0.3);
-  --hero-orb-3: rgba(168, 85, 247, 0.3);
-}
-
 :root {
   --vp-home-hero-name-color: transparent;
   --vp-home-hero-name-background: linear-gradient(45deg, var(--rainbow-prev), var(--rainbow-next));
 }
 
-/* 按钮：圆角、按压反馈、阴影 */
-.VPButton {
-  border-radius: 999px !important;
-  font-weight: 600 !important;
-}
-.VPButton:active { transform: scale(0.96); }
+/* 按钮品牌色/阴影（button.css 仅定义通用形态，此处保留 brand/alt 的颜色与阴影） */
 .VPButton.brand {
   background-color: var(--vp-c-brand-1) !important;
   color: #fff !important;
@@ -153,43 +119,14 @@ html:not(.dark) .VPHomeHero::after {
   color: #fff !important;
 }
 
-/* 导航栏玻璃拟态 */
-.VPNavBar:not(.has-sidebar):not(.home.top) {
-  background-color: var(--glass-bg-light) !important;
-  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-}
-.dark .VPNavBar:not(.has-sidebar):not(.home.top) {
-  background-color: var(--glass-bg-dark) !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-/* 搜索框：圆角、聚焦高亮、选中态 */
-.VPLocalSearchBox .shell { border-radius: 16px !important; }
-.VPLocalSearchBox .search-bar { border-radius: 10px !important; }
-.VPLocalSearchBox .search-bar:focus-within {
-  border-color: var(--vp-c-brand-1) !important;
-  box-shadow: 0 0 0 4px var(--vp-c-brand-soft) !important;
-}
-.VPLocalSearchBox .result.selected { background-color: var(--vp-c-brand-soft) !important; }
-.VPLocalSearchBox .titles mark {
-  color: var(--vp-c-brand-1) !important;
-  background: transparent !important;
-  text-decoration: underline;
-}
-
-/* 侧边栏激活项：高亮+圆角+内边距 */
-.VPSidebarItem.is-active > .item > .link,
-.VPSidebarItem.is-active > .item > .text {
-  color: var(--vp-c-brand-1) !important;
-  background-color: var(--vp-c-brand-soft);
-  border-radius: 8px;
-  padding-left: 12px;
-}
-.VPSidebarItem.level-0.is-active > .item { border-left-color: transparent !important; }
+/* 以下规则原为重复定义，已由后加载的 button.css / blur.css / search.css / overrides.css 覆盖，删除避免维护歧义：
+   - .VPButton 通用形态 / :active        → button.css
+   - .VPNavBar 玻璃拟态                   → blur.css
+   - .VPLocalSearchBox 搜索框             → search.css
+   - .VPSidebarItem.is-active 侧边栏激活  → overrides.css */
 
 /* 移动端极光背景进一步模糊 & 去动画 */
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .VPHomeHero::before { filter: blur(60px); animation: none; }
 }
 

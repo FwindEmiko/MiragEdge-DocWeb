@@ -11,30 +11,30 @@
 }
 
 /* Markdown中的图片使用组件样式 */
-.markdown-content img:not(.smart-image-content) {
+.vp-doc img:not(.smart-image-content) {
   max-width: 100%;
   border-radius: 6px;
   box-shadow: var(--image-shadow-light);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.markdown-content img:not(.smart-image-content):hover {
+.vp-doc img:not(.smart-image-content):hover {
   transform: translateY(-2px);
   box-shadow: var(--image-shadow-light-hover);
 }
 
 /* 深色模式下图片阴影 */
-.dark .markdown-content img:not(.smart-image-content) {
+.dark .vp-doc img:not(.smart-image-content) {
   box-shadow: var(--image-shadow-dark);
 }
 
-.dark .markdown-content img:not(.smart-image-content):hover {
+.dark .vp-doc img:not(.smart-image-content):hover {
   box-shadow: var(--image-shadow-dark-hover);
 }
 
 /* 表格全局样式优化 */
 /* 桌面端：保持原生表格流式布局，宽度自适应容器 */
-.markdown-content table {
+.vp-doc table {
   width: 100%;
   max-width: 100%;
   border-collapse: collapse;
@@ -45,44 +45,35 @@
 /* 移动端宽表格保护：table 以 block 形式横向滚动，避免撑破容器导致整页横向滚动
    thead/tbody/tr 恢复 table 显示以保持表格布局，width:max-content 让表格按内容撑开 */
 @media (max-width: 767px) {
-  .markdown-content table {
+  .vp-doc table {
     display: block;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
   }
-  .markdown-content table thead,
-  .markdown-content table tbody,
-  .markdown-content table tr {
+  .vp-doc table thead,
+  .vp-doc table tbody,
+  .vp-doc table tr {
     display: table;
     width: max-content;
     max-width: 100%;
   }
 }
 
-.markdown-content table th,
-.markdown-content table td {
+.vp-doc table th,
+.vp-doc table td {
   padding: 10px 12px;
   text-align: left;
   border-bottom: 1px solid var(--vp-c-divider);
 }
 
-.markdown-content table th {
+.vp-doc table th {
   background: var(--vp-c-bg-soft);
   font-weight: 600;
 }
 
-.markdown-content table tr:hover td {
+.vp-doc table tr:hover td {
   background: var(--vp-c-bg-soft);
 }
-
-/* 品质颜色样式 */
-.rarity-common { color: #999; }
-.rarity-uncommon { color: #1eff00; }
-.rarity-rare { color: #0070dd; }
-.rarity-epic { color: #a335ee; }
-.rarity-legendary { color: #ff8000; }
-.rarity-mythic { color: #e6cc80; }
-.rarity-curse { color: #9d9d9d; }
 
 /* ===== 滚动进度条 ===== */
 .scroll-progress {
@@ -98,7 +89,7 @@
 
 /* ===== 代码块美化 ===== */
 /* macOS 风格圆点装饰 */
-.markdown-content div[class*='language-'] {
+.vp-doc div[class*='language-'] {
   border-radius: 12px !important;
   box-shadow: 0 0 0 1px rgba(224, 82, 82, 0.06), 0 2px 12px rgba(0, 0, 0, 0.08);
   overflow: hidden;
@@ -106,7 +97,7 @@
   position: relative;
 }
 
-.markdown-content div[class*='language-']::before {
+.vp-doc div[class*='language-']::before {
   content: '';
   display: block;
   height: 32px;
@@ -115,12 +106,12 @@
   position: relative;
 }
 
-.dark .markdown-content div[class*='language-']::before {
+.dark .vp-doc div[class*='language-']::before {
   background: rgba(255, 255, 255, 0.03);
   border-bottom-color: rgba(255, 255, 255, 0.04);
 }
 
-.markdown-content div[class*='language-']::after {
+.vp-doc div[class*='language-']::after {
   content: '';
   position: absolute;
   top: 0;
@@ -136,7 +127,7 @@
 }
 
 /* 调整代码内容位置，为圆点条留出空间 */
-.markdown-content div[class*='language-'] > pre {
+.vp-doc div[class*='language-'] > pre {
   margin: 0;
   border-radius: 0;
 }
@@ -144,12 +135,12 @@
 /* 移动端缩减代码块 macOS 圆点装饰条高度（32px → 24px），节省纵向空间
    移动端纵向空间宝贵，代码块本身已需横向滚动，装饰条无需桌面端那么高 */
 @media (max-width: 767px) {
-  .markdown-content div[class*='language-']::before,
-  .markdown-content div[class*='language-']::after {
+  .vp-doc div[class*='language-']::before,
+  .vp-doc div[class*='language-']::after {
     height: 24px;
   }
   /* 圆点等比缩小并左移 */
-  .markdown-content div[class*='language-']::after {
+  .vp-doc div[class*='language-']::after {
     background:
       radial-gradient(circle at 14px 12px, #ff5f57 4px, transparent 4px),
       radial-gradient(circle at 28px 12px, #febc2e 4px, transparent 4px),
@@ -157,18 +148,18 @@
   }
 }
 
-.dark .markdown-content div[class*='language-'] {
+.dark .vp-doc div[class*='language-'] {
   box-shadow: 0 0 0 1px rgba(224, 82, 82, 0.08), 0 2px 16px rgba(0, 0, 0, 0.25);
 }
 
 /* ===== 链接下划线动画 ===== */
-.markdown-content a {
+.vp-doc a {
   position: relative;
   text-decoration: none !important;
   color: #E05252;
 }
 
-.markdown-content a::after {
+.vp-doc a::after {
   content: '';
   position: absolute;
   bottom: -1px;
@@ -181,22 +172,22 @@
   transition: transform 0.25s ease;
 }
 
-.markdown-content a:hover::after {
+.vp-doc a:hover::after {
   transform: scaleX(1);
 }
 
 /* 列表样式优化 */
-.markdown-content ul {
+.vp-doc ul {
   padding-left: 20px;
 }
 
-.markdown-content li {
+.vp-doc li {
   margin: 6px 0;
   line-height: 1.6;
 }
 
 /* 引用块样式优化 */
-.markdown-content blockquote {
+.vp-doc blockquote {
   border-left: 4px solid var(--vp-c-brand);
   background: var(--vp-c-bg-soft);
   padding: 12px 16px;
@@ -205,7 +196,7 @@
 }
 
 /* 水平分割线样式 */
-.markdown-content hr {
+.vp-doc hr {
   border: none;
   height: 1px;
   background: var(--vp-c-divider);

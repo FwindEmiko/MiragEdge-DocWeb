@@ -31,7 +31,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div class="bubbles-container" :class="{ visible: isVisible }">
+  <div class="bubbles-container" :class="{ visible: isVisible }" aria-hidden="true">
     <div
       v-for="bubble in bubbles"
       :key="bubble.id"

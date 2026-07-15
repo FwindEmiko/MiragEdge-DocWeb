@@ -98,7 +98,7 @@
 
 /* ========== 响应式适配 ========== */
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .VPSidebarItem .nav-icon-emoji {
     width: 18px;
     height: 18px;

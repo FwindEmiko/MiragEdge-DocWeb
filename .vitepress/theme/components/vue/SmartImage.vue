@@ -231,6 +231,7 @@ export default {
         for (const entry of entries) {
           if (entry.isIntersecting) {
             observer.disconnect();
+            this._observer = null;
             // 兜底：浏览器干预 load 事件时，手动处理
             if (img.complete && img.naturalWidth) {
               this.onImageLoad({ target: img });
@@ -240,7 +241,24 @@ export default {
         }
       }, { rootMargin: '200px' });
       observer.observe(img);
-      setTimeout(() => observer.disconnect(), 5000);
+      this._observer = observer;
+      this._fallbackTimer = setTimeout(() => {
+        observer.disconnect();
+        this._observer = null;
+        this._fallbackTimer = null;
+      }, 5000);
+    }
+  },
+
+  beforeUnmount() {
+    // 卸载时清理 observer 与兜底定时器，避免持有已分离 DOM 节点的引用
+    if (this._observer) {
+      this._observer.disconnect();
+      this._observer = null;
+    }
+    if (this._fallbackTimer) {
+      clearTimeout(this._fallbackTimer);
+      this._fallbackTimer = null;
     }
   },
 

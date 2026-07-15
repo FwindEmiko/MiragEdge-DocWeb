@@ -26,7 +26,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div class="stars-container" :class="{ visible: isVisible }">
+  <div class="stars-container" :class="{ visible: isVisible }" aria-hidden="true">
     <div
       v-for="star in stars"
       :key="star.id"
