@@ -36,9 +36,22 @@
  */
 .VPLocalSearchBox .shell {
   border-radius: 16px !important; /* 大圆角 */
-  /* 柔和双层投影：近处定形 + 远处扩散，避免生硬的“大阴影” */
+  /* 柔和双层投影：近处定形 + 远处扩散，避免生硬的"大阴影" */
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08), 0 12px 32px rgba(0, 0, 0, 0.1) !important;
   border: 1px solid rgba(128, 128, 128, 0.1); /* 边框 */
+  /* 进入动画：缩放 + 上浮 + 淡入 */
+  animation: searchShellIn 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes searchShellIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
 }
 
 /* 深色模式下搜索弹窗阴影：黑色投影收得住，配合品牌色微光体现悬浮 */
@@ -46,10 +59,16 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3), 0 12px 32px rgba(0, 0, 0, 0.25) !important;
 }
 
-/* 背景遮罩 - 毛玻璃效果 */
+/* 背景遮罩 - 毛玻璃效果 + 淡入 */
 .VPLocalSearchBox .backdrop {
   backdrop-filter: blur(8px); /* 毛玻璃模糊效果 */
   background: rgba(0, 0, 0, 0.2); /* 背景遮罩颜色 */
+  animation: searchBackdropIn 0.2s ease-out;
+}
+
+@keyframes searchBackdropIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
 /* 

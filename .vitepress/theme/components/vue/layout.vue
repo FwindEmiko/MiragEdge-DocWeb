@@ -125,6 +125,14 @@ watch(
         target.classList.add('page-enter')
       }
 
+      // 侧边栏淡入动画：路由切换时侧边栏内容更新，加一个轻柔的淡入+左滑
+      const sidebar = document.querySelector('.VPSidebar .nav')
+      if (sidebar) {
+        sidebar.classList.remove('sidebar-fade-enter')
+        void sidebar.offsetWidth
+        sidebar.classList.add('sidebar-fade-enter')
+      }
+
       // 侧边栏滚动追踪：若当前活动项不在可视区域内，平滑滚动到它
       // 用 requestIdleCallback 延迟到空闲时段执行，避免在移动端低性能机型上
       // 与页面进入动画、DOM 重建抢占主线程导致掉帧
@@ -329,6 +337,22 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }) => {
 
 .page-enter {
   animation: scaleIn 0.25s ease;
+}
+
+/* 侧边栏淡入动画：路由切换时侧边栏内容更新，轻柔淡入 + 微左滑 */
+@keyframes sidebarFadeIn {
+  from {
+    opacity: 0.4;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.sidebar-fade-enter {
+  animation: sidebarFadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* 文档页脚样式 - 带流光分割线与散落星点装饰 */

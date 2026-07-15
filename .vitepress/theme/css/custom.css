@@ -106,13 +106,16 @@
 }
 
 /* ===== 链接下划线动画 ===== */
-.vp-doc a {
+/* 排除块级链接组件（FeatureCard、pager 上一篇/下一篇），它们的下划线会超出圆角 */
+/* 使用 ::before 做下划线动画，把 ::after 留给 VitePress 的外部链接图标，
+   避免两者冲突导致外部链接图标被定位到链接左下角 */
+.vp-doc a:not(.feature-card):not(.pager) {
   position: relative;
   text-decoration: none !important;
   color: #E05252;
 }
 
-.vp-doc a::after {
+.vp-doc a:not(.feature-card):not(.pager)::before {
   content: '';
   position: absolute;
   bottom: -1px;
@@ -125,7 +128,7 @@
   transition: transform 0.25s ease;
 }
 
-.vp-doc a:hover::after {
+.vp-doc a:not(.feature-card):not(.pager):hover::before {
   transform: scaleX(1);
 }
 

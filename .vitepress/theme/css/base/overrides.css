@@ -267,11 +267,49 @@
 }
 
 /* --- 5. 自定义块 (Tip/Info) --- */
-/* 圆角更大，去掉边框，更像 iOS 弹窗 */
+/* 重新设计：左侧色条 + 柔和渐变背景 + 图标，告别平淡色块 */
 .custom-block.tip {
   border: none;
-  border-radius: 12px;
-  padding: 16px 20px;
+  border-left: 4px solid var(--vp-c-tip-1);
+  border-radius: 0 12px 12px 0;
+  padding: 14px 18px 14px 16px;
+  background: linear-gradient(135deg, var(--vp-c-tip-soft), transparent 80%);
+  position: relative;
+  overflow: hidden;
+}
+
+/* 标题前加图标 */
+.custom-block.tip .custom-block-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.custom-block.tip .custom-block-title::before {
+  content: '💡';
+  font-size: 1em;
+  line-height: 1;
+}
+
+/* Info 块也统一风格（品牌色左侧条） */
+.custom-block.info {
+  border: none;
+  border-left: 4px solid var(--vp-c-brand-1);
+  border-radius: 0 12px 12px 0;
+  padding: 14px 18px 14px 16px;
+  background: linear-gradient(135deg, var(--vp-c-brand-soft), transparent 80%);
+}
+
+/* Warning 块 */
+.custom-block.warning {
+  border-left: 4px solid #F59E0B;
+  border-radius: 0 12px 12px 0;
+}
+
+/* Danger 块 */
+.custom-block.danger {
+  border-left: 4px solid #EF4444;
+  border-radius: 0 12px 12px 0;
 }
 
 /* --- 6. 其他组件 --- */
@@ -289,17 +327,19 @@
 }
 
 /* ==============================================
-   浮层卡片阴影 (Flyout / Dropdown Shadow)
+   浮层卡片：玻璃磨砂 + 收敛阴影 (Flyout / Dropdown)
    ==============================================
    VitePress 的浮层（顶部「本页目录」下拉 .VPLocalNavOutlineDropdown .items、
-   所有 Flyout 菜单 .VPMenu）默认用 box-shadow: var(--vp-shadow-3)，
-   扩散大、不透明度高，显得又重又"圆润"。这里直接用元素级 !important 覆盖，
-   收敛为极轻的单层投影，避免依赖变量层叠被其它规则盖回。 */
+   所有 Flyout 菜单 .VPMenu）默认用实色背景 + box-shadow: var(--vp-shadow-3)。
+   这里覆盖为半透明玻璃背景 + backdrop-filter 磨砂效果 + 收敛阴影。 */
 
 /* 本页目录下拉浮层（点击顶部「本页」展开的卡片） */
 .VPLocalNavOutlineDropdown .items,
 /* 所有 Flyout 菜单（导航菜单组、外观/特效下拉等） */
 .VPMenu {
+  background-color: var(--glass-bg-color) !important;
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.03) !important;
 }
 
