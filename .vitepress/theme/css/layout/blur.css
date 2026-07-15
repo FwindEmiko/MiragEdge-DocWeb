@@ -86,15 +86,27 @@
   pointer-events: none; /* 防止遮挡点击 */
 }
 
-/* 补偿导航栏 border-bottom 增加的 1px，防止侧边栏内容被顶栏遮挡 */
+/* 调整侧边栏渲染边界：让 .VPSidebar 从顶栏下方开始定位，而非从视口顶部。
+   原本 VitePress 默认 .VPSidebar { top: 0; padding-top: var(--vp-nav-height) }，
+   盒模型仍从 top:0 开始，导致滚动条与顶部 64px 区域被常驻顶栏遮挡。
+   改为 top 偏移后，侧边栏的可视边界 = 顶栏下方 → 页面底部，渲染边界清晰，
+   滚动条也仅出现在顶栏下方区域，不再被顶栏覆盖。 */
 /* 使用 !important 覆盖 VitePress scoped CSS */
 @media (min-width: 960px) {
   .VPSidebar {
-    padding-top: calc(var(--vp-nav-height) + 4px) !important;
+    /* +1px 抵消顶栏 border-bottom，确保侧边栏顶部与顶栏下边缘无缝衔接 */
+    top: calc(var(--vp-nav-height) + 1px) !important;
+    /* top 已偏移到顶栏下方，不再需要 padding-top 让出空间 */
+    padding-top: 0 !important;
   }
+  /* curtain 原本通过 sticky + 负 margin 填充 padding-top 区域；
+     现已用 top 偏移替代该机制，curtain 失去作用，隐藏避免错位 */
   .curtain {
-    margin-top: calc((var(--vp-nav-height) + 4px) * -1) !important;
-    height: calc(var(--vp-nav-height) + 4px) !important;
+    display: none !important;
+  }
+  /* 顶部留出呼吸空间，避免内容紧贴顶栏下边缘 */
+  .VPSidebar .nav {
+    padding-top: 12px;
   }
 }
 

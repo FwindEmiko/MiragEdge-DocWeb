@@ -1,7 +1,19 @@
 <template>
   <div v-if="showContributors && contributorList.length" class="contributors-container">
-    <div class="contributors-section">
-      <h3 class="section-title">本页面贡献者</h3>
+    <div class="contributors-inner">
+      <div class="section-header">
+        <span class="header-line"></span>
+        <h3 class="section-title">
+          <svg class="title-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+            <circle cx="9" cy="7" r="4"></circle>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+          </svg>
+          本页面贡献者
+        </h3>
+        <span class="header-line"></span>
+      </div>
       <div class="contributors-grid">
         <a
           v-for="person in contributorList"
@@ -129,75 +141,104 @@ const contributorList = computed<Contributor[]>(() => {
 </script>
 
 <style scoped>
+/* ===== 容器：宽度对齐文档主体内容 ===== */
 .contributors-container {
-  margin: 3rem 0;
-  padding: 2rem 0;
-  border-top: 1px solid var(--vp-c-divider-light);
+  margin: 1rem auto 0;
+  padding: 1.5rem 0 0.5rem;
+  /* 宽度不超过上方文档内容，且整体居中 */
+  width: 100%;
+  max-width: 100%;
 }
 
-.contributors-section {
-  max-width: 800px;
+.contributors-inner {
+  /* 与 VitePress 文档 .content-container 最大宽度对齐：有 aside 时 688px */
+  max-width: 688px;
   margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ===== 标题区：横向线 + 居中标题 ===== */
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 1.5rem;
+}
+
+.header-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--vp-c-divider), transparent);
+  min-width: 20px;
 }
 
 .section-title {
-  font-size: 1.2rem;
-  padding-left: auto;
-  font-weight: 600;
-  color: var(--vp-c-text-1);
-  margin-bottom: 1.5rem;
   display: flex;
   align-items: center;
-  margin-left: auto;
-  margin-right: auto;
   gap: 0.5rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--vp-c-text-2);
+  margin: 0;
+  white-space: nowrap;
+  letter-spacing: 0.02em;
 }
 
-.section-title::before {
-  content: "📝";
-  font-size: 1.2rem;
-  margin-right: auto;
+.title-icon {
+  width: 18px;
+  height: 18px;
+  color: var(--vp-c-brand-1);
+  flex-shrink: 0;
 }
 
-.section-title::after {
-  content: "📝";
-  font-size: 1.2rem;
-  margin-left: auto;
-}
-
+/* ===== 贡献者网格：横向优先、自动换行 ===== */
 .contributors-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
 }
 
+/* ===== 贡献者卡片：玻璃磨砂 + 悬停发光 ===== */
 .contributor-card {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  padding: 0.75rem 1rem;
+  gap: 0.625rem;
+  padding: 0.5rem 0.875rem 0.5rem 0.5rem;
   background: var(--vp-c-bg-soft);
   border: 1px solid var(--vp-c-divider);
-  border-radius: 8px;
+  border-radius: 999px;
   text-decoration: none;
   color: inherit;
-  transition: all 0.2s ease;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  /* 紧凑卡片：横向优先时每张卡占自然宽度，但限制最大值避免单卡过宽 */
+  width: fit-content;
+  max-width: 100%;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 .contributor-card:hover {
-  background: var(--vp-c-bg-mute);
-  border-color: var(--vp-c-brand);
+  background: var(--vp-c-brand-soft);
+  border-color: var(--vp-c-brand-1);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 16px rgba(224, 82, 82, 0.18);
 }
 
+/* ===== 头像 ===== */
 .contributor-avatar {
-  width: 40px;
-  height: 40px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   overflow: hidden;
   flex-shrink: 0;
-  border: 2px solid var(--vp-c-divider);
+  border: 2px solid var(--vp-c-bg);
+  box-shadow: 0 0 0 1px var(--vp-c-divider);
+  transition: box-shadow 0.25s ease;
+}
+
+.contributor-card:hover .contributor-avatar {
+  box-shadow: 0 0 0 2px var(--vp-c-brand-1);
 }
 
 .avatar-image {
@@ -206,71 +247,98 @@ const contributorList = computed<Contributor[]>(() => {
   object-fit: cover;
 }
 
+/* ===== 文字信息 ===== */
 .contributor-info {
-  flex: 1;
-  min-width: 0;
   display: flex;
   flex-direction: column;
+  min-width: 0;
+  line-height: 1.25;
 }
 
 .contributor-name {
-  font-size: 0.95rem;
-  font-weight: 500;
+  font-size: 0.85rem;
+  font-weight: 600;
   color: var(--vp-c-text-1);
-  line-height: 1.4;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 140px;
 }
 
 .contributor-handle {
-  font-size: 0.8rem;
-  color: var(--vp-c-text-2);
-  opacity: 0.8;
+  font-size: 0.72rem;
+  color: var(--vp-c-text-3);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 140px;
 }
 
+/* ===== GitHub 图标徽章 ===== */
 .github-badge {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 28px;
-  height: 28px;
+  width: 24px;
+  height: 24px;
   background: var(--vp-c-bg);
-  border-radius: 6px;
+  border-radius: 50%;
   flex-shrink: 0;
+  transition: all 0.25s ease;
+}
+
+.contributor-card:hover .github-badge {
+  background: var(--vp-c-brand-1);
 }
 
 .github-icon {
-  width: 16px;
-  height: 16px;
+  width: 14px;
+  height: 14px;
   color: var(--vp-c-text-2);
-  transition: color 0.2s ease;
+  transition: color 0.25s ease;
 }
 
 .contributor-card:hover .github-icon {
-  color: var(--vp-c-brand);
+  color: #fff;
 }
 
-/* 响应式设计 */
+/* ===== 尊重减少动画偏好 ===== */
+@media (prefers-reduced-motion: reduce) {
+  .contributor-card,
+  .contributor-avatar,
+  .github-badge,
+  .github-icon {
+    transition: none;
+  }
+}
+
+/* ===== 响应式：移动端紧凑 ===== */
 @media (max-width: 768px) {
-  .contributors-grid {
-    grid-template-columns: 1fr;
+  .contributors-inner {
+    padding: 0 16px;
   }
-  
-  .contributors-container {
-    margin: 2rem 0;
-    padding: 1.5rem 0;
+
+  .section-header {
+    gap: 10px;
+    margin-bottom: 1rem;
   }
-  
+
   .section-title {
-    font-size: 1.1rem;
+    font-size: 0.875rem;
   }
-}
 
-/* 暗色模式适配 */
-.dark .contributor-card {
-  background: var(--vp-c-bg-soft-up);
-}
+  .contributors-grid {
+    gap: 0.5rem;
+  }
 
-.dark .contributor-card:hover {
-  background: var(--vp-c-bg-mute-up);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  .contributor-card {
+    gap: 0.5rem;
+    padding: 0.375rem 0.75rem 0.375rem 0.375rem;
+  }
+
+  .contributor-name,
+  .contributor-handle {
+    max-width: 110px;
+  }
 }
 </style>
