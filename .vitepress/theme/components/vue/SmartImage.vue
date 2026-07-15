@@ -198,10 +198,10 @@ export default {
         }
       }
       
-      // 阴影
+      // 阴影：默认使用柔和的双层投影，避免生硬的大阴影
       if (this.shadow !== false) {
         if (this.shadow === true) {
-          style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.1)'
+          style.boxShadow = '0 1px 2px rgba(0, 0, 0, 0.04), 0 2px 8px rgba(0, 0, 0, 0.06)'
         } else if (typeof this.shadow === 'string') {
           style.boxShadow = this.shadow
         }
@@ -383,7 +383,8 @@ export default {
 }
 
 .dark .has-shadow .image-wrapper img {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  /* !important 用于覆盖内联 style 的浅色阴影；深色背景下阴影更微妙，避免脏重感 */
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 2px 8px rgba(0, 0, 0, 0.2) !important;
 }
 
 /* 动画 */

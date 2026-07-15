@@ -287,12 +287,13 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }) => {
 }
 
 /* 顶部装饰线：底层静态渐变分隔 + 上层品牌色光斑来回扫描 */
+/* left/right 对齐 content-box（避开 padding 区域），防止延伸到本页目录下方 */
 .doc-footer::before {
   content: '';
   position: absolute;
   top: 0;
-  left: 0;
-  right: 0;
+  left: var(--footer-pl, 0px);
+  right: var(--footer-pr, 0px);
   height: 1px;
   background:
     /* 上层：30% 宽的流光光斑 */
@@ -301,6 +302,7 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }) => {
     linear-gradient(90deg, transparent, var(--vp-c-divider) 15%, var(--vp-c-divider) 85%, transparent);
   background-size: 30% 100%, 100% 100%;
   animation: footer-scan 5s ease-in-out infinite;
+  transition: left 0.3s ease, right 0.3s ease;
 }
 
 @keyframes footer-scan {
@@ -461,37 +463,72 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }) => {
 
 /*
  * 桌面端存在侧边栏时，让底部贡献者与页脚自动顺滑地偏移到
- * 侧边栏右侧的实际文档内容区居中显示。
- * 断点与偏移量完全对齐 VitePress 的 .VPContent.has-sidebar 内边距规则：
- *   >= 960px : padding-left 为侧边栏宽度
- *   >= 1440px : 左右同时留出 (100vw - 布局最大宽度) / 2 以保持内容居中
- * 移动端侧边栏为抽屉式覆盖，不占用布局空间，故无需偏移。
- * 首页无 .has-sidebar 类，:has() 不匹配，页脚仍全宽居中。
+ * 「侧边栏右侧、且本页目录左侧」的实际文档内容区居中显示。
+ *
+ * 对齐 VitePress 布局：
+ *   sidebar 宽度 = --vp-sidebar-width (272px)
+ *   aside（本页目录）宽度 = 256px（VitePress 硬编码 max-width，border-box）
+ *   布局最大宽度 = --vp-layout-max-width (1440px)
+ *
+ * 采用「基础规则 + 叠加覆盖」策略，避免 960-1280px 区间误判
+ * （该区间 aside 即使有 has-aside 类也被 display:none 隐藏，不占位）：
+ *   ≥960  有 sidebar           → PL=272,      PR=0,    offset=+136
+ *   ≥1280 有 sidebar + aside    →             PR=256,  offset=+8   （覆盖 PR/offset）
+ *   ≥1440 有 sidebar           → PL=居中+272, PR=居中, offset=+136 （覆盖全部）
+ *   ≥1440 有 sidebar + aside    →             PR=居中+256, offset=+8
+ *
+ * offset = (PL - PR) / 2，把星点中心从「整页 50%」修正到「content-box 50%」。
+ * 移动端侧边栏为抽屉式覆盖，不占布局空间，无需偏移。
+ * 首页无 .has-sidebar 类，:has() 不匹配，保持全宽居中。
  */
+
+/* 默认：无 sidebar 时无偏移 */
+.router-wrapper .doc-footer,
+.router-wrapper .centerdss {
+  --footer-pl: 0px;
+  --footer-pr: 0px;
+  --footer-offset: 0px;
+}
+
+/* ≥960 有 sidebar：基础偏移（此时 aside 不论是否有类都不占位） */
 @media (min-width: 960px) {
-  .router-wrapper:has(.VPContent.has-sidebar) .centerdss,
-  .router-wrapper:has(.VPContent.has-sidebar) .doc-footer {
-    padding-left: var(--vp-sidebar-width);
+  .router-wrapper:has(.VPContent.has-sidebar) .doc-footer,
+  .router-wrapper:has(.VPContent.has-sidebar) .centerdss {
+    --footer-pl: var(--vp-sidebar-width);
+    --footer-pr: 0px;
+    --footer-offset: calc(var(--vp-sidebar-width) / 2);
+    padding-left: var(--footer-pl);
+    padding-right: var(--footer-pr);
   }
 
-  /*
-   * 星点中心从「整页 50%」修正到「content-box 50%」。
-   * ::after 的 left 是相对 padding-box，padding-box 中心 = 整元素中心；
-   * content-box 中心 = 整元素中心 + (padding-left - padding-right) / 2。
-   * 有侧边栏时 padding-left = sidebar-width，padding-right = 0，
-   * 故需向右额外偏移 sidebar-width / 2。
-   * ≥1440px 时 PL-PR 仍等于 sidebar-width，偏移量不变，无需重复定义。
-   */
   .router-wrapper:has(.VPContent.has-sidebar) .doc-footer::after {
-    left: calc(50% + var(--vp-sidebar-width) / 2);
+    left: calc(50% + var(--footer-offset));
   }
 }
 
+/* ≥1280 有 sidebar + aside：aside 占位，右侧补偿 256px，offset 重算 */
+@media (min-width: 1280px) {
+  .router-wrapper:has(.VPContent.has-sidebar):has(.VPDoc.has-aside) .doc-footer,
+  .router-wrapper:has(.VPContent.has-sidebar):has(.VPDoc.has-aside) .centerdss {
+    --footer-pr: 256px;
+    --footer-offset: calc((var(--vp-sidebar-width) - 256px) / 2);
+  }
+}
+
+/* ≥1440 有 sidebar：超宽屏整体居中（覆盖 PL/PR/offset） */
 @media (min-width: 1440px) {
-  .router-wrapper:has(.VPContent.has-sidebar) .centerdss,
-  .router-wrapper:has(.VPContent.has-sidebar) .doc-footer {
-    padding-left: calc((100vw - var(--vp-layout-max-width)) / 2 + var(--vp-sidebar-width));
-    padding-right: calc((100vw - var(--vp-layout-max-width)) / 2);
+  .router-wrapper:has(.VPContent.has-sidebar) .doc-footer,
+  .router-wrapper:has(.VPContent.has-sidebar) .centerdss {
+    --footer-pl: calc((100vw - var(--vp-layout-max-width)) / 2 + var(--vp-sidebar-width));
+    --footer-pr: calc((100vw - var(--vp-layout-max-width)) / 2);
+    --footer-offset: calc(var(--vp-sidebar-width) / 2);
+  }
+
+  /* ≥1440 有 aside：PR 在居中基础上再加 256，offset 重算 */
+  .router-wrapper:has(.VPContent.has-sidebar):has(.VPDoc.has-aside) .doc-footer,
+  .router-wrapper:has(.VPContent.has-sidebar):has(.VPDoc.has-aside) .centerdss {
+    --footer-pr: calc((100vw - var(--vp-layout-max-width)) / 2 + 256px);
+    --footer-offset: calc((var(--vp-sidebar-width) - 256px) / 2);
   }
 }
 

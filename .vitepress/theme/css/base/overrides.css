@@ -42,6 +42,16 @@
   --vp-badge-tip-border: transparent;
   --vp-badge-tip-text: var(--vp-c-tip-1);
   --vp-badge-tip-bg: var(--vp-c-tip-soft);
+
+  /* --- 6. 阴影体系 (Shadows) ---
+     覆盖 VitePress 默认的 --vp-shadow-*，收敛扩散半径与不透明度，
+     消除浮层（本页目录下拉、Flyout 菜单等）那圈生硬的“大阴影”。
+     采用柔和双层投影：近处定形 + 远处微扩散。 */
+  --vp-shadow-1: 0 1px 2px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.05);
+  --vp-shadow-2: 0 2px 8px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.04);
+  --vp-shadow-3: 0 4px 12px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.05);
+  --vp-shadow-4: 0 6px 16px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
+  --vp-shadow-5: 0 8px 24px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.08);
 }
 
 /* --- 深色模式适配 --- */
@@ -58,7 +68,14 @@
   --vp-custom-block-tip-code-bg: rgba(0, 0, 0, 0.2);
   
   /* 行内代码在深色背景下用柔和的粉红 */
-  --vp-code-color: #FCA5A5; 
+  --vp-code-color: #FCA5A5;
+
+  /* 阴影体系（深色模式）：黑色投影需提高不透明度才可见，但收敛扩散半径避免脏重感 */
+  --vp-shadow-1: 0 1px 2px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2);
+  --vp-shadow-2: 0 2px 8px rgba(0, 0, 0, 0.35), 0 1px 3px rgba(0, 0, 0, 0.25);
+  --vp-shadow-3: 0 4px 12px rgba(0, 0, 0, 0.4), 0 1px 3px rgba(0, 0, 0, 0.3);
+  --vp-shadow-4: 0 6px 16px rgba(0, 0, 0, 0.45), 0 2px 4px rgba(0, 0, 0, 0.3);
+  --vp-shadow-5: 0 8px 24px rgba(0, 0, 0, 0.5), 0 2px 6px rgba(0, 0, 0, 0.35);
 }
 
 /* ==============================================
@@ -112,14 +129,109 @@
   color: var(--vp-c-brand-2) !important;
 }
 
-/* --- 3. 右侧大纲 (Outline) --- */
-.VPDocOutlineItem.active .link {
-  color: var(--vp-c-brand-1) !important;
-  border-left: 2px solid var(--vp-c-brand-1); /* 保留左侧指示线条 */
+/* --- 3. 右侧大纲 (Outline) · 玻璃卡片样式 ---
+   说明：VitePress 1.6 实际渲染的链接类名为 .outline-link（非旧版 .link），
+   活动指示器为 .outline-marker（由 JS 设置 top/opacity，CSS 仅控制外观）。
+   约束：marker 的 top = activeLink.offsetTop + 39px（硬编码），不得改动
+   .content 的 padding-top、.outline-title 的 line-height，否则指示条错位。 */
+.VPDocAsideOutline.has-outline {
+  position: relative;
+  padding: 14px 12px 12px;
+  border-radius: 14px;
+  border: 1px solid var(--vp-c-divider);
+  background-color: rgba(128, 128, 128, 0.05);
+  backdrop-filter: blur(10px) saturate(140%);
+  -webkit-backdrop-filter: blur(10px) saturate(140%);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
 }
 
-.VPDocOutlineItem .link:hover {
-  color: var(--vp-c-brand-2) !important;
+/* 内容容器：移除默认左边线（改用 marker 指示）；
+   严禁设置 padding-top，否则 marker 错位。 */
+.VPDocAsideOutline .content {
+  border-left: none !important;
+  padding-left: 14px !important;
+  padding-right: 4px !important;
+  padding-bottom: 4px !important;
+  font-size: 13px;
+}
+
+/* 标题：保留 line-height:32px（marker 偏移依赖） */
+.VPDocAsideOutline .outline-title {
+  line-height: 32px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--vp-c-text-1);
+}
+
+/* 活动指示条：渐变（top/opacity 由 JS 驱动，此处仅外观） */
+.VPDocAsideOutline .outline-marker {
+  left: 0 !important;
+  width: 3px !important;
+  height: 20px !important;
+  border-radius: 3px !important;
+  background: linear-gradient(180deg, var(--vp-c-brand-1), var(--vp-c-brand-light)) !important;
+}
+
+/* 链接项：悬停/激活时柔和背景高亮 */
+.VPDocAsideOutline .outline-link {
+  position: relative;
+  line-height: 30px;
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--vp-c-text-2) !important;
+  padding: 0 8px;
+  border-radius: 6px;
+  transition: color 0.25s ease, background-color 0.25s ease;
+}
+
+.VPDocAsideOutline .outline-link:hover {
+  color: var(--vp-c-text-1) !important;
+  background-color: rgba(128, 128, 128, 0.08);
+}
+
+.VPDocAsideOutline .outline-link.active {
+  color: var(--vp-c-brand-1) !important;
+  font-weight: 600;
+  background-color: var(--vp-c-brand-soft);
+}
+
+/* 树形层级线条：纯 CSS，不破坏 marker 的 offsetParent 链
+   约束：marker 的 top = activeLink.offsetTop + 39，offsetTop 相对 .root(relative)。
+   - .nested 加 border-left 不设 position → static，不成为 offsetParent ✓
+   - .outline-link 已是 relative，其 ::before 伪元素不影响父级 offsetParent ✓
+   特异性：带 .VPDocAsideOutline 前缀 (0,2,1+)，盖过 VitePress scoped
+   .nested[data-v-xxx] (0,2,0) 与 .outline-link[data-v-xxx] (0,2,0)。 */
+.VPDocAsideOutline .nested {
+  margin-left: 6px;
+  padding-left: 10px;
+  border-left: 1px solid var(--vp-c-divider);
+}
+
+/* 链接前的水平连接线（从竖线伸出到链接） */
+.VPDocAsideOutline .nested > li > .outline-link::before {
+  content: '';
+  position: absolute;
+  left: -10px;
+  top: 50%;
+  width: 7px;
+  height: 1px;
+  background: var(--vp-c-divider);
+  transform: translateY(-50%);
+  transition: background 0.25s ease, width 0.25s ease;
+}
+
+/* hover/active 时水平线高亮、延长（仅高亮当前项，不波及祖先竖线） */
+.VPDocAsideOutline .nested > li > .outline-link:hover::before,
+.VPDocAsideOutline .nested > li > .outline-link.active::before {
+  background: var(--vp-c-brand-1);
+  width: 9px;
+}
+
+/* 嵌套子项缩进（与竖线/水平线协调） */
+.VPDocAsideOutline .nested .outline-link {
+  padding-left: 10px;
+  font-size: 12.5px;
 }
 
 /* --- 4. 移动端菜单 --- */
@@ -169,6 +281,26 @@
 .float-button:hover {
   background-color: var(--vp-c-brand-2) !important;
   transform: translateY(-2px);
+}
+
+/* ==============================================
+   浮层卡片阴影 (Flyout / Dropdown Shadow)
+   ==============================================
+   VitePress 的浮层（顶部「本页目录」下拉 .VPLocalNavOutlineDropdown .items、
+   所有 Flyout 菜单 .VPMenu）默认用 box-shadow: var(--vp-shadow-3)，
+   扩散大、不透明度高，显得又重又"圆润"。这里直接用元素级 !important 覆盖，
+   收敛为极轻的单层投影，避免依赖变量层叠被其它规则盖回。 */
+
+/* 本页目录下拉浮层（点击顶部「本页」展开的卡片） */
+.VPLocalNavOutlineDropdown .items,
+/* 所有 Flyout 菜单（导航菜单组、外观/特效下拉等） */
+.VPMenu {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.03) !important;
+}
+
+.dark .VPLocalNavOutlineDropdown .items,
+.dark .VPMenu {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35), 0 1px 2px rgba(0, 0, 0, 0.25) !important;
 }
 
 /* ==============================================

@@ -30,14 +30,20 @@
   --vp-local-search-highlight-text: var(--vp-c-brand-1); /* 深色模式关键词高亮文字 */
 }
 
-/* 
- * 1. 弹窗容器优化 
+/*
+ * 1. 弹窗容器优化
  * 模仿 macOS Spotlight 的圆角和阴影
  */
 .VPLocalSearchBox .shell {
   border-radius: 16px !important; /* 大圆角 */
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2) !important; /* 深度阴影 */
+  /* 柔和双层投影：近处定形 + 远处扩散，避免生硬的“大阴影” */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08), 0 12px 32px rgba(0, 0, 0, 0.1) !important;
   border: 1px solid rgba(128, 128, 128, 0.1); /* 边框 */
+}
+
+/* 深色模式下搜索弹窗阴影：黑色投影收得住，配合品牌色微光体现悬浮 */
+.dark .VPLocalSearchBox .shell {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3), 0 12px 32px rgba(0, 0, 0, 0.25) !important;
 }
 
 /* 背景遮罩 - 毛玻璃效果 */

@@ -2,21 +2,34 @@
 :root {
   --image-border-color-light: #eaecef;
   --image-border-color-dark: #404040;
-  --image-shadow-light: rgba(0, 0, 0, 0.1);
-  --image-shadow-dark: rgba(0, 0, 0, 0.3);
+  /* 柔和阴影：浅色模式用低对比度双层投影，避免生硬的“大阴影”感 */
+  --image-shadow-light: 0 1px 2px rgba(0, 0, 0, 0.04), 0 2px 8px rgba(0, 0, 0, 0.06);
+  --image-shadow-light-hover: 0 2px 6px rgba(0, 0, 0, 0.06), 0 6px 16px rgba(0, 0, 0, 0.08);
+  /* 深色模式：黑色阴影收得住，靠轻微辉光体现层次，不脏不重 */
+  --image-shadow-dark: 0 1px 2px rgba(0, 0, 0, 0.3), 0 2px 8px rgba(0, 0, 0, 0.2);
+  --image-shadow-dark-hover: 0 2px 6px rgba(0, 0, 0, 0.35), 0 6px 16px rgba(0, 0, 0, 0.25);
 }
 
 /* Markdown中的图片使用组件样式 */
 .markdown-content img:not(.smart-image-content) {
   max-width: 100%;
   border-radius: 6px;
-  box-shadow: 0 2px 8px var(--image-shadow-light);
-  transition: transform 0.2s ease;
+  box-shadow: var(--image-shadow-light);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .markdown-content img:not(.smart-image-content):hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 16px var(--image-shadow-light);
+  box-shadow: var(--image-shadow-light-hover);
+}
+
+/* 深色模式下图片阴影 */
+.dark .markdown-content img:not(.smart-image-content) {
+  box-shadow: var(--image-shadow-dark);
+}
+
+.dark .markdown-content img:not(.smart-image-content):hover {
+  box-shadow: var(--image-shadow-dark-hover);
 }
 
 /* 表格全局样式优化 */

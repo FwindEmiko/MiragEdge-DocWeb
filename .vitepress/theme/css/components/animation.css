@@ -7,6 +7,12 @@
  */
 
 /* 全局淡入上升动画 */
+/* 关键：不能让 .VPContent 在动画结束后残留 transform，否则会为后代 position:fixed
+   元素（右侧本页目录 .aside-container）建立包含块，导致 fixed 退化为 absolute、
+   目录无法跟随滚动。措施：
+   1) 结束帧 transform: none（仅非 none 的 transform 才建立包含块）；
+   2) 不使用 forwards —— 结束帧(opacity:1 / transform:none)即元素默认态，无需保持，
+      去掉 forwards 可彻底消除 animation fill 状态对 fixed 定位的潜在影响。 */
 @keyframes appleFadeInUp {
   0% {
     opacity: 0;
@@ -14,13 +20,13 @@
   }
   100% {
     opacity: 1;
-    transform: scale(1) translateY(0);
+    transform: none;
   }
 }
 
 /* 内容区域进入动画 */
 .VPContent {
-  animation: appleFadeInUp 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: appleFadeInUp 0.75s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* ===== 内页内容区淡入过渡 ===== */
