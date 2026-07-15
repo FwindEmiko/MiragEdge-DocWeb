@@ -281,6 +281,8 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }) => {
   border-top: 1px solid var(--vp-c-divider);
   margin-top: 10px;
   text-align: center;
+  /* 桌面端有侧边栏时，让页脚顺滑地偏移到文档内容区 */
+  transition: padding-left 0.3s ease, padding-right 0.3s ease;
 }
 
 .doc-footer-content {
@@ -349,12 +351,35 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }) => {
   width: 100%;            /* 占满父容器宽度（确保是居中的容器） */
   margin: 0 auto;         /* 本身在父容器中水平居中 */
   margin-top: 0;          /* 清除默认上边距 */
+  /* 桌面端有侧边栏时，让贡献者顺滑地偏移到文档内容区 */
+  transition: padding-left 0.3s ease, padding-right 0.3s ease;
 }
 
-/* 清除贡献者组件的底部间距（覆盖组件内部样式） */
+/* 贡献者组件的间距控制（覆盖组件内部样式） */
 .centerdss .contributors-container {
-  margin-bottom: 0 !important; /* 强制清除组件自带的底部边距 */
+  margin-top: 8px !important;    /* 缩小与「上一篇/下一篇」之间的间距 */
+  margin-bottom: 0 !important;  /* 强制清除组件自带的底部边距 */
   padding-bottom: 0;
+}
+
+/*
+ * 缩小 VitePress 默认的文档底部留白，避免「上一篇/下一篇」与本页面贡献者之间
+ * 出现约 176px 的大空白（默认 .content padding-bottom 128px + 贡献者 margin-top 48px）。
+ * 由于下方有 .centerdss（贡献者）和 .doc-footer 接住，不再需要这么大留白。
+ * - < 960px: .VPDoc 的 padding-bottom 由 96~128px 缩为 24px
+ * - >= 960px: .content 的 padding-bottom 由 128px 缩为 24px
+ * 用 !important 覆盖 VitePress scoped 样式（scoped 选择器带属性选择器优先级更高）。
+ */
+@media (max-width: 959px) {
+  .VPDoc {
+    padding-bottom: 24px !important;
+  }
+}
+
+@media (min-width: 960px) {
+  .VPDoc .content {
+    padding-bottom: 24px !important;
+  }
 }
 
 /* 移动端菜单中的特效开关项 */
@@ -372,6 +397,30 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }) => {
   font-size: 12px;
   font-weight: 500;
   color: var(--vp-c-text-2);
+}
+
+/*
+ * 桌面端存在侧边栏时，让底部贡献者与页脚自动顺滑地偏移到
+ * 侧边栏右侧的实际文档内容区居中显示。
+ * 断点与偏移量完全对齐 VitePress 的 .VPContent.has-sidebar 内边距规则：
+ *   >= 960px : padding-left 为侧边栏宽度
+ *   >= 1440px : 左右同时留出 (100vw - 布局最大宽度) / 2 以保持内容居中
+ * 移动端侧边栏为抽屉式覆盖，不占用布局空间，故无需偏移。
+ * 首页无 .has-sidebar 类，:has() 不匹配，页脚仍全宽居中。
+ */
+@media (min-width: 960px) {
+  .router-wrapper:has(.VPContent.has-sidebar) .centerdss,
+  .router-wrapper:has(.VPContent.has-sidebar) .doc-footer {
+    padding-left: var(--vp-sidebar-width);
+  }
+}
+
+@media (min-width: 1440px) {
+  .router-wrapper:has(.VPContent.has-sidebar) .centerdss,
+  .router-wrapper:has(.VPContent.has-sidebar) .doc-footer {
+    padding-left: calc((100vw - var(--vp-layout-max-width)) / 2 + var(--vp-sidebar-width));
+    padding-right: calc((100vw - var(--vp-layout-max-width)) / 2);
+  }
 }
 
 </style>
