@@ -9,6 +9,10 @@ import NotFound from './NotFound.vue';
 import Live2D from './Live2D.vue';
 import EffectsToggle from './EffectsToggle.vue';
 import { effectsEnabled, initEffectsToggleState } from '../../composables/useEffectsToggle';
+import { useTocAutoScroll } from '../../composables/useTocAutoScroll';
+
+// 右侧「本页目录」长目录自动滚动跟随 active 项
+useTocAutoScroll();
 
 // Corner 装饰组件改为异步加载，减少主 bundle 体积
 const CornerStars = defineAsyncComponent(() => import('./CornerStars.vue'));
