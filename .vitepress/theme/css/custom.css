@@ -88,7 +88,6 @@
 }
 
 /* ===== 代码块美化 ===== */
-/* macOS 风格圆点装饰 */
 .vp-doc div[class*='language-'] {
   border-radius: 12px !important;
   box-shadow: 0 0 0 1px rgba(224, 82, 82, 0.06), 0 2px 12px rgba(0, 0, 0, 0.08);
@@ -97,55 +96,9 @@
   position: relative;
 }
 
-.vp-doc div[class*='language-']::before {
-  content: '';
-  display: block;
-  height: 32px;
-  background: rgba(0, 0, 0, 0.03);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.04);
-  position: relative;
-}
-
-.dark .vp-doc div[class*='language-']::before {
-  background: rgba(255, 255, 255, 0.03);
-  border-bottom-color: rgba(255, 255, 255, 0.04);
-}
-
-.vp-doc div[class*='language-']::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 32px;
-  background:
-    radial-gradient(circle at 18px 16px, #ff5f57 5px, transparent 5px),
-    radial-gradient(circle at 36px 16px, #febc2e 5px, transparent 5px),
-    radial-gradient(circle at 54px 16px, #28c840 5px, transparent 5px);
-  pointer-events: none;
-  z-index: 1;
-}
-
-/* 调整代码内容位置，为圆点条留出空间 */
 .vp-doc div[class*='language-'] > pre {
   margin: 0;
   border-radius: 0;
-}
-
-/* 移动端缩减代码块 macOS 圆点装饰条高度（32px → 24px），节省纵向空间
-   移动端纵向空间宝贵，代码块本身已需横向滚动，装饰条无需桌面端那么高 */
-@media (max-width: 767px) {
-  .vp-doc div[class*='language-']::before,
-  .vp-doc div[class*='language-']::after {
-    height: 24px;
-  }
-  /* 圆点等比缩小并左移 */
-  .vp-doc div[class*='language-']::after {
-    background:
-      radial-gradient(circle at 14px 12px, #ff5f57 4px, transparent 4px),
-      radial-gradient(circle at 28px 12px, #febc2e 4px, transparent 4px),
-      radial-gradient(circle at 42px 12px, #28c840 4px, transparent 4px);
-  }
 }
 
 .dark .vp-doc div[class*='language-'] {

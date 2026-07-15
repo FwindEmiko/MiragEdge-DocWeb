@@ -1,7 +1,7 @@
 // .vitepress/theme/index.ts
 // 自定义主题入口文件
 
-import { h, onMounted, onBeforeUnmount } from 'vue'
+import { h, onMounted, onBeforeUnmount, nextTick } from 'vue'
 import type { Theme } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
 import SmartImage from './components/vue/SmartImage.vue'
@@ -84,6 +84,11 @@ export default {
         initNavIcons();
         // 路由切换后检测是否有新部署（延迟 2s，避免与路由过渡冲突）
         checkVersionOnRouteChange();
+        // 路由切换后重新绑定首页卡片 3D 透视效果
+        // 新渲染的 .VPFeature 卡片未被绑定事件，需在 DOM 更新后重新初始化
+        nextTick(() => {
+          init3DTiltEffect();
+        });
       }
     }
   },

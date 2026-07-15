@@ -59,3 +59,9 @@ A：
 
 如以上内容未解决你的问题，欢迎在 Q 群、游戏留言板反馈。
 也欢迎补充排障经验，帮助后续玩家更快解决问题。
+
+## 📢 获取帮助
+
+- <MapIcon name="message-circle" :size="24" /> **玩家交流群**: 523914625
+- 🐛 **问题反馈**: [GitHub Issues](https://github.com/fwindemiko/MiragEdge-DocWeb/issues)
+- <MapIcon name="monitor" :size="24" /> **贡献代码**: [GitHub 仓库](https://github.com/fwindemiko/MiragEdge-DocWeb)
