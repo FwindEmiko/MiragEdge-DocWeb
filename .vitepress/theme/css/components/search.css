@@ -46,8 +46,8 @@
   /* 初始隐藏态：缩放 + 上浮 + 透明 */
   opacity: 0;
   transform: scale(0.96) translateY(-10px);
-  transition: opacity 0.22s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity var(--duration-slow) var(--ease-out-expo),
+    transform var(--duration-slow) var(--ease-out-expo);
   will-change: opacity, transform;
 }
 
@@ -66,9 +66,9 @@
 .VPLocalSearchBox .backdrop {
   backdrop-filter: blur(8px); /* 毛玻璃模糊效果 */
   background: rgba(0, 0, 0, 0.2); /* 背景遮罩颜色 */
-  /* 覆盖 VitePress 默认的 transition: opacity 0.5s，缩短为 0.2s */
+  /* 覆盖 VitePress 默认的 transition: opacity 0.5s，缩短并统一缓动 */
   opacity: 0;
-  transition: opacity 0.2s ease-out;
+  transition: opacity var(--duration-normal) var(--ease-out-expo);
   will-change: opacity;
 }
 
@@ -76,11 +76,12 @@
   opacity: 1;
 }
 
-/* 移动端：.shell 为全屏无圆角，scale 动画在全屏时变形明显，降级为纯淡入 */
+/* 移动端：.shell 为全屏无圆角，scale 动画在全屏时变形明显，降级为纯淡入。
+   引用全局动画 token，移动端 --duration-slow 自动降为 0.22s */
 @media (max-width: 767px) {
   .VPLocalSearchBox .shell {
     transform: none;
-    transition: opacity 0.18s ease-out;
+    transition: opacity var(--duration-slow) var(--ease-out-expo);
   }
   .VPLocalSearchBox .shell.search-open {
     transform: none;
@@ -95,7 +96,7 @@
   margin: 12px !important; /* 外边距 */
   background-color: var(--vp-c-bg-alt) !important; /* 背景色 */
   border: 1px solid transparent; /* 边框 */
-  transition: all 0.2s ease; /* 过渡动画 */
+  transition: all var(--duration-fast) var(--ease-out-expo); /* 过渡动画 */
 }
 
 /* 输入框激活状态 - 品牌色光晕 */
@@ -111,7 +112,7 @@
   border-radius: 8px !important; /* 列表项圆角 */
   margin: 4px 8px !important; /* 增加间距，不贴边 */
   border: none !important; /* 去除原有边框 */
-  transition: background-color 0.1s; /* 背景色过渡动画 */
+  transition: background-color var(--duration-instant); /* 背景色过渡动画 */
 }
 
 /* 选中项样式优化 */

@@ -120,15 +120,16 @@ export default {
           // 强制重排，确保无过渡的初始位移生效
           void navSearch.offsetWidth
           // 下一帧启用过渡并移除 transform，平滑滑到新位置
+          // 引用全局动画 token，与路由切换/侧边栏动画缓动一致
           requestAnimationFrame(() => {
-            navSearch.style.transition = 'transform 0.35s cubic-bezier(0.4, 0, 0.2, 1)'
+            navSearch.style.transition = 'transform var(--duration-slow) var(--ease-out-expo)'
             navSearch.style.transform = ''
           })
           // 过渡结束后清理 inline 样式，避免残留影响后续布局
           setTimeout(() => {
             navSearch.style.transition = ''
             navSearch.style.transform = ''
-          }, 380)
+          }, 320)
         })
       }
     }

@@ -1,22 +1,55 @@
 /*!
  * @file animation.css
- * @brief 全局动画效果定义
- * @description 定义网站的全局动画效果，包括淡入上升动画和可访问性支持
+ * @brief 全局动画效果定义与动画 token 系统
+ * @description 定义网站的全局动画 token（缓动曲线、持续时间）、淡入上升动画和可访问性支持
  * @author nekro-agent-doc team
  * @date 2024
  */
 
-/* 全局淡入上升动画 */
-/* 关键：不能让 .VPContent 在动画结束后残留 transform，否则会为后代 position:fixed
-   元素（右侧本页目录 .aside-container）建立包含块，导致 fixed 退化为 absolute、
-   目录无法跟随滚动。措施：
-   1) 结束帧 transform: none（仅非 none 的 transform 才建立包含块）；
-   2) 不使用 forwards —— 结束帧(opacity:1 / transform:none)即元素默认态，无需保持，
-      去掉 forwards 可彻底消除 animation fill 状态对 fixed 定位的潜在影响。 */
+/* ==================================================
+   动画 Token 系统（Design Tokens for Motion）
+   ==================================================
+   全站动画统一引用这些变量，确保缓动曲线与持续时间一致。
+   CSS 变量运行时解析，不受文件加载顺序影响，所有样式文件均可引用。 */
+:root {
+  /* --- 缓动曲线（Easing） --- */
+  /* 主缓动：expo out，快入慢出，适合内容进入、状态切换 */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  /* 弹性缓动：带轻微回弹，适合悬浮按钮、强调性微交互 */
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  /* 对称缓动：进出对称，适合抽屉、面板展开收起 */
+  --ease-in-out-circ: cubic-bezier(0.85, 0, 0.15, 1);
+
+  /* --- 持续时间（Duration） --- */
+  --duration-instant: 0.1s;   /* 即时反馈：搜索结果高亮 */
+  --duration-fast: 0.15s;     /* 微交互：hover、focus */
+  --duration-normal: 0.2s;    /* 路由切换：页面淡入 */
+  --duration-slow: 0.3s;      /* 面板动画：侧边栏淡入、搜索弹窗 */
+  --duration-page: 0.5s;      /* 首屏加载：appleFadeInUp */
+}
+
+/* --- 移动端动画降级 ---
+   覆盖 token 值，让所有引用变量的动画自动缩短 25%，
+   减少低端设备等待时间与合成层数据交换量。
+   不需要逐个修改各组件的动画声明。 */
+@media (max-width: 767px) {
+  :root {
+    --duration-normal: 0.15s;
+    --duration-slow: 0.22s;
+    --duration-page: 0.4s;
+  }
+}
+
+/* ==================================================
+   首屏加载动画
+   ==================================================
+   仅首次加载触发（VPContent 常驻挂载不随路由重建）。
+   translateY/scale 幅度刻意保持微小（6px / 0.99），
+   避免位移突兀，同时给首屏一个「从下方浮起」的呼吸感。 */
 @keyframes appleFadeInUp {
   0% {
     opacity: 0;
-    transform: scale(0.98) translateY(10px);
+    transform: scale(0.99) translateY(6px);
   }
   100% {
     opacity: 1;
@@ -24,26 +57,14 @@
   }
 }
 
-/* 内容区域进入动画 */
 .VPContent {
-  animation: appleFadeInUp 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: appleFadeInUp var(--duration-page) var(--ease-out-expo);
 }
 
-/* ===== 内页内容区淡入过渡 ===== */
-@keyframes docFadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-.VPDoc .content {
-  animation: docFadeIn 0.3s ease-out forwards;
-}
-
-/* 可访问性：尊重用户的 reduced-motion 偏好。
+/* ==================================================
+   可访问性
+   ==================================================
+   尊重用户的 reduced-motion 偏好。
    仅关闭装饰性 animation，保留 transition —— transition 是状态切换的微交互
    （hover/focus 反馈），关闭会让界面跳跃突兀，且不属于 WCAG 2.3.3 约束的"动画"。 */
 @media (prefers-reduced-motion: reduce) {

@@ -636,3 +636,38 @@
 .VPTeamMembersItem .sp .sp-link {
   border-radius: 0 0 16px 16px;
 }
+
+/* ==============================================
+   统一 VitePress 默认动画（覆盖 scoped 样式）
+   ==============================================
+   VitePress 默认的 VPSidebar / VPNavScreen 使用 ease 和不一致的时长，
+   此处统一为全局动画 token，确保与页面加载/路由切换动画风格一致。
+   使用 !important 覆盖 VitePress scoped CSS（带 data-v 属性选择器，特异性更高）。 */
+
+/* 移动端侧边栏抽屉：打开/关闭统一缓动与时长
+   VitePress 默认：打开 transform 0.5s cubic-bezier(0.19,1,.22,1) / 关闭 transform 0.25s ease
+   统一为：transform var(--duration-slow) var(--ease-out-expo)，打开/关闭对称 */
+@media (max-width: 959px) {
+  .VPSidebar {
+    transition: opacity var(--duration-slow) var(--ease-out-expo),
+      transform var(--duration-slow) var(--ease-out-expo) !important;
+  }
+
+  .VPSidebar.open {
+    transition: opacity var(--duration-slow) var(--ease-out-expo),
+      transform var(--duration-slow) var(--ease-out-expo) !important;
+  }
+}
+
+/* 移动端汉堡菜单抽屉（VPNavScreen）：fade transition 统一缓动
+   VitePress 默认：opacity 0.25s / transform 0.25s ease
+   统一为：var(--duration-slow) var(--ease-out-expo) */
+.VPNavScreen.fade-enter-active,
+.VPNavScreen.fade-leave-active {
+  transition: opacity var(--duration-slow) var(--ease-out-expo) !important;
+}
+
+.VPNavScreen.fade-enter-active .container,
+.VPNavScreen.fade-leave-active .container {
+  transition: transform var(--duration-slow) var(--ease-out-expo) !important;
+}

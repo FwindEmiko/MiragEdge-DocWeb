@@ -208,26 +208,65 @@ const updateScrollProgress = () => {
 /**
  * 监听路由变化，为内容区域触发进入动画（CSS animation，不依赖 :key 重建组件）
  * 这样 VPSidebar 不会被销毁重建，侧边栏滚动位置得以保持
+ *
+ * 闪烁修复：VitePress 异步路由加载可能导致 nextTick 跨微任务执行，
+ * 新内容在 nextTick 回调前已以 opacity:1 被浏览器绘制一帧。
+ * 在 nextTick 中先预设 inline opacity:0 堵住这个窗口，再重启动画，
+ * 确保浏览器绘制的始终是 opacity:0 → 1 的淡入过程，而非 1 → 0 → 1 的闪烁。
+ *
+ * 侧边栏动画优化：watch 默认 flush:'pre'（DOM 更新前执行回调），此时可拿到
+ * 旧侧边栏的链接结构指纹。nextTick 中（DOM 更新后）取新指纹比较，
+ * 仅当侧边栏结构变化（如跨分组切换）时才播放淡入动画。
+ * 同一分组内切换页面时侧边栏结构不变，跳过动画避免「抽搐」感。
  */
+
+// 提取侧边栏链接结构指纹：所有链接的 href 列表拼接，结构相同则指纹相同。
+// 遍历量通常 10-50 个链接，性能可忽略。
+function getSidebarFingerprint() {
+  const nav = document.querySelector('.VPSidebar .nav')
+  if (!nav) return ''
+  const links = nav.querySelectorAll('a[href]')
+  return Array.from(links, a => a.getAttribute('href')).join('\n')
+}
+
 watch(
   () => route.path,
   () => {
+    // flush:pre，DOM 还是旧的 —— 记录旧侧边栏结构指纹
+    const oldSidebarFingerprint = window.matchMedia('(min-width: 960px)').matches
+      ? getSidebarFingerprint()
+      : ''
+
     nextTick(() => {
       // 页面进入动画
       const target = document.querySelector('.vp-doc') || document.querySelector('#VPContent')
       if (target) {
         target.classList.remove('page-enter')
-        // 触发重排以重启动画
+        // 预设 opacity:0，堵住「新内容先以 opacity:1 渲染一帧」的闪烁窗口。
+        // 若 nextTick 与 DOM 更新同微任务则浏览器本就不会中间绘制，此处无害；
+        // 若跨微任务（异步路由加载）则此处 opacity 已为 0，避免先显示再消失。
+        target.style.opacity = '0'
+        // 触发重排，确保 opacity:0 已应用于渲染管线
         void target.offsetWidth
+        // 添加动画类，0% 关键帧 opacity:0 与 inline 一致，无缝衔接
         target.classList.add('page-enter')
+        // 清除 inline opacity，让 animation 接管（结束后恢复默认 opacity:1）
+        target.style.opacity = ''
       }
 
-      // 侧边栏淡入动画：路由切换时侧边栏内容更新，加一个轻柔的淡入+左滑
-      const sidebar = document.querySelector('.VPSidebar .nav')
-      if (sidebar) {
-        sidebar.classList.remove('sidebar-fade-enter')
-        void sidebar.offsetWidth
-        sidebar.classList.add('sidebar-fade-enter')
+      // 侧边栏淡入动画：仅当侧边栏结构变化时才播放（如跨分组切换）。
+      // 同一分组内切换页面时侧边栏链接列表不变，跳过动画避免「抽搐」感。
+      // 仅桌面端执行：移动端侧边栏为抽屉式，关闭时不可见，执行动画纯属浪费。
+      if (window.matchMedia('(min-width: 960px)').matches) {
+        const newSidebarFingerprint = getSidebarFingerprint()
+        if (newSidebarFingerprint !== oldSidebarFingerprint) {
+          const sidebar = document.querySelector('.VPSidebar .nav')
+          if (sidebar) {
+            sidebar.classList.remove('sidebar-fade-enter')
+            void sidebar.offsetWidth
+            sidebar.classList.add('sidebar-fade-enter')
+          }
+        }
       }
 
       // 搜索框 FLIP 动画已移至 index.ts 的 router.onBeforeRouteChanged/onAfterRouteChanged，
@@ -235,22 +274,25 @@ watch(
 
       // 侧边栏滚动追踪：若当前活动项不在可视区域内，平滑滚动到它
       // 用 requestIdleCallback 延迟到空闲时段执行，避免在移动端低性能机型上
-      // 与页面进入动画、DOM 重建抢占主线程导致掉帧
-      const scrollSidebarActive = () => {
-        const sidebar = document.querySelector('.VPSidebar')
-        const activeItem = sidebar?.querySelector('.VPSidebarItem.is-active')
-        if (sidebar && activeItem) {
-          const sRect = sidebar.getBoundingClientRect()
-          const iRect = activeItem.getBoundingClientRect()
-          if (iRect.top < sRect.top || iRect.bottom > sRect.bottom) {
-            activeItem.scrollIntoView({ block: 'nearest', behavior: 'smooth' })
+      // 与页面进入动画、DOM 重建抢占主线程导致掉帧。
+      // 移动端抽屉关闭时侧边栏不可见，跳过滚动追踪减少 getBoundingClientRect 调用
+      if (window.matchMedia('(min-width: 960px)').matches) {
+        const scrollSidebarActive = () => {
+          const sidebar = document.querySelector('.VPSidebar')
+          const activeItem = sidebar?.querySelector('.VPSidebarItem.is-active')
+          if (sidebar && activeItem) {
+            const sRect = sidebar.getBoundingClientRect()
+            const iRect = activeItem.getBoundingClientRect()
+            if (iRect.top < sRect.top || iRect.bottom > sRect.bottom) {
+              activeItem.scrollIntoView({ block: 'nearest', behavior: 'smooth' })
+            }
           }
         }
-      }
-      if ('requestIdleCallback' in window) {
-        requestIdleCallback(scrollSidebarActive, { timeout: 200 })
-      } else {
-        scrollSidebarActive()
+        if ('requestIdleCallback' in window) {
+          requestIdleCallback(scrollSidebarActive, { timeout: 200 })
+        } else {
+          scrollSidebarActive()
+        }
       }
     })
   }
@@ -423,27 +465,29 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }) => {
   min-height: 100vh;
 }
 
-/* 页面进入动画（通过 .page-enter 类触发，不依赖 :key 重建组件） */
+/* 页面进入动画（通过 .page-enter 类触发，不依赖 :key 重建组件）
+   优化：移除 scale 避免缩放渲染导致文字亚像素模糊；纯 opacity 淡入更干净。
+   引用全局动画 token --duration-normal / --ease-out-expo，与首屏 appleFadeInUp 视觉节奏一致。
+   不使用 forwards —— 结束帧 opacity:1 即默认态，避免残留 fill 状态影响后代 fixed 定位。 */
 @keyframes scaleIn {
   0% {
-    transform: scale(0.98);
     opacity: 0;
   }
   100% {
-    transform: scale(1);
     opacity: 1;
   }
 }
 
 .page-enter {
-  animation: scaleIn 0.25s ease;
+  animation: scaleIn var(--duration-normal) var(--ease-out-expo);
 }
 
-/* 侧边栏淡入动画：路由切换时侧边栏内容更新，轻柔淡入 + 微左滑 */
+/* 侧边栏淡入动画：路由切换时侧边栏内容更新，轻柔淡入 + 微左滑
+   translateX(-6px) 减小位移避免水平抖动；起始 opacity 0.5 减小跳变 */
 @keyframes sidebarFadeIn {
   from {
-    opacity: 0.4;
-    transform: translateX(-10px);
+    opacity: 0.5;
+    transform: translateX(-6px);
   }
   to {
     opacity: 1;
@@ -452,7 +496,7 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }) => {
 }
 
 .sidebar-fade-enter {
-  animation: sidebarFadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: sidebarFadeIn var(--duration-slow) var(--ease-out-expo);
 }
 
 /* 文档页脚样式 - 带流光分割线与散落星点装饰 */
@@ -575,11 +619,11 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }) => {
   opacity: 0;
   pointer-events: none;
   transform: translateY(12px) scale(0.8);
-  /* 弹性回弹缓动，让出现更生动 */
+  /* opacity 用主缓动，transform 用弹性缓动让出现更生动，box-shadow 用快速缓动 */
   transition:
-    opacity 0.35s ease,
-    transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
-    box-shadow 0.3s ease;
+    opacity var(--duration-slow) var(--ease-out-expo),
+    transform 0.4s var(--ease-spring),
+    box-shadow var(--duration-slow) var(--ease-out-expo);
   -webkit-tap-highlight-color: transparent;
 }
 
