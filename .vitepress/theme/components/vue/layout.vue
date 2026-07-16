@@ -230,6 +230,9 @@ watch(
         sidebar.classList.add('sidebar-fade-enter')
       }
 
+      // 搜索框 FLIP 动画已移至 index.ts 的 router.onBeforeRouteChanged/onAfterRouteChanged，
+      // 那里能可靠地在路由变化前后分别拿到旧/新 DOM 位置
+
       // 侧边栏滚动追踪：若当前活动项不在可视区域内，平滑滚动到它
       // 用 requestIdleCallback 延迟到空闲时段执行，避免在移动端低性能机型上
       // 与页面进入动画、DOM 重建抢占主线程导致掉帧

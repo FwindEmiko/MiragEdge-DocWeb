@@ -306,6 +306,9 @@ async function main() {
       if (e.isDirectory()) {
         // 跳过已水印的外部图片目录，避免双重水印
         if (e.name === "external-wm") continue;
+        // 跳过贡献者头像目录（构建后路径 dist/images/member），
+        // 头像无需水印，且加水印会破坏小尺寸头像的清晰度
+        if (e.name === "member" && dir.endsWith(join("images"))) continue;
         walk(fp);
       }
       else if (e.isFile()) {

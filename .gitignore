@@ -23,6 +23,7 @@ coverage/
 *.swp
 *.swo
 .claude
+.workbuddy
 
 # OS files
 .DS_Store
@@ -42,3 +43,4 @@ yarn-error.log*
 # pnpm
 .pnpm-store/
 .npm
+public/data/contributors-activity.json

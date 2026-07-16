@@ -266,50 +266,89 @@
   background-color: var(--vp-c-brand-soft) !important;
 }
 
-/* --- 5. 自定义块 (Tip/Info) --- */
-/* 重新设计：左侧色条 + 柔和渐变背景 + 图标，告别平淡色块 */
+/* --- 5. 自定义块 (Tip/Info/Warning/Danger/Details) --- */
+/* 统一设计语言：左侧色条 + 纯色柔淡底色，去除渐变和过度装饰 */
+.custom-block {
+  border: 1px solid transparent !important;
+  border-left: 3px solid !important;
+  border-radius: 8px !important;
+  padding: 14px 18px !important;
+  margin: 16px 0 !important;
+  line-height: 1.7 !important;
+}
+
+/* 标题统一加粗 + 间距 */
+.custom-block .custom-block-title {
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+/* tip: 绿色系 */
 .custom-block.tip {
-  border: none;
-  border-left: 4px solid var(--vp-c-tip-1);
-  border-radius: 0 12px 12px 0;
-  padding: 14px 18px 14px 16px;
-  background: linear-gradient(135deg, var(--vp-c-tip-soft), transparent 80%);
-  position: relative;
-  overflow: hidden;
+  border-left-color: #10b981 !important;
+  background: rgba(16, 185, 129, 0.07) !important;
 }
-
-/* 标题前加图标 */
 .custom-block.tip .custom-block-title {
-  display: flex;
-  align-items: center;
-  gap: 6px;
+  color: #059669;
 }
 
-.custom-block.tip .custom-block-title::before {
-  content: '💡';
-  font-size: 1em;
-  line-height: 1;
-}
-
-/* Info 块也统一风格（品牌色左侧条） */
+/* info: 蓝色系 */
 .custom-block.info {
-  border: none;
-  border-left: 4px solid var(--vp-c-brand-1);
-  border-radius: 0 12px 12px 0;
-  padding: 14px 18px 14px 16px;
-  background: linear-gradient(135deg, var(--vp-c-brand-soft), transparent 80%);
+  border-left-color: #3b82f6 !important;
+  background: rgba(59, 130, 246, 0.07) !important;
+}
+.custom-block.info .custom-block-title {
+  color: #2563eb;
 }
 
-/* Warning 块 */
+/* warning: 琥珀色系 */
 .custom-block.warning {
-  border-left: 4px solid #F59E0B;
-  border-radius: 0 12px 12px 0;
+  border-left-color: #f59e0b !important;
+  background: rgba(245, 158, 11, 0.07) !important;
+}
+.custom-block.warning .custom-block-title {
+  color: #d97706;
 }
 
-/* Danger 块 */
+/* danger: 红色系 */
 .custom-block.danger {
-  border-left: 4px solid #EF4444;
-  border-radius: 0 12px 12px 0;
+  border-left-color: #ef4444 !important;
+  background: rgba(239, 68, 68, 0.07) !important;
+}
+.custom-block.danger .custom-block-title {
+  color: #dc2626;
+}
+
+/* details: 折叠块 */
+.custom-block.details {
+  border-left-color: var(--vp-c-brand-1) !important;
+  background: var(--vp-c-bg-soft) !important;
+}
+
+/* 深色模式：提高底色饱和度保证可读性 */
+.dark .custom-block.tip {
+  background: rgba(16, 185, 129, 0.12) !important;
+}
+.dark .custom-block.info {
+  background: rgba(59, 130, 246, 0.12) !important;
+}
+.dark .custom-block.warning {
+  background: rgba(245, 158, 11, 0.12) !important;
+}
+.dark .custom-block.danger {
+  background: rgba(239, 68, 68, 0.12) !important;
+}
+.dark .custom-block.tip .custom-block-title {
+  color: #34d399;
+}
+.dark .custom-block.info .custom-block-title {
+  color: #60a5fa;
+}
+.dark .custom-block.warning .custom-block-title {
+  color: #fbbf24;
+}
+.dark .custom-block.danger .custom-block-title {
+  color: #f87171;
 }
 
 /* --- 6. 其他组件 --- */
@@ -463,4 +502,137 @@
 
 .dark .VPSidebar {
   scrollbar-color: rgba(255, 255, 255, 0.12) transparent;
+}
+
+/* ==============================================
+   团队页面 (VPTeamPage) 完全重构
+   玻璃磨砂卡片 + 品牌色光环头像 + 胶囊徽章
+   ============================================== */
+
+/* 页面主标题：品牌色渐变文字 */
+.VPTeamPageTitle .title {
+  font-weight: 700 !important;
+  background: linear-gradient(135deg, var(--vp-c-brand-1), var(--vp-c-brand-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* 区块标题：渐变分割线 + 玻璃文字背景 */
+.VPTeamPageSection .title-line {
+  background: linear-gradient(90deg, transparent, var(--vp-c-brand-1), transparent) !important;
+}
+.VPTeamPageSection .title-text {
+  background-color: var(--vp-c-bg) !important;
+  padding: 4px 20px !important;
+  border-radius: 8px;
+  font-weight: 600 !important;
+}
+
+/* 成员卡片网格间距 */
+.VPTeamMembers .container {
+  gap: 20px !important;
+}
+.VPTeamMembers.small .container {
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)) !important;
+}
+
+/* 成员卡片：玻璃磨砂 */
+.VPTeamMembersItem {
+  border-radius: 16px !important;
+  background: rgba(255, 255, 255, 0.65) !important;
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.dark .VPTeamMembersItem {
+  background: rgba(30, 30, 35, 0.55) !important;
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* 卡片内 profile 背景透明，让玻璃效果透出 */
+.VPTeamMembersItem .profile {
+  background-color: transparent !important;
+}
+
+/* hover 效果：上浮 + 品牌色光晕 */
+.VPTeamMembersItem:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 32px rgba(224, 82, 82, 0.12),
+    0 4px 12px rgba(0, 0, 0, 0.06);
+  border-color: rgba(224, 82, 82, 0.2);
+}
+
+.dark .VPTeamMembersItem:hover {
+  box-shadow: 0 12px 32px rgba(224, 82, 82, 0.15),
+    0 4px 12px rgba(0, 0, 0, 0.3);
+  border-color: rgba(224, 82, 82, 0.25);
+}
+
+/* 头像：圆角方形（与方形图片匹配）+ 品牌色光环 */
+/* 光环和上浮只在鼠标直接 hover 头像时触发，与卡片 hover 解耦 */
+.VPTeamMembersItem .avatar {
+  border-radius: 16px !important;
+  box-shadow: 0 0 0 3px var(--vp-c-brand-soft),
+    0 4px 12px rgba(0, 0, 0, 0.08) !important;
+  transition: box-shadow 0.3s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.VPTeamMembersItem .avatar-img {
+  border-radius: 16px !important;
+}
+
+/* 头像 hover 时：上浮 + 光环增强，同步移动不分离 */
+.VPTeamMembersItem .avatar:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0 0 4px rgba(224, 82, 82, 0.25),
+    0 8px 20px rgba(224, 82, 82, 0.15) !important;
+}
+
+/* 名字 */
+.VPTeamMembersItem .name {
+  color: var(--vp-c-text-1) !important;
+  font-weight: 700 !important;
+}
+
+/* 职位/头衔：胶囊徽章 */
+.VPTeamMembersItem .affiliation {
+  padding-top: 8px !important;
+}
+.VPTeamMembersItem .affiliation .title {
+  display: inline-block;
+  padding: 3px 12px;
+  border-radius: 12px;
+  font-size: 12px !important;
+  font-weight: 600;
+  color: var(--vp-c-brand-1);
+  background: var(--vp-c-brand-soft);
+}
+
+/* 描述文字 */
+.VPTeamMembersItem .desc {
+  color: var(--vp-c-text-2) !important;
+}
+
+/* 社交链接区域 */
+.VPTeamMembersItem .links {
+  height: auto !important;
+  padding-top: 16px !important;
+  margin: 0 !important;
+}
+
+/* 社交链接图标 hover 品牌 */
+.VPTeamMembersItem .links :deep(.VPSocialLink:hover),
+.VPTeamMembersItem .links .VPSocialLink:hover {
+  color: var(--vp-c-brand-1);
+}
+
+/* 赞助按钮圆角适配卡片底部 */
+.VPTeamMembersItem .sp .sp-link {
+  border-radius: 0 0 16px 16px;
 }

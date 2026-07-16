@@ -31,41 +31,32 @@
    1. 顶部导航栏 (Navbar)
    ================================================== */
 
+/* 所有 VPNavBar 状态预设透明 border-bottom
+   修复：从无 sidebar 页面（如首页）切换到有 sidebar 页面时，border-bottom 从 none
+   瞬变为 1px solid，由于 transition 只含 border-color，border-color 的过渡起点为
+   currentColor（深色模式下为白色），导致顶栏底部闪一条白线。
+   始终保持 1px border-width，仅切换 border-color 透明度，从 transparent 过渡到
+   目标色，避免经过 currentColor 产生闪烁。 */
+.VPNavBar {
+  border-bottom: 1px solid transparent !important;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
 /* 首页下滑后 & 文档页的导航栏 */
 .VPNavBar:not(.has-sidebar):not(.home.top),
 .VPNavBar.has-sidebar {
   background-color: var(--glass-bg-color) !important;
   backdrop-filter: blur(var(--blur-radius)) saturate(var(--glass-saturate));
   -webkit-backdrop-filter: blur(var(--blur-radius)) saturate(var(--glass-saturate));
-  
-  /* 底部增加一条极细的分割线，增加层次感 */
-  border-bottom: 1px solid var(--glass-border-color) !important;
-  transition: background-color 0.3s ease, border-color 0.3s ease;
+
+  /* 底部增加一条极细的分割线，增加层次感（仅改颜色，宽度由上方通用规则保持 1px） */
+  border-bottom-color: var(--glass-border-color) !important;
 }
 
 /* 适配桌面端中间内容区 (防止 VitePress 默认遮挡) */
 @media (min-width: 960px) {
   .VPNavBar:not(.home.top) .content-body {
     background-color: transparent !important; /* 让父元素的模糊透出来 */
-  }
-}
-
-/* 导航栏内容区位移过渡：首页(无 sidebar) ↔ 文档页(有 sidebar) 切换时，
-   .content 的 padding-left 从 0 变为 sidebar 宽度，搜索框等元素会整体右移。
-   给 padding 加 transition 让位移平滑，而非瞬间跳变。
-   保留 VitePress 原有的 background-color 过渡。 */
-@media (min-width: 960px) {
-  .VPNavBar .content,
-  .VPNavBar .content-body {
-    transition: padding-left 0.32s cubic-bezier(0.4, 0, 0.2, 1),
-      padding-right 0.32s cubic-bezier(0.4, 0, 0.2, 1),
-      background-color 0.5s ease;
-  }
-
-  /* logo 区 .title 在有 sidebar 时宽度/内边距也会变化，一并平滑 */
-  .VPNavBar .title {
-    transition: padding-left 0.32s cubic-bezier(0.4, 0, 0.2, 1),
-      width 0.32s cubic-bezier(0.4, 0, 0.2, 1);
   }
 }
 
@@ -122,8 +113,10 @@
 /* 使用 !important 覆盖 VitePress scoped CSS */
 @media (min-width: 960px) {
   .VPSidebar {
-    /* +1px 抵消顶栏 border-bottom，确保侧边栏顶部与顶栏下边缘无缝衔接 */
-    top: calc(var(--vp-nav-height) + 1px) !important;
+    /* 顶栏 height: var(--vp-nav-height) 在 box-sizing: border-box 下，
+       border-bottom 已包含在 height 内，外底边 = var(--vp-nav-height)。
+       sidebar top 紧贴顶栏外底边即可，无需 +1px（+1px 会制造 1px 真空带透白）。 */
+    top: var(--vp-nav-height) !important;
     /* top 已偏移到顶栏下方，不再需要 padding-top 让出空间 */
     padding-top: 0 !important;
   }

@@ -79,7 +79,19 @@ export default {
 
     // 仅在浏览器环境下执行
     if (inBrowser) {
-      router.onAfterRouteChanged = () => {
+      // 搜索框旧位置：路由变化前记录，用于 FLIP 动画
+      let lastSearchLeft: number | null = null
+
+      // onBeforeRouteChange：路由变化前触发，此时 DOM 还是旧布局
+      // 注意：VitePress 钩子是 onBeforeRouteChange（无 d），不是 onBeforeRouteChanged
+      router.onBeforeRouteChange = () => {
+        const navSearch = document.querySelector('.VPNavBarSearch') as HTMLElement | null
+        if (navSearch) {
+          lastSearchLeft = navSearch.getBoundingClientRect().left
+        }
+      }
+
+      router.onAfterRouteChange = () => {
         // 路由切换后重新增强导航/侧边栏图标
         initNavIcons();
         // 路由切换后检测是否有新部署（延迟 2s，避免与路由过渡冲突）
@@ -89,6 +101,35 @@ export default {
         nextTick(() => {
           init3DTiltEffect();
         });
+
+        // 搜索框 FLIP 动画：等 DOM 稳定后在 nextTick 中执行
+        // 有sidebar→有sidebar：位置不变（|dx|<=1），不触发
+        // 有sidebar↔无sidebar：位置变化，FLIP 平滑过渡
+        const oldLeft = lastSearchLeft
+        lastSearchLeft = null
+        if (oldLeft === null) return
+        nextTick(() => {
+          const navSearch = document.querySelector('.VPNavBarSearch') as HTMLElement | null
+          if (!navSearch) return
+          const newLeft = navSearch.getBoundingClientRect().left
+          const dx = oldLeft - newLeft
+          if (Math.abs(dx) <= 1) return
+          // FLIP: 先用 transform 移回旧位置（无过渡），再过渡到 0（新位置）
+          navSearch.style.transition = 'none'
+          navSearch.style.transform = `translateX(${dx}px)`
+          // 强制重排，确保无过渡的初始位移生效
+          void navSearch.offsetWidth
+          // 下一帧启用过渡并移除 transform，平滑滑到新位置
+          requestAnimationFrame(() => {
+            navSearch.style.transition = 'transform 0.35s cubic-bezier(0.4, 0, 0.2, 1)'
+            navSearch.style.transform = ''
+          })
+          // 过渡结束后清理 inline 样式，避免残留影响后续布局
+          setTimeout(() => {
+            navSearch.style.transition = ''
+            navSearch.style.transform = ''
+          }, 380)
+        })
       }
     }
   },
