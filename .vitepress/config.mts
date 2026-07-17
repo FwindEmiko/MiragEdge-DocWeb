@@ -256,6 +256,20 @@ export default defineConfig({
         if (token.attrIndex('loading') < 0) token.attrPush(['loading', 'lazy'])
         return defaultImage(tokens, idx, options, env, self)
       }
+      // mcfunction 不是 Shiki 内置语言，映射到 bash 语法高亮（注释/命令风格接近）
+      const fence = md.renderer.rules.fence!
+      md.renderer.rules.fence = (...args) => {
+        const [tokens, idx] = args
+        const token = tokens[idx]
+        const info = token.info.trim()
+        if (!info.startsWith('mcfunction')) return fence(...args)
+        token.info = info.replace('mcfunction', 'bash')
+        let html = fence(...args)
+        token.info = info
+        html = html.replace(/class="language-bash"/g, 'class="language-mcfunction"')
+        html = html.replace(/>bash</g, '>mcfunction<')
+        return html
+      }
     },
   },
 

@@ -5,8 +5,7 @@ import {
   Sprout, Swords, MessageCircle, Shield, Gem, Sparkles, Code,
   Wrench, Globe, Moon, Star, Cat, Github, Play, FileText,
   Users, Trophy, Map, Compass, Castle, Coins, Fish, ChefHat,
-  Skull, Dog, Image, Music, CheckCircle, AlertTriangle,
-  Wifi, Mountain, Book, Folder, Terminal, Database, Lock,
+  Skull, Dog, Wifi, Mountain, Book, Folder, Terminal, Database, Lock,
   Settings, ExternalLink, ArrowRight, Search
 } from 'lucide-vue-next'
 </script>
