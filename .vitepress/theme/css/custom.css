@@ -43,14 +43,16 @@
 }
 
 /* 移动端宽表格保护：table 以 block 形式横向滚动，避免撑破容器导致整页横向滚动
-   关键：不要给 thead/tbody/tr 显式设 display:table，否则每行会拆成独立匿名表格，
-   列宽各自计算导致错位堆叠。保持原生 display，浏览器会合并进同一匿名表格，列宽对齐 */
+   关键约束（性能相关，勿随意添加属性）：
+   1. 不要给 thead/tbody/tr 显式设 display:table，否则每行拆成独立匿名表格 → 列错位堆叠
+   2. 不要加 -webkit-overflow-scrolling:touch，iOS13+/Android Chrome 已默认惯性滚动；
+      该属性会强制每个表格创建独立 GPU 合成层，多表格+代码块阴影叠加会撑爆移动端显存
+   3. 不要加 width:max-content，会遍历所有单元格计算最大宽度，多表格场景下显著拖慢布局
+   block + overflow-x:auto 的自然行为已能让宽表格触发横向滚动、窄表格撑满容器 */
 @media (max-width: 767px) {
   .vp-doc table {
     display: block;
     overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    width: max-content;
     max-width: 100%;
   }
 }
