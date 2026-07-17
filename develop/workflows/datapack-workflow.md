@@ -19,6 +19,8 @@ head:
 
 本文档是一份**面向 AI 编码助手**（如 Claude Code、Trae、WorkBuddy、GitHub Copilot 等）的 Minecraft（我的世界）数据包（Data Pack） + CraftEngine 协同开发技能指南。其目的是将隐性的开发经验固化为可移植、可复用的显性知识文档。
 
+> 当然，给人类用于学习研究与参考也是可以的啦  
+
 任何不熟悉 MC 数据包的 AI 在阅读本文档后，应能**独立完成以下任务**：
 
 - 创建符合规范的数据包项目结构

@@ -1,5 +1,5 @@
 // 附魔数据 - 提取的结构化数据
-// 共 236 个附魔（诅咒 11 + 普通 20 + 优良 41 + 稀有 89 + 史诗 59 + 传说 10 + 至宝 6）
+// 共 244 个附魔（诅咒 11 + 普通 20 + 优良 41 + 稀有 91 + 史诗 62 + 传说 13 + 至宝 6）
 
 export interface Enchantment {
   name: string
@@ -205,6 +205,8 @@ export const enchantments: Enchantment[] = [
   { name: '鱼叉', id: 'spearfishing', maxLevel: 3, equipment: '三叉戟', effect: '击中水中的方块时有概率掉落鲜鱼', rarity: 'rare' },
   { name: '鱼钩', id: 'harpoon', maxLevel: 2, equipment: '钓鱼竿', effect: '对被钩上的生物造成大量伤害', rarity: 'rare' },
   { name: '麻痹', id: 'paralyze', maxLevel: 3, equipment: '盾牌', effect: '抵挡伤害时有概率使攻击者获得挖掘疲劳效果', rarity: 'rare' },
+  { name: '沙行', id: 'dune_speed', maxLevel: 3, equipment: '靴子', effect: '在沙地上提升移动速度', rarity: 'rare' },
+  { name: '飘浮射击', id: 'levitation_shot', maxLevel: 5, equipment: '弓', effect: '射中的目标获得飘浮效果', rarity: 'rare' },
 
   // ===== 史诗品质 (59) =====
   { name: '乘势', id: 'marking', maxLevel: 3, equipment: '弓 / 弩', effect: '短时间内连续对你的对手的伤害提升', rarity: 'epic' },
@@ -266,6 +268,9 @@ export const enchantments: Enchantment[] = [
   { name: '首击', id: 'first_strike', maxLevel: 6, equipment: '剑', effect: '对满血生物的伤害提升', rarity: 'epic' },
   { name: '魄力', id: 'force', maxLevel: 3, equipment: '弓', effect: '射出的箭矢伤害提升', rarity: 'epic' },
   { name: '黯然', id: 'dejecting', maxLevel: 5, equipment: '头盔 / 胸甲 / 护腿 / 靴子', effect: '使得周围的生物获得缓慢II，盔甲会自动扣除耐久', rarity: 'epic' },
+  { name: '伏击', id: 'ambush', maxLevel: 3, equipment: '剑', effect: '攻击未察觉的目标时造成额外伤害', rarity: 'epic' },
+  { name: '装甲飞行', id: 'plated', maxLevel: 4, equipment: '鞘翅', effect: '增加护甲与护甲韧性，但重力增大，与翱翔互斥', rarity: 'epic' },
+  { name: '翱翔', id: 'soaring', maxLevel: 4, equipment: '鞘翅', effect: '减少重力延长滑翔距离，降低摔落伤害，与装甲飞行互斥', rarity: 'epic' },
 
   // ===== 传说品质 (10) =====
   { name: '反重力', id: 'wings', maxLevel: 3, equipment: '靴子', effect: '可进入飞行状态，飞行时持续消耗装备耐久', rarity: 'legendary' },
@@ -278,6 +283,9 @@ export const enchantments: Enchantment[] = [
   { name: '自愈', id: 'rejuvenation', maxLevel: 2, equipment: '头盔 / 胸甲 / 护腿 / 靴子', effect: '自然回血速度与回血量提升', rarity: 'legendary' },
   { name: '重伤', id: 'injure', maxLevel: 3, equipment: '剑 / 斧 / 弓 / 弩 / 三叉戟', effect: '使得被攻击的玩家血量恢复速度降低', rarity: 'legendary' },
   { name: '重铸', id: 'indestructibility', maxLevel: 3, equipment: '全部', effect: '其物品耐久得到大幅度提升', rarity: 'legendary' },
+  { name: '暴击', id: 'critical_strike', maxLevel: 3, equipment: '剑', effect: '击杀充能后下一次攻击造成暴击伤害', rarity: 'legendary' },
+  { name: '虚空打击', id: 'void_strike', maxLevel: 1, equipment: '剑 / 斧', effect: '概率触发虚空侵蚀持续伤害', rarity: 'legendary' },
+  { name: '虚空射击', id: 'void_shot', maxLevel: 1, equipment: '弓 / 弩', effect: '箭矢命中附加减速与虚空侵蚀效果', rarity: 'legendary' },
 
   // ===== 至宝品质 (7) =====
   { name: '咒怨', id: 'missile', maxLevel: 3, equipment: '剑 / 斧', effect: '右击发射一颗凋零骷髅头（冷却时间: 60秒）', rarity: 'mythic' },
