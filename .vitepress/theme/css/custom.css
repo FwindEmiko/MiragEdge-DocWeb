@@ -43,17 +43,13 @@
 }
 
 /* 移动端宽表格保护：table 以 block 形式横向滚动，避免撑破容器导致整页横向滚动
-   thead/tbody/tr 恢复 table 显示以保持表格布局，width:max-content 让表格按内容撑开 */
+   关键：不要给 thead/tbody/tr 显式设 display:table，否则每行会拆成独立匿名表格，
+   列宽各自计算导致错位堆叠。保持原生 display，浏览器会合并进同一匿名表格，列宽对齐 */
 @media (max-width: 767px) {
   .vp-doc table {
     display: block;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
-  }
-  .vp-doc table thead,
-  .vp-doc table tbody,
-  .vp-doc table tr {
-    display: table;
     width: max-content;
     max-width: 100%;
   }
