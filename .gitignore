@@ -24,6 +24,7 @@ coverage/
 *.swo
 .claude
 .workbuddy
+docs/
 
 # OS files
 .DS_Store

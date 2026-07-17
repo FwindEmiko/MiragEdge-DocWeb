@@ -596,24 +596,18 @@ export default defineConfig({
           text: '⚙️ 插件配置',
           collapsed: false,
           items: [
-            { text: '贴图字符码', link: '/develop/server_configs/sticker' },
-            { text: '自定义作物', link: '/develop/server_configs/customcrops' },
-            { text: '钓鱼系统', link: '/develop/server_configs/fishing' },
-            {
-              text: '✨ 更多附魔',
-              collapsed: false,
-              items: [
-                { text: '附魔配置教程', link: '/develop/server_configs/enchanting' },
-                { text: '附魔ID对照表', link: '/develop/server_configs/enchantment_ids' },
-              ]
-            },
+            { text: '附魔ID对照表', link: '/develop/server_configs/enchantment_ids' },
           ]
         },
         {
           text: '🧩 开发工作流',
           collapsed: false,
           items: [
-            { text: '数据包客制化(AI Skills)', link: '/develop/workflows/datapack-workflow' },
+            { text: '数据包客制化(Skills)', link: '/develop/workflows/datapack-workflow' },
+            { text: 'CE材质引擎(Skills)',    link: '/develop/workflows/texture-workflow' },
+            { text: '自定义作物(Skills)',    link: '/develop/workflows/customcrops-workflow' },
+            { text: '钓鱼系统(Skills)',     link: '/develop/workflows/fishing-workflow' },
+            { text: '附魔配置(Skills)',     link: '/develop/workflows/enchanting-workflow' },
           ]
         },
         {
