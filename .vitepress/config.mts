@@ -349,49 +349,50 @@ export default defineConfig({
     
     // 导航栏
     nav: [
-      { text: '🏠 首页', link: '/' },
+      { text: '首页', link: '/' },
       { 
-        text: '🎮 玩法介绍',
+        text: '玩法介绍',
         link: '/features/',
         activeMatch: '^/features/'
       },
       { 
-        text: '📚 玩家手册', 
+        text: '玩家手册', 
         link: '/manual/review',
         activeMatch: '^/manual/'
       },
       { 
-        text: '💻 开发文档', 
+        text: '开发文档', 
         link: '/develop/team',
         activeMatch: '^/develop/'
       },
       { 
-        text: '📊 原创插件', 
-        link: '/plugins/' 
+        text: '原创插件', 
+        link: '/plugins/info',
+        activeMatch: '^/plugins/'
       },
       {
-       text: '🔗 相关链接', 
+       text: '相关链接', 
        items: [
          { 
-           text: '🦊 狐风轩汐の小窝-Blog', 
+           text: '狐风轩汐の小窝-Blog', 
            link: 'https://f.windemiko.top',
            target: '_blank',
            rel: 'noopener noreferrer'
          },
          { 
-           text: '☁️ 资源分享下载', 
+           text: '资源分享下载', 
            link: 'https://share.fnnas.net/s/a32874a8ab394948b4',
            target: '_blank',
            rel: 'noopener noreferrer'
          },
          { 
-           text: '📺 哔哩哔哩 - 狐风轩汐', 
+           text: '哔哩哔哩 - 狐风轩汐', 
            link: 'https://space.bilibili.com/359174372',
            target: '_blank',
            rel: 'noopener noreferrer'
          },
          { 
-           text: '📦 GitHub - 锐界幻境文档', 
+           text: 'GitHub - 锐界幻境文档', 
            link: 'https://github.com/fwindemiko/MiragEdge-DocWeb',
            target: '_blank',
            rel: 'noopener noreferrer'
@@ -408,19 +409,19 @@ export default defineConfig({
           text: '🏠 基础系统',
           collapsed: false,
           items: [
-            { text: '💰 经济系统', link: '/features/base/economy' },
-            { text: '🏠 玩家工会', link: '/features/base/playerguild' },
-            { text: '🎡 幻域领地', link: '/features/base/dom' },
-            { text: '🦄 独特功能', link: '/features/base/function' },
+            { text: '经济系统', link: '/features/base/economy' },
+            { text: '玩家工会', link: '/features/base/playerguild' },
+            { text: '幻域领地', link: '/features/base/dom' },
+            { text: '独特功能', link: '/features/base/function' },
           ]
         },
         {
           text: '🌾 田园生活',
           collapsed: false,
           items: [
-            { text: '🧑‍🌾 建筑大师', link: '/features/pastoral/builder' },
+            { text: '建筑大师', link: '/features/pastoral/builder' },
             {
-              text: '🌼 真实季节',
+              text: '真实季节',
               collapsed: true,
               items: [
                 { text: '介绍', link: '/features/pastoral/seasons/info' },
@@ -432,7 +433,7 @@ export default defineConfig({
               ]
             },
             {
-              text: '🎣 更多钓鱼',
+              text: '更多钓鱼',
               collapsed: true,
               items: [
                 { text: '介绍', link: '/features/pastoral/fishing/info' },
@@ -444,14 +445,14 @@ export default defineConfig({
               ]
             },
             {
-              text: '🌱 更多种植',
+              text: '更多种植',
               collapsed: true,
               items: [
                 { text: '介绍', link: '/features/pastoral/croups/info' },
               ]
             },
             {
-              text: '🍲 更多食物',
+              text: '更多食物',
               collapsed: true,
               items: [
                 { text: '食物总览', link: '/features/pastoral/food/info' },
@@ -474,23 +475,23 @@ export default defineConfig({
           collapsed: false,
           items: [
             {
-              text: '🧟 等级怪物',
+              text: '等级怪物',
               link: '/features/adventure/levelledmobs',
             },
             {
-              text: '💀 死亡轮回',
+              text: '死亡轮回',
               link: '/features/adventure/deathreincarnation',
             },
             {
-              text: '🌟 星辉锚点',
+              text: '星辉锚点',
               link: '/features/adventure/miragedgehome',
             },
             {
-              text: '🪶 鞘翅绑定',
+              text: '鞘翅绑定',
               link: '/features/adventure/elytrabind',
             },
             {
-              text: '🏷️ 称号与登场',
+              text: '称号与登场',
               link: '/features/adventure/identity',
             },
             {
@@ -521,32 +522,32 @@ export default defineConfig({
           text: '📌 必看指南',
           collapsed: false,
           items: [
-            { text: '✅ 欢迎朋友', link: '/manual/review' },
-            { text: '⚖️ 玩家守则', link: '/manual/eula' },
-            { text: '🔗 入服方法', link: '/manual/tutorial/serverjoin' },
-            { text: '📱 手机必看', link: '/manual/tutorial/bedrock' },
-            { text: '⚡️ 生电与特性', link: '/manual/redstone_mechanism' },
-            { text: '🔌 客户端安装', link: '/manual/tutorial/clientinstall' },
-            { text: '❓ 常见问题', link: '/manual/faq' },
+            { text: '欢迎朋友', link: '/manual/review' },
+            { text: '玩家守则', link: '/manual/eula' },
+            { text: '入服方法', link: '/manual/tutorial/serverjoin' },
+            { text: '手机必看', link: '/manual/tutorial/bedrock' },
+            { text: '生电与特性', link: '/manual/redstone_mechanism' },
+            { text: '客户端安装', link: '/manual/tutorial/clientinstall' },
+            { text: '常见问题', link: '/manual/faq' },
           ]
         },
         {
           text: '🔧 附属功能教程',
           collapsed: false,
           items: [
-            { text: '💾 白名单系统', link: '/manual/tutorial/whitelist' },
-            { text: '🎮 语音频道', link: '/manual/function/voicechannel' },
-            { text: '🐧 群服互通机器人', link: '/manual/function/qqbot' },
-            { text: '🐶 MOD拓展功能支持', link: '/manual/function/mod' },
+            { text: '白名单系统', link: '/manual/tutorial/whitelist' },
+            { text: '语音频道', link: '/manual/function/voicechannel' },
+            { text: '群服互通机器人', link: '/manual/function/qqbot' },
+            { text: 'MOD拓展功能支持', link: '/manual/function/mod' },
           ]
         },
         {
           text: '👥 社区交流',
           collapsed: false,
           items: [
-            { text: '💬 QQ 群组', link: '/manual/qq_group' },
-            { text: '🌏 世界观故事', link: '/manual/other/worldview' },
-            { text: '📺 宣传推广', link: '/manual/promotion' },
+            { text: 'QQ 群组', link: '/manual/qq_group' },
+            { text: '世界观故事', link: '/manual/other/worldview' },
+            { text: '宣传推广', link: '/manual/promotion' },
           ]
         },
         {
@@ -595,6 +596,13 @@ export default defineConfig({
           ]
         },
         {
+          text: '🧩 开发工作流',
+          collapsed: false,
+          items: [
+            { text: '数据包客制化(AI Skills)', link: '/develop/workflows/datapack-workflow' },
+          ]
+        },
+        {
           text: '🎯 玩法设计',
           collapsed: false,
           items: [
@@ -614,15 +622,15 @@ export default defineConfig({
           text: '📋 附录',
           collapsed: false,
           items: [
-            { text: '📅 更新日志', link: '/develop/logs' },
-            { text: '🐚 节点状态', link: '/develop/serverstatus' },
-            { text: '💰 计算服务', link: '/develop/ccs_price_list' },
+            { text: '更新日志', link: '/develop/logs' },
+            { text: '节点状态', link: '/develop/serverstatus' },
+            { text: '计算服务', link: '/develop/ccs_price_list' },
           ]
         },
       ],
 
       '/plugins/': [
-        { text: '📋 项目开发说明', link: '/plugins/index' },
+        { text: '📋 项目开发说明', link: '/plugins/info' },
         { text: '📊 原创插件列表', link: '/plugins/list' },
         {
           text: '⚔️ PVP竞技场系统',

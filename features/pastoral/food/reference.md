@@ -2,7 +2,7 @@
 title: 食物速查表
 ---
 
-# <MapIcon name="cooking" :size="24" /> 食物速查表
+#  食物速查表
 
 所有 57 种食物的完整属性对比，按品质分组排列。可快速查找所需 buff 的食物。
 
@@ -182,7 +182,7 @@ title: 食物速查表
 
 ## 技术说明
 
-<MapIcon name="info" :size="20" /> 食物特殊效果通过 **FwindEmiCore** 物品功能核心 + **CustomCrops** 自定义词条联合实现：
+ 食物特殊效果通过 **FwindEmiCore** 物品功能核心 + **CustomCrops** 自定义词条联合实现：
 
 - **基础属性**（饥饿值/饱和度）：由 CustomCrops 的 `food` 配置段控制
 - **特殊效果**（药水效果/命令执行）：由 FwindEmiCore 监听 `consume` 事件触发

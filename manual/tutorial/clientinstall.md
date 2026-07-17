@@ -45,9 +45,9 @@ head:
    - 选择正式版（推荐 `26.1.2`）
    - 保持默认安装配置（无需调整 Forge/OptiFine），安装客户端后启动游戏
 
-> 💡 若提示 Java 环境缺失：下载群文件中的 `Java17` 并完成安装
+> 若提示 Java 环境缺失：下载群文件中的 `Java17` 并完成安装
 
-> 💡 Mac 系统：可使用群文件中的 `[macos][优雅]LauncherX.Avalonia.osx.arm` 启动器
+> Mac 系统：可使用群文件中的 `[macos][优雅]LauncherX.Avalonia.osx.arm` 启动器
 
 ### 手机端
 
@@ -102,7 +102,7 @@ head:
 - 连通国际互联网
 - 一个聪明的头脑和一双勤劳的手
 
-> ⚠️ 所有年龄选项必须填写已成年，否则游戏会出现各种奇怪的限制
+>  所有年龄选项必须填写已成年，否则游戏会出现各种奇怪的限制
 
 ### 游戏内注册
 
@@ -136,4 +136,4 @@ head:
 
 <SmartImage src="https://oss.miragedge.top/images/web_image/msreg/tutorial/msreg6.png" alt="注册" maxWidth="400px" />
 
-> 💡 完成安装了？[前往入服教程](./serverjoin)
+> 完成安装了？[前往入服教程](./serverjoin)

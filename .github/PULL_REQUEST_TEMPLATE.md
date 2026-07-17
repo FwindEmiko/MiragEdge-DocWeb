@@ -1,16 +1,16 @@
-## 📝 Pull Request Description
+## Pull Request Description
 
-### 🎯 Related Issue
+### Related Issue
 <!-- 关联 Issue（例如：Closes #123） -->
 
-### ✅ Changes Made
+### Changes Made
 <!-- 请勾选适用项 -->
-- [ ] 🐛 Bug 修复
-- [ ] ✨ 新功能
-- [ ] 📝 文档更新
-- [ ] 🎨 样式 / UI 调整
-- [ ] ⚡ 性能优化
-- [ ] 🔧 配置 / 构建变更
+- [ ]  Bug 修复
+- [ ]  新功能
+- [ ]  文档更新
+- [ ]  样式 / UI 调整
+- [ ]  性能优化
+- [ ]  配置 / 构建变更
 
 ### 🧪 Testing
 <!-- 请说明你如何测试了这些变更 -->
@@ -19,15 +19,15 @@
 - [ ] 页面手动验证（受影响的页面能正常加载）
 - [ ] 移动端响应式检查（如涉及 UI 变更）
 
-### 📸 截图
+### 截图
 <!-- 如涉及 UI 变更，请附上前后对比截图（可选） -->
 
-### 📌 Reviewer Notes
+### Reviewer Notes
 <!-- 给 reviewer 的额外说明（可选） -->
 
 ---
 
-### ✅ Pre-merge Checklist
+### Pre-merge Checklist
 - [ ] 代码遵循项目风格
 - [ ] 已完成自审
 - [ ] 构建产物大小合理（无异常膨胀）

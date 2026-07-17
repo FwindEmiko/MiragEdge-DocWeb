@@ -7,7 +7,7 @@ head:
       content: MiragEdgeTitle, 称号插件, 入服消息, Minecraft 称号, 自研插件
 ---
 
-# 🏷️ MiragEdgeTitle — 称号与入服消息
+#  MiragEdgeTitle — 称号与入服消息
 
 **项目状态：C**
 
