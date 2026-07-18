@@ -1,5 +1,7 @@
 # 烬域 · 群系与结构
 
+<SmartImage src="/images/datapack/incendium/biomes/nether_overview.png" alt="烬域下界全景" shadow radius="auto" caption="下界在远古的灾难后彻底重塑——192 格高的立体世界、全新群系、史诗结构" />
+
 > 下界被一场远古的灾难彻底重塑。新的群系、新的结构、新的威胁等待勇敢的冒险者。新增 **8 个群系**、**9 个结构**，下界高度扩展至 **192 格**，同一区块不同高度可拥有不同的群系。
 
 
