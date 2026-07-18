@@ -32,6 +32,7 @@ import './css/layout/blur.css'
 import './css/base/overrides.css'
 import './style/dark.css'
 import './css/icons.css'
+import './css/datapack/datapack-guide.css'
 
 // 导入第三方库和组件
 import { inBrowser } from "vitepress"

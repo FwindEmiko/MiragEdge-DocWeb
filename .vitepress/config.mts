@@ -426,6 +426,9 @@ export default defineConfig({
             { text: '经济系统', link: '/features/base/economy' },
             { text: '玩家工会', link: '/features/base/playerguild' },
             { text: '幻域领地', link: '/features/base/dom' },
+            { text: '死亡轮回', link: '/features/adventure/deathreincarnation', },
+            { text: '星辉锚点', link: '/features/adventure/miragedgehome', },
+            { text: '称号与登场', link: '/features/adventure/identity', },
             { text: '独特功能', link: '/features/base/function' },
           ]
         },
@@ -437,43 +440,43 @@ export default defineConfig({
               text: '📦 数据包玩法',
               collapsed: false,
               items: [
-                { text: '🦊 玩法总览', link: '/features/datapack/' },
+                { text: '玩法总览', link: '/features/adventure/datapack/' },
+                { text: '世界生成', link: '/features/adventure/datapack/worldgen/overview' },
+                { text: '野外探索', link: '/features/adventure/datapack/exploration/structures' },
                 {
-                  text: '🔥 烬域 · Incendium',
+                  text: '地下城与酒馆',
                   collapsed: true,
                   items: [
-                    { text: '群系与结构', link: '/features/datapack/incendium/biomes' },
-                    { text: '物品与装备', link: '/features/datapack/incendium/items' },
-                    { text: '生物与Boss', link: '/features/datapack/incendium/mobs' },
-                    { text: '原版成就', link: '/features/datapack/incendium/advancements' },
+                    { text: '全结构一览', link: '/features/adventure/datapack/dungeons-and-taverns/structures' },
+                    { text: '物品一览', link: '/features/adventure/datapack/dungeons-and-taverns/items' },
+                    { text: '附魔列表', link: '/features/adventure/datapack/dungeons-and-taverns/enchantments' },
                   ]
                 },
+                { text: '稀有建筑群', link: '/features/adventure/datapack/rare-structures/overview' },
+                { text: '筑物塔楼', link: '/features/adventure/datapack/structory/structures' },
                 {
-                  text: '⭐ 繁星 · Stellarity',
+                  text: '烬域-下界',
                   collapsed: true,
                   items: [
-                    { text: '群系与结构', link: '/features/datapack/stellarity/biomes' },
-                    { text: '物品与装备', link: '/features/datapack/stellarity/items' },
-                    { text: '生物与Boss', link: '/features/datapack/stellarity/mobs' },
-                    { text: '原版成就', link: '/features/datapack/stellarity/advancements' },
+                    { text: '群系与结构', link: '/features/adventure/datapack/incendium/biomes' },
+                    { text: '物品与装备', link: '/features/adventure/datapack/incendium/items' },
+                    { text: '生物与Boss', link: '/features/adventure/datapack/incendium/mobs' },
+                    { text: '原版成就', link: '/features/adventure/datapack/incendium/advancements' },
                   ]
                 },
+                { text: '沧墟破门', link: '/features/adventure/datapack/hoppo-ruins/structures' },
                 {
-                  text: '🏰 地城酒馆 · D&T',
+                  text: '繁星-末地',
                   collapsed: true,
                   items: [
-                    { text: '全结构一览', link: '/features/datapack/dungeons-and-taverns/structures' },
-                    { text: '物品一览', link: '/features/datapack/dungeons-and-taverns/items' },
-                    { text: '附魔列表', link: '/features/datapack/dungeons-and-taverns/enchantments' },
+                    { text: '群系与结构', link: '/features/adventure/datapack/stellarity/biomes' },
+                    { text: '物品与装备', link: '/features/adventure/datapack/stellarity/items' },
+                    { text: '生物与Boss', link: '/features/adventure/datapack/stellarity/mobs' },
+                    { text: '原版成就', link: '/features/adventure/datapack/stellarity/advancements' },
                   ]
                 },
-                { text: '🏛️ 筑物塔楼 · Structory', link: '/features/datapack/structory/structures' },
-                { text: '🔍 野外探索', link: '/features/datapack/exploration/structures' },
-                { text: '🏘️ 稀有建筑群', link: '/features/datapack/rare-structures/overview' },
-                { text: '🌍 世界生成', link: '/features/datapack/worldgen/overview' },
-                { text: '🐉 终焉 · True Ending', link: '/features/datapack/true-ending/boss' },
-                { text: '🚪 沧墟破门 · Hoppo', link: '/features/datapack/hoppo-ruins/structures' },
-                { text: '🎮 趣味玩法', link: '/features/datapack/fun-packs/overview' },
+                { text: '终焉', link: '/features/adventure/datapack/true-ending/boss' },
+                { text: '捣怪内容', link: '/features/adventure/datapack/fun-packs/overview' },
               ]
             },
             {
@@ -481,20 +484,8 @@ export default defineConfig({
               link: '/features/adventure/levelledmobs',
             },
             {
-              text: '死亡轮回',
-              link: '/features/adventure/deathreincarnation',
-            },
-            {
-              text: '星辉锚点',
-              link: '/features/adventure/miragedgehome',
-            },
-            {
               text: '鞘翅绑定',
               link: '/features/adventure/elytrabind',
-            },
-            {
-              text: '称号与登场',
-              link: '/features/adventure/identity',
             },
             {
               text: '✨ 更多附魔',
