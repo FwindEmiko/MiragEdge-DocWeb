@@ -2,7 +2,6 @@
 
 > Stellarity 新增了超过 **40 件**自定义物品，包括武器、盔甲套装、特殊鞘翅、法术书和材料。大部分物品的设计灵感来自 Terraria——不遵循原版简单的点击伤害模式，每件武器都有独特的技能和玩法。
 
----
 
 ## 近战武器
 
@@ -13,7 +12,6 @@
 - **特点**：随升级阶段变强，有多段形态
 - **评级**：<span class="dp-difficulty lvl-5"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">致命</span></span>
 
----
 
 ### 塔玛里斯（Tamaris）
 - **类型**：近战 / 特殊剑
@@ -22,7 +20,6 @@
 - **特点**：攻速极快，电光四射
 - **评级**：<span class="dp-difficulty lvl-4"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">极难</span></span>
 
----
 
 ### 始与终（The Beginning and The End）
 - **类型**：近战 / 双剑 · 传说级
@@ -31,7 +28,6 @@
 - **特点**：「始」造成额外伤害，「终」吸取生命
 - **评级**：<span class="dp-difficulty lvl-5"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">致命</span></span>
 
----
 
 ### 无星镰刀（Starless Scythe）
 - **类型**：近战 / 镰刀
@@ -40,7 +36,6 @@
 - **特点**：每击杀一个敌人召唤一颗暗星追踪弹
 - **评级**：<span class="dp-difficulty lvl-4"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">极难</span></span>
 
----
 
 ### 收割者（Harvester）
 - **类型**：近战 / 镰刀 · 可升级
@@ -49,7 +44,6 @@
 - **特点**：有多个升级阶段（Tier 0 → Tier 4），越升级越强
 - **评级**：<span class="dp-difficulty lvl-5"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">致命</span></span>
 
----
 
 ### 棱镜肢解者（Prismember）
 - **类型**：近战 / 特殊武器
@@ -58,7 +52,6 @@
 - **特点**：视觉效果极佳，彩虹刀光
 - **评级**：<span class="dp-difficulty lvl-4"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">极难</span></span>
 
----
 
 ### 万花筒（Kaleidoscope）
 - **类型**：近战 / 鞭子
@@ -67,7 +60,6 @@
 - **特点**：光之女皇的标志性武器
 - **评级**：<span class="dp-difficulty lvl-5"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">致命</span></span>
 
----
 
 ## 远程武器
 
@@ -78,7 +70,6 @@
 - **特点**：无需实体箭矢，无限射击
 - **评级**：<span class="dp-difficulty lvl-4"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">极难</span></span>
 
----
 
 ### 虚空召唤（Call of The Void）
 - **类型**：远程 / 特殊弓
@@ -87,7 +78,6 @@
 - **特点**：控场神弓
 - **评级**：<span class="dp-difficulty lvl-5"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">致命</span></span>
 
----
 
 ### 幽灵之怒（Spectral Fury）
 - **类型**：远程 / 弩
@@ -96,7 +86,6 @@
 - **特点**：隔墙射击，无视掩体
 - **评级**：<span class="dp-difficulty lvl-4"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">极难</span></span>
 
----
 
 ### 棱镜重拳（Prismatic Punch）
 - **类型**：远程 / 特殊手套
@@ -105,7 +94,6 @@
 - **特点**：近战拳击与远程弹幕的结合
 - **评级**：<span class="dp-difficulty lvl-5"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">致命</span></span>
 
----
 
 ## 混合武器
 
@@ -116,7 +104,6 @@
 - **特点**：远近皆可，非常灵活
 - **评级**：<span class="dp-difficulty lvl-4"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">极难</span></span>
 
----
 
 ### 蓬松正义之锤（Fluffy Hammer of Justice）
 - **类型**：混合 / 锤子
@@ -125,7 +112,6 @@
 - **特点**：萌系外观，暴力输出
 - **评级**：<span class="dp-difficulty lvl-3"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">困难</span></span>
 
----
 
 ## 工具
 
@@ -136,7 +122,6 @@
 - **特点**：挖矿不用捡东西，自动进包
 - **评级**：<span class="dp-difficulty lvl-4"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">极难</span></span>
 
----
 
 ### 沙暴三叉戟（Sandstorm Trident）
 - **类型**：远程 / 三叉戟
@@ -144,7 +129,6 @@
 - **效果**：投掷时产生沙尘暴，遮蔽敌人视野
 - **评级**：<span class="dp-difficulty lvl-3"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">困难</span></span>
 
----
 
 ## 盔甲套装
 
@@ -155,7 +139,6 @@
 - **特点**：追求极限输出的玩家首选
 - **评级**：<span class="dp-difficulty lvl-5"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">致命</span></span>
 
----
 
 ### 神圣盔甲（Hallowed Armor）
 - **类型**：中甲套装
@@ -164,7 +147,6 @@
 - **特点**：Terraria 神圣套的致敬
 - **评级**：<span class="dp-difficulty lvl-5"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">致命</span></span>
 
----
 
 ### 潜影盔甲（Shulker Armor）
 - **类型**：轻甲套装
@@ -173,7 +155,6 @@
 - **特点**：探索末地的最佳选择
 - **评级**：<span class="dp-difficulty lvl-4"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">极难</span></span>
 
----
 
 ### 花之盔甲（Floral Armor）
 - **类型**：轻甲套装
@@ -182,7 +163,6 @@
 - **特点**：续航型装备
 - **评级**：<span class="dp-difficulty lvl-3"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">困难</span></span>
 
----
 
 ## 特殊鞘翅
 
@@ -192,7 +172,6 @@
 | **龙之翼**（Dragon Wings） | 击败末影龙掉落 | 飞行速度 +20%，紫色龙息尾迹 |
 | **女皇之翼**（Empress Wings） | 光之女皇掉落 | 飞行时间延长，彩虹尾迹 |
 
----
 
 ## 核心材料与支线
 
@@ -210,7 +189,6 @@
 - 不同群系有不同种类的鱼
 - 可作为食物或合成材料
 
----
 
 ## 炼药锅合成系统
 
@@ -221,7 +199,6 @@
 3. 超过 **12 种配方**可用
 4. 主要用于**食物**和**组合效果药水**
 
----
 
 ## 装备速查
 
@@ -233,6 +210,4 @@
 | 探索飞行 | 万花筒 | 女皇之翼 + 任意轻甲 |
 | 全地形通用 | 星辰打击者 | 神圣盔甲 |
 
----
 
-> <span class="dp-difficulty lvl-1"><span class="bar"></span><span class="label">简单</span></span> **上一章**：[群系与结构 ←](./biomes) | **下一章**：[生物与 Boss →](./mobs)

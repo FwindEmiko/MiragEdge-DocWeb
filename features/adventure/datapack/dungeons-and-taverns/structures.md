@@ -2,7 +2,6 @@
 
 > 世界各处散布着超过一百种全新的建筑——路边的酒馆、地下的要塞、灾厄村民的庄园……从主世界的繁华客栈到末地的虚空城堡，每一处都藏着独特的宝藏和挑战。
 
----
 
 ## 主世界结构
 
@@ -15,7 +14,6 @@
 | **地下房屋** | Underground House | Terraria 致敬彩蛋——埋在地下的神秘小屋 | <span class="dp-difficulty lvl-1"><span class="bar"></span><span class="label">简单</span></span> |
 | **废弃小镇** | Ruined Town | 被僵尸侵占的废墟小镇 | <span class="dp-difficulty lvl-3"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">困难</span></span> |
 
----
 
 ### 遗迹与废墟
 
@@ -26,7 +24,6 @@
 | **荒野废墟** | Wild Ruins — 各类小型废墟（废弃房屋、房屋废墟、损坏的红石魔像等） | <span class="dp-difficulty lvl-2"><span class="bar"></span><span class="bar"></span><span class="label">普通</span></span> |
 | **水井** | Wells — 丛林、白桦、森林、平原、针叶林、热带草原都有专属水井 | <span class="dp-difficulty lvl-1"><span class="bar"></span><span class="label">简单</span></span> |
 
----
 
 ### 灾厄村民据点
 
@@ -37,7 +34,6 @@
 | **灾厄营地** | Illager Camp | 灾厄村民旅途中搭建的小型营地 | <span class="dp-difficulty lvl-2"><span class="bar"></span><span class="bar"></span><span class="label">普通</span></span> |
 | **女巫别墅** | Witch Villa | 女巫的专属别墅，小心诅咒 | <span class="dp-difficulty lvl-3"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">困难</span></span> |
 
----
 
 ### 地牢与要塞
 
@@ -51,7 +47,6 @@
 | **沙漠遗迹** | Desert Ruins | 沙漠中的古代遗迹 | <span class="dp-difficulty lvl-3"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">困难</span></span> |
 | **毒液巢穴** | Toxic Lair | 毒性生物的巢穴 | <span class="dp-difficulty lvl-4"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">极难</span></span> |
 
----
 
 ### 特殊结构
 
@@ -63,7 +58,6 @@
 | **导管遗迹** | Conduit Ruins — 教玩家如何建造潮涌核心的教程型结构 | <span class="dp-difficulty lvl-1"><span class="bar"></span><span class="label">简单</span></span> |
 | **红树女巫小屋** | Mangrove Witch Hut — 3 种变体，战利品稍好 | <span class="dp-difficulty lvl-3"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">困难</span></span> |
 
----
 
 ## 下界结构
 
@@ -74,7 +68,6 @@
 | **下界要塞** | Nether Keep | 宏伟的下界城堡 | <span class="dp-difficulty lvl-5"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">致命</span></span> |
 | **烈焰试炼场** | Blaze Trials | 烈焰人的试炼之地 | <span class="dp-difficulty lvl-4"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">极难</span></span> |
 
----
 
 ## 末地结构
 
@@ -83,7 +76,6 @@
 | **末地城堡** | End Castle | 悬浮在虚空之上的宏伟城堡 | <span class="dp-difficulty lvl-5"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">致命</span></span> |
 | **末地酒馆** | End Tavern | 虚空中的酒馆——末地最安全的庇护所 | <span class="dp-difficulty lvl-2"><span class="bar"></span><span class="bar"></span><span class="label">普通</span></span> |
 
----
 
 ## 试炼密室扩展
 
@@ -109,6 +101,3 @@
 | 试炼挑战 | 1.21 新加载的试炼密室区块 |
 | 下界宝物 | 猪灵要塞、下界要塞 |
 
----
-
-> **下一章**：[地城酒馆 · 物品一览 →](./items)

@@ -2,7 +2,6 @@
 
 > 下界被一场远古的灾难彻底重塑。新的群系、新的结构、新的威胁等待勇敢的冒险者。新增 **8 个群系**、**9 个结构**，下界高度扩展至 **192 格**，同一区块不同高度可拥有不同的群系。
 
----
 
 ## 新群系一览
 
@@ -17,7 +16,6 @@
 - **难度**：<span class="dp-difficulty lvl-5"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">致命</span></span>
 - **建议**：准备充分再进入，这里是烬域终局内容的入口
 
----
 
 ### 魔炎沙丘（Infernal Dunes，`incendium:infernal_dunes`）
 
@@ -30,7 +28,6 @@
 - **特有生物**：沙漠烈焰（Desert Blaze）
 - **难度**：<span class="dp-difficulty lvl-3"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">困难</span></span>
 
----
 
 ### 倒悬森林（Inverted Forest，`incendium:inverted_forest`）
 
@@ -43,7 +40,6 @@
 - **难度**：<span class="dp-difficulty lvl-3"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">困难</span></span>
 - **小贴士**：抬头看，有些宝藏藏在倒挂的树冠中
 
----
 
 ### 石英平原（Quartz Flats，`incendium:quartz_flats`）
 
@@ -56,7 +52,6 @@
 - **难度**：<span class="dp-difficulty lvl-4"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">极难</span></span>
 - **注意**：圣所中可以获得神器「破晓者」（Daybreaker）
 
----
 
 ### 毒化废土（Toxic Heap，`incendium:toxic_heap`）
 
@@ -70,7 +65,6 @@
 - **难度**：<span class="dp-difficulty lvl-4"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">极难</span></span>
 - **防护建议**：进入前务必装备**防化服**（Hazmat Suit）
 
----
 
 ### 火山三角洲（Volcanic Deltas，`incendium:volcanic_deltas`）
 
@@ -84,7 +78,6 @@
 - **难度**：<span class="dp-difficulty lvl-3"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">困难</span></span>
 - **宝藏**：管道深处藏有「疯狂火炬」（Torch of Lunacy）
 
----
 
 ### 泣泪幽谷（Weeping Valley，`incendium:weeping_velley`）
 
@@ -94,7 +87,6 @@
 - **难度**：<span class="dp-difficulty lvl-2"><span class="bar"></span><span class="bar"></span><span class="label">普通</span></span>
 - **适合**：收集绯红木材和菌类资源
 
----
 
 ### 凋零森林（Withered Forest，`incendium:withered_forest`）
 
@@ -108,7 +100,6 @@
 - **难度**：<span class="dp-difficulty lvl-3"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">困难</span></span>
 - **友好提示**：穿着金甲可以和平访问猪灵村庄
 
----
 
 ## 九大结构
 
@@ -126,7 +117,6 @@
 - **炼狱之羽**（Infernal Feather）— Boss 掉落
 - **斥候战盔**（Scout's Battle Helm）— 击杀猪灵侦察兵 10% 概率
 
----
 
 ### 圣所（Sanctum，`incendium:sanctum`）
 
@@ -142,7 +132,6 @@
 **核心宝藏**：
 - **破晓者**（Daybreaker）— 圣所深处的神器弩
 
----
 
 ### 魔炎祭坛（Infernal Altar，`incendium:infernal_altar`）
 
@@ -150,7 +139,6 @@
 
 矗立在赤红沙丘中央的神秘祭坛，周围环绕着燃烧的火焰。祭坛本身是一个挑战点——挑战成功会掉落稀有道具。
 
----
 
 ### 废弃实验室（Ruined Lab，`incendium:ruined_lab`）
 
@@ -160,7 +148,6 @@
 
 **注意**：实验室里可能还有未清理的实验体...
 
----
 
 ### 下界反应堆（Nether Reactor，`incendium:nether_reactor`）
 
@@ -168,7 +155,6 @@
 
 一个巨大的能源装置，内部充满了未知的科技。由**反应堆哨兵**守卫，击败后可以搜刮反应堆核心区域。
 
----
 
 ### 废弃哨塔（Abandoned Tower，`incendium:abandoned_tower`）
 
@@ -176,7 +162,6 @@
 
 被遗弃的下界哨塔，共有 11 种不同的模块组合。塔内有时可以找到被囚禁的**小恶魂**（Ghastling）——这是游戏中最可爱的宠物之一！
 
----
 
 ### 石英厨房（Quartz Kitchen，`incendium:quartz_kitchen`）
 
@@ -184,7 +169,6 @@
 
 一个趣味性结构——下界的石英厨房。虽然看似无害，但里面可能藏有一些特殊的食物和酿造材料。
 
----
 
 ### 猪灵村庄（Piglin Village，`incendium:piglin_village`）
 
@@ -199,7 +183,6 @@
 
 穿着金甲即可和平访问，和村民交易可以获得稀有物品。
 
----
 
 ### 管道（Pipeline，`incendium:pipeline`）
 
@@ -209,7 +192,6 @@
 
 **终极目标**：击败精英哨兵，夺取其守护的 **「疯狂火炬」**（Torch of Lunacy）——一根能照亮超大范围的神器火把。
 
----
 
 ## 探险小贴士
 
@@ -221,6 +203,3 @@
 | 猪灵村庄 | 穿一件金甲即可，不要主动攻击村民 |
 | 寻找小恶魂 | 探索废弃哨塔，带火焰弹喂食 |
 
----
-
-> **下一章**：[烬域 · 物品与装备 →](./items)

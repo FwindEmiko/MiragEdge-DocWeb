@@ -2,7 +2,6 @@
 
 > Incendium 新增了超过 **30 件**自定义物品，涵盖武器、工具、护甲、盾牌和药水。每一件都有独特的获取方式和使用效果。
 
----
 
 ## 武器
 
@@ -13,7 +12,6 @@
 - **特点**：攻速极快，适合对付大量小怪
 - **评级**：<span class="dp-difficulty lvl-4"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">极难</span></span>
 
----
 
 ### 献祭大剑（Greatsword of Sacrifice）
 - **类型**：近战 / 巨剑
@@ -22,7 +20,6 @@
 - **特点**：高风险高回报，一刀残血、一刀回满
 - **评级**：<span class="dp-difficulty lvl-5"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">致命</span></span>
 
----
 
 ### 诸神黄昏（Ragnarok）
 - **类型**：近战 / 传说武器
@@ -31,7 +28,6 @@
 - **特点**：烬域最强武器之一，挥动时天地变色
 - **评级**：<span class="dp-difficulty lvl-5"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">致命</span></span>
 
----
 
 ### 雷击三叉戟（Voltaic Trident）
 - **类型**：远程 / 三叉戟
@@ -40,7 +36,6 @@
 - **特点**：雷雨天气下伤害翻倍
 - **评级**：<span class="dp-difficulty lvl-4"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">极难</span></span>
 
----
 
 ### 烈焰短柄斧（Blazing Hatchet）
 - **类型**：近战 / 斧
@@ -49,7 +44,6 @@
 - **特点**：一斧下去，敌人飞出去还着火
 - **评级**：<span class="dp-difficulty lvl-3"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">困难</span></span>
 
----
 
 ### 冰冻之刃（Chilling Blade）
 - **类型**：近战 / 剑
@@ -58,7 +52,6 @@
 - **特点**：唯一能有效对付幽魂类敌人的武器
 - **评级**：<span class="dp-difficulty lvl-4"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">极难</span></span>
 
----
 
 ### 火风暴（Firestorm）
 - **类型**：远程 / 弩
@@ -67,7 +60,6 @@
 - **特点**：一支箭射出多重火矢，清场神器
 - **评级**：<span class="dp-difficulty lvl-4"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">极难</span></span>
 
----
 
 ### 哨兵之怒（Sentry's Wrath）
 - **类型**：远程 / 弩
@@ -76,7 +68,6 @@
 - **特点**：对抗机械类敌人有额外伤害
 - **评级**：<span class="dp-difficulty lvl-3"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">困难</span></span>
 
----
 
 ### 开路先锋（Trailblazer）
 - **类型**：近战 / 特殊武器
@@ -85,7 +76,6 @@
 - **特点**：在地下开路的神器
 - **评级**：<span class="dp-difficulty lvl-3"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">困难</span></span>
 
----
 
 ### 追踪十字弩（Multiplex Crossbow）
 - **类型**：远程 / 弩
@@ -94,7 +84,6 @@
 - **特点**：近距离爆发力惊人
 - **评级**：<span class="dp-difficulty lvl-3"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">困难</span></span>
 
----
 
 ### 枯萎陨灭（Withersbane）
 - **类型**：近战 / 剑
@@ -103,7 +92,6 @@
 - **特点**：凋零克星，专杀凋零骷髅
 - **评级**：<span class="dp-difficulty lvl-4"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">极难</span></span>
 
----
 
 ### 扭曲凋零刃（Warping Witherblade）
 - **类型**：近战 / 剑 · 神器级
@@ -112,7 +100,6 @@
 - **特点**：外观酷炫，每次挥动都有扭曲特效
 - **评级**：<span class="dp-difficulty lvl-5"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">致命</span></span>
 
----
 
 ### 猪灵杀手（Piglin Slayer）
 - **类型**：近战 / 剑
@@ -121,7 +108,6 @@
 - **特点**：专门克制猪灵的武器
 - **评级**：<span class="dp-difficulty lvl-3"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">困难</span></span>
 
----
 
 ## 工具
 
@@ -132,7 +118,6 @@
 - **趣味**：和生物 Torte 有关联
 - **评级**：<span class="dp-difficulty lvl-2"><span class="bar"></span><span class="bar"></span><span class="label">普通</span></span>
 
----
 
 ### 防化服头盔（Hazmat Suit）
 - **类型**：头盔 · 防护装备
@@ -141,7 +126,6 @@
 - **必备场景**：毒化废土探索
 - **评级**：<span class="dp-difficulty lvl-4"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">极难</span></span>
 
----
 
 ### 重型矿镐（Hefty Pickaxe）
 - **类型**：工具 / 镐
@@ -150,7 +134,6 @@
 - **特点**：下界采矿效率翻倍
 - **评级**：<span class="dp-difficulty lvl-4"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">极难</span></span>
 
----
 
 ### 炼狱之羽（Infernal Feather）
 - **类型**：特殊道具
@@ -158,7 +141,6 @@
 - **效果**：用于合成或触发特殊事件
 - **评级**：<span class="dp-difficulty lvl-3"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">困难</span></span>
 
----
 
 ### 炼狱之翼（Infernal Wings）
 - **类型**：鞘翅
@@ -167,7 +149,6 @@
 - **特点**：下界飞行最佳选择
 - **评级**：<span class="dp-difficulty lvl-5"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">致命</span></span>
 
----
 
 ### 疯狂火炬（Torch of Lunacy）
 - **类型**：照明工具
@@ -176,7 +157,6 @@
 - **特点**：一根火炬照亮整个洞穴
 - **评级**：<span class="dp-difficulty lvl-4"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">极难</span></span>
 
----
 
 ### 不稳定粉末（Unstable Powder）
 - **类型**：投掷物
@@ -185,7 +165,6 @@
 - **注意**：在水中被浸湿时不会激活
 - **评级**：<span class="dp-difficulty lvl-3"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">困难</span></span>
 
----
 
 ### 回归卷轴（Scroll of Returning）
 - **类型**：消耗品 · 不可堆叠
@@ -194,7 +173,6 @@
 - **注意**：尊重世界边界，跨维度无法使用
 - **评级**：<span class="dp-difficulty lvl-4"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">极难</span></span>
 
----
 
 ### 不安之自然（Restless Nature）
 - **类型**：投掷物
@@ -203,7 +181,6 @@
 - **特点**：下界造林工具
 - **评级**：<span class="dp-difficulty lvl-2"><span class="bar"></span><span class="bar"></span><span class="label">普通</span></span>
 
----
 
 ## 护甲与盾牌
 
@@ -213,7 +190,6 @@
 - **效果**：格挡时吸取攻击者生命值
 - **评级**：<span class="dp-difficulty lvl-4"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">极难</span></span>
 
----
 
 ### 棱彩盾牌（Prismatic Shield）
 - **类型**：盾牌
@@ -221,7 +197,6 @@
 - **效果**：格挡时折射部分伤害到周围敌人
 - **评级**：<span class="dp-difficulty lvl-4"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">极难</span></span>
 
----
 
 ### 辐射盾牌（Radiation Shield）
 - **类型**：盾牌
@@ -229,7 +204,6 @@
 - **效果**：格挡时对攻击者施加辐射伤害
 - **评级**：<span class="dp-difficulty lvl-3"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">困难</span></span>
 
----
 
 ### 斥候战盔（Scout's Battle Helm）
 - **类型**：头盔 · 赞助者物品
@@ -238,7 +212,6 @@
 - **特点**：残血反杀神器
 - **评级**：<span class="dp-difficulty lvl-4"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">极难</span></span>
 
----
 
 ## 药水
 
@@ -249,7 +222,6 @@
 | **不死灵药**（Elixir of Undying） | 短时间不死 | 禁忌城堡深处 |
 | **死亡药水**（Death Potion） | 投掷后造成即死伤害 | 圣所掉落 |
 
----
 
 ## 神器系列（Patron / 赞助者限定）
 
@@ -263,7 +235,6 @@
 | **回归卷轴**（Scroll of Returning） | 消耗品 | 传送回出生点 |
 | **扭曲凋零刃**（Warping Witherblade） | 剑 | 慢速高伤，扭曲特效 |
 
----
 
 ## 装备速查
 
@@ -278,6 +249,3 @@
 | 盾牌选择 | 死灵盾牌（续航）/ 棱彩盾牌（反伤） |
 | 下界飞行 | 炼狱之翼 |
 
----
-
-> **上一章**：[群系与结构 ←](./biomes) | **下一章**：[生物与 Boss →](./mobs)

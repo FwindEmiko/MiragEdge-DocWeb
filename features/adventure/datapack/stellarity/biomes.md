@@ -2,7 +2,6 @@
 
 > 末地不再是那片荒芜的虚空。奇异的群系遍布浮岛，古老的文明遗迹等待探索。新增 **23 个群系**、多个全新结构，将末地从一片孤岛变成充满魔法与奇幻的异世界。
 
----
 
 ## 末地新群系
 
@@ -17,7 +16,6 @@ Stellarity 将末地群系按地貌特征分为四大类别：
 | **末地中部草原** | `stellarity:end_midlands` | 经典末地地形增强版，紫颂树与草地交错 |
 | **末地荒野** | `stellarity:end_wilds` | 更加狂野的末地平原，散布奇异植被 |
 
----
 
 ### 荒原类（Barrens）
 
@@ -29,7 +27,6 @@ Stellarity 将末地群系按地貌特征分为四大类别：
 | **末地巢穴** | `stellarity:the_nest` | 末影人的密集聚居地，小心不要激怒它们 |
 | **末影荒地** | `stellarity:ender_wastes` | 极简主义的荒原，紫颂植物稀疏 |
 
----
 
 ### 森林类（Forests）
 
@@ -40,7 +37,6 @@ Stellarity 将末地群系按地貌特征分为四大类别：
 | **紫水晶森林** | `stellarity:amethyst_forest` | 紫水晶簇遍布的魔法森林，空中飘浮着晶尘 |
 | **海晶森林** | `stellarity:prismarine_forest` | 海晶石色泽的奇幻树木，水下有特殊鱼类 |
 
----
 
 ### 冰冻类（Frozen）
 
@@ -50,13 +46,12 @@ Stellarity 将末地群系按地貌特征分为四大类别：
 |----------|-----------|------|
 | **冰冻末地** | `stellarity:frozen_end` | 末地罕见地披上了冰雪外衣 |
 
----
 
 ### 特殊群系
 
 #### 神圣之地（The Hallow，`stellarity:the_hallow`）
 
-![神圣之地](/images/datapack/stellarity/biomes/the_hallow.png)
+<SmartImage src="/images/datapack/stellarity/biomes/the_hallow.png" alt="神圣之地" shadow radius="auto" />
 
 > **Terraria 联动群系！** 五彩缤纷的草地、横跨天际的彩虹、闪烁的精灵粉尘——这可能是 Minecraft 中最美丽的群系。
 
@@ -74,7 +69,6 @@ Stellarity 将末地群系按地貌特征分为四大类别：
 
 一望无际的末地沙漠，隐藏着古老文明的遗迹。
 
----
 
 ## 重要结构
 
@@ -89,7 +83,6 @@ Stellarity 将末地城从头重建，设计风格类似新版试炼密室：
 - **保护水晶**：塔楼顶部有保护性末影水晶，阻止玩家在附近放置/破坏方块
 - **末地船**：依旧存在，鞘翅在船头等你
 
----
 
 ### 光明教堂（Chapel of Light，`stellarity:chapel_of_light`）
 
@@ -99,7 +92,6 @@ Stellarity 将末地城从头重建，设计风格类似新版试炼密室：
 - **核心功能**：在此召唤 **光之女皇**（Empress of Light）Boss
 - 建议准备充分后再进入
 
----
 
 ### 末地村庄（End Village，`stellarity:end_village`）
 
@@ -110,7 +102,6 @@ Stellarity 将末地城从头重建，设计风格类似新版试炼密室：
 - **交易系统**：与主世界不同，提供独家物品
 - 重要的装备获取来源
 
----
 
 ### 诅咒祭坛（Altar of the Accursed，`stellarity:altar_of_the_accursed`）
 
@@ -121,7 +112,6 @@ Stellarity 将末地城从头重建，设计风格类似新版试炼密室：
 - 可自定义**鞘翅尾迹**颜色（16 种染料 = 16 种尾迹粒子）
 - 可移除鞘翅上的染料（用水桶右键）
 
----
 
 ### 要塞（Stronghold）
 
@@ -131,7 +121,6 @@ Stellarity 将末地城从头重建，设计风格类似新版试炼密室：
 - 击败守卫可获得有助于对抗末影龙的物品
 - 进入末地前的重要准备地点
 
----
 
 ### 小型环境结构
 
@@ -141,7 +130,6 @@ Stellarity 将末地城从头重建，设计风格类似新版试炼密室：
 - 虚空祭坛
 - 散落的末地船残骸
 
----
 
 ## 特殊机制
 
@@ -160,7 +148,6 @@ Stellarity 将末地城从头重建，设计风格类似新版试炼密室：
 - 指向最近的末地折跃门
 - 迷路时的导航利器
 
----
 
 ## 探索路线建议
 
@@ -172,6 +159,4 @@ Stellarity 将末地城从头重建，设计风格类似新版试炼密室：
 | 后期探索 | 探索全群系 | 通过折跃门前往外岛 → 逐一探索各群系 |
 | 终局挑战 | 击败光之女皇 | 找到神圣之地 → 进入光明教堂 → 召唤 Boss |
 
----
 
-> <span class="dp-difficulty lvl-1"><span class="bar"></span><span class="label">简单</span></span> **下一章**：[繁星 · 物品与装备 →](./items)

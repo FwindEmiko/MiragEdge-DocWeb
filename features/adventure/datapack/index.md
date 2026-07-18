@@ -44,7 +44,6 @@
 | **炎爆** | 下界高压苦力怕——更高伤害、更大爆炸 | [查看详情](./fun-packs/overview) |
 | **护矿** | 猪灵守护金矿——挖掘下界金矿会激怒附近猪灵 | [查看详情](./fun-packs/overview) |
 
----
 
 ## 快速导航
 
@@ -61,7 +60,6 @@
 | 末影龙强化后怎么打？ | [终焉 · Boss攻略](./true-ending/boss) |
 | 有哪些世界生成类内容？ | [世界生成](./worldgen/overview) |
 
----
 
 <div class="dp-notice dp-tip">
 <div class="dp-notice-title">管理员提示</div>
