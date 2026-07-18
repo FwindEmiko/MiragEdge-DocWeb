@@ -89,18 +89,41 @@ minecraft:stick        # 原版命名空间下的 stick
 
 `pack_format` 是 `pack.mcmeta` 中的版本号，告知 Minecraft 该数据包兼容的游戏版本。**版本不匹配将导致警告，但不阻止加载**。
 
-在 MC 1.21.9+ 版本中，`pack_format` 已被弃用，改用 `min_format` / `max_format` 范围格式。本文档目标版本为 26.1.2，推荐同时支持新旧格式。
+自 MC 1.21.9 起，Mojang 引入了 `min_format` / `max_format` 范围字段，逐步取代单一的 `pack_format`。**Leaf 26.1.2 服务端对这两个字段有强制要求**（详见 [Leaf pack.mcmeta 严格校验规则](#leaf-26-1-2-pack-mcmeta-严格校验规则)）。
+
+::: danger 不要混用整数和数组格式
+`pack_format` / `min_format` / `max_format` 三个字段**必须使用同一种格式**：
+
+- **整数格式**（Leaf 26.1.2 推荐用法）：`101`、`82`、`107`
+- **数组格式**（X.Y 小数，对应 MC 26.1+ 的 `101.1` 等）：`[101, 1]`
+
+错误示例（Leaf 会报错）：
+```json
+{
+  "pack": {
+    "pack_format": 101,
+    "min_format": 101,
+    "max_format": [101, 1]   // ❌ min 是整数、max 是数组，不一致
+  }
+}
+```
+:::
+
+**Leaf 26.1.2（pack_format 101）推荐写法**：
 
 ```json
 {
   "pack": {
     "description": "MiragEdge Custom Data Pack",
     "pack_format": 101,
-    "min_format": 101,
-    "max_format": [101, 1]
+    "min_format": 82,
+    "max_format": 107
   }
 }
 ```
+
+> **为什么 min_format 是 82 而不是 101？**
+> 因为 Leaf 规定：当 `min_format` 落在 17-81（legacy 区间）时，必须额外提供已弃用的 `supported_formats` 字段；而 `supported_formats` 在 pack_format 82+ 又必须移除——会陷入死循环。`min_format` 必须设成 **82** 或更大才能避开这个陷阱。详见 [Leaf pack.mcmeta 严格校验规则](#leaf-26-1-2-pack-mcmeta-严格校验规则)。
 
 > 速查链接：[Pack version - Minecraft Wiki](https://minecraft.wiki/w/Pack_version)
 
@@ -259,13 +282,24 @@ miragedge-datapack/
 
 ::: code-group
 
-```json [MC 26.1.2（推荐：新旧兼容）]
+```json [MC 26.1.2（Leaf 推荐：整数格式）]
 {
   "pack": {
     "description": "MiragEdge Custom Data Pack",
     "pack_format": 101,
-    "min_format": 101,
-    "max_format": [101, 1]
+    "min_format": 82,
+    "max_format": 107
+  }
+}
+```
+
+```json [MC 26.1.2（数组格式，对应 101.1 小数版本）]
+{
+  "pack": {
+    "description": "MiragEdge Custom Data Pack",
+    "pack_format": [101, 1],
+    "min_format": [82, 0],
+    "max_format": [107, 0]
   }
 }
 ```
@@ -279,6 +313,10 @@ miragedge-datapack/
 }
 ```
 
+:::
+
+::: warning 不要使用 supported_formats 字段
+在 Leaf 26.1.2 中，`supported_formats` 字段从 pack_format 82 起被弃用，**保留会导致启动报错**。请使用 `min_format` + `max_format` 替代。
 :::
 
 ## 核心工作流
@@ -381,6 +419,39 @@ execute as @a if items entity @s weapon.mainhand *[custom_data~{craftengine:{id:
 # 检查物品的 NBT 标签
 execute as @a if items entity @s weapon.mainhand *[minecraft:custom_name='{"text":"龙焰之刃","color":"gold","italic":false}'] run function miragedge:items/sword_ability
 ```
+
+##### 5. 物品组件测试语法（附魔 / custom_data 等）
+
+`execute if items ... *[component~value]` 中 `value` 的格式因组件而异，**必须严格匹配组件的数据结构**：
+
+| 组件 | 测试值格式 | 示例 |
+|------|------------|------|
+| `minecraft:enchantments` | **列表** `[{<enchant_id>: <min_level>}]` | `*[minecraft:enchantments~[{silk_touch:1}]]` |
+| `minecraft:custom_data` | 对象 `{...}` | `*[custom_data~{craftengine:{id:"miragedge:flame_sword"}}]` |
+| `minecraft:custom_name` | JSON 字符串 | `*[minecraft:custom_name='{"text":"剑","color":"gold"}']` |
+| `minecraft:damage` | 整数 | `*[minecraft:damage~10]` |
+| `minecraft:max_damage` | 整数 | `*[minecraft:max_damage~100]` |
+
+::: danger minecraft:enchantments 测试值必须是列表
+最常见的错误是把附魔测试值写成对象 `{levels:{"minecraft:silk_touch":1}}`（这是 `/give` 的赋值语法），导致 `Malformed 'minecraft:enchantments' predicate: 'Not a list'` 错误。
+
+**错误**（这是 give 命令的赋值语法，不是测试语法）：
+```mcfunction
+# ❌ 会报 "Not a list" 错误
+execute as @a if items entity @s weapon.mainhand *[minecraft:enchantments~{levels:{"minecraft:silk_touch":1}}] run say has silk touch
+```
+
+**正确**（列表格式，每个元素是 `{<enchantment_id>: <min_level>}`）：
+```mcfunction
+# ✅ 正确的附魔检测语法
+execute as @a if items entity @s weapon.mainhand *[minecraft:enchantments~[{silk_touch:1}]] run say has silk touch
+
+# 多个附魔同时检测
+execute as @a if items entity @s weapon.mainhand *[minecraft:enchantments~[{sharpness:3},{unbreaking:1}]] run say enchanted
+```
+:::
+
+> **赋值 vs 测试**：`/give` 命令中使用 `{levels:{"minecraft:silk_touch":1}}` 是**赋值**（设置组件值）；`execute if items` 中的 `~` 后面是**测试**（匹配组件值），二者格式不同。
 
 #### 验证
 
@@ -1569,6 +1640,60 @@ blocks:
 # 检查服务端 latest.log 中的错误信息
 ```
 
+## Leaf 26.1.2 pack.mcmeta 严格校验规则
+
+::: danger Leaf 比 Vanilla 更严格
+Leaf 26.1.2 服务端对 `pack.mcmeta` 的校验比原版 Minecraft **严格得多**。原版只警告不阻止的字段问题，在 Leaf 上会直接抛出 `JsonParseException` 并跳过整个数据包（fallback type）。
+
+以下 4 条规则是经过实测总结的，**全部必须满足**，否则数据包无法加载。
+:::
+
+### 规则速查表
+
+| # | 规则 | 触发条件 | 错误信息 | 解决方案 |
+|---|------|----------|----------|----------|
+| 1 | `min_format` / `max_format` 必填 | `pack_format > 81` | `Pack declares support for version newer than 81, but is missing mandatory fields min_format and max_format` | 添加 `min_format` 和 `max_format` |
+| 2 | `min_format` 落在 legacy 区间时 `supported_formats` 必填 | `min_format` ∈ [17, 81] | `Pack declares support for format 81, but game versions supporting formats 17 to 81 require a supported_formats field` | 把 `min_format` 改为 ≥ 82 |
+| 3 | `supported_formats` 已弃用 | `pack_format` ≥ 82 且包含 `supported_formats` | `Pack key supported_formats is deprecated starting from pack format 82. Remove supported_formats from your pack.mcmeta` | 移除 `supported_formats` |
+| 4 | `min_format` 与 `supported_formats` 必须一致 | 同时存在两个字段且值不匹配 | `Pack version declaration mismatch between supported_formats (from X) and min_format (Y)` | 让 `min_format` = `supported_formats.min_inclusive` |
+
+### 死循环陷阱
+
+规则 2 和规则 3 会形成"死循环"——如果你把 `min_format` 设成 81：
+
+- 规则 2 要求你必须有 `supported_formats`（因为 81 在 legacy 区间）
+- 规则 3 又要求你必须移除 `supported_formats`（因为 pack_format 82+ 已弃用）
+
+**唯一解法**：`min_format` 必须 ≥ **82**。这样既不在 legacy 区间（不需要 `supported_formats`），又满足现代格式要求。
+
+### Leaf 26.1.2 最小合法 pack.mcmeta
+
+```json
+{
+  "pack": {
+    "pack_format": 101,
+    "min_format": 82,
+    "max_format": 107,
+    "description": "..."
+  }
+}
+```
+
+**验证清单**：
+- [ ] `pack_format` 落在 `[min_format, max_format]` 范围内
+- [ ] `min_format` ≥ 82（避开 legacy 区间）
+- [ ] 不包含 `supported_formats` 字段
+- [ ] 三个字段使用同种格式（全整数或全数组，不混用）
+- [ ] 文件无 UTF-8 BOM（用 `utf-8` 而非 `utf-8-sig` 写入）
+
+### 调试技巧
+
+Mojang 的错误信息通常**直接包含解决方案提示**。例如规则 2 的错误信息末尾会说 `Add "supported_formats": [81, 81] or require a version greater or equal to 82.0`——这等于直接告诉你"把 min_format 改成 82+"。遇到 pack.mcmeta 报错时：
+
+1. **完整阅读错误信息**（特别是末尾的 `at position XXX: ...<--[HERE]`）
+2. 按错误提示的方向修改，不要凭直觉
+3. 改完一项就重启验证，不要批量改多项再测
+
 ## 常见问题与踩坑
 
 ### pack_format 对照表
@@ -1593,17 +1718,35 @@ blocks:
 - **整数部分（`X`）**：主版本号，破坏性变更时递增（如 26.1 从 1.21.11 的 94 跳到 101）
 - **小数部分（`Y`）**：次版本号，同一主版本内非破坏性微调时递增（如 26.1-pre-2 的 `101.0` → 26.1-pre-3 的 `101.1`）
 
-在 `pack.mcmeta` 中，旧版 `pack_format` 整数字段已弃用；新版使用数组格式的 `min_format` / `max_format` 字段：
+在 `pack.mcmeta` 中可以用两种格式表示：
+
+**整数格式**（Leaf 26.1.2 推荐，简单不易错）：
 ```json
 {
   "pack": {
-    "min_format": [101, 1],
-    "max_format": [101, 1],
+    "pack_format": 101,
+    "min_format": 82,
+    "max_format": 107,
     "description": "MiragEdge Data Pack"
   }
 }
 ```
-其中 `[101, 1]` 对应 `pack_format: 101.1`。兼容旧版时，四个字段需同时出现。
+
+**数组格式**（精确到小数版本，对应 `101.1`）：
+```json
+{
+  "pack": {
+    "pack_format": [101, 1],
+    "min_format": [82, 0],
+    "max_format": [107, 0],
+    "description": "MiragEdge Data Pack"
+  }
+}
+```
+
+::: warning 三字段格式必须一致
+`pack_format` / `min_format` / `max_format` 三个字段**必须同时用整数或同时用数组**，混用会导致 Leaf 26.1.2 报错。详见 [Leaf pack.mcmeta 严格校验规则](#leaf-26-1-2-pack-mcmeta-严格校验规则)。
+:::
 :::
 
 > 更新到新版本时务必修改 `pack.mcmeta` 中的 `pack_format` / `min_format` 值！
@@ -1670,6 +1813,98 @@ blocks:
 4. **资源包未更新**：修改 CE 物品配置或贴图后，客户端可能需要重新加入服务器才能看到变化。
 5. **原版 recipe 引用 CE 物品 ID**：不可行。原版 `minecraft:item` 入口只能识别 `minecraft:` 命名空间下的物品 ID。
 6. **Stonecutter 配方使用 CE 物品做原料**：CE 官方不建议，可能导致客户端视觉问题。
+
+## 下载与适配第三方数据包
+
+### 场景说明
+
+从 Modrinth、CurseForge、PlanetMinecraft 等平台下载的第三方数据包通常针对特定 MC 版本编写。部署到 Leaf 26.1.2 服务器前，**必须进行兼容性适配**，否则会触发 `pack.mcmeta` 校验失败、`mcfunction` 语法错误等问题。
+
+### 适配工作流
+
+```
+1. 下载原始 zip
+       ↓
+2. 备份原始 zip（_original/ 子目录）
+       ↓
+3. 解压到工作目录
+       ↓
+4. 检查并修复 pack.mcmeta（见下方清单）
+       ↓
+5. 检查 mcfunction 语法（特别是组件测试）
+       ↓
+6. 重新打包 zip（UTF-8 无 BOM）
+       ↓
+7. 复制到 download-fixed/ 并部署到 world/datapacks/
+       ↓
+8. 重启服务器，检查 latest.log 无 ERROR/WARN
+```
+
+### pack.mcmeta 适配清单
+
+| 检查项 | 旧包常见问题 | 适配方法 |
+|--------|--------------|----------|
+| UTF-8 BOM | Windows 编辑器保存的 JSON 带 BOM | 用 `utf-8` 编码重写（非 `utf-8-sig`） |
+| `pack_format` | 旧版本号（如 48、71、81） | 改为 `101`（Leaf 26.1.2 目标版本） |
+| `min_format` / `max_format` | 旧包通常没有 | 新增 `min_format: 82`, `max_format: 107` |
+| `supported_formats` | 旧包可能包含 | **移除**（Leaf 26.1.2 已弃用，保留会报错） |
+| `min_format` 值 | 适配者常误设为 81 | **必须 ≥ 82**（否则触发 legacy 死循环） |
+| 字段格式一致性 | min/max 混用整数和数组 | 三个字段统一用整数或统一用数组 |
+
+### mcfunction 语法检查清单
+
+第三方包的 mcfunction 文件常见兼容性问题：
+
+| 问题 | 现象 | 解决方案 |
+|------|------|----------|
+| 旧版 `/give` NBT 语法 | `give @s diamond{display:{Name:...}}` | 转换为 1.20.5+ 组件格式 |
+| 旧版附魔检测 | `execute if data entity @s Items[0].tag.Enchantments...` | 用 `execute if items ... *[minecraft:enchantments~[...]]` |
+| 旧版选择器参数 | `@e[type=minecraft:pig,nbt={...}]` | 改用 `execute if data` 或 predicate |
+| 组件测试语法错误 | `*[minecraft:enchantments~{levels:...}]`（对象） | 改为列表 `*[minecraft:enchantments~[{...}]]` |
+
+::: warning 不要随意改写 mcfunction 语法
+**重要教训**：如果原作者的 mcfunction 语法看起来"奇怪"但能正常加载，**不要凭直觉修改**。例如 `*[minecraft:enchantments~[{silk_touch:1}]]` 看起来像是缺了 `minecraft:` 前缀，但实际上这是合法的简写形式。
+
+修改前先在测试世界验证，或查阅 [Minecraft Wiki - Item predicate](https://minecraft.wiki/w/Item_predicate) 确认语法。错误修改可能导致 `Malformed predicate` 错误。
+:::
+
+### loot table 适配
+
+第三方包的 loot table 常见问题：
+
+| 问题 | 现象 | 解决方案 |
+|------|------|----------|
+| `alternatives` 入口全部带 weight 但无 condition | `Unreachable entry!` 警告 | 改为 `minecraft:group`（无条件的加权选择不应使用 alternatives） |
+| 入口放在 `functions` 数组而非 `pools` | `set_loot_table` 解析失败 | 把入口移到 `pools` 数组中 |
+| 旧版 `entry` 字段名 | 1.20+ 已改名为 `entries` | 批量替换 |
+
+### 部署验证清单
+
+部署适配后的数据包后，检查 `latest.log`：
+
+- [ ] 无 `Error reading pack metadata, attempting fallback type` 警告
+- [ ] 无 `Failed to load function` 错误
+- [ ] 无 `Couldn't load tag` 错误
+- [ ] 无 `Unreachable entry!` 警告
+- [ ] 数据包出现在 `/datapack list` 输出中
+- [ ] 服务器正常启动无 ERROR
+
+### 推荐目录结构
+
+```
+F:\FCelestial\datapacks\
+├── new-fun\                          # 新下载包的工作目录
+│   ├── <Pack>.zip                    # 适配后的 zip
+│   ├── _original\                   # 原始 zip 备份（重要！）
+│   └── _extracted\                  # 解压后的工作副本
+└── download-fixed\                   # 适配完成、待部署的 zip
+    ├── <Pack>.zip
+    └── ...
+```
+
+::: tip 一定要备份原始 zip
+适配过程可能需要多次迭代（Leaf 的报错往往一项触发一项）。保留原始 zip 备份可以让你随时从干净的起点重新开始，避免在已修改的版本上叠加错误。
+:::
 
 ## AI 使用指南
 
