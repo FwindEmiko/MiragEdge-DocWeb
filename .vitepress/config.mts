@@ -430,64 +430,52 @@ export default defineConfig({
           ]
         },
         {
-          text: '🌾 田园生活',
-          collapsed: false,
-          items: [
-            { text: '建筑大师', link: '/features/pastoral/builder' },
-            {
-              text: '真实季节',
-              collapsed: true,
-              items: [
-                { text: '介绍', link: '/features/pastoral/seasons/info' },
-                { text: '温度系统', link: '/features/pastoral/seasons/temperature' },
-                { text: '春季', link: '/features/pastoral/seasons/spring' },
-                { text: '夏季', link: '/features/pastoral/seasons/summer' },
-                { text: '秋季', link: '/features/pastoral/seasons/fall' },
-                { text: '冬季', link: '/features/pastoral/seasons/winter' },
-              ]
-            },
-            {
-              text: '更多钓鱼',
-              collapsed: true,
-              items: [
-                { text: '介绍', link: '/features/pastoral/fishing/info' },
-                { text: '鱼竿进阶', link: '/features/pastoral/fishing/rods' },
-                { text: '鱼类图鉴', link: '/features/pastoral/fishing/fish' },
-                { text: '钓鱼比赛', link: '/features/pastoral/fishing/competitions' },
-                { text: '鱼饵系统', link: '/features/pastoral/fishing/baits' },
-                { text: '维度钓鱼', link: '/features/pastoral/fishing/dimensions' },
-              ]
-            },
-            {
-              text: '更多种植',
-              collapsed: true,
-              items: [
-                { text: '介绍', link: '/features/pastoral/croups/info' },
-              ]
-            },
-            {
-              text: '更多食物',
-              collapsed: true,
-              items: [
-                { text: '食物总览', link: '/features/pastoral/food/info' },
-                { text: '早餐简餐', link: '/features/pastoral/food/breakfast' },
-                { text: '糖果零食', link: '/features/pastoral/food/snacks' },
-                { text: '沙拉凉菜', link: '/features/pastoral/food/salads' },
-                { text: '烘焙糕点', link: '/features/pastoral/food/bakery' },
-                { text: '主菜肉食', link: '/features/pastoral/food/mains' },
-                { text: '饮品', link: '/features/pastoral/food/drinks' },
-                { text: '甜品', link: '/features/pastoral/food/desserts' },
-                { text: '煎蛋系列', link: '/features/pastoral/food/eggs' },
-                { text: '特色食物', link: '/features/pastoral/food/special' },
-                { text: '食物速查表', link: '/features/pastoral/food/reference' },
-              ]
-            },
-          ]
-        },
-        {
           text: '⚔️ 冒险战斗',
           collapsed: false,
           items: [
+            {
+              text: '📦 数据包玩法',
+              collapsed: false,
+              items: [
+                { text: '🦊 玩法总览', link: '/features/datapack/' },
+                {
+                  text: '🔥 烬域 · Incendium',
+                  collapsed: true,
+                  items: [
+                    { text: '群系与结构', link: '/features/datapack/incendium/biomes' },
+                    { text: '物品与装备', link: '/features/datapack/incendium/items' },
+                    { text: '生物与Boss', link: '/features/datapack/incendium/mobs' },
+                    { text: '原版成就', link: '/features/datapack/incendium/advancements' },
+                  ]
+                },
+                {
+                  text: '⭐ 繁星 · Stellarity',
+                  collapsed: true,
+                  items: [
+                    { text: '群系与结构', link: '/features/datapack/stellarity/biomes' },
+                    { text: '物品与装备', link: '/features/datapack/stellarity/items' },
+                    { text: '生物与Boss', link: '/features/datapack/stellarity/mobs' },
+                    { text: '原版成就', link: '/features/datapack/stellarity/advancements' },
+                  ]
+                },
+                {
+                  text: '🏰 地城酒馆 · D&T',
+                  collapsed: true,
+                  items: [
+                    { text: '全结构一览', link: '/features/datapack/dungeons-and-taverns/structures' },
+                    { text: '物品一览', link: '/features/datapack/dungeons-and-taverns/items' },
+                    { text: '附魔列表', link: '/features/datapack/dungeons-and-taverns/enchantments' },
+                  ]
+                },
+                { text: '🏛️ 筑物塔楼 · Structory', link: '/features/datapack/structory/structures' },
+                { text: '🔍 野外探索', link: '/features/datapack/exploration/structures' },
+                { text: '🏘️ 稀有建筑群', link: '/features/datapack/rare-structures/overview' },
+                { text: '🌍 世界生成', link: '/features/datapack/worldgen/overview' },
+                { text: '🐉 终焉 · True Ending', link: '/features/datapack/true-ending/boss' },
+                { text: '🚪 沧墟破门 · Hoppo', link: '/features/datapack/hoppo-ruins/structures' },
+                { text: '🎮 趣味玩法', link: '/features/datapack/fun-packs/overview' },
+              ]
+            },
             {
               text: '等级怪物',
               link: '/features/adventure/levelledmobs',
@@ -525,6 +513,61 @@ export default defineConfig({
               items: [
                 { text: '介绍', link: '/features/adventure/mmo/info' },
                 { text: '锻造升级', link: '/features/adventure/mmo/forge' },
+              ]
+            },
+          ]
+        },
+        {
+          text: '🌾 田园生活',
+          collapsed: false,
+          items: [
+            { text: '建筑大师', link: '/features/pastoral/builder' },
+            {
+              text: '更多钓鱼',
+              collapsed: true,
+              items: [
+                { text: '介绍', link: '/features/pastoral/fishing/info' },
+                { text: '鱼竿进阶', link: '/features/pastoral/fishing/rods' },
+                { text: '鱼类图鉴', link: '/features/pastoral/fishing/fish' },
+                { text: '钓鱼比赛', link: '/features/pastoral/fishing/competitions' },
+                { text: '鱼饵系统', link: '/features/pastoral/fishing/baits' },
+                { text: '维度钓鱼', link: '/features/pastoral/fishing/dimensions' },
+              ]
+            },
+            {
+              text: '更多种植',
+              collapsed: true,
+              items: [
+                { text: '介绍', link: '/features/pastoral/croups/info' },
+              ]
+            },
+            {
+              text: '更多食物',
+              collapsed: false,
+              items: [
+                { text: '食物总览', link: '/features/pastoral/food/info' },
+                { text: '早餐简餐', link: '/features/pastoral/food/breakfast' },
+                { text: '糖果零食', link: '/features/pastoral/food/snacks' },
+                { text: '沙拉凉菜', link: '/features/pastoral/food/salads' },
+                { text: '烘焙糕点', link: '/features/pastoral/food/bakery' },
+                { text: '主菜肉食', link: '/features/pastoral/food/mains' },
+                { text: '饮品', link: '/features/pastoral/food/drinks' },
+                { text: '甜品', link: '/features/pastoral/food/desserts' },
+                { text: '煎蛋系列', link: '/features/pastoral/food/eggs' },
+                { text: '特色食物', link: '/features/pastoral/food/special' },
+                { text: '食物速查表', link: '/features/pastoral/food/reference' },
+              ]
+            },
+            {
+              text: '真实季节',
+              collapsed: true,
+              items: [
+                { text: '介绍', link: '/features/pastoral/seasons/info' },
+                { text: '温度系统', link: '/features/pastoral/seasons/temperature' },
+                { text: '春季', link: '/features/pastoral/seasons/spring' },
+                { text: '夏季', link: '/features/pastoral/seasons/summer' },
+                { text: '秋季', link: '/features/pastoral/seasons/fall' },
+                { text: '冬季', link: '/features/pastoral/seasons/winter' },
               ]
             },
           ]
