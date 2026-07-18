@@ -1,5 +1,5 @@
 // 附魔数据 - 提取的结构化数据
-// 共 244 个附魔（诅咒 11 + 普通 20 + 优良 41 + 稀有 91 + 史诗 62 + 传说 13 + 至宝 6）
+// 共 249 个附魔（诅咒 12 + 普通 20 + 优良 41 + 稀有 92 + 史诗 64 + 传说 14 + 至宝 6）
 
 export interface Enchantment {
   name: string
@@ -37,7 +37,7 @@ export const rarities: RarityMeta[] = [
 ]
 
 export const enchantments: Enchantment[] = [
-  // ===== 诅咒类附魔 (11) =====
+  // ===== 诅咒类附魔 (12) =====
   { name: '仇恶诅咒', id: 'calling_curse', maxLevel: 1, equipment: '头盔 / 胸甲 / 护腿 / 靴子', effect: '使装备被穿戴时会激怒周围的怪物', rarity: 'curse' },
   { name: '无力诅咒', id: 'breaklessness_curse', maxLevel: 3, equipment: '镐 / 斧 / 锄 / 铲', effect: '使工具破坏方块时有概率失败', rarity: 'curse' },
   { name: '消失诅咒', id: 'vanishing_curse', maxLevel: 1, equipment: '所有物品', effect: '被诅咒的物品会在玩家死亡时消失', rarity: 'curse' },
@@ -49,6 +49,7 @@ export const enchantments: Enchantment[] = [
   { name: '软弱诅咒', id: 'harmlessness_curse', maxLevel: 3, equipment: '剑 / 斧', effect: '使剑或斧的攻击有概率无效', rarity: 'curse' },
   { name: '霉运诅咒', id: 'misfortune_curse', maxLevel: 3, equipment: '镐 / 斧 / 锄 / 铲', effect: '使工具破坏方块时有概率不掉落', rarity: 'curse' },
   { name: '饥饿诅咒', id: 'hunger_curse', maxLevel: 1, equipment: '头盔', effect: '使佩戴该头盔时饥饿速度加快', rarity: 'curse' },
+  { name: '不修', id: 'un_unbreaking', maxLevel: 1, equipment: '可损坏物品', effect: '物品耐久消耗速度×10，纯整蛊诅咒，与耐久互斥', rarity: 'curse' },
 
   // ===== 普通品质 (20) =====
   { name: '亡灵杀手', id: 'smite', maxLevel: 5, equipment: '剑 / 斧 / 重锤 / 矛', effect: '提高对亡灵生物的基础伤害', rarity: 'common' },
@@ -115,7 +116,7 @@ export const enchantments: Enchantment[] = [
   { name: '饵钓', id: 'lure', maxLevel: 3, equipment: '钓鱼竿', effect: '减少上钩等待时间', rarity: 'uncommon' },
   { name: '骑士', id: 'paladin', maxLevel: 3, equipment: '剑', effect: '在骑乘时造成的伤害提升', rarity: 'uncommon' },
 
-  // ===== 稀有品质 (89) =====
+  // ===== 稀有品质 (90) =====
   { name: '三言', id: 'tripleshot', maxLevel: 1, equipment: '弓', effect: '一次射出的箭矢数量增加为三支并分散为扇形', rarity: 'rare' },
   { name: '不意', id: 'backstab', maxLevel: 6, equipment: '剑 / 斧', effect: '攻击对手后方时伤害提升', rarity: 'rare' },
   { name: '仲裁', id: 'void_affinity', maxLevel: 5, equipment: '三叉戟', effect: '在末地造成的伤害提升', rarity: 'rare' },
@@ -207,8 +208,9 @@ export const enchantments: Enchantment[] = [
   { name: '麻痹', id: 'paralyze', maxLevel: 3, equipment: '盾牌', effect: '抵挡伤害时有概率使攻击者获得挖掘疲劳效果', rarity: 'rare' },
   { name: '沙行', id: 'dune_speed', maxLevel: 3, equipment: '靴子', effect: '在沙地上提升移动速度', rarity: 'rare' },
   { name: '飘浮射击', id: 'levitation_shot', maxLevel: 5, equipment: '弓', effect: '射中的目标获得飘浮效果', rarity: 'rare' },
+  { name: '重靴', id: 'heavy_boots', maxLevel: 1, equipment: '靴子', effect: '重力+50%，从5格以上摔落时震碎脚下方块（不掉落物品），与月球漫步互斥', rarity: 'rare' },
 
-  // ===== 史诗品质 (59) =====
+  // ===== 史诗品质 (61) =====
   { name: '乘势', id: 'marking', maxLevel: 3, equipment: '弓 / 弩', effect: '短时间内连续对你的对手的伤害提升', rarity: 'epic' },
   { name: '五言', id: 'pentashot', maxLevel: 1, equipment: '弓', effect: '一次射出的箭矢数量增加为五支并分散为扇形', rarity: 'epic' },
   { name: '会心', id: 'supercritical', maxLevel: 3, equipment: '剑', effect: '在攻击时有概率造成的伤害大幅提升', rarity: 'epic' },
@@ -271,8 +273,10 @@ export const enchantments: Enchantment[] = [
   { name: '伏击', id: 'ambush', maxLevel: 3, equipment: '剑', effect: '攻击未察觉的目标时造成额外伤害', rarity: 'epic' },
   { name: '装甲飞行', id: 'plated', maxLevel: 4, equipment: '鞘翅', effect: '增加护甲与护甲韧性，但重力增大，与翱翔互斥', rarity: 'epic' },
   { name: '翱翔', id: 'soaring', maxLevel: 4, equipment: '鞘翅', effect: '减少重力延长滑翔距离，降低摔落伤害，与装甲飞行互斥', rarity: 'epic' },
+  { name: '月球漫步', id: 'lunar_walk', maxLevel: 1, equipment: '靴子', effect: '重力-80%并免疫摔落伤害，与重靴互斥', rarity: 'epic' },
+  { name: '海王', id: 'neptune', maxLevel: 1, equipment: '靴子', effect: '行走时5%概率在脚下生成3×3水源，消耗1点耐久', rarity: 'epic' },
 
-  // ===== 传说品质 (10) =====
+  // ===== 传说品质 (11) =====
   { name: '反重力', id: 'wings', maxLevel: 3, equipment: '靴子', effect: '可进入飞行状态，飞行时持续消耗装备耐久', rarity: 'legendary' },
   { name: '抢夺', id: 'looting', maxLevel: 3, equipment: '剑 / 矛', effect: '提高击杀生物时物品的掉落数量或掉落概率', rarity: 'legendary' },
   { name: '捍卫', id: 'preservation', maxLevel: 4, equipment: '头盔 / 胸甲 / 护腿 / 靴子', effect: '受到的伤害大幅降低', rarity: 'legendary' },
@@ -286,6 +290,7 @@ export const enchantments: Enchantment[] = [
   { name: '暴击', id: 'critical_strike', maxLevel: 3, equipment: '剑', effect: '击杀充能后下一次攻击造成暴击伤害', rarity: 'legendary' },
   { name: '虚空打击', id: 'void_strike', maxLevel: 1, equipment: '剑 / 斧', effect: '概率触发虚空侵蚀持续伤害', rarity: 'legendary' },
   { name: '虚空射击', id: 'void_shot', maxLevel: 1, equipment: '弓 / 弩', effect: '箭矢命中附加减速与虚空侵蚀效果', rarity: 'legendary' },
+  { name: '爆裂打火石', id: 'explosive_flint', maxLevel: 1, equipment: '打火石', effect: '右键方块时产生爆炸（威力3.0），消耗3点耐久，冷却15秒', rarity: 'legendary' },
 
   // ===== 至宝品质 (7) =====
   { name: '咒怨', id: 'missile', maxLevel: 3, equipment: '剑 / 斧', effect: '右击发射一颗凋零骷髅头（冷却时间: 60秒）', rarity: 'mythic' },
