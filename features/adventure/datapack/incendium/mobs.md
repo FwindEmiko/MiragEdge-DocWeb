@@ -1,6 +1,8 @@
 # 烬域 · 生物与 Boss
 
-> Incendium 新增了超过 **30 种**自定义生物，从普通猪灵变种到毁天灭地的 Boss。下界的每一寸土地都有了新的威胁——也带来了新的机遇。
+<SmartImage src="/images/datapack/incendium/mobs/incendium_header.png" alt="烬域生物群像" shadow radius="auto" caption="从平凡的猪灵变种到烈焰执政官——下界的每一寸土地都有新的威胁" />
+
+> 下界炎热的地表上，上百种新的身影在暗中窥视。猪灵军团、圣所邪教徒、各类变异生物——以及盘踞在结构最深处的恐怖 Boss。
 
 
 ## 通用猪灵变种

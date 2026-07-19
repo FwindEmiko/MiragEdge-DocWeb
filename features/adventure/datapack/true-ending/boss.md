@@ -1,6 +1,6 @@
-# 终焉 · 真结局 Boss 攻略
+# 终焉 · Boss攻略
 
-> **True Ending**（终焉）将原版末影龙战斗提升到了一个全新的层次——更强的龙、更多的攻击模式、Boss 战斗音乐，以及一场让你终生难忘的最终对决。
+<SmartImage src="/images/datapack/stellarity/biomes/ender_dragon.png" alt="重制末影龙" shadow radius="auto" />
 
 
 ## 强化对比

@@ -1,6 +1,6 @@
 # 地城酒馆 · 附魔列表
 
-> D&T 新增了 **17 种**自定义附魔，全部以附魔书形式散落在特定结构的宝箱中。每种附魔都有独特的获取地点和玩法——有些能改变你的战斗方式，有些让你探索世界更加轻松。
+<SmartImage src="/images/datapack/dungeons-and-taverns/end_castle.png" alt="末地城堡" shadow radius="auto" />
 
 
 ## 武器附魔

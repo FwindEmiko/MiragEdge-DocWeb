@@ -122,6 +122,8 @@
 
 ### 圣所（Sanctum，`incendium:sanctum`）
 
+<SmartImage src="/images/datapack/incendium/structures/sanctum.png" alt="圣所" shadow radius="auto" />
+
 > 难度：<span class="dp-difficulty lvl-5"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">致命</span></span> | 生成群系：石英平原
 
 灾厄村民在下界的秘密避难所。外表是一座庄严的教堂式建筑，内部却充满了邪教徒和守卫。
@@ -137,12 +139,16 @@
 
 ### 魔炎祭坛（Infernal Altar，`incendium:infernal_altar`）
 
+<SmartImage src="/images/datapack/incendium/structures/infernal_altar.png" alt="魔炎祭坛" shadow radius="auto" />
+
 > 难度：<span class="dp-difficulty lvl-3"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">困难</span></span> | 生成群系：魔炎沙丘
 
 矗立在赤红沙丘中央的神秘祭坛，周围环绕着燃烧的火焰。祭坛本身是一个挑战点——挑战成功会掉落稀有道具。
 
 
 ### 废弃实验室（Ruined Lab，`incendium:ruined_lab`）
+
+<SmartImage src="/images/datapack/incendium/structures/ruined_lab.png" alt="废弃实验室" shadow radius="auto" />
 
 > 难度：<span class="dp-difficulty lvl-4"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">极难</span></span> | 生成群系：凋零森林、毒化废土
 
@@ -153,12 +159,16 @@
 
 ### 下界反应堆（Nether Reactor，`incendium:nether_reactor`）
 
+<SmartImage src="/images/datapack/incendium/structures/nether_reactor.png" alt="下界反应堆" shadow radius="auto" />
+
 > 难度：<span class="dp-difficulty lvl-3"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">困难</span></span> | 守卫：反应堆哨兵（Reactor Sentry）
 
 一个巨大的能源装置，内部充满了未知的科技。由**反应堆哨兵**守卫，击败后可以搜刮反应堆核心区域。
 
 
 ### 废弃哨塔（Abandoned Tower，`incendium:abandoned_tower`）
+
+<SmartImage src="/images/datapack/incendium/structures/abandoned_tower.png" alt="废弃哨塔" shadow radius="auto" />
 
 > 难度：<span class="dp-difficulty lvl-2"><span class="bar"></span><span class="bar"></span><span class="label">普通</span></span> | 结构组成：11 个模块
 
@@ -174,6 +184,8 @@
 
 ### 猪灵村庄（Piglin Village，`incendium:piglin_village`）
 
+<SmartImage src="/images/datapack/incendium/structures/piglin_village.png" alt="猪灵村庄" shadow radius="auto" />
+
 > 难度：<span class="dp-difficulty lvl-3"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">困难</span></span> | 生成群系：凋零森林 | 结构组成：42 个模块
 
 由 42 个拼图模块组成的完整猪灵聚落！这里有：
@@ -187,6 +199,8 @@
 
 
 ### 管道（Pipeline，`incendium:pipeline`）
+
+<SmartImage src="/images/datapack/incendium/structures/pipeline.png" alt="管道" shadow radius="auto" />
 
 > 难度：<span class="dp-difficulty lvl-3"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">困难</span></span> | 生成群系：火山三角洲 | 结构组成：20 个模块
 

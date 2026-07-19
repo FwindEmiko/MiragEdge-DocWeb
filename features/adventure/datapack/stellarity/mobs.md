@@ -1,6 +1,8 @@
 # 繁星 · 生物与 Boss
 
-> Stellarity 不仅重制了末地生物群系，还引入了全新的虚空生物、末地村民，以及两位令人难忘的 Boss——**光之女皇**和**潜影王**。末影龙本身也被全面强化。
+<SmartImage src="/images/datapack/stellarity/biomes/ender_dragon.png" alt="重制的末影龙" shadow radius="auto" caption="末影龙已被彻底重制——新的攻击模式、新的战斗阶段、全新的奖励" />
+
+> 末地不再是安全通关即永别的终点。新的Boss与威胁让这片虚空之地成为冒险的真正挑战。
 
 
 ## 重制末影龙（Ender Dragon）

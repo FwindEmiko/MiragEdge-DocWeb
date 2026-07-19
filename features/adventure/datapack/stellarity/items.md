@@ -1,6 +1,8 @@
 # 繁星 · 物品与装备
 
-> Stellarity 新增了超过 **40 件**自定义物品，包括武器、盔甲套装、特殊鞘翅、法术书和材料。大部分物品的设计灵感来自 Terraria——不遵循原版简单的点击伤害模式，每件武器都有独特的技能和玩法。
+<SmartImage src="/images/datapack/stellarity/biomes/altar_of_the_accursed.png" alt="被诅咒的祭坛" shadow radius="auto" caption="击败末影龙后解锁的咒术祭坛——许多传说装备的核心制作台" />
+
+> 末地并非只有紫颂果。远古的遗迹中埋藏着失落的锻造技艺，从魔法盔甲到元素武器，每一件都是探险者的终极追求。
 
 
 ## 近战武器

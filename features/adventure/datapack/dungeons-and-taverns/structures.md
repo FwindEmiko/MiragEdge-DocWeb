@@ -1,7 +1,8 @@
 # 地城酒馆 · 全结构一览
 
-> 世界各处散布着超过一百种全新的建筑——路边的酒馆、地下的要塞、灾厄村民的庄园……从主世界的繁华客栈到末地的虚空城堡，每一处都藏着独特的宝藏和挑战。
+<SmartImage src="/images/datapack/dungeons-and-taverns/taverns.png" alt="地城酒馆" shadow radius="auto" caption="遍布世界各地的酒馆——每个冒险者的起点和避风港" />
 
+> 世界各处散布着超过一百种全新的建筑。
 
 ## 主世界结构
 

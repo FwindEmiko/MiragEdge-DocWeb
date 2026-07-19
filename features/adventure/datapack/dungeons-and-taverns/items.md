@@ -1,6 +1,6 @@
 # 地城酒馆 · 物品一览
 
-> D&T 主要通过在结构中放置宝箱来提供战利品。虽然大部分物品来自原版，但每个结构的宝箱都经过精心设计，此外还有 **17 种全新附魔**散落在特定结构中。
+<SmartImage src="/images/datapack/dungeons-and-taverns/nether_keep.png" alt="下界要塞" shadow radius="auto" />
 
 
 ## 专属钥匙系统

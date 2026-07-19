@@ -1,6 +1,8 @@
 # 烬域 · 物品与装备
 
-> Incendium 新增了超过 **30 件**自定义物品，涵盖武器、工具、护甲、盾牌和药水。每一件都有独特的获取方式和使用效果。
+<SmartImage src="/images/datapack/incendium/items/incendium_header.png" alt="烬域神兵" shadow radius="auto" caption="从禁忌城堡的塔楼顶端到圣所的深处，烬域的神器武器散落在下界各处" />
+
+> 烬域新增的武器与装备是探索下界的核心动力。每一件都有独特的获取方式和战斗风格，从吸血的赤红匕首到毁天灭地的诸神黄昏。
 
 
 ## 武器
