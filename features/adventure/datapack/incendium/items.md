@@ -1,6 +1,6 @@
 # 烬域 · 物品与装备
 
-<SmartImage src="/images/datapack/incendium/items/incendium_header.png" alt="烬域神兵" shadow radius="auto" caption="从禁忌城堡的塔楼顶端到圣所的深处，烬域的神器武器散落在下界各处" />
+<SmartImage src="/images/datapack/incendium/items/Ragnarok_animated.gif" alt="诸神黄昏" shadow radius="auto" caption="从禁忌城堡的塔楼顶端到圣所的深处，烬域的神器武器散落在下界各处" />
 
 > 烬域新增的武器与装备是探索下界的核心动力。每一件都有独特的获取方式和战斗风格，从吸血的赤红匕首到毁天灭地的诸神黄昏。
 
@@ -8,6 +8,8 @@
 ## 武器
 
 ### 赤红匕首（Scarlet Dagger）
+
+<McItem name="赤红匕首" texture="/images/datapack/incendium/items/Scarlet_dagger.png" size="lg" />
 - **类型**：近战 / 匕首
 - **获取**：禁忌城堡塔楼顶端宝箱
 - **效果**：击杀目标时**吸取生命值**治疗使用者
@@ -16,6 +18,8 @@
 
 
 ### 献祭大剑（Greatsword of Sacrifice）
+
+<McItem name="献祭大剑" texture="/images/datapack/incendium/items/Greatsword_of_sacrifice.png" size="lg" />
 - **类型**：近战 / 巨剑
 - **获取**：禁忌城堡深处 / 特定 Boss 掉落
 - **效果**：消耗使用者生命值，造成**巨额伤害**
@@ -24,6 +28,8 @@
 
 
 ### 诸神黄昏（Ragnarok）
+
+<McItem name="诸神黄昏" texture="/images/datapack/incendium/items/Ragnarok_animated.gif" size="lg" />
 - **类型**：近战 / 传说武器
 - **获取**：禁忌城堡终局区域
 - **效果**：范围伤害 + 特殊粒子特效
@@ -32,6 +38,8 @@
 
 
 ### 雷击三叉戟（Voltaic Trident）
+
+<McItem name="雷击三叉戟" texture="/images/datapack/incendium/items/Voltaic_trident.png" size="lg" />
 - **类型**：远程 / 三叉戟
 - **获取**：禁忌城堡内部宝箱
 - **效果**：投掷时附带**雷电伤害**，连锁打击附近敌人
@@ -40,6 +48,8 @@
 
 
 ### 烈焰短柄斧（Blazing Hatchet）
+
+<McItem name="烈焰短柄斧" texture="/images/datapack/incendium/items/Blazing_hatchet.png" size="lg" />
 - **类型**：近战 / 斧
 - **获取**：下界结构宝箱
 - **效果**：点燃目标 + **巨大击退**
@@ -48,6 +58,8 @@
 
 
 ### 冰冻之刃（Chilling Blade）
+
+<McItem name="冰冻之刃" texture="/images/datapack/incendium/items/Chilling_blade.png" size="lg" />
 - **类型**：近战 / 剑
 - **获取**：下界结构宝箱
 - **效果**：减速被击中的生物，可**冻结不安灵魂**
@@ -56,6 +68,8 @@
 
 
 ### 火风暴（Firestorm）
+
+<McItem name="火风暴" texture="/images/datapack/incendium/items/Firestorm.gif" size="lg" />
 - **类型**：远程 / 弩
 - **获取**：禁忌城堡 / 圣所
 - **效果**：射程远、分支箭矢多、50% 概率点燃目标
@@ -72,6 +86,8 @@
 
 
 ### 开路先锋（Trailblazer）
+
+<McItem name="开路先锋" texture="/images/datapack/incendium/items/Trailblazer_animated.gif" size="lg" />
 - **类型**：近战 / 特殊武器
 - **获取**：禁忌城堡 / Boss 掉落
 - **效果**：击退 + 破坏前方方块（限下界岩/玄武岩/黑石）
@@ -122,6 +138,8 @@
 
 
 ### 防化服头盔（Hazmat Suit）
+
+<McItem name="防化服头盔" texture="/images/datapack/incendium/items/Hazmat_suit.png" size="lg" />
 - **类型**：头盔 · 防护装备
 - **获取**：废弃实验室宝箱
 - **效果**：在**毒化废土**中免疫毒气伤害
@@ -145,6 +163,8 @@
 
 
 ### 炼狱之翼（Infernal Wings）
+
+<McItem name="炼狱之翼" texture="/images/datapack/incendium/items/Infernal_wings.png" size="lg" />
 - **类型**：鞘翅
 - **获取**：禁忌城堡终局宝箱
 - **效果**：飞行速度惩罚降低（仅减速 5%而非原版 15%）

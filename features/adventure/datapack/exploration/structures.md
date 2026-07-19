@@ -1,6 +1,6 @@
 # 野外探索 · 小型结构一览
 
-> 本分类合并了 4 个小型结构数据包，它们各自为 Minecraft 世界增添探索乐趣。虽然单个包的内容不多，但合在一起让你的野外冒险充满惊喜。
+<SmartImage src="/images/datapack/incendium/biomes/Ash_barrens_tera.png" alt="野外探索" shadow radius="auto" caption="散落在世界各处的微型探索点——每一处都藏着惊喜" />
 
 
 ## ATi · 遗迹结构

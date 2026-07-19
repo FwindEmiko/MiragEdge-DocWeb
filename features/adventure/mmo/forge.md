@@ -3,7 +3,7 @@
 ## 下界合金鞘翅
 在保持原鞘翅功能属性的情况下，可再提供6点护甲值，并大幅提高装备耐久  
 
-<SmartImage 
+<SmartImage align="left" margin="0"
   src="https://oss.miragedge.top/images/web_image/features/adventure/mmo/reinforced_elytra.png" 
   alt="下界合金鞘翅"
   caption="下界合金鞘翅"
@@ -15,7 +15,7 @@
 因为是升级，原“钻石镰刀”的名字甚至都没变，哈哈  
 如果你不会合成镰刀，可以看这个: [镰刀](/features/base/function.md#镰刀)  
 
-<SmartImage 
+<SmartImage align="left" margin="0"
   src="https://oss.miragedge.top/images/web_image/features/adventure/mmo/netherite_sickle.png" 
   alt="下界合金镰刀"
   caption="下界合金镰刀"

@@ -17,6 +17,8 @@
 | `border` | `Boolean` / `String` | `false` | 否 | 边框设置：`true`（默认浅灰边框）、CSS 边框字符串、`false`（无边框） |
 | `showInfo` | `Boolean` | `false` | 否 | 是否显示图片信息（如图片尺寸），目前为预留字段 |
 | `lazy` | `Boolean` | `false` | 否 | 是否启用浏览器原生懒加载：`true` 为懒加载，`false` 为立即加载 |
+| `align` | `String` | `'center'` | 否 | 图片对齐方式：`'left'`（左对齐）、`'center'`（居中）、`'right'`（右对齐） |
+| `margin` | `Number` / `String` | `null` | 否 | 左/右边距（对齐时使用），例如 `0` 或 `'16px'` |
 
 > **注意**：`showInfo` 功能暂未实现，预留供后续扩展。
 
@@ -273,6 +275,32 @@
 ```
 
 > **注意**：懒加载效果依赖于浏览器支持，且图片的 `load` 事件会在图片真正加载完成后触发。本组件已内部处理 SSR 场景下的状态同步，确保首次加载也能正确显示。
+
+## 对齐方式
+
+通过 `align` 控制图片对齐方向，`margin` 控制边距。
+
+<SmartImage src="https://picsum.photos/300/200?random=7" alt="左对齐" align="left" margin="0" />
+
+```html
+<SmartImage 
+  src="https://picsum.photos/300/200?random=7" 
+  alt="左对齐" 
+  align="left" 
+  margin="0" 
+/>
+```
+
+<SmartImage src="https://picsum.photos/300/200?random=8" alt="右对齐" align="right" margin="0" />
+
+```html
+<SmartImage 
+  src="https://picsum.photos/300/200?random=8" 
+  alt="右对齐" 
+  align="right" 
+  margin="0" 
+/>
+```
 
 ## 综合示例
 

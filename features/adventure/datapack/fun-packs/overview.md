@@ -1,5 +1,7 @@
 # 趣味玩法 · 总览
 
+<SmartImage src="/images/datapack/incendium/biomes/Inverted_forest_tera.png" alt="趣味玩法" shadow radius="auto" caption="从天而降的羽毛到自动护矿——点缀冒险的小彩蛋" />
+
 > 三个小型趣味机制数据包——它们不改变世界面貌，但为游戏增添了一些意想不到的小乐趣（和小挑战）。
 
 

@@ -1,6 +1,6 @@
 # 世界生成 · 总览
 
-> 五个数据包协同工作，彻底改变 Minecraft 的世界生成方式——从壮丽的山川峡谷到深邃的洞穴系统，每一寸土地都经过精心雕琢。
+<SmartImage src="/images/datapack/incendium/biomes/Volcanic_deltas.png" alt="世界生成" shadow radius="auto" caption="从壮丽的山川到深邃的洞穴——五个数据包协同改变世界生成" />
 
 
 ## Terralith · 地灵

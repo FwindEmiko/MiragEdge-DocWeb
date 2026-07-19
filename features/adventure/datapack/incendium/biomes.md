@@ -1,13 +1,15 @@
 # 烬域 · 群系与结构
 
-<SmartImage src="/images/datapack/incendium/biomes/nether_overview.png" alt="烬域下界全景" shadow radius="auto" caption="下界在远古的灾难后彻底重塑——192 格高的立体世界、全新群系、史诗结构" />
+<SmartImage src="/images/datapack/incendium/biomes/2022-03-04_23.13.34.png" alt="烬域下界全景" shadow radius="auto" caption="下界在远古的灾难后彻底重塑——192 格高的立体世界、全新群系、史诗结构" />
 
 > 下界被一场远古的灾难彻底重塑。新的群系、新的结构、新的威胁等待勇敢的冒险者。新增 **8 个群系**、**9 个结构**，下界高度扩展至 **192 格**，同一区块不同高度可拥有不同的群系。
 
 
 ## 新群系一览
 
-### 灰烬荒原（Ash Barrens，`incendium:ash_barrens`）
+### 灰烬荒原（Ash Barrens）
+
+<SmartImage src="/images/datapack/incendium/biomes/Ash_barrens_tera.png" alt="灰烬荒原" shadow radius="auto" />
 
 > 灰白色灰烬覆盖的广袤荒地，远处禁忌城堡的黑色轮廓若隐若现
 
@@ -18,8 +20,11 @@
 - **难度**：<span class="dp-difficulty lvl-5"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">致命</span></span>
 - **建议**：准备充分再进入，这里是烬域终局内容的入口
 
+---
 
-### 魔炎沙丘（Infernal Dunes，`incendium:infernal_dunes`）
+### 魔炎沙丘（Infernal Dunes）
+
+<SmartImage src="/images/datapack/incendium/biomes/Infernal_dunes_tera.png" alt="魔炎沙丘" shadow radius="auto" />
 
 > 赤红沙丘如火焰般起伏，燃烧的烈焰棒碎片散落各处
 
@@ -30,8 +35,11 @@
 - **特有生物**：沙漠烈焰（Desert Blaze）
 - **难度**：<span class="dp-difficulty lvl-3"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">困难</span></span>
 
+---
 
-### 倒悬森林（Inverted Forest，`incendium:inverted_forest`）
+### 倒悬森林（Inverted Forest）
+
+<SmartImage src="/images/datapack/incendium/biomes/Inverted_forest_tera.png" alt="倒悬森林" shadow radius="auto" />
 
 > 巨型菌树从天花板倒挂而下，树根朝天、树冠朝地，整个世界仿佛被翻转
 
@@ -42,8 +50,11 @@
 - **难度**：<span class="dp-difficulty lvl-3"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">困难</span></span>
 - **小贴士**：抬头看，有些宝藏藏在倒挂的树冠中
 
+---
 
-### 石英平原（Quartz Flats，`incendium:quartz_flats`）
+### 石英平原（Quartz Flats）
+
+<SmartImage src="/images/datapack/incendium/biomes/IC5.0.2a_quartz_flats.png" alt="石英平原" shadow radius="auto" />
 
 > 洁白的石英平原在熔岩光芒下闪闪发亮，圣所的尖顶隐约可见
 
@@ -54,8 +65,9 @@
 - **难度**：<span class="dp-difficulty lvl-4"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">极难</span></span>
 - **注意**：圣所中可以获得神器「破晓者」（Daybreaker）
 
+---
 
-### 毒化废土（Toxic Heap，`incendium:toxic_heap`）
+### 毒化废土（Toxic Heap）
 
 > 紫色毒雾笼罩的废土，毒液池咕嘟冒泡，废弃实验室的残骸散落其中
 
@@ -67,8 +79,11 @@
 - **难度**：<span class="dp-difficulty lvl-4"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">极难</span></span>
 - **防护建议**：进入前务必装备**防化服**（Hazmat Suit）
 
+---
 
-### 火山三角洲（Volcanic Deltas，`incendium:volcanic_deltas`）
+### 火山三角洲（Volcanic Deltas）
+
+<SmartImage src="/images/datapack/incendium/biomes/Volcanic_deltas.png" alt="火山三角洲" shadow radius="auto" />
 
 > 岩浆河流纵横交错的火山三角洲，巨大的管道结构横跨其间
 
@@ -80,8 +95,11 @@
 - **难度**：<span class="dp-difficulty lvl-3"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">困难</span></span>
 - **宝藏**：管道深处藏有「疯狂火炬」（Torch of Lunacy）
 
+---
 
-### 泣泪幽谷（Weeping Valley，`incendium:weeping_velley`）
+### 泣泪幽谷（Weeping Valley）
+
+<SmartImage src="/images/datapack/incendium/biomes/WeepingValleySplatus.png" alt="泣泪幽谷" shadow radius="auto" />
 
 绯红森林的进化版——泣泪藤如瀑布般从天花板垂落，地面铺满了绯红菌岩。空气中飘浮着猩红的粒子，整个群系笼罩在诡异而美丽的光影之中。
 
@@ -89,8 +107,11 @@
 - **难度**：<span class="dp-difficulty lvl-2"><span class="bar"></span><span class="bar"></span><span class="label">普通</span></span>
 - **适合**：收集绯红木材和菌类资源
 
+---
 
-### 凋零森林（Withered Forest，`incendium:withered_forest`）
+### 凋零森林（Withered Forest）
+
+<SmartImage src="/images/datapack/incendium/biomes/Withered_Forest.png" alt="凋零森林" shadow radius="auto" />
 
 > 枯死的黑色树木扭曲伸向天空，灰烬粒子飘荡，猪灵村庄隐藏其中
 
@@ -105,7 +126,9 @@
 
 ## 九大结构
 
-### 禁忌城堡（Forbidden Castle，`incendium:forbidden_castle`）
+### 禁忌城堡（Forbidden Castle）
+
+<SmartImage src="/images/datapack/incendium/structures/Forbidden_castle_tera.png" alt="禁忌城堡" shadow radius="auto" caption="由 227 个拼图模块组成的史诗级结构——烬域最危险的挑战" />
 
 > 难度：<span class="dp-difficulty lvl-5"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">致命</span></span> | Boss：烈焰执政官（Hovering Inferno）
 
@@ -119,8 +142,9 @@
 - **炼狱之羽**（Infernal Feather）— Boss 掉落
 - **斥候战盔**（Scout's Battle Helm）— 击杀猪灵侦察兵 10% 概率
 
+---
 
-### 圣所（Sanctum，`incendium:sanctum`）
+### 圣所（Sanctum）
 
 <SmartImage src="/images/datapack/incendium/structures/sanctum.png" alt="圣所" shadow radius="auto" />
 
@@ -136,17 +160,19 @@
 **核心宝藏**：
 - **破晓者**（Daybreaker）— 圣所深处的神器弩
 
+---
 
-### 魔炎祭坛（Infernal Altar，`incendium:infernal_altar`）
+### 魔炎祭坛（Infernal Altar）
 
-<SmartImage src="/images/datapack/incendium/structures/infernal_altar.png" alt="魔炎祭坛" shadow radius="auto" />
+<SmartImage src="/images/datapack/incendium/structures/Infernal_altar_tera.png" alt="魔炎祭坛" shadow radius="auto" />
 
 > 难度：<span class="dp-difficulty lvl-3"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">困难</span></span> | 生成群系：魔炎沙丘
 
 矗立在赤红沙丘中央的神秘祭坛，周围环绕着燃烧的火焰。祭坛本身是一个挑战点——挑战成功会掉落稀有道具。
 
+---
 
-### 废弃实验室（Ruined Lab，`incendium:ruined_lab`）
+### 废弃实验室（Ruined Lab）
 
 <SmartImage src="/images/datapack/incendium/structures/ruined_lab.png" alt="废弃实验室" shadow radius="auto" />
 
@@ -156,8 +182,9 @@
 
 **注意**：实验室里可能还有未清理的实验体...
 
+---
 
-### 下界反应堆（Nether Reactor，`incendium:nether_reactor`）
+### 下界反应堆（Nether Reactor）
 
 <SmartImage src="/images/datapack/incendium/structures/nether_reactor.png" alt="下界反应堆" shadow radius="auto" />
 
@@ -165,8 +192,9 @@
 
 一个巨大的能源装置，内部充满了未知的科技。由**反应堆哨兵**守卫，击败后可以搜刮反应堆核心区域。
 
+---
 
-### 废弃哨塔（Abandoned Tower，`incendium:abandoned_tower`）
+### 废弃哨塔（Abandoned Tower）
 
 <SmartImage src="/images/datapack/incendium/structures/abandoned_tower.png" alt="废弃哨塔" shadow radius="auto" />
 
@@ -174,17 +202,19 @@
 
 被遗弃的下界哨塔，共有 11 种不同的模块组合。塔内有时可以找到被囚禁的**小恶魂**（Ghastling）——这是游戏中最可爱的宠物之一！
 
+---
 
-### 石英厨房（Quartz Kitchen，`incendium:quartz_kitchen`）
+### 石英厨房（Quartz Kitchen）
 
 > 难度：<span class="dp-difficulty lvl-2"><span class="bar"></span><span class="bar"></span><span class="label">普通</span></span> | 生成群系：石英平原
 
 一个趣味性结构——下界的石英厨房。虽然看似无害，但里面可能藏有一些特殊的食物和酿造材料。
 
+---
 
-### 猪灵村庄（Piglin Village，`incendium:piglin_village`）
+### 猪灵村庄（Piglin Village）
 
-<SmartImage src="/images/datapack/incendium/structures/piglin_village.png" alt="猪灵村庄" shadow radius="auto" />
+<SmartImage src="/images/datapack/incendium/structures/IC5.0.2a_piglin_village.png" alt="猪灵村庄" shadow radius="auto" />
 
 > 难度：<span class="dp-difficulty lvl-3"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">困难</span></span> | 生成群系：凋零森林 | 结构组成：42 个模块
 
@@ -197,8 +227,9 @@
 
 穿着金甲即可和平访问，和村民交易可以获得稀有物品。
 
+---
 
-### 管道（Pipeline，`incendium:pipeline`）
+### 管道（Pipeline）
 
 <SmartImage src="/images/datapack/incendium/structures/pipeline.png" alt="管道" shadow radius="auto" />
 

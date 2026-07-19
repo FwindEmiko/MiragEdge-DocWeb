@@ -1,5 +1,7 @@
 # 稀有建筑群 · 总览
 
+<SmartImage src="/images/datapack/incendium/structures/Sanctum.png" alt="稀有建筑" shadow radius="auto" caption="沙漠中的灵村、冰原上的大都、山脉间的村镇塔楼——罕见的传奇建筑" />
+
 > 三个大型村庄/城市改造数据包的集合——它们将原版单调的村庄变成了风格各异、令人叹为观止的聚落。
 
 

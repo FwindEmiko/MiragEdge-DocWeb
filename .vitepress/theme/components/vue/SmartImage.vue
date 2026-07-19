@@ -1,5 +1,5 @@
 <template>
-  <div class="smart-image-container" :class="containerClasses">
+  <div class="smart-image-container" :class="containerClasses" :style="containerStyle">
     <!-- 占位符 -->
     <div 
       v-if="!loaded && !error" 
@@ -103,6 +103,17 @@ export default {
     lazy: {
       type: Boolean,
       default: false
+    },
+    // 对齐方式：left / center / right
+    align: {
+      type: String,
+      default: 'center',
+      validator: v => ['left', 'center', 'right'].includes(v)
+    },
+    // 左/右边距（用于左/右对齐时控制距离）
+    margin: {
+      type: [Number, String],
+      default: null
     }
   },
 
@@ -143,11 +154,13 @@ export default {
       const style = {}
       
       if (this.width) {
-        style.width = typeof this.width === 'number' ? `${this.width}px` : this.width
+        const w = typeof this.width === 'number' ? this.width : parseFloat(this.width)
+        style.width = isNaN(w) ? this.width : `${w}px`
       }
       
       if (this.height) {
-        style.height = typeof this.height === 'number' ? `${this.height}px` : this.height
+        const h = typeof this.height === 'number' ? this.height : parseFloat(this.height)
+        style.height = isNaN(h) ? this.height : `${h}px`
       }
       
       return style
@@ -157,11 +170,34 @@ export default {
       const style = {}
       
       if (this.width) {
-        style.width = typeof this.width === 'number' ? `${this.width}px` : this.width
+        const w = typeof this.width === 'number' ? this.width : parseFloat(this.width)
+        style.width = isNaN(w) ? this.width : `${w}px`
       }
       
       if (this.maxWidth) {
-        style.maxWidth = typeof this.maxWidth === 'number' ? `${this.maxWidth}px` : this.maxWidth
+        const mw = typeof this.maxWidth === 'number' ? this.maxWidth : parseFloat(this.maxWidth)
+        style.maxWidth = isNaN(mw) ? this.maxWidth : `${mw}px`
+      }
+      
+      return style
+    },
+
+    // 容器对齐样式
+    containerStyle() {
+      const style = {}
+      
+      if (this.align === 'left') {
+        style.textAlign = 'left'
+        if (this.margin !== null) {
+          const m = typeof this.margin === 'number' ? this.margin : parseFloat(this.margin)
+          style.marginLeft = isNaN(m) ? this.margin : `${m}px`
+        }
+      } else if (this.align === 'right') {
+        style.textAlign = 'right'
+        if (this.margin !== null) {
+          const m = typeof this.margin === 'number' ? this.margin : parseFloat(this.margin)
+          style.marginRight = isNaN(m) ? this.margin : `${m}px`
+        }
       }
       
       return style
@@ -215,15 +251,15 @@ export default {
     const img = this.$refs.imageRef;
     if (!img) return;
 
-    // 图片已缓存，直接处理
-    if (img.complete) {
-      if (img.naturalWidth) {
-        this.onImageLoad({ target: img });
-      } else {
-        this.onImageError();
-      }
+    // 图片已缓存且已实际加载成功，直接处理
+    if (img.complete && img.naturalWidth > 0) {
+      this.onImageLoad({ target: img });
       return;
     }
+    
+    // 注意：不能在这里用 img.complete && !naturalWidth 判定失败
+    // 因为 SSR/Hydration 过程中 naturalWidth 暂时为 0，但图片实际会加载成功
+    // 让 @load/@error 事件自行处理即可
 
     // 懒加载图片：用 IntersectionObserver 等待进入视口
     if (this.lazy && 'IntersectionObserver' in window) {
