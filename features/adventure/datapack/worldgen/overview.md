@@ -1,6 +1,6 @@
 # 世界生成 · 总览
 
-<SmartImage src="/images/datapack/incendium/biomes/Volcanic_deltas.png" alt="世界生成" shadow radius="auto" caption="从壮丽的山川到深邃的洞穴——五个数据包协同改变世界生成" />
+<SmartImage src="/images/datapack/worldgen/terralith/terralith_1.jpeg" alt="世界生成" shadow radius="auto" caption="从壮丽的山川到深邃的洞穴——五个数据包协同改变世界生成" />
 
 
 ## Terralith · 地灵

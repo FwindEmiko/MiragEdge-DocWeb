@@ -1,6 +1,6 @@
 # 沧墟破门 · 结构一览
 
-<SmartImage src="/images/datapack/incendium/structures/Ruined_lab.png" alt="沧墟破门" shadow radius="auto" caption="被遗忘的文明遗迹——破碎的门扉通向未知的秘密" />
+<SmartImage src="/images/datapack/incendium/structures/ruined_lab.png" alt="沧墟破门" shadow radius="auto" caption="被遗忘的文明遗迹——破碎的门扉通向未知的秘密" />
 
 > **Hoppo** 系列包含两个数据包，分别翻新了原版的废弃传送门和海底废墟——让这些原本单调的结构变成值得探索的小型遗迹。
 

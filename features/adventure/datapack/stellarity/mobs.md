@@ -1,6 +1,6 @@
 # 繁星 · 生物与 Boss
 
-<SmartImage src="/images/datapack/stellarity/biomes/ender_dragon.png" alt="重制的末影龙" shadow radius="auto" caption="末影龙已被彻底重制——新的攻击模式、新的战斗阶段、全新的奖励" />
+<SmartImage src="/images/datapack/stellarity/mobs/empress_of_light.webp" alt="光之女皇" shadow radius="auto" caption="光之女皇统领着末地——新的 Boss 与原版重制让挑战更上一层" />
 
 > 末地不再是安全通关即永别的终点。新的Boss与威胁让这片虚空之地成为冒险的真正挑战。
 
@@ -64,6 +64,8 @@
 Stellarity 引入了全新的「虚空化」生物变种——它们是比原版对应生物更强的虚空版本，对未准备的冒险者构成更大威胁。
 
 ### 虚空僵尸（Voided Zombie）
+
+<SmartImage src="/images/datapack/stellarity/mobs/voided_zombie.webp" alt="虚空僵尸" shadow radius="auto" width="96" align="left" margin="0" />
 - **生成地点**：末地各处
 - **特点**：比主世界僵尸更强、更快、更肉
 - **掉落**：腐肉、虚空精华

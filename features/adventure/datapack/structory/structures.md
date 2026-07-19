@@ -1,6 +1,6 @@
 # 筑物塔楼 · 全建筑一览
 
-<SmartImage src="/images/datapack/incendium/structures/Abandoned_tower.png" alt="筑物塔楼" shadow radius="auto" caption="荒野中的废墟与塔楼——每一座都有独特的故事" />
+<SmartImage src="/images/datapack/incendium/structures/abandoned_tower.png" alt="筑物塔楼" shadow radius="auto" caption="荒野中的废墟与塔楼——每一座都有独特的故事" />
 
 > **Structory** 系列数据包为 Minecraft 世界增添了丰富的野外小型建筑。分为 **Structory**（筑物）和 **Structory Towers**（塔楼）两个子包，总计包含数十种建筑变体，让探索世界的过程不再单调。
 

@@ -6,6 +6,8 @@
 
 ## 主世界结构
 
+<SmartImage src="/images/datapack/dungeons-and-taverns/hamlets.png" alt="村落" shadow radius="auto" caption="散落在世界各处的村落——每一座都有自己的故事" />
+
 ### 酒馆与村落
 
 | 结构名称 | 英文名 | 描述 | 难度 |

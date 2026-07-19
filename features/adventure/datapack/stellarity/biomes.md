@@ -51,9 +51,9 @@ Stellarity 将末地群系按地貌特征分为四大类别：
 
 ### 特殊群系
 
-#### 神圣之地（The Hallow，`stellarity:the_hallow`）
+#### 神圣之地（The Hallow）
 
-<SmartImage src="/images/datapack/stellarity/biomes/the_hallow.png" alt="神圣之地" shadow radius="auto" />
+<SmartImage src="/images/datapack/stellarity/biomes/hallow.webp" alt="神圣之地" shadow radius="auto" caption="Terraria 联动群系——五彩缤纷的草地、横跨天际的彩虹" />
 
 > **Terraria 联动群系！** 五彩缤纷的草地、横跨天际的彩虹、闪烁的精灵粉尘——这可能是 Minecraft 中最美丽的群系。
 
@@ -63,18 +63,18 @@ Stellarity 将末地群系按地貌特征分为四大类别：
 - **难度**：<span class="dp-difficulty lvl-4"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">极难</span></span>
 - **重要**：光之女皇 Boss 在此召唤
 
-#### 棱镜沙丘（Prismatic Dunes，`stellarity:prismatic_dunes`）
+#### 棱镜沙丘（Prismatic Dunes）
 
 色彩斑斓的沙丘，沙粒在光线下折射出彩虹般的光芒。
 
-#### 无尽沙丘（Endless Dunes，`stellarity:endless_dunes`）
+#### 无尽沙丘（Endless Dunes）
 
 一望无际的末地沙漠，隐藏着古老文明的遗迹。
 
 
 ## 重要结构
 
-### 末地城（End City，`stellarity:end_city`）
+### 末地城（End City）
 
 > 全面重建的末地城，比原版更大更复杂
 
@@ -86,7 +86,9 @@ Stellarity 将末地城从头重建，设计风格类似新版试炼密室：
 - **末地船**：依旧存在，鞘翅在船头等你
 
 
-### 光明教堂（Chapel of Light，`stellarity:chapel_of_light`）
+### 光明教堂（Chapel of Light）
+
+<SmartImage src="/images/datapack/stellarity/structures/chapel_of_light.webp" alt="光明教堂" shadow radius="auto" />
 
 > 生成于神圣之地，光之女皇的召唤之地
 
@@ -95,7 +97,7 @@ Stellarity 将末地城从头重建，设计风格类似新版试炼密室：
 - 建议准备充分后再进入
 
 
-### 末地村庄（End Village，`stellarity:end_village`）
+### 末地村庄（End Village）
 
 > 末地有了自己的村民文明！
 
@@ -105,7 +107,7 @@ Stellarity 将末地城从头重建，设计风格类似新版试炼密室：
 - 重要的装备获取来源
 
 
-### 诅咒祭坛（Altar of the Accursed，`stellarity:altar_of_the_accursed`）
+### 诅咒祭坛（Altar of the Accursed）
 
 > 击败末影龙后觉醒的终局制作站
 
@@ -134,6 +136,8 @@ Stellarity 将末地城从头重建，设计风格类似新版试炼密室：
 
 
 ## 特殊机制
+
+<SmartImage src="/images/datapack/stellarity/structures/end_city.webp" alt="末地城镇" shadow radius="auto" caption="末地不再只是孤岛——新的城镇、神殿和灯塔散布在虚空之中" />
 
 ### 虚空钓鱼（Void Fishing）
 - 在末地空中抛竿（不能直接丢进虚空）

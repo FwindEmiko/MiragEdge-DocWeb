@@ -8,6 +8,7 @@
 ## 近战武器
 
 ### 龙刃（Dragonblade）
+<McItem name="龙刃" texture="/images/datapack/stellarity/items/Dragonblade_2.webp" size="lg" />
 - **类型**：近战 / 剑
 - **获取**：击败末影龙后，在诅咒祭坛合成
 - **效果**：挥舞时释放龙息冲击波，范围伤害
@@ -135,6 +136,8 @@
 ## 盔甲套装
 
 ### 冠军盔甲（Champion Armor）
+
+<SmartImage src="/images/datapack/stellarity/items/champion_armor.webp" alt="冠军盔甲" shadow radius="auto" width="200" align="left" margin="0" />
 - **类型**：重甲套装
 - **获取**：末地城宝库 / 诅咒祭坛合成
 - **套装效果**：满血时伤害翻倍
@@ -143,6 +146,8 @@
 
 
 ### 神圣盔甲（Hallowed Armor）
+
+<SmartImage src="/images/datapack/stellarity/items/hallowed_armor.webp" alt="神圣盔甲" shadow radius="auto" width="200" align="left" margin="0" />
 - **类型**：中甲套装
 - **获取**：神圣之地材料合成
 - **套装效果**：受到伤害后短暂无敌（闪避一次攻击）
@@ -151,6 +156,8 @@
 
 
 ### 潜影盔甲（Shulker Armor）
+
+<SmartImage src="/images/datapack/stellarity/items/shulker_armor.webp" alt="潜影盔甲" shadow radius="auto" width="200" align="left" margin="0" />
 - **类型**：轻甲套装
 - **获取**：末地城 / 潜影贝材料
 - **套装效果**：潜行时获得抗性提升 + 自动漂浮
@@ -158,7 +165,9 @@
 - **评级**：<span class="dp-difficulty lvl-4"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">极难</span></span>
 
 
-### 花之盔甲（Floral Armor）
+### 花冠盔甲（Floral Armor）
+
+<SmartImage src="/images/datapack/stellarity/items/floral_armor.webp" alt="花冠盔甲" shadow radius="auto" width="200" align="left" margin="0" />
 - **类型**：轻甲套装
 - **获取**：末地森林群系材料
 - **套装效果**：站在草地上持续回血
