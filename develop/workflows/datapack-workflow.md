@@ -67,6 +67,45 @@ pack_format 随游戏版本变化。本文编写时 MC 26.1.2 对应 **pack_form
 若服务器版本不同，请查阅 [pack_format 对照表](#pack_format-对照表) 或访问 [misode.github.io/versions](https://misode.github.io/versions) 获取最新值。
 :::
 
+::: tip MC 26.1+ 新增：World Clock 注册表
+MC 26.1 引入了 **World Clock（世界时钟）** 系统，作为 `time_check` 谓词的时间来源。这是破坏性变更：
+
+**变更内容**：`time_check` 谓词新增了 `clock` 字段（必填），指定使用哪个 World Clock 来检查时间。
+
+**关键陷阱**：World Clock **不是默认注册的**！你需要手动在数据包中创建 `data/<namespace>/world_clock/<id>.json` 文件来注册。
+
+**标准白天时钟注册**（最简单的方式——空对象即可注册）：
+```json
+// data/minecraft/world_clock/daytime.json
+{}
+```
+
+**time_check 谓词的完整格式（MC 26.1+）**：
+```json
+{
+  "condition": "minecraft:time_check",
+  "period": 24000,
+  "clock": "daytime",
+  "value": {
+    "min": 0,
+    "max": 12000
+  }
+}
+```
+
+**常见错误**：如果 World Clock 未注册，启动日志会报：
+```
+Failed to get element minecraft:daytime
+```
+
+**修复步骤**：
+1. 在数据包中创建 `data/minecraft/world_clock/daytime.json`，内容为 `{}`
+2. 确保 `time_check` 的 `clock` 字段设为 `"daytime"`（或你注册的其他时钟 ID）
+3. 重启服务器使注册生效
+
+> 注意：`clock` 字段中的 ID 会自动添加 `minecraft:` 命名空间前缀。完整的 World Clock ID 格式为 `命名空间:路径`，如 `minecraft:daytime`。
+:::
+
 ## 前置知识
 
 ### 命名空间（Namespace）

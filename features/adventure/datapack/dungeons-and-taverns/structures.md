@@ -1,106 +1,77 @@
-# 地城酒馆 · 全结构一览
+# 古城 · 结构改造
 
-<SmartImage src="/images/datapack/dungeons-and-taverns/taverns.png" alt="地城酒馆" shadow radius="auto" caption="遍布世界各地的酒馆——每个冒险者的起点和避风港" />
+锐界幻境部署了 **Dungeons & Taverns** 系列的 5 个独立改造数据包，分别翻新原版 5 种结构的内部布局和战利品体系。所有包均使用 `nova_structures` 命名空间，**不添加自定义附魔或物品**，仅通过增强战利品表提升探索价值。
 
-> 世界各处散布着超过一百种全新的建筑。
+## 古城 · Ancient City Overhaul
 
-## 主世界结构
+<SmartImage src="/images/datapack/dungeons-and-taverns/ancient_city.png" alt="古城改造" shadow radius="auto" caption="深暗之域古城迎来了全面翻新——更多的房间变体、更丰富的战利品、灾厄村民的突袭彩蛋" />
 
-<SmartImage src="/images/datapack/dungeons-and-taverns/hamlets.png" alt="村落" shadow radius="auto" caption="散落在世界各处的村落——每一座都有自己的故事" />
+深暗之域不再只有幽匿块和尖叫体。改造后的古城有三大变化：
 
-### 酒馆与村落
+- **结构增强**：更多房间变体，灾厄村民袭击彩蛋
+- **战利品扩容**：宝库、冰柜、灾厄袭击箱三种新战利品容器
+- **考古更新**：古城砖砾中可发掘锻造模板和远古残骸
 
-| 结构名称 | 英文名 | 描述 | 难度 |
-|----------|--------|------|------|
-| **酒馆** | Tavern | 每个群系变体各异的村民酒馆，内有 **制图师村民**可以交易 | <span class="dp-difficulty lvl-1"><span class="bar"></span><span class="label">简单</span></span> |
-| **消防塔** | Fire Watch Tower | 7 种木材对应的瞭望塔，提供庇护和基础物资 | <span class="dp-difficulty lvl-1"><span class="bar"></span><span class="label">简单</span></span> |
-| **地下房屋** | Underground House | Terraria 致敬彩蛋——埋在地下的神秘小屋 | <span class="dp-difficulty lvl-1"><span class="bar"></span><span class="label">简单</span></span> |
-| **废弃小镇** | Ruined Town | 被僵尸侵占的废墟小镇 | <span class="dp-difficulty lvl-3"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">困难</span></span> |
+| 战利品来源 | 亮点物品 |
+|-----------|---------|
+| 古城宝库 | 附魔金苹果、唱片 `otherside`、钻石 |
+| 灾厄袭击箱 | 回响碎片、幽匿催发体、紫水晶 |
+| 古城考古 | 锻造模板（监守/沉默）、附魔金苹果 |
+| 冰柜 | 迷之炖菜、金萝卜、雪球 |
 
+## 废弃矿井 · Mineshaft Overhaul
 
-### 遗迹与废墟
+<SmartImage src="/images/datapack/dungeons-and-taverns/mineshaft.png" alt="矿井改造" shadow radius="auto" caption="五种群系变体——从普通的橡木矿井到恶地红砂岩矿道，每种都有独特的装饰风格" />
 
-| 结构名称 | 描述 | 难度 |
-|----------|------|------|
-| **丛林废墟** | Jungle Ruins — 深藏在丛林中的古老遗迹 | <span class="dp-difficulty lvl-2"><span class="bar"></span><span class="bar"></span><span class="label">普通</span></span> |
-| **沙漠废墟** | Desert Ruins — 沙漠中的考古遗迹 | <span class="dp-difficulty lvl-2"><span class="bar"></span><span class="bar"></span><span class="label">普通</span></span> |
-| **荒野废墟** | Wild Ruins — 各类小型废墟（废弃房屋、房屋废墟、损坏的红石魔像等） | <span class="dp-difficulty lvl-2"><span class="bar"></span><span class="bar"></span><span class="label">普通</span></span> |
-| **水井** | Wells — 丛林、白桦、森林、平原、针叶林、热带草原都有专属水井 | <span class="dp-difficulty lvl-1"><span class="bar"></span><span class="label">简单</span></span> |
+废弃矿井全面翻新，新增 **5 种群系变体**，每种拥有独特的支柱材料、装饰风格和专属战利品表：
 
+| 变体 | 支柱材质 | 特色装饰 | 主要生成群系 |
+|------|---------|---------|------------|
+| 普通矿井 | 橡木 + 圆石 | 标准矿道，蜘蛛网 | 森林、平原 |
+| 尖峭矿井 | 杉木 | 雪地覆盖，狭窄通道 | 尖峭山峰、雪林 |
+| 恶地矿井 | 红砂岩 + 陶瓦 | 陶瓦拼花，露天入口 | 恶地、疏林恶地 |
+| 石峰矿井 | 石砖 + 苔石 | 石质结构，巨大洞穴 | 裸岩山峰、草地 |
+| 地表矿井 | 橡木 | 入口暴露地面，容易发现 | 森林、平原交界 |
 
-### 灾厄村民据点
+**新增战利品**：矿井桶（钻石、绿宝石、青金石、粗金）、矿井陶罐（煤炭块、铜/铁/金粒）、矿井考古（唱片、钻石镐/锹）
 
-| 结构名称 | 英文名 | 描述 | 难度 |
-|----------|--------|------|------|
-| **灾厄藏身处** | Illager Hideout | 隐藏在地下的灾厄村民据点——地下迷宫 | <span class="dp-difficulty lvl-4"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">极难</span></span> |
-| **灾厄庄园** | Illager Manor | 灾厄村民的大庄园，守卫森严 | <span class="dp-difficulty lvl-4"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">极难</span></span> |
-| **灾厄营地** | Illager Camp | 灾厄村民旅途中搭建的小型营地 | <span class="dp-difficulty lvl-2"><span class="bar"></span><span class="bar"></span><span class="label">普通</span></span> |
-| **女巫别墅** | Witch Villa | 女巫的专属别墅，小心诅咒 | <span class="dp-difficulty lvl-3"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">困难</span></span> |
+## 沙漠神殿 · Desert Temple Overhaul
 
+<SmartImage src="/images/datapack/dungeons-and-taverns/desert_temple.png" alt="沙漠神殿改造" shadow radius="auto" caption="沙漠神殿下方新增了墓室层——更深的探索、更丰厚的回报" />
 
-### 地牢与要塞
+沙漠神殿变成了多层复合结构——在地下的原版宝箱室之外，新增了更深的墓室层，需要穿过迷宫般的走廊才能抵达。
 
-| 结构名称 | 英文名 | 描述 | 难度 |
-|----------|--------|------|------|
-| **亡灵地穴** | Undead Crypt | 不死生物的葬身之地 | <span class="dp-difficulty lvl-3"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">困难</span></span> |
-| **迷途堡垒** | Stray Fort | 流浪者的冰封要塞 | <span class="dp-difficulty lvl-3"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">困难</span></span> |
-| **失落碉堡** | Lost Bunker | 小型地面结构 + 地下掩体 | <span class="dp-difficulty lvl-2"><span class="bar"></span><span class="bar"></span><span class="label">普通</span></span> |
-| **孤寂要塞** | Lone Citadel | 独自矗立的宏伟要塞 | <span class="dp-difficulty lvl-5"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">致命</span></span> |
-| **封印大厅** | Sealing Halls | 封印着强大魔法的神秘大厅 | <span class="dp-difficulty lvl-4"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">极难</span></span> |
-| **沙漠遗迹** | Desert Ruins | 沙漠中的古代遗迹 | <span class="dp-difficulty lvl-3"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">困难</span></span> |
-| **毒液巢穴** | Toxic Lair | 毒性生物的巢穴 | <span class="dp-difficulty lvl-4"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">极难</span></span> |
+| 战利品来源 | 亮点物品 |
+|-----------|---------|
+| 神殿宝箱（普通） | 钻石、铁锭、金锭、蜂蜜瓶 |
+| 神殿宝箱（稀有） | 鞍、命名牌、钻石块 |
+| 神殿陶罐 | 金锭、附魔瓶、沙漠锻造模板 |
+| 神殿考古 | 唱片 `11`、各色染料、绿宝石 |
 
+## 沼泽小屋 · Swamp Hut Overhaul
 
-### 特殊结构
+<SmartImage src="/images/datapack/dungeons-and-taverns/swamp_hut.png" alt="沼泽小屋改造" shadow radius="auto" caption="红树木材质的新版本——增加了炼药室和更丰富的女巫储备" />
 
-| 结构名称 | 描述 | 难度 |
-|----------|------|------|
-| **恶地矿工前哨** | Badland Miner Outpost — 灾厄村民在恶地的采矿据点 | <span class="dp-difficulty lvl-3"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">困难</span></span> |
-| **废弃矿洞** | 被遗弃的矿洞，可能残留珍贵矿石 | <span class="dp-difficulty lvl-2"><span class="bar"></span><span class="bar"></span><span class="label">普通</span></span> |
-| **废弃神庙** | 被遗忘的神庙遗迹 | <span class="dp-difficulty lvl-3"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">困难</span></span> |
-| **导管遗迹** | Conduit Ruins — 教玩家如何建造潮涌核心的教程型结构 | <span class="dp-difficulty lvl-1"><span class="bar"></span><span class="label">简单</span></span> |
-| **红树女巫小屋** | Mangrove Witch Hut — 3 种变体，战利品稍好 | <span class="dp-difficulty lvl-3"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">困难</span></span> |
+沼泽小屋不再只有一口锅和一朵花。改造后的小屋有 **三种风格变体**（大型、双栋、原版风格），全部使用红树木材质，并增加了炼药室：
 
+| 战利品 | 内容 |
+|--------|------|
+| 女巫储藏箱 | 各类药水、兔子脚、发酵蛛眼、荧石粉、糖、红石 |
 
-## 下界结构
+## 海底神殿 · Ocean Monument Overhaul
 
-| 结构名称 | 英文名 | 描述 | 难度 |
-|----------|--------|------|------|
-| **猪灵要塞** | Piglin Donjon | 猪灵的高塔要塞 | <span class="dp-difficulty lvl-4"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">极难</span></span> |
-| **下界港口** | Nether Port | 下界交通运输枢纽 | <span class="dp-difficulty lvl-3"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">困难</span></span> |
-| **下界要塞** | Nether Keep | 宏伟的下界城堡 | <span class="dp-difficulty lvl-5"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">致命</span></span> |
-| **烈焰试炼场** | Blaze Trials | 烈焰人的试炼之地 | <span class="dp-difficulty lvl-4"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">极难</span></span> |
+<SmartImage src="/images/datapack/dungeons-and-taverns/monument.png" alt="海底神殿改造" shadow radius="auto" caption="新增三叉戟主题变体——战利品分三个等级，远古守卫者有了自己的套房" />
 
+海底神殿改造增加了 **三叉戟主题变体**，战利品分三个等级，远古守卫者的房间更加华丽：
 
-## 末地结构
+| 宝藏等级 | 内容 |
+|---------|------|
+| 普通宝藏 | 铜锭、金锭、海晶石碎片/晶体、钻石 |
+| 大型宝藏 | 以上材料翻倍，更丰富的钻石和金币 |
+| 三叉戟宝藏 | **三叉戟**（保底出现）、海洋锻造模板 |
 
-| 结构名称 | 英文名 | 描述 | 难度 |
-|----------|--------|------|------|
-| **末地城堡** | End Castle | 悬浮在虚空之上的宏伟城堡 | <span class="dp-difficulty lvl-5"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">致命</span></span> |
-| **末地酒馆** | End Tavern | 虚空中的酒馆——末地最安全的庇护所 | <span class="dp-difficulty lvl-2"><span class="bar"></span><span class="bar"></span><span class="label">普通</span></span> |
+**新增考古**：海底神殿砖砾中可发掘海洋锻造模板。
 
+---
 
-## 试炼密室扩展
-
-> D&T 对 1.21 版本的试炼密室进行了大量扩展！
-
-| 扩展内容 | 描述 |
-|----------|------|
-| **多种变体试炼密室** | 不同主题的试炼密室——每个都有独特的试炼刷怪笼和 Boss |
-| **专属钥匙系统** | 每个试炼密室有对应的专属钥匙（如三叉戟 Boss 试炼钥匙、末地城堡试炼钥匙） |
-| **新 Boss 战** | 试炼密室中的 Boss 级敌人 |
-
-### 酒馆特殊机制
-
-> 在酒馆中找到**制图师村民**，与其交易升级至学徒，可以解锁**藏宝图**（指向稀有结构位置）。你可以把制图师带到任意位置继续升级，解锁更多地图。
-
-## 探索小贴士
-
-| 你想找... | 去哪里 |
-|-----------|--------|
-| 酒馆和制图师 | 主世界平原/森林群系，非常常见 |
-| 稀有附魔 | 特定结构宝箱（详见附魔页） |
-| 最强装备 | 孤寂要塞、封印大厅、末地城堡 |
-| 试炼挑战 | 1.21 新加载的试炼密室区块 |
-| 下界宝物 | 猪灵要塞、下界要塞 |
-
+> 以上 5 个数据包为 **nova_structures** 旗下 Dungeons & Taverns 改造系列的独立子包，仅影响对应原版结构的生成和战利品。侧边栏分类为「地下城与酒馆」源自该系列的原名，实际仅包含上述 5 类结构改造，不含酒馆、村庄等额外建筑。

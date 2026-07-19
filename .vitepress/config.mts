@@ -443,15 +443,7 @@ export default defineConfig({
                 { text: '玩法总览', link: '/features/adventure/datapack/' },
                 { text: '世界生成', link: '/features/adventure/datapack/worldgen/overview' },
                 { text: '野外探索', link: '/features/adventure/datapack/exploration/structures' },
-                {
-                  text: '地下城与酒馆',
-                  collapsed: true,
-                  items: [
-                    { text: '全结构一览', link: '/features/adventure/datapack/dungeons-and-taverns/structures' },
-                    { text: '物品一览', link: '/features/adventure/datapack/dungeons-and-taverns/items' },
-                    { text: '附魔列表', link: '/features/adventure/datapack/dungeons-and-taverns/enchantments' },
-                  ]
-                },
+                { text: '结构改造', link: '/features/adventure/datapack/dungeons-and-taverns/structures' },
                 { text: '稀有建筑群', link: '/features/adventure/datapack/rare-structures/overview' },
                 { text: '筑物塔楼', link: '/features/adventure/datapack/structory/structures' },
                 {
