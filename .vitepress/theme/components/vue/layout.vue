@@ -385,16 +385,16 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }) => {
 
 <template>
   <div class="router-wrapper">
-    <!-- 随机角落装饰元素（受特效开关控制） -->
-    <CornerStars v-if="effectsActive && randomCorner === 'stars'" />
-    <CornerQuotes v-if="effectsActive && randomCorner === 'quotes'" />
-    <CornerBubbles v-if="effectsActive && randomCorner === 'bubbles'" />
-    <CornerSakura v-if="effectsActive && randomCorner === 'sakura'" />
-    <CornerNotes v-if="effectsActive && randomCorner === 'notes'" />
-    <CornerLeaves v-if="effectsActive && randomCorner === 'leaves'" />
-    <CornerFireflies v-if="effectsActive && randomCorner === 'fireflies'" />
-    <CornerSurprise v-if="effectsActive" />
-    <CornerClickEffect v-if="effectsActive" />
+    <!-- 随机角落装饰只用于文档页，首页保留独立的粒子背景 -->
+    <CornerStars v-if="!isHome && effectsActive && randomCorner === 'stars'" />
+    <CornerQuotes v-if="!isHome && effectsActive && randomCorner === 'quotes'" />
+    <CornerBubbles v-if="!isHome && effectsActive && randomCorner === 'bubbles'" />
+    <CornerSakura v-if="!isHome && effectsActive && randomCorner === 'sakura'" />
+    <CornerNotes v-if="!isHome && effectsActive && randomCorner === 'notes'" />
+    <CornerLeaves v-if="!isHome && effectsActive && randomCorner === 'leaves'" />
+    <CornerFireflies v-if="!isHome && effectsActive && randomCorner === 'fireflies'" />
+    <CornerSurprise v-if="!isHome && effectsActive" />
+    <CornerClickEffect v-if="!isHome && effectsActive" />
     <!-- Live2D 看板娘 - 只在首页显示 -->
     <Live2D v-if="isHome" />
 
