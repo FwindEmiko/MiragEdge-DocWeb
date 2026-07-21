@@ -680,6 +680,17 @@ export default defineConfig({
             { text: '数据存储', link: '/plugins/fepvp/storage' },
           ]
         },
+        {
+          text: '🧹 异常附魔清理',
+          collapsed: false,
+          items: [
+            { text: '安装与使用', link: '/plugins/bugenchantremover/' },
+            { text: '命令参考', link: '/plugins/bugenchantremover/commands' },
+            { text: '配置参考', link: '/plugins/bugenchantremover/config' },
+            { text: '实战场景', link: '/plugins/bugenchantremover/scenarios' },
+            { text: 'UberEnchant 兼容', link: '/plugins/bugenchantremover/uber_enchant' },
+          ],
+        },
         { text: '🌟 星辉锚点', link: '/plugins/miragedgehome' },
         { text: '🏷️ 称号与入服消息', link: '/plugins/miragedgetitle' },
       ],
