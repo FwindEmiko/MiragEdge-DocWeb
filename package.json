@@ -37,7 +37,7 @@
     "@vitest/ui": "^4.1.8",
     "@volar/typescript": "^2.4.28",
     "@vue/language-core": "^3.3.5",
-    "axios": "^1.17.0",
+    "axios": "^1.18.0",
     "babel-loader": "^10.0.0",
     "busuanzi.pure.js": "^1.0.3",
     "canvas-confetti": "^1.9.3",
