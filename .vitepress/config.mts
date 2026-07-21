@@ -738,6 +738,9 @@ export default defineConfig({
     externalLinkIcon: true,
   },
   
+  // 排除 docs/ 目录（方案书与工作文件，不向玩家公开）
+  srcExclude: ['docs/**/*.md'],
+
   // 缓存配置
   cacheDir: './.vitepress/cache',
   

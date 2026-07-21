@@ -8,6 +8,7 @@ import Contributors from './Contributors.vue';
 import NotFound from './NotFound.vue';
 import Live2D from './Live2D.vue';
 import EffectsToggle from './EffectsToggle.vue';
+import ImageLightbox from './ImageLightbox.vue';
 import { effectsEnabled, initEffectsToggleState } from '../../composables/useEffectsToggle';
 import { useTocAutoScroll } from '../../composables/useTocAutoScroll';
 
@@ -413,6 +414,9 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }) => {
         <path d="M12 5l-7 7h4v7h6v-7h4l-7-7z" fill="currentColor"/>
       </svg>
     </button>
+
+    <!-- 图片查看器（全局单例，Teleport 到 body） -->
+    <ImageLightbox />
   </div>
 </template>
 

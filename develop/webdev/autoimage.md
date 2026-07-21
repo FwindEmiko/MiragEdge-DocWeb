@@ -19,8 +19,107 @@
 | `lazy` | `Boolean` | `false` | 否 | 是否启用浏览器原生懒加载：`true` 为懒加载，`false` 为立即加载 |
 | `align` | `String` | `'center'` | 否 | 图片对齐方式：`'left'`（左对齐）、`'center'`（居中）、`'right'`（右对齐） |
 | `margin` | `Number` / `String` | `null` | 否 | 左/右边距（对齐时使用），例如 `0` 或 `'16px'` |
+| `zoomable` | `Boolean` | `true` | 否 | 是否启用点击放大（Lightbox） |
+| `zoomSrc` | `String` | `''` | 否 | 放大时使用的高清图源；为空则复用 `src` |
+| `zoomGroup` | `String` | `''` | 否 | 分组名；同组图片可在 Lightbox 中左右切换 |
+| `zoomCaption` | `String` | `''` | 否 | 放大后显示的标题；为空则依次回退到 `caption` / `alt` |
 
 > **注意**：`showInfo` 功能暂未实现，预留供后续扩展。
+
+## 点击放大（Lightbox）
+
+`SmartImage` 默认启用点击放大功能。用户点击图片后会从原位置以 FLIP 动画平滑展开为全屏查看器，支持：
+
+- **滚轮缩放**（1x–4x，以鼠标位置为缩放原点）
+- **双击切换** 1x ↔ 2x
+- **拖拽平移**（缩放 > 1x 时）
+- **键盘导航**：`Esc` 关闭、`←` `→` 切换同组、`+` `-` 缩放、`0` 重置
+- **移动端手势**：双指缩放、单指左右滑动切换、下拉关闭
+- **同组切换**：通过 `zoomGroup` 标识同组图片，可在 Lightbox 中连续浏览
+
+### 关闭点击放大
+
+对于不需要放大的场景（如纯装饰图、像素图标），设置 `:zoomable="false"`。
+
+<SmartImage
+  src="https://picsum.photos/400/300?random=zoom-disabled"
+  alt="不可放大的图片"
+  caption="此图片无法点击放大"
+  :zoomable="false"
+/>
+
+```html
+<SmartImage
+  src="/path/to/image.png"
+  alt="装饰图"
+  :zoomable="false"
+/>
+```
+
+### 使用高清图源
+
+展示缩略图、放大时加载高清原图，可节省带宽。
+
+<SmartImage
+  src="https://picsum.photos/200/150?random=thumb"
+  zoomSrc="https://picsum.photos/1200/900?random=hd"
+  alt="缩略图点击查看高清图"
+  caption="点击查看高清图"
+  width="200"
+/>
+
+```html
+<SmartImage
+  src="/path/to/thumb.png"
+  zoomSrc="/path/to/hd.png"
+  alt="缩略图"
+  caption="点击查看高清图"
+  width="200"
+/>
+```
+
+### 同组图片切换
+
+为多张图片设置相同的 `zoomGroup`，在 Lightbox 中即可左右切换浏览。
+
+<SmartImage
+  src="https://picsum.photos/400/300?random=g1"
+  alt="组内图片 1"
+  caption="组内图片 1"
+  zoomGroup="demo-gallery"
+  width="300"
+/>
+
+<SmartImage
+  src="https://picsum.photos/400/300?random=g2"
+  alt="组内图片 2"
+  caption="组内图片 2"
+  zoomGroup="demo-gallery"
+  width="300"
+/>
+
+<SmartImage
+  src="https://picsum.photos/400/300?random=g3"
+  alt="组内图片 3"
+  caption="组内图片 3"
+  zoomGroup="demo-gallery"
+  width="300"
+/>
+
+```html
+<SmartImage
+  src="/path/to/img1.png"
+  alt="组内图片 1"
+  zoomGroup="my-gallery"
+/>
+<SmartImage
+  src="/path/to/img2.png"
+  alt="组内图片 2"
+  zoomGroup="my-gallery"
+/>
+```
+
+> **提示**：同组图片切换支持键盘 `←` `→` 与移动端左右滑动。组内顺序按组件渲染顺序自动注册。
 
 ## 基础用法
 

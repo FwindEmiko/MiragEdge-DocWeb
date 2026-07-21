@@ -22,8 +22,10 @@ import {
   unlinkSync,
   openSync,
   readSync,
+  writeSync,
   closeSync,
 } from "fs";
+import { promises as fsp } from "fs";
 import { join, extname, dirname } from "path";
 import { fileURLToPath } from "url";
 
@@ -62,13 +64,24 @@ function getImageSize(filePath) {
   }
   if (ext === ".webp") {
     if (buf.toString("ascii", 8, 12) === "WEBP") {
-      if (buf[15] === 0x2f) {
+      const chunkType = buf.toString("ascii", 12, 16);
+      if (chunkType === "VP8X") {
+        // VP8X 扩展格式：canvas 尺寸在 24-29 字节（24 位 LE）
+        const w = (buf[24] | (buf[25] << 8) | (buf[26] << 16)) + 1;
+        const h = (buf[27] | (buf[28] << 8) | (buf[29] << 16)) + 1;
+        return { width: w, height: h };
+      }
+      if (chunkType === "VP8L") {
+        // VP8L 无损格式：尺寸在 21-24 字节（14 位 LE，+1 偏移）
         const bits = buf.readUInt32LE(21);
         return { width: (bits & 0x3fff) + 1, height: ((bits >> 14) & 0x3fff) + 1 };
       }
-      const w = buf.readUInt16LE(26) & 0x3fff;
-      const h = buf.readUInt16LE(28) & 0x3fff;
-      if (w > 0 && h > 0) return { width: w, height: h };
+      if (chunkType === "VP8 ") {
+        // VP8 有损格式：尺寸在 26-29 字节（16 位 LE）
+        const w = buf.readUInt16LE(26) & 0x3fff;
+        const h = buf.readUInt16LE(28) & 0x3fff;
+        if (w > 0 && h > 0) return { width: w, height: h };
+      }
     }
   }
   return null;
@@ -277,7 +290,16 @@ async function processImage(filePath) {
       pipeline = pipeline.webp({ quality: 85, effort: 4 });
     }
     await pipeline.toFile(tmpPath);
-    renameSync(tmpPath, filePath);
+    // rename 覆盖原文件
+    // Windows 下可能因 Defender 扫描导致 EPERM，失败则直接跳过
+    // 失败的文件会在第二轮重试中处理
+    try {
+      renameSync(tmpPath, filePath);
+    } catch (e) {
+      // 清理临时文件
+      try { unlinkSync(tmpPath); } catch {}
+      throw e;
+    }
     return true;
   } catch (e) {
     try { unlinkSync(tmpPath); } catch {}
@@ -321,20 +343,70 @@ async function main() {
   console.log(`  Scanned ${images.length} images\n`);
 
   let processed = 0, skipped = 0, failed = 0;
+  const failedFiles = [];
+
+  // ===== 第一轮：快速处理所有图片，失败就跳过 =====
   for (let i = 0; i < images.length; i++) {
     if (i % 50 === 0 || i === images.length - 1) {
       const pct = ((i + 1) / images.length * 100).toFixed(1);
       process.stdout.write(`\r  ${i + 1}/${images.length} (${pct}%) | OK ${processed} | SKIP ${skipped} | FAIL ${failed}`);
     }
+    // 超时保护：单张图片处理超过 30 秒则跳过，避免 sharp 卡死整个构建
     try {
-      if (await processImage(images[i])) processed++;
+      const result = await Promise.race([
+        processImage(images[i]),
+        new Promise((_, reject) =>
+          setTimeout(() => reject(new Error("Timeout (>30s)")), 30000)
+        ),
+      ]);
+      if (result) processed++;
       else skipped++;
     } catch (e) {
       failed++;
+      failedFiles.push({ file: images[i], error: e.message });
+      if (e.message.includes("Timeout")) {
+        console.log(`\n  ⚠ Timeout: ${images[i]}`);
+      }
     }
   }
 
+  // ===== 第二轮：对失败的文件重试（等待 Defender 释放锁） =====
+  if (failedFiles.length > 0) {
+    console.log(`\n  Retrying ${failedFiles.length} failed files...`);
+    const stillFailed = [];
+    for (const f of failedFiles) {
+      // 等待 500ms 让 Defender/索引服务释放锁
+      await new Promise(r => setTimeout(r, 500));
+      try {
+        const result = await Promise.race([
+          processImage(f.file),
+          new Promise((_, reject) =>
+            setTimeout(() => reject(new Error("Timeout (>30s)")), 30000)
+          ),
+        ]);
+        if (result) {
+          processed++;
+          failed--;
+        } else {
+          stillFailed.push(f);
+        }
+      } catch (e) {
+        f.error = e.message;
+        stillFailed.push(f);
+      }
+    }
+    failedFiles.length = 0;
+    failedFiles.push(...stillFailed);
+  }
+
   console.log(`\n\nDone: ${processed} ok, ${skipped} skip, ${failed} fail / ${images.length} total`);
+  if (failedFiles.length > 0) {
+    console.log(`\nFailed files:`);
+    for (const f of failedFiles) {
+      console.log(`  ${f.file}`);
+      console.log(`    → ${f.error}`);
+    }
+  }
   svgCache.clear();
 }
 

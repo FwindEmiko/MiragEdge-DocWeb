@@ -5,6 +5,7 @@ import { h, onMounted, onBeforeUnmount, nextTick } from 'vue'
 import type { Theme } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
 import SmartImage from './components/vue/SmartImage.vue'
+import ImageLightbox from './components/vue/ImageLightbox.vue'
 import ChristmasTree from './components/vue/ChristmasTree.vue'
 import NodeStatus from './components/vue/NodeStatus.vue'
 import FeatureCard from './components/vue/FeatureCard.vue'
@@ -28,6 +29,7 @@ import './css/components/animation.css'
 import './css/components/button.css'
 import './css/components/feature.css'
 import './css/components/search.css'
+import './css/components/lightbox.css'
 import './css/layout/blur.css'
 import './css/base/overrides.css'
 import './style/dark.css'
@@ -51,6 +53,9 @@ import { showAestheticNotice, showConsoleLogo } from './components/js/notice.js'
 // ESA 边端缓存适配：版本检测自动刷新 + chunk 加载失败兜底
 import { initVersionCheck, checkVersionOnRouteChange } from './composables/useVersionCheck'
 
+// 图片查看器全局配置
+import { setLightboxConfig, useLightbox } from './composables/useLightbox'
+
 export default {
   extends: DefaultTheme,
 
@@ -63,6 +68,7 @@ export default {
     app.component("LayoutComponent", LayoutComponent)
     app.component('Contributors', Contributors)
     app.component('SmartImage', SmartImage)
+    app.component('ImageLightbox', ImageLightbox)
     app.component('ChristmasTree', ChristmasTree)
     app.component('NodeStatus', NodeStatus)
     app.component('FeatureCard', FeatureCard)
@@ -78,6 +84,16 @@ export default {
     app.component('GithubRepoActivity', GithubRepoActivity)
     app.component('TodoList', TodoList)
 
+    // 注入图片查看器全局配置（可在子组件中通过 inject('lightboxConfig') 覆盖）
+    setLightboxConfig({
+      maxZoom: 4,
+      dblClickZoom: true,
+      wheelZoom: true,
+      background: 'rgba(0, 0, 0, 0.92)',
+      blur: 16,
+      gapThreshold: 100,
+    })
+
     // 仅在浏览器环境下执行
     if (inBrowser) {
       // 搜索框旧位置：路由变化前记录，用于 FLIP 动画
@@ -89,6 +105,11 @@ export default {
         const navSearch = document.querySelector('.VPNavBarSearch') as HTMLElement | null
         if (navSearch) {
           lastSearchLeft = navSearch.getBoundingClientRect().left
+        }
+        // 路由切换前关闭图片查看器，避免 Lightbox 卡在新页面上
+        const { state, close: closeLightbox } = useLightbox()
+        if (state.open) {
+          closeLightbox()
         }
       }
 

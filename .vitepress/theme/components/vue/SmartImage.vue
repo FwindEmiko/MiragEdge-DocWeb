@@ -25,20 +25,23 @@
     </div>
 
     <!-- 主图片 -->
-    <div 
+    <div
       v-if="!error"
       class="image-wrapper"
       :style="wrapperStyle"
     >
       <img
         ref="imageRef"
+        class="smart-image-content"
+        :class="{ 'loaded': loaded, 'is-zoomable': zoomable }"
         :src="baseSrc"
         :alt="alt || 'Image'"
         :style="imageStyle"
-        :class="{ 'loaded': loaded }"
         :loading="loadingAttr"
+        :data-zoomable="zoomable ? 'true' : null"
         @load="onImageLoad"
         @error="onImageError"
+        @click="onImageClick"
       />
     </div>
 
@@ -52,12 +55,13 @@
 <script>
 import { withBase } from 'vitepress'
 import externalWmMap from '../../../../public/external-wm-map.json'
+import { useLightbox, registerToGroup, unregisterFromGroup } from '../../composables/useLightbox'
 
 const wmMap = externalWmMap
 
 export default {
   name: 'SmartImage',
-  
+
   props: {
     src: {
       type: String,
@@ -114,6 +118,27 @@ export default {
     margin: {
       type: [Number, String],
       default: null
+    },
+    // ====== Lightbox 相关 props ======
+    // 是否启用点击放大
+    zoomable: {
+      type: Boolean,
+      default: true
+    },
+    // 高清图源（默认空，则使用 src 原图）
+    zoomSrc: {
+      type: String,
+      default: ''
+    },
+    // 分组名（同组可在 lightbox 中左右切换）
+    zoomGroup: {
+      type: String,
+      default: ''
+    },
+    // 放大后的标题（默认空则复用 caption/alt）
+    zoomCaption: {
+      type: String,
+      default: ''
     }
   },
 
@@ -136,6 +161,18 @@ export default {
         return withBase(wmMap[this.src])
       }
       return withBase(this.src)
+    },
+    // 放大用的大图地址：优先 zoomSrc，否则使用 src（同样走水印重写）
+    baseZoomSrc() {
+      const raw = this.zoomSrc || this.src
+      if (raw && raw.startsWith('http') && wmMap[raw]) {
+        return withBase(wmMap[raw])
+      }
+      return withBase(raw)
+    },
+    // 放大后的标题：优先 zoomCaption，否则 caption，否则 alt
+    effectiveZoomCaption() {
+      return this.zoomCaption || this.caption || this.alt || ''
     },
     // 新增：根据 lazy prop 返回 loading 属性的值
     loadingAttr() {
@@ -256,10 +293,41 @@ export default {
       this.onImageLoad({ target: img });
       return;
     }
-    
-    // 注意：不能在这里用 img.complete && !naturalWidth 判定失败
-    // 因为 SSR/Hydration 过程中 naturalWidth 暂时为 0，但图片实际会加载成功
-    // 让 @load/@error 事件自行处理即可
+
+    // 兜底：SSR hydration 场景下 @load 事件可能在 hydration 前已触发
+    // Vue 无法捕获已触发的事件，导致 loaded 状态未同步
+    // 使用定时器轮询检查图片真实加载状态
+    if (!this._loadCheckTimer) {
+      this._loadCheckTimer = setInterval(() => {
+        if (!this.$refs.imageRef) {
+          clearInterval(this._loadCheckTimer);
+          this._loadCheckTimer = null;
+          return;
+        }
+        const cur = this.$refs.imageRef;
+        if (cur.complete && cur.naturalWidth > 0) {
+          clearInterval(this._loadCheckTimer);
+          this._loadCheckTimer = null;
+          if (!this.loaded) {
+            this.onImageLoad({ target: cur });
+          }
+        } else if (cur.complete && cur.naturalWidth === 0) {
+          // 加载失败
+          clearInterval(this._loadCheckTimer);
+          this._loadCheckTimer = null;
+          if (!this.error) {
+            this.onImageError();
+          }
+        }
+      }, 200);
+      // 10 秒后强制清除，避免内存泄漏
+      setTimeout(() => {
+        if (this._loadCheckTimer) {
+          clearInterval(this._loadCheckTimer);
+          this._loadCheckTimer = null;
+        }
+      }, 10000);
+    }
 
     // 懒加载图片：用 IntersectionObserver 等待进入视口
     if (this.lazy && 'IntersectionObserver' in window) {
@@ -296,6 +364,15 @@ export default {
       clearTimeout(this._fallbackTimer);
       this._fallbackTimer = null;
     }
+    if (this._loadCheckTimer) {
+      clearInterval(this._loadCheckTimer);
+      this._loadCheckTimer = null;
+    }
+    // 从 lightbox 分组注销
+    if (this.zoomGroup && this._registered) {
+      unregisterFromGroup(this.zoomGroup, this.baseZoomSrc);
+      this._registered = false;
+    }
   },
 
   methods: {
@@ -307,12 +384,45 @@ export default {
         height: img.naturalHeight,
         aspectRatio: img.naturalWidth / img.naturalHeight
       }
+      // 图片加载完成后再次注册（确保 originEl 引用最新）
+      this._registerToGroup();
     },
 
     onImageError() {
       this.error = true
       this.loaded = false
       console.error(`图片加载失败: ${this.src}`)
+    },
+
+    // 点击图片触发 lightbox
+    onImageClick() {
+      if (!this.zoomable) return;
+      const img = this.$refs.imageRef;
+      if (!img) return;
+      // 使用浏览器原生属性检查图片是否真正加载完成
+      // 避免 SSR hydration 场景下 loaded 状态未同步导致点击无反应
+      if (!img.complete || img.naturalWidth === 0) return;
+      const { open } = useLightbox();
+      open({
+        src: this.baseZoomSrc,
+        alt: this.alt || '',
+        caption: this.effectiveZoomCaption,
+        originEl: img,
+      }, this.zoomGroup || undefined);
+    },
+
+    // 内部方法：注册到分组
+    _registerToGroup() {
+      if (!this.zoomGroup || !this.zoomable || !this.loaded) return;
+      const img = this.$refs.imageRef;
+      if (!img) return;
+      registerToGroup(this.zoomGroup, {
+        src: this.baseZoomSrc,
+        alt: this.alt || '',
+        caption: this.effectiveZoomCaption,
+        originEl: img,
+      });
+      this._registered = true;
     }
   }
 }
@@ -345,6 +455,24 @@ export default {
 
 .image-wrapper img.loaded {
   opacity: 1;
+}
+
+/* 可放大的图片：放大镜光标（不依赖 loaded 状态，避免 SSR hydration 时 cursor 不正确） */
+.image-wrapper img.is-zoomable {
+  cursor: zoom-in;
+}
+
+/* 加载完成后的过渡与 hover 反馈 */
+.image-wrapper img.is-zoomable.loaded {
+  transition: opacity 0.3s ease, transform 0.2s ease;
+}
+
+.image-wrapper img.is-zoomable.loaded:hover {
+  transform: scale(1.01);
+}
+
+.image-wrapper img.is-zoomable.loaded:active {
+  transform: scale(0.99);
 }
 
 /* 占位符 */

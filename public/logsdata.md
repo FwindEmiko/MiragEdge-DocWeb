@@ -1,5 +1,37 @@
 # 锐界幻境更新日志
 
+## 2026.7.21
+
+[优化] 网站图像组件新增图像放大效果
+
+## 2026.7.20
+
+[添加] HFcatLoot 区域与重置系统 — 主城区/缓冲/生存/重置四区划分，WorldGuard集成
+[添加] HFcatLoot 世界重置系统 — 重置区自动刷新、首次进入引导、离线损失通知
+[添加] EvenMoreFish 钓鱼系统全面汉化与配置 — 27个配置文件中文化、五阶鱼竿、虚空/岩浆钓鱼
+[添加] EvenMoreFish 经济平衡 — 比赛奖励体系、稀有度权重、头颅纹理兼容
+[优化] HFcatLoot 消息润色17项：emoji统一替换、文案优化、守卫残留清理
+[修复] DimensionFishing 2处严重BUG — TrackedHook.reel()时序修复、runAtLocation去延迟
+
+## 2026.7.19
+
+[添加] ElytraBind多锻造系统兼容方案 — Vane下界合金 / Incendium地狱之翼 / 锻造还原三路线
+[添加] FwindEmiCore鞘翅还原模块修复 — getItemModel()替代PDC读取，部署至服务器
+[添加] CE星辉解缚符物品注册方案 — 锻造台还原特殊鞘翅为原版
+[优化] 文档站Incendium/Stellarity群系、物品、生物页面全面配图（约180张图片）
+[优化] 文档站数据包页面19页配图全部完成
+
+## 2026.7.18
+
+[添加] 数据包成就系统内嵌汉化 — Incendium 33个成就翻译润色、Stellarity 59个成就注入fallback字段
+[添加] Stellarity语言文件内嵌汉化，645条补齐至689条，全面汉化能力名称与描述
+[添加] Stellarity数据包虚空钓鱼功能剥离方案书（插件栈接管CE+EvenMoreFish+FEC）
+[优化] 28个数据包全面修复：Incendium BOM头清除、True Ending time_check格式修正、pack.mcmeta标准化
+[优化] 文档站D&T页面全面重写（删除虚构附魔/物品），侧边栏更名为「结构改造」
+[优化] 文档站SmartImage组件SSR修复，新增align/margin参数
+[优化] Sparkles RP重建，Incendium成就中文文本替换到材质包中
+[修复] Stellarity 48个缺失物品模型补齐（跳转模型）
+
 ## 2026.7.17
 
 [添加] 给菜单系统添加隐藏盔甲架功能设置(原创插件模块)

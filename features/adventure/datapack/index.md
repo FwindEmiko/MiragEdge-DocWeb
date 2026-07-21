@@ -56,7 +56,7 @@
 | 末地有什么新装备？ | [繁星 · 物品与装备](./stellarity/items) |
 | 光之女皇怎么打？ | [繁星 · 生物与Boss](./stellarity/mobs) |
 | 野外能遇到什么新建筑？ | [地城酒馆](./dungeons-and-taverns/structures) |
-| 有什么新附魔可以获取？ | [地城酒馆 · 附魔](./dungeons-and-taverns/enchantments) |
+| 有什么新附魔可以获取？ | [地城酒馆 · 结构与附魔](./dungeons-and-taverns/structures) |
 | 末影龙强化后怎么打？ | [终焉 · Boss攻略](./true-ending/boss) |
 | 有哪些世界生成类内容？ | [世界生成](./worldgen/overview) |
 

@@ -1,0 +1,448 @@
+/*!
+ * @file lightbox.css
+ * @brief 图片查看器（Lightbox）样式
+ * @description 图片点击放大查看器的容器、控件、动画与移动端适配
+ *              复用全站动画 token（--ease-out-expo / --duration-slow 等）与品牌色（#E05252）
+ */
+
+/* ==================================================
+   容器与背景层
+   ================================================== */
+.lightbox-root {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  /* 通过 CSS 变量与 useLightbox 配置同步 */
+  background: var(--lightbox-bg, rgba(0, 0, 0, 0.92));
+  backdrop-filter: blur(var(--lightbox-blur, 16px)) saturate(1.1);
+  -webkit-backdrop-filter: blur(var(--lightbox-blur, 16px)) saturate(1.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* 入场动画：背景淡入 + 轻微缩放 */
+  opacity: 0;
+  transition: opacity var(--duration-slow) var(--ease-out-expo);
+  touch-action: none; /* 阻止页面滚动穿透，手势由组件自行处理 */
+  overscroll-behavior: contain;
+}
+
+.lightbox-root.is-open {
+  opacity: 1;
+}
+
+.lightbox-root.is-closing {
+  opacity: 0;
+  transition: opacity var(--duration-normal) var(--ease-out-expo);
+}
+
+/* ==================================================
+   图片舞台
+   ================================================== */
+.lightbox-stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.lightbox-image {
+  /* 默认占位尺寸，实际 transform 由 JS 计算 */
+  max-width: 90vw;
+  max-height: 85vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  user-select: none;
+  -webkit-user-drag: none;
+  cursor: grab;
+  /* FLIP 入场过渡 */
+  transition: transform var(--duration-slow) var(--ease-out-expo),
+              opacity var(--duration-slow) var(--ease-out-expo);
+  will-change: transform;
+  /* 阴影：突出图片与背景的层次 */
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.5),
+              0 0 0 1px rgba(255, 255, 255, 0.04);
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.lightbox-image.is-zoomed {
+  cursor: grab;
+  transition: none; /* 缩放/拖拽时禁用过渡，避免跟手延迟 */
+}
+
+.lightbox-image.is-dragging {
+  cursor: grabbing;
+  transition: none;
+}
+
+/* 加载中/失败状态 */
+.lightbox-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 14px;
+  user-select: none;
+}
+
+.lightbox-state-icon {
+  width: 36px;
+  height: 36px;
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  border-top-color: #E05252;
+  border-radius: 50%;
+  animation: lightbox-spin 0.9s linear infinite;
+}
+
+.lightbox-state.is-error .lightbox-state-icon {
+  border: none;
+  animation: none;
+  font-size: 32px;
+  color: #E05252;
+}
+
+.lightbox-state.is-error {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.lightbox-retry {
+  margin-top: 8px;
+  padding: 6px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-out-expo);
+}
+
+.lightbox-retry:hover {
+  background: rgba(224, 82, 82, 0.18);
+  border-color: rgba(224, 82, 82, 0.5);
+}
+
+@keyframes lightbox-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ==================================================
+   控件：玻璃磨砂胶囊
+   ================================================== */
+.lightbox-controls {
+  position: fixed;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px;
+  border-radius: 999px;
+  /* 玻璃磨砂 */
+  background: rgba(28, 28, 30, 0.55);
+  backdrop-filter: blur(20px) saturate(1.6);
+  -webkit-backdrop-filter: blur(20px) saturate(1.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4),
+              inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  /* 入场延迟，让用户先聚焦图片 */
+  opacity: 0;
+  transform: translateY(-8px);
+  transition: opacity var(--duration-slow) var(--ease-out-expo) 120ms,
+              transform var(--duration-slow) var(--ease-out-expo) 120ms;
+}
+
+.lightbox-root.is-open .lightbox-controls {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.lightbox-root.is-closing .lightbox-controls {
+  opacity: 0;
+  transition: opacity var(--duration-fast) var(--ease-out-expo);
+}
+
+/* 顶部工具栏（关闭按钮） */
+.lightbox-toolbar {
+  top: 20px;
+  right: 20px;
+}
+
+/* 底部工具栏（导航 + 缩放 + 计数） */
+.lightbox-bottombar {
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-8px);
+}
+
+.lightbox-root.is-open .lightbox-bottombar {
+  transform: translateX(-50%) translateY(0);
+}
+
+.lightbox-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 999px;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.85);
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-out-expo);
+  /* 用 svg icon，无需额外字体 */
+  font-family: inherit;
+}
+
+.lightbox-btn:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.lightbox-btn:active:not(:disabled) {
+  transform: scale(0.94);
+}
+
+.lightbox-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.lightbox-btn.is-active {
+  /* 当前激活态：品牌红强调 */
+  background: rgba(224, 82, 82, 0.18);
+  color: #ff7a7a;
+}
+
+.lightbox-btn svg {
+  width: 18px;
+  height: 18px;
+  /* lucide icon stroke width */
+  stroke-width: 2;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* 计数器 */
+.lightbox-counter {
+  padding: 0 12px;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+  user-select: none;
+  min-width: 56px;
+  text-align: center;
+  letter-spacing: 0.02em;
+}
+
+.lightbox-counter-current {
+  color: #fff;
+  font-weight: 600;
+}
+
+/* 分隔线 */
+.lightbox-divider {
+  width: 1px;
+  height: 18px;
+  background: rgba(255, 255, 255, 0.15);
+  margin: 0 2px;
+}
+
+/* ==================================================
+   标题/说明
+   ================================================== */
+.lightbox-caption {
+  position: fixed;
+  left: 50%;
+  bottom: 80px;
+  transform: translateX(-50%);
+  max-width: min(90vw, 720px);
+  padding: 8px 18px;
+  border-radius: 999px;
+  background: rgba(28, 28, 30, 0.5);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 13px;
+  line-height: 1.5;
+  text-align: center;
+  /* 入场延迟 */
+  opacity: 0;
+  transition: opacity var(--duration-slow) var(--ease-out-expo) 200ms;
+  pointer-events: none;
+}
+
+.lightbox-root.is-open .lightbox-caption {
+  opacity: 1;
+}
+
+.lightbox-root.is-closing .lightbox-caption {
+  opacity: 0;
+  transition: opacity var(--duration-fast) var(--ease-out-expo);
+}
+
+/* ==================================================
+   提示（首次打开时短暂提示）
+   ================================================== */
+.lightbox-hint {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  padding: 10px 20px;
+  border-radius: 12px;
+  background: rgba(28, 28, 30, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  pointer-events: none;
+  opacity: 0;
+  animation: lightbox-hint-fade 2.4s var(--ease-out-expo) forwards;
+  animation-delay: 600ms;
+}
+
+@keyframes lightbox-hint-fade {
+  0% { opacity: 0; transform: translate(-50%, -45%); }
+  20% { opacity: 1; transform: translate(-50%, -50%); }
+  80% { opacity: 1; transform: translate(-50%, -50%); }
+  100% { opacity: 0; transform: translate(-50%, -55%); }
+}
+
+/* ==================================================
+   缩放比例指示器
+   ================================================== */
+.lightbox-zoom-indicator {
+  position: fixed;
+  left: 50%;
+  top: 24px;
+  transform: translateX(-50%);
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: rgba(28, 28, 30, 0.55);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  opacity: 0;
+  transition: opacity var(--duration-normal) var(--ease-out-expo);
+  pointer-events: none;
+}
+
+.lightbox-zoom-indicator.is-visible {
+  opacity: 1;
+}
+
+/* ==================================================
+   移动端适配
+   ================================================== */
+@media (max-width: 767px) {
+  .lightbox-image {
+    max-width: 100vw;
+    max-height: 80vh;
+    border-radius: 0;
+  }
+
+  /* 工具栏位置与尺寸调整 */
+  .lightbox-toolbar {
+    top: 12px;
+    right: 12px;
+  }
+
+  .lightbox-bottombar {
+    bottom: 16px;
+    /* 移动端底部留出安全区 */
+    padding-bottom: env(safe-area-inset-bottom, 0);
+  }
+
+  .lightbox-btn {
+    width: 40px;
+    height: 40px;
+  }
+
+  .lightbox-btn svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .lightbox-caption {
+    bottom: 72px;
+    max-width: 92vw;
+    font-size: 12px;
+    padding: 6px 14px;
+  }
+
+  /* 隐藏滚轮缩放按钮（移动端用双指） */
+  .lightbox-btn[data-action="zoom-in"],
+  .lightbox-btn[data-action="zoom-out"] {
+    display: none;
+  }
+
+  .lightbox-zoom-indicator {
+    top: 16px;
+  }
+}
+
+/* 横屏高度受限时进一步压缩 */
+@media (max-width: 767px) and (orientation: landscape) {
+  .lightbox-image {
+    max-height: 70vh;
+  }
+
+  .lightbox-caption {
+    bottom: 64px;
+  }
+}
+
+/* ==================================================
+   可访问性：尊重 reduced-motion
+   ================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .lightbox-root,
+  .lightbox-image,
+  .lightbox-controls,
+  .lightbox-caption,
+  .lightbox-zoom-indicator {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+
+  .lightbox-hint {
+    display: none;
+  }
+}
+
+/* ==================================================
+   切换动画（同组上一张/下一张）
+   ================================================== */
+.lightbox-image.is-entering-right {
+  animation: lightbox-slide-from-right var(--duration-slow) var(--ease-out-expo);
+}
+
+.lightbox-image.is-entering-left {
+  animation: lightbox-slide-from-left var(--duration-slow) var(--ease-out-expo);
+}
+
+@keyframes lightbox-slide-from-right {
+  0% { opacity: 0; transform: translateX(24px) scale(0.98); }
+  100% { opacity: 1; transform: translateX(0) scale(1); }
+}
+
+@keyframes lightbox-slide-from-left {
+  0% { opacity: 0; transform: translateX(-24px) scale(0.98); }
+  100% { opacity: 1; transform: translateX(0) scale(1); }
+}
