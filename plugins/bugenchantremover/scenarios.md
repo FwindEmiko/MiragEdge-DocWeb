@@ -40,8 +40,6 @@ clean-uber-enchant-glint: false            # 不涉及 UberEnchant
 3. `/bugenchantscan` 手动扫描，观察输出统计
 4. 如有 GUI 道具被误判，检查"识别为自定义物品"字段是否为"是"
 
----
-
 ## 场景二：清理所有 UberEnchant 药水效果附魔
 
 ### 问题描述
@@ -80,8 +78,6 @@ clean-uber-enchant-glint: true  # 清理 UberEnchant 添加的发光
 2. 或改用精准匹配（见场景三）
 :::
 
----
-
 ## 场景三：仅清理部分 UberEnchant 附魔
 
 ### 问题描述
@@ -105,8 +101,6 @@ clean-uber-enchant-glint: true
 ### 完整 UberEnchant 附魔 ID 列表
 
 参见 [UberEnchant 兼容 — 附魔清单](./uber_enchant#附魔清单)。
-
----
 
 ## 场景四：清理玩家手中的"问题物品"
 
@@ -144,8 +138,6 @@ clean-uber-enchant-glint: true
 `/bugenchantscan` 仅用于"立即生效"的场景。
 :::
 
----
-
 ## 场景五：Folia 服务端部署
 
 ### 问题描述
@@ -175,8 +167,6 @@ clean-uber-enchant-glint: true
 该类仅存在于 Folia 服务端，不存在则视为 Paper。
 :::
 
----
-
 ## 场景六：与 FE_MWSarden 配合使用
 
 ### 问题描述
@@ -191,8 +181,6 @@ clean-uber-enchant-glint: true
 | BugEnchantRemover | 异常附魔 | 附魔移除/物品删除 |
 
 两者无冲突，可放心同时使用。
-
----
 
 ## 常见问题排查
 

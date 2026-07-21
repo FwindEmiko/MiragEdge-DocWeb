@@ -35,11 +35,9 @@ clean-uber-enchant-glint: true # 清理 UberEnchant 发光残留
 
 # === 消息 ===
 messages:
-  actionbar: "帮你清理掉找到的异常附魔书啦~"
-  log-prefix: "[星玖姬]"
+  actionbar: "帮你清理掉找到的异常附魔啦~"
+  log-prefix: "[附魔清道夫]"
 ```
-
----
 
 ## 字段详解
 
@@ -106,8 +104,6 @@ translation-key-keywords:
   - "enchantment.nova_structures.bug_"
 ```
 
----
-
 ### 扫描行为
 
 #### `check-interval`
@@ -127,8 +123,6 @@ translation-key-keywords:
 ::: warning 修改后需重启
 此配置项修改后需要**重启服务器**才能生效，`/bugenchantreload` 不会重启定时任务。
 :::
-
----
 
 ### 日志
 
@@ -160,8 +154,6 @@ translation-key-keywords:
 当不确定某个附魔为何被清理（或未被清理）时，开启此项可看到详细匹配过程。
 生产环境可关闭以减少日志量。
 :::
-
----
 
 ### 附魔书处理策略
 
@@ -197,8 +189,6 @@ translation-key-keywords:
 2. `meta.getStoredEnchants()` 为空
 3. UberEnchant PDC 也为空（无 `uberenchant:storeduberenchantment` 数据）
 4. 未被识别为自定义物品（见下文）
-
----
 
 ### 自定义物品保护
 
@@ -242,8 +232,6 @@ v1.2 仅在"删除整本书"场景下保护自定义物品，允许"移除异常
 v1.3 扩展为：**自定义物品无论哪种情况都不修改 meta**，避免破坏 GUI 道具数据。
 :::
 
----
-
 ### UberEnchant 兼容
 
 #### `clean-uber-enchant-glint`
@@ -267,8 +255,6 @@ v1.3 扩展为：**自定义物品无论哪种情况都不修改 meta**，避免
 部分移除不会清理发光（保留 UberEnchant 自身管理逻辑）。
 :::
 
----
-
 ### 消息
 
 #### `messages.actionbar`
@@ -289,8 +275,6 @@ messages:
 - **类型**：String
 - **默认值**：`"[BugEnchantRemover]"`
 - **说明**：控制台日志前缀，用于 `log-removals` 和 `log-keyword-matches` 的输出
-
----
 
 ## 完整配置示例
 

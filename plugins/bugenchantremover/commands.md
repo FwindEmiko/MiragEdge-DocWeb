@@ -15,8 +15,6 @@ outline: deep
 | `/bugenchantscan` | `bugenchantremover.scan` | OP | 手动扫描背包 |
 | `/bugenchanttest` | `bugenchantremover.test` | OP | 检测手持物品 |
 
----
-
 ## `/bugenchantreload` — 重载配置
 
 ### 用法
@@ -55,8 +53,6 @@ outline: deep
 ::: warning 注意
 重载不会重启定时任务。如修改了 `check-interval`，需要重启服务器才能让新间隔生效。
 :::
-
----
 
 ## `/bugenchantscan` — 手动扫描背包
 
@@ -106,8 +102,6 @@ outline: deep
 3. `/bugenchantscan` 验证清理效果
 4. 如有遗漏，重复步骤 1-3
 :::
-
----
 
 ## `/bugenchanttest` — 检测手持物品
 

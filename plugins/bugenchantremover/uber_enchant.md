@@ -18,25 +18,13 @@ outline: deep
 | < 1.20.4 | `Enchantment.registerEnchantment()` 注册到 Bukkit | 传统 `meta.getEnchants()` 可读 |
 | ≥ 1.20.4 | PDC（PersistentDataContainer）存储 | 传统 API **完全读不到** |
 
-### BugEnchantRemover v1.2 的问题
-
-v1.2 仅使用 `meta.getEnchants()` / `meta.getStoredEnchants()`，**完全无法检测 UberEnchant 的 PDC 附魔**。
-
-这意味着：
-
-- 玩家背包中的 UberEnchant 附魔书无法被清理
-- `/bugenchanttest` 命令不显示这些附魔
-- 即使配置了 `uberenchant:` 关键词，也不会命中
-
-### v1.3 解决方案
+### BugEnchantRemover-v1.3 解决方案
 
 v1.3 直接读取 UberEnchant 的 PDC 数据结构，无需将 UberEnchant 作为依赖：
 
 - 完全通过 Bukkit 标准 PDC API 操作
 - 兼容 UberEnchant 的两种 PDC 数据结构
 - 跨版本兼容（1.18.2 ~ 1.21+）
-
----
 
 ## UberEnchant PDC 数据结构
 
@@ -100,8 +88,6 @@ uberenchant:uberenchantment (TAG_CONTAINER)
 
 结构来源验证：[UberUtils.getCustomMap](https://github.com/coltonj96/UberEnchant/blob/master/src/me/sciguymjm/uberenchant/api/utils/UberUtils.java) 同时尝试两种结构。
 
----
-
 ## 附魔清单
 
 UberEnchant 8.12.10+ 的 37 个药水效果附魔完整列表：
@@ -155,8 +141,6 @@ UberEnchant 内部用大写字符串（如 `"BLINDNESS"`）构造 `NamespacedKey
 因此从 PDC 读取时 key 为小写（如 `uberenchant:blindness`），关键词匹配时使用小写即可。
 :::
 
----
-
 ## 配置示例
 
 ### 1. 清理所有 UberEnchant 药水效果附魔
@@ -199,8 +183,6 @@ enchant-id-keywords:
   - "uberenchant:wind_charged"   # 1.20.5+ 风充能
 clean-uber-enchant-glint: true
 ```
-
----
 
 ## 技术细节
 
@@ -284,8 +266,6 @@ if (!onlyUberEnchantPdc) {
 }
 ```
 
----
-
 ## 验证测试
 
 ### 测试步骤
@@ -339,8 +319,6 @@ if (!onlyUberEnchantPdc) {
 | 附魔书 + blindness | 1 个 | `uberenchant:` | 删除整本书（全异常） |
 | 附魔书 + blindness + 原版锋利 | 1 个 UberEnchant + 1 个原版 | `uberenchant:` | 移除 blindness，保留锋利 |
 | 自定义 GUI 道具 + UberEnchant | 1 个 | `uberenchant:` + `protect-custom-items: true` | **不修改**，保护自定义物品 |
-
----
 
 ## 常见问题
 
