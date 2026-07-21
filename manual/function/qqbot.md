@@ -158,7 +158,7 @@ head:
 ```
 
 <SmartImage
-  src="https://oss.miragedge.top/images/web_image/msreg/function/%E4%B8%AA%E4%BA%BA%E4%BF%A1%E6%81%AF.png"
+  src="/images/web_image/msreg/function/%E4%B8%AA%E4%BA%BA%E4%BF%A1%E6%81%AF.png"
   alt="个人信息"
   caption="个人信息展示"
   maxWidth="350px"
