@@ -1,9 +1,9 @@
 <template>
   <div class="not-found">
     <!-- 角落装饰元素 -->
-    <CornerSakura />
-    <CornerStars />
-    <CornerQuotes />
+    <CornerSakura v-if="effectsActive" />
+    <CornerStars v-if="effectsActive" />
+    <CornerQuotes v-if="effectsActive" />
 
     <div class="cat-container">
       <div class="cat">
@@ -47,7 +47,7 @@
     <p class="hint">小鼠鼠找不到回家的路了,你可以...</p>
 
     <div class="actions">
-      <a href="/" class="home-btn">
+      <a :href="homeUrl" class="home-btn">
         <span class="icon">🏠</span>
         回到首页
       </a>
@@ -64,15 +64,39 @@
 </template>
 
 <script setup>
-import { defineAsyncComponent } from 'vue'
+import { computed, defineAsyncComponent, onMounted, onUnmounted, ref } from 'vue'
+import { withBase } from 'vitepress'
+import { effectsEnabled } from '../../composables/useEffectsToggle'
 
 // Corner 装饰组件异步加载，减少主 bundle 体积（与 layout.vue 保持一致）
 const CornerSakura = defineAsyncComponent(() => import('./CornerSakura.vue'))
 const CornerStars = defineAsyncComponent(() => import('./CornerStars.vue'))
 const CornerQuotes = defineAsyncComponent(() => import('./CornerQuotes.vue'))
+const homeUrl = withBase('/')
+const prefersReducedMotion = ref(false)
+const effectsActive = computed(() => effectsEnabled.value && !prefersReducedMotion.value)
+let motionQuery = null
+let motionHandler = null
+
+onMounted(() => {
+  motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
+  motionHandler = (event) => {
+    prefersReducedMotion.value = event.matches
+  }
+  prefersReducedMotion.value = motionQuery.matches
+  motionQuery.addEventListener?.('change', motionHandler)
+})
+
+onUnmounted(() => {
+  motionQuery?.removeEventListener?.('change', motionHandler)
+})
 
 const goBack = () => {
-  window.history.back()
+  if (window.history.length > 1) {
+    window.history.back()
+    return
+  }
+  window.location.assign(homeUrl)
 }
 </script>
 
@@ -332,7 +356,7 @@ const goBack = () => {
   font-size: 16px;
   cursor: pointer;
   text-decoration: none;
-  transition: all 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
   box-shadow: 0 4px 15px rgba(60, 135, 114, 0.3);
 }
 
@@ -381,6 +405,26 @@ const goBack = () => {
   .home-btn, .back-btn {
     width: 100%;
     justify-content: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cat,
+  .eye,
+  .tail,
+  .confused-stars,
+  .star {
+    animation: none;
+  }
+
+  .home-btn,
+  .back-btn {
+    transition: none;
+  }
+
+  .home-btn:hover,
+  .back-btn:hover {
+    transform: none;
   }
 }
 </style>

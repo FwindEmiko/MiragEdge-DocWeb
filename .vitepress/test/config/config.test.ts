@@ -41,8 +41,15 @@ describe('VitePress 配置文件验证', () => {
       expect(hasLiteral || hasConstRef).toBe(true)
     })
 
-    it('应配置 base 路径', () => {
-      expect(configSource).toMatch(/base:\s*['"`][^'"`]+['"`]/)
+    it('应配置 base 路径（字符串字面量或常量引用）', () => {
+      const hasLiteral = /base:\s*['"`][^'"`]+['"`]/.test(configSource)
+      const hasConstRef = /base:\s*[A-Z_][A-Z0-9_]*/.test(configSource)
+      expect(hasLiteral || hasConstRef).toBe(true)
+    })
+
+    it('应支持通过环境变量配置子路径部署', () => {
+      expect(configSource).toMatch(/process\.env\.VITEPRESS_BASE/)
+      expect(configSource).toMatch(/href:\s*withBasePath\(/)
     })
 
     it('应配置 outDir 输出目录', () => {

@@ -46,7 +46,10 @@ export function enhanceElement(el) {
   const text = el.textContent || '';
   const result = extractLeadingEmoji(text);
   if (result) {
-    el.innerHTML = `<span class="nav-icon-emoji">${result.emoji}</span>${result.text}`;
+    const icon = document.createElement('span');
+    icon.className = 'nav-icon-emoji';
+    icon.textContent = result.emoji;
+    el.replaceChildren(icon, document.createTextNode(result.text));
     el.dataset.navIconProcessed = 'true';
   }
 }

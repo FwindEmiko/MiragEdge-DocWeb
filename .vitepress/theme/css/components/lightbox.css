@@ -120,7 +120,7 @@
   color: #fff;
   font-size: 13px;
   cursor: pointer;
-  transition: all var(--duration-fast) var(--ease-out-expo);
+  transition: color var(--duration-fast) var(--ease-out-expo), background-color var(--duration-fast) var(--ease-out-expo), border-color var(--duration-fast) var(--ease-out-expo);
 }
 
 .lightbox-retry:hover {
@@ -195,7 +195,7 @@
   background: transparent;
   color: rgba(255, 255, 255, 0.85);
   cursor: pointer;
-  transition: all var(--duration-fast) var(--ease-out-expo);
+  transition: color var(--duration-fast) var(--ease-out-expo), background-color var(--duration-fast) var(--ease-out-expo), transform var(--duration-fast) var(--ease-out-expo);
   /* 用 svg icon，无需额外字体 */
   font-family: inherit;
 }

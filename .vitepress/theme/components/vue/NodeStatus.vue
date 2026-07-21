@@ -2,8 +2,8 @@
   <div class="node-status-container">
     <h3>Node在线状态统计</h3>
     <div class="node-grid">
-      <div 
-        v-for="server in servers" 
+      <div
+        v-for="server in servers"
         :key="server.host"
         :class="['node-card', server.online4 ? 'online' : 'offline']"
       >
@@ -53,6 +53,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue';
+import { withBase } from 'vitepress';
 
 interface Server {
   name: string;
@@ -110,7 +111,7 @@ const fetchServerStatus = async () => {
   abortController = new AbortController();
 
   try {
-    const response = await fetch('/ServerStatus/json/stats.json', {
+    const response = await fetch(withBase('/ServerStatus/json/stats.json'), {
       signal: abortController.signal
     });
     if (!response.ok) {
@@ -124,8 +125,8 @@ const fetchServerStatus = async () => {
       const date = new Date(Number(data.updated) * 1000);
       lastUpdated.value = date.toLocaleString('zh-CN');
     }
-  } catch (error) {
-    if (error.name !== 'AbortError') {
+  } catch (error: unknown) {
+    if (!(error instanceof DOMException && error.name === 'AbortError')) {
       console.error('获取服务器状态失败:', error);
     }
   }
@@ -167,7 +168,7 @@ onUnmounted(() => {
 
 .node-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 350px), 1fr));
   gap: 1rem;
   margin-top: 1rem;
 }
@@ -267,5 +268,22 @@ onUnmounted(() => {
   text-align: right;
   font-size: 0.85rem;
   color: var(--vp-c-text-3);
+}
+
+@media (max-width: 480px) {
+  .node-status-container {
+    padding: 1rem;
+  }
+
+  .node-header,
+  .detail-row {
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .detail-value {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
 }
 </style>

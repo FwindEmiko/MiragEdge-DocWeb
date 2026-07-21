@@ -115,7 +115,7 @@
   border-radius: 8px; /* 圆角矩形 */
   padding-left: 12px; /* 补偿视觉 */
   font-weight: 600;
-  transition: all 0.2s;
+  transition: color 0.2s, background-color 0.2s;
 }
 
 /* 移除默认的左侧边框线 */

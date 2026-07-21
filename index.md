@@ -66,15 +66,20 @@ features:
 </ClientOnly>
 
 <script setup>
-import { onMounted, onUnmounted } from 'vue'
-import { useRouter } from 'vitepress'
-
-const { route } = useRouter()
-
+import { onMounted, onUnmounted, watch } from 'vue'
+import { withBase } from 'vitepress'
+import { effectsEnabled } from './.vitepress/theme/composables/useEffectsToggle'
 
 let animationFrameId = null
 let particles = []
 let heroImage = null
+let resizeHandler = null
+let mouseMoveHandler = null
+let visibilityHandler = null
+let effectsStopWatcher = null
+let reducedMotionQuery = null
+let reducedMotionHandler = null
+let canvasRetryFrame = null
 
 const config = {
   maxParticles: 60,
@@ -113,34 +118,88 @@ function updateCenter() {
 }
 
 function initStarEffect() {
+  if (animationFrameId !== null) return
   canvas = document.getElementById('star-canvas')
   if (!canvas) return
 
   ctx = canvas.getContext('2d', { alpha: true })
+  if (!ctx) return
+  canvas.hidden = false
   
-  const resize = () => {
+  resizeHandler = () => {
     width = canvas.width = window.innerWidth
     height = canvas.height = window.innerHeight
     updateCenter()
   }
   
-  resize()
-  window.addEventListener('resize', resize)
+  resizeHandler()
+  window.addEventListener('resize', resizeHandler, { passive: true })
   
-  window.addEventListener('mousemove', (e) => {
+  mouseMoveHandler = (e) => {
     mouse.lastX = mouse.x
     mouse.lastY = mouse.y
     mouse.x = e.clientX
     mouse.y = e.clientY
     mouse.vx = mouse.x - mouse.lastX
     mouse.vy = mouse.y - mouse.lastY
-  }, { passive: true })
+  }
+  window.addEventListener('mousemove', mouseMoveHandler, { passive: true })
 
-  document.addEventListener('visibilitychange', () => {
+  visibilityHandler = () => {
     isVisible = !document.hidden
-  })
+  }
+  document.addEventListener('visibilitychange', visibilityHandler)
 
   animate()
+}
+
+function stopStarEffect() {
+  if (canvasRetryFrame !== null) {
+    cancelAnimationFrame(canvasRetryFrame)
+    canvasRetryFrame = null
+  }
+  if (animationFrameId !== null) {
+    cancelAnimationFrame(animationFrameId)
+    animationFrameId = null
+  }
+  if (resizeHandler) {
+    window.removeEventListener('resize', resizeHandler)
+    resizeHandler = null
+  }
+  if (mouseMoveHandler) {
+    window.removeEventListener('mousemove', mouseMoveHandler)
+    mouseMoveHandler = null
+  }
+  if (visibilityHandler) {
+    document.removeEventListener('visibilitychange', visibilityHandler)
+    visibilityHandler = null
+  }
+  if (ctx && canvas) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
+    canvas.hidden = true
+  }
+  particles = []
+  frame = 0
+  ctx = null
+}
+
+function startStarEffectWhenReady(attempt = 0) {
+  if (animationFrameId !== null || canvasRetryFrame !== null) return
+  canvasRetryFrame = requestAnimationFrame(() => {
+    canvasRetryFrame = null
+    if (!effectsEnabled.value || reducedMotionQuery?.matches) return
+    if (document.getElementById('star-canvas')) {
+      initStarEffect()
+      return
+    }
+    if (attempt < 30) startStarEffectWhenReady(attempt + 1)
+  })
+}
+
+function syncStarEffect() {
+  const shouldRun = effectsEnabled.value && !reducedMotionQuery?.matches
+  if (shouldRun) startStarEffectWhenReady()
+  else stopStarEffect()
 }
 
 class Star {
@@ -243,16 +302,24 @@ onMounted(() => {
   const randomIcon = weighted[Math.floor(Math.random() * weighted.length)]
   const heroImg = document.querySelector('.VPHomeHero img')
   if (heroImg) {
-    heroImg.src = randomIcon
+    heroImage = heroImg
+    heroImg.src = withBase(randomIcon)
   }
-  
-  initStarEffect()
+
+  reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
+  reducedMotionHandler = () => syncStarEffect()
+  reducedMotionQuery.addEventListener?.('change', reducedMotionHandler)
+  effectsStopWatcher = watch(effectsEnabled, syncStarEffect, { immediate: true })
 })
 
 
 onUnmounted(() => {
-  if (animationFrameId) {
-    cancelAnimationFrame(animationFrameId)
-  }
+  effectsStopWatcher?.()
+  effectsStopWatcher = null
+  reducedMotionQuery?.removeEventListener?.('change', reducedMotionHandler)
+  reducedMotionHandler = null
+  reducedMotionQuery = null
+  stopStarEffect()
+  heroImage = null
 })
 </script>

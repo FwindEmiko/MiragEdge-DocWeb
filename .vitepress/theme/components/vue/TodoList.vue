@@ -15,6 +15,7 @@
  * 不使用的元素：emoji / 表情符号 / 表格行 / 任何装饰字符
  */
 import { ref, computed, onMounted } from 'vue'
+import { withBase } from 'vitepress'
 
 interface TodoItem {
   id: string
@@ -59,7 +60,7 @@ const expandedNotes = ref<Set<string>>(new Set())
 
 onMounted(async () => {
   try {
-    const res = await fetch('/data/todo.json')
+    const res = await fetch(withBase('/data/todo.json'))
     if (!res.ok) throw new Error(`HTTP ${res.status}`)
     const json = await res.json() as TodoData
     data.value = json
@@ -156,6 +157,8 @@ const totalItemsCount = computed(() => {
   const done = data.value?.completed.reduce((s, g) => s + g.items.length, 0) ?? 0
   return { pending, done, total: pending + done }
 })
+
+const logsUrl = withBase('/develop/logs')
 </script>
 
 <template>
@@ -330,7 +333,7 @@ const totalItemsCount = computed(() => {
       </div>
 
       <p class="todo-footer-hint">
-        超过 15 天的完成条目滚动归档至 <a href="/develop/logs">更新日志</a>。
+        超过 15 天的完成条目滚动归档至 <a :href="logsUrl">更新日志</a>。
         本列表数据通过 <a href="https://github.com/fwindemiko/MiragEdge-DocWeb/edit/main/public/data/todo.json">todo.json</a> 维护。
       </p>
     </template>
@@ -461,7 +464,7 @@ const totalItemsCount = computed(() => {
 /* ============ 卡片容器 ============ */
 .todo-cards {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 360px), 1fr));
   gap: 12px;
 }
 

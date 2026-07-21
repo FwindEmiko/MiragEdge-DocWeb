@@ -133,9 +133,9 @@ const normalizedGrid = computed<ItemData[][]>(() => {
   --ct-gap: 4px;
 }
 
-.ct-sm { --ct-gap: 3px; }
-.ct-md { --ct-gap: 4px; }
-.ct-lg { --ct-gap: 6px; }
+.ct-sm { --ct-gap: 3px; --mc-item-size: 32px; }
+.ct-md { --ct-gap: 4px; --mc-item-size: 48px; }
+.ct-lg { --ct-gap: 6px; --mc-item-size: 64px; }
 
 /* ===== 合成网格 ===== */
 .ct-grid-wrapper {
@@ -274,6 +274,8 @@ const normalizedGrid = computed<ItemData[][]>(() => {
   .crafting-table {
     gap: 8px;
     padding: 10px 12px;
+    max-width: 100%;
+    overflow-x: auto;
   }
 
   .ct-sm .ct-arrow-svg,

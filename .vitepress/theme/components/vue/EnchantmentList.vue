@@ -275,7 +275,7 @@ onBeforeUnmount(() => {
   background: var(--vp-c-bg);
   color: var(--vp-c-text-2);
   cursor: pointer;
-  transition: all 0.2s;
+  transition: color 0.2s, background-color 0.2s, border-color 0.2s, transform 0.2s;
   white-space: nowrap;
 }
 
@@ -466,7 +466,7 @@ onBeforeUnmount(() => {
   background: var(--vp-c-bg);
   color: var(--vp-c-brand-1);
   cursor: pointer;
-  transition: all 0.2s;
+  transition: color 0.2s, background-color 0.2s, border-color 0.2s, transform 0.2s;
 }
 
 .ench-load-more-btn:hover {

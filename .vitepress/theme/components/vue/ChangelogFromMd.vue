@@ -87,6 +87,8 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
+import { withBase } from 'vitepress'
+import { formatSafeInlineMarkdown } from '../../utils/markdown'
 
 interface LogDetail {
   type: string
@@ -249,20 +251,14 @@ const getDetailClass = (type: string): string => {
   return map[type] || 'type-default'
 }
 
-const escapeHtml = (s: string): string =>
-  s.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c] as string))
-
-const formatContent = (content: string): string => {
-  // 先转义 HTML，防止日志正文中的 HTML 标签被 v-html 当作真实标签解析（XSS 防护）
-  // markdown 链接语法 [text](url) 不含被转义的字符，转义后再做链接替换仍可正常匹配
-  return escapeHtml(content).replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
-}
+const formatContent = formatSafeInlineMarkdown
 
 const loadMarkdown = async () => {
   loading.value = true
   error.value = ''
   try {
-    const res = await fetch(props.markdownUrl)
+    const markdownUrl = props.markdownUrl.startsWith('/') ? withBase(props.markdownUrl) : props.markdownUrl
+    const res = await fetch(markdownUrl)
     if (!res.ok) throw new Error(`加载失败: ${res.status}`)
     rawMarkdown.value = await res.text()
     const parsed = parseMarkdown(rawMarkdown.value)
@@ -373,7 +369,7 @@ onMounted(() => loadMarkdown())
   border-radius: 12px;
   margin-bottom: 0.8rem;
   overflow: hidden;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .log-card:hover {
@@ -455,7 +451,7 @@ onMounted(() => loadMarkdown())
   color: var(--vp-c-text-2);
   background: var(--vp-c-bg);
   border-radius: 50%;
-  transition: all 0.2s;
+  transition: background-color 0.2s, color 0.2s;
 }
 
 .log-card.expanded .expand-icon {
@@ -570,7 +566,7 @@ onMounted(() => loadMarkdown())
   border: none;
   border-radius: 24px;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
 }
 
 .load-more-btn:hover:not(:disabled) {
@@ -626,6 +622,25 @@ onMounted(() => loadMarkdown())
   .log-meta {
     width: 100%;
     justify-content: space-between;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .loading-spinner,
+  .spinner,
+  .end-icon,
+  .log-content {
+    animation: none;
+  }
+
+  .log-card,
+  .expand-icon,
+  .load-more-btn {
+    transition: none;
+  }
+
+  .load-more-btn:hover:not(:disabled) {
+    transform: none;
   }
 }
 </style>

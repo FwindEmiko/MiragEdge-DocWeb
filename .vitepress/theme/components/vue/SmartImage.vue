@@ -56,6 +56,7 @@
 import { withBase } from 'vitepress'
 import externalWmMap from '../../../../public/external-wm-map.json'
 import { useLightbox, registerToGroup, unregisterFromGroup } from '../../composables/useLightbox'
+import { normalizeCssLength } from '../../utils/cssValue'
 
 const wmMap = externalWmMap
 
@@ -189,32 +190,22 @@ export default {
 
     placeholderStyle() {
       const style = {}
-      
-      if (this.width) {
-        const w = typeof this.width === 'number' ? this.width : parseFloat(this.width)
-        style.width = isNaN(w) ? this.width : `${w}px`
-      }
-      
-      if (this.height) {
-        const h = typeof this.height === 'number' ? this.height : parseFloat(this.height)
-        style.height = isNaN(h) ? this.height : `${h}px`
-      }
+
+      const width = normalizeCssLength(this.width)
+      const height = normalizeCssLength(this.height)
+      if (width) style.width = width
+      if (height) style.height = height
       
       return style
     },
 
     wrapperStyle() {
       const style = {}
-      
-      if (this.width) {
-        const w = typeof this.width === 'number' ? this.width : parseFloat(this.width)
-        style.width = isNaN(w) ? this.width : `${w}px`
-      }
-      
-      if (this.maxWidth) {
-        const mw = typeof this.maxWidth === 'number' ? this.maxWidth : parseFloat(this.maxWidth)
-        style.maxWidth = isNaN(mw) ? this.maxWidth : `${mw}px`
-      }
+
+      const width = normalizeCssLength(this.width)
+      const maxWidth = normalizeCssLength(this.maxWidth)
+      if (width) style.width = width
+      if (maxWidth) style.maxWidth = maxWidth
       
       return style
     },
@@ -225,16 +216,12 @@ export default {
       
       if (this.align === 'left') {
         style.textAlign = 'left'
-        if (this.margin !== null) {
-          const m = typeof this.margin === 'number' ? this.margin : parseFloat(this.margin)
-          style.marginLeft = isNaN(m) ? this.margin : `${m}px`
-        }
+        const margin = normalizeCssLength(this.margin)
+        if (margin) style.marginLeft = margin
       } else if (this.align === 'right') {
         style.textAlign = 'right'
-        if (this.margin !== null) {
-          const m = typeof this.margin === 'number' ? this.margin : parseFloat(this.margin)
-          style.marginRight = isNaN(m) ? this.margin : `${m}px`
-        }
+        const margin = normalizeCssLength(this.margin)
+        if (margin) style.marginRight = margin
       }
       
       return style
@@ -284,111 +271,58 @@ export default {
     }
   },
 
-  mounted() {
-    const img = this.$refs.imageRef;
-    if (!img) return;
-
-    // 图片已缓存且已实际加载成功，直接处理
-    if (img.complete && img.naturalWidth > 0) {
-      this.onImageLoad({ target: img });
-      return;
-    }
-
-    // 兜底：SSR hydration 场景下 @load 事件可能在 hydration 前已触发
-    // Vue 无法捕获已触发的事件，导致 loaded 状态未同步
-    // 使用定时器轮询检查图片真实加载状态
-    if (!this._loadCheckTimer) {
-      this._loadCheckTimer = setInterval(() => {
-        if (!this.$refs.imageRef) {
-          clearInterval(this._loadCheckTimer);
-          this._loadCheckTimer = null;
-          return;
-        }
-        const cur = this.$refs.imageRef;
-        if (cur.complete && cur.naturalWidth > 0) {
-          clearInterval(this._loadCheckTimer);
-          this._loadCheckTimer = null;
-          if (!this.loaded) {
-            this.onImageLoad({ target: cur });
-          }
-        } else if (cur.complete && cur.naturalWidth === 0) {
-          // 加载失败
-          clearInterval(this._loadCheckTimer);
-          this._loadCheckTimer = null;
-          if (!this.error) {
-            this.onImageError();
-          }
-        }
-      }, 200);
-      // 10 秒后强制清除，避免内存泄漏
-      setTimeout(() => {
-        if (this._loadCheckTimer) {
-          clearInterval(this._loadCheckTimer);
-          this._loadCheckTimer = null;
-        }
-      }, 10000);
-    }
-
-    // 懒加载图片：用 IntersectionObserver 等待进入视口
-    if (this.lazy && 'IntersectionObserver' in window) {
-      const observer = new IntersectionObserver((entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) {
-            observer.disconnect();
-            this._observer = null;
-            // 兜底：浏览器干预 load 事件时，手动处理
-            if (img.complete && img.naturalWidth) {
-              this.onImageLoad({ target: img });
-            }
-            break;
-          }
-        }
-      }, { rootMargin: '200px' });
-      observer.observe(img);
-      this._observer = observer;
-      this._fallbackTimer = setTimeout(() => {
-        observer.disconnect();
-        this._observer = null;
-        this._fallbackTimer = null;
-      }, 5000);
+  watch: {
+    src() {
+      this._unregisterFromGroup()
+      this._resetImageState()
+      this.$nextTick(() => this._startImageMonitoring())
+    },
+    zoomSrc() {
+      this._syncGroupRegistration()
+    },
+    zoomGroup() {
+      this._syncGroupRegistration()
+    },
+    zoomable() {
+      this._syncGroupRegistration()
+    },
+    zoomCaption() {
+      this._syncGroupRegistration()
+    },
+    caption() {
+      this._syncGroupRegistration()
+    },
+    alt() {
+      this._syncGroupRegistration()
     }
   },
 
+  mounted() {
+    this._startImageMonitoring()
+  },
+
   beforeUnmount() {
-    // 卸载时清理 observer 与兜底定时器，避免持有已分离 DOM 节点的引用
-    if (this._observer) {
-      this._observer.disconnect();
-      this._observer = null;
-    }
-    if (this._fallbackTimer) {
-      clearTimeout(this._fallbackTimer);
-      this._fallbackTimer = null;
-    }
-    if (this._loadCheckTimer) {
-      clearInterval(this._loadCheckTimer);
-      this._loadCheckTimer = null;
-    }
-    // 从 lightbox 分组注销
-    if (this.zoomGroup && this._registered) {
-      unregisterFromGroup(this.zoomGroup, this.baseZoomSrc);
-      this._registered = false;
-    }
+    this._clearImageMonitoring()
+    this._unregisterFromGroup()
   },
 
   methods: {
     onImageLoad(event) {
+      this._clearImageMonitoring()
       this.loaded = true
+      this.error = false
       const img = event.target
       this.imageSize = {
         width: img.naturalWidth,
         height: img.naturalHeight,
-        aspectRatio: img.naturalWidth / img.naturalHeight
+        aspectRatio: img.naturalHeight > 0 ? img.naturalWidth / img.naturalHeight : 1
       }
-      // 图片加载完成后再次注册（确保 originEl 引用最新）
-      this._registerToGroup();
+      this._syncGroupRegistration()
     },
 
     onImageError() {
+      this._clearImageMonitoring()
+      this._unregisterFromGroup()
       this.error = true
       this.loaded = false
       console.error(`图片加载失败: ${this.src}`)
@@ -411,8 +345,92 @@ export default {
       }, this.zoomGroup || undefined);
     },
 
-    // 内部方法：注册到分组
-    _registerToGroup() {
+    _resetImageState() {
+      this._clearImageMonitoring()
+      this.loaded = false
+      this.error = false
+      this.imageSize = { width: 0, height: 0, aspectRatio: 1 }
+    },
+
+    _clearImageMonitoring() {
+      if (this._observer) {
+        this._observer.disconnect()
+        this._observer = null
+      }
+      if (this._fallbackTimer) {
+        clearTimeout(this._fallbackTimer)
+        this._fallbackTimer = null
+      }
+      if (this._loadCheckTimer) {
+        clearInterval(this._loadCheckTimer)
+        this._loadCheckTimer = null
+      }
+      if (this._loadCheckDeadlineTimer) {
+        clearTimeout(this._loadCheckDeadlineTimer)
+        this._loadCheckDeadlineTimer = null
+      }
+    },
+
+    _startImageMonitoring() {
+      this._clearImageMonitoring()
+      const img = this.$refs.imageRef
+      if (!img) return
+
+      if (img.complete && img.naturalWidth > 0) {
+        this.onImageLoad({ target: img })
+        return
+      }
+
+      // hydration 期间 complete=true 且 naturalWidth=0 可能只是资源尚未就绪。
+      // 这里只补偿漏掉的 load 事件，真实失败统一交给原生 error 事件。
+      this._loadCheckTimer = setInterval(() => {
+        const current = this.$refs.imageRef
+        if (!current) {
+          this._clearImageMonitoring()
+          return
+        }
+        if (current.complete && current.naturalWidth > 0 && !this.loaded) {
+          this.onImageLoad({ target: current })
+        }
+      }, 200)
+
+      this._loadCheckDeadlineTimer = setTimeout(() => {
+        if (this._loadCheckTimer) {
+          clearInterval(this._loadCheckTimer)
+          this._loadCheckTimer = null
+        }
+        this._loadCheckDeadlineTimer = null
+      }, 10000)
+
+      if (this.lazy && 'IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries) => {
+          if (!entries.some(entry => entry.isIntersecting)) return
+          observer.disconnect()
+          this._observer = null
+          const current = this.$refs.imageRef
+          if (current?.complete && current.naturalWidth > 0) {
+            this.onImageLoad({ target: current })
+          }
+        }, { rootMargin: '200px' })
+        observer.observe(img)
+        this._observer = observer
+        this._fallbackTimer = setTimeout(() => {
+          observer.disconnect()
+          if (this._observer === observer) this._observer = null
+          this._fallbackTimer = null
+        }, 5000)
+      }
+    },
+
+    _unregisterFromGroup() {
+      if (!this._registeredGroup || !this._registeredSrc) return
+      unregisterFromGroup(this._registeredGroup, this._registeredSrc)
+      this._registeredGroup = null
+      this._registeredSrc = null
+    },
+
+    _syncGroupRegistration() {
+      this._unregisterFromGroup()
       if (!this.zoomGroup || !this.zoomable || !this.loaded) return;
       const img = this.$refs.imageRef;
       if (!img) return;
@@ -422,7 +440,8 @@ export default {
         caption: this.effectiveZoomCaption,
         originEl: img,
       });
-      this._registered = true;
+      this._registeredGroup = this.zoomGroup
+      this._registeredSrc = this.baseZoomSrc
     }
   }
 }
@@ -582,6 +601,22 @@ export default {
   
   .image-caption {
     font-size: 13px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spinner {
+    animation: none;
+  }
+
+  .image-wrapper img,
+  .image-wrapper img.is-zoomable.loaded {
+    transition: none;
+  }
+
+  .image-wrapper img.is-zoomable.loaded:hover,
+  .image-wrapper img.is-zoomable.loaded:active {
+    transform: none;
   }
 }
 </style>

@@ -7,21 +7,21 @@
 <script setup>
 import { computed, useAttrs } from 'vue'
 import {
-  Anvil, ArrowDown, ArrowLeft, ArrowRight, ArrowUp, Award, Ban, Book, BookOpen,
+  AlertTriangle, Anvil, ArrowDown, ArrowLeft, ArrowRight, ArrowUp, Award, Ban, BarChart3, Book, BookOpen,
   BrickWall, Building2, Calendar, Castle, Cat, Check, ChefHat, ChevronDown,
-  ChevronLeft, ChevronRight, ChevronUp, Clipboard, Clock, Cloud, CloudLightning,
+  CheckCircle, ChevronLeft, ChevronRight, ChevronUp, Clipboard, Clock, Cloud, CloudLightning,
   CloudRain, CloudSnow, Code, Coins, Compass, Copy, Cpu, Crown, Database, Dog,
   DoorOpen, Download, Droplet, Droplets, ExternalLink, File, FileText, Fish,
   Flag, Flame, FlaskConical, Folder, FolderOpen, Footprints, Gamepad2, Gem,
   Gift, GitBranch, GitMerge, GitPullRequest, Github, Globe, Handshake, HardDrive,
-  Headphones, Heart, Image, Info, Leaf, Lightbulb, Link, Loader, Lock, Map,
+  Headphones, Heart, HelpCircle, Home, Image, Info, Leaf, Lightbulb, Link, Loader, Lock, Map,
   Megaphone, Menu, MessageCircle, MessageSquare, MessageSquareText, Monitor,
   Moon, Mountain, Music, Network, Package, Palette, PartyPopper, Pencil, Pin,
-  Pickaxe, Play, Plug, Puzzle, RefreshCw, Rocket, Ruler, Satellite, Search,
+  Palmtree, Pickaxe, Play, Plug, Puzzle, RefreshCw, Rocket, Ruler, Satellite, Search,
   Server, Settings, Share2, Shield, Skull, Smartphone, Snowflake, Sparkles,
   Sprout, Star, Sun, Sword, Swords, Target, Terminal, Thermometer, Timer, Trash2,
   TreePine, TrendingDown, TrendingUp, Trophy, Upload, User, Users, Video,
-  Volume2, Wand, Wifi, WifiOff, Wind, Wrench, X, Zap
+  Volume2, Wand, Wifi, WifiOff, Wind, Wrench, X, XCircle, Zap
 } from 'lucide-vue-next'
 
 /**
@@ -64,21 +64,21 @@ const attrs = useAttrs()
  * 仅包含上方按需 import 的图标，便于动态渲染并保留 tree-shaking。
  */
 const lucideIcons = {
-  Anvil, ArrowDown, ArrowLeft, ArrowRight, ArrowUp, Award, Ban, Book, BookOpen,
+  AlertTriangle, Anvil, ArrowDown, ArrowLeft, ArrowRight, ArrowUp, Award, Ban, BarChart3, Book, BookOpen,
   BrickWall, Building2, Calendar, Castle, Cat, Check, ChefHat, ChevronDown,
-  ChevronLeft, ChevronRight, ChevronUp, Clipboard, Clock, Cloud, CloudLightning,
+  CheckCircle, ChevronLeft, ChevronRight, ChevronUp, Clipboard, Clock, Cloud, CloudLightning,
   CloudRain, CloudSnow, Code, Coins, Compass, Copy, Cpu, Crown, Database, Dog,
   DoorOpen, Download, Droplet, Droplets, ExternalLink, File, FileText, Fish,
   Flag, Flame, FlaskConical, Folder, FolderOpen, Footprints, Gamepad2, Gem,
   Gift, GitBranch, GitMerge, GitPullRequest, Github, Globe, Handshake, HardDrive,
-  Headphones, Heart, Image, Info, Leaf, Lightbulb, Link, Loader, Lock, Map,
+  Headphones, Heart, HelpCircle, Home, Image, Info, Leaf, Lightbulb, Link, Loader, Lock, Map,
   Megaphone, Menu, MessageCircle, MessageSquare, MessageSquareText, Monitor,
   Moon, Mountain, Music, Network, Package, Palette, PartyPopper, Pencil, Pin,
-  Pickaxe, Play, Plug, Puzzle, RefreshCw, Rocket, Ruler, Satellite, Search,
+  Palmtree, Pickaxe, Play, Plug, Puzzle, RefreshCw, Rocket, Ruler, Satellite, Search,
   Server, Settings, Share2, Shield, Skull, Smartphone, Snowflake, Sparkles,
   Sprout, Star, Sun, Sword, Swords, Target, Terminal, Thermometer, Timer, Trash2,
   TreePine, TrendingDown, TrendingUp, Trophy, Upload, User, Users, Video,
-  Volume2, Wand, Wifi, WifiOff, Wind, Wrench, X, Zap
+  Volume2, Wand, Wifi, WifiOff, Wind, Wrench, X, XCircle, Zap
 }
 
 /**
@@ -141,7 +141,7 @@ const iconMap = {
   gamepad: 'Gamepad2',
   sword: 'Sword',
   'pickaxe': 'Pickaxe',
-  'treasure': 'TreasureChest',
+  'treasure': 'Gem',
   map: 'Map',
   compass: 'Compass',
   castle: 'Castle',

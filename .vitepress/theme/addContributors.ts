@@ -10,7 +10,7 @@ import { execSync } from "child_process";
 dotenv.config();
 
 // 类型定义
-type EmailWithSha1 = { email: string; sha1: string };
+type EmailWithSha1 = { email: string; sha1: string; authorName: string };
 type EmailWithUsername = { email: string; username: string };
 type FullContributorData = {
   username: string;
@@ -22,16 +22,35 @@ type FullContributorData = {
 // 配置
 const owner = 'fwindemiko'; // 你的GitHub用户名
 const repo = 'MiragEdge-DocWeb'; // 你的仓库名
+const knownEmailUsers: Record<string, string> = {
+  '2011857087@qq.com': 'FwindEmiko',
+  '1525301523@qq.com': 'FCelestial',
+};
 
 // 初始化
 const git = simpleGit();
-let ghToken = process.env.GITHUB_TOKEN;
-if (!ghToken) {
-  try { ghToken = execSync('gh auth token', { encoding: 'utf-8' }).trim(); } catch {}
+const ghToken = process.env.GITHUB_TOKEN?.trim();
+const octokit = ghToken
+  ? new Octokit({
+      auth: ghToken,
+      request: { timeout: 5000 },
+    })
+  : null;
+
+function inferUsername(email: string, authorName: string): string {
+  if (knownEmailUsers[email]) return knownEmailUsers[email];
+  const noReplyMatch = email.match(/^(?:\d+\+)?([^@]+)@users\.noreply\.github\.com$/i);
+  if (noReplyMatch) return noReplyMatch[1];
+  const emailLocalPart = email.split('@')[0];
+  if (/^[a-z0-9._-]+$/i.test(emailLocalPart) && !/^\d+$/.test(emailLocalPart)) {
+    return emailLocalPart;
+  }
+  return authorName.trim() || email.split('@')[0];
 }
-const octokit = new Octokit({
-  auth: ghToken,
-});
+
+function toLocalContributor({ email, authorName }: EmailWithSha1): EmailWithUsername {
+  return { email, username: inferUsername(email, authorName) };
+}
 
 /**
  * 获取仓库所有贡献者的Email和对应的一个SHA1
@@ -39,7 +58,7 @@ const octokit = new Octokit({
 async function getRepoContributors(): Promise<EmailWithSha1[]> {
   try {
     // 使用 git.raw 获取原始输出，避免 simple-git log() 对自定义 format 的解析问题
-    const rawOutput = await git.raw(['log', '--format=%ae %H']);
+    const rawOutput = await git.raw(['log', '--format=%ae%x09%H%x09%aN']);
     const logLines = rawOutput.split('\n').filter(line => line.trim());
 
     if (logLines.length === 0) {
@@ -47,19 +66,20 @@ async function getRepoContributors(): Promise<EmailWithSha1[]> {
       return [];
     }
 
-    const contributors = new Map<string, string>();
+    const contributors = new Map<string, { sha1: string; authorName: string }>();
 
     // 去重，只保留每个Email的第一个commit（reverse 后最早提交优先）
     logLines.reverse().forEach((commit) => {
-      const [email, sha1] = commit.split(' ');
+      const [email, sha1, authorName] = commit.split('\t');
       if (email && sha1 && !contributors.has(email)) {
-        contributors.set(email, sha1);
+        contributors.set(email, { sha1, authorName: authorName || email.split('@')[0] });
       }
     });
 
-    return Array.from(contributors).map(([email, sha1]) => ({
+    return Array.from(contributors).map(([email, contributor]) => ({
       email: email.trim(),
-      sha1
+      sha1: contributor.sha1,
+      authorName: contributor.authorName,
     }));
   } catch (error) {
     console.error('Error getting repo contributors:', error);
@@ -91,8 +111,8 @@ async function queryUsername(
       email: email.trim(), 
       username: author.login 
     };
-  } catch (error) {
-    console.error(`Error querying username for ${email}:`, error);
+  } catch {
+    console.warn(`GitHub username lookup failed for ${email}; using local metadata.`);
     return null;
   }
 }
@@ -102,7 +122,7 @@ async function queryUsername(
  */
 async function queryFullDataList(
   emailTuples: EmailWithUsername[],
-  octokit: Octokit
+  octokit: Octokit | null
 ): Promise<FullContributorData[]> {
   try {
     const user2emails = new Map<string, string[]>();
@@ -119,6 +139,14 @@ async function queryFullDataList(
     // 查询每个用户的详细信息
     const fullDataPromises = Array.from(user2emails.entries()).map(
       async ([username, emails]) => {
+        if (!octokit) {
+          return {
+            username,
+            nickname: username,
+            avatar: `https://github.com/${username}.png`,
+            emails,
+          };
+        }
         try {
           const userData = await octokit.rest.users.getByUsername({ username });
           return {
@@ -127,9 +155,8 @@ async function queryFullDataList(
             avatar: userData.data.avatar_url,
             emails,
           };
-        } catch (error) {
-          console.error(`Error getting user data for ${username}:`, error);
-          // 返回基础信息
+        } catch {
+          console.warn(`GitHub profile lookup failed for ${username}; using local metadata.`);
           return {
             username,
             nickname: username,
@@ -159,7 +186,6 @@ async function getEmailList(filePath: string): Promise<string[]> {
       .filter(email => email && email.trim() !== '');
 
     if (logLines.length === 0) {
-      console.log(`No contributors found for file: ${filePath}`);
       return [];
     }
 
@@ -175,7 +201,7 @@ async function getEmailList(filePath: string): Promise<string[]> {
  * 主函数：获取所有贡献者信息
  */
 async function getAllContributors(): Promise<FullContributorData[]> {
-  console.log('Starting to fetch contributor information...');
+  console.log('Loading contributor information from local Git history...');
   
   // 1. 获取所有贡献者的Email和SHA1
   const emailSha1List = await getRepoContributors();
@@ -185,23 +211,18 @@ async function getAllContributors(): Promise<FullContributorData[]> {
     return [];
   }
   
-  // 2. 查询GitHub用户名
-  console.log('Querying GitHub usernames...');
-  const usernamePromises = emailSha1List.map(item => 
-    queryUsername(item, octokit)
+  const localResults = emailSha1List.map(toLocalContributor);
+  if (!octokit) {
+    console.log('GITHUB_TOKEN is not set; using local contributor metadata.');
+    return queryFullDataList(localResults, null);
+  }
+
+  const usernameResults = await Promise.all(
+    emailSha1List.map(async (item, index) =>
+      (await queryUsername(item, octokit)) ?? localResults[index]
+    )
   );
-  const usernameResults = await Promise.all(usernamePromises);
-  const validUsernameResults = usernameResults.filter(
-    (result): result is EmailWithUsername => result !== null
-  );
-  console.log(`Resolved ${validUsernameResults.length} GitHub usernames`);
-  
-  // 3. 查询完整用户信息
-  console.log('Fetching full user data...');
-  const fullContributorData = await queryFullDataList(
-    validUsernameResults,
-    octokit
-  );
+  const fullContributorData = await queryFullDataList(usernameResults, octokit);
   
   console.log(`Successfully fetched data for ${fullContributorData.length} contributors`);
   
@@ -319,7 +340,9 @@ async function fetchAndSaveActivityData(emailMap: Record<string, string>): Promi
     console.log("[activity] Saved " + result.length + " contributors (" + lines.length + " commits) from git log");
   } catch (error) {
     console.warn("[activity] Failed:", (error as Error).message);
-    try { fs.writeFileSync(outputPath, JSON.stringify([]), "utf-8"); } catch {}
+    if (!fs.existsSync(outputPath)) {
+      try { fs.writeFileSync(outputPath, JSON.stringify([]), "utf-8"); } catch {}
+    }
   }
 }
 

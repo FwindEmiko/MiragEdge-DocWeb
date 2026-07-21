@@ -96,7 +96,7 @@
   margin: 12px !important; /* 外边距 */
   background-color: var(--vp-c-bg-alt) !important; /* 背景色 */
   border: 1px solid transparent; /* 边框 */
-  transition: all var(--duration-fast) var(--ease-out-expo); /* 过渡动画 */
+  transition: border-color var(--duration-fast) var(--ease-out-expo), box-shadow var(--duration-fast) var(--ease-out-expo), background-color var(--duration-fast) var(--ease-out-expo);
 }
 
 /* 输入框激活状态 - 品牌色光晕 */

@@ -210,7 +210,11 @@ const contributorList = computed<Contributor[]>(() => {
   border-radius: 999px;
   text-decoration: none;
   color: inherit;
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  transition:
+    background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   /* 紧凑卡片：横向优先时每张卡占自然宽度，但限制最大值避免单卡过宽 */
   width: fit-content;
   max-width: 100%;
@@ -284,7 +288,7 @@ const contributorList = computed<Contributor[]>(() => {
   background: var(--vp-c-bg);
   border-radius: 50%;
   flex-shrink: 0;
-  transition: all 0.25s ease;
+  transition: background-color 0.25s ease;
 }
 
 .contributor-card:hover .github-badge {

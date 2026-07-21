@@ -37,7 +37,7 @@ import './css/icons.css'
 import './css/datapack/datapack-guide.css'
 
 // 导入第三方库和组件
-import { inBrowser } from "vitepress"
+import { inBrowser, withBase } from "vitepress"
 import LayoutComponent from './components/vue/layout.vue'
 import Contributors from './components/vue/Contributors.vue'
 
@@ -179,7 +179,7 @@ export default {
 
         // 注册 Service Worker（仅生产环境）——用于外部图片按需水印
         if (import.meta.env.PROD && 'serviceWorker' in navigator) {
-          navigator.serviceWorker.register('/sw.js').catch((e) => {
+          navigator.serviceWorker.register(withBase('/sw.js')).catch((e) => {
             console.warn('[SW] 注册失败:', e)
           })
         }

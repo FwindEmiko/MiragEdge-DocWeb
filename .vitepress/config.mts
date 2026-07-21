@@ -7,6 +7,15 @@ import { fileURLToPath } from 'node:url'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
+function normalizeBasePath(value: string | undefined): string {
+  const path = value?.trim()
+  if (!path || path === '/') return '/'
+  return `/${path.replace(/^\/+|\/+$/g, '')}/`
+}
+
+const BASE_PATH = normalizeBasePath(process.env.VITEPRESS_BASE)
+const withBasePath = (path: string): string => `${BASE_PATH}${path.replace(/^\/+/, '')}`
+
 // 站点常量：用于 OG / canonical / JSON-LD 等绝对地址
 const SITE_HOST = 'https://miragedge.top'
 const SITE_TITLE = 'MiragEdge 文档中心'
@@ -19,7 +28,7 @@ export default defineConfig({
   description: SITE_DESCRIPTION,
 
   // 基础路径，如果部署在子路径下需要设置
-  base: '/',
+  base: BASE_PATH,
 
   // 输出目录
   outDir: '.vitepress/dist',
@@ -35,10 +44,10 @@ export default defineConfig({
 
   // 头部配置
   head: [
-    ['link', { rel: 'icon', href: '/title_img/favicon-32x32.png', sizes: '32x32' }],
-    ['link', { rel: 'icon', href: '/title_img/favicon-16x16.png', sizes: '16x16' }],
-    ['link', { rel: 'apple-touch-icon', href: '/title_img/apple-touch-icon.png', sizes: '180x180' }],
-    ['link', { rel: 'manifest', href: '/site.webmanifest' }],
+    ['link', { rel: 'icon', href: withBasePath('/title_img/favicon-32x32.png'), sizes: '32x32' }],
+    ['link', { rel: 'icon', href: withBasePath('/title_img/favicon-16x16.png'), sizes: '16x16' }],
+    ['link', { rel: 'apple-touch-icon', href: withBasePath('/title_img/apple-touch-icon.png'), sizes: '180x180' }],
+    ['link', { rel: 'manifest', href: withBasePath('/site.webmanifest') }],
     // 预连接关键第三方域名，加速 OG 图片与字体加载
     ['link', { rel: 'preconnect', href: 'https://oss.miragedge.top' }],
     ['meta', { name: 'theme-color', content: '#3c8772' }],

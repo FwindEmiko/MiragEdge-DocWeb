@@ -7,9 +7,9 @@
 // 3. 版本不一致 → reload，用 sessionStorage 防止同一版本重复 reload
 // 4. 资源加载失败 / 动态 import reject → reload 一次（session 级防循环）
 // 5. 任何 fetch 失败静默忽略，绝不影响正常浏览
-import { inBrowser } from 'vitepress'
+import { inBrowser, withBase } from 'vitepress'
 
-const VERSION_URL = '/version.json'
+const VERSION_URL = withBase('/version.json')
 const VERSION_RELOAD_KEY = 'miragedge-version-reloaded-to'
 const CHUNK_RELOAD_KEY = 'miragedge-chunk-reloaded'
 const CHECK_INTERVAL = 10 * 60 * 1000  // 定时检测间隔：10 分钟

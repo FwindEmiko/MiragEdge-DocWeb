@@ -5,7 +5,7 @@
  * 以 MC 原版风格展示食物的饥饿值和饱和度。
  * 饥饿值用鸡腿图标 + 数字，饱和度用金色护盾图标 + 数字。
  */
-import { computed } from 'vue'
+import { computed, useId } from 'vue'
 
 const props = withDefaults(defineProps<{
   /** 饥饿值（0-20） */
@@ -21,21 +21,22 @@ const props = withDefaults(defineProps<{
 })
 
 /** 饥饿值鸡腿图标数量（每个图标=2点，最多10个） */
-const hungerIcons = computed(() => {
-  const count = Math.ceil(props.hunger / 2)
-  return Math.min(count, 10)
-})
+const clampStat = (value: number) => Math.min(Math.max(Number.isFinite(value) ? value : 0, 0), 20)
+const clampedHunger = computed(() => clampStat(props.hunger))
+const clampedSaturation = computed(() => clampStat(props.saturation))
+
+const hungerIcons = computed(() => Math.ceil(clampedHunger.value / 2))
 
 /** 半个鸡腿（奇数饥饿值时最后一个显示半截） */
-const hasHalfDrumstick = computed(() => props.hunger % 2 !== 0)
+const hasHalfDrumstick = computed(() => clampedHunger.value % 2 !== 0)
 
 /** 饱和度条宽度百分比 */
 const saturationPercent = computed(() => {
-  return Math.min((props.saturation / 20) * 100, 100)
+  return (clampedSaturation.value / 20) * 100
 })
 
 /** 组件实例唯一 id，避免多实例时 clipPath id 冲突 */
-const instanceId = Math.random().toString(36).slice(2, 8)
+const instanceId = useId().replace(/[^a-zA-Z0-9_-]/g, '')
 const clipPathId = `half-clip-${instanceId}`
 const clipPathUrl = `url(#${clipPathId})`
 </script>
@@ -43,7 +44,7 @@ const clipPathUrl = `url(#${clipPathId})`
 <template>
   <div class="food-stats" :class="`fs-${size}`">
     <!-- 饥饿值 -->
-    <div class="fs-hunger" :title="`饥饿值: ${hunger}`">
+    <div class="fs-hunger" :title="`饥饿值: ${clampedHunger}`">
       <span class="fs-label">饥饿值</span>
       <div class="fs-drumsticks">
         <svg
@@ -71,11 +72,11 @@ const clipPathUrl = `url(#${clipPathId})`
           <path d="M0 0 L16 0 L16 16 Z" fill="rgba(0,0,0,0.35)"/>
         </svg>
       </div>
-      <span class="fs-value">{{ hunger }}</span>
+      <span class="fs-value">{{ clampedHunger }}</span>
     </div>
 
     <!-- 饱和度 -->
-    <div class="fs-saturation" :title="`饱和度: ${saturation}`">
+    <div class="fs-saturation" :title="`饱和度: ${clampedSaturation}`">
       <span class="fs-label">饱和度</span>
       <div class="fs-sat-bar">
         <div class="fs-sat-fill" :style="{ width: saturationPercent + '%' }"></div>
@@ -83,7 +84,7 @@ const clipPathUrl = `url(#${clipPathId})`
           <span v-for="i in 10" :key="i" class="fs-sat-tick"></span>
         </div>
       </div>
-      <span class="fs-value">{{ saturation.toFixed(1) }}</span>
+      <span class="fs-value">{{ clampedSaturation.toFixed(1) }}</span>
     </div>
   </div>
 </template>

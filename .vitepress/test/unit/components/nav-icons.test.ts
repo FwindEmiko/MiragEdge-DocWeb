@@ -106,6 +106,15 @@ describe('nav-icons: 元素增强逻辑', () => {
     expect(el.dataset.navIconProcessed).toBe('true')
   })
 
+  it('应把剩余文本作为文本节点处理', () => {
+    const el = document.createElement('a')
+    el.textContent = '🏠 <img src=x onerror=alert(1)>'
+    enhanceElement(el)
+
+    expect(el.querySelector('img')).toBeNull()
+    expect(el.textContent).toBe('🏠<img src=x onerror=alert(1)>')
+  })
+
   it('无 emoji 时不应修改元素', () => {
     const el = document.createElement('a')
     el.textContent = '纯文本导航'

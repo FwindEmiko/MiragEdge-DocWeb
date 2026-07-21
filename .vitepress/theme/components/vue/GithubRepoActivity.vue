@@ -190,7 +190,7 @@ onMounted(fetchData)
 .bar-column { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; min-width: 0; cursor: default; }
 .bar-wrap { flex: 1; width: 100%; display: flex; align-items: flex-end; justify-content: center; position: relative; }
 .bar-segments { position: absolute; bottom: 0; left: 0; right: 0; height: 100%; display: flex; flex-direction: column-reverse; }
-.bar-segment { width: 70%; margin: 0 auto; min-height: 2px; border-radius: 3px 3px 1px 1px; transition: all 0.3s ease; flex-shrink: 0; }
+.bar-segment { width: 70%; margin: 0 auto; min-height: 2px; border-radius: 3px 3px 1px 1px; transition: opacity 0.3s ease, filter 0.3s ease; flex-shrink: 0; }
 .bar-column:hover .bar-segment { opacity: 1 !important; filter: brightness(1.15); }
 .bar-empty { width: 70%; height: 100%; background: linear-gradient(180deg, var(--vp-c-brand-2, #7c5cfc), var(--vp-c-brand)); border-radius: 3px 3px 1px 1px; min-height: 2px; }
 .contributors-legend { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--vp-c-divider); }
@@ -202,7 +202,7 @@ onMounted(fetchData)
 
 .bar-label { font-size: 0.65rem; color: var(--vp-c-text-3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; text-align: center; }
 .error-state { display: flex; justify-content: center; align-items: center; padding: 2rem; color: var(--vp-c-text-2); font-size: 0.9rem; gap: 0.5rem; }
-.retry-btn { padding: 4px 12px; font-size: 0.8rem; color: var(--vp-c-brand); background: transparent; border: 1px solid var(--vp-c-brand); border-radius: 6px; cursor: pointer; transition: all 0.2s; }
+.retry-btn { padding: 4px 12px; font-size: 0.8rem; color: var(--vp-c-brand); background: transparent; border: 1px solid var(--vp-c-brand); border-radius: 6px; cursor: pointer; transition: color 0.2s, background-color 0.2s; }
 .retry-btn:hover { background: var(--vp-c-brand); color: white; }
 
 .dark .bar-empty { background: linear-gradient(180deg, var(--vp-c-brand-2), var(--vp-c-brand)); }

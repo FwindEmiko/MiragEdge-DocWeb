@@ -20,8 +20,8 @@
         <div class="messages-container">
           <h2 class="section-title">💝 给宝宝的话</h2>
           <div class="love-messages">
-            <div 
-              v-for="(message, index) in messages" 
+            <div
+              v-for="(message, index) in messages"
               :key="index"
               class="message-card"
               :class="{ active: currentMessageIndex === index }"
@@ -58,16 +58,16 @@
             <div class="tree-layer layer-2"></div>
             <div class="tree-layer layer-3"></div>
             <div class="tree-layer layer-4"></div>
-            
+
             <!-- 树干 -->
             <div class="tree-trunk"></div>
-            
+
             <!-- 树顶星星 -->
             <div class="tree-star">★</div>
-            
+
             <!-- 装饰物 - 彩灯 -->
-            <div 
-              v-for="(light, index) in lights" 
+            <div
+              v-for="(light, index) in lights"
               :key="'light-' + index"
               class="light"
               :class="`color-${light.color}`"
@@ -77,10 +77,10 @@
                 animationDelay: light.delay + 's'
               }"
             ></div>
-            
+
             <!-- 装饰物 - 小球 -->
-            <div 
-              v-for="(ball, index) in balls" 
+            <div
+              v-for="(ball, index) in balls"
               :key="'ball-' + index"
               class="ball"
               :class="`ball-color-${ball.color}`"
@@ -89,10 +89,10 @@
                 top: ball.y + 'px'
               }"
             ></div>
-            
+
             <!-- 装饰物 - 礼物盒 -->
-            <div 
-              v-for="(gift, index) in gifts" 
+            <div
+              v-for="(gift, index) in gifts"
               :key="'gift-' + index"
               class="gift"
               :class="`gift-${gift.color}`"
@@ -104,10 +104,10 @@
               <div class="gift-lid"></div>
               <div class="gift-bow"></div>
             </div>
-            
+
             <!-- 飘落的雪花 -->
-            <div 
-              v-for="(snowflake, index) in snowflakes" 
+            <div
+              v-for="(snowflake, index) in snowflakes"
               :key="'snow-' + index"
               class="snowflake"
               :style="{
@@ -119,7 +119,7 @@
               }"
             >❄</div>
           </div>
-          
+
           <!-- 树下文字 -->
           <div class="tree-footer">
             <p class="tree-message">宝宝，愿我们的爱情如这圣诞树般长青永恒！</p>
@@ -202,7 +202,7 @@ const initTreeDecorations = () => {
       delay: Math.random() * 5
     })
   }
-  
+
   // 初始化装饰球
   balls.value = []
   const ballColors = ['gold', 'silver', 'red', 'blue']
@@ -213,7 +213,7 @@ const initTreeDecorations = () => {
       color: ballColors[Math.floor(Math.random() * ballColors.length)]
     })
   }
-  
+
   // 初始化礼物盒
   gifts.value = []
   const giftColors = ['red', 'green', 'blue', 'gold']
@@ -224,7 +224,7 @@ const initTreeDecorations = () => {
       color: giftColors[Math.floor(Math.random() * giftColors.length)]
     })
   }
-  
+
   // 初始化雪花
   snowflakes.value = []
   for (let i = 0; i < 50; i++) {
@@ -381,7 +381,7 @@ onUnmounted(() => {
   padding: 12px;
   text-align: center;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
   font-size: 0.9rem;
   display: flex;
   align-items: center;
@@ -449,7 +449,7 @@ onUnmounted(() => {
   font-size: 1.1rem;
   border-radius: 50px;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
   box-shadow: 0 5px 15px rgba(255, 65, 108, 0.4);
 }
 
@@ -724,28 +724,28 @@ onUnmounted(() => {
     flex-direction: column;
     align-items: stretch; /* 移动端恢复默认对齐 */
   }
-  
+
   .messages-section, .tree-section {
     max-width: 100%;
     margin-bottom: 20px;
   }
-  
+
   .title {
     font-size: 1.8rem;
   }
-  
+
   .timer-number {
     font-size: 2.2rem;
   }
-  
+
   .love-messages {
     grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
   }
-  
+
   .tree {
     transform: scale(0.9);
   }
-  
+
   .messages-container, .tree-container {
     min-height: auto; /* 移动端取消最小高度 */
   }

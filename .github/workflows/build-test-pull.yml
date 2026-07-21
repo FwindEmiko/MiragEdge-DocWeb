@@ -131,19 +131,10 @@ jobs:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'pnpm'
       - run: pnpm install
-      - name: 适配 Pages base 路径
-        run: |
-          python3 << 'PYEOF'
-          import re
-          path = '.vitepress/config.mts'
-          with open(path) as f:
-              c = f.read()
-          c = re.sub(r"base: '/'", "base: '/MiragEdge-DocWeb/'", c)
-          with open(path, 'w') as f:
-              f.write(c)
-          print('base updated')
-          PYEOF
-      - run: pnpm run build
+      - name: 构建 GitHub Pages 预览
+        run: pnpm run build
+        env:
+          VITEPRESS_BASE: /MiragEdge-DocWeb/
       - uses: actions/upload-pages-artifact@v4
         with:
           path: .vitepress/dist

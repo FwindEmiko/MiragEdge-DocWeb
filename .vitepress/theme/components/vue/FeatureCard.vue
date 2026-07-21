@@ -38,7 +38,7 @@ defineProps({
   padding: 20px;
   text-decoration: none;
   color: inherit;
-  transition: all 0.3s ease;
+  transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
   margin-bottom: 16px;
 }
 

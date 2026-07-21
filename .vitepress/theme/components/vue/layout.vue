@@ -1,7 +1,7 @@
 <!-- 自定义布局组件，包含路由过渡动画和浮动按钮 -->
 
 <script setup>
-import { useRouter, useData } from "vitepress";
+import { useRouter, useData, withBase } from "vitepress";
 import DefaultTheme from "vitepress/theme";
 import { ref, watch, nextTick, provide, computed, defineAsyncComponent, onMounted, onUnmounted } from "vue";
 import Contributors from './Contributors.vue';
@@ -32,6 +32,7 @@ const { isDark, page } = useData();
 
 const buildId = __BUILD_ID__
 const buildSha = __BUILD_SHA__
+const soulUrl = withBase('/soul')
 
 // 检测是否为 404 页面
 const is404 = computed(() => page.value.isNotFound);
@@ -48,9 +49,14 @@ const showFloatButtons = computed(() => {
 
 // 随机角落装饰 - 每次路由变化时重新计算
 const randomCorner = ref(null)
+const prefersReducedMotion = ref(false)
+const effectsActive = computed(() => effectsEnabled.value && !prefersReducedMotion.value)
 
 // 搜索弹窗动画的 MutationObserver 引用（onUnmounted 时断开）
 let searchAnimObserver = null
+let motionMediaQuery = null
+let motionPreferenceHandler = null
+const searchBoxCleanups = new Map()
 
 /**
  * 搜索弹窗开关动画
@@ -63,67 +69,82 @@ let searchAnimObserver = null
  * 动画结束后用 approved flag 放行并重新触发原事件。
  */
 function initSearchAnimations() {
-  const mo = new MutationObserver(() => {
-    const box = document.querySelector('.VPLocalSearchBox')
-    if (box && !box.__searchAnimInit) {
-      box.__searchAnimInit = true
-      hookupSearchBox(box)
+  const scan = () => {
+    for (const [box, cleanup] of searchBoxCleanups) {
+      if (!box.isConnected) {
+        cleanup()
+      }
     }
-  })
+
+    document.querySelectorAll('.VPLocalSearchBox').forEach((box) => {
+      if (!box.__searchAnimInit) {
+        box.__searchAnimInit = true
+        hookupSearchBox(box)
+      }
+    })
+  }
+
+  const mo = new MutationObserver(scan)
   mo.observe(document.body, { childList: true, subtree: true })
+  scan()
 
   function hookupSearchBox(box) {
     const shell = box.querySelector('.shell')
     const backdrop = box.querySelector('.backdrop')
-
-    // 开启动画：双 rAF 确保初始隐藏态已渲染，再添加 .search-open 触发 transition
-    requestAnimationFrame(() =>
-      requestAnimationFrame(() => {
-        shell?.classList.add('search-open')
-        backdrop?.classList.add('search-open')
-      })
-    )
-
+    const backBtn = box.querySelector('.back-button')
     let approved = false
-    // 关闭动画时长需与 CSS transition (0.22s) 对齐，留少量余量
-    const CLOSE_MS = 240
+    let closeTimer = null
+    let firstFrame = null
+    let secondFrame = null
+    let cleaned = false
+
+    const cleanup = () => {
+      if (cleaned) return
+      cleaned = true
+      if (firstFrame !== null) cancelAnimationFrame(firstFrame)
+      if (secondFrame !== null) cancelAnimationFrame(secondFrame)
+      if (closeTimer !== null) clearTimeout(closeTimer)
+      backdrop?.removeEventListener('click', backdropHandler, true)
+      backBtn?.removeEventListener('click', backHandler, true)
+      document.removeEventListener('keydown', escHandler, true)
+      searchBoxCleanups.delete(box)
+    }
 
     const animateClose = (retrigger) => {
-      if (approved) return
+      if (approved || cleaned) return
       approved = true
       shell?.classList.remove('search-open')
       backdrop?.classList.remove('search-open')
-      setTimeout(() => {
-        // 先移除 Escape 监听，避免 retrigger 时再次被拦截
-        document.removeEventListener('keydown', escHandler, true)
+      const closeMs = prefersReducedMotion.value ? 0 : 240
+      closeTimer = window.setTimeout(() => {
+        cleanup()
         retrigger()
-      }, CLOSE_MS)
+      }, closeMs)
     }
 
+    // 开启动画：双 rAF 确保初始隐藏态已渲染，再添加 .search-open 触发 transition
+    firstFrame = requestAnimationFrame(() => {
+      secondFrame = requestAnimationFrame(() => {
+        shell?.classList.add('search-open')
+        backdrop?.classList.add('search-open')
+      })
+    })
+
     // 拦截 backdrop 点击（点遮罩关闭）
-    backdrop?.addEventListener(
-      'click',
-      (e) => {
-        if (approved) return
-        e.stopPropagation()
-        e.stopImmediatePropagation()
-        animateClose(() => backdrop.click())
-      },
-      true
-    )
+    const backdropHandler = (e) => {
+      if (approved) return
+      e.stopPropagation()
+      e.stopImmediatePropagation()
+      animateClose(() => backdrop.click())
+    }
 
     // 拦截返回按钮点击
-    const backBtn = box.querySelector('.back-button')
-    backBtn?.addEventListener(
-      'click',
-      (e) => {
-        if (approved) return
-        e.stopPropagation()
-        e.stopImmediatePropagation()
-        animateClose(() => backBtn.click())
-      },
-      true
-    )
+    const backHandler = (e) => {
+      if (approved) return
+      e.stopPropagation()
+      e.stopImmediatePropagation()
+      animateClose(() => backBtn.click())
+    }
 
     // 拦截 Escape 键（capture 阶段先于 VitePress 的 window keydown 监听）
     const escHandler = (e) => {
@@ -136,10 +157,20 @@ function initSearchAnimations() {
         )
       })
     }
+
+    backdrop?.addEventListener('click', backdropHandler, true)
+    backBtn?.addEventListener('click', backHandler, true)
     document.addEventListener('keydown', escHandler, true)
+    searchBoxCleanups.set(box, cleanup)
   }
 
   return mo
+}
+
+function cleanupSearchAnimations() {
+  for (const cleanup of [...searchBoxCleanups.values()]) {
+    cleanup()
+  }
 }
 
 // 随机数生成函数，SSR 和客户端分别使用固定值和随机值避免 hydration mismatch
@@ -154,6 +185,12 @@ function pickRandomCorner() {
 
 onMounted(() => {
   initEffectsToggleState()
+  motionMediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
+  motionPreferenceHandler = (event) => {
+    prefersReducedMotion.value = event.matches
+  }
+  prefersReducedMotion.value = motionMediaQuery.matches
+  motionMediaQuery.addEventListener?.('change', motionPreferenceHandler)
   randomCorner.value = pickRandomCorner()
   // 返回顶部按钮：注册滚动监听并做初始计算（passive 避免阻塞滚动）
   window.addEventListener('scroll', updateScrollProgress, { passive: true })
@@ -166,6 +203,10 @@ onMounted(() => {
 onUnmounted(() => {
   window.removeEventListener('scroll', updateScrollProgress)
   searchAnimObserver?.disconnect()
+  cleanupSearchAnimations()
+  motionMediaQuery?.removeEventListener?.('change', motionPreferenceHandler)
+  motionMediaQuery = null
+  motionPreferenceHandler = null
 })
 
 watch(() => route.path, () => {
@@ -181,7 +222,7 @@ watch(() => route.path, () => {
 const scrollToTop = () => {
   window.scrollTo({
     top: 0,
-    behavior: 'smooth'
+    behavior: prefersReducedMotion.value ? 'auto' : 'smooth'
   });
 };
 
@@ -239,9 +280,10 @@ watch(
       : ''
 
     nextTick(() => {
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
       // 页面进入动画
       const target = document.querySelector('.vp-doc') || document.querySelector('#VPContent')
-      if (target) {
+      if (target && !reduceMotion) {
         target.classList.remove('page-enter')
         // 预设 opacity:0，堵住「新内容先以 opacity:1 渲染一帧」的闪烁窗口。
         // 若 nextTick 与 DOM 更新同微任务则浏览器本就不会中间绘制，此处无害；
@@ -258,7 +300,7 @@ watch(
       // 侧边栏淡入动画：仅当侧边栏结构变化时才播放（如跨分组切换）。
       // 同一分组内切换页面时侧边栏链接列表不变，跳过动画避免「抽搐」感。
       // 仅桌面端执行：移动端侧边栏为抽屉式，关闭时不可见，执行动画纯属浪费。
-      if (window.matchMedia('(min-width: 960px)').matches) {
+      if (!reduceMotion && window.matchMedia('(min-width: 960px)').matches) {
         const newSidebarFingerprint = getSidebarFingerprint()
         if (newSidebarFingerprint !== oldSidebarFingerprint) {
           const sidebar = document.querySelector('.VPSidebar .nav')
@@ -285,7 +327,7 @@ watch(
             const sRect = sidebar.getBoundingClientRect()
             const iRect = activeItem.getBoundingClientRect()
             if (iRect.top < sRect.top || iRect.bottom > sRect.bottom) {
-              activeItem.scrollIntoView({ block: 'nearest', behavior: 'smooth' })
+              activeItem.scrollIntoView({ block: 'nearest', behavior: reduceMotion ? 'auto' : 'smooth' })
             }
           }
         }
@@ -344,15 +386,15 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }) => {
 <template>
   <div class="router-wrapper">
     <!-- 随机角落装饰元素（受特效开关控制） -->
-    <CornerStars v-if="effectsEnabled && randomCorner === 'stars'" />
-    <CornerQuotes v-if="effectsEnabled && randomCorner === 'quotes'" />
-    <CornerBubbles v-if="effectsEnabled && randomCorner === 'bubbles'" />
-    <CornerSakura v-if="effectsEnabled && randomCorner === 'sakura'" />
-    <CornerNotes v-if="effectsEnabled && randomCorner === 'notes'" />
-    <CornerLeaves v-if="effectsEnabled && randomCorner === 'leaves'" />
-    <CornerFireflies v-if="effectsEnabled && randomCorner === 'fireflies'" />
-    <CornerSurprise v-if="effectsEnabled" />
-    <CornerClickEffect v-if="effectsEnabled" />
+    <CornerStars v-if="effectsActive && randomCorner === 'stars'" />
+    <CornerQuotes v-if="effectsActive && randomCorner === 'quotes'" />
+    <CornerBubbles v-if="effectsActive && randomCorner === 'bubbles'" />
+    <CornerSakura v-if="effectsActive && randomCorner === 'sakura'" />
+    <CornerNotes v-if="effectsActive && randomCorner === 'notes'" />
+    <CornerLeaves v-if="effectsActive && randomCorner === 'leaves'" />
+    <CornerFireflies v-if="effectsActive && randomCorner === 'fireflies'" />
+    <CornerSurprise v-if="effectsActive" />
+    <CornerClickEffect v-if="effectsActive" />
     <!-- Live2D 看板娘 - 只在首页显示 -->
     <Live2D v-if="isHome" />
 
@@ -386,7 +428,7 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }) => {
         <div class="doc-footer-content">
           <a href="https://space.bilibili.com/359174372" target="_blank" class="doc-footer-link">© 2020-2026 锐界幻境与贡献者</a>
           <span style="color: var(--vp-c-text-3); margin: 0 6px;">|</span>
-          <a href="/soul" class="doc-footer-link" style="color: var(--vp-c-brand); font-weight: 600;" title="狐魇星玖 · 灵魂文档">SOUL</a>
+          <a :href="soulUrl" class="doc-footer-link" style="color: var(--vp-c-brand); font-weight: 600;" title="狐魇星玖 · 灵魂文档">SOUL</a>
         </div>
         <div class="doc-footer-content">
           <a href="https://beian.miit.gov.cn" target="_blank" rel="noopener noreferrer" style="color: var(--vp-c-text-2); text-decoration: none;">
@@ -572,6 +614,11 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }) => {
 
 /* 尊重用户的减少动画偏好 */
 @media (prefers-reduced-motion: reduce) {
+  .page-enter,
+  .sidebar-fade-enter {
+    animation: none;
+  }
+
   .doc-footer::before,
   .doc-footer::after {
     animation: none;
