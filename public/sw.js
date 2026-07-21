@@ -1,5 +1,5 @@
 /**
- * Service Worker — 外部图片按需水印 + 缓存
+ * Service Worker v4.0 — 外部图片按需水印 + 缓存
  *
  * 拦截两类请求：
  *   1. 同源 /external-wm/* — 来自 SmartImage 组件（URL 已重写）
@@ -11,15 +11,106 @@
  *   3. cors 失败 → no-cors 模式 fetch（仅显示，无水印）
  *   4. 均失败 → 重写路径 302 重定向 / 直接 URL 透传原始请求
  *
+ * 水印策略（与 scripts/watermark.mjs v4.0 保持一致）：
+ *   < 16px         → 跳过
+ *   16-32px        → 中心 2x2 标记 + 像素指纹
+ *   33-64px        → 中心狐狸耳 logo + 像素指纹
+ *   65-127px       → 斜向狐狸耳图层 + 右下角狐狸耳角标
+ *   128-599px      → 仅右下角文字角标（MiragEdge）
+ *   >= 600px       → 仅右下角文字角标（MiragEdge + miragedge.top）
+ *
  * 前提：OSS 需配置 CORS 允许 miragedge.top。
  * 若 OSS 启用了 Referer 防盗链，需勾选"允许空 Referer"，
  * 否则 SW 环境下的 fetch 可能因 Referer 为空被拒绝。
  */
 
-const CACHE_NAME = 'external-wm-v5';
+const CACHE_NAME = 'external-wm-v6';
 let forwardMap = null; // originalUrl → localPath
 let reverseMap = null; // localPath → originalUrl
 let urlSet = null;     // Set<originalUrl> — 快速判断是否需要拦截
+
+// =============== 品牌资产 ===============
+
+const BRAND = '#E05252';
+const BRAND_DARK = '#4A0E0E';
+const TEXT_MAIN = 'MiragEdge';
+const TEXT_DOMAIN = 'miragedge.top';
+const FONT_STACK = '"Helvetica Neue", "Arial", "Noto Sans", sans-serif';
+
+/**
+ * 狐狸耳 logo path 数据（viewBox 100x100，与 watermark.mjs 一致）
+ * 双层结构：外耳（亮色）+ 内耳（深色阴影），贝塞尔曲线流线型
+ */
+const FOX_PATHS = {
+  leftEar:   'M 50,82 C 42,70 28,50 18,18 C 16,12 22,10 28,14 C 36,22 46,42 52,62 Z',
+  rightEar:  'M 50,82 C 58,70 72,50 82,18 C 84,12 78,10 72,14 C 64,22 54,42 48,62 Z',
+  leftInner: 'M 49,72 C 43,62 33,46 25,24 C 24,20 28,18 32,21 C 38,27 45,42 50,56 Z',
+  rightInner:'M 51,72 C 57,62 67,46 75,24 C 76,20 72,18 68,21 C 62,27 55,42 50,56 Z',
+};
+
+// 预编译 Path2D（避免每次绘制重新解析）
+const FOX_PATH_LEFT  = new Path2D(FOX_PATHS.leftEar);
+const FOX_PATH_RIGHT = new Path2D(FOX_PATHS.rightEar);
+const FOX_PATH_LEFT_INNER  = new Path2D(FOX_PATHS.leftInner);
+const FOX_PATH_RIGHT_INNER = new Path2D(FOX_PATHS.rightInner);
+
+/**
+ * 绘制狐狸耳 logo（在 ctx 当前坐标系下，logo 居中于 (0,0) 到 (size,size) 的方框）
+ * @param {CanvasRenderingContext2D} ctx
+ * @param {number} size - logo 尺寸
+ * @param {number} x - 左上角 x
+ * @param {number} y - 左上角 y
+ * @param {object} opts - { outer, inner, highlight, stroke }
+ */
+function drawFoxLogo(ctx, size, x, y, opts = {}) {
+  const outer = opts.outer ?? 0.22;
+  const inner = opts.inner ?? 0.14;
+  const highlight = opts.highlight === true;
+  const strokeOp = opts.stroke ?? 0;
+  const scale = size / 100;
+
+  ctx.save();
+  ctx.translate(x, y);
+  ctx.scale(scale, scale);
+
+  // 外耳填充
+  ctx.globalAlpha = outer;
+  ctx.fillStyle = BRAND;
+  ctx.fill(FOX_PATH_LEFT);
+  ctx.fill(FOX_PATH_RIGHT);
+
+  // 外耳描边（提升轮廓清晰度）
+  if (strokeOp > 0) {
+    ctx.globalAlpha = strokeOp;
+    ctx.strokeStyle = '#ffffff';
+    ctx.lineWidth = 0.8;
+    ctx.lineJoin = 'round';
+    ctx.stroke(FOX_PATH_LEFT);
+    ctx.stroke(FOX_PATH_RIGHT);
+  }
+
+  // 内耳阴影
+  ctx.globalAlpha = inner;
+  ctx.fillStyle = BRAND_DARK;
+  ctx.fill(FOX_PATH_LEFT_INNER);
+  ctx.fill(FOX_PATH_RIGHT_INNER);
+
+  // 顶部高光（仅 highlight=true）
+  if (highlight) {
+    ctx.globalAlpha = 0.25;
+    ctx.strokeStyle = '#ffffff';
+    ctx.lineWidth = 1.2;
+    ctx.lineCap = 'round';
+    ctx.beginPath();
+    ctx.moveTo(22, 16);
+    ctx.bezierCurveTo(24, 14, 26, 14, 28, 16);
+    ctx.moveTo(78, 16);
+    ctx.bezierCurveTo(76, 14, 74, 14, 72, 16);
+    ctx.stroke();
+  }
+
+  ctx.restore();
+}
 
 // =============== 映射表加载 ===============
 
@@ -47,12 +138,7 @@ async function loadMap() {
 
 /**
  * 用 OffscreenCanvas 给图片加水印
- * 策略与构建时 watermark.mjs v3 一致（尺寸自适应）：
- *   <16px       → 跳过
- *   16-48px     → 中心狐狸耳（核心防盗）
- *   49-127px    → 对角线 + 中心狐狸耳 + 角标
- *   128-599px   → 斜向文字 + 中心狐狸耳 + 角标
- *   >=600px     → 斜向文字 + 中心狐狸耳 + 品牌角标
+ * 策略与构建时 watermark.mjs v4.0 一致（尺寸自适应）
  */
 async function addWatermark(blob) {
   const bitmap = await createImageBitmap(blob);
@@ -60,31 +146,34 @@ async function addWatermark(blob) {
   const h = bitmap.height;
   const minDim = Math.min(w, h);
 
-  if (minDim < 16) return blob;
+  if (minDim < 16) {
+    bitmap.close();
+    return blob;
+  }
 
   const canvas = new OffscreenCanvas(w, h);
   const ctx = canvas.getContext('2d');
   ctx.drawImage(bitmap, 0, 0);
   bitmap.close();
 
-  if (minDim < 49) {
-    // 超小图：仅中心狐狸耳
+  if (minDim <= 32) {
+    // 极小贴图：中心 2x2 标记 + 像素指纹
+    drawCenterMark(ctx, w, h);
+    drawPixelFingerprint(ctx, w, h, minDim);
+  } else if (minDim <= 64) {
+    // 小贴图：中心 logo + 像素指纹
     drawCenterFox(ctx, w, h, minDim);
+    drawPixelFingerprint(ctx, w, h, minDim);
   } else if (minDim < 128) {
-    // 小图：对角线 + 中心狐狸耳 + 角标（无全图偏色）
-    drawDiagonalLines(ctx, w, h);
-    drawCenterFox(ctx, w, h, minDim);
+    // 中等小贴图：斜向狐狸耳图层 + 右下角角标
+    drawDiagonalFox(ctx, w, h, minDim);
     drawFoxCorner(ctx, w, h, minDim);
   } else if (minDim < 600) {
-    // 中图：斜向文字 + 中心狐狸耳 + 角标（无全图偏色）
-    drawTileWatermark(ctx, w, h, minDim);
-    drawCenterFox(ctx, w, h, minDim);
-    drawFoxCorner(ctx, w, h, minDim);
+    // 中图：仅右下角文字角标
+    drawTextCorner(ctx, w, h, minDim, false);
   } else {
-    // 大图：斜向文字 + 中心狐狸耳 + 品牌角标
-    drawTileWatermark(ctx, w, h, minDim);
-    drawCenterFox(ctx, w, h, minDim);
-    drawTextCorner(ctx, w, h, minDim);
+    // 大图：右下角文字角标 + 域名
+    drawTextCorner(ctx, w, h, minDim, true);
   }
 
   const type = blob.type || 'image/png';
@@ -95,159 +184,143 @@ async function addWatermark(blob) {
   return canvas.convertToBlob({ type: outType, quality });
 }
 
-// 中心狐狸耳（覆盖图像核心区域，无法裁剪去除）
+// 中心 2x2 像素标记（极小贴图用，避免复杂 logo 细节丢失）
+function drawCenterMark(ctx, w, h) {
+  const cx = Math.floor(w / 2);
+  const cy = Math.floor(h / 2);
+  ctx.save();
+  ctx.globalAlpha = 0.35;
+  ctx.fillStyle = BRAND;
+  ctx.fillRect(cx - 1, cy - 1, 2, 2);
+  ctx.restore();
+}
+
+// 中心狐狸耳 logo（覆盖图像核心区域，无法裁剪去除）
 function drawCenterFox(ctx, w, h, minDim) {
-  const ratio = minDim < 49 ? 0.55 : minDim < 128 ? 0.45 : 0.30;
+  const ratio = minDim < 49 ? 0.40 : 0.35;
   const size = Math.round(minDim * ratio);
-  const x0 = w / 2 - size / 2;
-  const y0 = h / 2 - size / 2;
-  const op1 = minDim < 49 ? 0.28 : 0.20;
-  const op2 = minDim < 49 ? 0.20 : 0.14;
-  const op3 = minDim < 49 ? 0.12 : 0.08;
+  const x = (w - size) / 2;
+  const y = (h - size) / 2;
+  const outer = 0.30;
+  const inner = 0.20;
+  const stroke = minDim >= 50 ? 0.15 : 0;
+  drawFoxLogo(ctx, size, x, y, { outer, inner, highlight: false, stroke });
+}
 
+// 右下角像素指纹（小贴图防盗追溯）
+function drawPixelFingerprint(ctx, w, h, minDim) {
+  const pxSize = minDim < 33 ? 1 : 2;
+  const padding = minDim < 24 ? 1 : 2;
+  const x = w - pxSize - padding;
+  const y = h - pxSize - padding;
   ctx.save();
-  ctx.fillStyle = '#E05252';
-  // 左耳
-  ctx.globalAlpha = op1;
-  ctx.beginPath();
-  ctx.moveTo(x0 + size * 0.1, y0 + size * 0.9);
-  ctx.lineTo(x0 + size * 0.5, y0 + size * 0.05);
-  ctx.lineTo(x0 + size * 0.6, y0 + size * 0.45);
-  ctx.closePath();
-  ctx.fill();
-  // 右耳
-  ctx.globalAlpha = op2;
-  ctx.beginPath();
-  ctx.moveTo(x0 + size * 0.5, y0 + size * 0.05);
-  ctx.lineTo(x0 + size * 0.9, y0 + size * 0.9);
-  ctx.lineTo(x0 + size * 0.4, y0 + size * 0.45);
-  ctx.closePath();
-  ctx.fill();
-  // 面部轮廓
-  ctx.globalAlpha = op3;
-  ctx.beginPath();
-  ctx.ellipse(x0 + size * 0.5, y0 + size * 0.7, size * 0.3, size * 0.2, 0, 0, Math.PI * 2);
-  ctx.fill();
+  ctx.globalAlpha = 0.55;
+  ctx.fillStyle = BRAND;
+  ctx.fillRect(x, y, pxSize, pxSize);
   ctx.restore();
 }
 
-// 小图对角线（低透明度，不破坏可读性）
-function drawDiagonalLines(ctx, w, h) {
-  const spacing = Math.max(8, Math.round(Math.min(w, h) / 6));
-  ctx.save();
-  ctx.globalAlpha = 0.04;
-  ctx.strokeStyle = '#E05252';
-  ctx.lineWidth = 1;
-  ctx.beginPath();
-  for (let i = -h; i < w + h; i += spacing) {
-    ctx.moveTo(i, 0);
-    ctx.lineTo(i + h, h);
-  }
-  ctx.stroke();
-  ctx.restore();
-}
+// 斜向狐狸耳图层（65-127px 中等小贴图，替代斜向文字）
+function drawDiagonalFox(ctx, w, h, minDim) {
+  const logoSize = Math.round(minDim * 0.16);
+  const stepX = logoSize * 4.5;
+  const stepY = logoSize * 4.5;
+  const expandW = w * 1.6;
+  const expandH = h * 1.6;
+  const offsetX = (expandW - w) / 2;
+  const offsetY = (expandH - h) / 2;
 
-// 狐狸耳角标（右下角，按图片尺寸缩放）
-function drawFoxCorner(ctx, w, h, minDim) {
-  const size = Math.max(16, Math.min(80, Math.round(minDim * 0.15)));
-  const padding = Math.max(2, Math.round(minDim * 0.02));
-  const x = w - size - padding;
-  const y = h - size - padding;
-
-  ctx.save();
-  // 左耳
-  ctx.globalAlpha = 0.18;
-  ctx.fillStyle = '#E05252';
-  ctx.beginPath();
-  ctx.moveTo(x + size * 0.1, y + size * 0.9);
-  ctx.lineTo(x + size * 0.5, y + size * 0.05);
-  ctx.lineTo(x + size * 0.6, y + size * 0.45);
-  ctx.closePath();
-  ctx.fill();
-  // 右耳
-  ctx.globalAlpha = 0.12;
-  ctx.beginPath();
-  ctx.moveTo(x + size * 0.5, y + size * 0.05);
-  ctx.lineTo(x + size * 0.9, y + size * 0.9);
-  ctx.lineTo(x + size * 0.4, y + size * 0.45);
-  ctx.closePath();
-  ctx.fill();
-  // 面部轮廓
-  ctx.globalAlpha = 0.06;
-  ctx.beginPath();
-  ctx.ellipse(x + size * 0.5, y + size * 0.7, size * 0.3, size * 0.2, 0, 0, Math.PI * 2);
-  ctx.fill();
-  ctx.restore();
-}
-
-// 斜向文字覆盖（字号自适应）
-function drawTileWatermark(ctx, w, h, minDim) {
-  const fontSize = Math.max(12, Math.min(48, Math.round(minDim / 8)));
   ctx.save();
   ctx.translate(w / 2, h / 2);
-  ctx.rotate(-35 * Math.PI / 180);
-  ctx.translate(-w / 2, -h / 2);
+  ctx.rotate(-30 * Math.PI / 180);
+  ctx.translate(-w / 2 - offsetX, -h / 2 - offsetY);
 
-  ctx.globalAlpha = 0.06;
-  ctx.fillStyle = '#ffffff';
-  ctx.font = `bold ${fontSize}px "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", sans-serif`;
-  ctx.textAlign = 'center';
-  ctx.textBaseline = 'middle';
-
-  const text = '锐界幻境 MiragEdge';
-  const metrics = ctx.measureText(text);
-  const stepX = Math.max(metrics.width + fontSize * 2, fontSize * 8);
-  const stepY = fontSize * 3;
-
-  for (let y = -h; y < h * 2; y += stepY) {
-    for (let x = -w; x < w * 2; x += stepX) {
-      ctx.fillText(text, x, y);
+  let row = 0;
+  for (let y = 0; y < expandH; y += stepY) {
+    const xOffset = (row % 2) * (stepX / 2);
+    for (let x = 0; x < expandW; x += stepX) {
+      drawFoxLogo(ctx, logoSize, x + xOffset, y, {
+        outer: 0.06, inner: 0.03, highlight: false
+      });
     }
+    row++;
   }
   ctx.restore();
 }
 
-// 品牌文字角标（右下角，大图用）
-function drawTextCorner(ctx, w, h, minDim) {
-  const boxW = Math.max(120, Math.min(300, Math.round(minDim * 0.3)));
-  const boxH = Math.round(boxW * 0.3);
-  const padding = Math.max(8, Math.round(minDim * 0.015));
+// 右下角狐狸耳角标（65-127px 中等小贴图）
+function drawFoxCorner(ctx, w, h, minDim) {
+  const size = Math.max(20, Math.min(80, Math.round(minDim * 0.20)));
+  const padding = Math.max(3, Math.round(minDim * 0.04));
+  const x = w - size - padding;
+  const y = h - size - padding;
+  drawFoxLogo(ctx, size, x, y, { outer: 0.32, inner: 0.22, highlight: size >= 40, stroke: 0.18 });
+}
+
+// 右下角文字角标（128px+ 中图/大图）
+function drawTextCorner(ctx, w, h, minDim, withDomain) {
+  const boxW = Math.max(140, Math.min(360, Math.round(minDim * (withDomain ? 0.32 : 0.28))));
+  const boxH = withDomain ? Math.round(boxW * 0.34) : Math.round(boxW * 0.26);
+  const padding = Math.max(10, Math.round(minDim * 0.02));
   const x = w - boxW - padding;
   const y = h - boxH - padding;
+  const r = Math.round(boxH * 0.18);
 
   ctx.save();
-  // 渐变背景
+
+  // 渐变背景（左透明 → 右品牌色）
   const grad = ctx.createLinearGradient(x, y, x + boxW, y);
   grad.addColorStop(0, 'rgba(224, 82, 82, 0)');
-  grad.addColorStop(0.3, 'rgba(224, 82, 82, 0.06)');
-  grad.addColorStop(1, 'rgba(224, 82, 82, 0.12)');
+  grad.addColorStop(0.4, 'rgba(224, 82, 82, 0.06)');
+  grad.addColorStop(1, 'rgba(224, 82, 82, 0.18)');
   ctx.fillStyle = grad;
   // 圆角矩形
-  const r = Math.round(boxH * 0.15);
+  roundedRectPath(ctx, x, y, boxW, boxH, r);
+  ctx.fill();
+
+  // 左侧 logo
+  const logoSize = Math.round(boxH * 0.75);
+  const logoX = x + Math.round(boxH * 0.18);
+  const logoY = y + Math.round((boxH - logoSize) / 2);
+  drawFoxLogo(ctx, logoSize, logoX, logoY, {
+    outer: 0.30, inner: 0.20, highlight: logoSize >= 32, stroke: 0.16
+  });
+
+  // 右侧文字
+  const fontSize1 = Math.round(boxH * (withDomain ? 0.42 : 0.52));
+  const textX = logoX + logoSize + Math.round(boxH * 0.20);
+  const textCenterX = (textX + x + boxW - Math.round(boxH * 0.15)) / 2;
+
+  ctx.fillStyle = '#ffffff';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.font = `bold ${fontSize1}px ${FONT_STACK}`;
+  ctx.globalAlpha = 0.28;
+  ctx.fillText(TEXT_MAIN, textCenterX, y + boxH * (withDomain ? 0.42 : 0.52));
+
+  if (withDomain) {
+    const fontSize2 = Math.round(boxH * 0.22);
+    ctx.font = `${fontSize2}px ${FONT_STACK}`;
+    ctx.globalAlpha = 0.14;
+    ctx.fillText(TEXT_DOMAIN, textCenterX, y + boxH * 0.78);
+  }
+
+  ctx.restore();
+}
+
+// 圆角矩形路径辅助函数
+function roundedRectPath(ctx, x, y, w, h, r) {
   ctx.beginPath();
   ctx.moveTo(x + r, y);
-  ctx.lineTo(x + boxW - r, y);
-  ctx.quadraticCurveTo(x + boxW, y, x + boxW, y + r);
-  ctx.lineTo(x + boxW, y + boxH - r);
-  ctx.quadraticCurveTo(x + boxW, y + boxH, x + boxW - r, y + boxH);
-  ctx.lineTo(x + r, y + boxH);
-  ctx.quadraticCurveTo(x, y + boxH, x, y + boxH - r);
+  ctx.lineTo(x + w - r, y);
+  ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+  ctx.lineTo(x + w, y + h - r);
+  ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+  ctx.lineTo(x + r, y + h);
+  ctx.quadraticCurveTo(x, y + h, x, y + h - r);
   ctx.lineTo(x, y + r);
   ctx.quadraticCurveTo(x, y, x + r, y);
   ctx.closePath();
-  ctx.fill();
-
-  // 文字
-  ctx.textAlign = 'center';
-  ctx.textBaseline = 'middle';
-  ctx.fillStyle = '#ffffff';
-  ctx.globalAlpha = 0.20;
-  ctx.font = `bold ${Math.round(boxH * 0.45)}px "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", sans-serif`;
-  ctx.fillText('锐界幻境', x + boxW / 2, y + boxH * 0.4);
-  ctx.globalAlpha = 0.10;
-  ctx.font = `${Math.round(boxH * 0.22)}px "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", sans-serif`;
-  ctx.fillText('MiragEdge', x + boxW / 2, y + boxH * 0.75);
-  ctx.restore();
 }
 
 // =============== 请求处理 ===============
@@ -260,17 +333,13 @@ async function handleWatermark(request, originalUrl, isRewrittenPath) {
   const cached = await cache.match(cacheKey);
   if (cached) return cached;
 
-  // 2. 准备 Referer
-  //    SW 环境下 request.referrer 可能是 "about:client"（无效值）或空字符串
-  //    需确保使用有效的 https URL 匹配 OSS Referer 白名单
+  // 2. 准备 Referer（SW 环境下 request.referrer 可能无效）
   let referrerUrl = request.referrer;
   if (!referrerUrl || !referrerUrl.startsWith('http')) {
     referrerUrl = self.location.origin + '/';
   }
 
   // 3. 从 OSS 下载（cors 模式，需要读取内容做水印）
-  //    cache: 'no-cache' 避免浏览器复用 <img> 标签的 non-cors 缓存响应
-  //    （该响应不含 Access-Control-Allow-Origin 头，会导致 CORS 失败）
   try {
     const res = await fetch(originalUrl, {
       mode: 'cors',
@@ -306,7 +375,6 @@ async function handleWatermark(request, originalUrl, isRewrittenPath) {
     console.error('[SW] CORS 下载失败:', originalUrl, e.message);
 
     // 6. 兜底 1: no-cors 模式（仅显示，无水印）
-    //    返回 opaque 响应，<img> 可直接显示，但无法读取内容做水印
     try {
       const opaqueRes = await fetch(originalUrl, {
         mode: 'no-cors',
@@ -322,8 +390,7 @@ async function handleWatermark(request, originalUrl, isRewrittenPath) {
       console.error('[SW] no-cors 兜底也失败:', e2.message);
     }
 
-    // 7. 兜底 2: 重写路径 → 302 重定向到 OSS（浏览器直接加载，带正确 Referer）
-    //          直接 URL → 透传原始请求
+    // 7. 兜底 2: 重写路径 → 302 重定向到 OSS；直接 URL → 透传
     if (isRewrittenPath) {
       return Response.redirect(originalUrl, 302);
     }
@@ -361,17 +428,14 @@ self.addEventListener('fetch', (event) => {
   }
 
   // Case 2: 跨域 oss.miragedge.top/* （来自 Markdown ![]() 图片）
-  // 只拦截映射表中存在的 URL
   if (url.hostname === 'oss.miragedge.top') {
     event.respondWith(
       loadMap().then(() => {
-        // 去除 query/fragment 后比较
         const cleanUrl = url.origin + url.pathname;
         if (urlSet.has(cleanUrl) || urlSet.has(event.request.url)) {
           const originalUrl = urlSet.has(event.request.url) ? event.request.url : cleanUrl;
           return handleWatermark(event.request, originalUrl, false);
         }
-        // 不在映射表中，透传
         return fetch(event.request);
       })
     );

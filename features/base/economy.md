@@ -14,7 +14,7 @@ head:
 - **核心定义**：梦始之空与零境区域自然汇聚的灵力显化物，质地轻盈且蕴含微弱能量，是服务器基础流通货币。
 - **主要用途**：日常基础交易（如普通物资兑换、基础服务购买）、日常消耗类操作结算。
 <SmartImage 
-  src="/images/resourcepack/icon/money.png" 
+  src="https://oss.miragedge.top/images/web_image/resourcepack/icon/money.png" 
   alt="灵叶图标参考"
   caption="灵叶 图标参考"
 />
@@ -23,7 +23,7 @@ head:
 - **核心定义**：蕴含强大且稳定幻境能量的稀有晶石，仅在星玖姬诞生地、重要灵脉节点等特殊区域产出。
 - **主要用途**：高级物品交易、游戏内技术/功能升级、稀有资源/限定道具兑换。
 <SmartImage 
-  src="/images/resourcepack/icon/points.png" 
+  src="https://oss.miragedge.top/images/web_image/resourcepack/icon/points.png" 
   alt="星痕石图标参考"
   caption="星痕石 图标参考"
 />

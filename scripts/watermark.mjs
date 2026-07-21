@@ -1,17 +1,27 @@
 /**
- * 水印引擎 v3.0 — 尺寸自适应动态水印
+ * 水印引擎 v4.0 — 优雅分层水印系统
  *
- * 策略（按最短边分层，SVG 动态生成，避免缩放失真）：
- *   < 16px        → 跳过（太小无法加水印）
- *   16-48px       → 右下角 1-2px 品牌色像素标记（不破坏像素艺术）
- *   49-127px      → 低透明度对角线 + 右下角小角标
- *   128-599px     → 斜向文字覆盖（字号按尺寸自适应）+ 狐狸耳角标
- *   >= 600px      → 斜向文字覆盖 + 品牌文字角标
+ * 设计理念：
+ *   - 大图/中图：仅右下角文字小标，不破坏主视觉
+ *   - 中等小贴图（OSS 贴图重点）：斜向狐狸耳图层，防盗且美观
+ *   - 小贴图：中心 logo + 像素指纹，防盗可追溯
+ *   - 纯英文文字 + 图形化 logo，跨平台字体一致
  *
- * v3 改进：
- *   - 不再用固定 PNG 缩放，改用 SVG 按目标尺寸精确生成
- *   - 超小图（MC 贴图）不再全图覆盖，保护像素艺术可读性
- *   - 文字字号随图片尺寸自适应，大图文字更清晰
+ * 尺寸分层策略（按最短边）：
+ *   < 16px         → 跳过（太小无法加水印）
+ *   16-32px        → 中心 2x2 标记 + 像素指纹（极小贴图，避免复杂 logo 细节丢失）
+ *   33-64px        → 中心狐狸耳 logo + 像素指纹（小贴图防盗）
+ *   65-127px       → 斜向狐狸耳图层 + 右下角狐狸耳角标（中等小贴图）
+ *   128-599px      → 仅右下角文字角标（MiragEdge）
+ *   >= 600px       → 仅右下角文字角标（MiragEdge + miragedge.top）
+ *
+ * v4 改进：
+ *   - 移除斜向铺满文字（按需求，大图/中图只保留角标）
+ *   - 重新设计狐狸耳 logo：贝塞尔曲线流线型 + 内耳阴影层次 + 白色描边
+ *   - 新增斜向狐狸耳图层（65-127px 用，替代斜向文字）
+ *   - 新增像素指纹（小贴图防盗追溯）
+ *   - 16-32px 极小贴图用 2x2 中心标记代替复杂 logo，避免细节丢失
+ *   - 纯英文文字规避中文字体依赖
  */
 
 import sharp from "sharp";
@@ -22,10 +32,8 @@ import {
   unlinkSync,
   openSync,
   readSync,
-  writeSync,
   closeSync,
 } from "fs";
-import { promises as fsp } from "fs";
 import { join, extname, dirname } from "path";
 import { fileURLToPath } from "url";
 
@@ -33,8 +41,76 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, "..");
 const DIST = join(ROOT, ".vitepress", "dist");
 
-// 品牌色
-const BRAND = "#E05252";
+// =============== 品牌资产 ===============
+
+const BRAND = "#E05252";          // 品牌色（红）
+const BRAND_DARK = "#4A0E0E";     // 内耳深色（更深，强化层次对比）
+const TEXT_MAIN = "MiragEdge";    // 主文字（纯英文，跨平台一致）
+const TEXT_DOMAIN = "miragedge.top"; // 域名印记（仅大图角标）
+const FONT_STACK = "'Helvetica Neue', 'Arial', 'Noto Sans', sans-serif";
+
+/**
+ * 狐狸耳 logo path 数据（viewBox 100x100，中心 50,50）
+ *
+ * 设计：
+ *   - 双层结构：外耳（亮色）+ 内耳（深色阴影）
+ *   - 贝塞尔曲线流线型轮廓，顶部尖角圆润
+ *   - 两耳底部相连，模拟头部轮廓
+ *   - 对称美学
+ *
+ * 图层（从下到上）：
+ *   1. 外耳填充（品牌色 #E05252）
+ *   2. 内耳阴影（深色 #7A1818，叠加层次）
+ *   3. 顶部高光（白色细线，提升精致感，仅大尺寸显示）
+ */
+const FOX_LOGO_PATHS = {
+  // 左耳外轮廓：从底部中央上升至左尖角，再回落
+  leftEar: "M 50,82 C 42,70 28,50 18,18 C 16,12 22,10 28,14 C 36,22 46,42 52,62 Z",
+  // 右耳外轮廓：左耳的镜像
+  rightEar: "M 50,82 C 58,70 72,50 82,18 C 84,12 78,10 72,14 C 64,22 54,42 48,62 Z",
+  // 左内耳：缩小 70%，颜色更深形成阴影
+  leftInner: "M 49,72 C 43,62 33,46 25,24 C 24,20 28,18 32,21 C 38,27 45,42 50,56 Z",
+  // 右内耳
+  rightInner: "M 51,72 C 57,62 67,46 75,24 C 76,20 72,18 68,21 C 62,27 55,42 50,56 Z",
+};
+
+/**
+ * 生成狐狸耳 logo SVG 片段（可嵌入到任意尺寸的 SVG 中）
+ * @param {number} size - logo 绘制尺寸（正方形）
+ * @param {number} x - 左上角 x 坐标
+ * @param {number} y - 左上角 y 坐标
+ * @param {object} opts - 透明度配置 { outer, inner, highlight, stroke }
+ * @param {boolean} opts.highlight - 是否绘制顶部高光（大尺寸才用）
+ * @param {number} opts.stroke - 描边透明度（0 表示无描边，建议 0.12-0.18）
+ * @returns {string} SVG <g> 元素字符串
+ */
+function buildFoxLogoSvg(size, x, y, opts = {}) {
+  const outer = opts.outer ?? 0.22;
+  const inner = opts.inner ?? 0.14;
+  const highlight = opts.highlight === true;
+  const strokeOp = opts.stroke ?? 0;
+  const scale = size / 100;
+  const transform = `translate(${x} ${y}) scale(${scale})`;
+
+  // 描边属性（仅外耳描边，提升轮廓清晰度）
+  const strokeAttr = strokeOp > 0
+    ? ` stroke="#ffffff" stroke-width="0.8" stroke-opacity="${strokeOp}" stroke-linejoin="round"`
+    : "";
+
+  // 高光：顶部尖角的细白线，仅 highlight=true 时绘制
+  const highlightSvg = highlight
+    ? `<path d="M 22,16 C 24,14 26,14 28,16" stroke="#ffffff" stroke-width="1.2" fill="none" opacity="0.25" stroke-linecap="round"/>
+       <path d="M 78,16 C 76,14 74,14 72,16" stroke="#ffffff" stroke-width="1.2" fill="none" opacity="0.25" stroke-linecap="round"/>`
+    : "";
+
+  return `<g transform="${transform}">
+    <path d="${FOX_LOGO_PATHS.leftEar}" fill="${BRAND}" opacity="${outer}"${strokeAttr}/>
+    <path d="${FOX_LOGO_PATHS.rightEar}" fill="${BRAND}" opacity="${outer}"${strokeAttr}/>
+    <path d="${FOX_LOGO_PATHS.leftInner}" fill="${BRAND_DARK}" opacity="${inner}"/>
+    <path d="${FOX_LOGO_PATHS.rightInner}" fill="${BRAND_DARK}" opacity="${inner}"/>
+    ${highlightSvg}
+  </g>`;
+}
 
 // =============== 快速尺寸检测 ===============
 
@@ -66,18 +142,15 @@ function getImageSize(filePath) {
     if (buf.toString("ascii", 8, 12) === "WEBP") {
       const chunkType = buf.toString("ascii", 12, 16);
       if (chunkType === "VP8X") {
-        // VP8X 扩展格式：canvas 尺寸在 24-29 字节（24 位 LE）
         const w = (buf[24] | (buf[25] << 8) | (buf[26] << 16)) + 1;
         const h = (buf[27] | (buf[28] << 8) | (buf[29] << 16)) + 1;
         return { width: w, height: h };
       }
       if (chunkType === "VP8L") {
-        // VP8L 无损格式：尺寸在 21-24 字节（14 位 LE，+1 偏移）
         const bits = buf.readUInt32LE(21);
         return { width: (bits & 0x3fff) + 1, height: ((bits >> 14) & 0x3fff) + 1 };
       }
       if (chunkType === "VP8 ") {
-        // VP8 有损格式：尺寸在 26-29 字节（16 位 LE）
         const w = buf.readUInt16LE(26) & 0x3fff;
         const h = buf.readUInt16LE(28) & 0x3fff;
         if (w > 0 && h > 0) return { width: w, height: h };
@@ -90,155 +163,218 @@ function getImageSize(filePath) {
 // =============== SVG 水印动态生成 ===============
 
 /**
- * 生成斜向文字覆盖水印 SVG（按图片尺寸自适应字号和间距）
+ * 中心 2x2 像素标记 SVG（极小贴图用）
+ *
+ * 用于 16-32px 极小贴图：避免复杂 logo 细节丢失
+ * - 中心 2x2 品牌色像素，半透明，肉眼可见但不破坏像素艺术
+ * - 覆盖核心区域，无法裁剪去除
  */
-function buildTileSvg(w, h) {
-  const minDim = Math.min(w, h);
-  // 字号自适应：小图用较小字，大图用较大字，但有上下限
-  const fontSize = Math.max(12, Math.min(48, Math.round(minDim / 8)));
-  const text = "锐界幻境 MiragEdge";
-  // 间距随字号缩放
-  const stepX = fontSize * 8;
-  const stepY = fontSize * 3;
+function buildCenterMarkSvg(w, h) {
+  const cx = Math.floor(w / 2);
+  const cy = Math.floor(h / 2);
+  // 2x2 像素，居中
+  const x = cx - 1;
+  const y = cy - 1;
 
-  // 计算旋转后覆盖整个图片所需的范围（扩大 50%）
-  const expandW = w * 1.5;
-  const expandH = h * 1.5;
+  return `<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" xmlns="http://www.w3.org/2000/svg">
+    <rect x="${x}" y="${y}" width="2" height="2" fill="${BRAND}" opacity="0.35"/>
+  </svg>`;
+}
+
+/**
+ * 中心狐狸耳 logo SVG（覆盖图像核心区域，无法裁剪去除）
+ *
+ * 用于 33-64px 小贴图：核心防盗层
+ * - logo 占比 35-40%，避免过度遮挡像素艺术
+ * - 透明度提高，确保可见但不突兀
+ * - 大于 50px 启用描边，提升轮廓清晰度
+ */
+function buildCenterFoxSvg(w, h) {
+  const minDim = Math.min(w, h);
+  // logo 占比：降低以避免遮挡核心内容
+  const ratio = minDim < 49 ? 0.40 : 0.35;
+  const size = Math.round(minDim * ratio);
+  const x = (w - size) / 2;
+  const y = (h - size) / 2;
+  // 透明度：提高可见度
+  const outer = 0.30;
+  const inner = 0.20;
+  // 描边：大于 50px 启用，提升轮廓
+  const stroke = minDim >= 50 ? 0.15 : 0;
+
+  return `<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" xmlns="http://www.w3.org/2000/svg">
+    ${buildFoxLogoSvg(size, x, y, { outer, inner, highlight: false, stroke })}
+  </svg>`;
+}
+
+/**
+ * 右下角像素指纹 SVG（小贴图防盗追溯）
+ *
+ * 用于 ≤64px 小贴图：可追溯盗图来源
+ * - 1-2 像素的品牌色方块，肉眼可见但不破坏整体
+ * - 位置固定在右下角，便于事后检测
+ */
+function buildPixelFingerprintSvg(w, h) {
+  const minDim = Math.min(w, h);
+  // 像素尺寸：32px 以下用 1x1，33-64px 用 2x2
+  const pxSize = minDim < 33 ? 1 : 2;
+  // 距离边缘 1-2 像素
+  const padding = minDim < 24 ? 1 : 2;
+  const x = w - pxSize - padding;
+  const y = h - pxSize - padding;
+
+  return `<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" xmlns="http://www.w3.org/2000/svg">
+    <rect x="${x}" y="${y}" width="${pxSize}" height="${pxSize}" fill="${BRAND}" opacity="0.55"/>
+  </svg>`;
+}
+
+/**
+ * 斜向狐狸耳图层 SVG（按图片尺寸自适应密度）
+ *
+ * 用于 65-127px 中等小贴图：替代斜向文字，更优雅的防盗图层
+ * - 狐狸耳 logo 以 -30° 旋转，按网格铺满
+ * - 单个 logo 尺寸约最短边的 16%
+ * - 网格间距 4.5 倍 logo 尺寸，避免拥挤
+ * - 透明度极低（0.06），不破坏观感
+ */
+function buildDiagonalFoxSvg(w, h) {
+  const minDim = Math.min(w, h);
+  const logoSize = Math.round(minDim * 0.16);
+  // 网格间距：4.5 倍 logo 尺寸（增大间距避免拥挤）
+  const stepX = logoSize * 4.5;
+  const stepY = logoSize * 4.5;
+  // 旋转后覆盖整个图片所需的范围（扩大 60%）
+  const expandW = w * 1.6;
+  const expandH = h * 1.6;
   const offsetX = (expandW - w) / 2;
   const offsetY = (expandH - h) / 2;
 
-  let texts = "";
+  let logos = "";
   for (let y = -offsetY; y < expandH; y += stepY) {
     for (let x = -offsetX; x < expandW; x += stepX) {
-      texts += `<text x="${x}" y="${y}" font-family="'Noto Sans SC','Microsoft YaHei',sans-serif" font-size="${fontSize}" font-weight="700" fill="#ffffff" opacity="0.06" text-anchor="middle" dominant-baseline="central">${text}</text>`;
+      // 错位排列：奇数行向右偏移半个间距，更自然
+      const xOffset = (Math.round(y / stepY) % 2) * (stepX / 2);
+      logos += buildFoxLogoSvg(logoSize, x + xOffset, y, {
+        outer: 0.06, inner: 0.03, highlight: false
+      });
     }
   }
 
   return `<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" xmlns="http://www.w3.org/2000/svg">
-    <g transform="rotate(-35 ${w/2} ${h/2}) translate(${-offsetX} ${-offsetY})">
-      ${texts}
+    <g transform="rotate(-30 ${w/2} ${h/2}) translate(${-offsetX} ${-offsetY})">
+      ${logos}
     </g>
   </svg>`;
 }
 
 /**
- * 生成狐狸耳角标 SVG（右下角，按图片尺寸缩放）
+ * 右下角狐狸耳角标 SVG（按图片尺寸缩放）
+ *
+ * 用于 65-127px 中等小贴图：右下角品牌标识
+ * - logo 尺寸约最短边的 20%
+ * - 透明度较高（0.32），角标更醒目
+ * - 启用描边提升轮廓清晰度
+ * - 大于 40px 时启用高光细节
  */
 function buildFoxCornerSvg(w, h) {
   const minDim = Math.min(w, h);
-  // 角标尺寸：图片最短边的 15%，但限制在 16-80px
-  const size = Math.max(16, Math.min(80, Math.round(minDim * 0.15)));
-  const padding = Math.max(2, Math.round(minDim * 0.02));
+  const size = Math.max(20, Math.min(80, Math.round(minDim * 0.20)));
+  const padding = Math.max(3, Math.round(minDim * 0.04));
   const x = w - size - padding;
   const y = h - size - padding;
+  const highlight = size >= 40;
 
   return `<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" xmlns="http://www.w3.org/2000/svg">
-    <g transform="translate(${x} ${y})">
-      <polygon points="${size*0.1},${size*0.9} ${size*0.5},${size*0.05} ${size*0.6},${size*0.45}" fill="${BRAND}" opacity="0.18"/>
-      <polygon points="${size*0.5},${size*0.05} ${size*0.9},${size*0.9} ${size*0.4},${size*0.45}" fill="${BRAND}" opacity="0.12"/>
-      <ellipse cx="${size*0.5}" cy="${size*0.7}" rx="${size*0.3}" ry="${size*0.2}" fill="${BRAND}" opacity="0.06"/>
-    </g>
+    ${buildFoxLogoSvg(size, x, y, { outer: 0.32, inner: 0.22, highlight, stroke: 0.18 })}
   </svg>`;
 }
 
 /**
- * 生成品牌文字角标 SVG（右下角，大图用）
+ * 右下角文字角标 SVG（中图/大图用）
+ *
+ * 设计：
+ *   - 圆角矩形渐变背景（左透明 → 右品牌色），融入图像
+ *   - 左侧狐狸耳 logo（中等尺寸时省略）
+ *   - 右侧 "MiragEdge" 文字
+ *   - 大图增加 "miragedge.top" 域名副标
+ *
+ * @param {boolean} withDomain - 是否显示域名（仅大图）
  */
-function buildTextCornerSvg(w, h) {
+function buildTextCornerSvg(w, h, withDomain = false) {
   const minDim = Math.min(w, h);
-  const boxW = Math.max(120, Math.min(300, Math.round(minDim * 0.3)));
-  const boxH = Math.round(boxW * 0.3);
-  const padding = Math.max(8, Math.round(minDim * 0.015));
+  // 角标整体宽度：最短边的 28-32%
+  const boxW = Math.max(140, Math.min(360, Math.round(minDim * (withDomain ? 0.32 : 0.28))));
+  // 高度：含域名时更高
+  const boxH = withDomain
+    ? Math.round(boxW * 0.34)
+    : Math.round(boxW * 0.26);
+  const padding = Math.max(10, Math.round(minDim * 0.02));
   const x = w - boxW - padding;
   const y = h - boxH - padding;
-  const fontSize1 = Math.round(boxH * 0.45);
+  const r = Math.round(boxH * 0.18); // 圆角半径
+
+  // logo 尺寸（高度内适配）
+  const logoSize = Math.round(boxH * 0.75);
+  const logoX = x + Math.round(boxH * 0.18);
+  const logoY = y + Math.round((boxH - logoSize) / 2);
+
+  // 文字尺寸
+  const fontSize1 = Math.round(boxH * (withDomain ? 0.42 : 0.52));
   const fontSize2 = Math.round(boxH * 0.22);
+  // 文字起始 x（logo 右侧）
+  const textX = logoX + logoSize + Math.round(boxH * 0.20);
+  // 文字水平区域中心
+  const textCenterX = (textX + x + boxW - Math.round(boxH * 0.15)) / 2;
+
+  const domainSvg = withDomain
+    ? `<text x="${textCenterX}" y="${y + boxH * 0.78}" text-anchor="middle" font-family="${FONT_STACK}" font-size="${fontSize2}" font-weight="400" fill="#ffffff" opacity="0.14" letter-spacing="0.5">${TEXT_DOMAIN}</text>`
+    : "";
 
   return `<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" xmlns="http://www.w3.org/2000/svg">
     <defs>
       <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="0%">
         <stop offset="0%" stop-color="${BRAND}" stop-opacity="0"/>
-        <stop offset="30%" stop-color="${BRAND}" stop-opacity="0.06"/>
-        <stop offset="100%" stop-color="${BRAND}" stop-opacity="0.12"/>
+        <stop offset="40%" stop-color="${BRAND}" stop-opacity="0.06"/>
+        <stop offset="100%" stop-color="${BRAND}" stop-opacity="0.18"/>
       </linearGradient>
     </defs>
-    <rect x="${x}" y="${y}" width="${boxW}" height="${boxH}" rx="${Math.round(boxH*0.15)}" fill="url(#bg)"/>
-    <text x="${x + boxW/2}" y="${y + boxH*0.45}" text-anchor="middle" font-family="'Noto Sans SC','Microsoft YaHei',sans-serif" font-size="${fontSize1}" font-weight="700" fill="#ffffff" opacity="0.20">锐界幻境</text>
-    <text x="${x + boxW/2}" y="${y + boxH*0.8}" text-anchor="middle" font-family="'Noto Sans SC','Microsoft YaHei',sans-serif" font-size="${fontSize2}" font-weight="400" fill="#ffffff" opacity="0.10">MiragEdge</text>
+    <rect x="${x}" y="${y}" width="${boxW}" height="${boxH}" rx="${r}" fill="url(#bg)"/>
+    ${buildFoxLogoSvg(logoSize, logoX, logoY, { outer: 0.30, inner: 0.20, highlight: logoSize >= 32, stroke: 0.16 })}
+    <text x="${textCenterX}" y="${y + boxH * (withDomain ? 0.42 : 0.52)}" text-anchor="middle" font-family="${FONT_STACK}" font-size="${fontSize1}" font-weight="700" fill="#ffffff" opacity="0.28" letter-spacing="0.8">${TEXT_MAIN}</text>
+    ${domainSvg}
   </svg>`;
-}
-
-/**
- * 生成中心狐狸耳水印 SVG（覆盖图像核心区域）
- * 关键防盗措施：覆盖中心，无法通过裁剪去除，PS 修复需重建像素
- * 尺寸越小，狐狸耳占比越大（16px 占 55%，128px 占 30%）
- */
-function buildCenterFoxSvg(w, h) {
-  const minDim = Math.min(w, h);
-  // 狐狸耳占图片比例：小图占更大比例
-  const ratio = minDim < 49 ? 0.55 : minDim < 128 ? 0.45 : 0.30;
-  const size = Math.round(minDim * ratio);
-  const cx = w / 2;
-  const cy = h / 2;
-  // 透明度：小图更透明避免完全遮挡，但足够留下印记
-  const op1 = minDim < 49 ? 0.28 : 0.20;
-  const op2 = minDim < 49 ? 0.20 : 0.14;
-  const op3 = minDim < 49 ? 0.12 : 0.08;
-
-  // 以中心为原点绘制狐狸耳
-  const x0 = cx - size / 2;
-  const y0 = cy - size / 2;
-
-  return `<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" xmlns="http://www.w3.org/2000/svg">
-    <g transform="translate(${x0} ${y0})">
-      <!-- 左耳 -->
-      <polygon points="${size*0.1},${size*0.9} ${size*0.5},${size*0.05} ${size*0.6},${size*0.45}" fill="${BRAND}" opacity="${op1}"/>
-      <!-- 右耳 -->
-      <polygon points="${size*0.5},${size*0.05} ${size*0.9},${size*0.9} ${size*0.4},${size*0.45}" fill="${BRAND}" opacity="${op2}"/>
-      <!-- 面部轮廓 -->
-      <ellipse cx="${size*0.5}" cy="${size*0.7}" rx="${size*0.3}" ry="${size*0.2}" fill="${BRAND}" opacity="${op3}"/>
-    </g>
-  </svg>`;
-}
-
-/**
- * 生成小图对角线水印 SVG（低透明度，不破坏可读性）
- */
-function buildDiagonalLinesSvg(w, h) {
-  const spacing = Math.max(8, Math.round(Math.min(w, h) / 6));
-  let lines = "";
-  for (let i = -h; i < w + h; i += spacing) {
-    lines += `<line x1="${i}" y1="0" x2="${i + h}" y2="${h}" stroke="${BRAND}" stroke-width="1" opacity="0.04"/>`;
-  }
-  return `<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" xmlns="http://www.w3.org/2000/svg">${lines}</svg>`;
 }
 
 // =============== 水印层级选择 ===============
 
+/**
+ * 根据图片尺寸选择水印层级
+ * 策略与 public/sw.js 中 addWatermark() 保持一致（构建时 + 运行时双写）
+ */
 function buildWatermarkLayers(w, h) {
   const minDim = Math.min(w, h);
   if (minDim < 16) return [];
 
   const layers = [];
 
-  if (minDim < 49) {
-    // 超小图（16-48px，MC 贴图）：仅中心狐狸耳
+  if (minDim <= 32) {
+    // 极小贴图（16-32px）：中心 2x2 标记 + 像素指纹（避免复杂 logo 细节丢失）
+    layers.push({ svg: buildCenterMarkSvg(w, h) });
+    layers.push({ svg: buildPixelFingerprintSvg(w, h) });
+  } else if (minDim <= 64) {
+    // 小贴图（33-64px）：中心 logo + 像素指纹
     layers.push({ svg: buildCenterFoxSvg(w, h) });
+    layers.push({ svg: buildPixelFingerprintSvg(w, h) });
   } else if (minDim < 128) {
-    // 小图（49-127px）：对角线 + 中心狐狸耳 + 角标（无全图偏色）
-    layers.push({ svg: buildDiagonalLinesSvg(w, h) });
-    layers.push({ svg: buildCenterFoxSvg(w, h) });
+    // 中等小贴图（65-127px）：斜向狐狸耳图层 + 右下角角标
+    layers.push({ svg: buildDiagonalFoxSvg(w, h) });
     layers.push({ svg: buildFoxCornerSvg(w, h) });
   } else if (minDim < 600) {
-    // 中图（128-599px）：斜向文字 + 中心狐狸耳 + 角标（无全图偏色）
-    layers.push({ svg: buildTileSvg(w, h) });
-    layers.push({ svg: buildCenterFoxSvg(w, h) });
-    layers.push({ svg: buildFoxCornerSvg(w, h) });
+    // 中图（128-599px）：仅右下角文字角标
+    layers.push({ svg: buildTextCornerSvg(w, h, false) });
   } else {
-    // 大图（600px+）：斜向文字 + 中心狐狸耳 + 品牌角标
-    layers.push({ svg: buildTileSvg(w, h) });
-    layers.push({ svg: buildCenterFoxSvg(w, h) });
-    layers.push({ svg: buildTextCornerSvg(w, h) });
+    // 大图（600px+）：右下角文字角标 + 域名
+    layers.push({ svg: buildTextCornerSvg(w, h, true) });
   }
 
   return layers;
@@ -282,7 +418,7 @@ async function processImage(filePath) {
   try {
     let pipeline = sharp(filePath).composite(composites);
     if (ext === ".png") {
-      // 调色板量化 + 高压缩,避免水印重编码后体积反弹(PNG 真彩色体积过大)
+      // 调色板量化 + 高压缩，避免水印重编码后体积反弹
       pipeline = pipeline.png({ compressionLevel: 9, palette: true, quality: 85, effort: 10 });
     } else if (ext === ".jpg" || ext === ".jpeg") {
       pipeline = pipeline.jpeg({ quality: 85, mozjpeg: true, progressive: true });
@@ -290,13 +426,9 @@ async function processImage(filePath) {
       pipeline = pipeline.webp({ quality: 85, effort: 4 });
     }
     await pipeline.toFile(tmpPath);
-    // rename 覆盖原文件
-    // Windows 下可能因 Defender 扫描导致 EPERM，失败则直接跳过
-    // 失败的文件会在第二轮重试中处理
     try {
       renameSync(tmpPath, filePath);
     } catch (e) {
-      // 清理临时文件
       try { unlinkSync(tmpPath); } catch {}
       throw e;
     }
@@ -307,14 +439,14 @@ async function processImage(filePath) {
   }
 }
 
-// =============== 导出（供 external-watermark.mjs 复用） ===============
+// =============== 导出 ===============
 
 export { processImage, getImageSize, buildWatermarkLayers };
 
 // =============== 入口 ===============
 
 async function main() {
-  console.log("\nF 星玖水印引擎 v3.0 — 尺寸自适应动态水印\n");
+  console.log("\nF 星玖水印引擎 v4.0 — 优雅分层水印\n");
 
   if (!existsSync(DIST)) {
     console.error("No dist directory:", DIST);
@@ -328,8 +460,7 @@ async function main() {
       if (e.isDirectory()) {
         // 跳过已水印的外部图片目录，避免双重水印
         if (e.name === "external-wm") continue;
-        // 跳过贡献者头像目录（构建后路径 dist/images/member），
-        // 头像无需水印，且加水印会破坏小尺寸头像的清晰度
+        // 跳过贡献者头像目录（dist/images/member）
         if (e.name === "member" && dir.endsWith(join("images"))) continue;
         walk(fp);
       }
@@ -345,13 +476,11 @@ async function main() {
   let processed = 0, skipped = 0, failed = 0;
   const failedFiles = [];
 
-  // ===== 第一轮：快速处理所有图片，失败就跳过 =====
   for (let i = 0; i < images.length; i++) {
     if (i % 50 === 0 || i === images.length - 1) {
       const pct = ((i + 1) / images.length * 100).toFixed(1);
       process.stdout.write(`\r  ${i + 1}/${images.length} (${pct}%) | OK ${processed} | SKIP ${skipped} | FAIL ${failed}`);
     }
-    // 超时保护：单张图片处理超过 30 秒则跳过，避免 sharp 卡死整个构建
     try {
       const result = await Promise.race([
         processImage(images[i]),
@@ -370,12 +499,11 @@ async function main() {
     }
   }
 
-  // ===== 第二轮：对失败的文件重试（等待 Defender 释放锁） =====
+  // 第二轮：对失败的文件重试（等待 Defender 释放锁）
   if (failedFiles.length > 0) {
     console.log(`\n  Retrying ${failedFiles.length} failed files...`);
     const stillFailed = [];
     for (const f of failedFiles) {
-      // 等待 500ms 让 Defender/索引服务释放锁
       await new Promise(r => setTimeout(r, 500));
       try {
         const result = await Promise.race([
@@ -410,7 +538,6 @@ async function main() {
   svgCache.clear();
 }
 
-// 仅在直接运行时执行 main，被 import 时不自动执行
 const __isMain = process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1];
 if (__isMain) {
   main().catch((e) => { console.error(e); process.exit(1); });

@@ -1,7 +1,7 @@
 # 温度系统
 
 <SmartImage
-  src="https://oss.miragedge.top/images/web_image/features/seasons/temperature.png"
+  src="/images/web_image/features/seasons/temperature.png"
   alt="温度系统"
   caption="温度系统"
   width="300"

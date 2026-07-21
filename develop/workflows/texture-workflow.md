@@ -712,34 +712,34 @@ AI 的输出应满足：
 
 | 贴图名称（英文标识） | 字符编码 | 预览图 |
 |----------------------|----------|--------|
-| 灵叶（Spirit_Leaf） | `\uE028` | ![灵叶](/images/resourcepack/icon/money.png) |
-| 星痕石（Starscar_Gem） | `\uE02C` | ![星痕石](/images/resourcepack/icon/points.png) |
-| 红色感叹号提示（info） | `\uE037` | ![红色感叹号提示](/images/resourcepack/icon/info.png) |
-| 聊天（chat） | `\uE02E` | ![聊天](/images/resourcepack/icon/chat.png) |
-| 日期（time） | `\uE02B` | ![日期](/images/resourcepack/icon/time.png) |
+| 灵叶（Spirit_Leaf） | `\uE028` | ![灵叶](https://oss.miragedge.top/images/web_image/resourcepack/icon/money.png) |
+| 星痕石（Starscar_Gem） | `\uE02C` | ![星痕石](https://oss.miragedge.top/images/web_image/resourcepack/icon/points.png) |
+| 红色感叹号提示（info） | `\uE037` | ![红色感叹号提示](https://oss.miragedge.top/images/web_image/resourcepack/icon/info.png) |
+| 聊天（chat） | `\uE02E` | ![聊天](https://oss.miragedge.top/images/web_image/resourcepack/icon/chat.png) |
+| 日期（time） | `\uE02B` | ![日期](https://oss.miragedge.top/images/web_image/resourcepack/icon/time.png) |
 
 ### Rank 身份标牌
 
 | 贴图名称（英文标识） | 字符编码 | 预览图 |
 |----------------------|----------|--------|
-| NPC（npc） | `\uE031` | ![NPC](/images/resourcepack/rank_tab/npc.png) |
-| 商店（shop） | `\uE032` | ![商店](/images/resourcepack/rank_tab/shop.png) |
-| 玩家（小）（player） | `\uE036` | ![玩家（小）](/images/resourcepack/rank_tab/min/player.png) |
-| 玩家（大）（player） | `\u0152` | ![玩家（大）](/images/resourcepack/rank_tab/player.png) |
-| 会员（小）（vip） | `\uE033` | ![会员（小）](/images/resourcepack/rank_tab/min/vip.png) |
-| 会员（大）（vip） | `\u0126` | ![会员（大）](/images/resourcepack/rank_tab/vip.png) |
-| 大会员（小）（vip_plus） | `\u2AD4` | ![大会员（小）](/images/resourcepack/rank_tab/min/vip_plus.png) |
-| 大会员（大）（vip_plus） | `\uE034` | ![大会员（大）](/images/resourcepack/rank_tab/vip_plus.png) |
-| MVP 会员（小）（mvp） | `\uE02F` | ![MVP会员（小）](/images/resourcepack/rank_tab/min/mvp.png) |
-| MVP 会员（大）（mvp） | `\u012E` | ![MVP会员（大）](/images/resourcepack/rank_tab/mvp.png) |
-| 大 MVP 会员（小）（mvp_plus） | `\u2E9E` | ![大MVP会员（小）](/images/resourcepack/rank_tab/min/mvp_plus.png) |
-| 大 MVP 会员（大）（mvp_plus） | `\uE030` | ![大MVP会员（大）](/images/resourcepack/rank_tab/mvp_plus.png) |
+| NPC（npc） | `\uE031` | ![NPC](https://oss.miragedge.top/images/web_image/resourcepack/rank_tab/npc.png) |
+| 商店（shop） | `\uE032` | ![商店](https://oss.miragedge.top/images/web_image/resourcepack/rank_tab/shop.png) |
+| 玩家（小）（player） | `\uE036` | ![玩家（小）](https://oss.miragedge.top/images/web_image/resourcepack/rank_tab/min/player.png) |
+| 玩家（大）（player） | `\u0152` | ![玩家（大）](https://oss.miragedge.top/images/web_image/resourcepack/rank_tab/player.png) |
+| 会员（小）（vip） | `\uE033` | ![会员（小）](https://oss.miragedge.top/images/web_image/resourcepack/rank_tab/min/vip.png) |
+| 会员（大）（vip） | `\u0126` | ![会员（大）](https://oss.miragedge.top/images/web_image/resourcepack/rank_tab/vip.png) |
+| 大会员（小）（vip_plus） | `\u2AD4` | ![大会员（小）](https://oss.miragedge.top/images/web_image/resourcepack/rank_tab/min/vip_plus.png) |
+| 大会员（大）（vip_plus） | `\uE034` | ![大会员（大）](https://oss.miragedge.top/images/web_image/resourcepack/rank_tab/vip_plus.png) |
+| MVP 会员（小）（mvp） | `\uE02F` | ![MVP会员（小）](https://oss.miragedge.top/images/web_image/resourcepack/rank_tab/min/mvp.png) |
+| MVP 会员（大）（mvp） | `\u012E` | ![MVP会员（大）](https://oss.miragedge.top/images/web_image/resourcepack/rank_tab/mvp.png) |
+| 大 MVP 会员（小）（mvp_plus） | `\u2E9E` | ![大MVP会员（小）](https://oss.miragedge.top/images/web_image/resourcepack/rank_tab/min/mvp_plus.png) |
+| 大 MVP 会员（大）（mvp_plus） | `\uE030` | ![大MVP会员（大）](https://oss.miragedge.top/images/web_image/resourcepack/rank_tab/mvp_plus.png) |
 
 ### 物品材质贴图
 
 | 贴图名称（英文标识） | 命名空间 | 预览图 |
 |----------------------|----------|--------|
-| 胡萝卜镐（carrot_pickaxe） | `items_skin` | ![胡萝卜镐](/images/resourcepack/items_skin/weapons/pickaxe/carrot_pickaxe.png) |
+| 胡萝卜镐（carrot_pickaxe） | `items_skin` | ![胡萝卜镐](https://oss.miragedge.top/images/web_image/resourcepack/items_skin/weapons/pickaxe/carrot_pickaxe.png) |
 
 ### 使用提示
 

@@ -16,7 +16,6 @@
     "contributors": "node ./.vitepress/theme/components/js/contributors.js",
     "typecheck": "vue-tsc --noEmit",
     "watermark": "node scripts/watermark.mjs",
-    "watermark:generate": "node scripts/generate-watermark.mjs",
     "watermark:external": "node scripts/external-watermark.mjs"
   },
   "keywords": [],
