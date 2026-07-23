@@ -639,10 +639,18 @@ export default defineConfig({
           collapsed: false,
           items: [
             { text: '数据包客制化(Skills)', link: '/develop/workflows/datapack-workflow' },
-            { text: 'CE材质引擎(Skills)',    link: '/develop/workflows/texture-workflow' },
+            {
+              text: 'CE开发工作流(Skills)',
+              collapsed: true,
+              items: [
+                { text: '开始', link: '/develop/workflows/ce-workflow' },
+                { text: '配置参考与目录', link: '/develop/workflows/ce-reference' },
+                { text: '自定义盔甲模型', link: '/develop/workflows/ce-armor-workflow' },
+              ]
+            },
+            { text: '附魔配置(Skills)',     link: '/develop/workflows/enchanting-workflow' },
             { text: '自定义作物(Skills)',    link: '/develop/workflows/customcrops-workflow' },
             { text: '钓鱼系统(Skills)',     link: '/develop/workflows/fishing-workflow' },
-            { text: '附魔配置(Skills)',     link: '/develop/workflows/enchanting-workflow' },
           ]
         },
         {
