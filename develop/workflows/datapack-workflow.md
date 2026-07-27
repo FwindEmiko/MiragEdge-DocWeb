@@ -55,7 +55,7 @@ head:
 | 项目 | 值 |
 |------|-----|
 | 服务端 | Leaf（Paper 分支） |
-| MC 版本 | 26.1.2（Java Edition） |
+| MC 版本 | 26.2（Java Edition） |
 | pack_format | **101**（数据包）/ **84**（资源包） |
 | CraftEngine | 社区版 v26.7 |
 | 命名空间 | `miragedge` |

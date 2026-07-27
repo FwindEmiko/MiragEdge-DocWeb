@@ -33,7 +33,7 @@ head:
 
 | 层级 | 技术 | 用途 |
 |:----|:-----|:-----|
-| 服务端 | Leaf（Paper 分支）26.1.2 | Minecraft 服务端核心 |
+| 服务端 | Leaf（Paper 分支）26.2 | Minecraft 服务端核心 |
 | 插件 | Aiyatsbus（最新版） | 自定义附魔系统 |
 | 脚本引擎 | TabooLib fluxon | 附魔逻辑脚本语言 |
 | 数据包 | MC Data Pack | 附魔占位符注册（提供给 loot table 解析器） |
@@ -46,7 +46,7 @@ head:
 | 项目 | 值 |
 |:----|:----|
 | 服务端 | Leaf（Paper 分支） |
-| MC 版本 | 26.1.2（Java Edition） |
+| MC 版本 | 26.2（Java Edition） |
 | 附魔配置目录 | `plugins/Aiyatsbus/enchants/{附魔包名}/`（按附魔包分类，如 `Packet-Default/`、`Stellarity/`、`Funpack/`） |
 | 原版覆盖目录 | `plugins/Aiyatsbus/enchants/Packet-Vanilla/` |
 | 核心配置 | `display.yml`、`rarity.yml`、`target.yml`、`group.yml`、`skill.yml`、`artifact.yml` |
