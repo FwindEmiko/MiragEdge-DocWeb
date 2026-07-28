@@ -21,7 +21,7 @@ description: 锐界幻境冒险玩法入口：从探索世界、处理战利品�
 
 ## 应对风险
 
-[鞘翅绑定](/plugins/elytra-bind)说明鞘翅获取、绑定和飞行边界；死亡后需要返回原处时，查看[死亡回程](/plugins/custom/death-return)。
+[契约之翼](/plugins/elytra-bind)说明正式鞘翅的契约、升阶路线和保管边界；死亡后需要返回原处时，查看[死亡回程](/plugins/custom/death-return)。
 
 ## 推荐路线
 

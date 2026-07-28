@@ -21,13 +21,13 @@ hero:
   actions:
     - theme: brand
       text: 玩家指南
-      link: /manual/review.md
+      link: /start
     - theme: alt
       text: 玩法介绍
-      link: /features
+      link: /play
     - theme: alt
       text: 官方Q群
-      link: /manual/qq_group
+      link: /start/community/groups
 
 features:
   - title: 创新玩法
