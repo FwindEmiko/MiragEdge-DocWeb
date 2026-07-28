@@ -767,7 +767,8 @@ export default defineConfig({
   },
   
   // 排除 docs/ 目录（方案书与工作文件，不向玩家公开）
-  srcExclude: ['docs/**/*.md'],
+  // 排除 public/**/*.md（LLMs.txt 标准生成的清洗版 Markdown，是静态产物不应作为页面构建）
+  srcExclude: ['docs/**/*.md', 'public/**/*.md'],
 
   // 缓存配置
   cacheDir: './.vitepress/cache',

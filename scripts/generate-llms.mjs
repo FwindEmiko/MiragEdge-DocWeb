@@ -426,14 +426,24 @@ export function processVueComponents(md) {
   });
 
   // 自闭合组件：<Tag ... />
-  md = md.replace(/<([A-Z][\w-]*)([^/>]*)\/>/g, (_, tag, attrs) => {
+  // 注意：attrs 用 [^>]*? 而非 [^/>]*，因为属性值可能含 /（如 link="/features/base"）
+  // 旧正则 [^/>]* 遇到 URL 中的 / 会提前截断，导致组件无法匹配，最终被兜底 HTML 剥离逻辑误删
+  md = md.replace(/<([A-Z][\w-]*)([^>]*?)\s*\/>/g, (_, tag, attrs) => {
     const attrStr = extractComponentAttrs(attrs);
     return `> [Vue 组件: ${tag}${attrStr} —— 内容由前端动态渲染，请访问 HTML 页面查看]`;
   });
 
-  // 剥离剩余的 HTML 行内标签（如 <ClientOnly>），保留内容
-  md = md.replace(/<[a-zA-Z][^>]*>([\s\S]*?)<\/[a-zA-Z][^>]*>/g, '$1');
-  md = md.replace(/<[a-zA-Z][^/>]*\/>/g, '');
+  // 剥离剩余的 HTML 标签（如 <details> <summary> <ClientOnly> 等），保留内容
+  // 使用 backreference 配对剥离同名标签，循环处理嵌套结构（如 <details><summary>…</summary></details>）
+  // 修复：旧正则未校验开/闭标签名一致，<details><summary>x</summary> 会被错配，
+  // 导致 </details> 孤儿残留，触发 Vue 编译器 "Invalid end tag" 错误
+  let prev;
+  do {
+    prev = md;
+    md = md.replace(/<([a-zA-Z][\w-]*)([^>]*)>([\s\S]*?)<\/\1>/g, '$3');
+  } while (md !== prev);
+  // 剥离残留的自闭合或未配对标签（如 <br> <hr> <img> 等）
+  md = md.replace(/<\/?[a-zA-Z][^>]*>/g, '');
 
   // 还原代码块
   md = md.replace(/\u0000CODEBLOCK(\d+)\u0000/g, (_, i) => placeholders[Number(i)]);

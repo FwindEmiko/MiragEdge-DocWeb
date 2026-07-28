@@ -25,7 +25,7 @@
 | 方式 | 详情 |
 |------|------|
 | GitHub Security Advisory | [在此提交](https://github.com/FwindEmiko/MiragEdge-DocWeb/security/advisories/new) |
-| 邮件 | `2011857087@qq.com`（到达维护者） |
+| 邮件 | `security@miragedge.top`（到达维护者） |
 
 **提交时请包含：**
 - 漏洞类型与影响范围
