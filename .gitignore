@@ -59,3 +59,10 @@ public/develop/*.md
 public/develop/**/*.md
 public/plugins/*.md
 public/plugins/**/*.md
+# 根目录零散页面的清洗版（由生成器产出）
+# logsdata.md 是手动维护的静态数据文件，需保留
+public/README.md
+public/SECURITY.md
+public/soul.md
+public/review.md
+public/review/*.md

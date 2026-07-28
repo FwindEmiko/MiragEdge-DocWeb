@@ -826,11 +826,16 @@ export function generateLlms(options = {}) {
   }
 
   // 9. 写每页清洗版 .md
+  // 安全检查：若目标文件已存在且不是生成器产出的（手动维护文件），跳过避免覆盖
   let pageMdCount = 0;
+  let skippedCount = 0;
   for (const page of allPagesInOrder) {
-    // 计算 public 下的目标路径：保留源 posix 相对路径
     const targetRel = sourceRelPosix(page.rel);
     const target = join(PUBLIC, targetRel);
+    if (existsSync(target) && !isGeneratedMd(target)) {
+      skippedCount++;
+      continue;
+    }
     safeWrite(target, buildPageMarkdown(page));
     pageMdCount++;
   }
@@ -842,6 +847,7 @@ export function generateLlms(options = {}) {
     sectionCounts: Object.fromEntries(SECTIONS.map((s) => [s.name, sectionEntries[s.name].length])),
     rootCount: rootEntries.length,
     pageMdCount,
+    skippedCount,
     fullSnapshotBytes: Buffer.byteLength(fullSnapshot, 'utf8'),
   };
 }
@@ -868,7 +874,7 @@ function main() {
   }
   console.log(`  根目录页面: ${result.rootCount}`);
   if (!checkOnly) {
-    console.log(`  生成清洗版 .md: ${result.pageMdCount} 个`);
+    console.log(`  生成清洗版 .md: ${result.pageMdCount} 个${result.skippedCount ? `（跳过 ${result.skippedCount} 个手动维护文件）` : ''}`);
     console.log(`  llms-full.txt 体积: ${(result.fullSnapshotBytes / 1024).toFixed(1)} KB`);
     console.log(`  产物目录: ${relative(ROOT, PUBLIC)}`);
   }

@@ -1,205 +1,205 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuites name="vitest tests" tests="96" failures="0" errors="0" time="0.1755284">
-    <testsuite name=".vitepress/test/config/config.test.ts" timestamp="2026-07-28T04:05:50.227Z" hostname="TUF-Air-F" tests="23" failures="0" errors="0" skipped="0" time="0.0097347">
-        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; 文件存在性 &gt; config.mts 文件应存在" time="0.0030304">
+<testsuites name="vitest tests" tests="96" failures="0" errors="0" time="0.1374378">
+    <testsuite name=".vitepress/test/config/config.test.ts" timestamp="2026-07-28T04:15:10.224Z" hostname="TUF-Air-F" tests="23" failures="0" errors="0" skipped="0" time="0.0055498">
+        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; 文件存在性 &gt; config.mts 文件应存在" time="0.0017452">
         </testcase>
-        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; 文件存在性 &gt; 应使用 defineConfig 导出配置" time="0.0004731">
+        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; 文件存在性 &gt; 应使用 defineConfig 导出配置" time="0.0002306">
         </testcase>
-        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; 顶层必要字段 &gt; 应配置 title（字符串字面量或常量引用）" time="0.0003285">
+        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; 顶层必要字段 &gt; 应配置 title（字符串字面量或常量引用）" time="0.0001645">
         </testcase>
-        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; 顶层必要字段 &gt; 应配置 description（字符串字面量或常量引用）" time="0.0003261">
+        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; 顶层必要字段 &gt; 应配置 description（字符串字面量或常量引用）" time="0.0001374">
         </testcase>
-        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; 顶层必要字段 &gt; 应配置 base 路径（字符串字面量或常量引用）" time="0.0002739">
+        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; 顶层必要字段 &gt; 应配置 base 路径（字符串字面量或常量引用）" time="0.0001035">
         </testcase>
-        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; 顶层必要字段 &gt; 应支持通过环境变量配置子路径部署" time="0.0002032">
+        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; 顶层必要字段 &gt; 应支持通过环境变量配置子路径部署" time="0.0000965">
         </testcase>
-        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; 顶层必要字段 &gt; 应配置 outDir 输出目录" time="0.0001313">
+        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; 顶层必要字段 &gt; 应配置 outDir 输出目录" time="0.0000807">
         </testcase>
-        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; locales 与 head 配置 &gt; 应配置 locales 多语言" time="0.0002128">
+        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; locales 与 head 配置 &gt; 应配置 locales 多语言" time="0.0001358">
         </testcase>
-        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; locales 与 head 配置 &gt; 应配置中文根 locale" time="0.0002661">
+        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; locales 与 head 配置 &gt; 应配置中文根 locale" time="0.0000826">
         </testcase>
-        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; locales 与 head 配置 &gt; 应配置 head 数组（SEO/OG 标签）" time="0.0001452">
+        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; locales 与 head 配置 &gt; 应配置 head 数组（SEO/OG 标签）" time="0.0000715">
         </testcase>
-        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; locales 与 head 配置 &gt; head 应包含 Open Graph 元数据" time="0.0001502">
+        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; locales 与 head 配置 &gt; head 应包含 Open Graph 元数据" time="0.0000938">
         </testcase>
-        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; locales 与 head 配置 &gt; head 应包含 canonical 或 JSON-LD 结构化数据" time="0.0001418">
+        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; locales 与 head 配置 &gt; head 应包含 canonical 或 JSON-LD 结构化数据" time="0.0000902">
         </testcase>
-        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; themeConfig 配置 &gt; 应配置 themeConfig 对象" time="0.0001263">
+        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; themeConfig 配置 &gt; 应配置 themeConfig 对象" time="0.0000798">
         </testcase>
-        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; themeConfig 配置 &gt; 应配置本地搜索" time="0.0001588">
+        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; themeConfig 配置 &gt; 应配置本地搜索" time="0.0001021">
         </testcase>
-        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; themeConfig 配置 &gt; 应配置 nav 导航栏数组" time="0.0002217">
+        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; themeConfig 配置 &gt; 应配置 nav 导航栏数组" time="0.0000743">
         </testcase>
-        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; themeConfig 配置 &gt; 应配置 sidebar 侧边栏" time="0.00011">
+        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; themeConfig 配置 &gt; 应配置 sidebar 侧边栏" time="0.0000694">
         </testcase>
-        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; themeConfig 配置 &gt; 应配置 outline 本页目录" time="0.0001651">
+        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; themeConfig 配置 &gt; 应配置 outline 本页目录" time="0.0001164">
         </testcase>
-        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; Markdown 与 Vite 配置 &gt; 应配置 markdown 主题" time="0.0001163">
+        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; Markdown 与 Vite 配置 &gt; 应配置 markdown 主题" time="0.0000755">
         </testcase>
-        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; Markdown 与 Vite 配置 &gt; 应启用代码行号" time="0.0001208">
+        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; Markdown 与 Vite 配置 &gt; 应启用代码行号" time="0.000071">
         </testcase>
-        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; Markdown 与 Vite 配置 &gt; 应配置 vite 插件（mermaid 等）" time="0.0001043">
+        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; Markdown 与 Vite 配置 &gt; 应配置 vite 插件（mermaid 等）" time="0.0000832">
         </testcase>
-        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; SEO 与构建版本 &gt; 应注入构建版本标识 meta（x-build-id）" time="0.0001805">
+        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; SEO 与构建版本 &gt; 应注入构建版本标识 meta（x-build-id）" time="0.0000646">
         </testcase>
-        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; SEO 与构建版本 &gt; 应配置 transformHead 钩子（自动注入每页 SEO）" time="0.0002189">
+        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; SEO 与构建版本 &gt; 应配置 transformHead 钩子（自动注入每页 SEO）" time="0.0000767">
         </testcase>
-        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; SEO 与构建版本 &gt; 应配置 transformPageData 钩子（自动补全描述）" time="0.0001211">
-        </testcase>
-    </testsuite>
-    <testsuite name=".vitepress/test/unit/components/nav-icons.test.ts" timestamp="2026-07-28T04:05:50.235Z" hostname="TUF-Air-F" tests="19" failures="0" errors="0" skipped="0" time="0.0193297">
-        <testcase classname=".vitepress/test/unit/components/nav-icons.test.ts" name="nav-icons: emoji 提取逻辑 &gt; hasLeadingEmoji &gt; 单字符 emoji 开头应返回 true" time="0.0033383">
-        </testcase>
-        <testcase classname=".vitepress/test/unit/components/nav-icons.test.ts" name="nav-icons: emoji 提取逻辑 &gt; hasLeadingEmoji &gt; ZWJ 序列 emoji 开头应返回 true" time="0.0004376">
-        </testcase>
-        <testcase classname=".vitepress/test/unit/components/nav-icons.test.ts" name="nav-icons: emoji 提取逻辑 &gt; hasLeadingEmoji &gt; 纯文本开头应返回 false" time="0.0002595">
-        </testcase>
-        <testcase classname=".vitepress/test/unit/components/nav-icons.test.ts" name="nav-icons: emoji 提取逻辑 &gt; hasLeadingEmoji &gt; 空字符串应返回 false" time="0.0001236">
-        </testcase>
-        <testcase classname=".vitepress/test/unit/components/nav-icons.test.ts" name="nav-icons: emoji 提取逻辑 &gt; hasLeadingEmoji &gt; 数字开头应返回 false（数字不是 emoji）" time="0.000268">
-        </testcase>
-        <testcase classname=".vitepress/test/unit/components/nav-icons.test.ts" name="nav-icons: emoji 提取逻辑 &gt; hasLeadingEmoji &gt; emoji 不在开头时应返回 false" time="0.0001475">
-        </testcase>
-        <testcase classname=".vitepress/test/unit/components/nav-icons.test.ts" name="nav-icons: emoji 提取逻辑 &gt; extractLeadingEmoji &gt; 应正确提取单字符 emoji 与剩余文本" time="0.0003909">
-        </testcase>
-        <testcase classname=".vitepress/test/unit/components/nav-icons.test.ts" name="nav-icons: emoji 提取逻辑 &gt; extractLeadingEmoji &gt; 应正确提取 ZWJ 序列 emoji（不拆分）" time="0.0001927">
-        </testcase>
-        <testcase classname=".vitepress/test/unit/components/nav-icons.test.ts" name="nav-icons: emoji 提取逻辑 &gt; extractLeadingEmoji &gt; 应正确提取肤色修饰符 emoji" time="0.0001949">
-        </testcase>
-        <testcase classname=".vitepress/test/unit/components/nav-icons.test.ts" name="nav-icons: emoji 提取逻辑 &gt; extractLeadingEmoji &gt; 无 emoji 时应返回 null" time="0.0001354">
-        </testcase>
-        <testcase classname=".vitepress/test/unit/components/nav-icons.test.ts" name="nav-icons: emoji 提取逻辑 &gt; extractLeadingEmoji &gt; 无空格分隔时应正确提取" time="0.0001872">
-        </testcase>
-        <testcase classname=".vitepress/test/unit/components/nav-icons.test.ts" name="nav-icons: emoji 提取逻辑 &gt; extractLeadingEmoji &gt; 应去除剩余文本的首尾空白" time="0.0001227">
-        </testcase>
-        <testcase classname=".vitepress/test/unit/components/nav-icons.test.ts" name="nav-icons: 元素增强逻辑 &gt; 应将开头 emoji 包裹到 nav-icon-emoji span 中" time="0.0061093">
-        </testcase>
-        <testcase classname=".vitepress/test/unit/components/nav-icons.test.ts" name="nav-icons: 元素增强逻辑 &gt; 应把剩余文本作为文本节点处理" time="0.0012858">
-        </testcase>
-        <testcase classname=".vitepress/test/unit/components/nav-icons.test.ts" name="nav-icons: 元素增强逻辑 &gt; 无 emoji 时不应修改元素" time="0.0006696">
-        </testcase>
-        <testcase classname=".vitepress/test/unit/components/nav-icons.test.ts" name="nav-icons: 元素增强逻辑 &gt; 已处理过的元素不应重复处理（幂等）" time="0.0013678">
-        </testcase>
-        <testcase classname=".vitepress/test/unit/components/nav-icons.test.ts" name="nav-icons: 元素增强逻辑 &gt; 传入 null 应安全跳过" time="0.0009248">
-        </testcase>
-        <testcase classname=".vitepress/test/unit/components/nav-icons.test.ts" name="nav-icons: 元素增强逻辑 &gt; 已有子元素的节点应跳过（避免破坏嵌套结构）" time="0.000255">
-        </testcase>
-        <testcase classname=".vitepress/test/unit/components/nav-icons.test.ts" name="nav-icons: 元素增强逻辑 &gt; 空文本元素应安全跳过" time="0.0001869">
+        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; SEO 与构建版本 &gt; 应配置 transformPageData 钩子（自动补全描述）" time="0.0001957">
         </testcase>
     </testsuite>
-    <testsuite name=".vitepress/test/unit/composables/effects-toggle.test.ts" timestamp="2026-07-28T04:05:50.237Z" hostname="TUF-Air-F" tests="12" failures="0" errors="0" skipped="0" time="0.0072517">
-        <testcase classname=".vitepress/test/unit/composables/effects-toggle.test.ts" name="useEffectsToggle: 特效开关 composable &gt; initEffectsToggleState: 状态初始化 &gt; 无存储偏好时桌面端应默认开启" time="0.0026881">
+    <testsuite name=".vitepress/test/unit/scripts/generate-llms.test.mts" timestamp="2026-07-28T04:15:10.231Z" hostname="TUF-Air-F" tests="36" failures="0" errors="0" skipped="0" time="0.1045472">
+        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="parseFrontmatter &gt; 无 frontmatter 时返回空对象" time="0.0025119">
         </testcase>
-        <testcase classname=".vitepress/test/unit/composables/effects-toggle.test.ts" name="useEffectsToggle: 特效开关 composable &gt; initEffectsToggleState: 状态初始化 &gt; 无存储偏好时移动端应默认关闭" time="0.000525">
+        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="parseFrontmatter &gt; 解析简单 title / description 标量字段" time="0.00036">
         </testcase>
-        <testcase classname=".vitepress/test/unit/composables/effects-toggle.test.ts" name="useEffectsToggle: 特效开关 composable &gt; initEffectsToggleState: 状态初始化 &gt; 移动端断点 767px 应判定为移动端（默认关闭）" time="0.0001801">
+        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="parseFrontmatter &gt; 剥离单双引号包裹的值" time="0.0001665">
         </testcase>
-        <testcase classname=".vitepress/test/unit/composables/effects-toggle.test.ts" name="useEffectsToggle: 特效开关 composable &gt; initEffectsToggleState: 状态初始化 &gt; 桌面端断点 768px 应判定为桌面端（默认开启）" time="0.0001586">
+        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="parseFrontmatter &gt; 识别 layout / outline / lastUpdated 字段" time="0.0002164">
         </testcase>
-        <testcase classname=".vitepress/test/unit/composables/effects-toggle.test.ts" name="useEffectsToggle: 特效开关 composable &gt; initEffectsToggleState: 状态初始化 &gt; localStorage 存储为 &quot;true&quot; 时应恢复开启状态" time="0.0001361">
+        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="parseFrontmatter &gt; 跳过块级字段（hero / features 等缩进块）" time="0.0006372">
         </testcase>
-        <testcase classname=".vitepress/test/unit/composables/effects-toggle.test.ts" name="useEffectsToggle: 特效开关 composable &gt; initEffectsToggleState: 状态初始化 &gt; localStorage 存储为 &quot;false&quot; 时应恢复关闭状态" time="0.00012">
+        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="extractH1 &gt; 返回首个 H1 文本" time="0.0001719">
         </testcase>
-        <testcase classname=".vitepress/test/unit/composables/effects-toggle.test.ts" name="useEffectsToggle: 特效开关 composable &gt; initEffectsToggleState: 状态初始化 &gt; localStorage 存储值优先于移动端默认值" time="0.0001121">
-        </testcase>
-        <testcase classname=".vitepress/test/unit/composables/effects-toggle.test.ts" name="useEffectsToggle: 特效开关 composable &gt; useEffectsToggle: 切换与持久化 &gt; 初始状态为 true 时 toggle 应切换为 false" time="0.0002216">
-        </testcase>
-        <testcase classname=".vitepress/test/unit/composables/effects-toggle.test.ts" name="useEffectsToggle: 特效开关 composable &gt; useEffectsToggle: 切换与持久化 &gt; 当前状态为 false 时 toggle 应切换为 true" time="0.0002174">
-        </testcase>
-        <testcase classname=".vitepress/test/unit/composables/effects-toggle.test.ts" name="useEffectsToggle: 特效开关 composable &gt; useEffectsToggle: 切换与持久化 &gt; 连续 toggle 应在 true/false 间来回切换并同步持久化" time="0.00021">
-        </testcase>
-        <testcase classname=".vitepress/test/unit/composables/effects-toggle.test.ts" name="useEffectsToggle: 特效开关 composable &gt; useEffectsToggle: 切换与持久化 &gt; toggle 后 DOM 类名应同步更新" time="0.0001743">
-        </testcase>
-        <testcase classname=".vitepress/test/unit/composables/effects-toggle.test.ts" name="useEffectsToggle: 特效开关 composable &gt; useEffectsToggle: 切换与持久化 &gt; useEffectsToggle 返回的 effectsEnabled 应与全局 ref 同步" time="0.0000936">
-        </testcase>
-    </testsuite>
-    <testsuite name=".vitepress/test/unit/scripts/generate-llms.test.mts" timestamp="2026-07-28T04:05:50.239Z" hostname="TUF-Air-F" tests="36" failures="0" errors="0" skipped="0" time="0.1313177">
-        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="parseFrontmatter &gt; 无 frontmatter 时返回空对象" time="0.003304">
-        </testcase>
-        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="parseFrontmatter &gt; 解析简单 title / description 标量字段" time="0.0005107">
-        </testcase>
-        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="parseFrontmatter &gt; 剥离单双引号包裹的值" time="0.0001987">
-        </testcase>
-        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="parseFrontmatter &gt; 识别 layout / outline / lastUpdated 字段" time="0.0003694">
-        </testcase>
-        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="parseFrontmatter &gt; 跳过块级字段（hero / features 等缩进块）" time="0.0006078">
-        </testcase>
-        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="extractH1 &gt; 返回首个 H1 文本" time="0.0001904">
-        </testcase>
-        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="extractH1 &gt; 跳过 H2 / H3，仅匹配 H1" time="0.0001078">
+        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="extractH1 &gt; 跳过 H2 / H3，仅匹配 H1" time="0.0001045">
         </testcase>
         <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="extractH1 &gt; 无 H1 时返回空字符串" time="0.0000717">
         </testcase>
-        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="extractH1 &gt; 容忍标题尾随空白" time="0.0000652">
+        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="extractH1 &gt; 容忍标题尾随空白" time="0.000063">
         </testcase>
-        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="extractFirstParagraph &gt; 跳过标题与引用，返回第一段正文" time="0.0002481">
+        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="extractFirstParagraph &gt; 跳过标题与引用，返回第一段正文" time="0.0002372">
         </testcase>
-        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="extractFirstParagraph &gt; 剥离行内 markdown 语法（粗体 / 行内代码 / 链接）" time="0.0001139">
+        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="extractFirstParagraph &gt; 剥离行内 markdown 语法（粗体 / 行内代码 / 链接）" time="0.0001689">
         </testcase>
-        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="extractFirstParagraph &gt; 跳过列表项与表格行" time="0.0001013">
+        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="extractFirstParagraph &gt; 跳过列表项与表格行" time="0.0000967">
         </testcase>
-        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="extractFirstParagraph &gt; 跳过 HTML 标签起始行" time="0.0000706">
+        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="extractFirstParagraph &gt; 跳过 HTML 标签起始行" time="0.0000714">
         </testcase>
-        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="extractFirstParagraph &gt; 超长段落截断并加省略号" time="0.0001075">
+        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="extractFirstParagraph &gt; 超长段落截断并加省略号" time="0.000112">
         </testcase>
-        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="extractFirstParagraph &gt; 无可用段落时返回空字符串" time="0.0000686">
+        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="extractFirstParagraph &gt; 无可用段落时返回空字符串" time="0.0000789">
         </testcase>
-        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="processVueComponents &gt; 自闭合组件替换为占位说明" time="0.0007365">
+        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="processVueComponents &gt; 自闭合组件替换为占位说明" time="0.0005004">
         </testcase>
-        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="processVueComponents &gt; 提取自闭合组件的 title / link / icon 属性" time="0.0002726">
+        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="processVueComponents &gt; 提取自闭合组件的 title / link / icon 属性" time="0.0002519">
         </testcase>
-        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="processVueComponents &gt; 容器型组件保留内部文本并加组件头注释" time="0.000335">
+        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="processVueComponents &gt; 容器型组件保留内部文本并加组件头注释" time="0.0001881">
         </testcase>
-        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="processVueComponents &gt; 保留代码块内的 Vue 标签原样不动" time="0.000143">
+        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="processVueComponents &gt; 保留代码块内的 Vue 标签原样不动" time="0.0001227">
         </testcase>
-        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="processVueComponents &gt; 剥离行内 HTML 标签但保留内容" time="0.000073">
+        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="processVueComponents &gt; 剥离行内 HTML 标签但保留内容" time="0.0000978">
         </testcase>
-        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="cleanMarkdown &gt; 剥离 YAML frontmatter、脚本、样式、HTML 注释" time="0.0012214">
+        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="cleanMarkdown &gt; 剥离 YAML frontmatter、脚本、样式、HTML 注释" time="0.0009965">
         </testcase>
-        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="cleanMarkdown &gt; 剥离 VitePress 容器标记 ::: 但保留内部内容" time="0.0003621">
+        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="cleanMarkdown &gt; 剥离 VitePress 容器标记 ::: 但保留内部内容" time="0.0002101">
         </testcase>
-        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="cleanMarkdown &gt; 相对链接转换为站点绝对地址" time="0.0003421">
+        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="cleanMarkdown &gt; 相对链接转换为站点绝对地址" time="0.0003236">
         </testcase>
-        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="cleanMarkdown &gt; 保留外部链接与锚点不动" time="0.0001943">
+        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="cleanMarkdown &gt; 保留外部链接与锚点不动" time="0.000163">
         </testcase>
-        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="cleanMarkdown &gt; 折叠 3 个及以上换行为 2 个" time="0.00017">
+        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="cleanMarkdown &gt; 折叠 3 个及以上换行为 2 个" time="0.0001499">
         </testcase>
-        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="cleanMarkdown &gt; layout: home 页面把 hero / features 展开为 Markdown" time="0.0010994">
+        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="cleanMarkdown &gt; layout: home 页面把 hero / features 展开为 Markdown" time="0.0008374">
         </testcase>
-        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="cleanMarkdown &gt; frontmatter 缺失 title 时回退到 H1" time="0.0002059">
+        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="cleanMarkdown &gt; frontmatter 缺失 title 时回退到 H1" time="0.0001234">
         </testcase>
-        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="cleanMarkdown &gt; frontmatter 与 H1 均无标题时回退到文件名" time="0.0002158">
+        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="cleanMarkdown &gt; frontmatter 与 H1 均无标题时回退到文件名" time="0.0001282">
         </testcase>
-        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="scanMarkdownFiles &gt; 递归扫描所有 .md 文件并返回 posix 路径" time="0.0031115">
+        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="scanMarkdownFiles &gt; 递归扫描所有 .md 文件并返回 posix 路径" time="0.0033847">
         </testcase>
-        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="scanMarkdownFiles &gt; 默认排除 node_modules / public 等目录" time="0.0011597">
+        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="scanMarkdownFiles &gt; 默认排除 node_modules / public 等目录" time="0.0011478">
         </testcase>
-        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="scanMarkdownFiles &gt; 跳过隐藏文件" time="0.0009734">
+        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="scanMarkdownFiles &gt; 跳过隐藏文件" time="0.0007417">
         </testcase>
-        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="scanMarkdownFiles &gt; 结果已排序" time="0.0007244">
+        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="scanMarkdownFiles &gt; 结果已排序" time="0.0006432">
         </testcase>
-        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="scanMarkdownFiles &gt; 支持自定义 excludeDirs" time="0.0008372">
+        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="scanMarkdownFiles &gt; 支持自定义 excludeDirs" time="0.000658">
         </testcase>
-        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="scanMarkdownFiles &gt; Windows 反斜杠路径被规范化为 posix 风格" time="0.0007977">
+        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="scanMarkdownFiles &gt; Windows 反斜杠路径被规范化为 posix 风格" time="0.0006309">
         </testcase>
-        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="generateLlms &gt; checkOnly 模式扫描真实源码并返回统计，不写文件" time="0.0377572">
+        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="generateLlms &gt; checkOnly 模式扫描真实源码并返回统计，不写文件" time="0.0363668">
         </testcase>
-        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="generateLlms &gt; checkOnly 模式不返回写盘相关字段" time="0.0362806">
-        </testcase>
-    </testsuite>
-    <testsuite name=".vitepress/test/unit/utils/css-value.test.ts" timestamp="2026-07-28T04:05:50.244Z" hostname="TUF-Air-F" tests="3" failures="0" errors="0" skipped="0" time="0.0039052">
-        <testcase classname=".vitepress/test/unit/utils/css-value.test.ts" name="normalizeCssLength &gt; 数字与纯数字字符串应追加 px" time="0.0018911">
-        </testcase>
-        <testcase classname=".vitepress/test/unit/utils/css-value.test.ts" name="normalizeCssLength &gt; 合法 CSS 长度应原样保留" time="0.0002196">
-        </testcase>
-        <testcase classname=".vitepress/test/unit/utils/css-value.test.ts" name="normalizeCssLength &gt; 空值和非有限数字应忽略" time="0.0001629">
+        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="generateLlms &gt; checkOnly 模式不返回写盘相关字段" time="0.0270324">
         </testcase>
     </testsuite>
-    <testsuite name=".vitepress/test/unit/utils/markdown.test.ts" timestamp="2026-07-28T04:05:50.244Z" hostname="TUF-Air-F" tests="3" failures="0" errors="0" skipped="0" time="0.0039894">
-        <testcase classname=".vitepress/test/unit/utils/markdown.test.ts" name="markdown 安全格式化 &gt; 允许常用安全协议、锚点和相对路径" time="0.0019345">
+    <testsuite name=".vitepress/test/unit/composables/effects-toggle.test.ts" timestamp="2026-07-28T04:15:10.240Z" hostname="TUF-Air-F" tests="12" failures="0" errors="0" skipped="0" time="0.0082961">
+        <testcase classname=".vitepress/test/unit/composables/effects-toggle.test.ts" name="useEffectsToggle: 特效开关 composable &gt; initEffectsToggleState: 状态初始化 &gt; 无存储偏好时桌面端应默认开启" time="0.00248">
         </testcase>
-        <testcase classname=".vitepress/test/unit/utils/markdown.test.ts" name="markdown 安全格式化 &gt; 拒绝脚本、数据和协议相对 URL" time="0.0002189">
+        <testcase classname=".vitepress/test/unit/composables/effects-toggle.test.ts" name="useEffectsToggle: 特效开关 composable &gt; initEffectsToggleState: 状态初始化 &gt; 无存储偏好时移动端应默认关闭" time="0.0006161">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/composables/effects-toggle.test.ts" name="useEffectsToggle: 特效开关 composable &gt; initEffectsToggleState: 状态初始化 &gt; 移动端断点 767px 应判定为移动端（默认关闭）" time="0.0001864">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/composables/effects-toggle.test.ts" name="useEffectsToggle: 特效开关 composable &gt; initEffectsToggleState: 状态初始化 &gt; 桌面端断点 768px 应判定为桌面端（默认开启）" time="0.0001462">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/composables/effects-toggle.test.ts" name="useEffectsToggle: 特效开关 composable &gt; initEffectsToggleState: 状态初始化 &gt; localStorage 存储为 &quot;true&quot; 时应恢复开启状态" time="0.0001369">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/composables/effects-toggle.test.ts" name="useEffectsToggle: 特效开关 composable &gt; initEffectsToggleState: 状态初始化 &gt; localStorage 存储为 &quot;false&quot; 时应恢复关闭状态" time="0.0001289">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/composables/effects-toggle.test.ts" name="useEffectsToggle: 特效开关 composable &gt; initEffectsToggleState: 状态初始化 &gt; localStorage 存储值优先于移动端默认值" time="0.0001019">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/composables/effects-toggle.test.ts" name="useEffectsToggle: 特效开关 composable &gt; useEffectsToggle: 切换与持久化 &gt; 初始状态为 true 时 toggle 应切换为 false" time="0.0002418">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/composables/effects-toggle.test.ts" name="useEffectsToggle: 特效开关 composable &gt; useEffectsToggle: 切换与持久化 &gt; 当前状态为 false 时 toggle 应切换为 true" time="0.0002441">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/composables/effects-toggle.test.ts" name="useEffectsToggle: 特效开关 composable &gt; useEffectsToggle: 切换与持久化 &gt; 连续 toggle 应在 true/false 间来回切换并同步持久化" time="0.0001663">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/composables/effects-toggle.test.ts" name="useEffectsToggle: 特效开关 composable &gt; useEffectsToggle: 切换与持久化 &gt; toggle 后 DOM 类名应同步更新" time="0.0001709">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/composables/effects-toggle.test.ts" name="useEffectsToggle: 特效开关 composable &gt; useEffectsToggle: 切换与持久化 &gt; useEffectsToggle 返回的 effectsEnabled 应与全局 ref 同步" time="0.0000862">
+        </testcase>
+    </testsuite>
+    <testsuite name=".vitepress/test/unit/components/nav-icons.test.ts" timestamp="2026-07-28T04:15:10.243Z" hostname="TUF-Air-F" tests="19" failures="0" errors="0" skipped="0" time="0.0114731">
+        <testcase classname=".vitepress/test/unit/components/nav-icons.test.ts" name="nav-icons: emoji 提取逻辑 &gt; hasLeadingEmoji &gt; 单字符 emoji 开头应返回 true" time="0.0021853">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/components/nav-icons.test.ts" name="nav-icons: emoji 提取逻辑 &gt; hasLeadingEmoji &gt; ZWJ 序列 emoji 开头应返回 true" time="0.0001795">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/components/nav-icons.test.ts" name="nav-icons: emoji 提取逻辑 &gt; hasLeadingEmoji &gt; 纯文本开头应返回 false" time="0.0001543">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/components/nav-icons.test.ts" name="nav-icons: emoji 提取逻辑 &gt; hasLeadingEmoji &gt; 空字符串应返回 false" time="0.0000863">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/components/nav-icons.test.ts" name="nav-icons: emoji 提取逻辑 &gt; hasLeadingEmoji &gt; 数字开头应返回 false（数字不是 emoji）" time="0.0001644">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/components/nav-icons.test.ts" name="nav-icons: emoji 提取逻辑 &gt; hasLeadingEmoji &gt; emoji 不在开头时应返回 false" time="0.0000793">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/components/nav-icons.test.ts" name="nav-icons: emoji 提取逻辑 &gt; extractLeadingEmoji &gt; 应正确提取单字符 emoji 与剩余文本" time="0.0002159">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/components/nav-icons.test.ts" name="nav-icons: emoji 提取逻辑 &gt; extractLeadingEmoji &gt; 应正确提取 ZWJ 序列 emoji（不拆分）" time="0.0001134">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/components/nav-icons.test.ts" name="nav-icons: emoji 提取逻辑 &gt; extractLeadingEmoji &gt; 应正确提取肤色修饰符 emoji" time="0.0000954">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/components/nav-icons.test.ts" name="nav-icons: emoji 提取逻辑 &gt; extractLeadingEmoji &gt; 无 emoji 时应返回 null" time="0.0000783">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/components/nav-icons.test.ts" name="nav-icons: emoji 提取逻辑 &gt; extractLeadingEmoji &gt; 无空格分隔时应正确提取" time="0.0000913">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/components/nav-icons.test.ts" name="nav-icons: emoji 提取逻辑 &gt; extractLeadingEmoji &gt; 应去除剩余文本的首尾空白" time="0.0000794">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/components/nav-icons.test.ts" name="nav-icons: 元素增强逻辑 &gt; 应将开头 emoji 包裹到 nav-icon-emoji span 中" time="0.0035334">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/components/nav-icons.test.ts" name="nav-icons: 元素增强逻辑 &gt; 应把剩余文本作为文本节点处理" time="0.0003891">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/components/nav-icons.test.ts" name="nav-icons: 元素增强逻辑 &gt; 无 emoji 时不应修改元素" time="0.000311">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/components/nav-icons.test.ts" name="nav-icons: 元素增强逻辑 &gt; 已处理过的元素不应重复处理（幂等）" time="0.0006982">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/components/nav-icons.test.ts" name="nav-icons: 元素增强逻辑 &gt; 传入 null 应安全跳过" time="0.0006311">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/components/nav-icons.test.ts" name="nav-icons: 元素增强逻辑 &gt; 已有子元素的节点应跳过（避免破坏嵌套结构）" time="0.0001552">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/components/nav-icons.test.ts" name="nav-icons: 元素增强逻辑 &gt; 空文本元素应安全跳过" time="0.0001532">
+        </testcase>
+    </testsuite>
+    <testsuite name=".vitepress/test/unit/utils/css-value.test.ts" timestamp="2026-07-28T04:15:10.245Z" hostname="TUF-Air-F" tests="3" failures="0" errors="0" skipped="0" time="0.003424">
+        <testcase classname=".vitepress/test/unit/utils/css-value.test.ts" name="normalizeCssLength &gt; 数字与纯数字字符串应追加 px" time="0.0017945">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/utils/css-value.test.ts" name="normalizeCssLength &gt; 合法 CSS 长度应原样保留" time="0.000194">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/utils/css-value.test.ts" name="normalizeCssLength &gt; 空值和非有限数字应忽略" time="0.0001351">
+        </testcase>
+    </testsuite>
+    <testsuite name=".vitepress/test/unit/utils/markdown.test.ts" timestamp="2026-07-28T04:15:10.246Z" hostname="TUF-Air-F" tests="3" failures="0" errors="0" skipped="0" time="0.0041476">
+        <testcase classname=".vitepress/test/unit/utils/markdown.test.ts" name="markdown 安全格式化 &gt; 允许常用安全协议、锚点和相对路径" time="0.002113">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/utils/markdown.test.ts" name="markdown 安全格式化 &gt; 拒绝脚本、数据和协议相对 URL" time="0.0002585">
         </testcase>
         <testcase classname=".vitepress/test/unit/utils/markdown.test.ts" name="markdown 安全格式化 &gt; 转义 HTML，并只渲染安全链接" time="0.0005363">
         </testcase>
