@@ -10,13 +10,15 @@
     "test:coverage": "vitest run --coverage --config .vitepress/vitest.config.mts",
     "test:unit": "vitest run --config .vitepress/vitest.config.mts --dir .vitepress/test/unit",
     "test:config": "vitest run --config .vitepress/vitest.config.mts --dir .vitepress/test/config",
-    "dev": "vitepress dev",
-    "build": "node scripts/external-watermark.mjs && vitepress build && node scripts/watermark.mjs && node scripts/generate-version.mjs",
+    "dev": "node scripts/generate-llms.mjs && vitepress dev",
+    "build": "node scripts/external-watermark.mjs && node scripts/generate-llms.mjs && vitepress build && node scripts/watermark.mjs && node scripts/generate-version.mjs",
     "preview": "vitepress preview",
     "contributors": "node ./.vitepress/theme/components/js/contributors.js",
     "typecheck": "vue-tsc --noEmit",
     "watermark": "node scripts/watermark.mjs",
-    "watermark:external": "node scripts/external-watermark.mjs"
+    "watermark:external": "node scripts/external-watermark.mjs",
+    "llms": "node scripts/generate-llms.mjs",
+    "llms:check": "node scripts/generate-llms.mjs --check"
   },
   "keywords": [],
   "author": "F.windEmiko",
