@@ -11,7 +11,7 @@ head:
 
 > 服务器当前版本：`26.2`
 
-> 服务器持续更新 Geyser，实现基岩版最新版本与 Java 版互通，但部分功能无法完美兼容，推荐优先使用 Java 版入服
+> 服务器通过 Geyser 实现基岩版与 Java 版互通，但部分界面和操作方式存在差异。第一次游玩或需要完整操作时，优先使用 Java 版。
 
 > 安装完成后启动失败，可将具体错误截图发送至 QQ 交流群咨询群友
 
@@ -136,4 +136,4 @@ head:
 
 <SmartImage src="/images/web_image/msreg/tutorial/msreg6.png" alt="注册" maxWidth="400px" />
 
-> 完成安装了？[前往入服教程](./serverjoin)
+> 完成安装了？[前往入服教程](./join)

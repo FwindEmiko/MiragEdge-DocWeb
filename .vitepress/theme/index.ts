@@ -19,6 +19,8 @@ import Furnace from './components/vue/Furnace.vue'
 import FoodStats from './components/vue/FoodStats.vue'
 import FoodEntry from './components/vue/FoodEntry.vue'
 import TodoList from './components/vue/TodoList.vue'
+import CommandPanel from './components/vue/CommandPanel.vue'
+import CommandEntry from './components/vue/CommandEntry.vue'
 import './css/custom.css'
 
 // 导入所有样式文件
@@ -41,7 +43,6 @@ import { inBrowser, withBase } from "vitepress"
 import LayoutComponent from './components/vue/layout.vue'
 import Contributors from './components/vue/Contributors.vue'
 
-// 导入3D倾斜效果
 import { init3DTiltEffect } from './components/js/feature.js'
 
 // 导入导航/侧边栏图标增强
@@ -64,7 +65,7 @@ export default {
   },
 
   enhanceApp({ app, router, siteData }) {
-    // 注册全局组件（Corner 装饰组件由 layout.vue 异步加载，无需全局注册）
+    // 注册全局组件
     app.component("LayoutComponent", LayoutComponent)
     app.component('Contributors', Contributors)
     app.component('SmartImage', SmartImage)
@@ -83,6 +84,8 @@ export default {
     app.component('FoodEntry', FoodEntry)
     app.component('GithubRepoActivity', GithubRepoActivity)
     app.component('TodoList', TodoList)
+    app.component('CommandPanel', CommandPanel)
+    app.component('CommandEntry', CommandEntry)
 
     // 注入图片查看器全局配置（可在子组件中通过 inject('lightboxConfig') 覆盖）
     setLightboxConfig({
@@ -118,12 +121,8 @@ export default {
         initNavIcons();
         // 路由切换后检测是否有新部署（延迟 2s，避免与路由过渡冲突）
         checkVersionOnRouteChange();
-        // 路由切换后重新绑定首页卡片 3D 透视效果
-        // 新渲染的 .VPFeature 卡片未被绑定事件，需在 DOM 更新后重新初始化
-        nextTick(() => {
-          init3DTiltEffect();
-        });
-
+        // 首页卡片由路由异步渲染，完成后再恢复 3D 倾斜交互。
+        nextTick(() => init3DTiltEffect())
         // 搜索框 FLIP 动画：等 DOM 稳定后在 nextTick 中执行
         // 有sidebar→有sidebar：位置不变（|dx|<=1），不触发
         // 有sidebar↔无sidebar：位置变化，FLIP 平滑过渡
@@ -166,8 +165,8 @@ export default {
         // 在页面挂载后调用通知函数
         showAestheticNotice();
 
-        // 初始化3D倾斜效果
-        init3DTiltEffect();
+        init3DTiltEffect()
+
         // 初始化导航/侧边栏图标增强
         initNavIcons();
 

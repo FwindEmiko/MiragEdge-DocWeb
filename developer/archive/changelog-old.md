@@ -1095,7 +1095,7 @@
   - 统一文档链接为英文路径格式
   - 完善多语言目录映射关系
 - **内容扩展**
-  - 新增游戏食物系统文档: [**食物拓展指南**](https://miragedge.top/features/food/index.md)
+  - 新增游戏食物系统文档: [**食物拓展指南**](https://miragedge.top/play/food/index.md)
 
 ### V.0.0.4
 *2025年4月20日*

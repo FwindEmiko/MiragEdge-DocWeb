@@ -15,7 +15,6 @@ import { useTocAutoScroll } from '../../composables/useTocAutoScroll';
 // 右侧「本页目录」长目录自动滚动跟随 active 项
 useTocAutoScroll();
 
-// Corner 装饰组件改为异步加载，减少主 bundle 体积
 const CornerStars = defineAsyncComponent(() => import('./CornerStars.vue'));
 const CornerQuotes = defineAsyncComponent(() => import('./CornerQuotes.vue'));
 const CornerBubbles = defineAsyncComponent(() => import('./CornerBubbles.vue'));
@@ -41,13 +40,12 @@ const is404 = computed(() => page.value.isNotFound);
 const isHome = computed(() => route.path === '/' || route.path === '/index.html');
 
 // 悬浮按钮显示条件：所有文档内容路径（含长文档需要返回顶部），排除首页与 404
-// 覆盖原本仅 /docs/ 的窄范围，扩展到 features/manual/develop/plugins 等实际文档区
+// 覆盖所有公开文档区，排除首页与 404
 const showFloatButtons = computed(() => {
   if (is404.value || isHome.value) return false
-  return /^\/(features|manual|develop|plugins|docs)\//.test(route.path)
+  return /^\/(start|play|plugins|developer|archive)\//.test(route.path)
 });
 
-// 随机角落装饰 - 每次路由变化时重新计算
 const randomCorner = ref(null)
 const prefersReducedMotion = ref(false)
 const effectsActive = computed(() => effectsEnabled.value && !prefersReducedMotion.value)
@@ -173,14 +171,10 @@ function cleanupSearchAnimations() {
   }
 }
 
-// 随机数生成函数，SSR 和客户端分别使用固定值和随机值避免 hydration mismatch
 function pickRandomCorner() {
-  // 30% 概率显示装饰
-  if (Math.random() <= 0.3) {
-    const components = ['stars', 'quotes', 'bubbles', 'sakura', 'notes', 'leaves', 'fireflies'];
-    return components[Math.floor(Math.random() * components.length)];
-  }
-  return null;
+  if (Math.random() > 0.3) return null
+  const components = ['stars', 'quotes', 'bubbles', 'sakura', 'notes', 'leaves', 'fireflies']
+  return components[Math.floor(Math.random() * components.length)]
 }
 
 onMounted(() => {
@@ -210,7 +204,6 @@ onUnmounted(() => {
 })
 
 watch(() => route.path, () => {
-  randomCorner.value = pickRandomCorner()
   // 路由切换后重置返回顶部按钮状态（VitePress 默认会滚动到顶部）
   showBackToTop.value = false
   scrollProgress.value = 0
@@ -274,6 +267,7 @@ function getSidebarFingerprint() {
 watch(
   () => route.path,
   () => {
+    randomCorner.value = pickRandomCorner()
     // flush:pre，DOM 还是旧的 —— 记录旧侧边栏结构指纹
     const oldSidebarFingerprint = window.matchMedia('(min-width: 960px)').matches
       ? getSidebarFingerprint()
@@ -385,7 +379,6 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }) => {
 
 <template>
   <div class="router-wrapper">
-    <!-- 随机角落装饰只用于文档页，首页保留独立的粒子背景 -->
     <CornerStars v-if="!isHome && effectsActive && randomCorner === 'stars'" />
     <CornerQuotes v-if="!isHome && effectsActive && randomCorner === 'quotes'" />
     <CornerBubbles v-if="!isHome && effectsActive && randomCorner === 'bubbles'" />
@@ -395,6 +388,7 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }) => {
     <CornerFireflies v-if="!isHome && effectsActive && randomCorner === 'fireflies'" />
     <CornerSurprise v-if="!isHome && effectsActive" />
     <CornerClickEffect v-if="!isHome && effectsActive" />
+
     <!-- Live2D 看板娘 - 只在首页显示 -->
     <Live2D v-if="isHome" />
 
@@ -402,7 +396,6 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }) => {
     <!-- Layout 常驻挂载，不随路由变化销毁重建，以保持侧边栏滚动位置 -->
     <NotFound v-if="is404" />
     <Layout v-else>
-      <!-- 移动端汉堡菜单中的特效开关：置于菜单顶部，作为「外观设置」区，避免被长导航/侧边栏挤到底部 -->
       <template #nav-screen-content-before>
         <div class="VPNavScreenEffects">
           <p class="text">页面特效</p>
@@ -463,6 +456,23 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }) => {
 </template>
 
 <style>
+.VPNavScreenEffects {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  padding: 12px 14px 12px 16px;
+  border-radius: 8px;
+  background-color: var(--vp-c-bg-soft);
+}
+
+.VPNavScreenEffects .text {
+  color: var(--vp-c-text-2);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 24px;
+}
+
 /* 暗黑模式切换：使用 View Transition 默认 cross-fade，不覆盖伪元素默认动画。
    之前用 animation:none + opacity:1 关闭默认动画再手动 clipPath 驱动，但
    transition.ready resolve 后到 element.animate() 应用 clipPath 之间存在渲染帧间隙，
@@ -796,23 +806,6 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }) => {
   .VPDoc .content {
     padding-bottom: 24px !important;
   }
-}
-
-/* 移动端菜单中的特效开关项（置于菜单顶部，下方留间距与导航项分隔） */
-.VPNavScreenEffects {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-radius: 8px;
-  padding: 12px 14px 12px 16px;
-  background-color: var(--vp-c-bg-soft);
-  margin-bottom: 16px;
-}
-.VPNavScreenEffects .text {
-  line-height: 24px;
-  font-size: 12px;
-  font-weight: 500;
-  color: var(--vp-c-text-2);
 }
 
 /*

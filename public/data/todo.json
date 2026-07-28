@@ -1,6 +1,6 @@
 {
   "version": "2026.07.13",
-  "subtitle": "F.windEmiko 的开发待办面板。条目长期滚动保留；完成 15 天后归档到 /develop/logs。",
+  "subtitle": "F.windEmiko 的开发待办面板。条目长期滚动保留；完成 15 天后归档到 /developer/ops/changelog。",
   "categories": {
     "添加": {
       "label": "添加",
@@ -258,7 +258,7 @@
           "date": "2026-07-12",
           "title": "调整基岩版兼容性范围至 26.0 - 26.33",
           "scope": "服务端 · 兼容",
-          "note": "见 /develop/logs"
+          "note": "见 /developer/ops/changelog"
         },
         {
           "id": "d-2026-07-11-foodsystem",
@@ -278,7 +278,7 @@
           "date": "2026-07-09",
           "title": "修复同品质同等级附魔在跨服重启排序不稳定",
           "scope": "服务端 · 修复",
-          "note": "见 /develop/logs"
+          "note": "见 /developer/ops/changelog"
         },
         {
           "id": "d-2026-07-09-pityhash",

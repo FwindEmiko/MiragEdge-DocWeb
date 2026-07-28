@@ -153,9 +153,9 @@ describe('processVueComponents', () => {
   })
 
   it('提取自闭合组件的 title / link / icon 属性', () => {
-    const out = processVueComponents('<FeatureCard title="基础内容" link="/features/base" icon="💰" />')
+    const out = processVueComponents('<FeatureCard title="基础内容" link="/play/systems" icon="💰" />')
     expect(out).toContain('title="基础内容"')
-    expect(out).toContain('link="/features/base"')
+    expect(out).toContain('link="/play/systems"')
     expect(out).toContain('icon="💰"')
   })
 
@@ -232,11 +232,11 @@ const x = ref(1)
   it('相对链接转换为站点绝对地址', () => {
     const raw = `# 页面
 
-[同级链接](./other.md) [根链接](/manual/faq) ![图片](./img/a.png)`
-    const { body } = cleanMarkdown(raw, 'manual/page.md')
-    expect(body).toContain('https://miragedge.top/manual/other.md')
-    expect(body).toContain('https://miragedge.top/manual/faq')
-    expect(body).toContain('https://miragedge.top/manual/img/a.png')
+[同级链接](./other.md) [根链接](/start/faq) ![图片](./img/a.png)`
+    const { body } = cleanMarkdown(raw, 'start/page.md')
+    expect(body).toContain('https://miragedge.top/start/other.md')
+    expect(body).toContain('https://miragedge.top/start/faq')
+    expect(body).toContain('https://miragedge.top/start/img/a.png')
   })
 
   it('保留外部链接与锚点不动', () => {
@@ -268,7 +268,7 @@ hero:
   tagline: 远离困扰之地
   actions:
     - text: 玩家指南
-      link: /manual/review
+      link: /start/welcome
 features:
   - title: 创新玩法
     details: 独家轻 RPG 体系
@@ -291,7 +291,7 @@ features:
     expect(body).toContain('TPS 稳定 20')
     // 快速入口
     expect(body).toContain('快速入口：')
-    expect(body).toContain('[玩家指南](https://miragedge.top/manual/review)')
+    expect(body).toContain('[玩家指南](https://miragedge.top/start/welcome)')
     // 特效脚本应被剥离
     expect(body).not.toContain('特效脚本')
   })
@@ -314,7 +314,7 @@ description: 描述
 ---
 
 只有正文没有标题。`
-    const { title } = cleanMarkdown(raw, 'features/some-page.md')
+    const { title } = cleanMarkdown(raw, 'play/some-page.md')
     expect(title).toBe('some-page')
   })
 })
@@ -329,20 +329,20 @@ describe('scanMarkdownFiles', () => {
     tmpRoot = mkdtempSync(join(tmpdir(), 'llms-scan-'))
     // 构造目录结构：
     //   /a.md
-    //   /manual/b.md
-    //   /manual/sub/c.md
-    //   /features/d.md
+    //   /start/b.md
+    //   /start/sub/c.md
+    //   /play/d.md
     //   /node_modules/ignored.md   <- 应被默认排除
     //   /public/ignored.md         <- 应被默认排除
     //   /.hidden.md                <- 应被跳过（隐藏文件）
-    mkdirSync(join(tmpRoot, 'manual', 'sub'), { recursive: true })
-    mkdirSync(join(tmpRoot, 'features'), { recursive: true })
+    mkdirSync(join(tmpRoot, 'start', 'sub'), { recursive: true })
+    mkdirSync(join(tmpRoot, 'play'), { recursive: true })
     mkdirSync(join(tmpRoot, 'node_modules'), { recursive: true })
     mkdirSync(join(tmpRoot, 'public'), { recursive: true })
     writeFileSync(join(tmpRoot, 'a.md'), '# a')
-    writeFileSync(join(tmpRoot, 'manual', 'b.md'), '# b')
-    writeFileSync(join(tmpRoot, 'manual', 'sub', 'c.md'), '# c')
-    writeFileSync(join(tmpRoot, 'features', 'd.md'), '# d')
+    writeFileSync(join(tmpRoot, 'start', 'b.md'), '# b')
+    writeFileSync(join(tmpRoot, 'start', 'sub', 'c.md'), '# c')
+    writeFileSync(join(tmpRoot, 'play', 'd.md'), '# d')
     writeFileSync(join(tmpRoot, 'node_modules', 'ignored.md'), '# ignored')
     writeFileSync(join(tmpRoot, 'public', 'ignored.md'), '# ignored')
     writeFileSync(join(tmpRoot, '.hidden.md'), '# hidden')
@@ -355,9 +355,9 @@ describe('scanMarkdownFiles', () => {
   it('递归扫描所有 .md 文件并返回 posix 路径', () => {
     const files = scanMarkdownFiles(tmpRoot)
     expect(files).toContain('a.md')
-    expect(files).toContain('manual/b.md')
-    expect(files).toContain('manual/sub/c.md')
-    expect(files).toContain('features/d.md')
+    expect(files).toContain('start/b.md')
+    expect(files).toContain('start/sub/c.md')
+    expect(files).toContain('play/d.md')
   })
 
   it('默认排除 node_modules / public 等目录', () => {
@@ -378,11 +378,11 @@ describe('scanMarkdownFiles', () => {
   })
 
   it('支持自定义 excludeDirs', () => {
-    // 把 features 也排除
-    const files = scanMarkdownFiles(tmpRoot, new Set(['features', 'node_modules', 'public']))
+    // 把 play 也排除
+    const files = scanMarkdownFiles(tmpRoot, new Set(['play', 'node_modules', 'public']))
     expect(files).toContain('a.md')
-    expect(files).toContain('manual/b.md')
-    expect(files.some((f) => f.startsWith('features/'))).toBe(false)
+    expect(files).toContain('start/b.md')
+    expect(files.some((f) => f.startsWith('play/'))).toBe(false)
   })
 
   it('Windows 反斜杠路径被规范化为 posix 风格', () => {
@@ -402,10 +402,11 @@ describe('generateLlms', () => {
     expect(result.cleanedCount).toBe(result.totalFiles)
     expect(result.failures).toEqual([])
     // 四个主分区都有页面
-    expect(result.sectionCounts.manual).toBeGreaterThan(0)
-    expect(result.sectionCounts.features).toBeGreaterThan(0)
+    expect(result.sectionCounts.start).toBeGreaterThan(0)
+    expect(result.sectionCounts.play).toBeGreaterThan(0)
     expect(result.sectionCounts.plugins).toBeGreaterThan(0)
-    expect(result.sectionCounts.develop).toBeGreaterThan(0)
+    expect(result.sectionCounts.developer).toBeGreaterThan(0)
+    expect(result.sectionCounts.archive).toBeGreaterThan(0)
     expect(result.rootCount).toBeGreaterThan(0)
   })
 

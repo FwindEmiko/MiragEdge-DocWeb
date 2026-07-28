@@ -1,6 +1,6 @@
 # 秋季 · 层林尽染
 <SmartImage 
-  src="/images/features/autumn.png"
+  src="/images/play/autumn.png"
   alt="秋季景象"
   caption="秋季 · 丹枫迎秋，暮云凝碧"
   width="100"

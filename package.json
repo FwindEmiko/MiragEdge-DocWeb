@@ -15,6 +15,7 @@
     "preview": "vitepress preview",
     "contributors": "node ./.vitepress/theme/components/js/contributors.js",
     "typecheck": "vue-tsc --noEmit",
+    "audit:routes": "node scripts/audit-doc-routes.mjs",
     "watermark": "node scripts/watermark.mjs",
     "watermark:external": "node scripts/external-watermark.mjs",
     "llms": "node scripts/generate-llms.mjs",

@@ -302,8 +302,8 @@ shrink_leggings  → humanoid-leggings → textures/entity/equipment/humanoid_le
 
 ## 相关资料
 
-- [CE 开发工作流](/develop/workflows/ce-workflow)
-- [CE 配置参考与实际目录](/develop/workflows/ce-reference)
+- [CE 开发工作流](/developer/workflows/craftengine/)
+- [CE 配置参考与实际目录](/developer/workflows/craftengine/reference)
 - [CraftEngine 官方：装备](https://ce-pre.gtemc.cn/zh-Hans/configuration/equipment)
 - [CraftEngine 官方：物品模型](https://ce-pre.gtemc.cn/zh-Hans/configuration/item/models/model)
 - [CraftEngine 官方：项目结构](https://ce-pre.gtemc.cn/zh-Hans/getting_start/project_structure)

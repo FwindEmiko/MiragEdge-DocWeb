@@ -34,10 +34,10 @@ head:
 
 与其他工作流的入口：
 
-- [数据包工作流中的 CE 集成](/develop/workflows/datapack-workflow#craftengine-集成指南)
-- [自定义作物工作流](/develop/workflows/customcrops-workflow#与-ce-物品的对接)
-- [CE 配置样例与真实目录对照](/develop/workflows/ce-reference)
-- [CE 自定义盔甲模型与装备纹理](/develop/workflows/ce-armor-workflow)
+- [数据包工作流中的 CE 集成](/developer/workflows/datapack/modules#craftengine-集成指南)
+- [自定义作物工作流](/developer/workflows/custom-crops#与-ce-物品的对接)
+- [CE 配置样例与真实目录对照](/developer/workflows/craftengine/reference)
+- [CE 自定义盔甲模型与装备纹理](/developer/workflows/craftengine/armor)
 - [官方 CE 文档](https://ce-pre.gtemc.cn/)
 - [CraftEngine 源码仓库](https://github.com/Xiao-MoMi/craft-engine)
 - [CraftEngine DeepWiki](https://deepwiki.com/Xiao-MoMi/craft-engine)
@@ -210,7 +210,7 @@ equipments:
 4. 创建/修改配置与资源；YAML 中的中文保持 UTF-8 无 BOM，图片确认是真实 PNG 而非下载到的 HTML 错误页。
 5. 检查 ID、路径大小写、资源文件存在性、同名字符冲突、JSON/YAML 语法。
 6. `/ce reload` 后获取对象做游戏内验收；记录服务器日志中的首个错误，而不是只看最后一行。
-7. 若涉及数据包，额外执行 `/reload` 并参考[数据包 CE 集成章节](/develop/workflows/datapack-workflow#craftengine-集成指南)。
+7. 若涉及数据包，额外执行 `/reload` 并参考[数据包 CE 集成章节](/developer/workflows/datapack/modules#craftengine-集成指南)。
 
 ## 故障定位
 
@@ -232,8 +232,8 @@ equipments:
 
 ## 相关页面
 
-- [CE 配置参考与实际目录清单](/develop/workflows/ce-reference)
-- [CE 自定义盔甲模型与装备纹理](/develop/workflows/ce-armor-workflow)
-- [数据包工作流：CraftEngine 集成](/develop/workflows/datapack-workflow#craftengine-集成指南)
-- [自定义作物工作流：CraftEngine 资源对接](/develop/workflows/customcrops-workflow#与-ce-物品的对接)
-- [旧贴图字符码页面](/develop/server_configs/sticker)
+- [CE 配置参考与实际目录清单](/developer/workflows/craftengine/reference)
+- [CE 自定义盔甲模型与装备纹理](/developer/workflows/craftengine/armor)
+- [数据包工作流：CraftEngine 集成](/developer/workflows/datapack/modules#craftengine-集成指南)
+- [自定义作物工作流：CraftEngine 资源对接](/developer/workflows/custom-crops#与-ce-物品的对接)
+- [旧贴图字符码页面](/developer/reference/sticker)

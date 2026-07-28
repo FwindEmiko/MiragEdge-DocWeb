@@ -14,4 +14,4 @@ head:
 
 <EnchantmentList />
 
-> 附魔 ID 对照表（开发者用）[开发文档 - 附魔ID对照表](/develop/server_configs/enchantment_ids)。
+> 附魔 ID 对照表（开发者用）[开发文档 - 附魔ID对照表](/developer/reference/enchantment_ids)。

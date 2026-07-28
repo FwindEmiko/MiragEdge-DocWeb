@@ -7,7 +7,7 @@ outline: deep
 
 # 自定义作物工作流 · AI Skills
 
-> 本页只记录当前资源快照中能核对到的结构。CustomCrops 的作物逻辑和 CraftEngine 的物品/模型注册是两个层次；先看 [CE 开发工作流](/develop/workflows/ce-workflow)，再修改作物配置。
+> 本页只记录当前资源快照中能核对到的结构。CustomCrops 的作物逻辑和 CraftEngine 的物品/模型注册是两个层次；先看 [CE 开发工作流](/developer/workflows/craftengine/)，再修改作物配置。
 
 ## 当前实际结构
 
@@ -87,7 +87,7 @@ items:
     texture: customcrops:item/customcrops/crop/tomato/tomato
 ```
 
-`texture: customcrops:item/...` 对应 `assets/customcrops/textures/item/...png`；作物阶段的 `model: customcrops:block/...` 对应 `assets/customcrops/models/block/...json`。资源引用规则详见 [CE 配置参考](/develop/workflows/ce-reference#资源定位规则)。
+`texture: customcrops:item/...` 对应 `assets/customcrops/textures/item/...png`；作物阶段的 `model: customcrops:block/...` 对应 `assets/customcrops/models/block/...json`。资源引用规则详见 [CE 配置参考](/developer/workflows/craftengine/reference#资源定位规则)。
 
 ## 验收清单
 
@@ -96,11 +96,11 @@ items:
 - [ ] 种子/收获物用 `texture`，阶段用 `model`，没有把两种写法互换。
 - [ ] 未成熟作物不会错误掉落额外种子；成熟收获的数量和品质符合设计。
 - [ ] CE 重载后无 YAML/model 错误，客户端重新获得资源包后才进行最终判断。
-- [ ] 涉及自定义食物或工具时，跳转到 [CE 开发工作流的普通物品模式](/develop/workflows/ce-workflow#普通物品)。
+- [ ] 涉及自定义食物或工具时，跳转到 [CE 开发工作流的普通物品模式](/developer/workflows/craftengine/#普通物品)。
 
 ## 参考
 
-- [CE 开发工作流](/develop/workflows/ce-workflow)
-- [CE 配置参考与实际目录](/develop/workflows/ce-reference)
+- [CE 开发工作流](/developer/workflows/craftengine/)
+- [CE 配置参考与实际目录](/developer/workflows/craftengine/reference)
 - [CraftEngine 官方文档](https://ce-pre.gtemc.cn/)
 - [CraftEngine 源码](https://github.com/Xiao-MoMi/craft-engine)

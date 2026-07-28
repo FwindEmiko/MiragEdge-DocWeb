@@ -92,4 +92,4 @@ head:
 > 基岩版功能后续可能会更新完善喵~
 
 > **相关页面推荐**：
-> - [独特功能](/features/base/function) - 更多生存便利功能
+> - [日常便利](/plugins/daily-tools) - 更多生存便利功能

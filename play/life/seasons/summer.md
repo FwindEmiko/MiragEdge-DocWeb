@@ -1,6 +1,6 @@
 # 夏季 · 骄阳盛夏
 <SmartImage 
-  src="/images/features/summer.png"
+  src="/images/play/summer.png"
   alt="夏季景象"
   caption="夏季 · 绿意盎然，星落长河"
   width="100"

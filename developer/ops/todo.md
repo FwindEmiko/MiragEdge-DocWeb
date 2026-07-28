@@ -6,7 +6,7 @@ aside: false
 
 # 待办事项
 
-数据驱动视图，列出近期待完成与最近 15 天内的已完成条目；超过 15 天滚动归档到 [更新日志](/develop/logs)。
+数据驱动视图，列出近期待完成与最近 15 天内的已完成条目；超过 15 天滚动归档到 [更新日志](/developer/ops/changelog)。
 
 <TodoList />
 
@@ -32,7 +32,7 @@ aside: false
 
 1. 把条目从 `groups[].items[]` 剪切到 `completed[].items[]`；
 2. `date` 填实际完成日期；
-3. 15 天前的已完成项滚动归档到 [更新日志](/develop/logs)。
+3. 15 天前的已完成项滚动归档到 [更新日志](/developer/ops/changelog)。
 
 ### 5 个工作性质类别（必填 `category`）
 
@@ -52,12 +52,12 @@ aside: false
 
 ### 维护节奏
 
-- 每周日 —— 把本周完成的条目整理到 [更新日志](/develop/logs)
-- 超过 15 天 —— 从本页面滚动到 [更新日志](/develop/logs)
+- 每周日 —— 把本周完成的条目整理到 [更新日志](/developer/ops/changelog)
+- 超过 15 天 —— 从本页面滚动到 [更新日志](/developer/ops/changelog)
 - 每月底 —— 回顾本月未完成的长期规划条目，决定是否调整优先级
 
 ---
 
 直接在 GitHub 上点 [todo.json](https://github.com/fwindemiko/MiragEdge-DocWeb/edit/main/public/data/todo.json) 就能改，最快。
 
-本页面的 GitHub 路径：`develop/todo.md` → [在 GitHub 编辑](https://github.com/fwindemiko/MiragEdge-DocWeb/edit/main/develop/todo.md)
+本页面的 GitHub 路径：`developer/ops/todo.md` → [在 GitHub 编辑](https://github.com/fwindemiko/MiragEdge-DocWeb/edit/main/developer/ops/todo.md)

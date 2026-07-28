@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 /**
- * 自定义 VPNavBarExtra - 在原版基础上添加特效开关
+ * 自定义 VPNavBarExtra - 在原版基础上添加氛围动效开关
  * 基于 VitePress 默认主题 VPNavBarExtra.vue 复制修改
  * 注意：后续 VitePress 更新时需检查原版是否有变更
  */
@@ -63,10 +63,10 @@ const hasExtraContent = computed(
       </div>
     </div>
 
-    <!-- [自定义] 添加特效开关 -->
+    <!-- [自定义] 添加氛围动效开关 -->
     <div class="group">
       <div class="item effects">
-        <p class="label">页面特效</p>
+        <p class="label">氛围动效</p>
         <div class="effects-action">
           <EffectsToggle />
         </div>

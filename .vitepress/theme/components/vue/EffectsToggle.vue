@@ -1,4 +1,4 @@
-<!-- 页面特殊效果开关：玻璃磨砂 + 极光星辉，置于导航栏右侧 -->
+<!-- 氛围动效开关：控制首页与异常页的非阅读动效 -->
 <script setup>
 import { ref, onBeforeUnmount } from 'vue'
 import { useEffectsToggle } from '../../composables/useEffectsToggle'
@@ -39,8 +39,8 @@ onBeforeUnmount(() => {
     :class="{ 'is-on': effectsEnabled, bursting }"
     role="switch"
     :aria-checked="effectsEnabled ? 'true' : 'false'"
-    aria-label="页面特殊效果开关"
-    title="页面特殊效果"
+    aria-label="氛围动效开关"
+    title="氛围动效"
     @click="onClick"
   >
     <span class="et-track">

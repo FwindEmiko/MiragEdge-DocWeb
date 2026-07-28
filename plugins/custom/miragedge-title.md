@@ -1,171 +1,77 @@
 ---
-title: MiragEdgeTitle 称号与入服消息插件
-description: MiragEdgeTitle 锐界幻境自研称号与入服消息插件：自定义玩家称号与入服消息展示。
-head:
-  - - meta
-    - name: keywords
-      content: MiragEdgeTitle, 称号插件, 入服消息, Minecraft 称号, 自研插件
+title: 称号与入服消息
+description: 称号与入服消息的玩家使用教程：管理身份展示、创建自定义称号和选择进退服消息。
 ---
 
-#  MiragEdgeTitle — 称号与入服消息
+# 称号与入服消息
 
-**项目状态：C**
+## 在聊天里留下自己的名字
 
----
+这个功能负责“让别人知道你是谁”，不会直接提高攻击、防御或资源产量。
 
-## 插件概览
+你可以把称号放在聊天身份前，也可以选择已经解锁的入服消息。它适合用来展示游玩经历、社区身份或个人风格。
 
-MiragEdgeTitle 提供两套独立运作的身份表达系统：
+## 从仓库里挑选，再决定展示
 
-| 系统 | 说明 |
-|------|------|
-| 称号系统 | 称号商城 · 仓库管理 · 自定义称号 · 条件解锁 · 聊天前缀显示 |
-| 入服消息系统 | 成就触发解锁 · 个性化进/退服广播 · 展示台管理 |
+### 称号：拥有和佩戴
 
-两套互不依赖，可单独运作。
+<CommandPanel>
+  <CommandEntry command="/mt" description="打开称号主界面" />
+  <CommandEntry command="/mt shop" description="查看称号商城" />
+  <CommandEntry command="/mt storage" description="查看已拥有的称号" />
+  <CommandEntry command="/mt equip &lt;ID&gt;" description="装备指定称号" />
+  <CommandEntry command="/mt unequip" description="卸下当前称号" />
+</CommandPanel>
 
----
+如果只想创建自己的文字称号，可以使用：
 
-## 技术架构
+<CommandPanel title="创建自定义称号">
+  <CommandEntry command="/mt custom &lt;内容&gt;" description="提交自己的称号文字" />
+</CommandPanel>
 
-| 项目 | 说明 |
-|------|------|
-| 核心 | Paper API 1.21.1+ · JDK 25 · Maven |
-| 结构 | `paper/` 子模块（服务器端）+ `proxy/` 子模块（Velocity 代理端，跨服同步） |
-| 数据库 | SQLite（默认）/ MySQL 双模式 |
-| 基岩版 | Floodgate Form 完整适配，含整合主菜单 |
-| 跨服 | PluginMessage 通道 `miragedge:joinquit`，选项启用 |
-| 开源 | MIT 协议 · [GitHub 仓库](https://github.com/fwindemiko/MiragEdgeTitle) |
+创建前先确认文字长度和当前账号可用的称号券。当前服务器配置将自定义称号限制为最多 12 个字符。
 
-### 前置依赖
+### 入服消息：选择现在展示的内容
 
-| 插件 | 要求 | 用途 |
-|------|:--:|------|
-| Vault | 必须 | 称号商城经济交易 |
-| PlaceholderAPI | 可选 | PAPI 变量扩展 · CUSTOM 条件解锁 · 兼容旧 `%playertitle_use%` |
-| PlayerPoints | 可选 | 点券（星痕石）购买称号 |
-| Floodgate | 可选 | 基岩版表单适配 |
+<CommandPanel>
+  <CommandEntry command="/mtmessage" description="打开入服消息展示台" />
+  <CommandEntry command="/mtmessage equip &lt;ID&gt;" description="装备入服消息" />
+  <CommandEntry command="/mtmessage unequip" description="恢复默认消息" />
+</CommandPanel>
 
----
+展示台会区分已解锁和未解锁内容。未解锁的消息不是故障，通常需要完成对应条件后才会出现。
 
-## 配置说明
+## 当前服务器规则
 
-安装后在 `plugins/MiragEdgeTitle/` 下自动生成：
+以下内容来自当前服务器配置索引（2026-07-26）：
 
-| 文件 | 用途 |
-|------|------|
-| `config.yml` | 数据库类型 · 经济开关 · 跨服桥接 · 自定义称号限制 |
-| `titles.yml` | 系统称号定义（30+ 个预设称号，含旧数据迁移与新增） |
-| `messages.yml` | 入服消息定义（11 种，含 8 个成就型 + 3 个基础型） |
+- 当前启用服务器经济余额作为称号相关经济来源。
+- PlayerPoints 购买路径当前未启用，不要把旧页面中的星痕石价格当成当前规则。
+- 普通自定义称号、单色升级和渐变升级各使用 1 张对应称号券；实际库存以游戏内界面为准。
+- 在线时间条件由服务器定期检查，页面中的解锁状态可能不会在完成条件的瞬间变化。
+- 默认入服消息为 `[+] 玩家名`，默认退服消息为 `[-] 玩家名`；装备其他消息后才会替换它们。
 
-`/mtadmin reload` 运行时热重载全部配置。
+## 展示身份，不把它变成战斗数值
 
-### 消息格式
+称号和入服消息是低风险的身份表达：它们能让长期游玩、完成挑战或参与社区的玩家留下痕迹，但不把社交展示直接变成战斗数值。
 
-模板同时支持 § 颜色码、MiniMessage 渐变（`<gradient:...>`）、十六进制颜色。首、退服消息分别配置，共用解锁条件。
+把称号仓库、商城和入服消息分开，是为了让“我拥有了什么”和“我现在展示什么”互不混淆。你可以保留多个称号，只装备其中一个。
 
----
+## 常见问题
 
-## 称号系统
+### 为什么我拥有称号但聊天里没有显示？
 
-### 所有来源
+拥有和装备是两件事。先打开仓库，选中称号并执行装备；如果仍没有显示，再检查客户端是否已经重新进入服务器。
 
-| 来源 | 货币/条件 | 示例 |
-|------|-----------|------|
-| 商城购买（金币） | Vault · 灵叶 | 萌新(免费) / VIP(1000灵叶/30天) / 赞助者(1万/永久) |
-| 商城购买（点券） | PlayerPoints · 星痕石 | 邮递员(80) / 初音未来的狗(520) / 肝帝传说(240) |
-| 在线时长解锁 | ONLINETIME | 岛民证(50h) / 夜猫子(200h) / 元老玩家(500h) |
-| 权限解锁 | 满足权限后自动获得 | 跑酷大师 / 下界征服者 / 终末英雄 |
-| CUSTOM 条件 | PAPI 统计变量达标 | 万里征程(步行100km) / 合成狂魔(合成1万次) |
-| 管理员发放 | 通过 `/mtadmin give` 直接给予 | 任何称号均可 |
-| 玩家自创 | 每日上限 3 个，最多 32 字 | 自定义文字，带颜色需权限 |
+### 为什么不能创建彩色称号？
 
-### 自定义称号
+彩色或渐变属于升级能力，不是所有账号默认开放。以创建界面的权限提示为准，不要直接复制 MiniMessage 标签。
 
-`/mt custom <内容>` 创建专属称号。权限 `miragedge.title.custom.colored` 控制是否允许 MiniMessage 颜色标签。
+### Java 和基岩版界面一样吗？
 
----
+功能目标相同，但 Java 版偏向菜单交互，基岩版会使用表单。具体按钮位置见[基岩版兼容说明](/start/bedrock)。
 
-## 入服消息系统
+## 相关页面
 
-### 成就式解锁（全服广播）
-
-击杀/完成特定目标时，自动解锁对应入服消息，伴随全服广播：
-
-| 消息名称 | 解锁条件 | 监听机制 |
-|---------|---------|---------|
-| 牢玩家 | 累计在线 10,000 分钟 | 周期性在线检查 |
-| 探险家 | 步行满 1,000 万厘米 | PAPI 条件检查 |
-| 尊贵会员 | 拥有 `miragedge.premium` 权限 | 权限检查 |
-| **屠龙者** | **击杀末影龙** | EnderDragonKillListener · 全服广播 |
-| **凋零猎手** | **击杀凋零** | WitherKillListener · 全服广播 |
-| **冒险家** | **完成「探索的时光」进度** | AdventuringTimeListener · 全服广播 |
-| **怪物猎人** | **完成「赶尽杀绝」进度** | MonsterHunterListener · 全服广播 |
-| **村庄英雄** | **完成「光辉岁月」进度** | HeroOfTheVillageListener · 全服广播 |
-| **行商巨贾** | **完成「繁荣贸易」进度** | TradeVillagerListener · 全服广播 |
-| **幻境食神** | **食用七彩蛋羹** | 由 FwindEmiCore 检测 |
-| **龙之胃** | **食用煎龙蛋** | 由 FwindEmiCore 检测 |
-
-所有成就监听器设兜底权限节点（PERMISSION 型），管理员可手动授予，适用于插件安装前已满足条件的玩家。
-
-### 展示台管理
-
-`/mtmessage` 打开成就展示台，查看已解锁/未解锁消息，支持装备、卸下、预览。
-
----
-
-## 命令参考
-
-### 玩家命令
-
-| 命令 | 功能 |
-|------|------|
-| `/mt` | 无参数：JE 开仓库 / BE 开主菜单 |
-| `/mt help` | 帮助 |
-| `/mt shop` | 称号商城 |
-| `/mt storage` | 称号仓库 |
-| `/mt custom <内容>` | 自定义称号 |
-| `/mt equip <ID>` | 装备称号 |
-| `/mt unequip` | 卸下称号 |
-| `/mt buy <ID>` | 购买称号 |
-| `/mtmessage` | 入服消息展示台 |
-| `/mtmessage equip <ID>` | 装备入服消息 |
-| `/mtmessage unequip` | 恢复默认 |
-
-### 管理员命令
-
-| 命令 | 功能 |
-|------|------|
-| `/mtadmin list` | 列出所有称号 |
-| `/mtadmin create ...` | 创建称号 |
-| `/mtadmin delete <ID>` | 删除称号 |
-| `/mtadmin give <玩家> <ID> [天数]` | 发放称号 |
-| `/mtadmin coupon <玩家> <称号ID>` | 发放类兑换券（CouponService） |
-| `/mtadmin reload` | 热重载配置 |
-
----
-
-## 权限节点
-
-| 权限 | 默认 | 说明 |
-|------|:--:|------|
-| `miragedge.admin` | OP | 管理员权限 |
-| `miragedge.title.custom.colored` | 无 | 允许在自定义称号中使用颜色与 MiniMessage 标签 |
-
----
-
-## PAPI 变量（两组）
-
-| 变量 | 值类型 | 说明 |
-|------|:------:|------|
-| `%miragedgetitle_title%` | String | 当前装备的称号内容 |
-| `%miragedgetitle_title_name%` | String | 当前装备的称号名称 |
-| `%miragedgetitle_title_with_brackets%` | String | `[内容]` 格式 |
-| `%miragedgetitle_title_count%` | int | 拥有称号数量 |
-| `%miragedgetitle_has_title_<id>%` | boolean | 是否拥有指定称号 |
-| `%miragedgetitle_equipped_message%` | String | 当前入服消息名称 |
-| `%miragedgetitle_unlocked_messages%` | int | 已解锁消息数 |
-| `%miragedgetitle_has_message_<id>%` | boolean | 是否解锁指定消息 |
-| `%playertitle_use%` | String | 兼容旧版：当前称号（同 title_with_brackets） |
-
-PAPI 扩展包含 `PlaceholderCache` 短期缓存层，避免高频请求阻塞，数据变更后自动失效。
+- [玩家守则](/start/rules)
+- [特色功能总览](/plugins/)

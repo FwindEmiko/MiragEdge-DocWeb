@@ -1,8 +1,8 @@
 # 古城 · 结构改造
 
-锐界幻境部署了 **Dungeons & Taverns** 系列的 5 个独立改造数据包，分别翻新原版 5 种结构的内部布局和战利品体系。所有包均使用 `nova_structures` 命名空间，**不添加自定义附魔或物品**，仅通过增强战利品表提升探索价值。
+锐界幻境当前整理了五种原版结构改造：古城、废弃矿井、沙漠神殿、沼泽小屋和海底神殿。它们主要改变内部布局和战利品，不添加自定义附魔、自定义物品或独立钥匙系统。
 
-## 古城 · Ancient City Overhaul
+## 古城
 
 <SmartImage src="/images/datapack/dungeons-and-taverns/ancient_city.png" alt="古城改造" shadow radius="auto" caption="深暗之域古城迎来了全面翻新——更多的房间变体、更丰富的战利品、灾厄村民的突袭彩蛋" />
 
@@ -19,7 +19,7 @@
 | 古城考古 | 锻造模板（监守/沉默）、附魔金苹果 |
 | 冰柜 | 迷之炖菜、金萝卜、雪球 |
 
-## 废弃矿井 · Mineshaft Overhaul
+## 废弃矿井
 
 <SmartImage src="/images/datapack/dungeons-and-taverns/mineshaft.png" alt="矿井改造" shadow radius="auto" caption="五种群系变体——从普通的橡木矿井到恶地红砂岩矿道，每种都有独特的装饰风格" />
 
@@ -35,7 +35,7 @@
 
 **新增战利品**：矿井桶（钻石、绿宝石、青金石、粗金）、矿井陶罐（煤炭块、铜/铁/金粒）、矿井考古（唱片、钻石镐/锹）
 
-## 沙漠神殿 · Desert Temple Overhaul
+## 沙漠神殿
 
 <SmartImage src="/images/datapack/dungeons-and-taverns/desert_temple.png" alt="沙漠神殿改造" shadow radius="auto" caption="沙漠神殿下方新增了墓室层——更深的探索、更丰厚的回报" />
 
@@ -48,7 +48,7 @@
 | 神殿陶罐 | 金锭、附魔瓶、沙漠锻造模板 |
 | 神殿考古 | 唱片 `11`、各色染料、绿宝石 |
 
-## 沼泽小屋 · Swamp Hut Overhaul
+## 沼泽小屋
 
 <SmartImage src="/images/datapack/dungeons-and-taverns/swamp_hut.png" alt="沼泽小屋改造" shadow radius="auto" caption="红树木材质的新版本——增加了炼药室和更丰富的女巫储备" />
 
@@ -58,7 +58,7 @@
 |--------|------|
 | 女巫储藏箱 | 各类药水、兔子脚、发酵蛛眼、荧石粉、糖、红石 |
 
-## 海底神殿 · Ocean Monument Overhaul
+## 海底神殿
 
 <SmartImage src="/images/datapack/dungeons-and-taverns/monument.png" alt="海底神殿改造" shadow radius="auto" caption="新增三叉戟主题变体——战利品分三个等级，远古守卫者有了自己的套房" />
 
@@ -74,4 +74,4 @@
 
 ---
 
-> 以上 5 个数据包为 **nova_structures** 旗下 Dungeons & Taverns 改造系列的独立子包，仅影响对应原版结构的生成和战利品。侧边栏分类为「地下城与酒馆」源自该系列的原名，实际仅包含上述 5 类结构改造，不含酒馆、村庄等额外建筑。
+> 以上五种结构改造只影响对应原版结构的布局和战利品。页面中的“地城酒馆”是玩家侧的分类名称，不代表当前服务器还启用了酒馆、村庄或其他未列出的结构。

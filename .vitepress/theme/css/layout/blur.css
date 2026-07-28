@@ -57,6 +57,25 @@
   transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
+/* 首页首屏不使用文档页的实体导航。保留一层低不透明度的彩色玻璃，
+   让极光能穿过顶栏，同时确保标题和导航在亮色区域仍然清晰。 */
+.VPNavBar.home.top {
+  background: linear-gradient(
+    90deg,
+    rgba(57, 28, 38, 0.3),
+    rgba(38, 34, 58, 0.16) 48%,
+    rgba(62, 37, 45, 0.28)
+  ) !important;
+  backdrop-filter: blur(12px) saturate(145%);
+  -webkit-backdrop-filter: blur(12px) saturate(145%);
+  border-bottom-color: rgba(255, 255, 255, 0.06) !important;
+}
+
+html:not(.dark) .VPNavBar.home.top {
+  background: rgba(255, 255, 255, 0.18) !important;
+  border-bottom-color: rgba(15, 23, 42, 0.08) !important;
+}
+
 /* 首页下滑后 & 文档页的导航栏 */
 .VPNavBar:not(.has-sidebar):not(.home.top),
 .VPNavBar.has-sidebar {

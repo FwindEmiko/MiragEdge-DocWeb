@@ -1,6 +1,6 @@
 # 冬季 · 凛冬将至
 <SmartImage 
-  src="/images/features/winter.png"
+  src="/images/play/winter.png"
   alt="冬季景象"
   caption="冬季 · 霜雪漫天，寒极求生"
   width="100"

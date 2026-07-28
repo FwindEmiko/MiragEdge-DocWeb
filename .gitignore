@@ -51,6 +51,14 @@ public/llms.txt
 public/llms-full.txt
 public/*/llms.txt
 public/index.md
+public/start/*.md
+public/start/**/*.md
+public/play/*.md
+public/play/**/*.md
+public/developer/*.md
+public/developer/**/*.md
+public/archive/*.md
+public/archive/**/*.md
 public/manual/*.md
 public/manual/**/*.md
 public/features/*.md

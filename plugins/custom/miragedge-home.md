@@ -1,232 +1,97 @@
 ---
-title: MiragEdgeHome 星辉锚点插件
-description: MiragEdgeHome 锐界幻境自研家园与传送系统插件，替换旧版米饭 PlayerWarp，基于 Paper API 1.21.1 开发，采用 Java 25 + Maven 构建。
-head:
-  - - meta
-    - name: keywords
-      content: MiragEdgeHome, 星辉锚点插件, Minecraft 传送插件, Paper 插件, Java 25, 自研插件
+title: 星辉锚点
+description: 星辉锚点的玩家使用教程：设置家园、浏览公共地点和发起传送请求。
 ---
 
-# MiragEdgeHome
+# 星辉锚点
 
-> 锐界幻境自研的家园与传送系统，替换旧版米饭 PlayerWarp。基于 Paper API 1.21.1 开发，采用 Java 25 + Maven 构建。
+## 把常去的地方留住
 
-## 项目状态
+星辉锚点把你经常往返的位置保存下来，适合自己的基地、公共交通点和与朋友集合的地方。你不需要反复记坐标，也不用为了短距离移动反复穿越危险区域。
 
-- 版本：1.0.0
-- 作者：F.windEmiko（狐风轩汐）
-- 仓库：*待上传*
-- 许可：MIT
+它同时提供玩家之间的传送请求，但保留预热、冷却和费用，让传送是便利工具，不会完全取代探索和道路建设。
 
----
+## 从一个落脚点开始
 
-## 前置依赖
+### 家园：自己的落脚点
 
-| 插件 | 类型 | 说明 |
-|------|------|------|
-| Vault | 软依赖 | 经济系统（灵叶扣费/转账/递增费用），未装则不启用经济功能 |
-| PlaceholderAPI | 软依赖 | 占位符变量，未装则 PAPI 变量不可用 |
-| Floodgate | 软依赖 | 基岩版表单支持，未装则基岩版玩家走 Java 版消息样式 |
+<CommandPanel>
+  <CommandEntry command="/sethome &lt;名称&gt;" description="保存当前地点" />
+  <CommandEntry command="/home [名称]" description="返回指定家园；不填名称时打开列表" />
+  <CommandEntry command="/homes" description="查看自己的家园" />
+  <CommandEntry command="/delhome &lt;名称&gt;" description="删除不再使用的家园" />
+</CommandPanel>
 
-## 存储模式
+第一次设置时，站在真正想保存的位置再执行命令。家园名称建议使用容易记忆的短名称，例如 `base`、`mine` 或 `shop`。
 
-- **SQLite**（单服，零配置开箱即用）
-- **MySQL**（跨服共享，需在 config.yml 配置连接信息），通过 HikariCP 连接池管理
-- 跨服网络基于 **Redis**（推荐）或 Plugin Messaging，通过 `network/` 包实现玩家在线状态追踪、差异检测和实时推送
+### 公共锚点：前往大家常用的位置
 
----
+<CommandPanel>
+  <CommandEntry command="/warp [名称]" description="前往公共锚点" />
+  <CommandEntry command="/warps" description="浏览公共锚点" />
+</CommandPanel>
 
-## 核心系统
+如果你的账号获得了公开名额，可以使用：
 
-### 星辉锚点（Home）
+<CommandPanel title="拥有公开名额时">
+  <CommandEntry command="/publish &lt;家园名&gt; [显示名] [费用]" description="将家园发布为公共锚点" />
+  <CommandEntry command="/unpublish &lt;家园名&gt;" description="取消公开锚点" />
+</CommandPanel>
 
-玩家通过 `/sethome <名称>` 设置个人锚点。
+普通玩家默认公开名额为 0；已有公共锚点仍可浏览，能否创建以游戏内提示为准。
 
-**数量管理采用数据驱动模式**（非权限组模式）：
+### 和朋友集合
 
-- 默认可设置 **1 个**锚点（由 `homes.default-limit` 控制）
-- 管理员通过 `/megadmin number <玩家> set|add|remove homes <数量>` 单独调整每个玩家的锚点上限
-- `player_data.homes_limit` 为绝对上限，`-1` 回退到 config 默认值
-- 旧版权限节点 `miragedgehome.homes.*` 已废弃，不再参与上限计算
-- 同名家园补全检测 + DB 唯一约束双重保障
+<CommandPanel>
+  <CommandEntry command="/tpa &lt;玩家&gt;" description="请求传送到对方" />
+  <CommandEntry command="/tpahere &lt;玩家&gt;" description="请求对方传送到你这里" />
+  <CommandEntry command="/tpaccept [玩家]" description="接受请求" />
+  <CommandEntry command="/tpdeny [玩家]" description="拒绝请求" />
+  <CommandEntry command="/tpaui" description="打开传送请求管理界面" />
+</CommandPanel>
 
-**并发安全**：同玩家的连续 `/sethome` 操作通过 CompletableFuture 链串行化（S3-fix），杜绝 count→insert 之间的竞态问题。30 分钟自动清理已完成链尾。
+## 当前服务器规则
 
-### 公共锚点（Warp）
+以下内容来自当前服务器配置索引（2026-07-26）：
 
-| 类型 | 创建方式 | 说明 |
-|------|---------|------|
-| 管理员公共锚点 | `/setwarp <名称>` | 面向全服玩家，用于主城、交通枢纽等 |
-| 玩家公开锚点 | `/publish <家园名> [显示名] [费用]` | 玩家公开私人锚点，可设置访问费用 |
+| 项目 | 当前规则 |
+| --- | --- |
+| 默认家园数量 | 1 个 |
+| 家园名称长度 | 最多 16 个字符 |
+| 禁止设置家园的世界 | `pvp` |
+| 传送冷却 | 5 秒 |
+| 传送预热 | 3 秒 |
+| 预热期间移动或受伤 | 会取消传送 |
+| 创建第一个家园 | 350 灵叶 |
+| 额外家园 | 每个额外增加 300 灵叶 |
+| 删除家园 | 按当前配置返还 60% |
+| TPA 请求有效期 | 60 秒 |
+| TPA 成功费用 | 100 灵叶 |
 
-- 访问费用（灵叶）自动转入主人账户
-- 公开数量同样为数据驱动：默认 **0**（需管理员手动授权），通过 `/megadmin number` 指令设置
-- 跨服模式下可通过 `warp-list-scope` 控制列表范围（本服/全群组）
+传送成功后会有短暂的缓慢和失明效果。这是为了避免玩家刚落地就利用传送保护瞬间完成攻击或定位，不是传送失败。
 
-### 星辉信使（TPA）
+## 方便移动，也让每次出发有分量
 
-全内存管理，请求 60 秒超时自动清理。接收方连续拒绝同一玩家 **3 次**后，自动开启 **5 分钟**星能屏障。
+家园解决的是重复赶路，公共锚点解决的是社区交通，TPA 解决的是临时集合。三者分开，可以让玩家在“方便移动”和“仍然需要探索”之间保持平衡。
 
-- 跨服 TPA 支持（需启用 Redis 后端），可开关
-- 每次成功传送消耗 **100 灵叶**（可配置，需 Vault）
-- 提供独立 UI：`/tpaui` 命令打开专用传送请求管理界面（Java 版 GUI + 基岩版 Form）
+预热和移动取消让传送不能在战斗中无成本逃跑；费用和数量上限则让锚点仍然需要规划，而不是把所有位置都变成瞬移点。
 
-### 传送引擎
+## 常见问题
 
-完整的传送生命周期：
+### 为什么 `/sethome` 失败？
 
-```
-冷却检查 → 星轨校准（warmup，可被移动/受伤打断）
-→ 星辉扫描（安全检测：虚空/岩浆/窒息，默认关闭）
-→ 药水效果（缓慢2秒+失明3秒，防传送后迷惑定位）
-→ 成功传送 → 粒子+音效 | 不安全则警告，10秒内可强行跃迁
-```
+先确认当前世界不是 `pvp`，并检查是否已经达到家园数量上限。传送或创建过程中如果收到明确提示，以提示内容为准。
 
-**传送后药水效果**：成功传送后自动施加缓慢和失明效果（时长和等级可配置），防止传送后立即被攻击或定位迷惑——类似死亡轮回中 `/back` 的负面效果机制。
+### 传送时能不能走动？
 
-### 跨服网络
+不能。当前配置下，预热期间移动或受到伤害都会取消传送。
 
-跨服功能基于以下架构实现：
+### 基岩版能不能用？
 
-| 组件 | 作用 |
-|------|------|
-| `RedisBackend` | 通过 Redis Pub/Sub 实现实时推送和玩家数据差异检测 |
-| `ProxyConnector` | 与 Velocity/BungeeCord 代理通信，获取玩家在线状态和所在子服信息 |
-| `NetworkPlayerTracker` | 维护在线玩家缓存（TTL 30秒）+ 心跳检测 |
-| `HeadTextureCache` | 玩家头颅纹理缓存，减少 Redis 写入频次 |
-| `CrossServerBackend` | 统一接口，抽象 Redis 和 Plugin Messaging 两种实现 |
+核心功能与 Java 版一致。Java 版通常使用菜单，基岩版会使用对应表单；按钮布局差异见[基岩版兼容说明](/start/bedrock)。
 
-关键配置项目：
+## 相关页面
 
-```yaml
-cross-server:
-  enabled: false
-  server-id: ""           # 自动检测或手动填写
-  backend: redis          # redis 或 messaging
-  home-list-scope: all    # current=仅本服 / all=全群组
-  warp-list-scope: all
-  teleport-join-delay: 40 # 跨服切换后等待世界加载的 tick
-  tpa-cross-server: true  # 跨服 TPA
-
-  redis:
-    host: localhost
-    port: 6379
-    password: ""
-    database: 0
-```
-
-### 双端 UI
-
-- **Java 版**：MiniMessage 渐变色背包 GUI + 创建确认/公开确认界面
-- **基岩版**：Floodgate SimpleForm/ModalForm/CustomForm，功能对等
-
-### 外部 API
-
-提供 `MiragEdgeHomeAPI.getInstance()` 单例：
-
-- `getPlayerHomes(UUID)` / `getPublicWarps()`
-- `forceTeleportToHome(Player, String)`
-- `getHomeLimit(UUID)` — 查询锚点上限（数据驱动）
-- `isTpaBlacklisted(UUID, UUID)`
-
-三个可取消事件：`HomeTeleportEvent`、`TpaRequestEvent`、`PublicWarpVisitEvent`。
-
----
-
-## 命令一览
-
-| 命令 | 说明 | 权限 |
-|------|------|------|
-| `/sethome <名称>` | 设置星辉锚点 | 全玩家 |
-| `/home [名称]` | 传送到锚点（无参→打开列表） | 全玩家 |
-| `/delhome <名称>` | 删除锚点 | 全玩家 |
-| `/homes` | 列出全部锚点 | 全玩家 |
-| `/publish <家园名> [显示名] [费用]` | 公开私人锚点 | 全玩家 |
-| `/unpublish <家园名>` | 取消公开 | 全玩家 |
-| `/warp [ID\|名称]` | 传送到公共锚点 | 全玩家 |
-| `/setwarp <名称>` | 创建公共锚点（管理员） | `miragedgehome.admin` |
-| `/delwarp <名称>` | 删除公共锚点（管理员） | `miragedgehome.admin` |
-| `/warps` | 浏览所有公共锚点 | 全玩家 |
-| `/tpa <玩家>` | 请求传送到玩家 | 全玩家 |
-| `/tpahere <玩家>` | 请求玩家过来 | 全玩家 |
-| `/tpaccept [玩家]` | 接受请求（无参=最新） | 全玩家 |
-| `/tpdeny [玩家]` | 拒绝请求（无参=最新） | 全玩家 |
-| `/tpaui` | 打开传送管理界面 | 全玩家 |
-| `/megadmin number <玩家> <set\|add\|remove> <homes\|public> <数量>` | 调整玩家锚点上限（数据驱动） | `miragedgehome.admin` |
-| `/megadmin info <玩家>` | 查看玩家星辉档案 | `miragedgehome.admin` |
-| `/megadmin reload` | 重载配置 | `miragedgehome.admin` |
-
-## 权限节点
-
-| 节点 | 默认 | 说明 |
-|------|------|------|
-| `miragedgehome.admin` | op | 管理员权限 |
-
-> 家园数量和公开数量不再通过权限组控制，改为数据驱动模式。
-
-## 配置参考
-
-```yaml
-# config.yml 关键配置项
-
-database:
-  type: sqlite
-
-cross-server:
-  enabled: false
-  backend: redis
-  home-list-scope: all
-  tpa-cross-server: true
-
-homes:
-  default-limit: 1
-  world-blacklist:
-    - pvp
-
-teleport:
-  cooldown: 5
-  warmup: 3
-  safety-check: false
-  post-teleport-effects:
-    enabled: true
-    slowness-seconds: 2
-    blindness-seconds: 3
-    amplifier: 0
-
-public-warps:
-  default-limit: 0
-
-economy:
-  enabled: true
-  home-create:
-    base-cost: 350
-    per-home-cost: 300
-  public-create:
-    base-cost: 900
-    per-warp-cost: 1200
-  home-delete:
-    refund-percent: 60
-
-tpa:
-  request-timeout: 60
-  blacklist-streak: 3
-  blacklist-duration: 300
-  cost:
-    enabled: true
-    amount: 100
-```
-
-## PlaceholderAPI 变量
-
-| 变量 | 返回 | 说明 |
-|------|------|------|
-| `%miragedgehome_homes_count%` | 数字 | 当前锚点数量 |
-| `%miragedgehome_homes_limit%` | 数字 | 锚点上限（数据驱动） |
-| `%miragedgehome_public_count%` | 数字 | 已公开锚点数 |
-| `%miragedgehome_public_limit%` | 数字 | 公开锚点上限 |
-
-## 已知限制
-
-- TPA 黑名单为接收方全局冷却，冷却期间任何人无法向目标发送请求（简化方案）
-- 冷却不持久化，服务器重启后重置
-- 跨服 TPA 依赖 Redis 后端，Plugin Messaging 模式下受限
+- [经济系统](/play/systems/economy)
+- [入服与客户端兼容](/start/compatibility)
+- [插件教程总览](/plugins/)

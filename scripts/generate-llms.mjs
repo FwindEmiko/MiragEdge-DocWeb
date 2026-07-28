@@ -9,7 +9,7 @@
  *
  *   1. /llms.txt              —— 站点根索引（H1 + 摘要 + 分区文件清单）
  *   2. /llms-full.txt         —— 全站清洗后 Markdown 拼接而成的全文快照
- *   3. /{section}/llms.txt    —— 各主分区索引（features / manual / develop / plugins）
+ *   3. /{section}/llms.txt    —— 各主分区索引（start / play / plugins / developer / archive）
  *   4. /{path}/page.md        —— 每个 HTML 页面对应的清洗版 Markdown（同 URL + .md）
  *
  * 清洗规则：
@@ -60,26 +60,34 @@ const EXCLUDE_DIRS = new Set([
 // order 决定在 llms.txt 与 llms-full.txt 中的展示顺序
 const SECTIONS = [
   {
-    name: 'manual',
-    title: '玩家手册',
-    description: '入服指南、玩家守则、客户端安装、附属功能教程与社区交流说明',
+    name: 'start',
+    title: '开始游戏',
+    description: '新玩家入服、客户端安装、账号绑定、基岩版兼容与常见问题',
   },
   {
-    name: 'features',
-    title: '玩法介绍',
-    description: '基础系统、田园生活（钓鱼/种植/食物/季节）、冒险战斗（附魔/装备/数据包）',
+    name: 'play',
+    title: '玩法指南',
+    description: '基础系统、冒险探索、装备成长和田园生活的玩家使用说明',
   },
   {
     name: 'plugins',
-    title: '原创插件',
-    description: '锐界幻境自研 Bukkit 插件文档：PVP 竞技场、异常附魔清理、星辉锚点、称号系统',
+    title: '插件教程',
+    description: '锐界幻境服务器专属插件的使用教程与功能说明',
   },
   {
-    name: 'develop',
+    name: 'developer',
     title: '开发文档',
-    description: '开发团队、工作流（CE / 数据包 / 附魔 / 钓鱼 / 作物）、网建组件、节点状态与更新日志',
+    description: '开发工作流、当前配置参考、站点协作、运维信息与未完成内容',
+  },
+  {
+    name: 'archive',
+    title: '历史归档',
+    description: '已经结束的活动与历史事件记录，不代表当前服务器状态',
   },
 ];
+
+// 旧分区下的生成物是构建缓存，不属于当前公开文档；清理时只删除脚本自己生成的文件。
+const LEGACY_SECTIONS = ['manual', 'features', 'develop'];
 
 // ============================================================
 // 工具函数
@@ -426,7 +434,7 @@ export function processVueComponents(md) {
   });
 
   // 自闭合组件：<Tag ... />
-  // 注意：attrs 用 [^>]*? 而非 [^/>]*，因为属性值可能含 /（如 link="/features/base"）
+  // 注意：attrs 用 [^>]*? 而非 [^/>]*，因为属性值可能含 /（如 link="/play/systems"）
   // 旧正则 [^/>]* 遇到 URL 中的 / 会提前截断，导致组件无法匹配，最终被兜底 HTML 剥离逻辑误删
   md = md.replace(/<([A-Z][\w-]*)([^>]*?)\s*\/>/g, (_, tag, attrs) => {
     const attrStr = extractComponentAttrs(attrs);
@@ -571,7 +579,7 @@ function buildRootLlmsTxt(sectionEntries, rootEntries, buildMeta) {
   lines.push(`- 每个分区根目录下均有该分区的 llms.txt，仅列出该分区页面`);
   lines.push(`- 每个 HTML 页面同 URL 后追加 .md 即可获取该页清洗后的 Markdown 版本`);
   lines.push(`- /llms-full.txt 为全站页面 Markdown 拼接，适合一次性载入大上下文窗口`);
-  lines.push(`- 路径中 index.md 对应 HTML 索引页（如 /manual/ 对应 /manual/index.md）`);
+  lines.push(`- 路径中 index.md 对应 HTML 索引页（如 /start/ 对应 /start/index.md）`);
   lines.push('');
 
   // 各分区 H2 + 文件清单
@@ -585,7 +593,6 @@ function buildRootLlmsTxt(sectionEntries, rootEntries, buildMeta) {
     }
     lines.push('');
   }
-
   // 根目录零散页面（如有）
   if (rootEntries.length) {
     lines.push(`## 其他`);
@@ -702,6 +709,10 @@ function cleanOldOutputs() {
       // 仅删除 llms.txt 与递归 .md（保留其他静态资源如图片）
       removeGeneratedFiles(secDir);
     }
+  }
+  for (const secName of LEGACY_SECTIONS) {
+    const secDir = join(PUBLIC, secName);
+    if (existsSync(secDir)) removeGeneratedFiles(secDir);
   }
   // 根 index.md（首页清洗版）
   const rootIndexMd = join(PUBLIC, 'index.md');
