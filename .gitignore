@@ -44,6 +44,7 @@ yarn-error.log*
 # pnpm
 .pnpm-store/
 .npm
+
 public/data/contributors-activity.json
 
 # LLMs.txt 标准生成产物（由 scripts/generate-llms.mjs 自动生成）
