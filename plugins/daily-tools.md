@@ -18,7 +18,7 @@ description: 锐界幻境已启用的日常便利功能：作物收获、经验�
 镰刀系统当前已启用，不同材质拥有不同的收获范围和耐久。它适合处理成片成熟作物；具体数值以物品描述为准。
 
 <SmartImage
-  src="/images/web_image/play/systems/function/sickle_show.gif"
+  src="/images/web_image/features/base/function/sickle_show.gif"
   alt="镰刀收获演示"
   caption="镰刀收获"
   maxWidth="300px"
@@ -31,7 +31,7 @@ description: 锐界幻境已启用的日常便利功能：作物收获、经验�
 箱子整理功能当前已启用，整理范围覆盖以操作位置为中心的 3×3 区域，并有短暂冷却。大规模整理前，建议先确认相邻容器中没有需要保留的临时分类。
 
 <SmartImage
-  src="/images/web_image/play/systems/function/箱子整理.gif"
+  src="/images/web_image/features/base/function/箱子整理.gif"
   alt="箱子整理演示"
   caption="箱子整理"
   maxWidth="300px"
@@ -46,7 +46,7 @@ description: 锐界幻境已启用的日常便利功能：作物收获、经验�
 空经验瓶可将经验保存为可携带物品，存入会有一定损耗。它适合在远行或死亡风险较高前先转移部分经验，不适合用作无损存储。
 
 <SmartImage
-  src="/images/web_image/play/systems/function/empty_xp_bottle.png"
+  src="/images/web_image/features/base/function/empty_xp_bottle.png"
   alt="经验瓶物品示意"
   caption="经验瓶"
   maxWidth="300px"
@@ -73,7 +73,7 @@ description: 锐界幻境已启用的日常便利功能：作物收获、经验�
 玩家在土径上行走时会获得短暂速度提升。它适合把常用路线和基地通道做得更有价值。
 
 <SmartImage
-  src="/images/web_image/play/systems/function/土径加速.gif"
+  src="/images/web_image/features/base/function/土径加速.gif"
   alt="土径加速演示"
   caption="土径加速"
   maxWidth="300px"

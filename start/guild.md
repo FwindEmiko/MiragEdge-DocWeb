@@ -16,7 +16,7 @@
 - **工会铭牌**：可选配置，支持自行设计图片（宽度≤32像素，长度≤256像素，建议美观易识别）；也可使用纯文字形式，制作完成后需将图片发给服主协助导入
 
 <SmartImage
-  src="/images/play/tag.png"
+  src="/images/features/tag.png"
   alt="铭牌示例"
   caption="铭牌示例"
   maxWidth="100px"

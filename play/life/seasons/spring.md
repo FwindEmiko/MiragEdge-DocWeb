@@ -1,6 +1,6 @@
 # 春季 · 万物复苏
 <SmartImage 
-  src="/images/play/spring.png"
+  src="/images/features/spring.png"
   alt="春季景象"
   caption="春季 · 繁花遍野，樱落缤纷"
   width="100"

@@ -9,7 +9,7 @@ description: 锐界幻境现有的鞘翅与镰刀锻造升级说明。
 在保持原鞘翅功能属性的情况下，可再提供6点护甲值，并大幅提高装备耐久  
 
 <SmartImage align="left" margin="0"
-  src="/images/web_image/play/adventure/equipment/reinforced_elytra.png" 
+  src="/images/web_image/features/adventure/mmo/reinforced_elytra.png"
   alt="下界合金鞘翅"
   caption="下界合金鞘翅"
   maxWidth="350px"
@@ -21,7 +21,7 @@ description: 锐界幻境现有的鞘翅与镰刀锻造升级说明。
 如果你不会合成镰刀，可以看这个: [镰刀](/plugins/daily-tools#镰刀)  
 
 <SmartImage align="left" margin="0"
-  src="/images/web_image/play/adventure/equipment/netherite_sickle.png" 
+  src="/images/web_image/features/adventure/mmo/netherite_sickle.png"
   alt="下界合金镰刀"
   caption="下界合金镰刀"
   maxWidth="350px"

@@ -577,6 +577,7 @@ export default defineConfig({
             { text: '日常便利', link: '/plugins/daily-tools' },
             { text: '星辉锚点', link: '/plugins/custom/miragedge-home' },
             { text: '死亡回程', link: '/plugins/custom/death-return' },
+            { text: '幻空翼', link: '/plugins/custom/sky-elytra' },
           ]
         },
         {
@@ -737,7 +738,7 @@ export default defineConfig({
                 { text: 'FE_Fly', link: '/developer/archive/plugins/fe-fly' },
                 { text: '物品功能核心', link: '/developer/archive/plugins/items-core' },
                 { text: '任务系统', link: '/developer/archive/plugins/quests' },
-                { text: '幻空翼飞行', link: '/developer/archive/plugins/sky-elytra' },
+                { text: '幻空翼历史草稿', link: '/developer/archive/plugins/sky-elytra' },
                 {
                   text: 'PVP 竞技场',
                   link: '/developer/archive/plugins/pvp/',

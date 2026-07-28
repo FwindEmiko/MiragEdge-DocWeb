@@ -8,7 +8,7 @@
 ## 近战武器
 
 ### 龙刃（Dragonblade）
-<McItem name="龙刃" texture="/images/datapack/stellarity/items/Dragonblade_2.webp" size="lg" />
+<McItem name="龙刃" texture="/images/datapack/stellarity/items/dragonblade.png" size="lg" />
 - **类型**：近战 / 剑
 - **获取**：击败末影龙后，在诅咒祭坛合成
 - **效果**：挥舞时释放龙息冲击波，范围伤害
@@ -220,5 +220,4 @@
 | 生存续航 | 龙刃 / 塔玛里斯 | 神圣盔甲 / 花之盔甲 |
 | 探索飞行 | 万花筒 | 女皇之翼 + 任意轻甲 |
 | 全地形通用 | 星辰打击者 | 神圣盔甲 |
-
 

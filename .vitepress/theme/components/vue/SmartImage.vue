@@ -54,11 +54,8 @@
 
 <script>
 import { withBase } from 'vitepress'
-import externalWmMap from '../../../../public/external-wm-map.json'
 import { useLightbox, registerToGroup, unregisterFromGroup } from '../../composables/useLightbox'
 import { normalizeCssLength } from '../../utils/cssValue'
-
-const wmMap = externalWmMap
 
 export default {
   name: 'SmartImage',
@@ -157,18 +154,11 @@ export default {
 
   computed: {
     baseSrc() {
-      // 外部图片水印重写：如果映射表中存在本地水印版本，则使用本地路径
-      if (this.src && this.src.startsWith('http') && wmMap[this.src]) {
-        return withBase(wmMap[this.src])
-      }
       return withBase(this.src)
     },
-    // 放大用的大图地址：优先 zoomSrc，否则使用 src（同样走水印重写）
+    // 放大用的大图地址：优先 zoomSrc，否则使用 src
     baseZoomSrc() {
       const raw = this.zoomSrc || this.src
-      if (raw && raw.startsWith('http') && wmMap[raw]) {
-        return withBase(wmMap[raw])
-      }
       return withBase(raw)
     },
     // 放大后的标题：优先 zoomCaption，否则 caption，否则 alt

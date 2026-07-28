@@ -10,7 +10,7 @@ head:
 # 真实季节系统
 
 <SmartImage
-  src="/images/play/season.png"
+  src="/images/features/season.png"
   alt="真实季节"
   caption="春 · 夏 · 秋 · 冬"
   width="600"
