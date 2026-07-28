@@ -445,6 +445,7 @@ export default defineConfig({
           text: '⚔️ 冒险战斗',
           collapsed: false,
           items: [
+            { text: '战利品与探索区域', link: '/features/adventure/loot' },
             {
               text: '📦 数据包玩法',
               collapsed: false,

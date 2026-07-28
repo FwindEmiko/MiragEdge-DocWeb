@@ -30,3 +30,5 @@ head:
 </FeatureCard>
 
 有关常见问题的详细解答，请参考[常见问题](/manual/faq)页面
+
+探索世界前，建议先阅读[战利品与探索区域](/features/adventure/loot)，了解战利品箱、区域边界和重置风险。
