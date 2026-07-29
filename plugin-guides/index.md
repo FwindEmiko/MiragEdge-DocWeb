@@ -20,6 +20,14 @@ outline: deep
 检测并清理异常附魔，兼容 UberEnchant 的 PDC 附魔数据，并保护自定义 GUI 物品。
 </FeatureCard>
 
+<FeatureCard
+  icon="🐉"
+  title="DragonMiao"
+  link="/plugin-guides/dragonmiao/"
+>
+追踪末影龙生命周期与龙蛋记录，支持多末地世界和 Java、基岩版消息适配。
+</FeatureCard>
+
 ## 从需要解决的事开始
 
 首次接入插件时，先阅读对应插件首页确认服务端要求和安装顺序；出现异常物品、配置不生效或需要临时处置时，再从侧栏进入命令、配置和使用场景。技术实现、源码协作和服务器模块职责则保留在[开发者文档](/developer/)中。

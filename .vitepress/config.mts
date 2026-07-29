@@ -625,6 +625,7 @@ export default defineConfig({
                 { text: 'UberEnchant 兼容', link: '/plugin-guides/bug-enchant-remover/uber_enchant' },
               ]
             },
+            { text: 'DragonMiao', link: '/plugin-guides/dragonmiao/' },
           ]
         },
       ],
@@ -698,7 +699,7 @@ export default defineConfig({
           text: '🌐 站点与协作',
           collapsed: false,
           items: [
-            { text: '插件协作流程', link: '/developer/process/plugin-lifecycle' },
+            { text: '插件开发规范', link: '/developer/process/plugin-lifecycle' },
             { text: '开发团队', link: '/developer/team' },
             { text: '图片自动化模块', link: '/developer/website/autoimage' },
             { text: '配方可视化组件', link: '/developer/website/mcrecipe' },

@@ -21,7 +21,7 @@ description: 锐界幻境的服务端维护、插件协作、数据包和资源�
 - [自定义物理与反作弊桥接层](./reference/server-modules#自定义物理与反作弊桥接层)：为合法移速、鞘翅和碰撞变化设计最小化反作弊兼容。
 - [原创插件文档](/plugin-guides/)：查阅独立插件的安装、配置与维护资料。
 - [附魔 ID 对照表](./reference/enchantment_ids)：查阅字段、ID 与配置约定。
-- [插件协作流程](./process/plugin-lifecycle)：维护跨插件功能时的协作步骤。
+- [插件开发规范](./process/plugin-lifecycle)：面向 AI 与开发者的需求核对、实现边界、验证与交付规则。
 
 ## 日常维护
 
