@@ -61,5 +61,6 @@ description: 全服市场的玩家使用教程：购买、上架、收购、拍�
 ## 相关页面
 
 - [经济系统](/play/systems/economy)
+- [箱子商店](/plugins/custom/chest-shop)
 - [等价交换商店](/plugins/custom/emc-shop)
 - [插件教程总览](/plugins/)
