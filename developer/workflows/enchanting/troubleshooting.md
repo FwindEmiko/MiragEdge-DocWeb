@@ -1,35 +1,48 @@
 ---
-title: 附魔配置工作流 · 排错与交付
-description: 面向锐界幻境自定义附魔维护的工作流，拆分为前置环境、模块实现、参考资料和排错。
+title: Aiyatsbus 附魔配置工作流 · 排错
+description: 按加载、事件、变量、数据包和实服边界定位 Aiyatsbus 附魔问题。
 ---
 
-# 附魔配置工作流 · 排错与交付
+# 排错
 
-## 七、常见陷阱提醒
+先把问题归到一个层次：YAML 没加载、脚本没编译、事件没触发、状态没保存、数值不对，或是另一个系统也在生效。不要在没有日志和最小复现的情况下同时修改多个节点。
 
-| # | 陷阱 | 说明 |
-|:-|:-----|:-----|
-| 1 | ❌ 使用 Kether 语法 | 服务器已完全切换到 fluxon，所有 Kether 示例（`add-potion-effect`、`set ... to` 等）均已失效 |
-| 2 | ❌ 附魔 yml 中 `rarity` 写英文 | 必须写品质中文名（如 `传说`，不是 `legendary`） |
-| 3 | ❌ `targets` 写英文装备类 | 必须写中文名（如 `剑`，不是 `swords`） |
-| 4 | ❌ 在文档中重复附魔 ID 对照表 | 引用 `enchantment_ids.md` 的 Vue 组件即可 |
-| 5 | ❌ 删除 `alternative` 节 | 即使只做自定义附魔，alternative 字段（如 `is-treasure`）控制获取渠道，不可省略 |
-| 6 | ❌ 忘记在脚本中加 `&` 前缀 | fluxon 变量全部用 `&` 前缀，如 `&player`、`&冷却` |
-| 7 | ❌ tickers 中忘记 post-handle | 卸下附魔时不清理状态会导致飞行/无敌等效果残留 |
-| 8 | ❌ leveled 变量缺少 `:` 分隔符 | 即使单位为空也要写 `:` 前缀（如 `":0.064"`），否则 `IndexOutOfBoundsException at Variables.kt:100` |
-| 9 | ❌ 使用 `getXxx()` 形式调用属性 | fluxon 属性 key 名是去掉 `get` 前缀的名称（如 `cause()` 而非 `getCause()`，`action()` 而非 `getAction()`），使用 `getXxx()` 会抛 `FunctionNotFoundException` |
-| 10 | ❌ 使用 `math::random()` | fluxon 没有 `math` 命名空间，应使用 `random(最小, 最大)` |
-| 11 | ❌ 使用未注册的 Java 方法 | `&player::getGravity()`/`setGravity()`/`walkSpeed()` 等方法未注册，使用前必须确认属性已注册（见附录 D/E） |
-| 12 | ❌ 误用 `.` 成员访问 | Aiyatsbus 未启用 `allowReflectionAccess`，`.` 运算符无效，必须使用 `::` 上下文调用 |
-| 13 | ❌ 使用 `&event::getFrom()` / `getTo()` | player-move 事件无 PropertyPlayerMoveEvent 注册，应使用 `&event::player::getLocation()` 或 ticker 方案 |
+## 常见问题
 
-## 八、未覆盖问题的处理策略
+| 现象 | 优先检查 | 处理方式 |
+| --- | --- | --- |
+| reload 后没有附魔 | YAML 缩进、`basic.enable`、ID、配置目录、完整 reload 日志 | 先还原为最小骨架，逐段加回 |
+| `FunctionNotFoundException` | 实际 Fluxon 扩展、函数参数、事件类型 | 不要猜 Java getter；按 [Fluxon 参考](./reference) 或当前 JAR 源码改写 |
+| `modifiable` 每次都回到初始值 | 是否只写了 `&变量 = ...`，是否读写同一个 `&item` | 使用 `variables::modifiable(...)` 和 `variables::setModifiable(...)` |
+| `variables::modifiable` 报参数错误 | 是否传了第四个默认值 | 当前签名只接收 enchant、item、name 三个参数 |
+| 方块交互空指针或脚本错误 | 空气点击、左右手双触发、`clickedBlock` 语法 | 先判断 `isClickBlock()`，使用 `&event::clickedBlock()`，再按 `hand()` 过滤 |
+| 移动脚本始终用当前位置 | 使用了旧的“from/to 不可用”方案 | 当前版本可用 `&event::from()` 和 `&event::to()` |
+| 数据包效果和插件效果叠加 | 同 ID 或同机制仍由 datapack 生效 | 按 [数据包边界](./datapack-boundaries) 只保留一个机制所有者 |
+| reload 成功但游戏内无效 | 槽位、目标、条件、事件、区域保护、PVP、反作弊 | 走 [验证与实服验收](./validation) 的功能和组合回归层 |
+| 玩家速度/属性异常残留 | ticker 中全局属性写入与其他系统冲突 | 停止把 base attribute/metadata 恢复作为通用实现，改为短效、边界明确的机制或保留数据包实现 |
 
-当遇到本文档未覆盖的问题时，AI 应：
+## 最小复现步骤
 
-1. **查阅官方文档**：优先访问 [Aiyatsbus Wiki](https://wiki.polarastrum.cc/plugin/aiyatsbus/) 和 [TabooLib 脚本动作大全](https://taboolib.hhhhhy.kim/kether-list)
-2. **参考现有附魔**：`enchants/` 下所有附魔包（`Packet-Default/`、`Packet-Vanilla/`、`Stellarity/` 等）中的现有附魔是最佳参考。遇到不确定的属性或函数时，用 `grep` 搜索服务器上已工作的 yml 文件，确认正确的语法和属性 key 名
-3. **增量验证**：每完成一个模块配置后即用 `/aiyatsbus reload` 验证，不要等全部写完再测试
-4. **保守提示**：对于文档未明确覆盖的功能，向用户说明不确定性，并给出最佳实践建议
+1. 复制问题附魔为单独测试 ID，暂时去掉 ticker、变量和跨事件逻辑。
+2. 用 `/aiyatsbus book <enchant> [level] [player]` 或 `/aiyatsbus enchant <enchant> [level] [player]` 得到测试物品。
+3. 只保留一个 `listener`，让它做可观察但低风险的最小效果。
+4. 记录 reload 后第一条报错及完整堆栈，不要只截最后一行。
+5. 验证事件触发后，再逐项加回变量、冷却、ticker 和外部兼容逻辑。
 
----
+## YAML 检查重点
+
+- `handle`、`pre-handle`、`post-handle` 必须使用块标量 `|-`，避免双引号、多行转义和缩进混合。
+- 变量名、显示引用与脚本中的字符串名称必须完全一致。
+- `alternative` 是可选节点，删除它本身不会导致普通自定义附魔失效。
+- `basic.id` 不应与另一份 Aiyatsbus 配置或数据包注册项冲突。
+- 保留当前可加载文件的键名风格，不要在没有版本验证时做“统一连字符/下划线”的机械迁移。
+
+## 证据优先级
+
+1. 当前服务器启动/reload 日志和当前部署 JAR。
+2. 当前 Aiyatsbus 与 Fluxon 源码。
+3. 当前配置包内已经可加载的同类附魔。
+4. 官方 Wiki 和教程。
+5. 旧文档、论坛片段和旧 Kether 示例。
+
+资料冲突时，低优先级资料不能覆盖高优先级证据。静态检查、源码阅读和 reload 都不能替代目标服务器的游戏内验收。

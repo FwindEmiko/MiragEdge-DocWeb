@@ -393,7 +393,7 @@ export default defineConfig({
       {
         text: '更多',
         items: [
-          { text: '🧩 原创插件文档', link: '/plugin-guides/', activeMatch: '^/plugin-guides/' },
+          { text: '原创插件文档', link: '/plugin-guides/', activeMatch: '^/plugin-guides/' },
           { text: '历史活动记录', link: '/archive/' },
           { text: '网站源码仓库', link: 'https://github.com/fwindemiko/MiragEdge-DocWeb', target: '_blank', rel: 'noopener noreferrer' },
         ]
@@ -662,8 +662,10 @@ export default defineConfig({
               items: [
                 { text: '前置与环境', link: '/developer/workflows/enchanting/prerequisites' },
                 { text: '模块实现', link: '/developer/workflows/enchanting/modules' },
-                { text: '参考规则', link: '/developer/workflows/enchanting/reference' },
-                { text: '排错与适配', link: '/developer/workflows/enchanting/troubleshooting' },
+                { text: 'Fluxon 参考', link: '/developer/workflows/enchanting/reference' },
+                { text: '数据包边界', link: '/developer/workflows/enchanting/datapack-boundaries' },
+                { text: '验证与验收', link: '/developer/workflows/enchanting/validation' },
+                { text: '排错', link: '/developer/workflows/enchanting/troubleshooting' },
               ]
             },
             { text: '自定义作物工作流', link: '/developer/workflows/custom-crops' },
