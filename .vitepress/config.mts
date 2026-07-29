@@ -592,6 +592,7 @@ export default defineConfig({
           text: '💬 交易与互动',
           collapsed: false,
           items: [
+            { text: '全服市场', link: '/plugins/custom/global-market' },
             { text: '等价交换商店', link: '/plugins/custom/emc-shop' },
             { text: '知识问答', link: '/plugins/custom/quiz' },
             { text: '月卡与通行权益', link: '/plugins/custom/monthly-pass' },
