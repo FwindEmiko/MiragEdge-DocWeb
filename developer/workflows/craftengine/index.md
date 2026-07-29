@@ -156,16 +156,15 @@ items:
 
 ### 模型与方块
 
-`model:` 用于模型注册或物品/方块绑定，常见结构是 `type`、`path`、`generation`。模型引用也遵循资源定位规则，例如 `minecraft:block/custom/topaz_ore` 对应 `assets/minecraft/models/block/custom/topaz_ore.json`。
+`model:` 用于模型注册或物品/方块绑定，常见结构是 `type`、`path`、`generation`。模型引用也遵循资源定位规则，例如 `customcrops:block/customcrops/crop/chinese_cabbage/stage_1` 对应 `assets/customcrops/models/block/customcrops/crop/chinese_cabbage/stage_1.json`。
 
 ```yaml
 items:
-  miragedge_items:topaz_ore:
-    model: minecraft:block/custom/topaz_ore
-
-blocks:
-  miragedge_items:topaz_ore:
-    # 方块行为、状态、掉落等字段按当前 CE 文档补齐
+  customcrops:chinese_cabbage_stage_1:
+    material: sugar
+    model: customcrops:block/customcrops/crop/chinese_cabbage/stage_1
+    behavior:
+      type: block_item
 ```
 
 实际项目还使用 `templates/models.yml`、`templates/block_states.yml` 和 `templates/block_settings.yml`。复杂方块先复用模板，再写单个实例；不要在每个配置文件复制一套模型生成逻辑。

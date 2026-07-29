@@ -501,7 +501,6 @@ export default defineConfig({
               text: '装备与附魔',
               collapsed: false,
               items: [
-                { text: '新增材料', link: '/play/adventure/materials' },
                 {
                   text: '附魔系统',
                   collapsed: false,
@@ -553,8 +552,8 @@ export default defineConfig({
               ]
             },
             {
-              text: '真实季节',
-              collapsed: false,
+              text: '真实季节(暂弃)',
+              collapsed: true,
               items: [
                 { text: '季节总览', link: '/play/life/seasons/info' },
                 { text: '温度系统', link: '/play/life/seasons/temperature' },
@@ -699,8 +698,8 @@ export default defineConfig({
           text: '🌐 站点与协作',
           collapsed: false,
           items: [
+            { text: '贡献者介绍', link: '/developer/team' },
             { text: '插件开发规范', link: '/developer/process/plugin-lifecycle' },
-            { text: '开发团队', link: '/developer/team' },
             { text: '图片自动化模块', link: '/developer/website/autoimage' },
             { text: '配方可视化组件', link: '/developer/website/mcrecipe' },
             { text: '统一图标系统', link: '/developer/website/vectoricons' },
@@ -729,7 +728,6 @@ export default defineConfig({
               collapsed: true,
               items: [
                 { text: '等级怪物系统', link: '/developer/archive/design/levelledmobs' },
-                { text: '黄玉护甲', link: '/developer/archive/design/yuxi-armor' },
                 { text: '装备升级', link: '/developer/archive/design/equipment-upgrade' },
               ]
             },

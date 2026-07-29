@@ -25,7 +25,6 @@ outline: deep
 | CE 引用 | 文件位置 |
 | --- | --- |
 | `minecraft:item/food/toast` | `resourcepack/assets/minecraft/textures/item/food/toast.png` |
-| `minecraft:block/custom/topaz_ore` | `resourcepack/assets/minecraft/models/block/custom/topaz_ore.json` |
 | `minecraft:font/image/money.png` | `resourcepack/assets/minecraft/textures/font/image/money.png` |
 | `customcrops:block/customcrops/crop/cabbage/stage_1` | `customcrops/resourcepack/assets/customcrops/models/block/customcrops/crop/cabbage/stage_1.json` |
 

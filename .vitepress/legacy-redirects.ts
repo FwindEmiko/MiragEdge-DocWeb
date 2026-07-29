@@ -99,9 +99,6 @@ const exactRules: RedirectRule[] = [
   { from: '/features/adventure/mmo/forge', to: '/plugins/forge' },
   { from: '/play/adventure/levelledmobs', to: '/developer/archive/design/levelledmobs' },
   { from: '/features/adventure/levelledmobs', to: '/developer/archive/design/levelledmobs' },
-  { from: '/play/adventure/armor/yuxi-armor', to: '/developer/archive/design/yuxi-armor' },
-  { from: '/play/adventure/yuxi-armor', to: '/developer/archive/design/yuxi-armor' },
-  { from: '/features/adventure/yuxi-armor', to: '/developer/archive/design/yuxi-armor' },
   { from: '/play/adventure/equipment/info', to: '/developer/archive/design/equipment-upgrade' },
   { from: '/features/adventure/mmo/info', to: '/developer/archive/design/equipment-upgrade' },
 ]
