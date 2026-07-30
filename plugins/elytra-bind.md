@@ -25,16 +25,26 @@ outline: deep
 正式鞘翅的阶位固定如下：
 
 1. <McItem id="elytra" size="lg" /> **原版鞘翅**：从末地城开始你的飞行旅程。
-2. **下界合金鞘翅**
+2. <McItem name="下界合金鞘翅" texture="/mc-textures/item/elytra/netherite-wings.png" size="lg" /> **下界合金鞘翅**
 3. **炼狱之翼**
 4. <McItem name="龙翼" texture="/mc-textures/item/elytra/dragon-wings.png" size="lg" /> **龙翼**
 5. <McItem name="光翼" texture="/mc-textures/item/elytra/light-wings.png" size="lg" /> **光翼**
 
-每次只能换成严格更高的阶位；同级或更低的鞘翅不能作为升阶目标。更高阶鞘翅来自服务器的探索、首领或既有锻造内容；拿到合适的目标后，再通过下面的 Q 跃迁完成替换。
+下界合金鞘翅是固定的第一阶锻造升级；炼狱之翼、龙翼和光翼等后续阶位，则可作为地面上的 Q 跃迁目标。无论使用哪条方式，同级或更低的鞘翅都不能作为升阶目标。
 
-## 在地面上完成 Q 跃迁
+## 第一阶：在锻造台升级
 
-Q 跃迁是高阶鞘翅进入你契约的唯一方式。操作前，请将自己的低阶、已绑定鞘翅拿在手上，并靠近地面上的更高阶鞘翅。
+下界合金鞘翅不通过 Q 跃迁获得。将自己的已绑定原版鞘翅带到锻造台，按以下顺序放入三槽：
+
+1. 模板槽：<McItem id="netherite_upgrade_smithing_template" /> 下界合金升级模板。
+2. 装备槽：自己的原版鞘翅。
+3. 材料槽：<McItem id="netherite_ingot" /> 下界合金锭。
+
+完成后获得下界合金鞘翅。契约、已有附魔和耐久损耗比例都会继承；例如原鞘翅已经损耗约 30%，升级后的鞘翅也会保持约 30% 的损耗比例。
+
+## 在地面上完成后续 Q 跃迁
+
+Q 跃迁用于让炼狱之翼、龙翼、光翼等后续高阶鞘翅进入你的契约；下界合金鞘翅不在 Q 跃迁目标中。操作前，请将自己的低阶、已绑定鞘翅拿在手上，并靠近地面上的严格更高阶鞘翅。
 
 1. 走到目标 **3 格内**。
 2. 动作栏会显示最近、且可以升阶的目标名称，并提示“按 Q 升级”。
@@ -56,9 +66,9 @@ Q 跃迁是高阶鞘翅进入你契约的唯一方式。操作前，请将自己
   shaped
   size="sm"
   :grid="[
-    [{name:'末影合金碎片'}, {name:'末影合金碎片'}, {name:'末影合金碎片'}],
-    [{name:'末影合金碎片'}, {name:'幻翼之翼', texture:'/mc-textures/item/elytra/phantom-wings.png'}, {name:'末影合金碎片'}],
-    [{name:'末影合金碎片'}, {name:'末影合金碎片'}, {name:'末影合金碎片'}]
+    [{name:'末影合金碎片', texture:'/mc-textures/item/enderite_shard.png'}, {name:'末影合金碎片', texture:'/mc-textures/item/enderite_shard.png'}, {name:'末影合金碎片', texture:'/mc-textures/item/enderite_shard.png'}],
+    [{name:'末影合金碎片', texture:'/mc-textures/item/enderite_shard.png'}, {name:'幻翼之翼', texture:'/mc-textures/item/elytra/phantom-wings.png'}, {name:'末影合金碎片', texture:'/mc-textures/item/enderite_shard.png'}],
+    [{name:'末影合金碎片', texture:'/mc-textures/item/enderite_shard.png'}, {name:'末影合金碎片', texture:'/mc-textures/item/enderite_shard.png'}, {name:'末影合金碎片', texture:'/mc-textures/item/enderite_shard.png'}]
   ]"
   :result="{id:'elytra'}"
 />
@@ -73,18 +83,18 @@ Q 跃迁是高阶鞘翅进入你契约的唯一方式。操作前，请将自己
   shaped
   size="sm"
   :grid="[
-    [{name:'末影合金碎片'}, {id:'dragon_breath'}, {name:'末影合金碎片'}],
+    [{name:'末影合金碎片', texture:'/mc-textures/item/enderite_shard.png'}, {id:'dragon_breath'}, {name:'末影合金碎片', texture:'/mc-textures/item/enderite_shard.png'}],
     [{id:'phantom_membrane'}, {name:'幻翼之翼', texture:'/mc-textures/item/elytra/phantom-wings.png'}, {id:'phantom_membrane'}],
     [{id:'phantom_membrane'}, {id:'experience_bottle'}, {id:'phantom_membrane'}]
   ]"
-  :result="{name:'星辉解缚符'}"
+  :result="{name:'星辉解缚符', texture:'/mc-textures/item/elytra/restoration-charm.png'}"
 />
 
 然后在锻造台放入：
 
-- 模板槽：星辉解缚符
+- 模板槽：<McItem name="星辉解缚符" texture="/mc-textures/item/elytra/restoration-charm.png" /> 星辉解缚符
 - 装备槽：当前的高阶鞘翅
-- 材料槽：末影合金碎片
+- 材料槽：<McItem name="末影合金碎片" texture="/mc-textures/item/enderite_shard.png" /> 末影合金碎片
 
 结果是一件原版鞘翅。契约、已有附魔和耐久损耗比例会保留；高阶鞘翅原有的特殊外观或效果则回到原版鞘翅。幻翼之翼不走还原流程，想得到正式鞘翅请使用觉醒。
 
@@ -104,7 +114,7 @@ Q 跃迁是高阶鞘翅进入你契约的唯一方式。操作前，请将自己
 
 ### 为什么 Q 没有升级？
 
-确认手持的是自己的绑定鞘翅，目标在 3 格内且阶位更高；附近有多件目标时，靠近想选的那一件，让它成为最近目标。
+确认手持的是自己的绑定鞘翅，目标在 3 格内且阶位更高；下界合金鞘翅需要在锻造台升级，不会触发 Q 跃迁。附近有多件目标时，靠近想选的那一件，让它成为最近目标。
 
 ### 为什么不能放进箱子或垃圾桶？
 
@@ -112,7 +122,7 @@ Q 跃迁是高阶鞘翅进入你契约的唯一方式。操作前，请将自己
 
 ### 怎么更换升阶路线？
 
-先制作星辉解缚符，将当前高阶鞘翅还原为原版鞘翅，再向新的更高阶鞘翅进行 Q 跃迁。
+先制作星辉解缚符，将当前高阶鞘翅还原为原版鞘翅，再按目标选择锻造台升级为下界合金鞘翅，或向地面上的后续更高阶鞘翅进行 Q 跃迁。
 
 ### 如何查询自己的契约？
 
