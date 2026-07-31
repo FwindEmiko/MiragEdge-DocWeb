@@ -41,6 +41,7 @@ const showFloatButtons = computed(() => {
 
 const prefersReducedMotion = ref(false)
 const effectsActive = computed(() => effectsEnabled.value && !prefersReducedMotion.value)
+const contributorsReady = ref(false)
 
 // 搜索弹窗动画的 MutationObserver 引用（onUnmounted 时断开）
 let searchAnimObserver = null
@@ -164,6 +165,7 @@ function cleanupSearchAnimations() {
 }
 
 onMounted(() => {
+  contributorsReady.value = true
   initEffectsToggleState()
   motionMediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
   motionPreferenceHandler = (event) => {
@@ -382,8 +384,8 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }) => {
       </template>
     </Layout>
 
-    <!-- 贡献者信息独立于 VitePress 正文树，避免生成空的 .vp-doc 节点。 -->
-    <div class="centerdss">
+    <!-- 贡献者依赖当前路由 frontmatter，待 hydration 完成后再挂载。 -->
+    <div v-if="contributorsReady" class="centerdss">
       <div class="content-wrapper">
         <Contributors />
       </div>

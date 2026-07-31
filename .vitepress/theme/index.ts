@@ -120,8 +120,9 @@ export default {
       }
 
       router.onAfterRouteChange = () => {
-        // 路由切换后重新增强导航/侧边栏图标
-        initNavIcons();
+        // 首屏时此钩子发生在 app.mount() 之前。延后 DOM 改写，避免破坏
+        // 服务端 HTML，导致 VitePress 的 lean 页面模块在 hydration 时清空正文。
+        window.setTimeout(initNavIcons, 0)
         // 路由切换后检测是否有新部署（延迟 2s，避免与路由过渡冲突）
         checkVersionOnRouteChange();
         // 首页卡片由路由异步渲染，完成后再恢复 3D 倾斜交互。
