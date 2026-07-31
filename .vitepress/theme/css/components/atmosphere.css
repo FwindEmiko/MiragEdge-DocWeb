@@ -1,5 +1,9 @@
 /* 统一由 effects-disabled 控制的低密度微交互。 */
 
+:root {
+  --atmosphere-heading-line: #c5a46d;
+}
+
 html:not(.effects-disabled) .vp-doc h2.atmosphere-target,
 html:not(.effects-disabled) .vp-doc h3.atmosphere-target {
   position: relative;
@@ -13,9 +17,9 @@ html:not(.effects-disabled) .vp-doc h3.atmosphere-target::after {
   width: 42px;
   height: 1px;
   content: '';
-  background-color: var(--vp-c-brand-1);
+  background: linear-gradient(90deg, var(--atmosphere-heading-line), transparent);
   opacity: 0;
-  transform: scaleX(0.25);
+  transform: scaleX(0.18);
   transform-origin: left center;
 }
 
@@ -83,7 +87,7 @@ html:not(.effects-disabled) .VPDocAsideOutline .outline-link.active {
     transform: scaleX(0.25);
   }
   100% {
-    opacity: 0.72;
+    opacity: 0.86;
     transform: scaleX(1);
   }
 }

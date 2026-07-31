@@ -109,7 +109,7 @@
 .vp-doc a:not(.feature-card):not(.pager):not(.header-anchor) {
   color: var(--vp-c-text-1);
   text-decoration-line: underline;
-  text-decoration-color: color-mix(in srgb, var(--vp-c-brand-1) 58%, transparent);
+  text-decoration-color: color-mix(in srgb, var(--vp-c-text-2) 62%, transparent);
   text-decoration-thickness: 1px;
   text-underline-offset: 3px;
   transition: color 160ms ease, text-decoration-color 160ms ease;
@@ -118,7 +118,7 @@
 .vp-doc a:not(.feature-card):not(.pager):not(.header-anchor):hover,
 .vp-doc a:not(.feature-card):not(.pager):not(.header-anchor):focus-visible {
   color: var(--vp-c-brand-1);
-  text-decoration-color: currentColor;
+  text-decoration-color: color-mix(in srgb, var(--vp-c-brand-1) 78%, transparent);
 }
 
 .vp-doc a:not(.feature-card):not(.pager):not(.header-anchor):focus-visible {
