@@ -1193,7 +1193,7 @@ CE 支持的 block state provider 类型：`craftengine:simple_state_provider`�
 
 ## CraftEngine 集成指南
 
-> 本章只说明数据包与 CE 的边界。CE 物品、方块和资源包的实际结构见 [CE 开发工作流](/developer/workflows/craftengine/) 与 [CE 配置参考](/developer/workflows/craftengine/reference)。本章示例中的 namespace 只是示例，当前资源快照主要使用 `miragedge_items`、`miragedge_icon`、`miragedge_menu` 和 `customcrops`。
+> 本章只说明数据包与 CE 的边界。CE 物品、方块和资源包的实际结构见 [CE 开发工作流](/developer/workflows/craftengine/) 与 [CE 配置参考](/developer/workflows/craftengine/reference)。当数据包伴随资源包被 CE 合并且需要交付给 Bedrock 玩家时，继续执行 [Geyser 基岩版内容转换工作流](/developer/workflows/geyser/)；不要把 Java 资源包直接当作 Bedrock pack。本文示例中的 namespace 只是示例，当前资源快照主要使用 `miragedge_items`、`miragedge_icon`、`miragedge_menu` 和 `customcrops`。
 
 ### 配置对接总览
 

@@ -658,6 +658,18 @@ export default defineConfig({
               ]
             },
             {
+              text: 'Geyser 基岩版转换工作流',
+              link: '/developer/workflows/geyser/',
+              collapsed: true,
+              items: [
+                { text: '转换与发布', link: '/developer/workflows/geyser/conversion' },
+                { text: 'CraftEngine 与合并资源包', link: '/developer/workflows/geyser/craftengine' },
+                { text: '复杂数据包实体与展示', link: '/developer/workflows/geyser/entities' },
+                { text: '验收与排错', link: '/developer/workflows/geyser/validation' },
+                { text: '协议与产物参考', link: '/developer/workflows/geyser/reference' },
+              ]
+            },
+            {
               text: '附魔配置工作流',
               link: '/developer/workflows/enchanting/',
               collapsed: true,

@@ -36,6 +36,7 @@ head:
 
 - [数据包工作流中的 CE 集成](/developer/workflows/datapack/modules#craftengine-集成指南)
 - [自定义作物工作流](/developer/workflows/custom-crops#与-ce-物品的对接)
+- [Geyser 基岩版内容转换工作流](/developer/workflows/geyser/)
 - [CE 配置样例与真实目录对照](/developer/workflows/craftengine/reference)
 - [CE 自定义盔甲模型与装备纹理](/developer/workflows/craftengine/armor)
 - [官方 CE 文档](https://ce-pre.gtemc.cn/)
@@ -234,5 +235,6 @@ equipments:
 - [CE 配置参考与实际目录清单](/developer/workflows/craftengine/reference)
 - [CE 自定义盔甲模型与装备纹理](/developer/workflows/craftengine/armor)
 - [数据包工作流：CraftEngine 集成](/developer/workflows/datapack/modules#craftengine-集成指南)
+- [Geyser 基岩版内容转换工作流](/developer/workflows/geyser/)
 - [自定义作物工作流：CraftEngine 资源对接](/developer/workflows/custom-crops#与-ce-物品的对接)
 - [旧贴图字符码页面](/developer/reference/sticker)
