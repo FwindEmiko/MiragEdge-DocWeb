@@ -155,6 +155,50 @@ items:
 
 业务命令、条件和函数参数必须以当前 CE 版本文档及服务器已有配置为准；不要从其他插件的事件语法照搬。
 
+### 自定义食物食用时出现黑紫色碎屑粒子
+
+以下结论已在 **Minecraft Java 26.2 + CraftEngine 26.7.4** 环境中验证。
+
+#### 现象与判断
+
+自定义食物的物品贴图和手持模型都正常，但食用时出现黑紫色缺失材质粒子。CE 自带的可食用物（例如 `hami_melon_slice`、`magma_fruit`）以及 CustomCrops 果实正常时，可以先排除资源包整体加载、PNG 路径、`texture` 字段和 `food` 营养值问题。
+
+#### 根因
+
+为了让物品不可堆叠而添加 `data.components.minecraft:max_damage: 1`，会在 Java 26.2 的 CE 自定义食物路径中把物品带入耐久组件处理，导致客户端解析食用碎屑粒子模型失败，最终显示为黑紫色缺失材质。
+
+这不是缺少 `particle` 字段，也不需要为每种食物额外编写 `item/generated` 模型或粒子定义。正常食物不需要配置粒子字段。
+
+#### 错误与正确写法
+
+错误：用 `max-damage` 实现不可堆叠。
+
+```yaml
+data:
+  components:
+    minecraft:max_damage: 1
+```
+
+正确：改用最大堆叠数量限制，并保留原有 `material`、`texture`、`food`、`events` 和 `consume-replacement` 配置。
+
+```yaml
+data:
+  components:
+    minecraft:max_stack_size: 1
+  food:
+    nutrition: 7
+    saturation: 8.0
+```
+
+修复时删除 `food.yml` 中所有食物项的 `max-damage: 1`；只有确实需要不可堆叠的食物才添加 `minecraft:max_stack_size: 1`。
+
+#### 部署与验收
+
+1. 修改实际服务器目录 `CraftEngine/resources/miragedge_items/configuration/food.yml`。
+2. 执行 `/ce reload all`，让客户端重新接收或刷新服务端资源包。
+3. 至少抽测普通食物、带 `on consume` 事件的食物，以及带 `consume-replacement` 的饮料各一项，确认物品贴图和食用碎屑都正常。
+4. 如果仍然异常，先用一个不带 `events` 的食物做最小复现，并检查是否残留 `max_damage`；不要优先修改贴图或补写 `particle`。
+
 ### 模型与方块
 
 `model:` 用于模型注册或物品/方块绑定，常见结构是 `type`、`path`、`generation`。模型引用也遵循资源定位规则，例如 `customcrops:block/customcrops/crop/chinese_cabbage/stage_1` 对应 `assets/customcrops/models/block/customcrops/crop/chinese_cabbage/stage_1.json`。
@@ -220,6 +264,7 @@ equipments:
 | 只显示原版物品 | ID/配置文件未加载、`material` 或 `custom-model-data` 不匹配、字段缩进错误 |
 | 字体图标为空白 | `images:` 是否加载、`file` 路径、`chars` 是否冲突、调用方是否指定了相同 font |
 | 物品能拿到但放置异常 | 物品模型与方块模型混用，或缺少 block state / behavior |
+| 自定义食物食用时出现黑紫色碎屑 | 先检查 `food.yml` 是否残留 `max-damage: 1` 或 `minecraft:max_damage: 1`；移除后改用 `minecraft:max_stack_size: 1`，再刷新资源包并实机复测 |
 | CE 重载报错 | 查看 `logs/latest.log` 中第一条 CraftEngine 配置错误，回滚最后一个改动再二分 |
 | Java 正常、基岩版异常 | 这是跨端转换链路问题，单独检查 Geyser/转换资源包，不要仅凭 Java 资源包结论 |
 

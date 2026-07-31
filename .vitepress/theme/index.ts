@@ -32,6 +32,7 @@ import './css/components/button.css'
 import './css/components/feature.css'
 import './css/components/search.css'
 import './css/components/lightbox.css'
+import './css/components/mermaid-viewer.css'
 import './css/layout/blur.css'
 import './css/base/overrides.css'
 import './style/dark.css'
@@ -56,6 +57,7 @@ import { initVersionCheck, checkVersionOnRouteChange } from './composables/useVe
 
 // 图片查看器全局配置
 import { setLightboxConfig, useLightbox } from './composables/useLightbox'
+import { initMermaidViewers } from './components/js/mermaid-viewer'
 
 export default {
   extends: DefaultTheme,
@@ -159,6 +161,7 @@ export default {
   setup() {
     let scrollBar = null
     let scrollHandler = null
+    let stopMermaidViewers: (() => void) | null = null
 
     onMounted(() => {
       if (inBrowser) {
@@ -166,6 +169,9 @@ export default {
         showAestheticNotice();
 
         init3DTiltEffect()
+
+        // 全局增强 Mermaid：路由切换或异步渲染出的图表都会自动接入查看器。
+        stopMermaidViewers = initMermaidViewers()
 
         // 初始化导航/侧边栏图标增强
         initNavIcons();
@@ -206,6 +212,8 @@ export default {
           scrollBar.parentNode.removeChild(scrollBar)
         }
       }
+      stopMermaidViewers?.()
+      stopMermaidViewers = null
     });
   }
 } as Theme

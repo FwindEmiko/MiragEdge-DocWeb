@@ -627,6 +627,20 @@ export default defineConfig({
               ]
             },
             { text: 'DragonMiao', link: '/plugin-guides/dragonmiao/' },
+            {
+              text: 'FE_PVP 竞技系统',
+              link: '/plugin-guides/fepvp/',
+              collapsed: false,
+              items: [
+                { text: '玩家指南', link: '/plugin-guides/fepvp/guide' },
+                { text: '竞技场管理', link: '/plugin-guides/fepvp/arena' },
+                { text: '装备组合管理', link: '/plugin-guides/fepvp/kit' },
+                { text: '命令参考', link: '/plugin-guides/fepvp/commands' },
+                { text: '配置参考', link: '/plugin-guides/fepvp/config' },
+                { text: '权限节点', link: '/plugin-guides/fepvp/permissions' },
+                { text: '数据存储', link: '/plugin-guides/fepvp/storage' },
+              ]
+            },
           ]
         },
       ],
@@ -714,6 +728,7 @@ export default defineConfig({
           items: [
             { text: '贡献者介绍', link: '/developer/team' },
             { text: '插件开发规范', link: '/developer/process/plugin-lifecycle' },
+            { text: '文档站内容维护工作流', link: '/developer/website/content-workflow' },
             { text: '图片自动化模块', link: '/developer/website/autoimage' },
             { text: '配方可视化组件', link: '/developer/website/mcrecipe' },
             { text: '统一图标系统', link: '/developer/website/vectoricons' },
@@ -754,20 +769,6 @@ export default defineConfig({
                 { text: '物品功能核心', link: '/developer/archive/plugins/items-core' },
                 { text: '任务系统', link: '/developer/archive/plugins/quests' },
                 { text: '幻空翼历史草稿', link: '/developer/archive/plugins/sky-elytra' },
-                {
-                  text: 'PVP 竞技场',
-                  link: '/developer/archive/plugins/pvp/',
-                  collapsed: true,
-                  items: [
-                    { text: '竞技场管理', link: '/developer/archive/plugins/pvp/arena' },
-                    { text: '配置参考', link: '/developer/archive/plugins/pvp/config' },
-                    { text: '玩家指南', link: '/developer/archive/plugins/pvp/guide' },
-                    { text: '装备组合管理', link: '/developer/archive/plugins/pvp/kit' },
-                    { text: '权限节点', link: '/developer/archive/plugins/pvp/permissions' },
-                    { text: '命令参考', link: '/developer/archive/plugins/pvp/commands' },
-                    { text: '数据存储', link: '/developer/archive/plugins/pvp/storage' },
-                  ]
-                },
               ]
             },
           ]
