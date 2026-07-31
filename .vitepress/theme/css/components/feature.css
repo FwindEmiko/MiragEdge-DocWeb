@@ -61,7 +61,7 @@ html:not(.dark) .VPHome .VPFeature {
 /* -------------------------------------------
    悬停交互状态
 ------------------------------------------- */
-.VPHome .VPFeature:hover {
+html:not(.effects-disabled) .VPHome .VPFeature:hover {
   /* 悬停时添加缩放效果 */
   transform: perspective(1000px) rotateX(var(--rotate-x, 0deg)) rotateY(var(--rotate-y, 0deg)) scale3d(1.05, 1.05, 1.05);
   border-color: var(--vp-c-brand-1) !important;
@@ -70,16 +70,16 @@ html:not(.dark) .VPHome .VPFeature {
 }
 
 /* 悬停时显示光泽 */
-.VPHome .VPFeature:hover::after {
+html:not(.effects-disabled) .VPHome .VPFeature:hover::after {
   opacity: 1;
 }
 
-.dark .VPHome .VPFeature:hover {
+.dark:not(.effects-disabled) .VPHome .VPFeature:hover {
   background-color: rgba(255, 255, 255, 0.08) !important;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3), 0 0 20px rgba(224, 82, 82, 0.1);
 }
 
-html:not(.dark) .VPHome .VPFeature:hover {
+html:not(.dark):not(.effects-disabled) .VPHome .VPFeature:hover {
   background-color: rgba(255, 255, 255, 0.9) !important;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1), 0 2px 6px rgba(0, 0, 0, 0.05);
 }
@@ -101,17 +101,17 @@ html:not(.dark) .VPHome .VPFeature:hover {
   }
 }
 
-.VPHome .VPFeature .icon {
+html:not(.effects-disabled) .VPHome .VPFeature .icon {
   animation: iconBreathe 3s ease-in-out infinite;
 }
 
 /* 不同卡片错开动画延迟 */
-.VPHome .VPFeature:nth-child(6n+1) .icon { animation-delay: 0s; }
-.VPHome .VPFeature:nth-child(6n+2) .icon { animation-delay: 0.5s; }
-.VPHome .VPFeature:nth-child(6n+3) .icon { animation-delay: 1s; }
-.VPHome .VPFeature:nth-child(6n+4) .icon { animation-delay: 1.5s; }
-.VPHome .VPFeature:nth-child(6n+5) .icon { animation-delay: 2s; }
-.VPHome .VPFeature:nth-child(6n+6) .icon { animation-delay: 2.5s; }
+html:not(.effects-disabled) .VPHome .VPFeature:nth-child(6n+1) .icon { animation-delay: 0s; }
+html:not(.effects-disabled) .VPHome .VPFeature:nth-child(6n+2) .icon { animation-delay: 0.5s; }
+html:not(.effects-disabled) .VPHome .VPFeature:nth-child(6n+3) .icon { animation-delay: 1s; }
+html:not(.effects-disabled) .VPHome .VPFeature:nth-child(6n+4) .icon { animation-delay: 1.5s; }
+html:not(.effects-disabled) .VPHome .VPFeature:nth-child(6n+5) .icon { animation-delay: 2s; }
+html:not(.effects-disabled) .VPHome .VPFeature:nth-child(6n+6) .icon { animation-delay: 2.5s; }
 
 /* 尊重用户的减少动画偏好 */
 @media (prefers-reduced-motion: reduce) {

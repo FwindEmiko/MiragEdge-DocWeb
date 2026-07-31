@@ -1,0 +1,129 @@
+/* 统一由 effects-disabled 控制的低密度微交互。 */
+
+html:not(.effects-disabled) .vp-doc h2.atmosphere-target,
+html:not(.effects-disabled) .vp-doc h3.atmosphere-target {
+  position: relative;
+}
+
+html:not(.effects-disabled) .vp-doc h2.atmosphere-target::after,
+html:not(.effects-disabled) .vp-doc h3.atmosphere-target::after {
+  position: absolute;
+  bottom: -12px;
+  left: 0;
+  width: 42px;
+  height: 1px;
+  content: '';
+  background-color: var(--vp-c-brand-1);
+  opacity: 0;
+  transform: scaleX(0.25);
+  transform-origin: left center;
+}
+
+html:not(.effects-disabled) .vp-doc h2.atmosphere-revealed::after,
+html:not(.effects-disabled) .vp-doc h3.atmosphere-revealed::after {
+  animation: atmosphere-heading-trace 720ms var(--ease-out-expo) both;
+  animation-delay: var(--atmosphere-delay);
+}
+
+html:not(.effects-disabled) .vp-doc h3.atmosphere-target::after {
+  width: 26px;
+  bottom: -9px;
+  opacity: 0.74;
+}
+
+html:not(.effects-disabled) .VPHome .VPFeature.atmosphere-target::before {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  z-index: 3;
+  width: 16px;
+  height: 16px;
+  content: '';
+  border-top: 1px solid var(--vp-c-brand-1);
+  border-left: 1px solid var(--vp-c-brand-1);
+  opacity: 0;
+  pointer-events: none;
+}
+
+html:not(.effects-disabled) .VPHome .VPFeature:nth-child(3n + 2).atmosphere-target::before {
+  right: 14px;
+  left: auto;
+  border-right: 1px solid var(--vp-c-brand-1);
+  border-left: 0;
+}
+
+html:not(.effects-disabled) .VPHome .VPFeature:nth-child(3n).atmosphere-target::before {
+  top: auto;
+  bottom: 14px;
+  border-top: 0;
+  border-bottom: 1px solid var(--vp-c-brand-1);
+}
+
+html:not(.effects-disabled) .VPHome .VPFeature.atmosphere-revealed::before {
+  animation: atmosphere-card-mark 900ms var(--ease-out-expo) both;
+  animation-delay: calc(var(--atmosphere-delay) + 80ms);
+}
+
+html:not(.effects-disabled) .vp-doc a:not(.feature-card):not(.pager):not(.header-anchor) {
+  text-underline-offset: 4px;
+}
+
+html:not(.effects-disabled) .vp-doc a:not(.feature-card):not(.pager):not(.header-anchor):hover,
+html:not(.effects-disabled) .vp-doc a:not(.feature-card):not(.pager):not(.header-anchor):focus-visible {
+  text-underline-offset: 6px;
+}
+
+html:not(.effects-disabled) .VPDocAsideOutline .outline-link.active {
+  animation: atmosphere-outline-breathe 2.8s ease-in-out infinite;
+}
+
+@keyframes atmosphere-heading-trace {
+  0% {
+    opacity: 0;
+    transform: scaleX(0.25);
+  }
+  100% {
+    opacity: 0.72;
+    transform: scaleX(1);
+  }
+}
+
+@keyframes atmosphere-card-mark {
+  0% {
+    opacity: 0;
+    transform: scale(0.72);
+  }
+  45% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 0.34;
+    transform: scale(1);
+  }
+}
+
+@keyframes atmosphere-outline-breathe {
+  0%,
+  100% {
+    filter: brightness(1);
+  }
+  50% {
+    filter: brightness(1.18);
+  }
+}
+
+html.effects-disabled .VPHome .VPFeature {
+  --rotate-x: 0deg !important;
+  --rotate-y: 0deg !important;
+  --bg-x: 50% !important;
+  --bg-y: 50% !important;
+}
+
+@media (max-width: 767px), (prefers-reduced-motion: reduce) {
+  html:not(.effects-disabled) .vp-doc h2.atmosphere-revealed::after,
+  html:not(.effects-disabled) .vp-doc h3.atmosphere-revealed::after,
+  html:not(.effects-disabled) .VPHome .VPFeature.atmosphere-revealed::before,
+  html:not(.effects-disabled) .VPDocAsideOutline .outline-link.active {
+    animation: none;
+  }
+}

@@ -57,7 +57,7 @@
   }
 }
 
-.VPContent {
+html:not(.effects-disabled) .VPContent {
   animation: appleFadeInUp var(--duration-page) var(--ease-out-expo);
 }
 

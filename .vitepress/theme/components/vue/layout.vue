@@ -7,6 +7,8 @@ import { ref, watch, nextTick, provide, computed, defineAsyncComponent, onMounte
 import Contributors from './Contributors.vue';
 import NotFound from './NotFound.vue';
 import Live2D from './Live2D.vue';
+import HeroParticleField from './HeroParticleField.vue';
+import AtmosphereDetails from './AtmosphereDetails.vue';
 import EffectsToggle from './EffectsToggle.vue';
 import ImageLightbox from './ImageLightbox.vue';
 import { effectsEnabled, initEffectsToggleState } from '../../composables/useEffectsToggle';
@@ -15,15 +17,7 @@ import { useTocAutoScroll } from '../../composables/useTocAutoScroll';
 // 右侧「本页目录」长目录自动滚动跟随 active 项
 useTocAutoScroll();
 
-const CornerStars = defineAsyncComponent(() => import('./CornerStars.vue'));
-const CornerQuotes = defineAsyncComponent(() => import('./CornerQuotes.vue'));
-const CornerBubbles = defineAsyncComponent(() => import('./CornerBubbles.vue'));
-const CornerSakura = defineAsyncComponent(() => import('./CornerSakura.vue'));
-const CornerNotes = defineAsyncComponent(() => import('./CornerNotes.vue'));
-const CornerLeaves = defineAsyncComponent(() => import('./CornerLeaves.vue'));
-const CornerSurprise = defineAsyncComponent(() => import('./CornerSurprise.vue'));
-const CornerFireflies = defineAsyncComponent(() => import('./CornerFireflies.vue'));
-const CornerClickEffect = defineAsyncComponent(() => import('./CornerClickEffect.vue'));
+const AmbientParticles = defineAsyncComponent(() => import('./AmbientParticles.vue'));
 
 const { Layout } = DefaultTheme;
 const { route } = useRouter();
@@ -46,7 +40,6 @@ const showFloatButtons = computed(() => {
   return /^\/(start|play|plugins|developer|archive)\//.test(route.path)
 });
 
-const randomCorner = ref(null)
 const prefersReducedMotion = ref(false)
 const effectsActive = computed(() => effectsEnabled.value && !prefersReducedMotion.value)
 
@@ -171,12 +164,6 @@ function cleanupSearchAnimations() {
   }
 }
 
-function pickRandomCorner() {
-  if (Math.random() > 0.3) return null
-  const components = ['stars', 'quotes', 'bubbles', 'sakura', 'notes', 'leaves', 'fireflies']
-  return components[Math.floor(Math.random() * components.length)]
-}
-
 onMounted(() => {
   initEffectsToggleState()
   motionMediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
@@ -185,7 +172,6 @@ onMounted(() => {
   }
   prefersReducedMotion.value = motionMediaQuery.matches
   motionMediaQuery.addEventListener?.('change', motionPreferenceHandler)
-  randomCorner.value = pickRandomCorner()
   // 返回顶部按钮：注册滚动监听并做初始计算（passive 避免阻塞滚动）
   window.addEventListener('scroll', updateScrollProgress, { passive: true })
   updateScrollProgress()
@@ -267,7 +253,6 @@ function getSidebarFingerprint() {
 watch(
   () => route.path,
   () => {
-    randomCorner.value = pickRandomCorner()
     // flush:pre，DOM 还是旧的 —— 记录旧侧边栏结构指纹
     const oldSidebarFingerprint = window.matchMedia('(min-width: 960px)').matches
       ? getSidebarFingerprint()
@@ -379,18 +364,12 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }) => {
 
 <template>
   <div class="router-wrapper">
-    <CornerStars v-if="!isHome && effectsActive && randomCorner === 'stars'" />
-    <CornerQuotes v-if="!isHome && effectsActive && randomCorner === 'quotes'" />
-    <CornerBubbles v-if="!isHome && effectsActive && randomCorner === 'bubbles'" />
-    <CornerSakura v-if="!isHome && effectsActive && randomCorner === 'sakura'" />
-    <CornerNotes v-if="!isHome && effectsActive && randomCorner === 'notes'" />
-    <CornerLeaves v-if="!isHome && effectsActive && randomCorner === 'leaves'" />
-    <CornerFireflies v-if="!isHome && effectsActive && randomCorner === 'fireflies'" />
-    <CornerSurprise v-if="!isHome && effectsActive" />
-    <CornerClickEffect v-if="!isHome && effectsActive" />
+    <HeroParticleField v-if="isHome && effectsActive" />
+    <AtmosphereDetails v-if="!is404 && effectsActive" />
+    <AmbientParticles v-if="!isHome && !is404 && effectsActive" />
 
     <!-- Live2D 看板娘 - 只在首页显示 -->
-    <Live2D v-if="isHome" />
+    <Live2D v-if="isHome && effectsActive" />
 
     <!-- 404 页面 / 正常页面 -->
     <!-- Layout 常驻挂载，不随路由变化销毁重建，以保持侧边栏滚动位置 -->
@@ -534,7 +513,7 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }) => {
   }
 }
 
-.page-enter {
+html:not(.effects-disabled) .page-enter {
   animation: scaleIn var(--duration-normal) var(--ease-out-expo);
 }
 
@@ -551,7 +530,7 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }) => {
   }
 }
 
-.sidebar-fade-enter {
+html:not(.effects-disabled) .sidebar-fade-enter {
   animation: sidebarFadeIn var(--duration-slow) var(--ease-out-expo);
 }
 
@@ -583,7 +562,7 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }) => {
     /* 下层：静态渐变分隔线（两端淡出） */
     linear-gradient(90deg, transparent, var(--vp-c-divider) 15%, var(--vp-c-divider) 85%, transparent);
   background-size: 30% 100%, 100% 100%;
-  animation: footer-scan 5s ease-in-out infinite;
+  animation: none;
   transition: left 0.3s ease, right 0.3s ease;
 }
 
@@ -611,7 +590,7 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }) => {
      85px    9px 0 0 var(--vp-c-brand-soft),
     145px   -7px 0 0 var(--vp-c-brand-1),
     205px    5px 0 0 var(--vp-c-brand-soft);
-  animation: footer-twinkle 3.2s ease-in-out infinite;
+  animation: none;
   pointer-events: none;
   /* 让星点中心跟随侧边栏偏移顺滑滑动（与 .doc-footer 的 padding 过渡同步） */
   transition: left 0.3s ease;
@@ -622,15 +601,23 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }) => {
   50%      { opacity: 1;    transform: scale(1.1); }
 }
 
+html:not(.effects-disabled) .doc-footer::before {
+  animation: footer-scan 5s ease-in-out infinite;
+}
+
+html:not(.effects-disabled) .doc-footer::after {
+  animation: footer-twinkle 3.2s ease-in-out infinite;
+}
+
 /* 尊重用户的减少动画偏好 */
 @media (prefers-reduced-motion: reduce) {
-  .page-enter,
-  .sidebar-fade-enter {
+  html:not(.effects-disabled) .page-enter,
+  html:not(.effects-disabled) .sidebar-fade-enter {
     animation: none;
   }
 
-  .doc-footer::before,
-  .doc-footer::after {
+  html:not(.effects-disabled) .doc-footer::before,
+  html:not(.effects-disabled) .doc-footer::after {
     animation: none;
   }
 }

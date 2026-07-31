@@ -42,7 +42,6 @@ body {
     radial-gradient(at 90% 80%, #F59E0B 0, transparent 50%),
     radial-gradient(at 50% 50%, #db2777 0, transparent 50%);
   opacity: 0.5;
-  animation: aurora-move-1 10s ease-in-out infinite alternate;
 }
 
 /* 冷色层：深邃紫+通透蓝 */
@@ -51,7 +50,16 @@ body {
     radial-gradient(at 80% 10%, #7C3AED 0, transparent 50%),
     radial-gradient(at 10% 90%, #06B6D4 0, transparent 50%);
   opacity: 0.4;
-  animation: aurora-move-2 14s ease-in-out infinite alternate-reverse;
+}
+
+@media (min-width: 768px) and (prefers-reduced-motion: no-preference) {
+  :root:not(.effects-disabled) .VPHomeHero::before {
+    animation: aurora-move-1 10s ease-in-out infinite alternate;
+  }
+
+  :root:not(.effects-disabled) .VPHomeHero::after {
+    animation: aurora-move-2 14s ease-in-out infinite alternate-reverse;
+  }
 }
 
 /* 极光动画：非对称流动，避免机械感 */
@@ -76,12 +84,10 @@ html:not(.dark) .VPHomeHero::after {
   mix-blend-mode: multiply;
 }
 html:not(.dark) .VPHomeHero::before { 
-  opacity: 0.5; 
-  animation: aurora-move-1 10s ease-in-out infinite alternate;
+  opacity: 0.5;
 }
 html:not(.dark) .VPHomeHero::after { 
-  opacity: 0.4; 
-  animation: aurora-move-2 14s ease-in-out infinite alternate-reverse;
+  opacity: 0.4;
 }
 
 /* 移动端性能降级：静态背景 & 单层光斑 & 移除 will-change（动画已禁用，合成层无需预留） */
@@ -538,8 +544,8 @@ html:not(.dark) .VPHomeHero::after {
         --rainbow-next: #c76dd1;
     }
   }
-@media (prefers-reduced-motion: no-preference) {
-  :root {
+@media (min-width: 768px) and (prefers-reduced-motion: no-preference) {
+  :root:not(.effects-disabled) {
     animation: rainbow 8s linear infinite;
   }
 }
