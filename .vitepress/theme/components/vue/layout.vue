@@ -3,12 +3,13 @@
 <script setup>
 import { useRouter, useData, withBase } from "vitepress";
 import DefaultTheme from "vitepress/theme";
-import { ref, watch, nextTick, provide, computed, defineAsyncComponent, onMounted, onUnmounted } from "vue";
+import { ref, watch, nextTick, provide, computed, onMounted, onUnmounted } from "vue";
 import Contributors from './Contributors.vue';
 import NotFound from './NotFound.vue';
 import Live2D from './Live2D.vue';
 import HeroParticleField from './HeroParticleField.vue';
 import AtmosphereDetails from './AtmosphereDetails.vue';
+import AmbientParticles from './AmbientParticles.vue';
 import EffectsToggle from './EffectsToggle.vue';
 import ImageLightbox from './ImageLightbox.vue';
 import { effectsEnabled, initEffectsToggleState } from '../../composables/useEffectsToggle';
@@ -16,8 +17,6 @@ import { useTocAutoScroll } from '../../composables/useTocAutoScroll';
 
 // 右侧「本页目录」长目录自动滚动跟随 active 项
 useTocAutoScroll();
-
-const AmbientParticles = defineAsyncComponent(() => import('./AmbientParticles.vue'));
 
 const { Layout } = DefaultTheme;
 const { route } = useRouter();
@@ -383,13 +382,9 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }) => {
       </template>
     </Layout>
 
-    <!-- 贡献者组件 -->
+    <!-- 贡献者信息独立于 VitePress 正文树，避免生成空的 .vp-doc 节点。 -->
     <div class="centerdss">
       <div class="content-wrapper">
-        <div class="vp-doc">
-          <!-- 这里是Markdown内容 -->
-        </div>
-        <!-- 在内容之后、页脚之前插入贡献者 -->
         <Contributors />
       </div>
     </div>
