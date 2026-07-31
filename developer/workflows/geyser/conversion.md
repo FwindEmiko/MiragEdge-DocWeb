@@ -12,7 +12,7 @@ outline: deep
 
 转换结果和以下版本强绑定：Java 服务端、Geyser build、Bedrock 协议、Java 测试客户端、Fabric/Fabric API、Rainbow build、CE 生成的 Java 包。任何一项改变，都应视为新的转换候选版本。
 
-建立 `source-manifest.yml`，再进行采集：
+在 `release.json` 补齐版本字段；Bridge 的 `reports/audit.json` 会自动记录 Java ZIP、CE merge 输入、SHA、目录统计和差异。采集前至少确认下列字段：
 
 ```yaml
 schema: 1
@@ -48,7 +48,7 @@ F:\FCelestial\CraftEngine\generated\resource_pack_map.zip       # map-plugin/Blu
 F:\FCelestial\CraftEngine\generated\resource_pack_unprotected.zip
 ```
 
-这是配置声明的目标产物，不是文件存在性的保证。本文核对时 `generated/` 中只有主 `resource_pack.zip` 和 map 兼容包，尚未看到未保护副本；因此本次现场状态不能直接启动 Rainbow。先完成 CE 资源包重新生成，确认未保护副本与主包来自同一批次，再进入后续步骤。不要因为路径已写在配置里就退回使用受保护主包。
+这是配置声明的目标产物，不是文件存在性的保证。2026-07-31 的现场快照已包含未保护副本；它比主包早 241 秒，处于受管 Bridge 的 900 秒同批次时间窗口内。这个结果只说明可以进入资源结构审计，不表示 CE 外部合并输入已经完整；后者仍由 `bridge.py audit` 的逐项存在性和 SHA 检查决定。不要因为路径已写在配置里就退回使用受保护主包。
 
 转换时优先选择同一 CE 生成批次的 `resource_pack_unprotected.zip`，理由如下：
 
@@ -73,6 +73,43 @@ Get-FileHash $unprotected, $protected -Algorithm SHA256 | Format-Table Path, Has
 ```
 
 若未保护副本不存在、时间比主包明显旧，或其 SHA 在发布记录中无法解释，停止转换并先重新生成 CE 资源包。不要拿旧副本补齐，也不要临时关闭保护后忘记恢复原有策略。
+
+### MiragEdge 受管 Bridge
+
+本机实现位于 `F:\FCelestial\Geyser-Velocity\bridge\bridge.py`。它不替代 Rainbow，而是把“当前可工作的 Geyser 旧资产”和“每次新的 Rainbow 输出”变成一个可校验、可回滚的增量发布链。
+
+首次仅执行一次：
+
+```powershell
+Set-Location F:\FCelestial\Geyser-Velocity\bridge
+python .\bridge.py init
+python .\bridge.py audit --release 2026-07-31-r01
+python .\bridge.py stage --release 2026-07-31-r01
+python .\bridge.py validate --release 2026-07-31-r01
+```
+
+`init` 只复制当前由 MiragEdge 拥有的 `miragedge_*.json`、`miragedge_*.zip`、现有头颅和 locale override 到 `bridge/state/baseline/`，不会碰 Geyser 正在加载的文件。`audit` 必须读取 `resource_pack_unprotected.zip`，明确忽略 `resource_pack_map.zip`，并逐项检查 CE 配置声明的外部目录和 ZIP。首个 audit 产生全量收集清单是正常现象；只有 audit 通过后才执行一次 `--adopt`，把当前 Java 文件 SHA 固化为可信增量基线：
+
+```powershell
+python .\bridge.py audit --release <可信首发编号> --adopt
+```
+
+不要用 `--force-adopt` 把缺失 merge 输入的快照当成可部署版本。它只能建立“变化观测基线”，不能让后续 `validate` 或 `apply` 绕过 CE 输入不完整的问题。
+
+后续新增或修改内容的固定操作是：
+
+```powershell
+Set-Location F:\FCelestial\Geyser-Velocity\bridge
+python .\bridge.py audit --release <新编号>
+# 在 Java 测试客户端加载本次 CE 最终包，再把新的 Rainbow 输出放到 .\incoming\<新编号>\
+python .\bridge.py ingest --release <新编号>
+python .\bridge.py validate --release <新编号>
+python .\bridge.py apply --release <新编号> --yes
+```
+
+`audit` 的 `reports/rainbow-collection.json` 只列出变更的 Java 资产、需要采集的模型和复杂内容路线；`reports/java-languages.json` 列出最终 Java 包各 locale 的来源数量、翻译键数量和跨来源同键异值，供人工/Rainbow 语言采集核对。它不是可直接投放的 Bedrock locale。`ingest` 会把 Rainbow 的 v2 mappings、Bedrock ZIP/MCPACK、`locales/overrides/*.json`、`custom-skulls.yml` 合并到一个 staging release；同一 Java selector、同一 Bedrock registry key 或同一路径资产内容不同会阻断。确实要替换旧模型时，人工确认差异后才加 `--replace-matching`，绝不能依赖多个历史包的加载顺序。
+
+`apply` 是唯一会修改 Geyser 活动 `packs/`、`custom_mappings/`、locale override 和 `custom-skulls.yml` 的命令。它先在 `bridge/backups/<时间>-<release>/` 复制精确旧文件，再用 `custom_mappings/managed/miragedge-managed.json` 和一个 `miragedge-bridge-<release>.mcpack` 替换本项目的旧 `miragedge_*` 文件；`GeyserRecipeFix`、`incendium-pack.mcpack`、`menu.mcpack`、`nullback.mcpack` 等其他所有者文件不在操作范围内。
 
 ### 输入包结构审计
 
@@ -149,7 +186,7 @@ Geyser v2 会按“基础 Java 物品 + `minecraft:item_model`”匹配；legacy
 | `custom_model_data` | 当前 CE 同时下发 CMD；可用于 legacy 回退和诊断。 |
 | 动态组件 | 食物、装备、耐久、冷却、工具等会影响 Bedrock 的预定义行为。 |
 | Java 可见场景 | 决定必须采集和测试哪些状态。 |
-| Bedrock identifier/icon | 需要全局唯一，且必须与 Bedrock pack 内资源一致。 |
+| Bedrock identifier/icon | 必须与 Bedrock pack 内资源一致。同一 Bedrock 定义可被多个不同 Java 基础物品显式复用；一旦 `components`、`bedrock_options` 或图标语义不同，就必须使用新 identifier。 |
 
 ## 3. 准备 Java 采集客户端
 
@@ -275,16 +312,16 @@ Java 显示错误时，不要先跑 Rainbow。它会把错误输入稳定地转�
 - 为 3D 模型降级出的 GUI 图标、attachable 或动画警告。
 - 资源路径的大小写、父模型、覆盖层和多纹理问题。
 
-报告中没有 `error` 不等于覆盖完成。必须把 `custom_mappings`、`pack.zip` 和 `coverage.yml` 交叉比较，确认每个计划条目都有可解释状态。
+报告中没有 `error` 不等于覆盖完成。必须把 `custom_mappings`、`.mcpack` 和 `coverage.json` 交叉比较，确认每个计划条目都有可解释状态。
 
 ### 静态检查模板
 
 以下 PowerShell 片段只检查发布物，不会修改 Geyser：
 
 ```powershell
-$release = 'F:\geyser-bridge\releases\2026-07-31-r01'
+$release = 'F:\FCelestial\Geyser-Velocity\bridge\releases\2026-07-31-r01'
 $mappings = Join-Path $release 'custom_mappings'
-$pack = Join-Path $release 'packs\miragedge-bedrock-2026-07-31-r01.zip'
+$pack = Join-Path $release 'packs\miragedge-bridge-2026-07-31-r01.mcpack'
 
 Get-ChildItem $mappings -Filter *.json | ForEach-Object {
   try {
@@ -347,7 +384,7 @@ Get-FileHash $pack -Algorithm SHA256
 
 约束：
 
-- `bedrock_identifier` 在所有映射中必须唯一，且不能使用 `minecraft` 命名空间。
+- `bedrock_identifier` 不得映射到两个不同的 Bedrock-facing 定义，且不能使用 `minecraft` 命名空间。相同图标/组件的菜单占位符可以跨不同 Java 基础物品复用同一个 identifier；这必须在 release 中显式记录，不能靠加载顺序碰巧生效。
 - `icon` 是 `textures/item_texture.json` 的 shorthand，不是 PNG 文件名；推荐显式填写，避免 `:` 转 `.`、`/` 转 `_` 的默认转换歧义。
 - 武器、工具、钓竿等通常需要 `display_handheld: true`；不要让普通 2D 消耗品继承这个选项。
 - 基岩物品行为由预注册的静态 components 决定。不要把会因单个物品实例变化的 Java components 直接写成唯一映射。
@@ -462,12 +499,12 @@ Geyser 官方目录随平台变化，但逻辑固定：
 
 ### Custom skulls 的幂等合并
 
-Rainbow 的本次输出先保存为 `custom-skulls.patch.yml`，不要把它改名后直接投放。发布脚本必须用 YAML 解析器读取“当前活动 `custom-skulls.yml`”和 patch，逐 section 处理 `player-usernames`、`player-uuids`、`player-profiles`、`skin-hashes`：
+Rainbow 若输出 `custom-skulls.yml`，先原样放入 release 的 `rainbow/input/`，不要把它改名后直接投放。发布脚本必须用 YAML 解析器读取“当前活动 `custom-skulls.yml`”和 Rainbow 原始输入，逐 section 处理 `player-usernames`、`player-uuids`、`player-profiles`、`skin-hashes`：
 
 1. 缺失 section 按 Geyser 当前 schema 初始化，保留原有值的类型和结构。
-2. 以 section 规定的 username、UUID、profile 或 skin hash 作为规范化 key；相同 key 且值相同则跳过，保证重复执行不会增长文件。
-3. 相同 key 但内容不同必须报告冲突并停止发布，不能静默覆盖服务器已有头颅。
-4. 新条目追加到内存结构，按稳定排序写出 `merged/custom-skulls.yml`，再原子替换 Geyser 活动文件。
+2. 每个 section 都是字符串 list；以 username、UUID、profile 或 skin hash 的完整字符串去重，相同值跳过，保证重复执行不会增长文件。
+3. 新条目追加到内存结构；不要把 list 当成可按“key 更新”的 map，也不要静默删除现有头颅。
+4. 输出本次新增 `custom-skulls.patch.yml`，再输出全量 `merged/custom-skulls.yml`，只有后者才可原子替换 Geyser 活动文件。
 5. 对合并结果重新解析 YAML、统计四个 section 的条目数并记录 SHA；只有这个最终文件进入部署清单。
 
 这一步是“patch → active file”的转换，不是字符串拼接；不要用正则替换 YAML，也不要把 `custom-skulls.patch.yml` 当成 Geyser 会自动读取的文件。
@@ -484,9 +521,8 @@ Rainbow 的本次输出先保存为 `custom-skulls.patch.yml`，不要把它改�
 推荐在 Geyser 目录中使用固定、可归属的文件名，例如：
 
 ```text
-custom_mappings/miragedge-r01-items.json
-custom_mappings/miragedge-r01-blocks.json
-packs/miragedge-bedrock-r01.zip
+custom_mappings/managed/miragedge-managed.json
+packs/miragedge-bridge-<release-id>.mcpack
 locales/overrides/zh_cn.json
 ```
 

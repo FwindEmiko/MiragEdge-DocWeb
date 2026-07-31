@@ -155,7 +155,7 @@ Geyser 官方当前文档明确说明，Java `item_display`/`block_display` 等 
 4. 将逻辑状态与视觉载体分开记录：例如“函数负责 phase”“模型由 item_display 承载”“音效由 sounds.json 提供”。
 5. 对每个视觉载体选择路线：Rainbow item/block、手工 Bedrock entity、Geyser Entity API、GeyserDisplayEntity 或 Java-only。
 6. 先完成一个最小静态默认姿态，再逐一添加攻击/受伤/阶段动画。每次只增加一个状态，避免无法定位的全量重写。
-7. 将 Bedrock 侧缺失能力写入 `coverage.yml`，并给玩家可接受的回退（原版实体、2D 图标、无动画装饰或 Java-only）。
+7. 将 Bedrock 侧缺失能力写入 `coverage.json`，并给玩家可接受的回退（原版实体、2D 图标、无动画装饰或 Java-only）。
 
 ### 不要混淆逻辑与视觉
 
@@ -185,7 +185,7 @@ entities/<release-id>/
 │   ├── animations/
 │   └── bridge-contract.yml
 ├── report.md
-└── coverage.yml
+└── coverage.json
 ```
 
 `bridge-contract.yml` 记录 Java entity signal、Bedrock identifier、property、默认值和扩展版本。更新扩展时同时更新资源包；不允许“只换 jar 不换 pack”或反过来。
@@ -202,4 +202,3 @@ entities/<release-id>/
 - Geyser Entity API 版本与服务器当前 build 不兼容，或扩展无法在目标平台启动。
 
 “Bedrock 看到一个模型”与“Bedrock 获得 Java 的完整生物功能”是两个不同交付等级，必须在文档和验收记录中分开。
-

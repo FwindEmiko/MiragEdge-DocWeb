@@ -59,9 +59,9 @@ flowchart LR
 | --- | --- |
 | `resource-pack.path: ./generated/resource_pack.zip` | 这是 Java 玩家实际接收的主产物，但启用了保护/混淆，不应作为转换器首选输入。 |
 | `map-plugin-compatibility.enable: true`，路径为 `./generated/resource_pack_map.zip` | 这是给 BlueMap 等地图插件的兼容产物。它不是完整 Java 客户端包，禁止作为 Rainbow 或 Geyser 转换输入；当前 `generated/` 中确实存在此文件。 |
-| `protection.unprotected-copy.enable: true`，路径为 `./generated/resource_pack_unprotected.zip` | 配置要求生成同一批次的标准 ZIP，优先作为 Rainbow 的输入。本文编写时实际 `generated/` 目录只见主包和 map 包，未见此副本；它必须被视为阻断前置条件，先重新生成 CE 包并核对文件，再开始转换。 |
-| `merge-external-folders` | ModelEngine、EliteMobs 等目录被并入最终包，不能因它们不在 `resources/` 下就排除。 |
-| `merge-external-zip-files` | CustomNameplates、BetterModel、D&T、真结局、Sparkles、Stellarity、魅力系统等 ZIP 已是最终视觉输入的一部分。 |
+| `protection.unprotected-copy.enable: true`，路径为 `./generated/resource_pack_unprotected.zip` | 配置要求生成同一批次的标准 ZIP，优先作为 Rainbow 的输入。2026-07-31 现场已确认该文件存在；与主包的修改时间相差 241 秒，处于 Bridge 默认 900 秒窗口内。时间接近不证明合并输入完整，仍必须通过 Bridge 审计。 |
+| `merge-external-folders` | ModelEngine、EliteMobs 等目录是 CE 的声明输入；当前快照中两个目录缺失，Bridge 会阻断并要求恢复来源或经所有者确认后移除声明，不能静默跳过。 |
+| `merge-external-zip-files` | CustomNameplates、BetterModel、D&T、真结局、Sparkles、Stellarity、魅力系统等 ZIP 是 CE 的声明输入；当前 `true-ending`、Sparkles、Stellarity 存在，另外四项缺失，必须逐项核对后再重建最终包。 |
 | `client-bound-model: true` | CE 会把客户端模型数据下发到物品栈，Rainbow 应从真实获得的物品读取，而不是仅猜 YAML。 |
 | `always-use-item-model: true` 与 `always-use-custom-model-data: true` | 同一物品可能同时具备现代 `minecraft:item_model` 和兼容用 CMD；首选 v2 的 `item_model` 映射，同时保留 legacy 覆盖的审计能力。 |
 | `always-generate-model-overrides: true` | 会生成兼容性模型覆盖；这有利于旧式 CMD 识别，但不是“所有模型都可自动转换”的保证。 |
@@ -109,23 +109,32 @@ geyser-bridge/releases/<release-id>/
 ├── input/
 │   ├── resource_pack_unprotected.zip
 │   ├── source.sha256
-│   └── source-manifest.yml
+│   └── source.sha256
 ├── rainbow/
-│   └── report.txt
+│   └── input/                         # 本次新 Rainbow 输出的原始副本
 ├── custom_mappings/
-│   └── <owned-mapping>.json
+│   └── miragedge-managed.json
 ├── packs/
-│   └── miragedge-bedrock-<release-id>.zip
+│   └── miragedge-bridge-<release-id>.mcpack
 ├── locales/
 │   └── overrides/
 ├── custom-skulls.patch.yml
 ├── merged/
 │   └── custom-skulls.yml
-├── coverage.yml
+├── reports/
+│   ├── audit.json
+│   ├── java-languages.json
+│   ├── rainbow-collection.json
+│   └── validation.json
+├── coverage.json
 └── release.json
 ```
 
 `custom-skulls.patch.yml` 只保存 Rainbow 本次新增/更新的差异，不能直接复制到 Geyser。`merged/custom-skulls.yml` 才是按四个 section 与服务器现有清单幂等合并后的活动文件。`release.json` 最少记录：CE 生成时间、Java 输入 SHA-256、Geyser build、Rainbow build、Java 测试客户端版本、目标 Bedrock 版本、映射文件名、Bedrock pack SHA-256、已知未覆盖项和实机验收人/时间。不要只保留一个名为 `latest.zip` 的文件；那样既无法回滚，也无法解释某一项为什么消失。
+
+本机已经落地受管实现：`F:\FCelestial\Geyser-Velocity\bridge\bridge.py`。它把当前 `miragedge_*` 映射和包冻结为不可变基线，后续只比较 CE 最终未保护包的文件 SHA、只导入新 Rainbow 输出、只替换明确匹配的映射或 Bedrock 资源项。它不会伪造模型，也不会在 `apply` 前改动 Geyser 活动目录。
+
+当前快照还有一个发布阻断项：CE 配置声明的 `ModelEngine/resource pack`、`EliteMobs/resource_pack`、`CustomNameplates/resourcepack.zip`、`BetterModel/build.zip`、`dnt.zip`、`miragedge-charm-rp.zip` 均不在 `F:\FCelestial` 下。恢复实际来源或依据所有者确认后移除相应配置项，并重新生成 CE 包前，不得把当前 Java 包标记为可复现的可信基线。
 
 ## AI 执行契约
 

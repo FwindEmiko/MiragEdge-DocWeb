@@ -63,7 +63,7 @@ Bedrock item components 不能像 Java item stack 一样在运行时任意改变
 | `legacy` | `custom_model_data`、`bedrock_identifier` | legacy CMD 映射；CMD 是 float 值。 |
 | `group` | `definitions`，可选共享 `model` | 为同一模型组织多个条件化定义；成员可继承 group model。 |
 
-`bedrock_identifier` 必须唯一，且不可使用 `minecraft` namespace。若缺命名空间，Geyser 可能使用默认 namespace；生产配置不要依赖这种隐式行为。
+`bedrock_identifier` 不可使用 `minecraft` namespace。它可以被不同 Java 基础物品复用，但复用时必须指向完全相同的 Bedrock-facing 定义，例如相同 `icon`、`components` 和 `bedrock_options`；不能让同一 identifier 在不同映射里隐式代表两个物品。若缺命名空间，Geyser 可能使用默认 namespace；生产配置不要依赖这种隐式行为。
 
 ### Bedrock options
 
@@ -225,11 +225,11 @@ Geyser 通过 `custom-skulls.yml` 预注册 Java 玩家头颅，生成对应 Bed
 - 头颅 NBT 中的 player profile Base64 值。
 - Minecraft 皮肤服务器纹理 hash。
 
-Rainbow 的本次输出应保存为 `custom-skulls.patch.yml`。部署时必须用 YAML 解析器按 `player-usernames`、`player-uuids`、`player-profiles`、`skin-hashes` 四个 section 与服务器现有 `custom-skulls.yml` 幂等合并，生成最终活动文件；相同 key 相同值跳过，相同 key 不同值报冲突，禁止整体覆盖。用户名/UUID 跟随皮肤变化，profile/hash 只有人工更新才会变化；发布记录要写清采用的稳定性策略和最终文件 SHA。
+Rainbow 原始输出若含 `custom-skulls.yml`，应完整放进 release 的 `rainbow/input/`，不能直接部署。Bridge 再按 `player-usernames`、`player-uuids`、`player-profiles`、`skin-hashes` 四个 list section 去重，并生成 `custom-skulls.patch.yml` 和最终 `merged/custom-skulls.yml`。当前 Geyser schema 的每个条目本身就是字符串，不存在可安全“更新同 key 不同值”的结构化字段；新值追加、完全相同的值跳过，禁止整体覆盖。用户名/UUID 跟随皮肤变化，profile/hash 只有人工更新才会变化；发布记录要写清采用的稳定性策略和最终文件 SHA。
 
 ### 语言覆盖
 
-Rainbow 会从已加载 Java 资源包导出/合并语言文件，投放到 `locales/overrides/`。它仅解决文本键和值的覆盖，不等于 Java 字体、格式化标签、GUI 位置或自定义 glyph 在 Bedrock 可用。
+Rainbow 会从已加载 Java 资源包导出/合并 Geyser-compatible 语言覆盖，投放到 `locales/overrides/`。最终 Java 包的 `assets/*/lang/*.json` 不能被盲目复制到这里：Java 翻译键、Bedrock/Geyser 翻译键、字体和 GUI 语义并不天然一一对应。Bridge 的 `reports/java-languages.json` 仅用于核对各 locale 的来源、键数量和冲突；只有 Rainbow 导出的或经人工确认的 override 才会进入 staging release。语言覆盖也不等于 Java 字体、格式化标签、GUI 位置或自定义 glyph 在 Bedrock 可用。
 
 ### Waypoint styles
 

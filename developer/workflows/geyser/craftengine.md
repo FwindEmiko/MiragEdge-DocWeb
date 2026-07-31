@@ -118,7 +118,7 @@ resource-pack:
     - "CraftEngine/zip_other/miragedge-charm-rp.zip"
 ```
 
-这些路径是 CE 相对插件目录的输入声明，不代表每个 ZIP 都是“纯贴图包”。转换器应逐个解包审计 `assets/`、模型/实体/动画/声音目录，并把数据包逻辑 ZIP 与 companion resource pack 的关系写入 `source-manifest.yml`；但 Rainbow 的唯一 Java 视觉输入仍是 CE 同批次最终未保护合并包。
+这些路径是 CE 相对插件目录的输入声明，不代表每个 ZIP 都是“纯贴图包”。转换器应逐个解包审计 `assets/`、模型/实体/动画/声音目录，并把数据包逻辑 ZIP 与 companion resource pack 的关系写入 release 的 `reports/audit.json` 和 `release.json`；但 Rainbow 的唯一 Java 视觉输入仍是 CE 同批次最终未保护合并包。
 
 本文编写时本地 `F:\FCelestial\CraftEngine\zip_other\` 只看到 `Sparkles_26.2_v1.1.10.zip`、`Stellarity-5.5.2-RP.zip` 和 `true-ending-dragon-music-v1.zip`；配置声明的 `dnt.zip` 与 `miragedge-charm-rp.zip` 不在这个快照中。此现象不能通过删除配置项来“修复”：该目录可能只是脱离服务器的配置/资源快照。应在实际服务器的插件根目录解析相对路径，并对每个 `required` 输入执行存在性和 SHA 检查；真实缺失时让 CE/Rainbow 流程失败。
 
@@ -178,7 +178,7 @@ resource-pack:
 
 CE 的保护配置包括混淆 namespace/path、图集、JSON、模型和纹理等。即使 `obfuscation.item-model.enable` 当前为 `false`，整体保护仍可能影响其他资产。转换器需要标准资源结构，未保护副本就是本项目明确提供的边界。
 
-配置启用不等于本次文件已经生成。本文核对 `F:\FCelestial\CraftEngine\generated\` 时只发现主包和 map 兼容包，未发现 `resource_pack_unprotected.zip`；这是发布前置条件失败，不是可以忽略的警告。必须重新生成并在同一批次核对两个 ZIP 的时间、大小和 SHA，再把未保护副本交给 Rainbow。
+配置启用不等于本次文件已经生成。2026-07-31 现场已确认 `resource_pack_unprotected.zip` 存在，且与主包的修改时间相差 241 秒；Bridge 使用 900 秒窗口记录这一事实。真正的阻断项是 CE 配置中六个外部 merge 输入在当前插件根目录缺失，必须恢复来源或经内容所有者确认后移除配置并重新生成，不能只因为未保护副本存在就跳过审计。
 
 ## 4. 双模型数据的设计规则
 

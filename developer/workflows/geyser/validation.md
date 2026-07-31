@@ -21,7 +21,7 @@ outline: deep
 
 ## 2. 覆盖记录
 
-使用一份结构化 `coverage.yml`，将“预期内容”和“转换器实际输出”分离：
+使用一份结构化 `coverage.json`，将“预期内容”和“转换器实际输出”分离：
 
 ```yaml
 release: 2026-07-31-r01
@@ -84,7 +84,7 @@ known_gaps:
 
 - [ ] 所有 mappings JSON 可被解析，`format_version` 与目标 Geyser 文档一致。
 - [ ] v2 item mappings 的 Java 基础物品、`model`/legacy CMD 来自实际物品或 Rainbow 报告。
-- [ ] 每个 `bedrock_identifier` 全局唯一且不在 `minecraft` namespace。
+- [ ] 每个 `bedrock_identifier` 不会对应两个不同的 Bedrock-facing 定义，且不在 `minecraft` namespace；相同图标/组件可跨不同 Java 基础物品显式复用，但必须记录该共享关系。
 - [ ] `icon` shorthand 在 Bedrock `item_texture.json` 中存在。
 - [ ] predicate 的 property、index、threshold 和 strategy 与实际 Java 状态一致。
 - [ ] 不重复注册同一 Java item + item model 的无条件定义。
@@ -94,7 +94,7 @@ known_gaps:
 ### Bedrock pack
 
 - [ ] `manifest.json` 可解析，header/module UUID 有效且不与其他活动 pack 冲突。
-- [ ] `textures/item_texture.json`、`attachables`、`models/entity`、`entity`、animations 等按实际输出存在。
+- [ ] 有 item mapping 时存在 `textures/item_texture.json`；attachables、`models/entity`、`entity`、animations 只在对应 3D 物品或实体输出确实需要时检查。
 - [ ] 所有 texture path 大小写与文件名一致；没有把 HTML/错误页当 PNG。
 - [ ] 3D 模型的 geometry、attachable、GUI 图标和动画引用互相存在。
 - [ ] pack 内没有 Java `assets/`、`pack.mcmeta`、行为包或旧转换器残留文件，除非工具明确要求。
@@ -225,5 +225,4 @@ Rollback release:
 - Java 资源包新增 `items/` item model、实体动画、字体、atlas 或声音冲突。
 - 服务器从纯 Java 物品改成真实 CE serverside block/furniture 或 Display Entity。
 
-通过旧 release 的内容清单逐项比较新增、删除和 identity 变化，再决定 Rainbow 是增量采集还是全量新建；默认选择全量新建以避免旧映射残留。
-
+可信 Java 基线建立后，普通物品、贴图、声音或语言的新增/修改默认走增量采集：Bridge 只列出 SHA 改变的 Java 资产，并把新 Rainbow 输出合并到受管映射和单一 Bedrock pack。只有 Minecraft/Geyser/Rainbow 主版本变化、CE 合并顺序/保护策略变化、外部包替换、Java 输入出现大范围删改、或复杂实体/Display 路线变化时，才升级为完整重新采集。每次 Rainbow 输出仍必须使用新的 release 目录，不能覆盖旧 release。
