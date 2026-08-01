@@ -605,6 +605,7 @@ export default defineConfig({
           collapsed: false,
           items: [
             { text: '飞行武器限制', link: '/plugins/custom/flight-guard' },
+            { text: '免幻翼', link: '/plugins/custom/nophantom' },
           ]
         },
       ],
