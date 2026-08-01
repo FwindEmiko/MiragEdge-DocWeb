@@ -143,6 +143,26 @@ $missing = foreach ($relative in $declared) {
 if ($missing) { throw "BLOCKED: CE merge input missing:`n$($missing -join "`n")" }
 ```
 
+#### Sparkles 与 Stellarity 的实际边界
+
+当前服务器的名称对应关系必须固定记录，不能按文件名猜测数据包维度：
+
+| Java 数据包/资源包 | 内容归属 | 本次 Geyser 发布策略 |
+| --- | --- | --- |
+| `Sparkles_26.2_v1.1.10.zip` | Incendium 地狱内容 | 不作为本次新增转换输入；现有 `F:\FCelestial\Geyser-Velocity\packs\incendium-pack.mcpack` 独立保留，先做 CRC、manifest 和 SHA 校验 |
+| `Stellarity-5.5.3.zip` | Stellarity 末地数据包 | 本次缺失内容；必须与 CE 最终 `resource_pack_unprotected.zip` 一起作为 Java 采集和静态审计输入 |
+| `Stellarity-5.5.2-RP.zip` | CE 配置声明的 companion RP | 不能替代启用中的 `Stellarity-5.5.3.zip`；只用于追溯 CE 合并来源，最终模型以 CE 未保护合并包为准 |
+
+因此，首发 Rainbow 输入应组织为：
+
+```text
+F:\FCelestial\Geyser-Velocity\bridge\incoming\2026-07-31-r01\
+  ce\          # F:\FCelestial\CraftEngine\rainbow 的完整目录
+  stellarity\  # Java 26.2 测试客户端导出的 Stellarity Rainbow 目录
+```
+
+不要把 `incendium-pack.mcpack` 解包后混入 `stellarity\`。它是另一个所有者、另一个 Bedrock pack 生命周期；混入会让语言、声音和同名资源的来源无法审计。
+
 在发布记录中，建议将每个外部输入记录为：
 
 ```yaml

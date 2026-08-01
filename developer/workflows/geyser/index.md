@@ -99,6 +99,7 @@ flowchart LR
 3. [复杂数据包实体与展示](/developer/workflows/geyser/entities)：处理生物模型、Display Entity、ModelEngine/BetterModel 类内容和 Geyser 扩展边界。
 4. [验收与排错](/developer/workflows/geyser/validation)：静态审计、Geyser 启动、Bedrock 客户端测试、回滚和故障定位。
 5. [协议与产物参考](/developer/workflows/geyser/reference)：查阅 Custom Content、Rainbow、item/block/skull/entity mapping 与 Bedrock pack 的字段边界。
+6. [Stellarity 5.5.3 末地批次](/developer/workflows/geyser/stellarity)：按当前服务器真实数据包和 CE 最终包执行 Rainbow 采集、首发合并与后续增量发布。
 
 ## 发布物契约
 

@@ -677,6 +677,7 @@ export default defineConfig({
               collapsed: true,
               items: [
                 { text: '转换与发布', link: '/developer/workflows/geyser/conversion' },
+                { text: 'Stellarity 5.5.3 末地批次', link: '/developer/workflows/geyser/stellarity' },
                 { text: 'CraftEngine 与合并资源包', link: '/developer/workflows/geyser/craftengine' },
                 { text: '复杂数据包实体与展示', link: '/developer/workflows/geyser/entities' },
                 { text: '验收与排错', link: '/developer/workflows/geyser/validation' },

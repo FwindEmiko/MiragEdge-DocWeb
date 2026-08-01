@@ -16,6 +16,7 @@ build
 coverage/
 # test_tool
 !.gitkeep
+.research/*
 
 # IDE files
 .vscode/
