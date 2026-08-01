@@ -266,17 +266,20 @@ export default defineConfig({
          if (token.attrIndex('loading') < 0) token.attrPush(['loading', 'lazy'])
          return defaultImage(tokens, idx, options, env, self)
        }
-       // 正文的跨页引用始终新开标签，避免读者在长教程间跳转后失去当前位置。
-       const defaultLinkOpen = md.renderer.rules.link_open ?? ((tokens, idx, options, _env, self) => self.renderToken(tokens, idx, options))
-       md.renderer.rules.link_open = (tokens, idx, options, env, self) => {
-         const token = tokens[idx]
-         const href = token.attrGet('href') ?? ''
-         if (href && !href.startsWith('#') && !/^(mailto:|tel:|javascript:)/i.test(href)) {
-           token.attrSet('target', '_blank')
-           token.attrSet('rel', 'noopener noreferrer')
-         }
-         return defaultLinkOpen(tokens, idx, options, env, self)
-       }
+       // 仅外部链接（http/https）新开标签，避免读者跳离站点；
+      // 站内链接（以 / 开头）交回 VitePress 客户端路由走 SPA 导航。
+      // 原实现对所有非锚点链接加 target="_blank"，导致无扩展名的站内链接
+      // （如 /start/main-city）在新窗口打开时服务器 fallback 到 .md 源文件触发下载。
+      const defaultLinkOpen = md.renderer.rules.link_open ?? ((tokens, idx, options, _env, self) => self.renderToken(tokens, idx, options))
+      md.renderer.rules.link_open = (tokens, idx, options, env, self) => {
+        const token = tokens[idx]
+        const href = token.attrGet('href') ?? ''
+        if (href && /^https?:\/\//i.test(href)) {
+          token.attrSet('target', '_blank')
+          token.attrSet('rel', 'noopener noreferrer')
+        }
+        return defaultLinkOpen(tokens, idx, options, env, self)
+      }
       // mcfunction 不是 Shiki 内置语言，映射到 bash 语法高亮（注释/命令风格接近）
       const fence = md.renderer.rules.fence!
       md.renderer.rules.fence = (...args) => {

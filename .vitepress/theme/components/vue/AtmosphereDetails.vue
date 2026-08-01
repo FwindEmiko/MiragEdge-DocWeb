@@ -79,4 +79,15 @@ onBeforeUnmount(() => {
 })
 </script>
 
-<template></template>
+<template>
+  <!-- 修复 hydration mismatch：空模板组件 SSR 输出 0 节点、客户端输出 1 个注释锚点，
+       导致 router-wrapper 内后续节点整体错位，VitePress lean 模块水合失败清空正文。
+       改为渲染一个隐藏占位 div，SSR 与客户端结构一致。 -->
+  <div class="atmosphere-details" aria-hidden="true"></div>
+</template>
+
+<style scoped>
+.atmosphere-details {
+  display: none;
+}
+</style>
