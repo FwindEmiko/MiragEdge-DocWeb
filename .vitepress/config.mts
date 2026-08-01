@@ -299,6 +299,7 @@ export default defineConfig({
     define: {
       __BUILD_ID__: JSON.stringify(process.env.GITHUB_RUN_NUMBER || 'dev'),
       __BUILD_SHA__: JSON.stringify(process.env.GITHUB_SHA ? process.env.GITHUB_SHA.substring(0, 7) : ''),
+      __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: 'true',
     },
     plugins: [
       MermaidPlugin() as any,
