@@ -6,7 +6,7 @@ description: 锐界幻境现有的鞘翅与镰刀锻造升级说明。
 # 锻造升级
 
 ## 下界合金鞘翅
-在保持原鞘翅功能属性的情况下，可再提供3点护甲值，并提高100点装备耐久  
+在保持原鞘翅功能属性的情况下，可再提供2点护甲值，并提高100点装备耐久  
 
 <SmartImage align="left" margin="0"
   src="/images/web_image/features/adventure/mmo/reinforced_elytra.png"
