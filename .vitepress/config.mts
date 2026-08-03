@@ -497,6 +497,7 @@ export default defineConfig({
                     { text: '群系与结构', link: '/play/adventure/worlds/stellarity/biomes' },
                     { text: '生物与 Boss', link: '/play/adventure/worlds/stellarity/mobs' },
                     { text: '物品与装备', link: '/play/adventure/worlds/stellarity/items' },
+                    { text: '高级附魔', link: '/play/adventure/worlds/stellarity/enchantments' },
                     { text: '原版成就', link: '/play/adventure/worlds/stellarity/advancements' },
                   ]
                 },
@@ -724,6 +725,7 @@ export default defineConfig({
           items: [
             { text: '服务器模块职责', link: '/developer/reference/server-modules' },
             { text: '附魔 ID 对照表', link: '/developer/reference/enchantment_ids' },
+            { text: 'Stellarity 技术附魔', link: '/developer/reference/stellarity-technical-enchantments' },
             { text: '附魔配置参考', link: '/developer/reference/enchanting' },
             { text: '钓鱼配置参考', link: '/developer/reference/fishing' },
             { text: '自定义作物参考', link: '/developer/reference/customcrops' },

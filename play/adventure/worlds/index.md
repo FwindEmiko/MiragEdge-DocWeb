@@ -47,6 +47,7 @@
 | 下界有哪些新生物？ | [烬域 · 生物与Boss](./incendium/mobs) |
 | 末地变成了什么样？ | [繁星 · 群系与结构](./stellarity/biomes) |
 | 末地有什么新装备？ | [繁星 · 物品与装备](./stellarity/items) |
+| 末地有哪些专属附魔？ | [繁星 · 高级附魔](./stellarity/enchantments) |
 | 光之女皇怎么打？ | [繁星 · 生物与Boss](./stellarity/mobs) |
 | 野外能遇到什么新建筑？ | [野外探索与结构](./exploration/structures) |
 | 地城酒馆改造了什么？ | [五种结构改造](./dungeons-and-taverns/structures) |

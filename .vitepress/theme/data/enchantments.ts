@@ -206,8 +206,8 @@ export const enchantments: Enchantment[] = [
   { name: '鱼叉', id: 'spearfishing', maxLevel: 3, equipment: '三叉戟', effect: '击中水中的方块时有概率掉落鲜鱼', rarity: 'rare' },
   { name: '鱼钩', id: 'harpoon', maxLevel: 2, equipment: '钓鱼竿', effect: '对被钩上的生物造成大量伤害', rarity: 'rare' },
   { name: '麻痹', id: 'paralyze', maxLevel: 3, equipment: '盾牌', effect: '抵挡伤害时有概率使攻击者获得挖掘疲劳效果', rarity: 'rare' },
-  { name: '沙行', id: 'dune_speed', maxLevel: 3, equipment: '靴子', effect: '在沙地上提升移动速度', rarity: 'rare' },
-  { name: '飘浮射击', id: 'levitation_shot', maxLevel: 5, equipment: '弓', effect: '射中的目标获得飘浮效果', rarity: 'rare' },
+  { name: '沙行', id: 'dune_speed', maxLevel: 3, equipment: '靴子', effect: '在沙地表面移动时提升速度，并有低概率损耗耐久', rarity: 'rare' },
+  { name: '飘浮射击', id: 'levitation_shot', maxLevel: 5, equipment: '弓', effect: '射中的目标有概率获得飘浮效果', rarity: 'rare' },
   { name: '重靴', id: 'heavy_boots', maxLevel: 1, equipment: '靴子', effect: '重力+50%，从5格以上摔落时震碎脚下方块（不掉落物品），与月球漫步互斥', rarity: 'rare' },
 
   // ===== 史诗品质 (61) =====
@@ -270,9 +270,9 @@ export const enchantments: Enchantment[] = [
   { name: '首击', id: 'first_strike', maxLevel: 6, equipment: '剑', effect: '对满血生物的伤害提升', rarity: 'epic' },
   { name: '魄力', id: 'force', maxLevel: 3, equipment: '弓', effect: '射出的箭矢伤害提升', rarity: 'epic' },
   { name: '黯然', id: 'dejecting', maxLevel: 5, equipment: '头盔 / 胸甲 / 护腿 / 靴子', effect: '使得周围的生物获得缓慢II，盔甲会自动扣除耐久', rarity: 'epic' },
-  { name: '伏击', id: 'ambush', maxLevel: 3, equipment: '剑', effect: '攻击未察觉的目标时造成额外伤害', rarity: 'epic' },
-  { name: '装甲飞行', id: 'plated', maxLevel: 4, equipment: '鞘翅', effect: '增加护甲与护甲韧性，但重力增大，与翱翔互斥', rarity: 'epic' },
-  { name: '翱翔', id: 'soaring', maxLevel: 4, equipment: '鞘翅', effect: '减少重力延长滑翔距离，降低摔落伤害，与装甲飞行互斥', rarity: 'epic' },
+  { name: '伏击', id: 'ambush', maxLevel: 3, equipment: '剑', effect: '潜行时攻击未察觉的目标造成额外伤害，触发后需重新潜行', rarity: 'epic' },
+  { name: '装甲飞行', id: 'plated', maxLevel: 4, equipment: '鞘翅', effect: '增加护甲与护甲韧性，但重力增大滑翔更沉稳，与翱翔互斥', rarity: 'epic' },
+  { name: '翱翔', id: 'soaring', maxLevel: 4, equipment: '鞘翅', effect: '降低滑翔重力延长距离，并降低摔落伤害，与装甲飞行互斥', rarity: 'epic' },
   { name: '月球漫步', id: 'lunar_walk', maxLevel: 1, equipment: '靴子', effect: '重力-80%并免疫摔落伤害，与重靴互斥', rarity: 'epic' },
   { name: '海王', id: 'neptune', maxLevel: 1, equipment: '靴子', effect: '行走时5%概率在脚下生成3×3水源，消耗1点耐久', rarity: 'epic' },
 
@@ -287,9 +287,9 @@ export const enchantments: Enchantment[] = [
   { name: '自愈', id: 'rejuvenation', maxLevel: 2, equipment: '头盔 / 胸甲 / 护腿 / 靴子', effect: '自然回血速度与回血量提升', rarity: 'legendary' },
   { name: '重伤', id: 'injure', maxLevel: 3, equipment: '剑 / 斧 / 弓 / 弩 / 三叉戟', effect: '使得被攻击的玩家血量恢复速度降低', rarity: 'legendary' },
   { name: '重铸', id: 'indestructibility', maxLevel: 3, equipment: '全部', effect: '其物品耐久得到大幅度提升', rarity: 'legendary' },
-  { name: '暴击', id: 'critical_strike', maxLevel: 3, equipment: '剑', effect: '击杀充能后下一次攻击造成暴击伤害', rarity: 'legendary' },
-  { name: '虚空打击', id: 'void_strike', maxLevel: 1, equipment: '剑 / 斧', effect: '概率触发虚空侵蚀持续伤害', rarity: 'legendary' },
-  { name: '虚空射击', id: 'void_shot', maxLevel: 1, equipment: '弓 / 弩', effect: '箭矢命中附加减速与虚空侵蚀效果', rarity: 'legendary' },
+  { name: '暴击', id: 'critical_strike', maxLevel: 3, equipment: '剑', effect: '击杀目标充能后，下一次攻击必定暴击并给予短暂力量效果', rarity: 'legendary' },
+  { name: '虚空打击', id: 'void_strike', maxLevel: 1, equipment: '剑 / 斧 / 三叉戟', effect: '近战命中时有概率施加虚空侵蚀，造成持续伤害', rarity: 'legendary' },
+  { name: '虚空射击', id: 'void_shot', maxLevel: 1, equipment: '弓 / 弩', effect: '远程命中时有概率触发虚空爆发，造成缓慢、范围伤害与虚空侵蚀', rarity: 'legendary' },
   { name: '爆裂打火石', id: 'explosive_flint', maxLevel: 1, equipment: '打火石', effect: '右键方块时产生爆炸（威力3.0），消耗3点耐久，冷却15秒', rarity: 'legendary' },
 
   // ===== 至宝品质 (7) =====
