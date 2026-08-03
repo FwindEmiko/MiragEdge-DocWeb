@@ -189,7 +189,7 @@ description: 面向锐界幻境开发维护的数据包工作流，按前置环�
 | 入口放在 `functions` 数组而非 `pools` | `set_loot_table` 解析失败 | 把入口移到 `pools` 数组中 |
 | 旧版 `entry` 字段名 | 1.20+ 已改名为 `entries` | 批量替换 |
 
-### 部署验证清单
+#### 部署验证清单
 
 部署适配后的数据包后，检查 `latest.log`：
 
@@ -199,6 +199,74 @@ description: 面向锐界幻境开发维护的数据包工作流，按前置环�
 - [ ] 无 `Unreachable entry!` 警告
 - [ ] 数据包出现在 `/datapack list` 输出中
 - [ ] 服务器正常启动无 ERROR
+
+### 常见问题扩展
+
+#### UTF-8 BOM 检测
+
+Windows 编辑器（记事本、VS Code 等）保存的 JSON 文件可能带有 UTF-8 BOM（`EF BB BF`），**Leaf 服务端会拒绝加载**。用 `od` 命令检测：
+
+```bash
+# 检查 pack.mcmeta 是否带 BOM
+unzip -p pack.zip pack.mcmeta | od -A x -t x1z -v | head -1
+
+# 正常输出（无 BOM）：首字节为 7B（{）
+# 000000 7b 0a 20 20 ...
+
+# 带 BOM 输出：首三个字节为 ef bb bf
+# 000000 ef bb bf 7b 0a ...
+```
+
+**修复方法**：用 Python 重新保存为无 BOM 的 UTF-8：
+
+```python
+with open("pack.mcmeta", "r", encoding="utf-8-sig") as f:
+    content = f.read()
+with open("pack.mcmeta", "w", encoding="utf-8", newline="\n") as f:
+    f.write(content)
+```
+
+#### CRLF 换行符
+
+第三方数据包可能使用 Windows 换行符（`\r\n`），虽然 Leaf 通常能处理，但**跨平台部署时建议统一为 LF（`\n`）**。用 `sed` 批量转换：
+
+```bash
+# 将目录下所有 .json 和 .mcfunction 的 CRLF 转为 LF
+find . -name "*.json" -o -name "*.mcfunction" | xargs sed -i 's/\r$//'
+```
+
+#### tick.json 的 replace 字段
+
+多个数据包同时注册 `#minecraft:tick` 时，标签文件默认**合并**（`replace: false`）。如果某个数据包的 tick.json 设置了 `replace: true`，会**覆盖**其他所有数据包的 tick 注册——导致其他数据包的 tick 函数失效。
+
+**最佳实践**：始终显式声明 `"replace": false`：
+
+```json
+{
+  "replace": false,
+  "values": ["my_namespace:main"]
+}
+```
+
+::: tip replace 的默认行为
+如果 `replace` 字段完全缺失，Minecraft 默认使用 `false`（合并模式）。但显式声明更安全，能防止误操作。
+:::
+
+#### 26.2 的 pack_format 变化
+
+自 MC 26.2 起，`pack.mcmeta` 不再要求 `pack_format` 字段，改用 `min_format` / `max_format` 指定版本范围：
+
+```json
+{
+  "pack": {
+    "description": "...",
+    "min_format": 107,
+    "max_format": 107
+  }
+}
+```
+
+官方 Minecraft 26.2 的数据包也使用此格式。**整数格式和数组格式可以混用**（官方示例中 `min_format` 为整数 `107` 而 `max_format` 为数组 `[107, 1]`），但建议统一使用整数格式以保持一致性。
 
 ### 推荐目录结构
 

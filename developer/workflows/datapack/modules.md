@@ -78,6 +78,7 @@ execute as @a run function miragedge:core/player_check
 ```json
 // data/minecraft/tags/function/load.json
 {
+  "replace": false,
   "values": [
     "miragedge:load"
   ]
@@ -87,11 +88,16 @@ execute as @a run function miragedge:core/player_check
 ```json
 // data/minecraft/tags/function/tick.json
 {
+  "replace": false,
   "values": [
     "miragedge:tick"
   ]
 }
 ```
+
+::: tip 始终显式声明 replace: false
+`replace` 的默认值是 `false`（合并模式），但多个数据包同时注册 `#minecraft:tick` 时，显式声明可以防止误操作。详见[排错页的 tick.json 说明](./troubleshooting#tickjson-的-replace-字段)。
+:::
 
 ##### 4. 条件分支与 CE 物品交互
 
