@@ -473,36 +473,32 @@ export default defineConfig({
               link: '/play/adventure/worlds/',
               collapsed: false,
               items: [
-                { text: '世界生成', link: '/play/adventure/worlds/worldgen/overview' },
-                { text: '野外探索', link: '/play/adventure/worlds/exploration/structures' },
-                { text: '结构改造', link: '/play/adventure/worlds/dungeons-and-taverns/structures' },
-                { text: '稀有建筑群', link: '/play/adventure/worlds/rare-structures/overview' },
-                { text: '沧墟破门', link: '/play/adventure/worlds/hoppo-ruins/structures' },
-                { text: '筑物塔楼', link: '/play/adventure/worlds/structory/structures' },
-                { text: '趣味内容', link: '/play/adventure/worlds/fun-packs/overview' },
-                {
-                  text: '烬域',
-                  collapsed: true,
-                  items: [
-                    { text: '群系与结构', link: '/play/adventure/worlds/incendium/biomes' },
-                    { text: '生物与 Boss', link: '/play/adventure/worlds/incendium/mobs' },
-                    { text: '物品与装备', link: '/play/adventure/worlds/incendium/items' },
-                    { text: '原版成就', link: '/play/adventure/worlds/incendium/advancements' },
-                  ]
-                },
-                {
-                  text: '繁星',
-                  collapsed: true,
-                  items: [
-                    { text: '群系与结构', link: '/play/adventure/worlds/stellarity/biomes' },
-                    { text: '生物与 Boss', link: '/play/adventure/worlds/stellarity/mobs' },
-                    { text: '物品与装备', link: '/play/adventure/worlds/stellarity/items' },
-                    { text: '高级附魔', link: '/play/adventure/worlds/stellarity/enchantments' },
-                    { text: '原版成就', link: '/play/adventure/worlds/stellarity/advancements' },
-                  ]
-                },
-                { text: '终焉 Boss', link: '/play/adventure/worlds/true-ending/boss' },
-              ]
+                              { text: '野外结构图鉴', link: '/play/adventure/worlds/structures' },
+                              { text: '世界生成与地形', link: '/play/adventure/worlds/worldgen' },
+                              { text: '趣味彩蛋', link: '/play/adventure/worlds/fun-packs' },
+                              {
+                                text: '烬域',
+                                collapsed: true,
+                                items: [
+                                  { text: '群系与结构', link: '/play/adventure/worlds/incendium/biomes' },
+                                  { text: '生物与 Boss', link: '/play/adventure/worlds/incendium/mobs' },
+                                  { text: '物品与装备', link: '/play/adventure/worlds/incendium/items' },
+                                  { text: '探索指南', link: '/play/adventure/worlds/incendium/guide' },
+                                ]
+                              },
+                              {
+                                text: '繁星',
+                                collapsed: true,
+                                items: [
+                                  { text: '群系与结构', link: '/play/adventure/worlds/stellarity/biomes' },
+                                  { text: '生物与 Boss', link: '/play/adventure/worlds/stellarity/mobs' },
+                                  { text: '物品与装备', link: '/play/adventure/worlds/stellarity/items' },
+                                  { text: '高级附魔', link: '/play/adventure/worlds/stellarity/enchantments' },
+                                  { text: '探索指南', link: '/play/adventure/worlds/stellarity/guide' },
+                                ]
+                              },
+                              { text: '终焉 Boss', link: '/play/adventure/worlds/true-ending/boss' },
+                            ]
             },
             {
               text: '装备与附魔',

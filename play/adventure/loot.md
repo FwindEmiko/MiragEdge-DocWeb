@@ -164,4 +164,4 @@ head:
 
 查看自己当前所在的世界、坐标、区域名称、范围和简短规则说明。它只用于查询，不会刷新战利品，也不会触发任何重置。
 
-继续探索：[玩法总览](/play/) · [野外探索与结构](/play/adventure/worlds/exploration/structures)
+继续探索：[玩法总览](/play/) · [野外结构图鉴](/play/adventure/worlds/structures)

@@ -102,6 +102,16 @@ const exactRules: RedirectRule[] = [
   { from: '/features/adventure/levelledmobs', to: '/developer/archive/design/levelledmobs' },
   { from: '/play/adventure/equipment/info', to: '/developer/archive/design/equipment-upgrade' },
   { from: '/features/adventure/mmo/info', to: '/developer/archive/design/equipment-upgrade' },
+  // 世界与结构重构（2026-08-03）
+  { from: '/play/adventure/worlds/worldgen/overview', to: '/play/adventure/worlds/worldgen' },
+  { from: '/play/adventure/worlds/fun-packs/overview', to: '/play/adventure/worlds/fun-packs' },
+  { from: '/play/adventure/worlds/dungeons-and-taverns/structures', to: '/play/adventure/worlds/structures' },
+  { from: '/play/adventure/worlds/structory/structures', to: '/play/adventure/worlds/structures' },
+  { from: '/play/adventure/worlds/exploration/structures', to: '/play/adventure/worlds/structures' },
+  { from: '/play/adventure/worlds/hoppo-ruins/structures', to: '/play/adventure/worlds/structures' },
+  { from: '/play/adventure/worlds/rare-structures/overview', to: '/play/adventure/worlds/structures' },
+  { from: '/play/adventure/worlds/incendium/advancements', to: '/play/adventure/worlds/incendium/guide' },
+  { from: '/play/adventure/worlds/stellarity/advancements', to: '/play/adventure/worlds/stellarity/guide' },
 ]
 
 function normalizeRoute(route: string): string {
