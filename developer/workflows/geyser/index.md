@@ -101,6 +101,127 @@ flowchart LR
 5. [协议与产物参考](/developer/workflows/geyser/reference)：查阅 Custom Content、Rainbow、item/block/skull/entity mapping 与 Bedrock pack 的字段边界。
 6. [Stellarity 5.5.3 末地批次](/developer/workflows/geyser/stellarity)：按当前服务器真实数据包和 CE 最终包执行 Rainbow 采集、首发合并与后续增量发布。
 
+## 常见陷阱与注意事项
+
+### 1. 武器的 `display_handheld`
+
+基岩版默认所有物品渲染为"手持物品"样式，武器/工具类必须显式设置 `bedrock_options.display_handheld: true`，否则拿在手上像普通物品，没有正确的握持角度。
+
+**受影响的物品类型**：剑、斧、镐、锹、锄、弓、弩、三叉戟、矛、钓竿、盾牌。
+
+```json
+{
+  "bedrock_identifier": "stellarity:dragonblade",
+  "type": "definition",
+  "model": "stellarity:dragonblade",
+  "bedrock_options": {
+    "icon": "stellarity.item_dragonblade",
+    "display_handheld": true
+  }
+}
+```
+
+### 2. 盔甲的 `components.minecraft:equippable`
+
+盔甲物品必须设置 `components.minecraft:equippable` 组件，否则基岩版不会在玩家模型上渲染盔甲。该组件需要指定 `slot`（部位）、`asset_id`（纹理标识）、`damage_on_hurt`（是否消耗耐久）和 `equip_sound`（装备音效）。
+
+**slot 映射**：
+- 头盔 → `head`
+- 胸甲/鞘翅 → `chest`
+- 护腿 → `legs`
+- 靴子 → `feet`
+
+```json
+{
+  "bedrock_identifier": "stellarity:champion_chestplate",
+  "type": "definition",
+  "model": "stellarity:champion_chestplate",
+  "components": {
+    "minecraft:equippable": {
+      "slot": "chest",
+      "asset_id": "stellarity:champion",
+      "damage_on_hurt": true,
+      "equip_sound": "minecraft:item.armor.equip_netherite"
+    }
+  }
+}
+```
+
+### 3. 物品图标的 `bedrock_options.icon`
+
+自定义物品必须设置 `bedrock_options.icon` 引用 Bedrock 资源包中的纹理键名，否则基岩版显示默认的 base item 纹理。纹理键名格式为 `namespace.path_with_underscores`，例如 `stellarity.item_dragonblade`。
+
+纹理键名必须与资源包中 `textures/item_texture.json` 的 `texture_data` 键一一对应。
+
+### 4. Base Item 的准确性
+
+**警告**：不要猜测 base item！必须从数据包的 loot table 中提取实际 base item。错误的 base item（如将所有物品设为 `stick`）会导致：
+- 物品显示错误的默认纹理
+- 盔甲无法正确装备
+- 武器没有正确的攻击速度/伤害显示
+
+验证方法：检查数据包中对应的 `loot_table/item/` 下的 JSON 文件，找到 `entries[].name` 字段。
+
+### 5. 状态变体物品（复杂模型）
+
+对于使用 `select`、`condition`、`range_dispatch` 等复杂 item_model 的物品（如弓的拉动状态、弩的装填状态、三叉戟的投掷状态），Geyser v2 映射只能匹配到 item_model 层级，无法处理内部状态变体。
+
+**建议**：映射默认/GUI 纹理即可，状态变体需要在后续通过 Geyser 的 predicate 系统单独处理，或保持现状（基岩版显示默认纹理）。
+
+### 6. 盔甲自定义纹理的限制
+
+Java 版的自定义盔甲纹理（通过 `asset_id` 引用 `assets/<namespace>/textures/entity/equipment/humanoid/` 下的纹理）**不会自动转换到基岩版**。基岩版使用 attachable 系统渲染盔甲纹理，需要额外创建 Bedrock 格式的 attachable 文件。
+
+**当前方案**：映射 `equippable` 组件使盔甲在基岩版上可见，但使用默认的 base item 纹理（如铁盔甲纹理）。要启用自定义纹理，需要：
+
+1. 创建 `attachables/` 目录下的 JSON 文件，定义每个盔甲部位的渲染
+2. 将 Java 格式的盔甲纹理转换为 Bedrock UV 贴图格式
+3. 放入 `textures/models/armor/` 目录（胸甲用 `_1` 后缀，护腿用 `_2` 后缀）
+
+### 7. Display Entity 支持（光之女皇、自定义方块）
+
+Stellarity 的光之女皇模型和自定义方块使用 Java 的 `item_display`/`block_display` 实体。基岩版原生不支持这些实体类型。
+
+**解决方案**：安装 [GeyserDisplayEntity](https://github.com/GeyserExtensionists/GeyserDisplayEntity) 扩展。
+
+**安装步骤**：
+1. 下载 `GeyserDisplayEntity-*.jar` 放入 Geyser 的 `extensions/` 目录
+2. 下载 `GeyserDisplayEntityPack.mcpack` 放入 `packs/` 目录
+3. 重启 Geyser
+
+该扩展会自动将 item_display 和 block_display 实体转换为基岩版可见的实体。
+
+### 8. 实体生物贴图转换
+
+Stellarity 的末地生物变体贴图（末影猫、末影鸡等）存在于 Java 资源包中，但需要手动转换到基岩版格式。
+
+**工具**：
+- [Rainbow](https://geysermc.org/wiki/other/rainbow/) — Geyser 官方 Fabric 转换模组
+- [convertmcpack.net](https://convertmcpack.net/) — 在线转换工具
+- [mc-tools.net](https://mc-tools.net/pack-converter) — 在线转换工具
+
+**手动步骤**：
+1. 将 Java 纹理文件（`assets/stellarity/textures/entity/`）复制到 Bedrock 资源包的 `textures/entity/` 目录
+2. 注意 Bedrock 的实体纹理命名规范可能与 Java 不同
+
+### 7. 资源包层级与加载顺序
+
+Geyser 按 `packs/` 目录下的文件顺序加载资源包。多个包之间有同名纹理键时，**后加载的覆盖先加载的**。建议保持命名空间唯一性，避免跨包冲突。
+
+### 8. 映射验证清单
+
+部署前逐项检查：
+
+- [ ] format_version 为 2
+- [ ] 所有 bedrock_identifier 唯一，不使用 `minecraft:` 命名空间
+- [ ] 武器/工具有 `display_handheld: true`
+- [ ] 盔甲有 `components.minecraft:equippable`（含 slot/asset_id/damage_on_hurt/equip_sound）
+- [ ] 自定义物品有 `bedrock_options.icon` 引用正确纹理键名
+- [ ] base item 从 loot table 验证，非猜测
+- [ ] Bedrock 资源包有 `manifest.json` 和 `textures/item_texture.json`
+- [ ] 备份当前 mapping 和 pack 后再部署
+- [ ] Geyser 重启后验证映射注册日志
+
 ## 发布物契约
 
 每个发布批次必须有一个不可变的目录，且至少包含以下项目：
