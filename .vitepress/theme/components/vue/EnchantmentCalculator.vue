@@ -139,9 +139,9 @@ const RARITIES = [
   { name:'优良', color:'#66c18c', mult:1.5, sr:73, decay:0.09, prio:2 },
   { name:'稀有', color:'#63bbd0', mult:2.0, sr:63, decay:0.095,prio:3 },
   { name:'诅咒', color:'#d42517', mult:3.0, sr:30, decay:0.10, prio:4 },
-  { name:'史诗', color:'#eb507e', mult:3.5, sr:55, decay:0.10, prio:5 },
-  { name:'传说', color:'#fba414', mult:4.0, sr:45, decay:0.105,prio:6 },
-  { name:'至宝', color:'#fbda41', mult:5.0, sr:38, decay:0.095,prio:7 },
+  { name:'史诗', color:'#eb507e', mult:3.0, sr:55, decay:0.10, prio:5 },
+  { name:'传说', color:'#fba414', mult:3.5, sr:45, decay:0.105,prio:6 },
+  { name:'至宝', color:'#fbda41', mult:4.0, sr:38, decay:0.095,prio:7 },
 ]
 
 const lv = ref(3)

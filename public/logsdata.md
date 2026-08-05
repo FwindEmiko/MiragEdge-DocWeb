@@ -5,17 +5,22 @@
 [添加] 任务系统全完成奖励调整：每日7000灵叶+5星痕石+15min飞行，每周22000灵叶+50星痕石+60min飞行
 [添加] Aiyatsbus 附魔注册数据包修复：dune_speed.json tag引用修复、vein/lumberjack exclusive_set 修复
 [添加] 鞘翅专属附魔 Soaring/Plated 注册完成
+[添加] 文档站补充辐光宝石和瓶中精灵用途说明
+[添加] 文档站移除已迁移页面的侧栏入口（钓鱼配置/自定义作物/贴图字符码）
 
 [升级] 更新服务端核心至最新版本，修复一些问题
 
-[分析] Towns and Towers 雪原村庄 worldgen 报错分析：MC-307918 Mojang 已知 bug，抑制日志
-
 [调整] Geyser 扩展配置目录名修复：从 geyserdisplayentity 改为 GeyserDisplayEntity，配置正式生效
 [调整] 粒子过滤模块审查通过，可直接部署到服务器
+[调整] 文档站同步修正辉耀掉落名称：辉耀珠宝→辐光宝石，精灵瓶→瓶中精灵
 
 [修复] 修复 Geyser 扩展配置未生效的问题（目录名不匹配导致一直使用默认配置）
 [修复] 修复 Aiyatsbus 预注册附魔 dune_speed.json 引用不存在的 block tag 导致解析失败
 [修复] 修复 Aiyatsbus 预注册附魔 exclusive_set 引用不存在的 vein/lumberjack 导致 Unbound values 错误
+[修复] 修复文档站 redstone.md 中 .html 后缀的旧链接
+[修复] 修复文档站 craftengine/index.md 中指向已迁移 sticker 页面的引用
+
+[分析] Towns and Towers 雪原村庄 worldgen 报错分析：MC-307918 Mojang 已知 bug，建议抑制日志
 
 ## 2026.8.4
 
