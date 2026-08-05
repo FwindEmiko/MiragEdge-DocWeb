@@ -723,10 +723,8 @@ export default defineConfig({
             { text: '附魔 ID 对照表', link: '/developer/reference/enchantment_ids' },
             { text: 'Stellarity 技术附魔', link: '/developer/reference/stellarity-technical-enchantments' },
             { text: '附魔配置参考', link: '/developer/reference/enchanting' },
-            { text: '钓鱼配置参考', link: '/developer/reference/fishing' },
-            { text: '自定义作物参考', link: '/developer/reference/customcrops' },
-            { text: '贴图字符码速查表', link: '/developer/reference/sticker' },
-          ]
+            { text: '祛魔成本计算器', link: '/developer/reference/enchantment-calculator' },
+                      ]
         },
         {
           text: '🌐 站点与协作',

@@ -44,6 +44,7 @@ import './css/datapack/datapack-guide.css'
 import { inBrowser, withBase } from "vitepress"
 import LayoutComponent from './components/vue/layout.vue'
 import Contributors from './components/vue/Contributors.vue'
+import EnchantmentCalculator from './components/vue/EnchantmentCalculator.vue'
 
 import { init3DTiltEffect } from './components/js/feature.js'
 
@@ -71,6 +72,7 @@ export default {
     // 注册全局组件
     app.component("LayoutComponent", LayoutComponent)
     app.component('Contributors', Contributors)
+    app.component('EnchantmentCalculator', EnchantmentCalculator)
     app.component('SmartImage', SmartImage)
     app.component('ImageLightbox', ImageLightbox)
     app.component('ChristmasTree', ChristmasTree)

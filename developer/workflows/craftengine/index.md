@@ -282,4 +282,4 @@ equipments:
 - [数据包工作流：CraftEngine 集成](/developer/workflows/datapack/modules#craftengine-集成指南)
 - [Geyser 基岩版内容转换工作流](/developer/workflows/geyser/)
 - [自定义作物工作流：CraftEngine 资源对接](/developer/workflows/custom-crops#与-ce-物品的对接)
-- [旧贴图字符码页面](/developer/reference/sticker)
+
