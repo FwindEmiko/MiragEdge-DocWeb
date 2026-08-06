@@ -1,5 +1,25 @@
 # 锐界幻境更新日志
 
+## 2026.8.6
+
+[添加] 新增夜视附魔（Night Vision）：Aiyatsbus 配置 + 数据包预注册，头盔专属
+[添加] 在线奖励480分钟档添加全服播报
+
+[升级] 更新Geyser至最新版本
+
+[调整] 签到插件奖励配置调整：去掉VIP/VIP+组，只保留Default，精简全服播报
+[调整] 在线时间奖励调整：每日全勤从9,800灵叶降至6,000灵叶，星痕石从51降至30
+[调整] Hindsight代理模型切换：Gemini切到DeepSeek V4 Flash为主模型
+[调整] 连锁挖矿toggle修复部署到服务器（VeinMiner官方toggle命令替代旧vm mode）
+[调整] Geyser基岩版材质映射修复：修复服务器上旧版本mapping文件（bedrock_identifier缺失）
+[调整] 粒子过滤模块部署完成：Geyser扩展 + VelocityCommandForward 全部就绪
+[调整] Stellarity数据包v6.2性能优化：末影人群系spawn_costs改为不限刷新
+
+[修复] 修复Geyser基岩版翅膀映射问题（移除Stellarity翅膀自定义映射，恢复原版elytra飞行）
+[修复] 修复弓/弩/三叉戟/钓竿的bedrock_identifier命名空间错误
+[修复] 修复菜单插件连锁挖矿开关无效的问题
+[修复] 修复签到插件GUI中VIP/MVP奖励显示冗余
+
 ## 2026.8.5
 
 [添加] 任务系统全完成奖励调整：每日7000灵叶+5星痕石+15min飞行，每周22000灵叶+50星痕石+60min飞行
