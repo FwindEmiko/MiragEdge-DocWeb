@@ -1,119 +1,230 @@
 ---
-title: "Geyser 基岩版内容转换工作流 · AI Skills"
-description: "把 CraftEngine 合并后的 Java 资源包、数据包伴随资源包和复杂展示内容，变成可审计的 Geyser 映射与基岩版资源包。"
-icon: "🌉"
+title: "Geyser 基岩版内容转化工作流"
+description: "Java 版自定义内容到基岩版的完整转化工作流——映射、资源包、扩展开发、硬限制与验收"
 outline: deep
-head:
-  - - meta
-    - name: keywords
-      content: "Geyser, Bedrock, Rainbow, CraftEngine, Java resource pack, custom mappings, item_model, custom_model_data, display entity, AI Skills"
 ---
 
-# Geyser 基岩版内容转换工作流 · AI Skills
+# Geyser 基岩版内容转化工作流
 
-这是一套面向 MiragEdge 的可执行工作流，不是“把 Java ZIP 改后缀”的教程。目标是把 Java 侧真正送到玩家客户端的最终视觉内容，转换为 Geyser 能注册的映射和基岩版资源包，并留下可重新生成、可回滚、可验收的发布物。
+> 最后更新：2026-08-07 · 基于 Geyser 2.11.x on Velocity 4.1.0 · CraftEngine on backend subserver
 
-本工作流同时覆盖三类输入：
+## 1. 概述
 
-1. CraftEngine 自己的物品、方块、盔甲、家具、字体与声音资源。
-2. 数据包提供逻辑、但随 Java 资源包携带的物品、方块、模型、声音、头颅和展示物。
-3. CE 在生成阶段合并的外部资源包，包括模型/生物系统、名称牌、复杂数据包资源包与独立 ZIP。
+Geyser 是一个桥接代理，允许基岩版（Bedrock Edition）玩家连接到 Java 版服务器。但 Geyser **不会自动转化 Java 资源包**——Java ZIP 不能直接放进 `packs/` 目录。所有自定义内容必须手动创建映射文件和基岩版资源包。
 
-本文依据 2026-07-31 检索的 Geyser/Rainbow 上游资料和 `F:\FCelestial\CraftEngine\config.yml` 编写。Geyser、Bedrock 协议、Rainbow 和 CE 都会演进；每次升级后都必须重新做版本锁定和实机验收。
+### 三类输入
 
-## 先给结论
+1. **CraftEngine 物品/方块** — CE 自建的物品和服务器端方块
+2. **数据包伴随资源包** — Stellarity、Incendium、True-Ending 等数据包携带的物品/方块/模型
+3. **外部合并包** — CustomNameplates、BetterModel、Sparkles 等独立 ZIP
 
-- Geyser **不会**自动把 Java 资源包转换成 Bedrock 资源包；Java ZIP 不能直接放进 Geyser 的 `packs/` 目录。
-- 对物品、简单方块、声音、头颅和部分 3D 物品，首选 Rainbow 生成 `custom_mappings`、Bedrock pack 和报告。
-- 基岩版行为包或 Add-on 不能替代 Java 服务端逻辑。数据包和 CE 仍运行在 Java 服务端，Bedrock 包只负责客户端视觉与 Geyser 注册结果。
-- 复杂生物、CEM/OptiFine/EMF 规则、Display Entity 组合和高级动画不是通用自动转换目标；它们必须进入“手工 Bedrock 实体 + Geyser 扩展”或“第三方 Display Entity 扩展”的独立验收分支。
-- 当前 CE 已配置输出未保护副本，且会把外部资源包合并为最终 Java 包。转换器的输入应优先是这个**同一发布批次的未保护最终合并包**，不是单独挑某个 CE pack，也不是受保护的 `resource_pack.zip`。
+### 当前服务器环境
 
-## 系统边界
+| 组件 | 版本 | 位置 |
+|------|------|------|
+| Geyser | 2.11.x (b1209) | Velocity 代理端 `/mnt/miragedge/vc/plugins/Geyser-Velocity/` |
+| CraftEngine | 后端子服 | `/mnt/miragedge/MainServer/plugins/CraftEngine/` |
+| Velocity | 4.1.0-SNAPSHOT | 代理端 |
+| 服务端核心 | Leaf 26.2 (Paper fork) | 后端 |
 
-```mermaid
-flowchart LR
-  A["CE resources"] --> D["CE 最终 Java 资源包"]
-  B["数据包伴随资源包"] --> D
-  C["外部目录与 ZIP 资源包"] --> D
-  D --> E["Java 测试客户端加载最终包"]
-  E --> F["Rainbow 采集真实物品/方块/声音/头颅"]
-  F --> G["Geyser custom_mappings"]
-  F --> H["Bedrock resource pack"]
-  F --> I["语言覆盖与报告"]
-  G --> J["Geyser 启动注册"]
-  H --> J
-  I --> J
-  J --> K["Bedrock 客户端实机验收"]
-  L["复杂实体与 Display Entity"] --> M["人工 Bedrock 实体或扩展适配"]
-  M --> J
+::: warning 架构关键
+Geyser 在代理端，CraftEngine 在后端子服。CE 方块是运行时动态注册的，Geyser 启动时看不到——这决定了非原版方块必须用 Extension API（见第 6 节）。
+:::
+
+## 2. 基岩版资源包结构
+
+### 目录结构
+
+```text
+my-pack.mcpack (或 .zip)
+├── manifest.json
+├── textures/
+│   ├── item_texture.json       # 物品纹理图集
+│   ├── terrain_texture.json    # 方块纹理图集
+│   ├── items/                  # 物品 PNG
+│   │   └── my_item.png
+│   ├── blocks/                 # 方块 PNG
+│   │   └── my_block.png
+│   └── models/
+│       └── armor/             # 盔甲纹理
+│           ├── my_armor_1.png  # 胸甲
+│           └── my_armor_2.png  # 护腿
+├── models/
+│   └── blocks/
+│       └── my_block.geo.json  # 方块几何体
+└── attachables/
+    └── my_armor.json           # 可穿戴物品定义
 ```
 
-这里的关键是“最终 Java 资源包”。CE 的配置可以把目录和 ZIP 合并到一个产物中，Java 客户端看到的是合并后的资源优先级与冲突处理结果。若拿 CE 自建 pack、某个数据包 ZIP 或某个外部模型包分别转换，通常会漏掉覆盖后的模型、纹理、语言、图集或声音。
-
-## 当前 CE 事实基线
-
-以 `F:\FCelestial\CraftEngine\config.yml` 为准，当前转换链路必须认识到以下配置事实：
-
-| 配置事实 | 对基岩转换的含义 |
-| --- | --- |
-| `resource-pack.path: ./generated/resource_pack.zip` | 这是 Java 玩家实际接收的主产物，但启用了保护/混淆，不应作为转换器首选输入。 |
-| `map-plugin-compatibility.enable: true`，路径为 `./generated/resource_pack_map.zip` | 这是给 BlueMap 等地图插件的兼容产物。它不是完整 Java 客户端包，禁止作为 Rainbow 或 Geyser 转换输入；当前 `generated/` 中确实存在此文件。 |
-| `protection.unprotected-copy.enable: true`，路径为 `./generated/resource_pack_unprotected.zip` | 配置要求生成同一批次的标准 ZIP，优先作为 Rainbow 的输入。2026-07-31 现场已确认该文件存在；与主包的修改时间相差 241 秒，处于 Bridge 默认 900 秒窗口内。时间接近不证明合并输入完整，仍必须通过 Bridge 审计。 |
-| `merge-external-folders` | ModelEngine、EliteMobs 等目录是 CE 的声明输入；当前快照中两个目录缺失，Bridge 会阻断并要求恢复来源或经所有者确认后移除声明，不能静默跳过。 |
-| `merge-external-zip-files` | CustomNameplates、BetterModel、D&T、真结局、Sparkles、Stellarity、魅力系统等 ZIP 是 CE 的声明输入；当前 `true-ending`、Sparkles、Stellarity 存在，另外四项缺失，必须逐项核对后再重建最终包。 |
-| `client-bound-model: true` | CE 会把客户端模型数据下发到物品栈，Rainbow 应从真实获得的物品读取，而不是仅猜 YAML。 |
-| `always-use-item-model: true` 与 `always-use-custom-model-data: true` | 同一物品可能同时具备现代 `minecraft:item_model` 和兼容用 CMD；首选 v2 的 `item_model` 映射，同时保留 legacy 覆盖的审计能力。 |
-| `always-generate-model-overrides: true` | 会生成兼容性模型覆盖；这有利于旧式 CMD 识别，但不是“所有模型都可自动转换”的保证。 |
-| `block.serverside-blocks: 2000` | CE 方块可能是服务器端真实方块，不能假定它们都是音符盒或其他原版状态覆盖。必须从实际世界和 Geyser/Rainbow 报告确认映射路线。 |
-
-`generate-mod-assets: true` 只说明 CE 还生成供 Java Fabric 客户端工具使用的资源，不会生成任何 Bedrock 资产。CE 的混淆、图集和保护选项也不会自动变成 Bedrock 兼容格式。
-
-## 选择路线
-
-先按最终效果选择路线，再开始转换。不要用“这是一个数据包”或“这是 CE 物品”替代技术分类。
-
-| Java 侧最终效果 | 首选路线 | 自动化边界 | 必须验收 |
-| --- | --- | --- | --- |
-| 2D 自定义物品 | Rainbow 物品映射 + `item_texture.json` | 通常可自动生成 | 背包、手持、掉落物、容器、配方书 |
-| 单纹理 3D 物品 | Rainbow 3D 物品/attachable | 支持简单 Java 模型和部分 display transform | GUI 图标、第一/三人称、头部槽、掉落物 |
-| 物品状态切换 | Rainbow 生成 v2 predicate/group | 仅限支持的 broken、damaged、CMD、rod cast、范围/选择条件 | 损坏、蓄力、抛竿、数量和维度切换 |
-| 简单盔甲/鞘翅 | Rainbow 读取 `equippable`/装备资源 | 鞘翅仅保证视觉，复杂装备分支需人工检查 | 四个槽位、飞行、第三人称、死亡/重登 |
-| 覆盖原版状态的自定义方块 | Rainbow block mapping | 自动扫描可能漏项；可手工标记世界坐标 | 放置、破坏、碰撞、光照、朝向、含水状态 |
-| CE 服务器端真实方块 | 先做实测识别，再决定 Geyser 自定义方块 JSON/API | 不承诺 Rainbow 可以覆盖所有注册方式 | 世界同步、交互、区块重载、状态变化 |
-| 自定义头颅 | Rainbow `custom-skulls.yml` + Geyser 生成包 | 可导出，但合并不能覆盖已有头颅 | 背包、穿戴、展示框、放置 |
-| 自定义声音 | Rainbow sound mapping + Bedrock sound 资源 | 支持资产采集，不保证所有触发语义 | 玩家动作、方块、实体、距离和音量 |
-| Java 字体图标、菜单 UI | 单独设计 Bedrock UI/图标回退 | Rainbow 没有承诺通用 Java 字体/UI 转换 | 菜单可读性、点击坐标、文字回退 |
-| 原版生物全局换肤 | 手工编写对应 Bedrock 实体资源 | Java 与 Bedrock 实体格式不同 | 所有同类实体是否被错误替换 |
-| 条件化自定义生物/CEM/复杂动画 | Geyser Entity API 扩展 + Bedrock 实体包 | API 为实验性；无 JSON 通用映射 | 生成、状态切换、动画、卸载/重载、性能 |
-| `item_display`/`block_display` 组合 | 单独评估 GeyserDisplayEntity 或自建扩展 | 官方 Geyser 不原生支持 Display Entity | 可见性、旋转、缩放、跨区块、交互 |
-
-若一个效果横跨多行，例如“数据包 Boss = 实体模型 + 掉落物 + 自定义音乐 + 展示台”，必须拆成多个可验收对象。不要将“Boss 能生成”写成“基岩版兼容”。
-
-## 工作流目录
-
-按以下顺序执行；每页都可以独立交给另一个 AI，但输入、输出和验收记录必须共享同一发布编号。
-
-1. [转换与发布](/developer/workflows/geyser/conversion)：冻结最终 Java 输入、用 Rainbow 采集、审计产物并部署到 Geyser。
-2. [CraftEngine 与合并资源包](/developer/workflows/geyser/craftengine)：把 CE YAML、双模型数据、外部合并包和物品收集方法接到转换流水线。
-3. [复杂数据包实体与展示](/developer/workflows/geyser/entities)：处理生物模型、Display Entity、ModelEngine/BetterModel 类内容和 Geyser 扩展边界。
-4. [验收与排错](/developer/workflows/geyser/validation)：静态审计、Geyser 启动、Bedrock 客户端测试、回滚和故障定位。
-5. [协议与产物参考](/developer/workflows/geyser/reference)：查阅 Custom Content、Rainbow、item/block/skull/entity mapping 与 Bedrock pack 的字段边界。
-6. [Stellarity 5.5.3 末地批次](/developer/workflows/geyser/stellarity)：按当前服务器真实数据包和 CE 最终包执行 Rainbow 采集、首发合并与后续增量发布。
-
-## 常见陷阱与注意事项
-
-### 1. 武器的 `display_handheld`
-
-基岩版默认所有物品渲染为"手持物品"样式，武器/工具类必须显式设置 `bedrock_options.display_handheld: true`，否则拿在手上像普通物品，没有正确的握持角度。
-
-**受影响的物品类型**：剑、斧、镐、锹、锄、弓、弩、三叉戟、矛、钓竿、盾牌。
+### manifest.json
 
 ```json
 {
-  "bedrock_identifier": "stellarity:dragonblade",
+  "format_version": 2,
+  "header": {
+    "description": "My Resource Pack",
+    "name": "My Pack",
+    "uuid": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+    "version": [1, 0, 0],
+    "min_engine_version": [1, 16, 0]
+  },
+  "modules": [
+    {
+      "description": "My Resource Pack",
+      "type": "resources",
+      "uuid": "yyyyyyyy-yyyy-yyyy-yyyy-yyyyyyyyyyyy",
+      "version": [1, 0, 0]
+    }
+  ]
+}
+```
+
+- 两个 UUID 必须不同且唯一
+- `type` 必须是 `"resources"`
+- `min_engine_version` 建议设为 `[1, 16, 0]`（跨版本兼容）
+
+### item_texture.json
+
+```json
+{
+  "resource_pack_name": "my_pack",
+  "texture_name": "atlas.items",
+  "texture_data": {
+    "my_ns:my_item": {
+      "textures": "textures/items/my_item"
+    }
+  }
+}
+```
+
+- 键名是纹理标识符，用于映射文件的 `bedrock_options.icon`
+- 如果不设 `icon`，默认使用 bedrock_identifier（`:` 替换为 `.`，`/` 替换为 `_`）
+- 路径不带 `.png` 后缀
+
+### terrain_texture.json
+
+```json
+{
+  "resource_pack_name": "my_pack",
+  "texture_name": "atlas.terrain",
+  "padding": 8,
+  "num_mip_levels": 4,
+  "texture_data": {
+    "blocks_crop_cucumber_1": {
+      "textures": "blocks/crop/cucumber/cucumber_1"
+    }
+  }
+}
+```
+
+- 键名格式：`blocks_` + 路径用 `_` 连接
+- 对应方块映射中的 `material_instances.*.texture`
+
+### 纹理键前缀规则
+
+::: danger 重要
+- `block_` 前缀的纹理键 → 基岩版按 **3D 方块展开图** 渲染（显示为方块拆解图）
+- `item_` 前缀的纹理键 → 基岩版按 **平面物品图标** 渲染
+
+同一个 PNG 文件，只需在 `item_texture.json` 和 `terrain_texture.json` 中分别用不同前缀注册即可。
+:::
+
+### 80 字符路径限制
+
+基岩版资源包内的文件路径（从包根开始）**不能超过 80 字符**。超长路径会导致 Geyser 启动警告，基岩客户端可能无法加载。
+
+**修复方法**：缩短目录名（如 `crimson_bracket_fungus` → `cbf`）
+
+### 几何体文件格式（.geo.json）
+
+```json
+{
+  "format_version": "1.12.0",
+  "minecraft:geometry": [
+    {
+      "description": {
+        "identifier": "geometry.my_namespace.my_model",
+        "texture_width": 16,
+        "texture_height": 16,
+        "visible_bounds_width": 3,
+        "visible_bounds_height": 3,
+        "visible_bounds_offset": [0, 0.5, 0]
+      },
+      "bones": [
+        {
+          "name": "root",
+          "pivot": [0, 0, 0],
+          "cubes": [
+            {
+              "origin": [-8, 0, -8],
+              "size": [16, 16, 16],
+              "uv": [0, 0],
+              "uv_size": [16, 16]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
+
+- `identifier` 必须以 `geometry.` 开头
+- `origin` 是中心原点制（-8~8），不是 Java 的左下原点（0~16）
+- `uv_size` 指定 UV 贴图尺寸
+
+### attachables（可穿戴物品）
+
+```json
+{
+  "minecraft:attachable": {
+    "description": {
+      "identifier": "my_ns:my_chestplate",
+      "item": {
+        "my_ns:my_chestplate": "my_chestplate"
+      }
+    },
+    "scripts": {
+      "parent_setup": "variable.chest_layer_visible = 0.0;"
+    },
+    "geometry": {
+      "default": "geometry.player_armor"
+    },
+    "textures": {
+      "default": "textures/models/armor/my_armor_1"
+    },
+    "render_controllers": ["controller.render_armor"]
+  }
+}
+```
+
+## 3. 自定义物品映射（V2 格式）
+
+### 文件结构
+
+映射文件放在 `custom_mappings/` 目录下，格式如下：
+
+```json
+{
+  "format_version": 2,
+  "items": {
+    "minecraft:JAVA_ITEM": [
+      { "定义1" },
+      { "定义2" }
+    ]
+  }
+}
+```
+
+### 三种定义类型
+
+#### definition（1.21.4+ item_model）
+
+```json
+{
   "type": "definition",
   "model": "stellarity:dragonblade",
+  "bedrock_identifier": "stellarity:dragonblade",
   "bedrock_options": {
     "icon": "stellarity.item_dragonblade",
     "display_handheld": true
@@ -121,175 +232,748 @@ flowchart LR
 }
 ```
 
-### 2. 盔甲的 `components.minecraft:equippable`
-
-盔甲物品必须设置 `components.minecraft:equippable` 组件，否则基岩版不会在玩家模型上渲染盔甲。该组件需要指定 `slot`（部位）、`asset_id`（纹理标识）、`damage_on_hurt`（是否消耗耐久）和 `equip_sound`（装备音效）。
-
-**slot 映射**：
-- 头盔 → `head`
-- 胸甲/鞘翅 → `chest`
-- 护腿 → `legs`
-- 靴子 → `feet`
+#### legacy（旧版 custom_model_data）
 
 ```json
 {
-  "bedrock_identifier": "stellarity:champion_chestplate",
+  "type": "legacy",
+  "custom_model_data": 1450104,
+  "bedrock_identifier": "incendium:trailblazer",
+  "bedrock_options": {
+    "icon": "incendium.trailblazer",
+    "display_handheld": true
+  }
+}
+```
+
+#### group（多定义分组）
+
+```json
+{
+  "type": "group",
+  "model": "example:my_item",
+  "definitions": [
+    {
+      "bedrock_identifier": "example:my_item_nether",
+      "predicate": {
+        "type": "match",
+        "property": "context_dimension",
+        "value": "minecraft:the_nether"
+      }
+    },
+    {
+      "bedrock_identifier": "example:my_item"
+    }
+  ]
+}
+```
+
+### 必填字段
+
+| 字段 | 说明 |
+|------|------|
+| `bedrock_identifier` | 基岩版物品标识符，**必填**，不能使用 `minecraft:` 命名空间，不能与其他定义重复 |
+| `model` | definition 类型必填，Java item_model 标识符 |
+| `custom_model_data` | legacy 类型必填，旧版 CMD 数值 |
+
+### bedrock_options 全字段
+
+| 字段 | 类型 | 默认值 | 说明 |
+|------|------|--------|------|
+| `icon` | string | bedrock_identifier | 物品图标，对应 item_texture.json 键名 |
+| `display_handheld` | bool | false | 是否以工具/武器姿势手持 |
+| `allow_offhand` | bool | true | 是否允许放副手 |
+| `protection_value` | int | 0 | 护甲值显示（仅 equippable 时有效） |
+| `creative_category` | string | none | 创造模式分类 |
+| `creative_group` | string | - | 创造模式组 |
+| `tags` | array | - | 物品标签 |
+
+### components 全列表
+
+| 组件 | 说明 |
+|------|------|
+| `minecraft:consumable` | 食用/饮用行为 |
+| `minecraft:equippable` | 可装备（需指定 slot） |
+| `minecraft:food` | 食物属性 |
+| `minecraft:max_damage` | 最大耐久 |
+| `minecraft:max_stack_size` | 最大堆叠 |
+| `minecraft:use_cooldown` | 使用冷却 |
+| `minecraft:enchantable` | 可附魔 |
+| `minecraft:tool` | 工具属性 |
+| `minecraft:repairable` | 可修复 |
+| `minecraft:enchantment_glint_override` | 附魔光效覆盖 |
+| `minecraft:attack_range` | 攻击范围 |
+| `minecraft:kinetic_weapon` | 动能武器（弓） |
+| `minecraft:piercing_weapon` | 穿透武器（弩） |
+| `minecraft:swing_animation` | 挥动动画 |
+| `minecraft:use_effects` | 使用效果 |
+
+#### 移除组件
+
+在组件名前加 `!` 前缀：
+
+```json
+"components": {
+  "!minecraft:food": {}
+}
+```
+
+### predicates 系统
+
+#### condition 谓词
+
+| 属性 | 说明 |
+|------|------|
+| `broken` | 物品是否损坏（仅剩 1 点耐久） |
+| `damaged` | 物品是否受损 |
+| `custom_model_data` | 检查 CMD flags 指定 index |
+| `has_component` | 是否拥有指定组件 |
+| `fishing_rod_cast` | 钓竿是否抛出 |
+
+```json
+"predicate": {
+  "type": "condition",
+  "property": "broken"
+}
+```
+
+#### match 谓词
+
+| 属性 | 说明 |
+|------|------|
+| `charge_type` | 弩装填的弹药类型（arrow/rocket） |
+| `trim_material` | 盔甲纹饰材料 |
+| `context_dimension` | 当前维度 |
+| `custom_model_data` | CMD 字符串 |
+
+```json
+"predicate": {
+  "type": "match",
+  "property": "context_dimension",
+  "value": "minecraft:the_end"
+}
+```
+
+#### range_dispatch 谓词
+
+| 属性 | 可标准化 | 说明 |
+|------|---------|------|
+| `bundle_fullness` | 否 | 收集袋充满度 |
+| `damage` | 是 | 物品损伤值 |
+| `count` | 是 | 物品数量 |
+| `custom_model_data` | 否 | CMD 浮点值 |
+
+```json
+"predicate": {
+  "type": "range_dispatch",
+  "property": "count",
+  "threshold": 32
+}
+```
+
+### predicate_strategy
+
+- `and`（默认）：所有谓词都满足
+- `or`：任一谓词满足
+
+### priority
+
+数值越高优先级越高，排在前面的定义先检查。
+
+### 完整示例
+
+#### 武器
+
+```json
+{
+  "type": "definition",
+  "model": "stellarity:dragonblade",
+  "bedrock_identifier": "stellarity:dragonblade",
+  "bedrock_options": {
+    "icon": "stellarity.item_dragonblade",
+    "display_handheld": true
+  }
+}
+```
+
+#### 盔甲
+
+```json
+{
   "type": "definition",
   "model": "stellarity:champion_chestplate",
+  "bedrock_identifier": "stellarity:champion_chestplate",
+  "bedrock_options": {
+    "icon": "stellarity.item_champion_chestplate",
+    "protection_value": 8
+  },
   "components": {
     "minecraft:equippable": {
       "slot": "chest",
-      "asset_id": "stellarity:champion",
-      "damage_on_hurt": true,
-      "equip_sound": "minecraft:item.armor.equip_netherite"
+      "asset_id": "stellarity:champion"
+    },
+    "minecraft:max_stack_size": 1
+  }
+}
+```
+
+#### 食物
+
+```json
+{
+  "type": "definition",
+  "model": "geyser_mc:yummy_food",
+  "bedrock_identifier": "geyser_mc:yummy_food",
+  "components": {
+    "minecraft:consumable": {},
+    "minecraft:food": {
+      "nutrition": 5,
+      "saturation": 0.0
+    },
+    "minecraft:max_stack_size": 16
+  }
+}
+```
+
+## 4. 硬限制：不可兼得的物品
+
+::: danger 实测定论 2026-08-07
+基岩版的行为动画全部硬编码在原版物品 ID 上。自定义 `bedrock_identifier` 会创建全新物品类型，**所有原版行为动画全部丢失**。
+:::
+
+### 机制详解
+
+Geyser 源码 `CustomItemRegistryPopulator.java`（约 2037-2135 行）中有一段逻辑：根据 vanilla mapping 的 `bedrock_identifier` 自动注入 `chargeable`/`throwable` 组件到 item NBT：
+
+```java
+// 源码逻辑（简化）
+case "minecraft:bow" -> GeyserChargeable.builder()
+    .maxDrawDuration(1.0F)
+    .ammunition(Identifier.of("arrow"))
+    .build();
+case "minecraft:crossbow" -> GeyserChargeable.builder()
+    .chargeOnDraw(true)
+    .ammunition(Identifier.of("arrow"))
+    .build();
+// 三叉戟自动获得 SPEAR 动画
+if (mapping.getBedrockIdentifier().equals("minecraft:trident")) {
+    return Optional.of(new Consumable(
+        DEFAULT_ITEM_USE_DURATION,
+        Consumable.ItemUseAnimation.TRIDENT,
+        null, false, List.of()
+    ));
+}
+```
+
+**但是**：虽然 Geyser 把这些组件写入了 item NBT，**基岩客户端不认这些注入**——因为行为动画是客户端硬编码的，不是服务端 NBT 控制的。
+
+### 基岩版动画映射表
+
+```
+NONE=0, EAT=1, DRINK=2, BLOCK=3, BOW=4, SPEAR=6, CROSSBOW=9, SPYGLASS=10, BRUSH=12
+```
+
+### 实测结果
+
+| 物品 | 原版行为 | 自定义 bid 后果 | 能否同时有自定义纹理+原版行为 |
+|------|---------|---------------|------|
+| `minecraft:bow` | 拉弓动画（3段） | 能射但无拉弓动画 | **否** |
+| `minecraft:crossbow` | 蓄力动画 | 无法射出 | **否** |
+| `minecraft:trident` | 投掷动画 | 无投掷动画 | **否** |
+| `minecraft:fishing_rod` | 抛竿动画 | 手持角度歪斜 | **否** |
+| `minecraft:elytra` | 飞行功能 | 无法飞行 | **否** |
+| `minecraft:shield` | 格挡动画 | 无法格挡 | **否** |
+
+### 为什么不能只保留 icon？
+
+`bedrock_identifier` 在 V2 格式下是**必填字段**。尝试省略它（只设 `icon`）会导致：
+
+```
+InvalidCustomMappingsFileException: While reading key "bedrock_identifier"
+in single item definition: key is required but was not present
+```
+
+所以只有两个选择：
+- **有 bid** → 创建新物品类型 → 丢失原版行为
+- **无 bid** → 报错，Geyser 拒绝加载
+
+### 唯一解
+
+**删除这 6 类物品的全部映射条目**，走纯原版。功能正常但无自定义纹理。
+
+::: tip 结论
+弓、弩、三叉戟、钓竿、鞘翅、盾——这 6 类物品在基岩版**无法同时拥有自定义纹理和原版行为动画**。这是 Geyser V2 映射系统的硬限制，不是配置问题。
+:::
+
+## 5. 自定义方块映射
+
+### JSON 映射（原版方块覆盖）
+
+```json
+{
+  "format_version": 1,
+  "blocks": {
+    "minecraft:granite_wall": {
+      "name": "my_block",
+      "display_name": "自定义花岗岩墙",
+      "geometry": "geometry.blocks.my_block_geo",
+      "material_instances": {
+        "*": {
+          "texture": "some_texture",
+          "render_method": "alpha_test",
+          "face_dimming": true,
+          "ambient_occlusion": true
+        }
+      },
+      "tags": ["stone", "wall"],
+      "state_overrides": {
+        "east=none,north=none,south=none,up=true,waterlogged=true,west=none": {
+          "geometry": "geometry.blocks.my_other_block_geo",
+          "destructible_by_mining": 10
+        }
+      }
     }
   }
 }
 ```
 
-### 3. 物品图标的 `bedrock_options.icon`
+### 方块组件
 
-自定义物品必须设置 `bedrock_options.icon` 引用 Bedrock 资源包中的纹理键名，否则基岩版显示默认的 base item 纹理。纹理键名格式为 `namespace.path_with_underscores`，例如 `stellarity.item_dragonblade`。
+| 组件 | 说明 |
+|------|------|
+| `geometry` | 几何体标识符或对象 |
+| `material_instances` | 材质实例（纹理+渲染方法） |
+| `collision_box` | 碰撞箱 |
+| `selection_box` | 选择箱 |
+| `light_emission` | 发光等级 0-15 |
+| `light_dampening` | 遮光等级 0-15 |
+| `friction` | 摩擦力 0.0-1.0 |
+| `tags` | 方块标签 |
+| `transformation` | 变换（缩放/平移/旋转） |
+| `placement_filter` | 放置规则 |
+| `unit_cube` | 是否为标准立方体 |
+| `state_overrides` | 按方块状态覆盖属性 |
 
-纹理键名必须与资源包中 `textures/item_texture.json` 的 `texture_data` 键一一对应。
+### 限制
 
-### 4. Base Item 的准确性
+JSON 映射只能覆盖**已知原版方块状态**。对于 CraftEngine 等插件运行时动态注册的非原版方块（如 `craftengine:custom_44`），JSON 映射会报错：
 
-**警告**：不要猜测 base item！必须从数据包的 loot table 中提取实际 base item。错误的 base item（如将所有物品设为 `stick`）会导致：
-- 物品显示错误的默认纹理
-- 盔甲无法正确装备
-- 武器没有正确的攻击速度/伤害显示
+```
+InvalidCustomMappingsFileException: Unknown Java block: craftengine:custom_44
+```
 
-验证方法：检查数据包中对应的 `loot_table/item/` 下的 JSON 文件，找到 `entries[].name` 字段。
+必须使用 Extension API（见第 6 节）。
 
-### 5. 状态变体物品（复杂模型）
+## 6. Geyser Extension 开发（非原版方块）
 
-对于使用 `select`、`condition`、`range_dispatch` 等复杂 item_model 的物品（如弓的拉动状态、弩的装填状态、三叉戟的投掷状态），Geyser v2 映射只能匹配到 item_model 层级，无法处理内部状态变体。
+### 项目结构
 
-**建议**：映射默认/GUI 纹理即可，状态变体需要在后续通过 Geyser 的 predicate 系统单独处理，或保持现状（基岩版显示默认纹理）。
+```text
+CustomCrops-Geyser/
+├── build.gradle.kts
+├── settings.gradle.kts
+├── src/main/resources/
+│   ├── extension.yml
+│   └── geometry/
+│       ├── block_1.geo.json
+│       └── block_2.geo.json
+└── src/main/java/.../
+    ├── MyExtension.java
+    └── BlockDefinitions.java
+```
 
-### 6. 盔甲自定义纹理的限制
+### extension.yml
 
-Java 版的自定义盔甲纹理（通过 `asset_id` 引用 `assets/<namespace>/textures/entity/equipment/humanoid/` 下的纹理）**不会自动转换到基岩版**。基岩版使用 attachable 系统渲染盔甲纹理，需要额外创建 Bedrock 格式的 attachable 文件。
+```yaml
+name: CustomCrops
+id: customcrops
+main: top.miragedge.geyser.customcrops.CustomCropsExtension
+api: 2.11.0
+version: 1.0.0
+```
 
-**当前方案**：映射 `equippable` 组件使盔甲在基岩版上可见，但使用默认的 base item 纹理（如铁盔甲纹理）。要启用自定义纹理，需要：
+### build.gradle.kts
 
-1. 创建 `attachables/` 目录下的 JSON 文件，定义每个盔甲部位的渲染
-2. 将 Java 格式的盔甲纹理转换为 Bedrock UV 贴图格式
-3. 放入 `textures/models/armor/` 目录（胸甲用 `_1` 后缀，护腿用 `_2` 后缀）
+```kotlin
+plugins { id("java") }
+group = "top.miragedge"
+version = "1.0.0"
 
-### 7. Display Entity 支持（光之女皇、自定义方块）
+repositories {
+    mavenCentral()
+    maven("https://repo.opencollab.dev/main/")
+    maven("https://jitpack.io")
+}
 
-Stellarity 的光之女皇模型和自定义方块使用 Java 的 `item_display`/`block_display` 实体。基岩版原生不支持这些实体类型。
+dependencies {
+    compileOnly("org.geysermc.geyser:api:2.11.0-SNAPSHOT")
+}
 
-**解决方案**：安装 [GeyserDisplayEntity](https://github.com/GeyserExtensionists/GeyserDisplayEntity) 扩展。
+tasks.jar { archiveBaseName.set("CustomCrops-Geyser") }
+```
 
-**安装步骤**：
-1. 下载 `GeyserDisplayEntity-*.jar` 放入 Geyser 的 `extensions/` 目录
-2. 下载 `GeyserDisplayEntityPack.mcpack` 放入 `packs/` 目录
-3. 重启 Geyser
+### 核心代码
 
-该扩展会自动将 item_display 和 block_display 实体转换为基岩版可见的实体。
+```java
+package top.miragedge.geyser.customcrops;
 
-### 8. 实体生物贴图转换
+import org.geysermc.geyser.api.extension.Extension;
+import org.geysermc.geyser.api.event.lifecycle.GeyserDefineCustomBlocksEvent;
+import org.geysermc.geyser.api.block.custom.NonVanillaCustomBlockData;
+import org.geysermc.geyser.api.block.custom.CustomBlockState;
+import org.geysermc.geyser.api.block.custom.component.CustomBlockComponents;
+import org.geysermc.geyser.api.block.custom.component.BoxComponent;
+import org.geysermc.geyser.api.block.custom.component.GeometryComponent;
+import org.geysermc.geyser.api.block.custom.component.MaterialInstance;
+import org.geysermc.geyser.api.block.custom.nonvanilla.JavaBlockState;
+import org.geysermc.geyser.api.block.custom.nonvanilla.JavaBoundingBox;
+import org.geysermc.event.subscribe.Subscribe;
 
-Stellarity 的末地生物变体贴图（末影猫、末影鸡等）存在于 Java 资源包中，但需要手动转换到基岩版格式。
+public class CustomCropsExtension implements Extension {
 
-**工具**：
-- [Rainbow](https://geysermc.org/wiki/other/rainbow/) — Geyser 官方 Fabric 转换模组
-- [convertmcpack.net](https://convertmcpack.net/) — 在线转换工具
-- [mc-tools.net](https://mc-tools.net/pack-converter) — 在线转换工具
+    @Subscribe
+    public void onDefineCustomBlocks(GeyserDefineCustomBlocksEvent event) {
+        int idCounter = 0;
 
-**手动步骤**：
-1. 将 Java 纹理文件（`assets/stellarity/textures/entity/`）复制到 Bedrock 资源包的 `textures/entity/` 目录
-2. 注意 Bedrock 的实体纹理命名规范可能与 Java 不同
+        for (BlockDefinitions.BlockDef def : BlockDefinitions.BLOCKS) {
+            // 构建方块组件
+            CustomBlockComponents components = CustomBlockComponents.builder()
+                .geometry(GeometryComponent.builder()
+                    .identifier("geometry.customcrops." + def.modelName())
+                    .build())
+                .materialInstance("*", MaterialInstance.builder()
+                    .texture("customcrops_" + def.modelName())
+                    .renderMethod("alpha_test")
+                    .faceDimming(true)
+                    .ambientOcclusion(true)
+                    .build())
+                .collisionBox(BoxComponent.emptyBox())
+                .selectionBox(new BoxComponent(-8, 0, -8, 16, 16, 16))
+                .build();
 
-### 7. 资源包层级与加载顺序
+            // 必须用 NonVanillaCustomBlockData
+            NonVanillaCustomBlockData data = NonVanillaCustomBlockData.builder()
+                .namespace("customcrops")
+                .name("customcrops_" + def.modelName())
+                .components(components)
+                .includedInCreativeInventory(false)
+                .build();
 
-Geyser 按 `packs/` 目录下的文件顺序加载资源包。多个包之间有同名纹理键时，**后加载的覆盖先加载的**。建议保持命名空间唯一性，避免跨包冲突。
+            event.register(data);
 
-### 8. 映射验证清单
+            // 用 JavaBlockState 映射非原版方块
+            int baseId = 32367 + (idCounter * 2);
+            idCounter++;
+
+            CustomBlockState state = data.blockStateBuilder().build();
+            JavaBlockState javaBlockState = JavaBlockState.builder()
+                .identifier("craftengine:" + def.blockId())
+                .javaId(baseId)
+                .stateGroupId(baseId + 1)
+                .blockHardness(1.0f)
+                .waterlogged(false)
+                .collision(new JavaBoundingBox[0])  // 必须非 null
+                .canBreakWithHand(true)
+                .pistonBehavior("NORMAL")  // 必须非 null
+                .build();
+            event.registerOverride(javaBlockState, state);
+        }
+    }
+}
+```
+
+### JavaBlockState 必填字段
+
+| 字段 | 值 | 注意事项 |
+|------|-----|---------|
+| `identifier` | `"craftengine:custom_44"` | CraftEngine 方块 ID |
+| `javaId` | `>= 32367` | 必须在最后一个原版方块状态之后 |
+| `stateGroupId` | `javaId + 1` | 状态组 ID |
+| `blockHardness` | `1.0f` | 硬度 |
+| `waterlogged` | `false` | 是否含水 |
+| `collision` | `new JavaBoundingBox[0]` | **必须非 null**，否则 NPE |
+| `canBreakWithHand` | `true` | 徒手破坏 |
+| `pistonBehavior` | `"NORMAL"` | **必须非 null**，否则 NPE |
+
+::: danger 常见崩溃
+- `collision` 为 null → `NullPointerException: Cannot read array length`
+- `pistonBehavior` 为 null → 同上
+- `javaId < 32367` → `RuntimeException: runtime ID must start after last vanilla block state`
+:::
+
+### 构建与部署
+
+```bash
+# 构建
+cmd.exe /c "F:\env\gradle\8.12\bin\gradle.bat build --no-daemon"
+
+# 部署
+scp build/libs/CustomCrops-Geyser-1.0.0.jar \
+    root@server:/mnt/miragedge/vc/plugins/Geyser-Velocity/extensions/
+```
+
+## 7. Java 方块模型 → 基岩版几何体转换
+
+### 坐标系差异
+
+| 属性 | Java Edition | Bedrock Edition |
+|------|-------------|-----------------|
+| 原点 | 左下角 (0,0,0) | 中心 (-8,0,-8) |
+| 范围 | 0~16 | -8~8 |
+| UV | 每面独立 | 按 cube UV |
+
+转换公式：`bedrock_x = java_x - 8`
+
+### 零厚度元素处理
+
+十字形植物模型（如作物）在 Java 中使用零厚度元素（如 `from=[0,0,8] to=[16,16,8]`）。直接转换会导致 z-fighting。
+
+**修复**：对零厚度元素加 1px 厚度：
+
+```python
+if dx < 1:
+    x1 -= 0.5
+    x2 += 0.5
+    dx = 1
+```
+
+### parent 模型递归继承
+
+Java 模型可以通过 `parent` 字段继承父模型。转换器必须递归解析 parent 链，直到找到有 `elements` 的模型。
+
+常见 parent：
+- `block/crop` → 十字形作物（无 elements，需 fallback）
+- `block/cube_all` → 标准立方体（无 elements，需 fallback）
+- `block/handheld` → 手持物品（有 display transform）
+
+### Vanilla parent fallback
+
+对于 parent 为 vanilla 模型且自身无 elements 的情况，需要生成 fallback 几何体：
+
+| Parent | Fallback 几何体 |
+|--------|----------------|
+| `block/crop` | 十字形（2 个交叉平面） |
+| `block/cube_all` | 标准立方体 |
+| `block/cube` | 标准立方体 |
+
+### rstrip(".json") 陷阱
+
+::: danger Python 陷阱
+`path.rstrip(".json")` 是**字符集剥离**，不是后缀移除！
+
+`"stage_golden".rstrip(".json")` → `"stage_golde"`（末尾的 `n` 被剥掉了，因为它在 `.json` 字符集中）
+
+**正确写法**：
+```python
+path = path[:-5] if path.endswith(".json") else path
+```
+:::
+
+### 纹理路径映射
+
+Java 纹理引用 → 基岩版 terrain_texture 键：
+
+```text
+Java: customcrops:block/crop/cucumber/cucumber_1
+                    ↓ 去掉命名空间和 block/ 前缀
+中间: crop/cucumber/cucumber_1
+                    ↓ 加 blocks/ 前缀
+Bedrock PNG 路径: textures/blocks/crop/cucumber/cucumber_1.png
+                    ↓ 路径用 _ 连接
+terrain_texture 键: blocks_crop_cucumber_cucumber_1
+```
+
+### Vanilla 纹理回退
+
+部分 Java 模型引用原版纹理（如 `block/oak_log`），基岩版需映射到对应原版纹理键：
+
+```python
+VANILLA_TEX = {
+    "block/spruce_log": "log/spruce",
+    "block/oak_log": "log/oak",
+    "block/farmland": "farmland",
+    "block/farmland_moist": "farmland_wet",
+    "block/water_still": "water_still_grey",
+}
+```
+
+## 8. CraftEngine 集成注意事项
+
+### 动态方块注册
+
+CraftEngine 的自定义方块在**服务器运行时动态注册**（如 `craftengine:custom_44`）。Geyser 启动时这些方块还不存在，所以 JSON 映射会报错 `Unknown Java block`。
+
+**解决方案**：用 Geyser Extension API 的 `NonVanillaCustomBlockData` + `JavaBlockState`，在 `GeyserDefineCustomBlocksEvent` 中注册。
+
+### CE 资源包
+
+| 文件 | 用途 |
+|------|------|
+| `generated/resource_pack.zip` | 受保护/混淆的主包，**不作为转换输入** |
+| `generated/resource_pack_unprotected.zip` | 未保护副本，**首选转换输入** |
+| `generated/resource_pack_map.zip` | BlueMap 兼容包，**不用** |
+
+### CE blockstates
+
+CE 的 blockstates 文件位于 `assets/craftengine/blockstates/custom_XX.json`，包含 `variants` 字段，指向 Java 模型路径。
+
+### 缩短名映射
+
+部分作物名过长会导致基岩版路径超 80 字符，需要缩短：
+
+| 原名 | 缩写 |
+|------|------|
+| `chinese_cabbage` | `ch_cabbage` |
+| `gigantic_cabbage` | `gi_cabbage` |
+| `gigantic_pineapple` | `gi_pineapple` |
+| `gigantic_tomato` | `gi_tomato` |
+| `greenhouse_glass` | `gh_glass` |
+| `sweet_potato` | `s_potato` |
+| `crimson_bracket_fungus` | `cbf` |
+| `warped_glow_fungus` | `wgf` |
+
+## 9. Incendium / Stellarity 数据包适配
+
+### Incendium（下界）
+
+- 使用旧版 `custom_model_data` + 函数体系（非 `item_model`）
+- 必须用 V2 `legacy` 类型映射
+- 官方 Sparkles GeyserMC Pack 已包含大部分物品（不含弩/鞘翅/盾）
+- 官方包 4 处基础物品错误已修正
+
+**修正记录**：
+- `blazing_hatchet` → `iron_axe`（官方写 diamond/netherite_axe）
+- `scarlet_dagger(vampire)` → `iron_sword`（官方写 netherite_sword）
+- `withersbane` → `iron_sword`（官方写 golden_sword）
+- `chilling` 仅 `diamond_sword`（官方多写 netherite_sword）
+
+### Stellarity（末地）
+
+- 使用 `item_model`（1.21.4+），用 V2 `definition` 类型映射
+- 约 132 个映射条目
+- 弓/弩/三叉戟/钓竿/鞘翅/盾因硬限制已删除映射（见第 4 节）
+
+### 官方 Sparkles GeyserMC Pack 限制
+
+| 限制 | 说明 |
+|------|------|
+| 弓拉弓动画 | 仅 3 段（基岩版硬限制） |
+| 弩 | 不包含 |
+| 鞘翅 | 不包含 |
+| 盾牌 | 不包含（WIP） |
+| 自定义生物纹理 | 不包含（OptiFine 特性） |
+
+### base item 验证
+
+**不要猜测 base item！** 必须从数据包的 loot table 中提取：
+
+```bash
+# 检查 loot table
+unzip -p datapack.zip data/.../loot_table/item/xxx.json | jq '.pools[0].entries[0].name'
+```
+
+### 盔甲适配
+
+1. 映射中添加 `minecraft:equippable` 组件（指定 slot）
+2. 资源包中创建 `attachables/` JSON 文件
+3. 盔甲纹理放入 `textures/models/armor/`（胸甲 `_1`，护腿 `_2`）
+
+## 10. 部署流程
+
+### 目录结构
+
+```text
+Geyser-Velocity/
+├── custom_mappings/        # 映射 JSON 文件
+│   ├── miragedge-managed.json
+│   └── incendium_mappings.json
+├── packs/                  # 基岩版资源包
+│   ├── stellarity-pack.mcpack
+│   └── incendium-pack.mcpack
+├── extensions/             # Geyser 扩展 JAR
+│   └── CustomCrops-Geyser-1.0.0.jar
+└── config.yml
+```
+
+### 部署步骤
+
+1. **备份**：`cp miragedge-managed.json miragedge-managed.json.bak-$(date +%Y%m%d)`
+2. **上传映射**：`scp miragedge-managed.json root@server:.../custom_mappings/`
+3. **上传资源包**：`scp my-pack.mcpack root@server:.../packs/`
+4. **上传扩展**：`scp my-ext.jar root@server:.../extensions/`
+5. **检查 config.yml**：`enable-custom-content: true`
+6. **重启 Geyser**
+7. **验证日志**
+
+### 验证日志
+
+```text
+[geyser]: Registered 496 custom items
+[geyser]: Registered 103 non-vanilla block overrides.
+[geyser]: Registered 199 custom block overrides.
+[geyser]: Registered 1574 custom blocks.
+```
+
+常见错误：
+- `key is required but was not present` → bedrock_identifier 缺失
+- `Unknown Java block` → JSON 映射引用了不存在的方块 ID
+- `namespace cannot be minecraft` → bedrock_identifier 用了 minecraft: 前缀
+
+## 11. 验证清单
 
 部署前逐项检查：
 
-- [ ] format_version 为 2
-- [ ] 所有 bedrock_identifier 唯一，不使用 `minecraft:` 命名空间
+- [ ] `format_version` 正确（物品 V2=2，方块 V1=1）
+- [ ] 所有 `bedrock_identifier` 唯一
+- [ ] `bedrock_identifier` 不使用 `minecraft:` 命名空间
+- [ ] 弓/弩/三叉戟/钓竿/鞘翅/盾的映射已删除（硬限制）
 - [ ] 武器/工具有 `display_handheld: true`
-- [ ] 盔甲有 `components.minecraft:equippable`（含 slot/asset_id/damage_on_hurt/equip_sound）
-- [ ] 自定义物品有 `bedrock_options.icon` 引用正确纹理键名
+- [ ] 盔甲有 `components.minecraft:equippable`（含 slot）
+- [ ] 所有 `bedrock_options.icon` 引用匹配 `item_texture.json` 键
 - [ ] base item 从 loot table 验证，非猜测
-- [ ] Bedrock 资源包有 `manifest.json` 和 `textures/item_texture.json`
-- [ ] 备份当前 mapping 和 pack 后再部署
-- [ ] Geyser 重启后验证映射注册日志
+- [ ] 资源包有 `manifest.json`（两个不同 UUID）
+- [ ] 纹理路径 < 80 字符
+- [ ] `terrain_texture.json` 包含所有方块纹理键
+- [ ] `item_texture.json` 包含所有物品纹理键
+- [ ] 几何体文件 `.geo.json` 的 `identifier` 以 `geometry.` 开头
+- [ ] Extension 的 `JavaBlockState` 有 `collision`（非 null）和 `pistonBehavior`（非 null）
+- [ ] Extension 的 `javaId >= 32367`
+- [ ] 部署前已备份
+- [ ] Geyser 重启后日志无 ERROR
 
-## 发布物契约
+## 12. 参考来源
 
-每个发布批次必须有一个不可变的目录，且至少包含以下项目：
+### Geyser 官方文档
 
-```text
-geyser-bridge/releases/<release-id>/
-├── input/
-│   ├── resource_pack_unprotected.zip
-│   ├── source.sha256
-│   └── source.sha256
-├── rainbow/
-│   └── input/                         # 本次新 Rainbow 输出的原始副本
-├── custom_mappings/
-│   └── miragedge-managed.json
-├── packs/
-│   └── miragedge-bridge-<release-id>.mcpack
-├── locales/
-│   └── overrides/
-├── custom-skulls.patch.yml
-├── merged/
-│   └── custom-skulls.yml
-├── reports/
-│   ├── audit.json
-│   ├── java-languages.json
-│   ├── rainbow-collection.json
-│   └── validation.json
-├── coverage.json
-└── release.json
-```
+- [Custom Items (v2)](https://geysermc.org/wiki/geyser/custom-items)
+- [Custom Items (v1)](https://geysermc.org/wiki/geyser/custom-items-old)
+- [Custom Blocks](https://geysermc.org/wiki/geyser/custom-blocks)
+- [Using Resource Packs](https://geysermc.org/wiki/geyser/packs)
+- [Custom Entities](https://geysermc.org/wiki/geyser/custom-entities)
+- [Rainbow](https://geysermc.org/wiki/other/rainbow/)
 
-`custom-skulls.patch.yml` 只保存 Rainbow 本次新增/更新的差异，不能直接复制到 Geyser。`merged/custom-skulls.yml` 才是按四个 section 与服务器现有清单幂等合并后的活动文件。`release.json` 最少记录：CE 生成时间、Java 输入 SHA-256、Geyser build、Rainbow build、Java 测试客户端版本、目标 Bedrock 版本、映射文件名、Bedrock pack SHA-256、已知未覆盖项和实机验收人/时间。不要只保留一个名为 `latest.zip` 的文件；那样既无法回滚，也无法解释某一项为什么消失。
+### GeyserMC GitHub 源码
 
-本机已经落地受管实现：`F:\FCelestial\Geyser-Velocity\bridge\bridge.py`。它把当前 `miragedge_*` 映射和包冻结为不可变基线，后续只比较 CE 最终未保护包的文件 SHA、只导入新 Rainbow 输出、只替换明确匹配的映射或 Bedrock 资源项。它不会伪造模型，也不会在 `apply` 前改动 Geyser 活动目录。
+- [Geyser 主仓库](https://github.com/GeyserMC/Geyser)
+- [CustomItemRegistryPopulator.java](https://github.com/GeyserMC/Geyser/blob/master/core/src/main/java/org/geysermc/geyser/registry/populator/CustomItemRegistryPopulator.java)
+- [CustomBlockRegistryPopulator.java](https://github.com/GeyserMC/Geyser/blob/master/core/src/main/java/org/geysermc/geyser/registry/populator/CustomBlockRegistryPopulator.java)
+- [Rainbow](https://github.com/GeyserMC/Rainbow)
 
-当前快照还有一个发布阻断项：CE 配置声明的 `ModelEngine/resource pack`、`EliteMobs/resource_pack`、`CustomNameplates/resourcepack.zip`、`BetterModel/build.zip`、`dnt.zip`、`miragedge-charm-rp.zip` 均不在 `F:\FCelestial` 下。恢复实际来源或依据所有者确认后移除相应配置项，并重新生成 CE 包前，不得把当前 Java 包标记为可复现的可信基线。
+### 基岩版资源包参考
 
-## AI 执行契约
+- [Minecraft Wiki: Resource Pack](https://minecraft.wiki/w/Resource_pack)
+- [Mojang bedrock-schemas](https://github.com/Mojang/bedrock-schemas)
+- [manifest.json 模板](https://convertmcpack.net/pages/manifest_template.html)
 
-任何 AI 接到“让这个 CE/数据包内容支持基岩版”的任务时，必须遵守以下规则。
+### 社区工具
 
-1. 先读取 `F:\FCelestial\CraftEngine\config.yml` 的资源包、合并、保护和 item 段，再查看本次实际生成的 ZIP、日志与资源路径。
-2. 把 CE 自建资源、外部合并包和数据包伴随包统一看作 Java 最终输入的一部分；不得只扫描 `resources/`。
-3. 建立内容清单。每个条目至少记录 Java 基础物品、实际 `item_model`/CMD、Java 可见场景、Bedrock identifier、映射状态、异常与验收状态。
-4. 通过 Java 测试客户端实际加载最终 Java 包，再让 Rainbow 从真实物品、容器、配方和世界方块采集；不要凭文件名伪造映射。
-5. 检查 `report.txt`，将未转换、警告、重复 ID、未知模型和实体问题写入覆盖清单。没有覆盖项不等于转换完整。
-6. 只向 Geyser 部署本项目拥有的映射文件、资源包和语言覆盖。`custom-skulls.yml` 必须做结构化合并，禁止整体覆盖。
-7. `gameplay.enable-custom-content` 必须为 `true`，并通过重启后的 Geyser 日志确认映射注册。该开关变化需要重启才能生效。
-8. 最终结论必须分成“静态通过”“Geyser 启动通过”“Bedrock 实机通过”“尚未覆盖/不支持”四类。没有基岩真机测试时，不得宣称兼容完成。
+- [GeyserExtensionists/GeyserDisplayEntity](https://github.com/GeyserExtensionists/GeyserDisplayEntity) — Display Entity 扩展（与 Geyser 2.11 不兼容）
+- [Kas-tle/java2bedrock.sh](https://github.com/Kas-tle/java2bedrock.sh) — 物品模型转换（仅 item/generated）
+- [markeev/java2bedrock-furniture](https://github.com/markeev/java2bedrock-furniture) — 家具方块转换参考
 
-## 明确禁止
+### MiragEdge 本地资源
 
-- 将 Java `resource_pack.zip`、数据包 ZIP 或 CE pack 目录直接改名成 `.mcpack` 后投放给 Bedrock 客户端。
-- 使用 Bedrock 行为包来补 Java 服务端数据包逻辑；Geyser 的资源包投放不支持该路线。
-- 仅用物品名称、Lore、PDC 或配置文件名区分映射。Geyser v2 映射的核心是基础 Java 物品加 `item_model`，或 legacy CMD；这些展示数据不是可靠的通用匹配条件。
-- 假定 CE 的 `texture:` 路径就是发给客户端的 `minecraft:item_model` 值。必须从真实物品或 Rainbow 输出确认。
-- 把生成的 `custom_mappings` 整个目录无差别覆盖到 Geyser，或把 Rainbow 导出的 `custom-skulls.yml` 覆盖已有服务器清单。
-- 依赖 `packs/` 中多个历史 ZIP 的不透明加载顺序。每个项目应只有一个受控的活动 Bedrock 合并包。
-- 把 GeyserDisplayEntity 当作所有复杂实体的通用解法。它是社区扩展，解决的是特定 Display Entity 场景。
-- 因为 Java 客户端显示正常就跳过 Bedrock 测试。Java 和 Bedrock 的模型、动画、GUI、实体与缓存路径是两条不同链路。
-
-## 参考来源
-
-- [Geyser：Custom Content](https://geysermc.org/wiki/geyser/custom-content)
-- [Geyser：Custom Items v2](https://geysermc.org/wiki/geyser/custom-items)
-- [Geyser：Custom Blocks](https://geysermc.org/wiki/geyser/custom-blocks)
-- [Geyser：Using Resource Packs](https://geysermc.org/wiki/geyser/packs)
-- [Geyser：Entity API](https://geysermc.org/wiki/geyser/custom-entities)
-- [Geyser：Rainbow](https://geysermc.org/wiki/other/rainbow/)
-- [GeyserMC/Rainbow](https://github.com/GeyserMC/Rainbow)
-- [GeyserExtensionists/GeyserDisplayEntity](https://github.com/GeyserExtensionists/GeyserDisplayEntity)
-- [Kas-tle/java2bedrock.sh](https://github.com/Kas-tle/java2bedrock.sh)：仅作历史背景，已不应作为当前主流程。
+- 映射文件：`F:\FCelestial\Geyser-Velocity\custom_mappings\managed\miragedge-managed.json`
+- 转换器：`F:\FCelestial\Geyser-Velocity\bridge\java2bedrock_converter.py`
+- CustomCrops 扩展：`F:\FCelestial\CustomCrops-Geyser\`
+- CE 资源包：`F:\FCelestial\CraftEngine\generated\resource_pack_unprotected.zip`
