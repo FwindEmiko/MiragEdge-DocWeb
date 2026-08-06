@@ -587,8 +587,9 @@ export default defineConfig({
           collapsed: false,
           items: [
             { text: '建筑大师', link: '/plugins/building-tools' },
-            { text: '锻造升级', link: '/plugins/forge' },
-            { text: '契约之翼', link: '/plugins/elytra-bind' },
+                        { text: '锻造升级', link: '/plugins/forge' },
+                        { text: '契约之翼', link: '/plugins/elytra-bind' },
+                        { text: '史莱姆靴', link: '/plugins/custom/slime-boots' },
           ]
         },
         {

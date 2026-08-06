@@ -2,6 +2,9 @@
 
 ## 2026.8.6
 
+[添加] 新增 Anchor 锚点传送系统审查修复：组件颜色码解析、消息反馈优化
+[添加] 新增 Incendium 烬域 Geyser 材质映射：从 V1 改为 V2 legacy 格式，武器添加 display_handheld
+[添加] 新增 VillageNamer 插件 + 史莱姆靴 Geyser 映射部署
 [添加] 新增夜视附魔（Night Vision）：Aiyatsbus 配置 + 数据包预注册，头盔专属
 [添加] 在线奖励480分钟档添加全服播报
 
@@ -14,11 +17,17 @@
 [调整] Geyser基岩版材质映射修复：修复服务器上旧版本mapping文件（bedrock_identifier缺失）
 [调整] 粒子过滤模块部署完成：Geyser扩展 + VelocityCommandForward 全部就绪
 [调整] Stellarity数据包v6.2性能优化：末影人群系spawn_costs改为不限刷新
+[调整] Aiyatsbus 附魔描述修复：plated/soaring/critical_strike/levitation_shot/void_strike 双百分号修正并部署
+[调整] StellarityOptimizer v2 方案：高峰卡顿优化，剩余 @e 扫描迁移到插件异步实现
+[调整] Dominion 领地上限调整：全服和单世界从 10 个降至 5 个
 
 [修复] 修复Geyser基岩版翅膀映射问题（移除Stellarity翅膀自定义映射，恢复原版elytra飞行）
 [修复] 修复弓/弩/三叉戟/钓竿的bedrock_identifier命名空间错误
 [修复] 修复菜单插件连锁挖矿开关无效的问题
 [修复] 修复签到插件GUI中VIP/MVP奖励显示冗余
+[修复] 修复知识问答插件（FE_ABCQ）26.2 升级后关键词检测和消息拦截失效：改用 AsyncChatEvent + 动态注册
+[修复] 修复锚点传送系统 Component.text 中 § 颜色码不解析的问题
+[修复] EMCShop 审查发现：Spark TPS 类型强转错误会崩、购买消息物品名不替换
 
 ## 2026.8.5
 

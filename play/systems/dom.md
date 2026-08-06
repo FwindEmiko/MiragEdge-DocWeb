@@ -26,6 +26,7 @@ head:
 **计费**：每格 2.5 灵叶  
 **自动回收**：180天未登录自动解除  
 **初始大小**：自动创建 10 格范围  
+**数量上限**：每位玩家最多 5 个领地（全服合计）  
 
 > 官方详细教程：[dominion领地系统 官方玩家教程](https://dominion.lunadeer.cn/notes/doc/player/dominion/create/)
 
