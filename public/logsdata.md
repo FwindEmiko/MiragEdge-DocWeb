@@ -9,7 +9,7 @@
 
 [调整] 子代理工作流优化：delegation-first 策略，SOUL.md + memory + 2个技能同步更新至 v2.0.0
 [调整] 服务器状态监控页面重写：快速连通性检测面板、mermaid架构图、NodeStatus组件修复
-[调整] 任务系统修复：挖圆石不涨进度（匹配STONE+COBBLESTONE）、刷怪笼骷髅不涨进度（关闭 disable_spawner_progression）
+[调整] 任务系统修复：挖圆石不涨进度（匹配STONE+COBBLESTONE）、刷怪笼骷髅不涨进度（关闭disable_spawner_progression）
 
 [修复] 修复随身附魔图鉴菜单动作顺序：先关闭再执行命令，避免 inventory 状态机冲突
 [修复] 修复 StellarityOptimizer 装甲飞行附魔不生效问题（is-vanilla 与数据包冲突分析）

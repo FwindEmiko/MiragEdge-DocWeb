@@ -58,7 +58,6 @@ const exactRules: RedirectRule[] = [
   { from: '/start/qq_group', to: '/start/community/groups' },
   { from: '/start/faq', to: '/start/community/faq' },
   { from: '/manual/promotion', to: '/developer/archive/promotion' },
-  { from: '/develop/logs_old', to: '/developer/archive/changelog-old' },
   { from: '/develop/logs', to: '/developer/ops/changelog' },
   { from: '/develop/ccs_price_list', to: '/developer/ops/compute' },
   { from: '/develop/serverstatus', to: '/developer/ops/server-status' },

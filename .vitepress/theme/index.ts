@@ -21,6 +21,7 @@ import FoodEntry from './components/vue/FoodEntry.vue'
 import TodoList from './components/vue/TodoList.vue'
 import CommandPanel from './components/vue/CommandPanel.vue'
 import CommandEntry from './components/vue/CommandEntry.vue'
+import QQGroupCard from './components/vue/QQGroupCard.vue'
 import './css/custom.css'
 
 // 导入所有样式文件
@@ -91,6 +92,7 @@ export default {
     app.component('TodoList', TodoList)
     app.component('CommandPanel', CommandPanel)
     app.component('CommandEntry', CommandEntry)
+    app.component('QQGroupCard', QQGroupCard)
 
     // 注入图片查看器全局配置（可在子组件中通过 inject('lightboxConfig') 覆盖）
     setLightboxConfig({

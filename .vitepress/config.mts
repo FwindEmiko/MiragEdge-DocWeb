@@ -610,6 +610,7 @@ export default defineConfig({
           items: [
             { text: '飞行武器限制', link: '/plugins/custom/flight-guard' },
             { text: '免幻翼', link: '/plugins/custom/nophantom' },
+            { text: '缚灵钢符', link: '/plugins/custom/piglin-talisman' },
           ]
         },
       ],
@@ -764,7 +765,6 @@ export default defineConfig({
           text: '🗃️ 历史与待核对',
           collapsed: true,
           items: [
-            { text: '旧更新记录', link: '/developer/archive/changelog-old' },
             { text: '宣传推广记录', link: '/developer/archive/promotion' },
             { text: '种植系统设计占位', link: '/developer/archive/design/farming' },
             { text: '赛季设计记录', link: '/developer/design/liveops_260107' },
