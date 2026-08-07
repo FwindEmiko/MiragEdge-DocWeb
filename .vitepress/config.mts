@@ -648,6 +648,16 @@ export default defineConfig({
             },
           ]
         },
+        {
+          text: '🔌 第三方插件配置',
+          collapsed: false,
+          items: [
+            {
+              text: 'UltimateShop 商店系统',
+              link: '/plugin-guides/ultimateshop/',
+            },
+          ]
+        },
       ],
 
       '/developer/': [

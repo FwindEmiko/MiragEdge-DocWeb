@@ -1,5 +1,19 @@
 # 锐界幻境更新日志
 
+## 2026.8.8
+
+[添加] UltimateShop 商店系统配置文档编写：完整配置工作流（shops/menus/经济格式/动态价格/库存系统）
+[添加] 维度钓鱼系统 v2 深入分析：发现10个外部引用依赖，AEC tick循环、村民交易、give命令等复杂依赖链
+[添加] 星玖AI后端管理API：创建 miragefox 后端模块（status/tools/knowledge/test-chat 路由）
+[添加] 4个插件上传至 FCelestial GitHub 仓库：VillageNamer、StellarityOptimizer、ParticleFilter-Geyser、CustomCrops-Geyser
+
+[调整] 子代理工作流优化：delegation-first 策略，SOUL.md + memory + 2个技能同步更新至 v2.0.0
+[调整] 服务器状态监控页面重写：快速连通性检测面板、mermaid架构图、NodeStatus组件修复
+[调整] 任务系统修复：挖圆石不涨进度（匹配STONE+COBBLESTONE）、刷怪笼骷髅不涨进度（关闭 disable_spawner_progression）
+
+[修复] 修复随身附魔图鉴菜单动作顺序：先关闭再执行命令，避免 inventory 状态机冲突
+[修复] 修复 StellarityOptimizer 装甲飞行附魔不生效问题（is-vanilla 与数据包冲突分析）
+
 ## 2026.8.7
 
 [添加] 维度钓鱼系统 v2 全链路交付：EMF 原生 DF 启用 + VoidLure v2 补充层（9类、20KB）、13种鱼 CE 注册清单、FEC 晶心鱼成就监听
