@@ -725,6 +725,7 @@ export default defineConfig({
             { text: 'Stellarity 技术附魔', link: '/developer/reference/stellarity-technical-enchantments' },
             { text: '附魔配置参考', link: '/developer/reference/enchanting' },
             { text: '祛魔成本计算器', link: '/developer/reference/enchantment-calculator' },
+            { text: '经济基准参考', link: '/developer/reference/economy' },
                       ]
         },
         {
