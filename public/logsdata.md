@@ -2,17 +2,28 @@
 
 ## 2026.8.8
 
+[添加] 赏金猎人系统（BountyHunter）插件开发完成：49条赏金、6层定价、每日限量、跨日重置，已热加载部署
+[添加] 好友系统 AdvancedFriend MySQL 支持：新增 MySQL.java 实现 Database 接口，支持 sqlite/mysql 切换
+[添加] 菜单系统更新：新增菜单物品自动给予开关、在线奖励占位符修复、wiki 新增 GSit/Hat/缚灵钢符
+[添加] MirageFox 管理面板增强：新增数据看板面板 + 实时对话集成
 [添加] UltimateShop 商店系统配置文档编写：完整配置工作流（shops/menus/经济格式/动态价格/库存系统）
 [添加] 维度钓鱼系统 v2 深入分析：发现10个外部引用依赖，AEC tick循环、村民交易、give命令等复杂依赖链
 [添加] 星玖AI后端管理API：创建 miragefox 后端模块（status/tools/knowledge/test-chat 路由）
 [添加] 4个插件上传至 FCelestial GitHub 仓库：VillageNamer、StellarityOptimizer、ParticleFilter-Geyser、CustomCrops-Geyser
 
+[调整] 末影龙掉落机制调整：设置 always_generate_egg=1，每次击杀都生成龙蛋
+[调整] EMCShop 方块银行调整：修复浮点精度问题，新增苍白森林原木/绯红菌柄/诡异菌柄定价
+[调整] EMF 维度钓鱼修复：修复粒子颜色被 YAML 注释吃掉、require-custom-rod 阻止鱼获发放的问题
+[调整] SMB 映射权限修复：M盘写权限修复，jar文件所有者改为 root
 [调整] 子代理工作流优化：delegation-first 策略，SOUL.md + memory + 2个技能同步更新至 v2.0.0
 [调整] 服务器状态监控页面重写：快速连通性检测面板、mermaid架构图、NodeStatus组件修复
 [调整] 任务系统修复：挖圆石不涨进度（匹配STONE+COBBLESTONE）、刷怪笼骷髅不涨进度（关闭disable_spawner_progression）
 
 [修复] 修复随身附魔图鉴菜单动作顺序：先关闭再执行命令，避免 inventory 状态机冲突
 [修复] 修复 StellarityOptimizer 装甲飞行附魔不生效问题（is-vanilla 与数据包冲突分析）
+[修复] 内部技术附魔会生成在普通装备上的问题
+[修复] HFcatLoot 战利品系统性能优化：空间索引替代方块扫描，解决 syncLoad 卡顿（10.55%→0%），木桶音效修复，已热重载部署
+[修复] 个人网站图片方向自适应：竖屏/横屏图片自适应显示，已部署上线
 
 ## 2026.8.7
 
