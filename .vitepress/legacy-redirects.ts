@@ -39,6 +39,7 @@ const prefixRules: PrefixRule[] = [
   ['/plugins/bugenchantremover', '/plugin-guides/bug-enchant-remover'],
   ['/plugins/bug-enchant-remover', '/plugin-guides/bug-enchant-remover'],
   ['/developer/reference/plugins/bug-enchant-remover', '/plugin-guides/bug-enchant-remover'],
+  ['/plugin-guides/ultimateshop', '/developer/reference/ultimateshop'],
 ]
 
 const exactRules: RedirectRule[] = [

@@ -648,20 +648,10 @@ export default defineConfig({
               ]
             },
           ]
-        },
-        {
-          text: '🔌 第三方插件配置',
-          collapsed: false,
-          items: [
-            {
-              text: 'UltimateShop 商店系统',
-              link: '/plugin-guides/ultimateshop/',
-            },
-          ]
-        },
-      ],
+                  },
+                ],
 
-      '/developer/': [
+                '/developer/': [
         { text: '🛠️ 开发者文档', link: '/developer/' },
         {
           text: '🔧 开发工作流',
@@ -736,8 +726,9 @@ export default defineConfig({
             { text: 'Stellarity 技术附魔', link: '/developer/reference/stellarity-technical-enchantments' },
             { text: '附魔配置参考', link: '/developer/reference/enchanting' },
             { text: '祛魔成本计算器', link: '/developer/reference/enchantment-calculator' },
-            { text: '经济基准参考', link: '/developer/reference/economy' },
-                      ]
+                        { text: '经济基准参考', link: '/developer/reference/economy' },
+                        { text: 'UltimateShop 商店系统', link: '/developer/reference/ultimateshop/' },
+                                  ]
         },
         {
           text: '🌐 站点与协作',
