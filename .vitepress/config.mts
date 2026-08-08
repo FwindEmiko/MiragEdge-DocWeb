@@ -473,32 +473,32 @@ export default defineConfig({
               link: '/play/adventure/worlds/',
               collapsed: false,
               items: [
-                              { text: '野外结构图鉴', link: '/play/adventure/worlds/structures' },
-                              { text: '世界生成与地形', link: '/play/adventure/worlds/worldgen' },
-                              { text: '趣味彩蛋', link: '/play/adventure/worlds/fun-packs' },
-                              {
-                                text: '烬域',
-                                collapsed: true,
-                                items: [
-                                  { text: '群系与结构', link: '/play/adventure/worlds/incendium/biomes' },
-                                  { text: '生物与 Boss', link: '/play/adventure/worlds/incendium/mobs' },
-                                  { text: '物品与装备', link: '/play/adventure/worlds/incendium/items' },
-                                  { text: '探索指南', link: '/play/adventure/worlds/incendium/guide' },
-                                ]
-                              },
-                              {
-                                text: '繁星',
-                                collapsed: true,
-                                items: [
-                                  { text: '群系与结构', link: '/play/adventure/worlds/stellarity/biomes' },
-                                  { text: '生物与 Boss', link: '/play/adventure/worlds/stellarity/mobs' },
-                                  { text: '物品与装备', link: '/play/adventure/worlds/stellarity/items' },
-                                  { text: '高级附魔', link: '/play/adventure/worlds/stellarity/enchantments' },
-                                  { text: '探索指南', link: '/play/adventure/worlds/stellarity/guide' },
-                                ]
-                              },
-                              { text: '终焉 Boss', link: '/play/adventure/worlds/true-ending/boss' },
-                            ]
+                { text: '野外结构图鉴', link: '/play/adventure/worlds/structures' },
+                { text: '世界生成与地形', link: '/play/adventure/worlds/worldgen' },
+                { text: '趣味彩蛋', link: '/play/adventure/worlds/fun-packs' },
+                {
+                  text: '烬域',
+                  collapsed: true,
+                  items: [
+                    { text: '群系与结构', link: '/play/adventure/worlds/incendium/biomes' },
+                    { text: '生物与 Boss', link: '/play/adventure/worlds/incendium/mobs' },
+                    { text: '物品与装备', link: '/play/adventure/worlds/incendium/items' },
+                    { text: '探索指南', link: '/play/adventure/worlds/incendium/guide' },
+                  ]
+                },
+                {
+                  text: '繁星',
+                  collapsed: true,
+                  items: [
+                    { text: '群系与结构', link: '/play/adventure/worlds/stellarity/biomes' },
+                    { text: '生物与 Boss', link: '/play/adventure/worlds/stellarity/mobs' },
+                    { text: '物品与装备', link: '/play/adventure/worlds/stellarity/items' },
+                    { text: '高级附魔', link: '/play/adventure/worlds/stellarity/enchantments' },
+                    { text: '探索指南', link: '/play/adventure/worlds/stellarity/guide' },
+                  ]
+                },
+                { text: '终焉 Boss', link: '/play/adventure/worlds/true-ending/boss' },
+              ]
             },
             {
               text: '装备与附魔',
@@ -587,9 +587,9 @@ export default defineConfig({
           collapsed: false,
           items: [
             { text: '建筑大师', link: '/plugins/building-tools' },
-                        { text: '锻造升级', link: '/plugins/forge' },
-                        { text: '契约之翼', link: '/plugins/elytra-bind' },
-                        { text: '史莱姆靴', link: '/plugins/custom/slime-boots' },
+            { text: '锻造升级', link: '/plugins/forge' },
+            { text: '契约之翼', link: '/plugins/elytra-bind' },
+            { text: '史莱姆靴', link: '/plugins/custom/slime-boots' },
           ]
         },
         {
@@ -615,43 +615,7 @@ export default defineConfig({
         },
       ],
 
-      '/plugin-guides/': [
-        { text: '🧩 原创插件文档', link: '/plugin-guides/' },
-        {
-          text: '📦 已发布插件',
-          collapsed: false,
-          items: [
-            {
-              text: 'BugEnchantRemover',
-              link: '/plugin-guides/bug-enchant-remover/',
-              collapsed: false,
-              items: [
-                { text: '使用场景', link: '/plugin-guides/bug-enchant-remover/scenarios' },
-                { text: '处理命令', link: '/plugin-guides/bug-enchant-remover/commands' },
-                { text: '配置说明', link: '/plugin-guides/bug-enchant-remover/config' },
-                { text: 'UberEnchant 兼容', link: '/plugin-guides/bug-enchant-remover/uber_enchant' },
-              ]
-            },
-            { text: 'DragonMiao', link: '/plugin-guides/dragonmiao/' },
-            {
-              text: 'FE_PVP 竞技系统',
-              link: '/plugin-guides/fepvp/',
-              collapsed: false,
-              items: [
-                { text: '玩家指南', link: '/plugin-guides/fepvp/guide' },
-                { text: '竞技场管理', link: '/plugin-guides/fepvp/arena' },
-                { text: '装备组合管理', link: '/plugin-guides/fepvp/kit' },
-                { text: '命令参考', link: '/plugin-guides/fepvp/commands' },
-                { text: '配置参考', link: '/plugin-guides/fepvp/config' },
-                { text: '权限节点', link: '/plugin-guides/fepvp/permissions' },
-                { text: '数据存储', link: '/plugin-guides/fepvp/storage' },
-              ]
-            },
-          ]
-                  },
-                ],
-
-                '/developer/': [
+      '/developer/': [
         { text: '🛠️ 开发者文档', link: '/developer/' },
         {
           text: '🔧 开发工作流',
@@ -669,7 +633,7 @@ export default defineConfig({
               ]
             },
             {
-              text: 'CraftEngine 工作流',
+              text: 'CE材质引擎工作流',
               link: '/developer/workflows/craftengine/',
               collapsed: true,
               items: [
@@ -678,7 +642,7 @@ export default defineConfig({
               ]
             },
             {
-              text: 'Geyser 基岩版转换工作流',
+              text: '基岩材质转换工作流',
               link: '/developer/workflows/geyser/',
               collapsed: true,
               items: [
@@ -703,7 +667,7 @@ export default defineConfig({
                 { text: '排错', link: '/developer/workflows/enchanting/troubleshooting' },
               ]
             },
-            { text: '自定义作物工作流', link: '/developer/workflows/custom-crops' },
+            { text: '特殊作物工作流', link: '/developer/workflows/custom-crops' },
             {
               text: '钓鱼系统工作流',
               link: '/developer/workflows/fishing/',
@@ -723,12 +687,11 @@ export default defineConfig({
           items: [
             { text: '服务器模块职责', link: '/developer/reference/server-modules' },
             { text: '附魔 ID 对照表', link: '/developer/reference/enchantment_ids' },
-            { text: 'Stellarity 技术附魔', link: '/developer/reference/stellarity-technical-enchantments' },
-            { text: '附魔配置参考', link: '/developer/reference/enchanting' },
+            { text: '内嵌隐藏技术附魔', link: '/developer/reference/stellarity-technical-enchantments' },
             { text: '祛魔成本计算器', link: '/developer/reference/enchantment-calculator' },
-                        { text: '经济基准参考', link: '/developer/reference/economy' },
-                        { text: 'UltimateShop 商店系统', link: '/developer/reference/ultimateshop/' },
-                                  ]
+            { text: '经济基准参考', link: '/developer/reference/economy' },
+            { text: '高级商店系统', link: '/developer/reference/ultimateshop/' },
+          ]
         },
         {
           text: '🌐 站点与协作',
@@ -776,6 +739,42 @@ export default defineConfig({
                 { text: '物品功能核心', link: '/developer/archive/plugins/items-core' },
                 { text: '任务系统', link: '/developer/archive/plugins/quests' },
                 { text: '幻空翼历史草稿', link: '/developer/archive/plugins/sky-elytra' },
+              ]
+            },
+          ]
+        },
+      ],
+
+      '/plugin-guides/': [
+        { text: '🧩 原创插件文档', link: '/plugin-guides/' },
+        {
+          text: '📦 已发布插件',
+          collapsed: false,
+          items: [
+            {
+              text: 'BugEnchantRemover',
+              link: '/plugin-guides/bug-enchant-remover/',
+              collapsed: false,
+              items: [
+                { text: '使用场景', link: '/plugin-guides/bug-enchant-remover/scenarios' },
+                { text: '处理命令', link: '/plugin-guides/bug-enchant-remover/commands' },
+                { text: '配置说明', link: '/plugin-guides/bug-enchant-remover/config' },
+                { text: 'UberEnchant 兼容', link: '/plugin-guides/bug-enchant-remover/uber_enchant' },
+              ]
+            },
+            { text: 'DragonMiao', link: '/plugin-guides/dragonmiao/' },
+            {
+              text: 'FE_PVP 竞技系统',
+              link: '/plugin-guides/fepvp/',
+              collapsed: false,
+              items: [
+                { text: '玩家指南', link: '/plugin-guides/fepvp/guide' },
+                { text: '竞技场管理', link: '/plugin-guides/fepvp/arena' },
+                { text: '装备组合管理', link: '/plugin-guides/fepvp/kit' },
+                { text: '命令参考', link: '/plugin-guides/fepvp/commands' },
+                { text: '配置参考', link: '/plugin-guides/fepvp/config' },
+                { text: '权限节点', link: '/plugin-guides/fepvp/permissions' },
+                { text: '数据存储', link: '/plugin-guides/fepvp/storage' },
               ]
             },
           ]
