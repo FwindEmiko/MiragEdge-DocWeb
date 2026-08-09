@@ -97,9 +97,9 @@
 
 ---
 
-### 泣泪幽谷（Weeping Valley）
+### 垂泪幽谷（Weeping Valley）
 
-<SmartImage src="/images/datapack/incendium/biomes/WeepingValleySplatus.png" alt="泣泪幽谷" shadow radius="auto" />
+<SmartImage src="/images/datapack/incendium/biomes/WeepingValleySplatus.png" alt="垂泪幽谷" shadow radius="auto" />
 
 绯红森林的进化版——泣泪藤如瀑布般从天花板垂落，地面铺满了绯红菌岩。空气中飘浮着猩红的粒子，整个群系笼罩在诡异而美丽的光影之中。
 
@@ -130,11 +130,11 @@
 
 <SmartImage src="/images/datapack/incendium/structures/Forbidden_castle_tera.png" alt="禁忌城堡" shadow radius="auto" caption="由 227 个拼图模块组成的史诗级结构——烬域最危险的挑战" />
 
-> 难度：<span class="dp-difficulty lvl-5"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">致命</span></span> | Boss：烈焰执政官（Hovering Inferno）
+> 难度：<span class="dp-difficulty lvl-5"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">致命</span></span> | Boss：炼狱游者（Hovering Inferno），在魔炎沙丘的炼狱祭坛召唤
 
 烬域最宏伟、最复杂、最危险的结构。由 **227 个拼图模块**组装而成，是目前 Minecraft 数据包中最复杂的拼图结构。
 
-城堡高耸入云，塔楼林立，内部通道错综复杂。这里驻扎着各类猪灵战士——侦察兵、弓箭手、骑士、炎术师——以及终极 Boss **烈焰执政官**（Hovering Inferno）。
+城堡高耸入云，塔楼林立，内部通道错综复杂。这里驻扎着各类猪灵战士——侦察兵、弓箭手、骑士、炎术师——以及终极 Boss **炼狱游者**（Hovering Inferno）。
 
 **值得寻找的宝藏**：
 - **赤红匕首**（Scarlet Dagger）— 塔楼顶端宝箱
@@ -150,7 +150,7 @@
 
 > 难度：<span class="dp-difficulty lvl-5"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">致命</span></span> | 生成群系：石英平原
 
-灾厄村民在下界的秘密避难所。外表是一座庄严的教堂式建筑，内部却充满了邪教徒和守卫。
+灾厄村民在下界的秘密避难所。外表是一座庄严的教堂式建筑，内部充满了邪教徒和守卫。地下隐藏着金库迷宫——**诸神黄昏**和**破晓者**就藏在这座迷宫的深处。
 
 **圣所生物群**：
 - 圣所守护者、圣所信徒、圣所使徒
@@ -158,7 +158,8 @@
 - 圣所幻术师、圣所劫掠兽
 
 **核心宝藏**：
-- **破晓者**（Daybreaker）— 圣所深处的神器弩
+- **破晓者**（Daybreaker）— 圣所地下迷宫终点
+- **诸神黄昏**（Ragnarok）— 圣所迷宫第五死胡同
 
 ---
 
@@ -168,7 +169,7 @@
 
 > 难度：<span class="dp-difficulty lvl-3"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">困难</span></span> | 生成群系：魔炎沙丘
 
-矗立在赤红沙丘中央的神秘祭坛，周围环绕着燃烧的火焰。祭坛本身是一个挑战点——挑战成功会掉落稀有道具。
+矗立在赤红沙丘中央的神秘祭坛，周围环绕着燃烧的火焰。在祭坛讲台上**投掷下界之星**即可召唤终极 Boss **炼狱游者**（Hovering Inferno）。
 
 ---
 
@@ -188,9 +189,9 @@
 
 <SmartImage src="/images/datapack/incendium/structures/nether_reactor.png" alt="下界反应堆" shadow radius="auto" />
 
-> 难度：<span class="dp-difficulty lvl-3"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">困难</span></span> | 守卫：反应堆哨兵（Reactor Sentry）
+> 难度：<span class="dp-difficulty lvl-4"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">极难</span></span> | 守卫：辐射主管（Radiation Director）+ 反应堆哨兵（Reactor Sentry）
 
-一个巨大的能源装置，内部充满了未知的科技。由**反应堆哨兵**守卫，击败后可以搜刮反应堆核心区域。
+一个巨大的能源装置，内部充满了未知的科技。由**辐射主管**和**反应堆哨兵**（巨型恶魂炮台，10 个不死图腾）守卫，击败后可以搜刮反应堆核心区域。桶中可找到**防化服**套装和**辐射护盾**。
 
 ---
 
@@ -198,7 +199,7 @@
 
 <SmartImage src="/images/datapack/incendium/structures/abandoned_tower.png" alt="废弃哨塔" shadow radius="auto" />
 
-> 难度：<span class="dp-difficulty lvl-2"><span class="bar"></span><span class="bar"></span><span class="label">普通</span></span> | 结构组成：11 个模块
+> 难度：<span class="dp-difficulty lvl-2"><span class="bar"></span><span class="bar"></span><span class="label">普通</span></span> | 生成群系：石英平原 | 结构组成：11 个模块
 
 被遗弃的下界哨塔，共有 11 种不同的模块组合。塔内有时可以找到被囚禁的**小恶魂**（Ghastling）——这是游戏中最可爱的宠物之一！
 
@@ -233,7 +234,7 @@
 
 <SmartImage src="/images/datapack/incendium/structures/pipeline.png" alt="管道" shadow radius="auto" />
 
-> 难度：<span class="dp-difficulty lvl-3"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">困难</span></span> | 生成群系：火山三角洲 | 结构组成：20 个模块
+> 难度：<span class="dp-difficulty lvl-3"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">困难</span></span> | 生成群系：魔炎沙丘 / 毒化废土 | 结构组成：20 个模块
 
 横跨火山三角洲的巨大管道系统，由 **20 个模块**连接而成。管道内部由**管道哨兵**和**精英哨兵**（Prime Sentry）巡逻守卫。
 

@@ -687,7 +687,7 @@ export default defineConfig({
           items: [
             { text: '服务器模块职责', link: '/developer/reference/server-modules' },
             { text: '附魔 ID 对照表', link: '/developer/reference/enchantment_ids' },
-            { text: '内嵌隐藏技术附魔', link: '/developer/reference/stellarity-technical-enchantments' },
+            { text: '内部隐藏技术附魔', link: '/developer/reference/stellarity-technical-enchantments' },
             { text: '祛魔成本计算器', link: '/developer/reference/enchantment-calculator' },
             { text: '经济基准参考', link: '/developer/reference/economy' },
             { text: '高级商店系统', link: '/developer/reference/ultimateshop/' },

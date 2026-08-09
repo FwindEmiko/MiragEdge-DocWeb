@@ -6,6 +6,24 @@
 
 [升级] 更新NPC插件至最新以修复一些NPC菜单界面打不开的问题
 
+[修复] 在线时间因papi占位符注册冲突导致总是变换的问题
+
+[添加] 烬域（Incendium）文档全面重写：mobs.md 全文重写（数据包实测数据：猪灵守卫血量/护甲/掉落、炼狱游者700❤三阶段九技能、精英掉落概率）、items.md 全文重写（loot table 校准，全部物品获取方式/效果）、guide.md 全文重写（Boss挑战路线与成就速查）、biomes.md 多处修正（垂泪幽谷、管道位置、祭坛召唤方式、圣所宝藏等）
+[添加] 删除 developer/reference/enchanting.md（已迁移至 workflows/enchanting/ 的过时占位页）
+[添加] 文档站新版更新日志页面搭建（public/logsdata.md）
+[添加] ECS 云服务器磁盘清理：释放约 8GB 空间（Docker 构建缓存 4.23GB、journald 日志 3.6GB 等）
+
+[调整] 炼狱游者名称统一：全站烈焰执政官→炼狱游者
+[调整] UltimateShop 文档迁移：从 plugin-guides/ 移至 developer/reference/ultimateshop/
+[调整] contributors-activity.json 排除 git 跟踪
+
+[修复] 修复侧栏配置缺失：developer/reference/ 下附魔配置参考链接丢失（之前 patch 误删），已恢复
+[修复] 修复审计报错：enchanting.md 已迁移占位页删除后，路由审计 161 页全部有效
+[修复] 修复 CrazyCrates 连锁挖矿配置（DefaultActivationStrategy: NONE→ALWAYS）
+[修复] 修复任务奖励文案：飞行时间修正（日宝石商会 15秒→300秒、周矿工/探险家 30秒→1800秒）
+[修复] 修复 MirageFox 星玖管理后台数据加载问题（API 路径重复 + 响应拦截器解包冲突）
+
+
 ## 2026.8.8
 
 [添加] 赏金猎人系统（BountyHunter）插件开发完成：49条赏金、6层定价、每日限量、跨日重置，已热加载部署
