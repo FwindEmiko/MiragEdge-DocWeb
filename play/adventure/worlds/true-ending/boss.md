@@ -137,4 +137,4 @@ True Ending 提供可配置的设置菜单：
 | 幻翼太难打 | 远程先解决——它们是最优先目标 |
 | 终局阶段打不到 | 用脚手架搭高 / 末影珍珠跳到龙的位置 |
 | 难度太高 | `/function true_ending:_settings` 调整设置 |
-| 想听 Boss 音乐 | 数据包版需安装[配套资源包](https://modrinth.com/resourcepack/true-ending-ender-dragon-music) |
+| 想听 Boss 音乐 | 进阶版需安装[配套资源包](https://modrinth.com/resourcepack/true-ending-ender-dragon-music) |

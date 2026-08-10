@@ -599,6 +599,7 @@ export default defineConfig({
             { text: '箱子商店', link: '/plugins/custom/chest-shop' },
             { text: '全服市场', link: '/plugins/custom/global-market' },
             { text: '方块银行', link: '/plugins/custom/emc-shop' },
+            { text: '赏金猎人', link: '/plugins/custom/bounty-hunter' },
             { text: '知识问答', link: '/plugins/custom/quiz' },
             { text: '称号与入服消息', link: '/plugins/custom/miragedge-title' },
             { text: '月卡与通行权益', link: '/plugins/custom/monthly-pass' },

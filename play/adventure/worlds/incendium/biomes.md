@@ -128,11 +128,11 @@
 
 ### 禁忌城堡（Forbidden Castle）
 
-<SmartImage src="/images/datapack/incendium/structures/Forbidden_castle_tera.png" alt="禁忌城堡" shadow radius="auto" caption="由 227 个拼图模块组成的史诗级结构——烬域最危险的挑战" />
+<SmartImage src="/images/datapack/incendium/structures/Forbidden_castle_tera.png" alt="禁忌城堡" shadow radius="auto" caption="由 227 个建筑模块组成的史诗级结构——烬域最危险的挑战" />
 
 > 难度：<span class="dp-difficulty lvl-5"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">致命</span></span> | Boss：炼狱游者（Hovering Inferno），在魔炎沙丘的炼狱祭坛召唤
 
-烬域最宏伟、最复杂、最危险的结构。由 **227 个拼图模块**组装而成，是目前 Minecraft 数据包中最复杂的拼图结构。
+烬域最宏伟、最复杂、最危险的结构。由 **227 个建筑模块**组装而成，是目前 Minecraft 中最复杂的建筑结构之一。
 
 城堡高耸入云，塔楼林立，内部通道错综复杂。这里驻扎着各类猪灵战士——侦察兵、弓箭手、骑士、炎术师——以及终极 Boss **炼狱游者**（Hovering Inferno）。
 
@@ -219,7 +219,7 @@
 
 > 难度：<span class="dp-difficulty lvl-3"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">困难</span></span> | 生成群系：凋零森林 | 结构组成：42 个模块
 
-由 42 个拼图模块组成的完整猪灵聚落！这里有：
+由 42 个建筑模块组成的完整猪灵聚落！这里有：
 - **猪灵平民**（Piglin Civilian）— 村民
 - **村庄矿工**（Village Miner）— 开采下界矿石
 - **村庄伐木工**（Village Lumberjack）— 收集菌木

@@ -1,8 +1,8 @@
 # 世界生成与地形
 
-<SmartImage src="/images/datapack/worldgen/terralith/terralith_1.jpeg" alt="世界生成" shadow radius="auto" caption="从壮丽的山川到深邃的洞穴——多个数据包协同改变世界生成" />
+<SmartImage src="/images/datapack/worldgen/terralith/terralith_1.jpeg" alt="世界生成" shadow radius="auto" caption="从壮丽的山川到深邃的洞穴——多个世界生成扩展共同塑造了这片土地" />
 
-> 锐界幻境的主世界和末地使用了多个世界生成数据包，共同塑造你脚下的每一寸土地。
+锐界幻境的主世界和末地使用了多个世界生成扩展，共同塑造你脚下的每一寸土地。
 
 ## 主世界地形
 
