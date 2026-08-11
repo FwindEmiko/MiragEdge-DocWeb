@@ -2,15 +2,22 @@
 
 ## 2026.8.11
 
+[添加] CurseVanish 插件：死亡时自动移除消失诅咒物品（keepInventory 时生效），其他装备保留
+[添加] 服务器宣传计划：三核卖点升级（烬域繁星/全端互通/自研生态）+ Slogan + MineBBS 帖文 + MC百科简介
 [添加] SkyIslandHome 空岛家园系统深度审查：105 个 Java 文件、15,380 行，发现 5 个 P0 致命 Bug（19/21 命令权限写错、ANIMAL_SPAWN Flag 重复注册、飞行系统空壳 UI、飞行管理器不检查付费状态、任务金币奖励未发放）+ 15 个中等问题
 [添加] Spark 性能分析：定位 tickTime 10.57% 来自数据包 schedule function 开销
 
+[调整] 钓鱼系统权限阶梯重新设计（4级）：修复"钓到传说鱼才解锁传说鱼"的死循环，第4级改为收集全部史诗鱼/累计200条解锁
+[调整] 修复 EMF 钓鱼死鱼问题：删除遗留的 stellarity 自定义群系限制，鱼现在全部末地虚空可钓
 [调整] 怪物生成配置调优：恢复原版参数（mob-spawn-range 6→8、spawn-limits.monsters 70→60、despawn-ranges 恢复默认），保留性能优化（sim=6、DAB、异步生成）
 [调整] 飞行插件最大飞行时间调整：86400 秒（24小时）→ 4800 秒（80分钟）
 
 [修复] FwindEmiko-Web 前端修复：el-tree-select props type error（node-key 替代 props.value）
 [修复] MirageFox 网络工具优化：4 个网络工具绕过主线程、getOfflinePlayer 阻塞替换、RandomTeleport 减少主线程开销
 [修复] HeadDatabase 黑插件修复：修复 Main.class 常量池损坏（JDK 25 ClassFormatError）+ 清除远程禁用后门 + 清除盗版 banner
+[修复] FwindEmiko-Web 后端修复：下载目录保存 500（FolderTreeNode.model_validate 懒加载问题改手动构建）、权限管理页面 TypeError（可选链）
+[修复] 菜单 [proxy] 动作修复：从 player.chat()（仅基岩版）改为 sendProxyCommand BungeeCord 通道，皮肤设置按钮走 /skills
+[修复] 点歌系统 AllMusic：修复 netapi 加载和播放问题，插件正常启动
 
 ## 2026.8.10
 
