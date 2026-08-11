@@ -28,6 +28,20 @@
       </button>
     </div>
 
+    <!-- 来源筛选栏 -->
+    <div class="ench-source-tabs">
+      <button
+        v-for="s in sourceFilters"
+        :key="s.key"
+        class="ench-source-tab"
+        :class="{ active: activeSource === s.key }"
+        @click="selectSource(s.key)"
+      >
+        {{ s.label }}
+        <span class="ench-source-tab-count">{{ countBySource[s.key] }}</span>
+      </button>
+    </div>
+
     <!-- 搜索结果提示 -->
     <div class="ench-search-info" v-if="searchQuery">
       <span>搜索到 <strong>{{ filteredItems.length }}</strong> 个匹配的附魔</span>
@@ -46,23 +60,61 @@
           <th class="col-name">名称</th>
           <th class="col-level">最大等级</th>
           <th class="col-equip">适用装备</th>
+          <th class="col-source">来源</th>
+          <th class="col-conflict">冲突</th>
           <th class="col-effect">效果</th>
+          <th class="col-expand" title="点击行展开详情"></th>
         </tr>
       </thead>
       <tbody>
-        <tr
-          v-for="ench in visibleItems"
-          :key="ench.id + ench.name + ench.maxLevel"
-          class="ench-row"
-        >
-          <td class="col-name">
-            <span class="ench-name-dot" :style="{ background: rarityColor(ench.rarity) }"></span>
-            <span class="ench-name-text" :style="{ color: rarityColor(ench.rarity) }">{{ ench.name }}</span>
-          </td>
-          <td class="col-level">{{ ench.maxLevel }}</td>
-          <td class="col-equip">{{ ench.equipment }}</td>
-          <td class="col-effect">{{ ench.effect }}</td>
-        </tr>
+        <template v-for="ench in visibleItems" :key="ench.id">
+          <tr
+            class="ench-row"
+            @click="toggleExpand(ench.id)"
+            :class="{ expanded: expandedId === ench.id }"
+            :title="'点击查看详情'"
+          >
+            <td class="col-name">
+              <span class="ench-name-dot" :style="{ background: rarityColor(ench.rarity) }"></span>
+              <span class="ench-name-text" :style="{ color: rarityColor(ench.rarity) }">{{ ench.name }}</span>
+            </td>
+            <td class="col-level">{{ ench.maxLevel }}</td>
+            <td class="col-equip">{{ ench.equipment }}</td>
+            <td class="col-source">
+              <span class="ench-source-badge">{{ sourceLabel(ench.source) }}</span>
+            </td>
+            <td class="col-conflict">
+              <span v-if="ench.conflicts.length > 0" class="ench-conflict-icon" :title="conflictNames(ench.conflicts)">⚡</span>
+              <span v-else class="ench-conflict-none">—</span>
+            </td>
+            <td class="col-effect">{{ ench.effect }}</td>
+            <td class="col-expand">{{ expandedId === ench.id ? '▼' : '▶' }}</td>
+          </tr>
+          <!-- 详情展开行 -->
+          <tr v-if="expandedId === ench.id" class="ench-detail-row">
+            <td colspan="7">
+              <div class="ench-detail-inner">
+                <div class="ench-detail-section">
+                  <span class="ench-detail-label">名称</span>
+                  <span class="ench-detail-name" :style="{ color: rarityColor(ench.rarity) }">{{ ench.name }}</span>
+                  <span class="ench-detail-rarity" :style="{ background: rarityColor(ench.rarity) }">{{ rarityLabel(ench.rarity) }}</span>
+                </div>
+                <div class="ench-detail-section">
+                  <span class="ench-detail-label">来源详情</span>
+                  <span class="ench-detail-value">{{ ench.sourceDetail }}</span>
+                </div>
+                <div class="ench-detail-section" v-if="ench.conflicts.length > 0">
+                  <span class="ench-detail-label">冲突附魔</span>
+                  <span class="ench-detail-value">{{ conflictNames(ench.conflicts) }}</span>
+                </div>
+                <div class="ench-detail-section">
+                  <span class="ench-detail-label">归属包</span>
+                  <span class="ench-detail-pack">{{ packLabel(ench.pack) }}</span>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </template>
       </tbody>
     </table>
 
@@ -70,16 +122,36 @@
     <div class="ench-cards" v-if="filteredItems.length > 0">
       <div
         v-for="ench in visibleItems"
-        :key="ench.id + ench.name + ench.maxLevel"
+        :key="ench.id"
         class="ench-card"
         :style="{ borderLeftColor: rarityColor(ench.rarity) }"
+        @click="toggleExpand(ench.id)"
       >
         <div class="ench-card-head">
           <span class="ench-card-name" :style="{ color: rarityColor(ench.rarity) }">{{ ench.name }}</span>
           <span class="ench-card-level">最大等级 {{ ench.maxLevel }}</span>
         </div>
+        <div class="ench-card-meta">
+          <span class="ench-source-badge">{{ sourceLabel(ench.source) }}</span>
+          <span v-if="ench.conflicts.length > 0" class="ench-conflict-icon" :title="conflictNames(ench.conflicts)">⚡</span>
+        </div>
         <div class="ench-card-equip">{{ ench.equipment }}</div>
         <div class="ench-card-effect">{{ ench.effect }}</div>
+        <!-- 卡片详情展开 -->
+        <div v-if="expandedId === ench.id" class="ench-card-detail">
+          <div class="ench-detail-section">
+            <span class="ench-detail-label">来源详情</span>
+            <span class="ench-detail-value">{{ ench.sourceDetail }}</span>
+          </div>
+          <div class="ench-detail-section" v-if="ench.conflicts.length > 0">
+            <span class="ench-detail-label">冲突附魔</span>
+            <span class="ench-detail-value">{{ conflictNames(ench.conflicts) }}</span>
+          </div>
+          <div class="ench-detail-section">
+            <span class="ench-detail-label">归属包</span>
+            <span class="ench-detail-pack">{{ packLabel(ench.pack) }}</span>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -119,21 +191,67 @@ const pageSize = 20
 
 const searchQuery = ref('')
 const activeRarity = ref('curse')
+const activeSource = ref('')
+const expandedId = ref(null)
 const visibleCount = ref(pageSize)
 const sentinelRef = ref(null)
 let observer = null
 
 const total = enchantments.length
 
-// 预构建 rarity 查找表，避免每行 find
-const rarityMap = computed(() => {
+// 来源筛选按钮定义
+const sourceFilters = [
+  { key: '', label: '全部' },
+  { key: 'enchanting_table', label: '附魔台' },
+  { key: 'random_loot', label: '随机战利品' },
+  { key: 'structure', label: '结构宝箱' },
+  { key: 'stellarity_vault', label: '末地城宝库' },
+  { key: 'curse_random', label: '诅咒' },
+  { key: 'funpack', label: '整蛊' },
+]
+
+// 来源标签映射
+const sourceLabels = {
+  enchanting_table: '🔮 附魔台',
+  random_loot: '🎲 战利品',
+  structure: '🏛️ 结构',
+  stellarity_vault: '⚱️ 宝库',
+  curse_random: '☠️ 诅咒',
+  funpack: '🎭 整蛊',
+}
+
+// 归属包标签映射
+const packLabels = {
+  vanilla: '原版',
+  incendium: '烬域',
+  stellarity: '繁星',
+  atistructures: 'ATi结构',
+  dt: 'D&T',
+  structory: 'Structory',
+  funpack: '整蛊包',
+  other: '其他',
+}
+
+// 预构建 id→name 查询表
+const nameMap = computed(() => {
   const map = {}
-  for (const r of rarities) {
-    map[r.key] = r
+  for (const e of enchantments) {
+    map[e.id] = e.name
   }
   return map
 })
 
+// 来源计数
+const countBySource = computed(() => {
+  const map = { '': enchantments.length }
+  for (const f of sourceFilters) {
+    if (!f.key) continue
+    map[f.key] = enchantments.filter(e => e.source === f.key).length
+  }
+  return map
+})
+
+// 稀有度计数
 const countByRarity = computed(() => {
   const map = {}
   for (const r of rarities) {
@@ -146,29 +264,56 @@ const activeRarityMeta = computed(() =>
   rarities.find(r => r.key === activeRarity.value)
 )
 
-// 过滤后的列表：搜索时跨所有品质，否则按当前品质
+// 过滤后的列表：来源筛选 + 品质筛选 + 搜索
 const filteredItems = computed(() => {
+  let list = enchantments
+
+  // 来源筛选（始终生效）
+  if (activeSource.value) {
+    list = list.filter(e => e.source === activeSource.value)
+  }
+
   const q = searchQuery.value.trim().toLowerCase()
   if (q) {
-    return enchantments.filter(e =>
+    // 搜索时跨所有品质
+    list = list.filter(e =>
       e.name.toLowerCase().includes(q) ||
       e.effect.toLowerCase().includes(q) ||
       e.equipment.toLowerCase().includes(q) ||
       e.id.toLowerCase().includes(q)
     )
+  } else {
+    // 品质筛选
+    list = list.filter(e => e.rarity === activeRarity.value)
   }
-  return enchantments.filter(e => e.rarity === activeRarity.value)
+  return list
 })
 
-// 当前可见的条目（渐进加载）
 const visibleItems = computed(() => filteredItems.value.slice(0, visibleCount.value))
 
 const hasMore = computed(() => visibleCount.value < filteredItems.value.length)
 const remaining = computed(() => filteredItems.value.length - visibleCount.value)
 
 function rarityColor(key) {
-  const r = rarityMap.value[key]
+  const r = rarities.find(r => r.key === key)
   return r ? r.color : '#999'
+}
+
+function rarityLabel(key) {
+  const r = rarities.find(r => r.key === key)
+  return r ? r.label : ''
+}
+
+function sourceLabel(key) {
+  return sourceLabels[key] || key
+}
+
+function conflictNames(ids) {
+  return ids.map(id => nameMap.value[id] || id).join('、')
+}
+
+function packLabel(key) {
+  return packLabels[key] || key
 }
 
 function selectRarity(key) {
@@ -176,14 +321,23 @@ function selectRarity(key) {
   visibleCount.value = pageSize
 }
 
+function selectSource(key) {
+  activeSource.value = key
+  visibleCount.value = pageSize
+}
+
+function toggleExpand(id) {
+  expandedId.value = expandedId.value === id ? null : id
+}
+
 function loadMore() {
   visibleCount.value += pageSize
 }
 
-// 搜索或切换品质时重置可见数量，并重新观察哨兵
-watch([searchQuery, activeRarity], () => {
+// 搜索或切换品质/来源时重置可见数量，并重新观察哨兵
+watch([searchQuery, activeRarity, activeSource], () => {
   visibleCount.value = pageSize
-  // 切换后哨兵 DOM 会被销毁重建，需重新观察
+  expandedId.value = null
   nextTick(() => {
     if (observer && sentinelRef.value) {
       observer.observe(sentinelRef.value)
@@ -201,7 +355,6 @@ onMounted(() => {
       }
     }
   }, { rootMargin: '300px' })
-  // nextTick 确保哨兵已渲染
   nextTick(() => {
     if (sentinelRef.value) observer.observe(sentinelRef.value)
   })
@@ -261,7 +414,7 @@ onBeforeUnmount(() => {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
 }
 
 .ench-tab {
@@ -298,6 +451,46 @@ onBeforeUnmount(() => {
 .ench-tab-count {
   font-size: 11px;
   opacity: 0.7;
+}
+
+/* ===== 来源筛选栏 ===== */
+.ench-source-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.ench-source-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  font-size: 12px;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 14px;
+  background: var(--vp-c-bg);
+  color: var(--vp-c-text-2);
+  cursor: pointer;
+  transition: color 0.2s, background-color 0.2s, border-color 0.2s;
+  white-space: nowrap;
+}
+
+.ench-source-tab:hover {
+  border-color: var(--vp-c-brand-2);
+  color: var(--vp-c-brand-1);
+}
+
+.ench-source-tab.active {
+  font-weight: 600;
+  border-color: var(--vp-c-brand-1);
+  color: var(--vp-c-brand-1);
+  background: var(--vp-c-bg-soft);
+}
+
+.ench-source-tab-count {
+  font-size: 10px;
+  opacity: 0.6;
 }
 
 /* ===== 搜索信息 ===== */
@@ -364,7 +557,12 @@ onBeforeUnmount(() => {
   transition: background 0.15s;
 }
 
-.ench-table tbody tr:hover td {
+.ench-table tbody tr.ench-row:hover td {
+  background: var(--vp-c-bg-soft);
+  cursor: pointer;
+}
+
+.ench-table tbody tr.ench-row-expanded td {
   background: var(--vp-c-bg-soft);
 }
 
@@ -397,8 +595,119 @@ onBeforeUnmount(() => {
   font-size: 0.92em;
 }
 
+.ench-row .col-source {
+  white-space: nowrap;
+}
+
+.ench-row .col-conflict {
+  text-align: center;
+  width: 60px;
+}
+
 .ench-row .col-effect {
   line-height: 1.6;
+}
+
+/* 展开提示列 */
+.ench-row .col-expand {
+  width: 32px;
+  text-align: center;
+  color: var(--vp-c-text-3);
+  font-size: 12px;
+  cursor: pointer;
+  user-select: none;
+  transition: color 0.2s;
+}
+
+.ench-row:hover .col-expand {
+  color: var(--vp-c-brand-1);
+}
+
+.ench-row.expanded .col-expand {
+  color: var(--vp-c-brand-1);
+}
+
+.ench-table th.col-expand {
+  width: 32px;
+  background: transparent;
+}
+
+/* 来源标签 */
+.ench-source-badge {
+  display: inline-block;
+  font-size: 12px;
+  padding: 1px 8px;
+  border-radius: 10px;
+  background: var(--vp-c-bg-soft);
+  color: var(--vp-c-text-2);
+  white-space: nowrap;
+}
+
+/* 冲突图标 */
+.ench-conflict-icon {
+  cursor: help;
+  font-size: 16px;
+  display: inline-block;
+}
+
+.ench-conflict-none {
+  color: var(--vp-c-text-3);
+  font-size: 13px;
+}
+
+/* ===== 详情展开行 ===== */
+.ench-detail-row td {
+  padding: 0;
+  background: var(--vp-c-bg-soft);
+  border-bottom: 2px solid var(--vp-c-divider);
+}
+
+.ench-detail-inner {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 14px 16px;
+}
+
+.ench-detail-section {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+}
+
+.ench-detail-label {
+  color: var(--vp-c-text-3);
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.ench-detail-name {
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.ench-detail-rarity {
+  display: inline-block;
+  font-size: 11px;
+  color: #fff;
+  padding: 1px 8px;
+  border-radius: 10px;
+  white-space: nowrap;
+}
+
+.ench-detail-value {
+  color: var(--vp-c-text-1);
+}
+
+.ench-detail-pack {
+  display: inline-block;
+  font-size: 12px;
+  padding: 1px 8px;
+  border-radius: 10px;
+  background: var(--vp-c-brand-soft);
+  color: var(--vp-c-brand-1);
+  white-space: nowrap;
 }
 
 /* ===== 移动端卡片（默认隐藏，小屏显示） ===== */
@@ -413,6 +722,12 @@ onBeforeUnmount(() => {
   padding: 12px 14px;
   margin-bottom: 10px;
   background: var(--vp-c-bg);
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.ench-card:hover {
+  background: var(--vp-c-bg-soft);
 }
 
 .ench-card-head {
@@ -420,7 +735,7 @@ onBeforeUnmount(() => {
   align-items: center;
   justify-content: space-between;
   gap: 8px;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
 
 .ench-card-name {
@@ -438,6 +753,13 @@ onBeforeUnmount(() => {
   flex-shrink: 0;
 }
 
+.ench-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
 .ench-card-equip {
   font-size: 13px;
   color: var(--vp-c-text-2);
@@ -448,6 +770,16 @@ onBeforeUnmount(() => {
   font-size: 13px;
   line-height: 1.6;
   color: var(--vp-c-text-1);
+}
+
+/* 卡片详情展开 */
+.ench-card-detail {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--vp-c-divider);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 /* ===== 加载更多 ===== */
@@ -511,6 +843,15 @@ onBeforeUnmount(() => {
   .ench-tab {
     padding: 5px 10px;
     font-size: 12px;
+  }
+
+  .ench-source-tabs {
+    gap: 4px;
+  }
+
+  .ench-source-tab {
+    padding: 2px 8px;
+    font-size: 11px;
   }
 }
 </style>
