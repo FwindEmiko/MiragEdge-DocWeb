@@ -436,6 +436,7 @@ export default defineConfig({
           collapsed: false,
           items: [
             { text: '基岩版兼容', link: '/start/bedrock' },
+            { text: '皮肤更换', link: '/start/skin' },
             { text: '客户端扩展', link: '/start/compatibility' },
             { text: '玩家守则', link: '/start/rules' },
           ]
