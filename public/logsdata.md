@@ -1,5 +1,17 @@
 # 锐界幻境更新日志
 
+## 2026.8.11
+
+[添加] SkyIslandHome 空岛家园系统深度审查：105 个 Java 文件、15,380 行，发现 5 个 P0 致命 Bug（19/21 命令权限写错、ANIMAL_SPAWN Flag 重复注册、飞行系统空壳 UI、飞行管理器不检查付费状态、任务金币奖励未发放）+ 15 个中等问题
+[添加] Spark 性能分析：定位 tickTime 10.57% 来自数据包 schedule function 开销
+
+[调整] 怪物生成配置调优：恢复原版参数（mob-spawn-range 6→8、spawn-limits.monsters 70→60、despawn-ranges 恢复默认），保留性能优化（sim=6、DAB、异步生成）
+[调整] 飞行插件最大飞行时间调整：86400 秒（24小时）→ 4800 秒（80分钟）
+
+[修复] FwindEmiko-Web 前端修复：el-tree-select props type error（node-key 替代 props.value）
+[修复] MirageFox 网络工具优化：4 个网络工具绕过主线程、getOfflinePlayer 阻塞替换、RandomTeleport 减少主线程开销
+[修复] HeadDatabase 黑插件修复：修复 Main.class 常量池损坏（JDK 25 ClassFormatError）+ 清除远程禁用后门 + 清除盗版 banner
+
 ## 2026.8.10
 
 [添加] 付费称号系统设计完善
