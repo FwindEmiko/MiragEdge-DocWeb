@@ -1,7 +1,8 @@
 # UltimateShop 商店系统配置
 
-> 插件版本: 3.4.8+ Premium | 官方Wiki: [ultimateshop.superiormc.cn](https://ultimateshop.superiormc.cn/)
-> 插件目录: `plugins/UltimateShop/`
+> 插件版本: 3.4.8+ Premium  
+> 官方Wiki: [ultimateshop.superiormc.cn](https://ultimateshop.superiormc.cn/)  
+> 插件目录: `plugins/UltimateShop/`  
 
 UltimateShop 是一个高灵活性商店插件，支持多对多的商品-价格关系、动态价格、库存系统、每日商店等高级功能。本文档为 MiragEdge 服务器定制配置参考。
 
