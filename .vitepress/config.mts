@@ -591,7 +591,7 @@ export default defineConfig({
             { text: '锻造升级', link: '/plugins/forge' },
             { text: '契约之翼', link: '/plugins/elytra-bind' },
             { text: '史莱姆靴', link: '/plugins/custom/slime-boots' },
-            { text: '巨像胸甲与灵影护腿', link: '/plugins/fec-armor' },
+            { text: '随地大小变', link: '/plugins/fec-armor' },
           ]
         },
         {
