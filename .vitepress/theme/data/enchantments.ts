@@ -519,7 +519,7 @@ export const enchantments: Enchantment[] = [
   pack: 'vanilla'
 },
   { name: '信念', id: 'stalwart', maxLevel: 3, equipment: '头盔 / 胸甲 / 护腿 / 靴子', effect: '受到伤害时有概率获得抗性提升效果', rarity: 'rare' ,
-  conflicts: [],
+  conflicts: ['towering', 'shields', 'evasion'],
   source: 'structure',
   sourceDetail: '烬域城堡/圣所',
   pack: 'incendium'
@@ -645,7 +645,7 @@ export const enchantments: Enchantment[] = [
   pack: 'vanilla'
 },
   { name: '尖锐', id: 'stab', maxLevel: 3, equipment: '三叉戟', effect: '三叉戟的近战伤害提升', rarity: 'rare' ,
-  conflicts: [],
+  conflicts: ['serrated', 'impact', 'cranial', 'atmospheric'],
   source: 'structure',
   sourceDetail: 'D&T海底神殿',
   pack: 'dt'
@@ -663,7 +663,7 @@ export const enchantments: Enchantment[] = [
   pack: 'vanilla'
 },
   { name: '屹立', id: 'towering', maxLevel: 4, equipment: '头盔 / 胸甲 / 护腿 / 靴子', effect: '在血量较高时受到伤害增加，在血量较低时受到伤害减少', rarity: 'rare' ,
-  conflicts: [],
+  conflicts: ['stalwart', 'shields', 'evasion'],
   source: 'structure',
   sourceDetail: '烬域城堡',
   pack: 'incendium'
@@ -711,13 +711,13 @@ export const enchantments: Enchantment[] = [
   pack: 'dt'
 },
   { name: '抛射', id: 'atmospheric', maxLevel: 3, equipment: '三叉戟', effect: '在空中时投掷的三叉戟伤害提升', rarity: 'rare' ,
-  conflicts: [],
+  conflicts: ['stab', 'serrated', 'impact', 'cranial'],
   source: 'random_loot',
   sourceDetail: '随机战利品',
   pack: 'vanilla'
 },
   { name: '护盾', id: 'shields', maxLevel: 8, equipment: '头盔 / 胸甲 / 护腿 / 靴子', effect: '长时间不受伤害下一次可以减伤', rarity: 'rare' ,
-  conflicts: [],
+  conflicts: ['stalwart', 'towering', 'evasion'],
   source: 'structure',
   sourceDetail: '烬域城堡/实验室',
   pack: 'incendium'
@@ -957,7 +957,7 @@ export const enchantments: Enchantment[] = [
   pack: 'vanilla'
 },
   { name: '过载', id: 'impact', maxLevel: 3, equipment: '三叉戟', effect: '在攻击时有概率造成大量伤害', rarity: 'rare' ,
-  conflicts: [],
+  conflicts: ['stab', 'serrated', 'cranial', 'atmospheric'],
   source: 'random_loot',
   sourceDetail: '随机战利品',
   pack: 'vanilla'
@@ -969,7 +969,7 @@ export const enchantments: Enchantment[] = [
   pack: 'vanilla'
 },
   { name: '透骨', id: 'cranial', maxLevel: 6, equipment: '三叉戟', effect: '投掷的三叉戟爆头伤害提升', rarity: 'rare' ,
-  conflicts: [],
+  conflicts: ['stab', 'serrated', 'impact', 'atmospheric'],
   source: 'random_loot',
   sourceDetail: '随机战利品',
   pack: 'vanilla'
@@ -981,13 +981,13 @@ export const enchantments: Enchantment[] = [
   pack: 'vanilla'
 },
   { name: '锯齿', id: 'serrated', maxLevel: 3, equipment: '三叉戟', effect: '三叉戟造成的伤害提升', rarity: 'rare' ,
-  conflicts: [],
+  conflicts: ['stab', 'impact', 'cranial', 'atmospheric'],
   source: 'random_loot',
   sourceDetail: '随机战利品',
   pack: 'vanilla'
 },
   { name: '闪避', id: 'evasion', maxLevel: 3, equipment: '头盔 / 胸甲 / 护腿 / 靴子', effect: '受到伤害时有概率免疫', rarity: 'rare' ,
-  conflicts: [],
+  conflicts: ['stalwart', 'towering', 'shields'],
   source: 'structure',
   sourceDetail: '烬域城堡',
   pack: 'incendium'
@@ -1049,7 +1049,7 @@ export const enchantments: Enchantment[] = [
   pack: 'vanilla'
 },
   { name: '会心', id: 'supercritical', maxLevel: 3, equipment: '剑', effect: '在攻击时有概率造成的伤害大幅提升', rarity: 'epic' ,
-  conflicts: [],
+  conflicts: ['critical_strike', 'criticals', 'carve'],
   source: 'structure',
   sourceDetail: '烬域城堡/圣所/尖塔',
   pack: 'incendium'
@@ -1181,7 +1181,7 @@ export const enchantments: Enchantment[] = [
   pack: 'stellarity'
 },
   { name: '暴戾', id: 'criticals', maxLevel: 6, equipment: '剑 / 斧', effect: '暴击伤害提升', rarity: 'epic' ,
-  conflicts: [],
+  conflicts: ['critical_strike', 'supercritical', 'carve'],
   source: 'random_loot',
   sourceDetail: '随机战利品',
   pack: 'vanilla'
@@ -1259,7 +1259,7 @@ export const enchantments: Enchantment[] = [
   pack: 'vanilla'
 },
   { name: '破军', id: 'carve', maxLevel: 3, equipment: '斧', effect: '暴击时提升伤害并溅射至周围实体', rarity: 'epic' ,
-  conflicts: [],
+  conflicts: ['critical_strike', 'criticals', 'supercritical'],
   source: 'random_loot',
   sourceDetail: '随机战利品',
   pack: 'vanilla'
@@ -1483,7 +1483,7 @@ export const enchantments: Enchantment[] = [
   pack: 'incendium'
 },
   { name: '暴击', id: 'critical_strike', maxLevel: 3, equipment: '剑', effect: '击杀目标充能后，下一次攻击必定暴击并给予短暂力量效果', rarity: 'legendary' ,
-  conflicts: ['bane_of_arthropods', 'breach', 'density', 'impaling', 'sharpness', 'smite', 'soul_harvest'],
+  conflicts: ['bane_of_arthropods', 'breach', 'carve', 'criticals', 'density', 'impaling', 'sharpness', 'smite', 'soul_harvest', 'supercritical'],
   source: 'stellarity_vault',
   sourceDetail: '末地城 vault 稀有宝箱',
   pack: 'stellarity'
