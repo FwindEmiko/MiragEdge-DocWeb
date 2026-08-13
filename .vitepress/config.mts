@@ -591,6 +591,7 @@ export default defineConfig({
             { text: '锻造升级', link: '/plugins/forge' },
             { text: '契约之翼', link: '/plugins/elytra-bind' },
             { text: '史莱姆靴', link: '/plugins/custom/slime-boots' },
+            { text: '巨像胸甲与灵影护腿', link: '/plugins/fec-armor' },
           ]
         },
         {
@@ -601,6 +602,7 @@ export default defineConfig({
             { text: '全服市场', link: '/plugins/custom/global-market' },
             { text: '方块银行', link: '/plugins/custom/emc-shop' },
             { text: '赏金猎人', link: '/plugins/custom/bounty-hunter' },
+            { text: '生物捕捉', link: '/plugins/custom/mob-capture' },
             { text: '知识问答', link: '/plugins/custom/quiz' },
             { text: '称号与入服消息', link: '/plugins/custom/miragedge-title' },
             { text: '月卡与通行权益', link: '/plugins/custom/monthly-pass' },
