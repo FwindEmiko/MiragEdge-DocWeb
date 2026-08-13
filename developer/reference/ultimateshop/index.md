@@ -301,6 +301,114 @@ A:
   buy-times-reset-mode: 'NEVER'     # 不自动补货
 ```
 
+::: warning 使用 FE_RefreshPapi 变量作为库存
+MiragEdge 的稀有资源商店使用 `FE_RefreshPapi` 变量驱动供应池：
+- `buy-limits.global: '%ferp_value_mineral_limit_diamond%'` — 库存 = 变量值
+- `buy-actions` 执行 `ferp add mineral_limit_diamond -{amount}` — 买入扣库存
+- `sell-actions` 执行 `ferp add mineral_limit_diamond {amount}` — 卖出加库存
+- 变量在 `plugins/FE_RefreshPapi/config.yml` 配置，每年 1 月 1 日重置
+:::
+
+## 基岩版兼容 (Bedrock UI - Premium)
+
+### 概述
+
+Premium 版会自动把 Java 箱子商店转换为基岩版 Form 表单 UI，无需手动编写脚本。转换依赖 Geyser + Floodgate（后端子服也要装）。
+
+### 前置条件
+
+1. Geyser + Floodgate 安装（后端子服 + Velocity 代理）
+2. Geyser `auth-type: floodgate`
+3. 插件启动时控制台应出现 `Hooking into floodgate`
+
+### config.yml 关键配置
+
+```yaml
+# 基岩版 UI 开关
+menu:
+  bedrock:
+    enabled: true                # 开启表单 UI
+    auto-add-icon:               # 自动为原版物品生成图标 (4.7.0+)
+      enabled: true
+      format: "https://raw.githubusercontent.com/InventivetalentDev/minecraft-assets/refs/heads/{version}/assets/minecraft/textures/{path}.png"
+    check-method: FLOODGATE      # 识别基岩版玩家的方式
+    # 购买/出售成功后再开菜单
+    not-auto-close: true
+    # 按钮第二行显示价格
+    price-extra-line:
+      default: '§a购买: §f{buy-price} §6| §b出售: §f{sell-price}'
+      only-buy: '§a购买: §f{buy-price}'
+      only-sell: '§b出售: §f{sell-price}'
+```
+
+::: warning 颜色代码
+基岩版按钮文字必须用 **§** 前缀颜色代码（不是 `&`）。
+:::
+
+### 自动图标生成（auto-add-icon）
+
+让插件自动为原版物品按钮添加贴图：
+
+1. config.yml 开启 `minecraft-item-material-file.enabled: true` + `generate-new-one: true`
+2. 重启服务器 → 插件自动下载 Material→纹理路径映射
+3. 成功后把 `generate-new-one` 改回 `false`
+4. 服务器升级 MC 版本后需删除 `item-materials.json` 重新生成
+
+```yaml
+config-files:
+  minecraft-item-material-file:
+    enabled: true
+    generate-new-one: false
+    file: 'item-materials.json'
+```
+
+### 商品手动配置图标
+
+auto-add-icon 只匹配原版材质。自定义纹理/物品（ItemsAdder、CraftEngine 等）需手动给商品加 `bedrock` 图标：
+
+```yaml
+A:
+  display-item:
+    material: DIAMOND
+    name: '&b钻石'           # 中文名（否则表单显示英文材质名）
+    bedrock:
+      hide: false             # 是否对基岩版隐藏
+      icon: 'path;;textures/items/diamond.png'  # 纹理路径
+```
+
+icon 格式：
+- `path;;textures/items/diamond.png` — 本地 Bedrock 资源包路径
+- `url;;https://example.com/diamond.png` — 远程 URL
+
+### Bedrock 按钮 action
+
+```yaml
+buttons:
+  X:
+    display-item:
+      material: GRASS_BLOCK
+      bedrock:
+        hide: false
+        icon: 'url;;https://raw.githubusercontent.com/Jens-Co/MinecraftItemImages/main/1.20/melon_slice.png'
+```
+
+### 菜单级 Bedrock 配置
+
+```yaml
+title: '{shop-name}'
+size: 54
+bedrock:
+  enabled: true               # 此菜单对基岩版用表单
+  content: '&f欢迎来到商店!'  # 表单顶部说明文字
+```
+
+### MiragEdge 服务器现状（2026-08-10）
+
+- 所有商店商品已补中文 `display-item`（`&e中文名` / `&c中文名`）
+- 原版物品靠 auto-add-icon 自动生成图标
+- 稀有资源交易所手动配置了 4 个图标
+- 红石商店手动配置了 13 个图标
+
 ## 重置模式
 
 | 模式 | 说明 | 存储时间 |
