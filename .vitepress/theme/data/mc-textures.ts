@@ -638,9 +638,9 @@ export const mcTextures: Record<string, McItemData> = {
   writable_book: { name: '书与笔', texture: '/mc-textures/item/writable_book.png' },
   written_book: { name: '成书', texture: '/mc-textures/item/written_book.png' },
   // ===== 锐界幻境自定义工具 =====
-    enderite_shard: { name: '末影合金碎片', texture: '/mc-textures/item/enderite_shard.png' },
+    enderite_shard: { name: '末影合金碎片', texture: '/mc-textures/item/amethyst_shard.png' },
     starlight_soot: { name: '星辉尘', texture: '/mc-textures/item/glowstone_dust.png' },
-    unstable_powder: { name: '不稳定火药', texture: '/mc-textures/item/glowstone_dust.png' },
+    unstable_powder: { name: '不稳定火药', texture: '/images/datapack/incendium/items/Unstable_powder.png' },
     capture_egg_core: { name: '捕捉蛋核心', texture: '/mc-textures/item/capture_egg_core.png' },
     capture_egg: { name: '捕捉蛋', texture: '/mc-textures/item/capture_egg.png' },
     forging_hammer: { name: '锻造锤', texture: 'https://oss.miragedge.top/images/web_image/mc-textures/item/forging_hammer.png' },
