@@ -63,6 +63,7 @@
 
 ### 虚空生物（Voided Mobs）
 
+<SmartImage align="left" margin="0" src="/images/datapack/stellarity/mobs/voided_zombie.webp" alt="虚空僵尸" shadow radius="auto" width="96" />
 繁星末地引入了「虚空化」生物变种——比原版对应生物更强的虚空版本，对未准备的冒险者构成更大威胁。
 
 - **虚空僵尸**：比主世界僵尸更强、更快、更肉

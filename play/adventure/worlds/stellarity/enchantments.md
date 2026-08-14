@@ -98,4 +98,4 @@ head:
 
 ---
 
-> 附魔 ID 对照表（开发者用）见 [开发文档 - 附魔ID对照表](/developer/reference/enchantment_ids)。技术附魔标记（`_technical/*`）是数据包内部机制，不在此列，详见 [开发文档 - Stellarity 技术附魔](/developer/reference/stellarity-technical-enchantments)。
+> 附魔 ID 对照表（开发者用）见 [开发文档 - 附魔ID对照表](/developer/reference/enchantment_ids)。技术附魔标记（`_technical/*`）是游戏内部机制，不在此列，详见 [开发文档 - Stellarity 技术附魔](/developer/reference/stellarity-technical-enchantments)。

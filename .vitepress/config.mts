@@ -411,8 +411,6 @@ export default defineConfig({
           text: '🚪 第一次入服',
           collapsed: false,
           items: [
-            { text: '新服速览', link: '/start/new-server' },
-            { text: '主城共建', link: '/start/main-city' },
             { text: '新玩家须知', link: '/start/welcome' },
             { text: '客户端安装', link: '/start/install' },
             { text: '连接服务器', link: '/start/join' },

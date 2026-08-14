@@ -60,6 +60,6 @@ head:
 
 ## 从这些页面继续
 
-- [新服速览](/start/new-server)：新服全部核心改动一览
+- [开服公告](/start/)：新服全部核心改动一览
 - [方块银行](/plugins/custom/emc-shop)：块币的获取与使用
 - [建筑大师](/plugins/building-tools)：建材兑换、盔甲架编辑等建造工具

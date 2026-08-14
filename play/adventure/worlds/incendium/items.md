@@ -82,6 +82,8 @@
 ---
 
 ### 哨兵之怒（Sentry's Wrath）
+
+<McItem name="哨兵之怒" texture="/images/datapack/incendium/items/Sentry_s_wrath.gif" size="lg" />
 - **类型**：远程 / 弩
 - **获取**：禁忌城堡哨兵室
 - **效果**：光灵箭变慢速强攻闪电，爆炸范围伤害
@@ -103,6 +105,8 @@
 ---
 
 ### 追踪十字弩（Multiplex Crossbow）
+
+<McItem name="追踪十字弩" texture="/images/datapack/incendium/items/Multiplex.gif" size="lg" />
 - **类型**：远程 / 弩
 - **获取**：禁忌城堡塔顶
 - **效果**：短距离散射火焰箭矢，扇形覆盖
@@ -112,6 +116,8 @@
 ---
 
 ### 枯萎陨灭（Withersbane）
+
+<McItem name="枯萎陨灭" texture="/images/datapack/incendium/items/Withersbane.png" size="lg" />
 - **类型**：近战 / 剑（基础：铁剑）
 - **获取**：禁忌城堡圆桌室
 - **效果**：对亡灵连锁伤害，净化下界污秽
@@ -135,6 +141,8 @@
 ## 特殊系列
 
 ### 破晓者（Daybreaker）
+
+<McItem name="破晓者" texture="/images/datapack/incendium/items/Daybreaker.png" size="lg" />
 - **类型**：近战 / 剑（基础：下界合金剑）
 - **获取**：圣所地下迷宫终点
 - **效果**：击杀生物有概率掉落金粒
@@ -143,6 +151,8 @@
 ---
 
 ### 神圣之怒（Holy Wrath）
+
+<McItem name="神圣之怒" texture="/images/datapack/incendium/items/Holy_wrath.gif" size="lg" />
 - **类型**：远程 / 弩
 - **获取**：圣所护卫者掉落
 - **效果**：发射火焰箭，落地后 24 箭呈圆形扩散
@@ -152,6 +162,8 @@
 ---
 
 ### 扭曲凋零刃（Warping Witherblade）
+
+<McItem name="扭曲凋零刃" texture="/images/datapack/incendium/items/Warping_witherblade_animated.gif" size="lg" />
 - **类型**：近战 / 剑 · 神器级（基础：下界合金剑）
 - **获取**：在倒置森林击杀凋灵，33% 掉落率
 - **效果**：75% 几率造成凋零效果，减速目标
@@ -161,6 +173,8 @@
 ---
 
 ### 斥候战盔（Scout's Battle Helm）
+
+<McItem name="斥候战盔" texture="/images/datapack/incendium/items/Scout_s_battle_helm.png" size="lg" />
 - **类型**：头盔（基础：下界合金头盔）
 - **获取**：禁忌城堡击杀猪灵侦察兵，20% 掉落率
 - **效果**：绿宝石镶边，护甲 +3、韧性 +3、抗性 +0.1
@@ -170,6 +184,8 @@
 ---
 
 ### 回归卷轴（Scroll of Returning）
+
+<McItem name="回归卷轴" texture="/images/datapack/incendium/items/Scroll_of_Returning.png" size="lg" />
 - **类型**：消耗品 · 不可堆叠
 - **获取**：圣所幻术师 50% 掉落
 - **效果**：使用后**传送回主世界出生点**
@@ -192,6 +208,8 @@
 ---
 
 ### 炼狱之羽（Infernal Feather）
+
+<McItem name="炼狱之羽" texture="/images/datapack/incendium/items/Infernal_feather.png" size="lg" />
 - **类型**：升级材料
 - **获取**：炼狱游者 100% 掉落
 - **效果**：与鞘翅在锻造台合成**炼狱之翼**
@@ -211,6 +229,8 @@
 ---
 
 ### 疯癫火把（Torch of Lunacy）
+
+<McItem name="疯癫火把" texture="/images/datapack/incendium/items/Torch_of_lunacy_animated.gif" size="lg" />
 - **类型**：照明工具（基础：灵魂火把）
 - **获取**：管道宝藏室精英哨兵掉落（70%）
 - **效果**：放在背包中使沙漠烈焰人无视你
@@ -220,6 +240,8 @@
 ---
 
 ### 不稳定火药（Unstable Powder）
+
+<McItem name="不稳定火药" texture="/images/datapack/incendium/items/Unstable_powder.png" size="lg" />
 - **类型**：投掷物（基础：荧石粉）
 - **获取**：禁忌城堡炼金室桶中
 - **效果**：丢出后高亮 30 格内敌对生物，穿透墙壁透视
@@ -229,6 +251,8 @@
 ---
 
 ### 不息自然（Restless Nature）
+
+<McItem name="不息自然" texture="/images/datapack/incendium/items/Restless_nature.png" size="lg" />
 - **类型**：投掷物（基础：雪球）
 - **获取**：不安灵魂掉落
 - **效果**：丢在下界岩/灵魂土/玄武岩上**生成下界树**
@@ -260,6 +284,8 @@
 ## 护盾
 
 ### 死灵护盾（Necrotic Shield）
+
+<McItem name="死灵护盾" texture="/images/datapack/incendium/items/Necrotic_shield.png" size="lg" />
 - **类型**：盾牌
 - **获取**：炼狱游者掉落（70%）
 - **效果**：格挡时以死亡爆炸反击攻击者
@@ -268,6 +294,8 @@
 ---
 
 ### 棱镜护盾（Prismatic Shield）
+
+<McItem name="棱镜护盾" texture="/images/datapack/incendium/items/Prismatic_shield_animated.gif" size="lg" />
 - **类型**：盾牌
 - **获取**：炼狱游者掉落（70%）
 - **效果**：格挡时以强光火花反射攻击
@@ -276,6 +304,8 @@
 ---
 
 ### 辐射护盾（Radiation Shield）
+
+<McItem name="辐射护盾" texture="/images/datapack/incendium/items/Radiation_shield.png" size="lg" />
 - **类型**：盾牌
 - **获取**：下界反应堆桶中
 - **效果**：格挡时释放辐射

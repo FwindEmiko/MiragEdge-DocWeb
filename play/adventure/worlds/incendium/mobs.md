@@ -126,6 +126,8 @@
 > 全部生成于石英平原的**圣所**结构中。基于灾厄村民（掠夺者）修改。
 
 ### 圣所守护者（Sanctum Protector）
+
+<SmartImage align="left" margin="0" src="/images/datapack/incendium/mobs/Sanctum_protector.png" alt="圣所守护者" shadow radius="auto" width="96" />
 - **特点**：使用剑和盾，高防御
 - **威胁**：<span class="dp-difficulty lvl-4"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="label">极难</span></span>
 
@@ -211,7 +213,6 @@
 
 ### 小恶魂（Ghastling）
 
-<SmartImage align="left" margin="0" src="/images/datapack/incendium/mobs/ghastling.png" alt="小恶魂" shadow radius="auto" width="96" />
 - **生成地点**：石英平原的废弃哨塔（被囚禁状态）
 - **特点**：**可驯服为宠物**！喂食火焰弹后跟随你
 - **技能**：自动摧毁附近恶魂火球，保护主人
@@ -244,6 +245,8 @@
 ---
 
 ### 骷髅厨师托尔特（Torte）
+
+<SmartImage align="left" margin="0" src="/images/datapack/incendium/mobs/Torte.png" alt="骷髅厨师托尔特" shadow radius="auto" width="96" />
 - **生成地点**：石英厨房
 - **特点**：自带力量 V，手持蛋糕糊，攻击力 31❤（15.5 颗心）
 - **文化**：致敬《超级马里奥 RPG》中的厨师 Torte
@@ -334,6 +337,8 @@
 ---
 
 ### 管道哨兵（Pipeline Sentry）
+
+<SmartImage align="left" margin="0" src="/images/datapack/incendium/mobs/Pipeline_Sentry.png" alt="管道哨兵" shadow radius="auto" width="96" />
 - **基础**：烈焰人
 - **位置**：管道
 - **特点**：发射闪电攻击，拥有 4-6 个不死图腾，头顶粒子显示剩余生命
