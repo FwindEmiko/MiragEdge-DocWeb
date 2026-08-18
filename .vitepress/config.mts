@@ -789,6 +789,7 @@ export default defineConfig({
           text: '📅 历史事件',
           collapsed: false,
           items: [
+            { text: '新服开放：梦始之空全面重启', link: '/archive/events/20260801' },
             { text: '2026 元旦合照纪念活动', link: '/archive/events/20260101' },
             { text: '新服数据丢失事件', link: '/archive/events/20251225' },
             { text: '存档数据重置', link: '/archive/events/20251017' },
