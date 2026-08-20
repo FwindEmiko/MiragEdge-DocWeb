@@ -25,6 +25,7 @@ coverage/
 *.swo
 .claude
 .workbuddy
+.dsh/
 docs/
 
 # OS files
