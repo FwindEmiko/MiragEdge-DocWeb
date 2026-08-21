@@ -1,0 +1,30 @@
+
+
+#         Powered by TabooLib 6.3         #
+
+
+# 冷却设置
+cooldown:
+  enable: true
+  # 在附魔变量配置里定义的冷却的变量名
+  name: "冷却"
+
+# 触发器默认设置
+trigger:
+  # 触发形式
+  # 可以是如下形式:
+  # - RIGHT_CLICK 右击(默认)
+  # - LEFT_CLICK 左击
+  # - SWAP 切换物品(一般是按 F 键)
+  action: RIGHT_CLICK
+  # 是否需要下蹲才能触发技能
+  shift-needed: false
+  # 下蹲时是否不触发技能
+  shift-ignored: true
+
+# 冷却时间减免权限
+privilege:
+  - "aiyatsbus.privilege.skill.cdrate.90:{cooldown}*0.9"
+  - "aiyatsbus.privilege.skill.cdrate.80:{cooldown}*0.8"
+  - "aiyatsbus.privilege.skill.cdrate.70:{cooldown}*0.7"
+  - "aiyatsbus.privilege.skill.cdrate.50:{cooldown}*0.5"

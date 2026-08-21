@@ -1,0 +1,335 @@
+
+
+#         Powered by TabooLib 6.3         #
+
+
+prefix: '&8\[&{#D8D8FA}Aiyatsbus&8\]'
+
+loading-rarity: '{prefix} &a良好 &8| &a{0} &3个附魔品质已加载 &8({1} ms)'
+loading-target: '{prefix} &a良好 &8| &a{0} &3个附魔对象已加载 &8({1} ms)'
+loading-internal-trigger: '{prefix} &a良好 &8| &a{0} &3个内置触发器已加载 &8({1} ms)'
+loading-enchantments: '{prefix} &a良好 &8| &a{0} &3个附魔已加载 &8({1} ms)'
+loading-group: '{prefix} &a良好 &8| &a{0} &3个附魔组已加载 &8({1} ms)'
+
+plugin-reload: '{prefix} &a良好 &8| &3已重新载入插件 &8({0} ms)'
+
+configuration-reload: '{prefix} &a良好 &8| &3检测到 {0} 配置文件变动, 已自动重新载入 &8({1} ms)'
+
+enchantment-reload: '{prefix} &a良好 &8| &3检测到 {0} 附魔配置文件变动, 已自动重新载入 &8({1} ms)'
+enchantment-reload-failed:
+  - '{prefix} &b信息 &8| &3由于您已开启自动平衡性调整, {0} 附魔配置文件变动被阻拦'
+  - '{prefix} &b信息 &8| &3若您确实有附魔参数调整需求, 请前往 config.yml 关闭该功能'
+
+thanks:
+  - '{prefix} &7欢迎使用 Aiyatsbus v{0}! 作者: Mical & 南外丶仓鼠(白熊)'
+  - '{prefix} &7|- 感谢 次元互联 对本项目的支持 售前服务群: 1064601581'
+  - '{prefix} &7|- 感谢 YiMiner 对本项目的支持 强力宝石插件交流群: 777905589'
+  - '{prefix} &7|- 感谢以下服务器的所有玩家对本项目的帮助: &bStarLight&3繁星工坊 &eHAPPYLAND &aStarrySky'
+  - '{prefix} &7|- 该信息只有拥有权限 aiyatsbus.thanks 的玩家能看到, 可在配置文件中关闭'
+
+limitations-not-enabled: '附魔未启用'
+
+limitations-typename-target: '附魔对象'
+limitations-typename-capability: '词条个数'
+limitations-typename-papi_expression: '表达式'
+limitations-typename-permission: '权限'
+limitations-typename-conflict_enchant: '冲突'
+limitations-typename-conflict_group: '冲突'
+limitations-typename-dependence_enchant: '依赖'
+limitations-typename-dependence_group: '依赖'
+limitations-typename-disable_world: '禁用世界'
+limitations-typename-slot: '可用位置'
+
+limitations-check-failed: '{typename}错误'
+
+filter-type-rarity: '品质'
+filter-type-target: '物品类别'
+filter-type-group: '类型/定位'
+filter-type-string: '名字/描述'
+
+filter-statement-symbol-on: '&a✔'
+filter-statement-symbol-off: '&c✘'
+
+add: '添加'
+remove: '移除'
+
+ui-type-anvil: '铁砧模拟器'
+ui-type-enchant_info: '附魔详情 {info}'
+ui-type-enchant_search: '附魔大全'
+ui-type-filter_group: '类型定位筛选器' # 筛选器的名称相较于 3.0 有所不同
+ui-type-filter_rarity: '品质筛选器'
+ui-type-filter_target: '物品类别筛选器'
+ui-type-item_check: '附魔查询'
+ui-type-main_menu: '附魔主菜单'
+ui-type-favorite: '附魔收藏夹'
+
+ui-check-mode-find: '&7搜索可用附魔'
+ui-check-mode-find-current: '&a搜索可用附魔'
+ui-check-mode-load: '&7读取物品附魔'
+ui-check-mode-load-current: '&a读取物品附魔'
+
+ui-enchant-info-limitations-permission-true: '&a✔'
+ui-enchant-info-limitations-permission-false: '&c✘'
+ui-enchant-info-other-attain-ways-inaccessible: '&c无法通过正常渠道获取'
+ui-enchant-info-other-attain-ways-discoverable: '&e战利品箱'
+ui-enchant-info-other-attain-ways-enchantable: '&d附魔台'
+ui-enchant-info-other-attain-ways-tradeable: '&6村民'
+ui-enchant-info-other-grindstoneable-true: '&a✔'
+ui-enchant-info-other-grindstoneable-false: '&c✘'
+ui-enchant-info-other-treasure-true: '&a✔'
+ui-enchant-info-other-treasure-false: '&c✘'
+ui-enchant-info-other-curse-true: '&a✔'
+ui-enchant-info-other-curse-false: '&c✘'
+ui-enchant-info-available-state-unknown: 'N/A'
+ui-enchant-info-available-reasons-unknown: '无'
+ui-enchant-info-available-reasons-empty: '无'
+ui-enchant-info-available-can-install-true: '&e可安装'
+ui-enchant-info-available-can-install-false: '&c不可安装'
+ui-enchant-info-available-installed: '&a已安装 {upgrade}'
+ui-enchant-info-available-installed-can-upgrade-true: '可升级'
+ui-enchant-info-available-installed-can-upgrade-false: '最高级'
+ui-enchant-info-favorite-true: '&a收藏'
+ui-enchant-info-favorite-false: '&c移除收藏'
+
+ui-anvil-info-allow: '&a允许'
+ui-anvil-info-disallow: '&c不允许'
+ui-anvil-info-level: '{cost}'
+ui-anvil-info-level-disallow: 'N/A'
+ui-anvil-info-reasons-empty: '无'
+ui-anvil-info-reasons:
+  - '&7'
+  - '{reason}'
+  - '&7'
+  - '其他可能:'
+  - '拼合前后物品&e不变'
+  - '经验值消耗&e小于等于0级'
+
+limitations-hand: '主手'
+limitations-off_hand: '副手'
+limitations-feet: '足'
+limitations-legs: '腿'
+limitations-chest: '胸'
+limitations-head: '头'
+
+ui-enchant-info-variables: '&b{variable} &7> {value}'
+
+# 适配 Iweleth 变量
+variable-base-damage: "基础伤害"
+variable-item-damage: "物品耐久"
+variable-experience: "经验值"
+
+# 适配 NereusOpus 变量
+variable-amount: "数量/规模"
+variable-chance: "触发几率"
+variable-repeat-ticks: "生效周期"
+variable-durability-decrease: "耐久降低"
+variable-durability-increase: "耐久升高"
+variable-durability-decrease-extra: "额外磨损"
+variable-require-full-charge: "是否跟随攻击冷却"
+variable-velocity: "加速度"
+variable-velocity-y: "垂直加速"
+variable-velocity-xz: "水平加速"
+variable-damage-multiplier: "伤害倍率"
+variable-damage-splash-multiplier: "溅射伤害"
+variable-damage-splash: "溅射伤害"
+variable-duration: "持续时间"
+variable-amplifier: "效果等级"
+variable-disable-on-players: "是否不对玩家生效"
+variable-damage: "真实伤害"
+variable-power: "规模/力度"
+variable-cause-fire: "是否引发火焰"
+variable-break-blocks: "是否破坏方块"
+variable-angle: "偏移角度"
+variable-decrease-if-cooldown: "是否存在冷却减幅"
+variable-speed: "速度加成"
+variable-range: "范围"
+variable-range_x: "x轴范围"
+variable-range_y: "y轴范围"
+variable-range_z: "z轴范围"
+variable-judge-range: "判定范围"
+variable-percent: "比例"
+variable-cooldown-decreased: "攻击冷却减幅"
+variable-min-health: "最低血量"
+variable-min-health-percent: "最低血量"
+variable-avaliable-on-players: "是否对玩家生效"
+variable-drop-xp: "是否掉落经验"
+variable-oxygen: "氧气值"
+variable-min-distance: "最长生效距离"
+variable-max-health-increase: "最大血量增加"
+variable-drops: "掉落物"
+variable-targets: "作用对象"
+variable-exp-multiplier: "经验倍率"
+variable-heal: "回复血量"
+variable-heal-multiplier: "回复倍率"
+variable-max-distance: "最大距离"
+variable-health-judging-line: "判定血量"
+variable-high-damage-multiplier: "高于判定线"
+variable-low-damage-multiplier: "低于判定线"
+variable-absorption-multiplier: "伤害吸收倍率"
+variable-spread: "偏散程度"
+variable-custom: "持续显示"
+variable-food: "饱食度"
+variable-colored: "是否附带发光颜色"
+variable-sound: "释放音效"
+variable-cooldown: "冷却时间"
+variable-permission-check: "是否检查方块权限"
+variable-hardness-check: "是否检查方块硬度"
+variable-disable-on-sneak: "是否在蹲下时禁用"
+variable-enable-sound: "是否开启声音"
+
+# 变量值
+value-true: "&a✔"
+value-false: "&c✘"
+
+messages-menu-search-input: '{prefix} &7请在聊天栏中输入字段...'
+messages-menu-search-input_finish: '{prefix} &a输入完成'
+messages-misc-cool_down: '{prefix} &7冷却未结束，还有{second}s'
+
+info-illegal_item: '{prefix} &7你背包中的物品 &a{item} &7包含非法附魔 &d{enchant}&7，已经分离(&c{reason}&7)'
+
+enchant-strike-attacker: '{prefix} &7你的武器召唤了雷电击中 &e{0}'
+enchant-strike-damaged: '{prefix} &7你被 &e{0} &7召唤的雷电击中'
+enchant-twinge-attacker: '{prefix} &7你的武器使得 &e{0} &7流血'
+enchant-twinge-damaged: '{prefix} &7你被 &e{0} &7施加了流血效果'
+enchant-impact-attacker: '{prefix} &7本次远程攻击命中 &e{0} &7触发了&b会心一击'
+enchant-impact-damaged: '{prefix} &7你被 &e{0} &7的弹射物会心一击'
+enchant-vitalize-recovered: '{prefix} &7你的盾牌为你恢复了 &e{0} &7点血量'
+enchant-prohibition_curse-damaged: '{prefix} &7你的装备对你造成了 &c{0} &7点真实伤害'
+
+command-helper:
+  - '&7'
+  - '  [&6Aiyatsbus](c=#D8D8FA;h=&7Aiyatsbus 附魔扩展插件) &f[{pluginVersion}](h=&7插件版本: &2{pluginVersion}<br>&7游戏版本: &b{minecraftVersion})'
+  - '&7'
+  - '  &7命令: [&f/aiyatsbus &8\[...\]](h=&f/aiyatsbus &8\[...\];suggest=/aiyatsbus )'
+  - '  &7参数:'
+  - '{subCommands}'
+  - '&7'
+command-sub:
+  - '    &8- [&f{name}](h=/aiyatsbus {name} {usage}&8- &7{description};suggest=/aiyatsbus {name})'
+  - '      &7{description}'
+command-argument-missing:
+  - '{prefix} &7指令 &f{name} &7参数不足'
+  - '{prefix} &7正确用法:'
+  - '{prefix} &7/aiyatsbus {name} {usage}&8- &7{description}'
+command-argument-wrong:
+  - '{prefix} &7指令 &f{name} &7参数有误'
+  - '{prefix} &7正确用法:'
+  - '{prefix} &7/aiyatsbus {name} {usage}&8- &7{description}'
+command-argument-unknown:
+  - '{prefix} &7指令 &f{name} &7不存在'
+  - '{prefix} &7你可能想要:'
+  - '{prefix} &f/aiyatsbus {similar} {usage}&8- &7{description}'
+command-incorrect-sender: '{prefix} &7指令 &f{name} &7只能由 &f玩家 &7执行'
+command-subCommands-book-description: '给玩家一本指定的附魔书'
+command-subCommands-book-usage: '&7\[&8附魔&7\] &7<&8等级&7> &7<&8玩家&7>'
+command-subCommands-book-sender: '{prefix} &7附魔书已经发送给 &e{name}'
+command-subCommands-book-receiver: '{prefix} &7你收到了附魔书 {enchantment}'
+command-subCommands-book-fail: '{prefix} &7控制台无法给予自己附魔书'
+
+command-subCommands-capability-description: '更新玩家手上物品的最大附魔词条数'
+command-subCommands-capability-usage: '&7\[&8操作&7\] &7\[&8数值&7\] &7<&8玩家&7>'
+command-subCommands-capability-sender: '{prefix} &e{name} &7手上物品的最大附魔词条数已被更新为 &e{amount}'
+command-subCommands-capability-receiver: '{prefix} &7你手上物品的最大附魔词条数已被更新为 &e{amount}'
+command-subCommands-capability-fail: '{prefix} &7控制台无法设置自己手上物品的最大附魔词条数'
+
+command-subCommands-dev-description: '开发者调试命令'
+command-subCommands-dev-usage: ''
+
+command-subCommands-enchant-description: '为玩家手持物品增加/清除附魔'
+command-subCommands-enchant-usage: '&7\[&8附魔&7\] &7<&8等级\(0为清除\)&7> &7<&8玩家&7>'
+command-subCommands-enchant-empty: '{prefix} &7手持物品为空'
+command-subCommands-enchant-sender: '{prefix} &7为 &e{name} &7手上的物品 {state}了附魔 {enchantment}'
+command-subCommands-enchant-receiver: '{prefix} &7手上的物品被 {state}了附魔 {enchantment}'
+command-subCommands-enchant-fail: '{prefix} &7控制台无法给予自己附魔书'
+
+command-subCommands-menu-description: '打开附魔菜单'
+command-subCommands-menu-usage: '&7<&8玩家&7> &7<&8菜单类型&7>'
+command-subCommands-menu-fail: '{prefix} &7控制台无法打开菜单'
+
+command-subCommands-mode-description: '设置玩家的菜单模式'
+command-subCommands-mode-usage: '&7\[&8模式&7\] &7<&8玩家&7>'
+command-subCommands-mode-sender: '{prefix} &7成功将 &e{name} &7的菜单模式修改为 &a{mode}'
+command-subCommands-mode-receiver: '{prefix} &7菜单模式修改为 &a{mode}'
+command-subCommands-mode-fail: '{prefix} &7控制台无法设置自己的菜单模式'
+
+command-subCommands-reload-description: '重载插件'
+command-subCommands-reload-usage: ''
+
+command-subCommands-random-description: '为玩家随机抽取一本指定品质的附魔书'
+command-subCommands-random-usage: '&7\[&8品质&7\] &7<&8等级&7> &7<&8玩家&7>'
+command-subCommands-random-rarity: '{prefix} &7品质中附魔为空'
+command-subCommands-random-number: '{prefix} &7请输入正整数'
+command-subCommands-random-sender: '{prefix} &7给 &e{name} &7发送了随机的附魔书 {enchantment}'
+command-subCommands-random-receiver: '{prefix} &7你收到了随机附魔书 {enchantment}'
+command-subCommands-random-fail: '{prefix} &7控制台无法接受随机附魔书'
+
+command-subCommands-report-description: '查看性能报告'
+command-subCommands-report-usage: ''
+
+command-subCommands-script-description: '脚本控制'
+command-subCommands-script-usage: ''
+
+command-no-desc: '没有描述'
+
+command-script-helper:
+  - '&7'
+  - '  [&6Aiyatsbus](c=#D8D8FA;h=&7Aiyatsbus 附魔扩展插件) &f[{pluginVersion}](h=&7插件版本: &2{pluginVersion}<br>&7游戏版本: &b{minecraftVersion})'
+  - '&7'
+  - '  &7命令: [&f/aiyatsbusscript &8\[...\]](h=&f/aiyatsbusscript &8\[...\];suggest=/aiyatsbusscript )'
+  - '  &7参数:'
+  - '{subCommands}'
+  - '&7'
+command-script-sub:
+  - '    &8- [&f{name}](h=/aiyatsbusscript {name} {usage}&8- &7{description};suggest=/aiyatsbusscript {name})'
+  - '      &7{description}'
+command-script-argument-missing:
+  - '{prefix} &7指令 &f{name} &7参数不足'
+  - '{prefix} &7正确用法:'
+  - '{prefix} &7/aiyatsbusscript {name} {usage}&8- &7{description}'
+command-script-argument-wrong:
+  - '{prefix} &7指令 &f{name} &7参数有误'
+  - '{prefix} &7正确用法:'
+  - '{prefix} &7/aiyatsbusscript {name} {usage}&8- &7{description}'
+command-script-argument-unknown:
+  - '{prefix} &7指令 &f{name} &7不存在'
+  - '{prefix} &7你可能想要:'
+  - '{prefix} &f{similar}'
+command-script-subCommands-run-description: '运行脚本文件'
+command-script-subCommands-run-usage: '&7\[&8文件&7\] &7<&8执行者&7> &7<&8参数&7>'
+
+command-script-subCommands-stop-description: '停止运行脚本文件'
+command-script-subCommands-stop-usage: '&7\[&8文件&7\]'
+
+command-script-subCommands-list-description: '列出所有脚本'
+command-script-subCommands-list-usage: ''
+
+command-script-subCommands-reload-description: '重载脚本工作空间'
+command-script-subCommands-reload-usage: ''
+
+command-script-subCommands-debug-description: '调试命令'
+command-script-subCommands-debug-usage: ''
+
+command-script-subCommands-invoke-description: '执行语句'
+command-script-subCommands-invoke-usage: '&7\[&8语句&7\]'
+
+command-script-no-desc: '没有描述'
+
+command-script-error:
+  - ' &5&l‹ ›&f &7在运行脚本时发生了错误:'
+  - ' &5&l‹ ›&f &7{0}'
+command-script-not-found: ' &5&l‹ ›&f &7脚本不存在。'
+command-script-not-running: ' &5&l‹ ›&f &7脚本未在运行。'
+command-script-list-all:
+  - ' &5&l‹ ›&f &7所有脚本: &f{0}'
+  - ' &5&l‹ ›&f &7运行脚本: &f{1}'
+command-script-reload-all:
+  - ' &5&l‹ ›&f &7重载完成。'
+
+# message: 发送聊天栏信息
+# actionbar: 发送行为栏信息
+# title: 发送标题信息, 大小标题用分号隔开
+celebrate-notice-epic-message: "{prefix} &7恭喜玩家 {player} 获得了史诗附魔 {enchant}"
+celebrate-notice-legendary-message: "{prefix} &7恭喜玩家 {player} 获得了传奇附魔 {enchant}"
+celebrate-notice-legendary-title: "恭喜玩家 {player};获得了传奇附魔 {enchant}"
+celebrate-notice-splendid-message: "{prefix} &7恭喜玩家 {player} 获得了稀世附魔 {enchant}"
+celebrate-notice-splendid-title: "恭喜玩家 {player};获得了稀世附魔 {enchant}"

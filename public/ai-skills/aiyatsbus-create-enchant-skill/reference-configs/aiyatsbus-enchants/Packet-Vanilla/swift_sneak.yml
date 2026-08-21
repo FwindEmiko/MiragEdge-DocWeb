@@ -1,0 +1,20 @@
+basic:
+  id: swift_sneak
+  name: 迅捷潜行
+  max-level: 3
+alternative:
+  is-vanilla: true
+  is-cursed: false
+  is-treasure: true
+  is-tradeable: false
+  is-discoverable: false
+rarity: 稀有
+targets:
+- 护腿
+display:
+  description:
+    general: 提高玩家潜行时的移动速度
+    specific: '&7潜行时的移动速度提高&a{速度}'
+variables:
+  leveled:
+    速度: '%:50*{level}'

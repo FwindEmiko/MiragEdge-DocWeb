@@ -1,0 +1,70 @@
+basic:
+  enable: true
+  disable_worlds: []
+  id: wings
+  name: 反重力
+  max-level: 3
+alternative:
+  is-tradeable: false
+  is-treasure: true
+  is-discoverable: true
+
+rarity: 传说
+targets:
+- 靴子
+limitations:
+- CONFLICT_ENCHANT:经验修补
+- CONFLICT_ENCHANT:自生
+display:
+  description:
+    general: 可进入飞行状态，飞行时持续消耗装备耐久
+    specific: '&7可进入飞行状态，飞行时每&a2秒&7消耗装备&a{消耗耐久}&7耐久'
+variables:
+  leveled:
+    消耗耐久: 点:2-0.5*{level}
+mechanisms:
+  listeners:
+    on-fall:
+      listen: entity-damage
+      handle: |-
+        if &event::cause() == FALL && &player::hasMeta("fall-protect") then {
+            &player::removeMeta("fall-protect")
+            &event::setCancelled(true)
+        }
+  tickers:
+    durability:
+      type: fluxon
+      interval: 40
+      pre-handle: |-
+        unbreakable = item::isUnbreakable(&item)
+        damage = double(&item::type::maxDurability() - &item::durability()) / &item::type::maxDurability() <= 0.1
+        canDamage = !&damage || &unbreakable
+        if (&player::gameMode() == SURVIVAL || &player::gameMode() == ADVENTURE) && &canDamage then {
+            &player::setAllowFlight(true)
+        }
+      handle: |-
+        unbreakable = item::isUnbreakable(&item)
+        damage = double(&item::type::maxDurability() - &item::durability()) / &item::type::maxDurability() <= 0.1
+        canDamage = !&damage || &unbreakable
+        if &player::gameMode() == SURVIVAL || &player::gameMode() == ADVENTURE then {
+          if &player::isOnGround() && &player::hasMeta("fall-protect") then {
+              &player::removeMeta("fall-protect")
+          }
+          if !&player::allowFlight() && &canDamage then {
+              &player::setAllowFlight(true)
+          }
+          if !&canDamage && &player::isFlying() then {
+              &player::setFlying(false)
+              &player::setAllowFlight(false)
+              &player::setMeta("fall-protect", "true")
+              return
+          }
+          if !&unbreakable && &player::isFlying() then {
+              &item::setDurability(&item::durability() + &消耗耐久)
+          }
+        }
+      post-handle: |-
+        if &player::gameMode() == SURVIVAL || &player::gameMode() == ADVENTURE then {
+            &player::setFlying(false)
+            &player::setAllowFlight(false)
+        }

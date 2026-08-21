@@ -1,0 +1,27 @@
+# 虚空射击 (void_shot)
+# 原数据包依赖特殊弓、箭矢自定义数据与原生 voided 状态，插件无法可靠判定。
+
+basic:
+  enable: false
+  disable_worlds: [ ]
+  id: void_shot
+  name: "虚空射击"
+  max_level: 1
+
+rarity: 传说
+
+targets:
+  - 弓
+  - 弩
+
+limitations: [ ]
+
+display:
+  description:
+    general: "由数据包提供的虚空箭矢效果"
+    specific: "&7原效果依赖特殊物品与箭矢状态；插件复刻默认关闭，由数据包负责生效。"
+
+alternative:
+  is-treasure: true
+  is-discoverable: true
+  is-tradeable: false

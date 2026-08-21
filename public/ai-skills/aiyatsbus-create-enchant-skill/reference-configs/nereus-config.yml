@@ -1,0 +1,35 @@
+cdkey: "在这里填写您的序列码，下方的captcha千万不要修改！"
+
+captcha:
+  ip: "110.42.109.26"
+  port: 50128
+
+# 在附魔文件缺失时自动补全
+# 可关闭此项来做到删除附魔
+save-when-missing: true
+
+supports:
+  itemsadder: false
+  citizens: false
+
+#世界组，填写世界名
+world_group:
+  no_pvp: #这里的世界将会直接标记为禁止PVP,而不是进行检测
+    - NoPVPWorld
+
+fixers:
+  bloodfixer: false
+  speedfixer: false
+
+team:
+  damage:
+    enable: false
+  savepath: 'team/data.yml'
+  tablename: 'team_data'
+  savethreshold: 1
+  placeholder: '%put_your_placeholder%' # 检测队伍的 placeholder，例如你可以填写%team_name%
+
+debug:
+  enable: false
+  players:
+    - HamsterYDS

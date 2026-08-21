@@ -1,0 +1,17 @@
+basic:
+  id: knockback
+  name: 击退
+  max-level: 2
+alternative:
+  is-vanilla: true
+rarity: 优良
+targets:
+- 剑
+- 矛
+display:
+  description:
+    general: 增加击退距离
+    specific: '&7使横向击退距离增加&a{横向}&7'
+variables:
+  leveled:
+    横向: 格:2.6*({level}-1)+1.6

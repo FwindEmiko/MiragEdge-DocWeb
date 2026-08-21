@@ -1,0 +1,13 @@
+basic:
+  id: power
+  name: 力量
+  max-level: 5
+alternative:
+  is-vanilla: true
+rarity: 稀有
+targets:
+- 弓
+display:
+  description:
+    general: 提高箭矢的伤害
+    specific: '&7每级提高&a25%&7箭矢伤害'

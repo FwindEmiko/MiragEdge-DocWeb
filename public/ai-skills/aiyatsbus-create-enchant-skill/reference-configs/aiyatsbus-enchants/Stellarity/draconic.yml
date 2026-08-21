@@ -1,0 +1,29 @@
+# Stellarity 龙之刃内部附魔的 Aiyatsbus 兼容占位符
+# 该文件不实现龙之刃机制；真实逻辑仍由 Stellarity 数据包执行。
+basic:
+  enable: false
+  id: _technical/draconic
+  name: 龙之刃机制
+  max-level: 1
+
+alternative:
+  weight: 1
+  grindstoneable: false
+  is-treasure: true
+  is-cursed: false
+  is-tradeable: false
+  is-discoverable: false
+  inaccessible: true
+
+rarity: 普通
+
+targets:
+  - 可损坏物品
+
+limitations: []
+
+display:
+  display: false
+  description:
+    general: "&7优化龙之刃攻击检测，并强化对特殊目标的伤害"
+    specific: "&7对无法正常被击打的怪物造成额外伤害；与经验修补和耐久不兼容"

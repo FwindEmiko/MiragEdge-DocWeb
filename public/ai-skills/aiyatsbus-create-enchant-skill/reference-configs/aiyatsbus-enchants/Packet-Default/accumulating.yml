@@ -1,0 +1,65 @@
+
+
+#         Powered by TabooLib 6.3         #
+
+
+basic:
+  enable: true
+  disable_worlds: [ ]
+  id: accumulating
+  name: "蓄能"
+  max_level: 2
+
+alternative:
+  is-tradeable: false
+  is-treasure: true
+  is-discoverable: true
+
+rarity: 史诗
+targets:
+  - 剑
+  - 斧
+
+limitations: [ ]
+
+display:
+  format:
+    previous: "{default_previous}  &7{是否充能完毕}(&e{当前累计}&7/&a{击杀累计}&7)"
+  description:
+    general: "每击杀若干只怪物后，下一次攻击伤害增加"
+    specific: "&7每击杀&a{击杀累计}&7生物后，下一次攻击伤害增加&a{伤害增加百分比}"
+
+variables:
+  leveled:
+    击杀累计: "只:4-{level}"
+    伤害增加百分比: "%:15.0*{level}"
+  modifiable:
+    当前累计: test_current_total=0
+    是否充能完毕: can_discharge=充能中
+
+mechanisms:
+  listeners:
+    on-damage:
+      listen: "entity-damage-other"
+      handle: |-
+        total = int(variables::modifiable(&enchant, &item, "当前累计"))
+        damage = &event::damage()
+        
+        if &total >= &击杀累计 then {
+            variables::setModifiable(&enchant, &item, "当前累计", 0)
+            variables::setModifiable(&enchant, &item, "是否充能完毕", "充能中")
+            &event::setDamage(&damage * (1.0 + &伤害增加百分比 / 100.0))
+        }
+        
+        total = int(variables::modifiable(&enchant, &item, "当前累计"))
+
+    on-kill:
+      listen: "entity-death"
+      handle: |-
+        total = int(variables::modifiable(&enchant, &item, "当前累计"))
+        variables::setModifiable(&enchant, &item, "当前累计", min(&total + 1, &击杀累计))
+
+        total = int(variables::modifiable(&enchant, &item, "当前累计"))
+        if &total >= &击杀累计 then {
+            variables::setModifiable(&enchant, &item, "是否充能完毕", "充能完毕")
+        }

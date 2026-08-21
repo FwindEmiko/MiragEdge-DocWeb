@@ -1,0 +1,19 @@
+basic:
+  id: frost_walker
+  name: 冰霜行者
+  max-level: 2
+alternative:
+  is-vanilla: true
+  is-treasure: true
+rarity: 稀有
+targets:
+- 靴子
+limitations:
+- CONFLICT_GROUP:深海探索者
+display:
+  description:
+    general: 在地面上时使周围的水结冰
+    specific: '&7在地面上时使&a{结冰半径}&7内的水结冰'
+variables:
+  leveled:
+    结冰半径: 格:2+{level}

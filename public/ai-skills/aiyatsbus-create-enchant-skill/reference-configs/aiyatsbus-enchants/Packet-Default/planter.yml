@@ -1,0 +1,98 @@
+basic:
+  enable: true
+  disable_worlds: []
+  id: planter
+  name: 播撒
+  max_level: 3
+alternative:
+  is-tradeable: false
+  is-treasure: true
+  is-discoverable: true
+
+rarity: 传说
+targets:
+- 锄
+limitations: []
+display:
+  description:
+    general: 右击可范围播种作物(需要种子)
+    specific: '&7右击可范围播种作物(需要种子) (&a{边长}×&a{边长} &7冷却:&a{冷却}&7)'
+variables:
+  leveled:
+    冷却: 秒:3.5-{level}
+    边长: 格:{level}+1
+  ordinary:
+    作物:
+      BEETROOT_SEEDS: BEETROOTS
+      MELON_SEEDS: MELON_STEM
+      PUMPKIN_SEEDS: PUMPKIN_STEM
+      TORCHFLOWER_SEEDS: TORCHFLOWER_CROP
+      WHEAT_SEEDS: WHEAT
+      CARROT: CARROTS
+      POTATO: POTATOES
+    下界作物:
+      NETHER_WART: NETHER_WART
+mechanisms:
+  listeners:
+    on-right-click:
+      listen: player-interact
+      handle: |-
+        def getSeed(player, seed) = {
+            if &seed == "ALL" then {
+                result = list(&player::inventory::contents())::find(|| &it != null && (&作物::contains(string(&it::type())) || &下界作物::contains(string(&it::type())))) ?: return null
+                return &result::type()
+            }
+            try {
+                type = material(&seed) ?: return null
+                if &player::inventory::containsAtLeast(static org.bukkit.inventory.ItemStack(&type, 1)) then {
+                    return &type
+                }
+            } catch (e) {
+            }
+            return null
+        }
+
+        if &event::action() == RIGHT_CLICK_BLOCK && &event::hand() == &triggerSlot then { 
+            if !cooldown::isReady(&player, &enchant, &冷却) then {
+                return
+            }
+            trace = &player::rayTraceBlocks(6.0, fluidCollisionMode("NEVER")) ?: return
+            hitBlock = &trace::hitBlock() ?: return
+            loc = &hitBlock::location() 
+            type = getSeed(&player, ALL) ?: return null
+
+            down = -&边长 / 2
+            up = &边长 / 2 - if &边长 % 2 == 0 then 1 else 0
+
+            for ox in &down..&up then {
+                for oz in &down..&up then {
+                    current = &loc::clone::add(&ox, 0.0, &oz)
+                    seed = when string(&current::block::type()) {
+                        FARMLAND -> &作物::get(string(&type))
+                        SOUL_SAND -> &下界作物::get(string(&type))
+                        else -> null
+                    }
+                    if &seed == null then {
+                        continue;
+                    }
+                    planted = &current::clone::add(0.0, 1.0, 0.0)::block()
+                    if !guard::canBreak(&player, &planted::location()) then {
+                        continue
+                    }
+                    if string(&planted::type()) != AIR then {
+                        // 防止左右手打架
+                        continue
+                    }
+                    if !inventory::hasItem(&player, 1, || &it::type() == &type) then {
+                        continue
+                    }
+                    if player::placeBlock(&player, &planted, new org.bukkit.inventory.ItemStack(&type, 1)) then {
+                        &planted::setType(material(&seed))
+                        data = &planted::blockData()
+                        &data::setAge(0)
+                        &planted::setBlockData(&data)
+                        inventory::takeItem(&player, 1, || &it::type() == &type)
+                    }
+                }
+            }
+        }

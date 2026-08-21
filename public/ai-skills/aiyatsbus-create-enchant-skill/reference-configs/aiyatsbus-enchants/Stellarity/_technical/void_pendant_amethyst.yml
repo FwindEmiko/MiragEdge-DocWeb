@@ -1,0 +1,28 @@
+# Compatibility placeholder for a Stellarity internal enchantment.
+# No Aiyatsbus gameplay mechanics are registered.
+basic:
+  enable: false
+  disable_worlds: [ ]
+  id: _technical/void_pendant/amethyst
+  name: "Stellarity internal void pendant amethyst"
+  max-level: 1
+
+rarity: 普通
+targets:
+  - 可损坏物品
+limitations: [ ]
+
+display:
+  display: false
+  description:
+    general: "&7提供永久夜视效果"
+    specific: "&7潜行时使附近敌人发光"
+
+alternative:
+  weight: 1
+  grindstoneable: false
+  is-treasure: false
+  is-cursed: false
+  is-tradeable: false
+  is-discoverable: false
+  inaccessible: true

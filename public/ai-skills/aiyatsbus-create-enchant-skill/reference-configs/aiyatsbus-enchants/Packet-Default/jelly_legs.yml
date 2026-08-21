@@ -1,0 +1,50 @@
+basic:
+  enable: true
+  disable_worlds: []
+  id: jelly_legs
+  name: 缓震
+  max_level: 3
+alternative:
+  is-tradeable: false
+  is-treasure: true
+  is-discoverable: true
+
+rarity: 稀有
+targets:
+- 靴子
+limitations: []
+display:
+  description:
+    general: 摔伤时可减少伤害并弹起
+    specific: '&7受到不超过&a{最大高度}&7的摔伤时减少&a{减少伤害}&7并弹起'
+variables:
+  leveled:
+    最大高度:
+      1: 16
+      2: 48
+      3: 256
+      unit: 格
+    减少伤害: 点:3*{level}
+mechanisms:
+  listeners:
+    on-entity-damage:
+      listen: entity-damage
+      handle: |-
+        fallDistance = &event::entity::fallDistance()
+        height = &fallDistance / 2.0
+
+        if string(&event::cause()) == FALL then {
+            if &fallDistance <= &最大高度 then {
+                // 这个公式不建议修改, 已调整至最平衡
+                y = 0.1804 * &height - 0.0044 * &height + 0.00004 * pow(&height, 3)
+                &event::entity::setVelocity(vector(0, &y, 0))
+
+                delta = &event::damage() - &减少伤害
+                // 受到伤害小于 0 时取消伤害
+                if &event::damage() - &减少伤害 <= 0.0 then {
+                    &event::setCancelled(true)
+                } else {
+                    &event::setDamage(&delta)
+                }
+            }
+        }

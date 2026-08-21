@@ -1,0 +1,15 @@
+basic:
+  id: infinity
+  name: 无限
+  max-level: 1
+alternative:
+  is-vanilla: true
+rarity: 史诗
+targets:
+- 弓
+limitations:
+- CONFLICT_ENCHANT:经验修补
+display:
+  description:
+    general: 射箭时不会消耗普通箭矢
+    specific: '&7射箭不消耗普通箭矢'

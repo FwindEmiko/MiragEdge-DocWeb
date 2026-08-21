@@ -1,0 +1,18 @@
+basic:
+  id: feather_falling
+  name: 摔落缓冲
+  max-level: 4
+alternative:
+  is-vanilla: true
+dependencies:
+  supports: 11903
+rarity: 优良
+targets:
+- 靴子
+display:
+  description:
+    general: 减少受到的摔落伤害
+    specific: '&7减少&a{减伤百分比}&7摔落伤害'
+variables:
+  leveled:
+    减伤百分比: '%:8*{level}'

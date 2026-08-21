@@ -1,0 +1,18 @@
+basic:
+  id: looting
+  name: 抢夺
+  max-level: 3
+alternative:
+  is-vanilla: true
+rarity: 稀有
+targets:
+- 剑
+- 矛
+display:
+  description:
+    general: 提高击杀生物时物品的掉落数量或掉落概率
+    specific: '&7使大部分常见掉落物的数量上限提高&a{上限}&7，使稀有掉落物的掉落概率提高&a{概率}'
+variables:
+  leveled:
+    上限: 个:{level}
+    概率: '%:{level}'

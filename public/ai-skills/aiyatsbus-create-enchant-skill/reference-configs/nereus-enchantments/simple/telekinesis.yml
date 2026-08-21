@@ -1,0 +1,32 @@
+enabled: true
+name: Telekinesis
+
+displayName: "吸星"
+description: "使掉落物和经验直接进入背包"
+
+maxLevel: 1
+rarity: rare
+grindstoneable: true
+
+limits:
+  targets:
+    - pickaxes
+    - axes
+    - shovels
+    - hoes
+    - swords
+    - bow
+    - crossbow
+  conflicts: [ ]
+  neededEnchants: [ ]
+  withLore: [ ]
+  withoutLore: [ ]
+  withName: ""
+  withoutName: ""
+  permission: ""
+  papi: [ ]
+
+params:
+  disable-on-players: true
+  check-radius: 2
+  check-delay: 1

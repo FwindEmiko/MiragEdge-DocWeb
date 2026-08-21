@@ -1,0 +1,49 @@
+# 爆裂打火石 (explosive_flint)
+# 对照 Funpack v1.1.0：右键时消耗主手打火石，并触发 25 威力爆炸。
+
+basic:
+  enable: false
+  disable_worlds: [ ]
+  id: explosive_flint
+  name: "爆裂打火石"
+  max_level: 1
+
+rarity: 传说
+
+targets:
+  - 打火石
+
+limitations: [ ]
+
+display:
+  description:
+    general: "右键方块时消耗打火石并引发高威力爆炸"
+    specific: "&7右键方块时消耗主手打火石，并在眼前引发&c{爆炸威力}&7威力的爆炸。"
+
+variables:
+  leveled:
+    爆炸威力: ":25.0"
+
+mechanisms:
+  listeners:
+    on-use:
+      listen: "player-interact"
+      handle: |-
+        if &triggerSlot != "HAND" || string(&event::hand()) != "HAND" then {
+          return
+        }
+        if !&event::isRightClick() || !&event::isClickBlock() then {
+          return
+        }
+
+        &event::setCancelled(true)
+        &item::setAmount(0)
+
+        loc = &player::eyeLocation()
+        world = &loc::world()
+        &world::createExplosion(&loc, float(&爆炸威力))
+
+alternative:
+  is-treasure: true
+  is-discoverable: true
+  is-tradeable: false

@@ -1,0 +1,48 @@
+# 月球漫步 (lunar_walk)
+# 原数据包使用 gravity -80% 与 safe_fall_distance +1000 属性。
+# 这里以缓慢下落和摔落伤害取消近似。
+
+basic:
+  enable: false
+  disable_worlds: [ ]
+  id: lunar_walk
+  name: "月球漫步"
+  max_level: 1
+
+rarity: 史诗
+
+targets:
+  - 靴子
+
+limitations:
+  - "CONFLICT_ENCHANT:重靴"
+
+display:
+  description:
+    general: "穿戴时缓慢下落并免疫摔落伤害"
+    specific: "&7穿戴时获得短暂&b缓慢下落&7，并&a免疫摔落伤害&7。"
+
+variables:
+  leveled:
+    持续tick: "tick:40"
+
+mechanisms:
+  tickers:
+    slow-falling:
+      type: fluxon
+      interval: 20
+      handle: |-
+        entity::addPotionEffect(&player, "SLOW_FALLING", int(&持续tick), 0)
+
+  listeners:
+    on-fall:
+      listen: "entity-damage"
+      handle: |-
+        if string(&event::cause()) == "FALL" then {
+          &event::setCancelled(true)
+        }
+
+alternative:
+  is-treasure: true
+  is-discoverable: true
+  is-tradeable: false

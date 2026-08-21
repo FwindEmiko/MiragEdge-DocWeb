@@ -1,0 +1,28 @@
+# Compatibility placeholder for a Stellarity internal enchantment.
+# No Aiyatsbus gameplay mechanics are registered.
+basic:
+  enable: false
+  disable_worlds: [ ]
+  id: _technical/infernal_infusion
+  name: "Stellarity internal infernal infusion"
+  max-level: 1
+
+rarity: 普通
+targets:
+  - 可损坏物品
+limitations: [ ]
+
+display:
+  display: false
+  description:
+    general: "&7使棱彩武器的攻击附带棱彩炼狱效果"
+    specific: "&7与火属性和火焰附加不兼容"
+
+alternative:
+  weight: 1
+  grindstoneable: false
+  is-treasure: false
+  is-cursed: false
+  is-tradeable: false
+  is-discoverable: false
+  inaccessible: true

@@ -1,0 +1,28 @@
+# Compatibility placeholder for a Stellarity internal enchantment.
+# No Aiyatsbus gameplay mechanics are registered.
+basic:
+  enable: false
+  disable_worlds: [ ]
+  id: _technical/void_pendant/lapis
+  name: "Stellarity internal void pendant lapis"
+  max-level: 1
+
+rarity: 普通
+targets:
+  - 可损坏物品
+limitations: [ ]
+
+display:
+  display: false
+  description:
+    general: "&7所有经验来源额外获得 1 至 3 点经验"
+    specific: "&7额外经验数量会在 1 至 3 点之间变化"
+
+alternative:
+  weight: 1
+  grindstoneable: false
+  is-treasure: false
+  is-cursed: false
+  is-tradeable: false
+  is-discoverable: false
+  inaccessible: true

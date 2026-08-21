@@ -1,0 +1,185 @@
+basic:
+  enable: true
+  disable_worlds: []
+  id: aiming
+  name: 索敌
+  max_level: 3
+alternative:
+  is-tradeable: false
+  is-treasure: true
+  is-discoverable: true
+
+rarity: 至宝
+targets:
+- 弓
+limitations: []
+display:
+  description:
+    general: 箭矢会自动追踪目标
+variables:
+  ordinary:
+    steer_coefficient_xz: 0.1
+    steer_coefficient_y: 0.08
+    blacklist:
+    - ALLAY
+    - VILLAGER
+    - WANDERING_TRADER
+    - WOLF
+    - CAT
+    - BAT
+    - ENDERMAN
+    - HORSE
+    - SKELETON_HORSE
+    - ZOMBIE_HORSE
+    - PIG
+    - COW
+    - SHEEP
+    - CAMEL
+    - CHICKEN
+    - COD
+    - DOLPHIN
+    - DONKEY
+    - FOX
+    - FROG
+    - GOAT
+    - IRON_GOLEM
+    - LLAMA
+    - MULE
+    - OCELOT
+    - PANDA
+    - PARROT
+    - POLAR_BEAR
+    - PUFFERFISH
+    - RABBIT
+    - SALMON
+    - SNIFFER
+    - SNOW_GOLEM
+    - TRADER_LLAMA
+    - TROPICAL_FISH
+    - TURTLE
+mechanisms:
+  listeners:
+    on-shoot-bow:
+      listen: entity-shoot-bow
+      handle: |-
+        def findTarget(shooter, oldTarget, arrow, isNew) = {
+            world = &arrow::world()
+            arrowLocation = &arrow::location()
+            arrowVelocity = &arrow::velocity()
+
+            changeTarget = &isNew || if &oldTarget == null then true else {
+                if &oldTarget::world() != &world || &oldTarget::isDead() then true else {
+                    oldTargetLocation = &oldTarget::eyeLocation()
+                    traceDirection = &oldTargetLocation::toVector::subtract(&arrowLocation::toVector())::normalize()
+                    distance = &arrowLocation::distance(&oldTargetLocation)
+                    traceResult = &world::rayTraceBlocks(&arrowLocation, &traceDirection, &distance, fluidCollisionMode("NEVER"))
+                    if &traceResult == null || &traceResult::hitBlock() == null then true
+                    cosTheta = &traceDirection::dot(&arrowVelocity::clone::normalize())
+                    if &cosTheta < 0.5 then true
+                }
+                false
+            }
+            if &changeTarget then {
+                newTarget = null
+                box = static org.bukkit.util.BoundingBox.of(&arrow::location(), 50.0, 50.0, 50.0)
+                minScore = 8.5
+
+                for oe in &world::getNearbyEntities(&box) then {
+                    if !(&oe is org.bukkit.entity.LivingEntity) || &oe == &shooter then continue
+                    // if &blacklist::contains(string(&oe::type())) then continue
+                    if !guard::canDamage(&player, &oe) then continue
+                    score = 0.0
+                    rayLocation = if &isNew then &shooter::eyeLocation() else &arrowLocation
+                    rayDirection = if &isNew then &shooter::eyeLocation::direction() else &arrowVelocity::clone::normalize()
+                    entityLocation = &oe::eyeLocation()
+                    toEntity = &entityLocation::toVector::subtract(&rayLocation::toVector())
+                    toEntityNormalized = &toEntity::clone::normalize()
+
+                    score += &toEntity::cross(&rayDirection)::length()
+                    score += &entityLocation::distance(&rayLocation) * 0.1
+
+                    if &isNew && &shooter::eyeLocation::pitch() < -10 && &toEntityNormalized::y() < &rayDirection::y() then {
+                        score *= 0.5
+                    }
+                    if &score <= &minScore then {
+                        &minScore = &score
+                        &newTarget = &oe
+                    }
+                }
+                return &newTarget
+            } else {
+                return &oldTarget
+            }
+        }
+
+        def getSteerFactor(lifetime, level) = {
+            if &level > &maxLevel then level = &maxLevel
+            if &lifetime <= 0 then return 0.0
+            if &lifetime <= 2 then return (&lifetime - 0) / 2.0 * &level
+            return &level * 1.0
+        }
+
+        def getPredictedLocation(target, arrow) = {
+            if &target::world() != &arrow::world() then { return }
+            targetLocation = &target::eyeLocation()
+            targetVelocity = if &target::isInsideVehicle() then &target::vehicle::velocity::clone() else &target::velocity::clone()
+            arrowLocation = &arrow::location()
+            arrowVelocity = &arrow::velocity()
+            desiredVelocity = &targetLocation::toVector::subtract(&arrow::location::toVector())
+            cosTheta = &arrowVelocity::clone::normalize::dot(&desiredVelocity::clone::normalize())
+            axisSpeed = &arrowVelocity::length() * &cosTheta
+            distance = &arrowLocation::distance(&targetLocation)
+            predictedTime = &distance / &axisSpeed
+            predictedMovement = &targetVelocity::multiply(&predictedTime)
+            return &targetLocation::add(&predictedMovement)
+        }
+
+        def steer(target, arrow) = {
+            if &target == null then { return }
+            if &target::world() != &arrow::world() then { return }
+            if &arrow::ticksLived() < 0 then { 
+                if &target::isGlowing() then &target::setGlowing(false)
+                if &arrow::isGlowing() then &arrow::setGlowing(false)
+                return
+            }
+            if !&target::isGlowing() then &target::setGlowing(true)
+            if !&arrow::isGlowing() then &arrow::setGlowing(true)
+            targetLocation = getPredictedLocation(&target, &arrow)
+            if &targetLocation == null then { return }
+            arrowLocation = &arrow::location()
+            arrowVelocity = &arrow::velocity()
+            xzVelocity = vector(&arrowVelocity::x(), 0.0, &arrowVelocity::z())
+            yVelocity = vector(0.0, &arrowVelocity::y(), 0.0)
+            xzSpeed = &xzVelocity::length()
+            ySpeed = &yVelocity::length()
+            steerFactor = getSteerFactor(&arrow::ticksLived(), &level)
+            if &steerFactor <= 0.001 then { return }
+            aimingForce = &targetLocation::toVector::subtract(&arrowLocation::toVector())::normalize()
+            xzForce = vector(&aimingForce::x(), 0.0, &aimingForce::z())::multiply(&steerFactor * &steer_coefficient_xz)
+            yForce = vector(0.0, &aimingForce::y(), 0.0)::multiply(&steerFactor * &steer_coefficient_y)
+
+            if &xzVelocity::length() >= 1e-5 then {
+                &xzVelocity::add(&xzForce)::multiply(&xzSpeed / &xzVelocity::length())
+            }
+            if &yVelocity::length() >= 1e-5 then {
+                &yVelocity::add(&yForce)::multiply(&ySpeed / &yVelocity::length())
+            }
+
+            &arrow::setVelocity(vector(&xzVelocity::x(), &yVelocity::y(), &xzVelocity::z()))
+        }
+
+        arrow = &event::projectile()
+
+        if &arrow is org.bukkit.entity.AbstractArrow then {
+            target = findTarget(&player, null, &arrow, true)
+            submit()::period(1)::on(&arrow)::run(|| {
+                if &arrow::isInBlock() || &arrow::isDead() then {
+                    if &target != null && &target::isGlowing() then &target::setGlowing(false)
+                    if &arrow::isGlowing() then &arrow::setGlowing(false)
+                    &it::cancel()
+                    return
+                }
+                target = findTarget(&player, &target, &arrow, false)
+                steer(&target, &arrow)
+            })
+        }

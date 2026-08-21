@@ -1,0 +1,75 @@
+basic:
+  enable: true
+  disable_worlds: []
+  id: bouncy_arrow
+  name: 跃动
+  max_level: 3
+alternative:
+  is-tradeable: false
+  is-treasure: true
+  is-discoverable: true
+
+rarity: 至宝
+targets:
+  - 弓
+  - 弩
+limitations: []
+display:
+  description:
+    general: 射箭撞方块反弹并有概率分裂
+    specific: '&7射箭撞方块可反弹最多&a{次数}&7并有&a{概率}&7的概率分裂'
+variables:
+  leveled:
+    次数: 次:{level}
+    速度: :0.5+0.1*{level}
+    概率: '%:20*{level}'
+mechanisms:
+  listeners:
+    on-projectile-hit:
+      listen: "projectile-hit"
+      handle: |-
+        def spawn(world, location, velocity, speed, spread, oldArrow, bouncedTime) = {
+            newArrow = &world.spawnArrow(&location, &velocity, &speed, &spread)
+            &newArrow::setMeta("bouncedTime", &bouncedTime)
+            &newArrow::setShooter(&oldArrow::shooter())
+            &newArrow::setPickupStatus(static org.bukkit.entity.AbstractArrow$PickupStatus.CREATIVE_ONLY)
+
+            // 1.20.4+
+            try {
+                &newArrow.setWeapon(&oldArrow.getWeapon())
+            } catch (e) {
+            }
+        
+            return &newArrow
+        }
+
+        if !(&event::entity() is org.bukkit.entity.AbstractArrow) then return
+        if &event::hitBlockFace() == null then return
+
+        arrow = &event::entity()
+        blockFace = &event::hitBlockFace()
+
+        normalLine = &blockFace::direction()
+        velocity = &arrow::velocity()
+        location = &arrow::location()
+        world = &location::world() ?: return
+
+        bouncedTime = int(&arrow::getMeta("bouncedTime") ?: 0) + 1
+        if &bouncedTime > &level then return
+
+        newVelocity = &velocity::clone::rotateAroundAxis(&normalLine, &PI)::multiply(-1)
+        speed = float(&newVelocity::length()) * float(&速度)
+        &newVelocity::normalize()
+
+        &world::spawnParticle(particle("CRIT"), &location, 20)
+        newArrow = spawn(&world, &location, &newVelocity, &speed, 0, &arrow, &bouncedTime)
+
+        if random(0, 100) <= &概率 then {
+            &newVelocity::rotateAroundAxis(vector(0.0, 1.0, 0.0), &PI / 18.0)
+            &newArrow = spawn(&world, &location, &newVelocity, &speed, 0, &arrow, &bouncedTime)
+
+            &newVelocity::rotateAroundAxis(vector(0.0, 1.0, 0.0), -&PI / 9.0)
+            &newArrow = spawn(&world, &location, &newVelocity, &speed, 0, &arrow, &bouncedTime)
+        }
+
+        &arrow::remove()

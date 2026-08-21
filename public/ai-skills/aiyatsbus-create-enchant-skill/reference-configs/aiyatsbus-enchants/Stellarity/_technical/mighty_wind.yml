@@ -1,0 +1,28 @@
+# Compatibility placeholder for a Stellarity internal enchantment.
+# No Aiyatsbus gameplay mechanics are registered.
+basic:
+  enable: false
+  disable_worlds: [ ]
+  id: _technical/mighty_wind
+  name: "Stellarity internal mighty wind"
+  max-level: 1
+
+rarity: 普通
+targets:
+  - 可损坏物品
+limitations: [ ]
+
+display:
+  display: false
+  description:
+    general: "&7优化沙尘暴三叉戟的投掷检测，并内置忠诚 III"
+    specific: "&7与大多数三叉戟附魔不兼容"
+
+alternative:
+  weight: 1
+  grindstoneable: false
+  is-treasure: false
+  is-cursed: false
+  is-tradeable: false
+  is-discoverable: false
+  inaccessible: true

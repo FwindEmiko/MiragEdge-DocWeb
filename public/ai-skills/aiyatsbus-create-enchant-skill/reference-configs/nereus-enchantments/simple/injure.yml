@@ -1,0 +1,30 @@
+enabled: true
+name: Injure
+
+displayName: "重伤"
+description: "使得被攻击的玩家血量恢复速度降低"
+
+maxLevel: 3
+rarity: legendary
+grindstoneable: true
+
+limits:
+  targets:
+    - swords
+    - axes
+    - bow
+    - crossbow
+    - trident
+  conflicts: [ ]
+  neededEnchants: [ ]
+  withLore: [ ]
+  withoutLore: [ ]
+  withName: ""
+  withoutName: ""
+  permission: ""
+  papi: [ ]
+
+params:
+  heal-multiplier: 1-0.25*level
+  duration: 80+20*level
+  require-full-charge: true

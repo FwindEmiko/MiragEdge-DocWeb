@@ -663,7 +663,46 @@ export default defineConfig({
               items: [
                 { text: '前置与环境', link: '/developer/workflows/enchanting/prerequisites' },
                 { text: '模块实现', link: '/developer/workflows/enchanting/modules' },
-                { text: 'Fluxon 参考', link: '/developer/workflows/enchanting/reference' },
+                {
+                  text: '开发方式',
+                  link: '/developer/workflows/enchanting/development-methods',
+                  collapsed: true,
+                  items: [
+                    { text: '开发方式总览', link: '/developer/workflows/enchanting/development-methods' },
+                    { text: '纯代码附魔', link: '/developer/workflows/enchanting/code-defined' },
+                    { text: 'YAML 附魔', link: '/developer/workflows/enchanting/config-defined' },
+                    { text: '附魔字段速查', link: '/developer/workflows/enchanting/enchantment-fields' },
+                  ]
+                },
+                {
+                  text: '触发器参考',
+                  collapsed: true,
+                  items: [
+                    { text: '机制总览', link: '/developer/workflows/enchanting/mechanisms' },
+                    { text: 'Listener 触发器', link: '/developer/workflows/enchanting/listener-trigger' },
+                    { text: 'Ticker 触发器', link: '/developer/workflows/enchanting/ticker-trigger' },
+                    { text: 'Skill 触发器', link: '/developer/workflows/enchanting/skill-trigger' },
+                    { text: 'Builtin 触发器', link: '/developer/workflows/enchanting/builtin-trigger' },
+                    { text: 'Artifact 触发器', link: '/developer/workflows/enchanting/artifact-trigger' },
+                    { text: '事件函数索引', link: '/developer/workflows/enchanting/event-functions' },
+                  ]
+                },
+                {
+                  text: 'Fluxon 参考',
+                  collapsed: true,
+                  items: [
+                    { text: 'Fluxon 语言参考', link: '/developer/workflows/enchanting/fluxon-language' },
+                    { text: '内置函数与扩展', link: '/developer/workflows/enchanting/fluxon-stdlib' },
+                    { text: 'JVM 互操作', link: '/developer/workflows/enchanting/fluxon-jvm-interop' },
+                    { text: 'Bukkit/Java 语义', link: '/developer/workflows/enchanting/fluxon-bukkit-java-semantics' },
+                    { text: 'Import 模块参考', link: '/developer/workflows/enchanting/fluxon-modules' },
+                    { text: '平台函数', link: '/developer/workflows/enchanting/fluxon-platform-functions' },
+                    { text: '运行时容器', link: '/developer/workflows/enchanting/fluxon-containers' },
+                    { text: 'Aiyatsbus 函数', link: '/developer/workflows/enchanting/aiyatsbus-fluxon-functions' },
+                  ]
+                },
+                { text: 'Fluxon 参考(整合)', link: '/developer/workflows/enchanting/reference' },
+                { text: '官方技能包文件浏览', link: '/developer/workflows/enchanting/skill-files' },
                 { text: '数据包边界', link: '/developer/workflows/enchanting/datapack-boundaries' },
                 { text: '验证与验收', link: '/developer/workflows/enchanting/validation' },
                 { text: '排错', link: '/developer/workflows/enchanting/troubleshooting' },
@@ -705,6 +744,7 @@ export default defineConfig({
             { text: '图片自动化模块', link: '/developer/website/autoimage' },
             { text: '配方可视化组件', link: '/developer/website/mcrecipe' },
             { text: '统一图标系统', link: '/developer/website/vectoricons' },
+            { text: 'AI Skills 系统', link: '/developer/ai-skills' },
           ]
         },
         {
@@ -853,7 +893,7 @@ export default defineConfig({
   
   // 排除 docs/ 目录（方案书与工作文件，不向玩家公开）
   // 排除 public/**/*.md（LLMs.txt 标准生成的清洗版 Markdown，是静态产物不应作为页面构建）
-  srcExclude: ['docs/**/*.md', 'public/**/*.md'],
+  srcExclude: ['docs/**/*.md', 'public/**/*.md', 'enchant/**/*.md', '.dsh/**/*.md', '.workbuddy/**/*.md'],
 
   // 缓存配置
   cacheDir: './.vitepress/cache',

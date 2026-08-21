@@ -1,0 +1,22 @@
+basic:
+  id: sweeping_edge
+  name: 横扫之刃
+  max-level: 3
+alternative:
+  is-vanilla: true
+dependencies:
+  supports: 12100
+rarity: 优良
+targets:
+- 剑
+display:
+  description:
+    general: 提高横扫攻击的伤害
+    specific: '&7横扫攻击的伤害附加&a{比例}&7的武器基础伤害'
+variables:
+  leveled:
+    比例:
+      1: 50
+      2: 67
+      3: 75
+      unit: '%'

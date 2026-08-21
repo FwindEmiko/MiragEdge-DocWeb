@@ -1,0 +1,33 @@
+# 使附魔插件干预原版战利品生成
+# 这样战利品的附魔书里会出现更多附魔
+enable: true
+# 当前附魔体系仅通过战利品箱产出；关闭钓鱼共用抽取池。
+fish_enable: false
+# 是否开启原版附魔必中模式
+# 开启时则保留原版奖励生成然后向其中添加我们的附魔
+# 关闭时则完全按照我们的概率和等级计算随机添加
+# 默认关闭 (推荐)
+vanilla_mode: false
+cost: 3 # 按照点击附魔台第三个按钮的计算权重来计算
+bonus: 12 # 按照12书架等级附魔台的权重来计算（降低满级出货率）
+# 一次性附魔得到的附魔个数对应的概率
+# 可用变量：{button}
+more_enchant_chance:
+  - "0.2*{button}" # 一次性出俩附魔的概率
+  - "0.15*{button}" # 在一次出俩附魔的基础上出第三个附魔的概率
+  - "0.1*{button}" # 同理，第四个在出三个基础上的概率
+# 计算出货的等级，最小为1，可用变量：
+# {button} {max_level} {bonus}
+# 注意: 若配置了全局附魔出货最大等级设定, 或为对应附魔配置了出货最大等级限制
+# 则 max_level 为该限制值, 否则才是该附魔的最大等级
+# 不是特别想改，就请勿改动
+# 因为你永远也不知道自己调出来的公式是什么妖魔鬼怪
+level_formula: "{max_level}*{button}/3.0*({bonus}+1.0)/17.0-rand(1)"
+# 全局附魔出货项最大等级设定
+# -1 则为无限制 (但最高到该附魔的最高等级)
+max_level_limit: -1
+privilege:
+  chance:
+    - "aiyatsbus.privilege.loot.vip:{chance}*1.2"
+    - "aiyatsbus.privilege.loot.svip:{chance}*1.4"
+  full_level: "aiyatsbus.privilege.loot.full"

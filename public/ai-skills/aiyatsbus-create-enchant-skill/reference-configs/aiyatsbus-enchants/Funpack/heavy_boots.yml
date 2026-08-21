@@ -1,0 +1,63 @@
+# 重靴 (heavy_boots)
+# 原数据包使用 gravity +50% 属性与 location_changed 破坏脚下方块。
+# 这里以短时缓慢近似重力体感，保留经过摔落伤害确认后的脚下方块破坏。
+
+basic:
+  enable: false
+  disable_worlds: [ ]
+  id: heavy_boots
+  name: "重靴"
+  max_level: 1
+
+rarity: 稀有
+
+targets:
+  - 靴子
+
+limitations:
+  - "CONFLICT_ENCHANT:月球漫步"
+
+display:
+  description:
+    general: "穿戴时行动迟缓，重摔会破坏脚下方块"
+    specific: "&7穿戴时获得短暂&8缓慢&7；摔落距离达到&e{最小摔落高度}&7格且受到摔落伤害时，会破坏脚下方块。"
+
+variables:
+  leveled:
+    缓慢持续tick: "tick:40"
+    缓慢等级: ":1"
+    最小摔落高度: "格:5"
+
+mechanisms:
+  tickers:
+    slow:
+      type: fluxon
+      interval: 20
+      handle: |-
+        entity::addPotionEffect(&player, "SLOWNESS", int(&缓慢持续tick), int(&缓慢等级))
+
+  listeners:
+    on-fall:
+      listen: "entity-damage"
+      handle: |-
+        if string(&event::cause()) != "FALL" then {
+          return
+        }
+
+        fallDistance = &event::entity()::fallDistance()
+        if &fallDistance < &最小摔落高度 then {
+          return
+        }
+
+        below = &player::location()::clone()::subtract(0.0, 1.0, 0.0)::block()
+        blockType = string(&below::type())
+        if &blockType == "AIR" || &blockType == "BEDROCK" || &blockType == "END_PORTAL_FRAME" then {
+          return
+        }
+
+        &below::breakNaturally()
+
+alternative:
+  is-treasure: true
+  is-discoverable: true
+  is-tradeable: false

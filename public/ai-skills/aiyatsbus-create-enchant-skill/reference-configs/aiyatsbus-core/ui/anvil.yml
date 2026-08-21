@@ -1,0 +1,71 @@
+
+title: "&f<shift:-8><image:miragedge_menu:aiyatsbus_anvil>"
+
+shape:
+  - '       ZI'
+  - ' APPBEER '
+  - '         '
+
+template:
+  'P':
+    material: PAPER
+    custom-model-data: 233
+    name: "&e+"
+
+  'E':
+    material: PAPER
+    custom-model-data: 233
+    name: "&e="
+
+  'Z':
+    material: PAPER
+    custom-model-data: 233
+    name: "&b返回 {last}"
+    feature:
+      - ==: Functional
+        keyword: Back
+
+  'I':
+    material: PAPER
+    custom-model-data: 233
+    name: "&b拼合信息"
+    lore:
+      - "&8| &7拼合检测 > {allowed}"
+      - "&8| &7等级消耗 > &e{level}级"
+      - "&8| &7详情 > "
+      - "   &7{reasons}"
+    feature:
+      - ==: Functional
+        keyword: Anvil:information
+
+  'A':
+    material: PAPER
+    custom-model-data: 5210
+    name: "&b物品A"
+    lore:
+      - "&8| &7点击背包内物品上传"
+    feature:
+      - ==: Functional
+        keyword: Anvil:a
+
+  'B':
+    material: PAPER
+    custom-model-data: 5210
+    name: "&b物品B"
+    lore:
+      - "&8| &7点击背包内物品上传"
+    feature:
+      - ==: Functional
+        keyword: Anvil:b
+
+  'R':
+    material: PAPER
+    custom-model-data: 233
+    name: "&b结果"
+    lore:
+      - "&8| &7物品上传完毕后此处将会显示结果"
+      - "&8| &7若未显示，则说明无法拼合"
+      - "&8| &7具体详情见右侧信息显示"
+    feature:
+      - ==: Functional
+        keyword: Anvil:result

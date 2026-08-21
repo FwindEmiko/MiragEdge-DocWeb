@@ -1,0 +1,22 @@
+basic:
+  id: sharpness
+  name: 锋利
+  max-level: 5
+alternative:
+  is-vanilla: true
+rarity: 优良
+targets:
+- 剑
+- 斧
+- 矛
+limitations:
+- CONFLICT_GROUP:原版增伤类附魔
+- CONFLICT_ENCHANT:致密
+- CONFLICT_ENCHANT:穿刺
+display:
+  description:
+    general: 提高近战攻击伤害
+    specific: '&7近战攻击伤害提高&a{伤害提高}'
+variables:
+  leveled:
+    伤害提高: 点:0.5*{level}+0.5

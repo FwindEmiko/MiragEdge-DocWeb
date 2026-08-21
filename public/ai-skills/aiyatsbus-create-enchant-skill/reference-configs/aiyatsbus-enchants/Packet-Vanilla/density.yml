@@ -1,0 +1,32 @@
+
+
+#         Powered by TabooLib 6.3         #
+
+
+basic:
+  id: density
+  name: "致密"
+  max-level: 5
+
+alternative:
+  is-vanilla: true
+
+dependencies:
+  supports: 12100
+
+limitations:
+  - "CONFLICT_GROUP:原版增伤类附魔"
+
+rarity: 普通
+targets:
+  - 重锤
+
+display:
+  description:
+    general: "摔落高度越高，重锤造成的伤害越高"
+    specific: "&7每摔落&a1格&7时重锤造成的伤害增加&a{伤害}"
+
+# 原版附魔机制本插件不提供修改，因此此处改了也没有效果
+variables:
+  leveled:
+    伤害: "点:0.5*{level}"

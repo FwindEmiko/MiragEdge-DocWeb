@@ -1,0 +1,16 @@
+basic:
+  id: punch
+  name: 冲击
+  max-level: 2
+alternative:
+  is-vanilla: true
+rarity: 稀有
+targets:
+- 弓
+display:
+  description:
+    general: 提高箭矢的击退距离
+    specific: '&7使横向击退距离提高&a{横向}&7'
+variables:
+  leveled:
+    横向: 格:3*{level}

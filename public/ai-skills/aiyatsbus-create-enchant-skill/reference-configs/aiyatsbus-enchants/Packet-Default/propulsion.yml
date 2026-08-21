@@ -1,0 +1,36 @@
+basic:
+  enable: true
+  disable_worlds: []
+  id: propulsion
+  name: 弹射
+  max_level: 1
+alternative:
+  is-tradeable: false
+  is-treasure: true
+  is-discoverable: true
+
+rarity: 史诗
+targets:
+- 靴子
+limitations:
+- CONFLICT_ENCHANT:弹跳鞋
+display:
+  description:
+    general: 在空中下蹲可触发二段跳 (冷却:&a{冷却}&7)
+variables:
+  leveled:
+    冷却: 秒:6
+mechanisms:
+  listeners:
+    on-sneak:
+      listen: player-toggle-sneak
+      handle: |-
+        if !&player::isOnGround() && &player::isSneaking() then {
+            if cooldown::isReady(&player, &enchant, &冷却) then {
+                velocity = &event::player::eyeLocation::direction::normalize() :: {
+                    setY(0.5)
+                }
+                &player::setVelocity(&velocity)
+                cooldown::addCooldown(&player, &enchant)
+            }
+        }

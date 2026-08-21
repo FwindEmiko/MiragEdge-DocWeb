@@ -1,0 +1,35 @@
+# 装甲飞行 (plated)
+# 增加鞘翅的护甲和护甲韧性，但降低滑翔机动性。
+
+basic:
+  enable: true
+  disable_worlds: [ ]
+  id: plated
+  name: "装甲飞行"
+  max_level: 4
+
+rarity: 史诗
+
+targets:
+  - 鞘翅
+
+limitations:
+  - "CONFLICT_ENCHANT:翱翔"
+
+display:
+  description:
+    general: "增加鞘翅护甲和护甲韧性，但降低滑翔机动性"
+    specific: "&7护甲值&a+{护甲}&7点，护甲韧性&a+{韧性}&7点，重力&c+{重力}&7。"
+
+variables:
+  leveled:
+    护甲: ":1+1*{level}"
+    韧性: ":0+1*({level}-1)/3"
+    重力: "%:1+3*{level}"
+
+alternative:
+  is-vanilla: true
+  is-treasure: true
+  is-discoverable: true
+  is-tradeable: false
+  weight: 2

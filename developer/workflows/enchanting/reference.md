@@ -3,7 +3,9 @@ title: Aiyatsbus 附魔配置工作流 · Fluxon 参考
 description: 基于当前 Aiyatsbus 与 Fluxon 源码核实的最小 Fluxon API 参考。
 ---
 
-# Fluxon 参考
+# Fluxon 参考（整合）
+
+> 本文档基于 Aiyatsbus 官方技能包 v0.0.2，以当前服务器源码和配置为准。
 
 这里不是“全部 API 列表”。Fluxon 扩展会随依赖版本变化，维护文档只保留本轮能从当前源码或上游默认配置确认的调用。需要更多能力时，先检查实际 JAR 所携带的 Fluxon 版本和对应源码，再写入配置。
 

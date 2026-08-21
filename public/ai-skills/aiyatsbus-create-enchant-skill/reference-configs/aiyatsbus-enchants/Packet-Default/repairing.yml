@@ -1,0 +1,50 @@
+
+#         Powered by TabooLib 6.3         #
+
+basic:
+  enable: true
+  disable_worlds: [ ]
+  id: repairing
+  name: "自生"
+  max_level: 3
+
+alternative:
+  is-tradeable: false
+  is-treasure: true
+  is-discoverable: true
+
+rarity: 史诗
+targets:
+  - 剑
+  - 斧
+  - 镐
+  - 铲
+  - 锄
+  - 弓
+  - 弩
+  - 三叉戟
+  - 钓鱼竿
+  - 剪刀
+
+limitations:
+  - "CONFLICT_ENCHANT:经验修补"
+  - "CONFLICT_ENCHANT:腐烂诅咒"
+
+display:
+  description:
+    general: "消耗经验值自动修复物品耐久"
+    specific: "&7每&a6&7秒消耗&a{经验消耗}&7经验恢复&a{修复量}&7点耐久"
+
+variables:
+  leveled:
+    修复量: "点:{level}"
+    经验消耗: "点:{level}*2"
+
+# 修复逻辑由 FixRepairingEnchant 插件实现
+# 配置见插件 config.yml:
+#   repair-interval: 5  (秒)
+#   check-inventory: true  (检查背包)
+#   require-sneaking: false
+#   levels.1: xp-cost=2 durability=1
+#   levels.2: xp-cost=4 durability=2
+#   levels.3: xp-cost=6 durability=3

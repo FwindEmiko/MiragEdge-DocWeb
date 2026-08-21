@@ -1,0 +1,16 @@
+basic:
+  id: lure
+  name: 饵钓
+  max-level: 3
+alternative:
+  is-vanilla: true
+rarity: 优良
+targets:
+- 钓鱼竿
+display:
+  description:
+    general: 减少上钩等待时间
+    specific: '&7使上钩等待时间减少&a{时间}'
+variables:
+  leveled:
+    时间: 秒:5*{level}

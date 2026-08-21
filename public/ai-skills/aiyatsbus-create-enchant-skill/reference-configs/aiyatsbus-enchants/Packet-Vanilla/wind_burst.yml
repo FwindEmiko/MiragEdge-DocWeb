@@ -1,0 +1,29 @@
+
+
+#         Powered by TabooLib 6.3         #
+
+
+basic:
+  id: wind_burst
+  name: "风暴"
+  max-level: 3
+
+alternative:
+  is-vanilla: true
+  is-treasure: true
+  is-tradeable: false
+  is-cursed: false
+  is-discoverable: false
+
+dependencies:
+  supports: 12100
+
+rarity: 普通
+targets:
+  - 重锤
+
+display:
+  description:
+    general: "攻击时产生风弹爆炸"
+
+# TODO 数据录入

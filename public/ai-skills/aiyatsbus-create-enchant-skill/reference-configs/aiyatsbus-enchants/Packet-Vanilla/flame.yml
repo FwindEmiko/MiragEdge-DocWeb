@@ -1,0 +1,13 @@
+basic:
+  id: flame
+  name: 火矢
+  max-level: 1
+alternative:
+  is-vanilla: true
+rarity: 优良
+targets:
+- 弓
+display:
+  description:
+    general: 点燃射中的生物
+    specific: '&7点燃射中的生物&a5秒'

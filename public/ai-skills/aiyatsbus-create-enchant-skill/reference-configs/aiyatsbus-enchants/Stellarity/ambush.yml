@@ -1,0 +1,58 @@
+# 伏击 (ambush)
+# Fluxon 可验证近似：目标为未锁定攻击者的非玩家 Mob 时，造成额外伤害。
+
+basic:
+  enable: true
+  disable_worlds: [ ]
+  id: ambush
+  name: "伏击"
+  max_level: 3
+
+rarity: 史诗
+
+targets:
+  - 剑
+
+limitations: [ ]
+
+display:
+  description:
+    general: "攻击尚未锁定你的非玩家生物时造成额外伤害"
+    specific: "&7攻击尚未锁定你的非玩家生物时，造成&a{伤害倍率}倍&7伤害。"
+
+variables:
+  leveled:
+    伤害倍率: ":1.0+0.5*{level}"
+
+mechanisms:
+  listeners:
+    on-attack:
+      listen: "entity-damage-other"
+      handle: |-
+        if &triggerSlot != "HAND" then {
+          return
+        }
+
+        victim = &event::entity()
+        if &victim is org.bukkit.entity.Player then {
+          return
+        }
+        if &victim is org.bukkit.entity.Mob then {
+          target = &victim::target()
+          if &target == &player then {
+            return
+          }
+        }
+
+        damage = &event::damage()
+        &event::setDamage(&damage * &伤害倍率)
+
+        loc = &victim::location()
+        world = &victim::world()
+        &world::spawnParticle("CRIT", &loc, 16, 0.35, 0.5, 0.35, 0.08)
+        &world::playSound(&loc, "minecraft:entity.player.attack.crit", 0.8, 1.0)
+
+alternative:
+  is-treasure: true
+  is-discoverable: true
+  is-tradeable: false

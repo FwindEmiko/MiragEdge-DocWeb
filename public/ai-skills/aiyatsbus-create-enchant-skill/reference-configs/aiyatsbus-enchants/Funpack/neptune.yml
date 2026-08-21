@@ -1,0 +1,63 @@
+# 海王 (neptune)
+# 对照 Funpack v1.1.0：位置改变时有 5% 概率在当前位置生成 3x3 水源。
+# 此效果直接改写世界方块，未接入领地插件前保持关闭。
+
+basic:
+  enable: false
+  disable_worlds: [ ]
+  id: neptune
+  name: "海王"
+  max_level: 1
+
+rarity: 史诗
+
+targets:
+  - 靴子
+
+limitations: [ ]
+
+display:
+  description:
+    general: "移动时有概率在当前位置生成水源"
+    specific: "&7每次跨越方块有&b{触发概率}&7概率在当前位置生成&3 3x3&7水源；每次成功生成水源消耗&c{耐久消耗}&7点靴子耐久。"
+
+variables:
+  leveled:
+    触发概率: "%:5.0"
+    耐久消耗: ":1"
+
+mechanisms:
+  listeners:
+    on-move:
+      listen: "player-move"
+      handle: |-
+        from = &event::from()
+        to = &event::to()
+        if &from::blockX() == &to::blockX() && &from::blockZ() == &to::blockZ() then {
+          return
+        }
+        if random(0.0, 100.0) >= &触发概率 then {
+          return
+        }
+
+        created = 0
+        world = &to::world()
+        for x in -1..1 then {
+          for z in -1..1 then {
+            water = location(&world, double(&to::blockX() + &x), double(&to::blockY()), double(&to::blockZ() + &z))
+            block = &water::block()
+            if string(&block::type()) == "AIR" && guard::canBreak(&player, &block::location()) then {
+              &block::setType(material("WATER"))
+              created = &created + 1
+            }
+          }
+        }
+
+        if &created > 0 then {
+          item damage &item to &耐久消耗 by &player
+        }
+
+alternative:
+  is-treasure: true
+  is-discoverable: true
+  is-tradeable: false

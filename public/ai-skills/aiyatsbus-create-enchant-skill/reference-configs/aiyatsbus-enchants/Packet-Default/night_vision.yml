@@ -1,0 +1,63 @@
+# 月光祝福 (night_vision)
+# 在黑暗中提供清晰的视野（夜视效果）
+
+basic:
+  enable: true
+  disable_worlds: [ ]
+  id: night_vision
+  name: "月光祝福"
+  max_level: 1
+
+rarity: 史诗
+
+targets:
+  - 头盔
+
+limitations: [ ]
+
+display:
+  description:
+    general: "在黑暗中提供清晰的视野"
+    specific: "&7佩戴时持续获得&b夜视&7效果，每60刻刷新一次。"
+    # 基岩版描述（如需要可补全）
+    # bedrock: "§7持续获得夜视效果"
+
+variables:
+  leveled:
+    夜视时长: "tick:320"
+    耐久消耗: "%:1.0"
+
+mechanisms:
+  tickers:
+    night_vision:
+      type: fluxon
+      interval: 60
+      pre-handle: |-
+        # 首次佩戴时立即给予夜视
+        entity::addPotionEffect(&player, "NIGHT_VISION", 320, 0, true, false)
+      handle: |-
+        # 玩家不在线或已死亡时跳过
+        if !&player::isOnline() then {
+          return
+        }
+        if &player::isDead() then {
+          return
+        }
+
+        # 刷新夜视效果（每次刷新时延长至320刻）
+        entity::addPotionEffect(&player, "NIGHT_VISION", 320, 0, true, false)
+
+        # 低概率消耗耐久
+        if random(0.0, 100.0) < &耐久消耗 then {
+          damage = &item::durability()
+          &item::setDurability(&damage + 1)
+        }
+      post-handle: |-
+        # 卸下头盔时清除夜视效果
+        entity::removePotionEffect(&player, "NIGHT_VISION")
+
+alternative:
+  is-treasure: false
+  is-discoverable: true
+  is-tradeable: false
+  weight: 3

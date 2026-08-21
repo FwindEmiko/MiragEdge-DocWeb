@@ -1,0 +1,19 @@
+basic:
+  id: mending
+  name: 经验修补
+  max-level: 1
+alternative:
+  is-vanilla: true
+  is-treasure: true
+  is-tradeable: true
+  is-discoverable: true
+  weight: 300
+rarity: 稀有
+targets:
+- 可损坏物品
+limitations:
+- CONFLICT_ENCHANT:无限
+display:
+  description:
+    general: 转化获得的经验为物品的耐久度
+    specific: '&7将获得的经验值转化为耐久修复'

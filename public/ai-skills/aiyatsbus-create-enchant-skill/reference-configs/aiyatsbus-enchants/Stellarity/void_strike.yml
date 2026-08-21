@@ -1,0 +1,57 @@
+# 虚空打击 (void_strike)
+# Fluxon 无法复刻数据包的 voided 原生标记，使用固定 8 秒凋零作为明确近似。
+
+basic:
+  enable: true
+  disable_worlds: [ ]
+  id: void_strike
+  name: "虚空打击"
+  max_level: 1
+
+rarity: 传说
+
+targets:
+  - 剑
+  - 斧
+  - 三叉戟
+
+limitations: [ ]
+
+display:
+  description:
+    general: "直接命中时有概率施加凋零"
+    specific: "&7直接命中时有&a{触发概率}&7概率对目标施加&5凋零 I&7，持续&e{持续时间}&7秒。"
+
+variables:
+  leveled:
+    触发概率: "%:30.0"
+    持续时间: "秒:8"
+    持续时间tick: "tick:160"
+
+mechanisms:
+  listeners:
+    on-attack:
+      listen: "entity-damage-other"
+      handle: |-
+        if &triggerSlot != "HAND" then {
+          return
+        }
+        if random(0.0, 100.0) >= &触发概率 then {
+          return
+        }
+
+        victim = &event::entity()
+        if !(&victim is org.bukkit.entity.LivingEntity) then {
+          return
+        }
+
+        entity::addPotionEffect(&victim, "WITHER", int(&持续时间tick), 0)
+        loc = &victim::location()
+        world = &victim::world()
+        &world::spawnParticle("PORTAL", &loc, 24, 0.45, 0.75, 0.45, 0.35)
+        &world::playSound(&loc, "minecraft:block.end_portal_frame.fill", 0.8, 0.6)
+
+alternative:
+  is-treasure: true
+  is-discoverable: true
+  is-tradeable: false

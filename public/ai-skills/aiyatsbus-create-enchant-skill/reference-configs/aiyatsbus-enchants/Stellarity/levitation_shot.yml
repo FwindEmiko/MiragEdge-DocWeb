@@ -1,0 +1,54 @@
+# 飘浮射击 (levitation_shot)
+# 命中时按等级概率施加飘浮。普通箭的归属由 Aiyatsbus 在命中时按手持弓解析。
+
+basic:
+  enable: true
+  disable_worlds: [ ]
+  id: levitation_shot
+  name: "飘浮射击"
+  max_level: 5
+
+rarity: 稀有
+
+targets:
+  - 弓
+
+limitations: [ ]
+
+display:
+  description:
+    general: "箭矢命中时有概率使目标飘浮"
+    specific: "&7箭矢命中时有&a{触发概率}&7概率对目标施加&b飘浮 I&7，持续&e{持续时间}&7秒。"
+
+variables:
+  leveled:
+    触发概率: "%:10.0*{level}"
+    持续时间: "秒:4.0+1.25*({level}-1)"
+    持续时间tick: "tick:80+25*({level}-1)"
+
+mechanisms:
+  listeners:
+    on-projectile-hit:
+      listen: "projectile-hit"
+      handle: |-
+        projectile = &event::entity()
+        target = &event::hitEntity()
+        if &target == null || !(&target is org.bukkit.entity.LivingEntity) then {
+          return
+        }
+        if !(&projectile is org.bukkit.entity.AbstractArrow) then {
+          return
+        }
+        if random(0.0, 100.0) >= &触发概率 then {
+          return
+        }
+
+        entity::addPotionEffect(&target, "LEVITATION", int(&持续时间tick), 0)
+        loc = &target::location()
+        world = &target::world()
+        &world::spawnParticle("CLOUD", &loc, 12, 0.35, 0.35, 0.35, 0.03)
+
+alternative:
+  is-treasure: true
+  is-discoverable: true
+  is-tradeable: false

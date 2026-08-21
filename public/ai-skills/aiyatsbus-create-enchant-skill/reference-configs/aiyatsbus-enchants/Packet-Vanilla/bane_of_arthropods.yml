@@ -1,0 +1,33 @@
+
+
+#         Powered by TabooLib 6.3         #
+
+
+basic:
+  id: bane_of_arthropods
+  name: "节肢杀手"
+  max-level: 5
+
+alternative:
+  is-vanilla: true
+
+rarity: 普通
+targets:
+  - 剑
+  - 斧
+  - 重锤
+  - 矛
+
+limitations:
+  - "CONFLICT_GROUP:原版增伤类附魔"
+
+display:
+  description:
+    general: "对节肢动物的基础伤害提高"
+    specific: "&7对节肢动物的基础伤害提高&a{伤害}&7，并对其施加&a1~{时间}&7的缓慢IV效果"
+
+# 原版附魔机制本插件不提供修改，因此此处改了也没有效果
+variables:
+  leveled:
+    伤害: "点:2.5*{level}"
+    时间: "秒:1+0.5*{level}"

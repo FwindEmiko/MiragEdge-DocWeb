@@ -1,0 +1,28 @@
+# Compatibility placeholder for a Stellarity internal enchantment.
+# No Aiyatsbus gameplay mechanics are registered.
+basic:
+  enable: false
+  disable_worlds: [ ]
+  id: _technical/daybroken
+  name: "Stellarity internal daybroken"
+  max-level: 1
+
+rarity: 普通
+targets:
+  - 可损坏物品
+limitations: [ ]
+
+display:
+  display: false
+  description:
+    general: "&7优化万花筒的攻击检测机制"
+    specific: "&7与火属性附魔不兼容"
+
+alternative:
+  weight: 1
+  grindstoneable: false
+  is-treasure: false
+  is-cursed: false
+  is-tradeable: false
+  is-discoverable: false
+  inaccessible: true

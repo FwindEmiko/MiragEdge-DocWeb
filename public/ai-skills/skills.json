@@ -1,0 +1,3010 @@
+{
+  "version": 1,
+  "skills": [
+    {
+      "id": "aiyatsbus-create-enchant-skill",
+      "name": "创建 Aiyatsbus 附魔",
+      "description": "用于创建或修改 Aiyatsbus 附魔，包括通过 BuiltinAiyatsbusEnchantment.builder() 编写 Java 纯代码附魔、通过 YAML 定义附魔信息并使用 Java Builtin 编写触发器，以及编写 Fluxon 附魔脚本。",
+      "version": "0.0.2",
+      "skillFile": "aiyatsbus-create-enchant-skill/SKILL.md",
+      "files": [
+        {
+          "name": "reference-configs",
+          "type": "directory",
+          "path": "aiyatsbus-create-enchant-skill/reference-configs",
+          "children": [
+            {
+              "name": "aiyatsbus-core",
+              "type": "directory",
+              "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-core",
+              "children": [
+                {
+                  "name": "config.yml",
+                  "type": "file",
+                  "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-core/config.yml",
+                  "size": 3135,
+                  "mtime": "2026-08-21T10:53:28.000Z"
+                },
+                {
+                  "name": "event-mapping.yml",
+                  "type": "file",
+                  "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-core/event-mapping.yml",
+                  "size": 3224,
+                  "mtime": "2026-08-21T10:53:29.000Z"
+                },
+                {
+                  "name": "lang",
+                  "type": "directory",
+                  "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-core/lang",
+                  "children": [
+                    {
+                      "name": "zh_CN.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-core/lang/zh_CN.yml",
+                      "size": 15193,
+                      "mtime": "2026-08-21T10:53:29.000Z"
+                    }
+                  ]
+                },
+                {
+                  "name": "mechanisms",
+                  "type": "directory",
+                  "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-core/mechanisms",
+                  "children": [
+                    {
+                      "name": "anvil.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-core/mechanisms/anvil.yml",
+                      "size": 2017,
+                      "mtime": "2026-08-21T10:53:30.000Z"
+                    },
+                    {
+                      "name": "enchanting_table.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-core/mechanisms/enchanting_table.yml",
+                      "size": 2773,
+                      "mtime": "2026-08-21T10:53:31.000Z"
+                    },
+                    {
+                      "name": "grindstone.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-core/mechanisms/grindstone.yml",
+                      "size": 932,
+                      "mtime": "2026-08-21T10:53:31.000Z"
+                    },
+                    {
+                      "name": "loot.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-core/mechanisms/loot.yml",
+                      "size": 1644,
+                      "mtime": "2026-08-21T10:53:31.000Z"
+                    },
+                    {
+                      "name": "villager.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-core/mechanisms/villager.yml",
+                      "size": 338,
+                      "mtime": "2026-08-21T10:53:32.000Z"
+                    }
+                  ]
+                },
+                {
+                  "name": "ui",
+                  "type": "directory",
+                  "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-core/ui",
+                  "children": [
+                    {
+                      "name": "anvil.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-core/ui/anvil.yml",
+                      "size": 1412,
+                      "mtime": "2026-08-21T10:53:33.000Z"
+                    },
+                    {
+                      "name": "enchant_info.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-core/ui/enchant_info.yml",
+                      "size": 4415,
+                      "mtime": "2026-08-21T10:53:34.000Z"
+                    },
+                    {
+                      "name": "enchant_search.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-core/ui/enchant_search.yml",
+                      "size": 2731,
+                      "mtime": "2026-08-21T10:53:34.000Z"
+                    },
+                    {
+                      "name": "favorites.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-core/ui/favorites.yml",
+                      "size": 1228,
+                      "mtime": "2026-08-21T10:53:34.000Z"
+                    },
+                    {
+                      "name": "filter_group.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-core/ui/filter_group.yml",
+                      "size": 1248,
+                      "mtime": "2026-08-21T10:53:35.000Z"
+                    },
+                    {
+                      "name": "filter_rarity.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-core/ui/filter_rarity.yml",
+                      "size": 1243,
+                      "mtime": "2026-08-21T10:53:35.000Z"
+                    },
+                    {
+                      "name": "filter_target.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-core/ui/filter_target.yml",
+                      "size": 1251,
+                      "mtime": "2026-08-21T10:53:36.000Z"
+                    },
+                    {
+                      "name": "item_check.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-core/ui/item_check.yml",
+                      "size": 1567,
+                      "mtime": "2026-08-21T10:53:36.000Z"
+                    },
+                    {
+                      "name": "menu.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-core/ui/menu.yml",
+                      "size": 1518,
+                      "mtime": "2026-08-21T10:53:37.000Z"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "aiyatsbus-enchants",
+              "type": "directory",
+              "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants",
+              "children": [
+                {
+                  "name": "artifact.yml",
+                  "type": "file",
+                  "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants/artifact.yml",
+                  "size": 1190,
+                  "mtime": "2026-08-21T10:53:37.000Z"
+                },
+                {
+                  "name": "display.yml",
+                  "type": "file",
+                  "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants/display.yml",
+                  "size": 2721,
+                  "mtime": "2026-08-21T10:53:38.000Z"
+                },
+                {
+                  "name": "Funpack",
+                  "type": "directory",
+                  "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants/Funpack",
+                  "children": [
+                    {
+                      "name": "explosive_flint.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants/Funpack/explosive_flint.yml",
+                      "size": 1106,
+                      "mtime": "2026-08-21T10:53:38.000Z"
+                    },
+                    {
+                      "name": "heavy_boots.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants/Funpack/heavy_boots.yml",
+                      "size": 1584,
+                      "mtime": "2026-08-21T10:53:39.000Z"
+                    },
+                    {
+                      "name": "lunar_walk.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants/Funpack/lunar_walk.yml",
+                      "size": 984,
+                      "mtime": "2026-08-21T10:53:39.000Z"
+                    },
+                    {
+                      "name": "neptune.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants/Funpack/neptune.yml",
+                      "size": 1661,
+                      "mtime": "2026-08-21T10:53:40.000Z"
+                    },
+                    {
+                      "name": "un_unbreaking.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants/Funpack/un_unbreaking.yml",
+                      "size": 865,
+                      "mtime": "2026-08-21T10:53:40.000Z"
+                    }
+                  ]
+                },
+                {
+                  "name": "group.yml",
+                  "type": "file",
+                  "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants/group.yml",
+                  "size": 1728,
+                  "mtime": "2026-08-21T10:53:41.000Z"
+                },
+                {
+                  "name": "Packet-Default",
+                  "type": "directory",
+                  "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants/Packet-Default",
+                  "children": [
+                    {
+                      "name": "accumulating.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants/Packet-Default/accumulating.yml",
+                      "size": 1847,
+                      "mtime": "2026-08-21T10:53:41.000Z"
+                    },
+                    {
+                      "name": "aiming.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants/Packet-Default/aiming.yml",
+                      "size": 7247,
+                      "mtime": "2026-08-21T10:53:42.000Z"
+                    },
+                    {
+                      "name": "bouncy_arrow.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants/Packet-Default/bouncy_arrow.yml",
+                      "size": 2512,
+                      "mtime": "2026-08-21T10:53:42.000Z"
+                    },
+                    {
+                      "name": "jelly_legs.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants/Packet-Default/jelly_legs.yml",
+                      "size": 1355,
+                      "mtime": "2026-08-21T10:53:43.000Z"
+                    },
+                    {
+                      "name": "night_vision.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants/Packet-Default/night_vision.yml",
+                      "size": 1523,
+                      "mtime": "2026-08-21T10:53:43.000Z"
+                    },
+                    {
+                      "name": "planter.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants/Packet-Default/planter.yml",
+                      "size": 3497,
+                      "mtime": "2026-08-21T10:53:43.000Z"
+                    },
+                    {
+                      "name": "propulsion.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants/Packet-Default/propulsion.yml",
+                      "size": 863,
+                      "mtime": "2026-08-21T10:53:44.000Z"
+                    },
+                    {
+                      "name": "repairing.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants/Packet-Default/repairing.yml",
+                      "size": 973,
+                      "mtime": "2026-08-21T10:53:44.000Z"
+                    },
+                    {
+                      "name": "replanter.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants/Packet-Default/replanter.yml",
+                      "size": 1265,
+                      "mtime": "2026-08-21T10:53:45.000Z"
+                    },
+                    {
+                      "name": "tremor.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants/Packet-Default/tremor.yml",
+                      "size": 7435,
+                      "mtime": "2026-08-21T10:53:45.000Z"
+                    },
+                    {
+                      "name": "wings.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants/Packet-Default/wings.yml",
+                      "size": 2373,
+                      "mtime": "2026-08-21T10:53:46.000Z"
+                    }
+                  ]
+                },
+                {
+                  "name": "Packet-Vanilla",
+                  "type": "directory",
+                  "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants/Packet-Vanilla",
+                  "children": [
+                    {
+                      "name": "aqua_affinity.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants/Packet-Vanilla/aqua_affinity.yml",
+                      "size": 267,
+                      "mtime": "2026-08-21T10:53:47.000Z"
+                    },
+                    {
+                      "name": "bane_of_arthropods.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants/Packet-Vanilla/bane_of_arthropods.yml",
+                      "size": 626,
+                      "mtime": "2026-08-21T10:53:47.000Z"
+                    },
+                    {
+                      "name": "binding_curse.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants/Packet-Vanilla/binding_curse.yml",
+                      "size": 393,
+                      "mtime": "2026-08-21T10:53:48.000Z"
+                    },
+                    {
+                      "name": "blast_protection.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants/Packet-Vanilla/blast_protection.yml",
+                      "size": 411,
+                      "mtime": "2026-08-21T10:53:48.000Z"
+                    },
+                    {
+                      "name": "breach.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants/Packet-Vanilla/breach.yml",
+                      "size": 539,
+                      "mtime": "2026-08-21T10:53:49.000Z"
+                    },
+                    {
+                      "name": "channeling.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants/Packet-Vanilla/channeling.yml",
+                      "size": 335,
+                      "mtime": "2026-08-21T10:53:49.000Z"
+                    },
+                    {
+                      "name": "density.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants/Packet-Vanilla/density.yml",
+                      "size": 558,
+                      "mtime": "2026-08-21T10:53:49.000Z"
+                    },
+                    {
+                      "name": "depth_strider.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants/Packet-Vanilla/depth_strider.yml",
+                      "size": 438,
+                      "mtime": "2026-08-21T10:53:50.000Z"
+                    },
+                    {
+                      "name": "efficiency.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants/Packet-Vanilla/efficiency.yml",
+                      "size": 280,
+                      "mtime": "2026-08-21T10:53:50.000Z"
+                    },
+                    {
+                      "name": "feather_falling.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants/Packet-Vanilla/feather_falling.yml",
+                      "size": 360,
+                      "mtime": "2026-08-21T10:53:50.000Z"
+                    },
+                    {
+                      "name": "fire_aspect.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants/Packet-Vanilla/fire_aspect.yml",
+                      "size": 328,
+                      "mtime": "2026-08-21T10:53:51.000Z"
+                    },
+                    {
+                      "name": "fire_protection.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants/Packet-Vanilla/fire_protection.yml",
+                      "size": 410,
+                      "mtime": "2026-08-21T10:53:51.000Z"
+                    },
+                    {
+                      "name": "flame.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants/Packet-Vanilla/flame.yml",
+                      "size": 229,
+                      "mtime": "2026-08-21T10:53:52.000Z"
+                    },
+                    {
+                      "name": "fortune.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants/Packet-Vanilla/fortune.yml",
+                      "size": 338,
+                      "mtime": "2026-08-21T10:53:52.000Z"
+                    },
+                    {
+                      "name": "frost_walker.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants/Packet-Vanilla/frost_walker.yml",
+                      "size": 410,
+                      "mtime": "2026-08-21T10:53:53.000Z"
+                    },
+                    {
+                      "name": "impaling.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants/Packet-Vanilla/impaling.yml",
+                      "size": 454,
+                      "mtime": "2026-08-21T10:53:53.000Z"
+                    },
+                    {
+                      "name": "infinity.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants/Packet-Vanilla/infinity.yml",
+                      "size": 291,
+                      "mtime": "2026-08-21T10:53:54.000Z"
+                    },
+                    {
+                      "name": "knockback.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants/Packet-Vanilla/knockback.yml",
+                      "size": 310,
+                      "mtime": "2026-08-21T10:53:55.000Z"
+                    },
+                    {
+                      "name": "looting.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants/Packet-Vanilla/looting.yml",
+                      "size": 433,
+                      "mtime": "2026-08-21T10:53:55.000Z"
+                    },
+                    {
+                      "name": "loyalty.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants/Packet-Vanilla/loyalty.yml",
+                      "size": 308,
+                      "mtime": "2026-08-21T10:53:56.000Z"
+                    },
+                    {
+                      "name": "luck_of_the_sea.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants/Packet-Vanilla/luck_of_the_sea.yml",
+                      "size": 341,
+                      "mtime": "2026-08-21T10:53:56.000Z"
+                    },
+                    {
+                      "name": "lunge.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants/Packet-Vanilla/lunge.yml",
+                      "size": 327,
+                      "mtime": "2026-08-21T10:53:57.000Z"
+                    },
+                    {
+                      "name": "lure.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants/Packet-Vanilla/lure.yml",
+                      "size": 298,
+                      "mtime": "2026-08-21T10:53:57.000Z"
+                    },
+                    {
+                      "name": "mending.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants/Packet-Vanilla/mending.yml",
+                      "size": 402,
+                      "mtime": "2026-08-21T10:53:58.000Z"
+                    },
+                    {
+                      "name": "multishot.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants/Packet-Vanilla/multishot.yml",
+                      "size": 291,
+                      "mtime": "2026-08-21T10:53:58.000Z"
+                    },
+                    {
+                      "name": "piercing.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants/Packet-Vanilla/piercing.yml",
+                      "size": 369,
+                      "mtime": "2026-08-21T10:53:58.000Z"
+                    },
+                    {
+                      "name": "power.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants/Packet-Vanilla/power.yml",
+                      "size": 233,
+                      "mtime": "2026-08-21T10:53:59.000Z"
+                    },
+                    {
+                      "name": "projectile_protection.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants/Packet-Vanilla/projectile_protection.yml",
+                      "size": 425,
+                      "mtime": "2026-08-21T10:53:59.000Z"
+                    },
+                    {
+                      "name": "protection.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants/Packet-Vanilla/protection.yml",
+                      "size": 387,
+                      "mtime": "2026-08-21T10:53:59.000Z"
+                    },
+                    {
+                      "name": "punch.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants/Packet-Vanilla/punch.yml",
+                      "size": 298,
+                      "mtime": "2026-08-21T10:54:00.000Z"
+                    },
+                    {
+                      "name": "quick_charge.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants/Packet-Vanilla/quick_charge.yml",
+                      "size": 309,
+                      "mtime": "2026-08-21T10:54:01.000Z"
+                    },
+                    {
+                      "name": "respiration.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants/Packet-Vanilla/respiration.yml",
+                      "size": 360,
+                      "mtime": "2026-08-21T10:54:02.000Z"
+                    },
+                    {
+                      "name": "riptide.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants/Packet-Vanilla/riptide.yml",
+                      "size": 368,
+                      "mtime": "2026-08-21T10:54:02.000Z"
+                    },
+                    {
+                      "name": "sharpness.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants/Packet-Vanilla/sharpness.yml",
+                      "size": 434,
+                      "mtime": "2026-08-21T10:54:02.000Z"
+                    },
+                    {
+                      "name": "silk_touch.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants/Packet-Vanilla/silk_touch.yml",
+                      "size": 342,
+                      "mtime": "2026-08-21T10:54:03.000Z"
+                    },
+                    {
+                      "name": "smite.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants/Packet-Vanilla/smite.yml",
+                      "size": 614,
+                      "mtime": "2026-08-21T10:54:03.000Z"
+                    },
+                    {
+                      "name": "soul_speed.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants/Packet-Vanilla/soul_speed.yml",
+                      "size": 431,
+                      "mtime": "2026-08-21T10:54:04.000Z"
+                    },
+                    {
+                      "name": "sweeping_edge.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants/Packet-Vanilla/sweeping_edge.yml",
+                      "size": 409,
+                      "mtime": "2026-08-21T10:54:04.000Z"
+                    },
+                    {
+                      "name": "swift_sneak.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants/Packet-Vanilla/swift_sneak.yml",
+                      "size": 414,
+                      "mtime": "2026-08-21T10:54:04.000Z"
+                    },
+                    {
+                      "name": "thorns.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants/Packet-Vanilla/thorns.yml",
+                      "size": 435,
+                      "mtime": "2026-08-21T10:54:05.000Z"
+                    },
+                    {
+                      "name": "unbreaking.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants/Packet-Vanilla/unbreaking.yml",
+                      "size": 264,
+                      "mtime": "2026-08-21T10:54:05.000Z"
+                    },
+                    {
+                      "name": "vanishing_curse.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants/Packet-Vanilla/vanishing_curse.yml",
+                      "size": 352,
+                      "mtime": "2026-08-21T10:54:06.000Z"
+                    },
+                    {
+                      "name": "wind_burst.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants/Packet-Vanilla/wind_burst.yml",
+                      "size": 380,
+                      "mtime": "2026-08-21T10:54:06.000Z"
+                    }
+                  ]
+                },
+                {
+                  "name": "rarity.yml",
+                  "type": "file",
+                  "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants/rarity.yml",
+                  "size": 2169,
+                  "mtime": "2026-08-21T10:54:06.000Z"
+                },
+                {
+                  "name": "skill.yml",
+                  "type": "file",
+                  "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants/skill.yml",
+                  "size": 748,
+                  "mtime": "2026-08-21T10:54:07.000Z"
+                },
+                {
+                  "name": "Stellarity",
+                  "type": "directory",
+                  "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants/Stellarity",
+                  "children": [
+                    {
+                      "name": "_technical",
+                      "type": "directory",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants/Stellarity/_technical",
+                      "children": [
+                        {
+                          "name": "daybroken.yml",
+                          "type": "file",
+                          "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants/Stellarity/_technical/daybroken.yml",
+                          "size": 606,
+                          "mtime": "2026-08-21T10:54:13.000Z"
+                        },
+                        {
+                          "name": "infernal_infusion.yml",
+                          "type": "file",
+                          "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants/Stellarity/_technical/infernal_infusion.yml",
+                          "size": 643,
+                          "mtime": "2026-08-21T10:54:13.000Z"
+                        },
+                        {
+                          "name": "mighty_wind.yml",
+                          "type": "file",
+                          "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants/Stellarity/_technical/mighty_wind.yml",
+                          "size": 644,
+                          "mtime": "2026-08-21T10:54:14.000Z"
+                        },
+                        {
+                          "name": "prismatic_pearl_return.yml",
+                          "type": "file",
+                          "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants/Stellarity/_technical/prismatic_pearl_return.yml",
+                          "size": 668,
+                          "mtime": "2026-08-21T10:54:14.000Z"
+                        },
+                        {
+                          "name": "soul_harvest.yml",
+                          "type": "file",
+                          "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants/Stellarity/_technical/soul_harvest.yml",
+                          "size": 618,
+                          "mtime": "2026-08-21T10:54:15.000Z"
+                        },
+                        {
+                          "name": "void_pendant_amethyst.yml",
+                          "type": "file",
+                          "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants/Stellarity/_technical/void_pendant_amethyst.yml",
+                          "size": 621,
+                          "mtime": "2026-08-21T10:54:16.000Z"
+                        },
+                        {
+                          "name": "void_pendant_copper.yml",
+                          "type": "file",
+                          "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants/Stellarity/_technical/void_pendant_copper.yml",
+                          "size": 629,
+                          "mtime": "2026-08-21T10:54:16.000Z"
+                        },
+                        {
+                          "name": "void_pendant_diamond.yml",
+                          "type": "file",
+                          "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants/Stellarity/_technical/void_pendant_diamond.yml",
+                          "size": 616,
+                          "mtime": "2026-08-21T10:54:16.000Z"
+                        },
+                        {
+                          "name": "void_pendant_emerald.yml",
+                          "type": "file",
+                          "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants/Stellarity/_technical/void_pendant_emerald.yml",
+                          "size": 616,
+                          "mtime": "2026-08-21T10:54:17.000Z"
+                        },
+                        {
+                          "name": "void_pendant_gold.yml",
+                          "type": "file",
+                          "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants/Stellarity/_technical/void_pendant_gold.yml",
+                          "size": 602,
+                          "mtime": "2026-08-21T10:54:17.000Z"
+                        },
+                        {
+                          "name": "void_pendant_iron.yml",
+                          "type": "file",
+                          "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants/Stellarity/_technical/void_pendant_iron.yml",
+                          "size": 608,
+                          "mtime": "2026-08-21T10:54:18.000Z"
+                        },
+                        {
+                          "name": "void_pendant_lapis.yml",
+                          "type": "file",
+                          "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants/Stellarity/_technical/void_pendant_lapis.yml",
+                          "size": 657,
+                          "mtime": "2026-08-21T10:54:18.000Z"
+                        },
+                        {
+                          "name": "void_pendant_netherite.yml",
+                          "type": "file",
+                          "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants/Stellarity/_technical/void_pendant_netherite.yml",
+                          "size": 621,
+                          "mtime": "2026-08-21T10:54:19.000Z"
+                        },
+                        {
+                          "name": "void_pendant_quartz.yml",
+                          "type": "file",
+                          "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants/Stellarity/_technical/void_pendant_quartz.yml",
+                          "size": 621,
+                          "mtime": "2026-08-21T10:54:19.000Z"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "ambush.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants/Stellarity/ambush.yml",
+                      "size": 1352,
+                      "mtime": "2026-08-21T10:54:08.000Z"
+                    },
+                    {
+                      "name": "critical_strike.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants/Stellarity/critical_strike.yml",
+                      "size": 1816,
+                      "mtime": "2026-08-21T10:54:09.000Z"
+                    },
+                    {
+                      "name": "draconic.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants/Stellarity/draconic.yml",
+                      "size": 688,
+                      "mtime": "2026-08-21T10:54:09.000Z"
+                    },
+                    {
+                      "name": "dune_speed.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants/Stellarity/dune_speed.yml",
+                      "size": 1503,
+                      "mtime": "2026-08-21T10:54:09.000Z"
+                    },
+                    {
+                      "name": "levitation_shot.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants/Stellarity/levitation_shot.yml",
+                      "size": 1408,
+                      "mtime": "2026-08-21T10:54:10.000Z"
+                    },
+                    {
+                      "name": "night_vision.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants/Stellarity/night_vision.yml",
+                      "size": 1144,
+                      "mtime": "2026-08-21T10:54:10.000Z"
+                    },
+                    {
+                      "name": "plated.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants/Stellarity/plated.yml",
+                      "size": 693,
+                      "mtime": "2026-08-21T10:54:11.000Z"
+                    },
+                    {
+                      "name": "soaring.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants/Stellarity/soaring.yml",
+                      "size": 624,
+                      "mtime": "2026-08-21T10:54:11.000Z"
+                    },
+                    {
+                      "name": "void_shot.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants/Stellarity/void_shot.yml",
+                      "size": 572,
+                      "mtime": "2026-08-21T10:54:12.000Z"
+                    },
+                    {
+                      "name": "void_strike.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants/Stellarity/void_strike.yml",
+                      "size": 1364,
+                      "mtime": "2026-08-21T10:54:12.000Z"
+                    }
+                  ]
+                },
+                {
+                  "name": "target.yml",
+                  "type": "file",
+                  "path": "aiyatsbus-create-enchant-skill/reference-configs/aiyatsbus-enchants/target.yml",
+                  "size": 11635,
+                  "mtime": "2026-08-21T10:54:19.000Z"
+                }
+              ]
+            },
+            {
+              "name": "nereus-config.yml",
+              "type": "file",
+              "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-config.yml",
+              "size": 729,
+              "mtime": "2026-08-21T10:57:20.000Z"
+            },
+            {
+              "name": "nereus-enchantments",
+              "type": "directory",
+              "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments",
+              "children": [
+                {
+                  "name": "artifact",
+                  "type": "directory",
+                  "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/artifact",
+                  "children": [
+                    {
+                      "name": "anger_artifact_specialized.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/artifact/anger_artifact_specialized.yml",
+                      "size": 484,
+                      "mtime": "2026-08-21T10:54:21.000Z"
+                    },
+                    {
+                      "name": "anger_artifact.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/artifact/anger_artifact.yml",
+                      "size": 439,
+                      "mtime": "2026-08-21T10:54:21.000Z"
+                    },
+                    {
+                      "name": "ash_artifact_specialized.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/artifact/ash_artifact_specialized.yml",
+                      "size": 485,
+                      "mtime": "2026-08-21T10:54:23.000Z"
+                    },
+                    {
+                      "name": "ash_artifact.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/artifact/ash_artifact.yml",
+                      "size": 442,
+                      "mtime": "2026-08-21T10:54:22.000Z"
+                    },
+                    {
+                      "name": "clouds_artifact_specialized.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/artifact/clouds_artifact_specialized.yml",
+                      "size": 473,
+                      "mtime": "2026-08-21T10:54:24.000Z"
+                    },
+                    {
+                      "name": "clouds_artifact.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/artifact/clouds_artifact.yml",
+                      "size": 430,
+                      "mtime": "2026-08-21T10:54:24.000Z"
+                    },
+                    {
+                      "name": "copper_artifact_specialized.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/artifact/copper_artifact_specialized.yml",
+                      "size": 462,
+                      "mtime": "2026-08-21T10:54:26.000Z"
+                    },
+                    {
+                      "name": "copper_artifact.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/artifact/copper_artifact.yml",
+                      "size": 430,
+                      "mtime": "2026-08-21T10:54:25.000Z"
+                    },
+                    {
+                      "name": "crimson_artifact_specialized.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/artifact/crimson_artifact_specialized.yml",
+                      "size": 483,
+                      "mtime": "2026-08-21T10:54:27.000Z"
+                    },
+                    {
+                      "name": "crimson_artifact.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/artifact/crimson_artifact.yml",
+                      "size": 440,
+                      "mtime": "2026-08-21T10:54:26.000Z"
+                    },
+                    {
+                      "name": "damage_artifact_specialized.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/artifact/damage_artifact_specialized.yml",
+                      "size": 473,
+                      "mtime": "2026-08-21T10:54:28.000Z"
+                    },
+                    {
+                      "name": "damage_artifact.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/artifact/damage_artifact.yml",
+                      "size": 430,
+                      "mtime": "2026-08-21T10:54:27.000Z"
+                    },
+                    {
+                      "name": "dragon_artifact_specialized.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/artifact/dragon_artifact_specialized.yml",
+                      "size": 473,
+                      "mtime": "2026-08-21T10:54:29.000Z"
+                    },
+                    {
+                      "name": "dragon_artifact.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/artifact/dragon_artifact.yml",
+                      "size": 430,
+                      "mtime": "2026-08-21T10:54:28.000Z"
+                    },
+                    {
+                      "name": "dust_artifact_specialized.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/artifact/dust_artifact_specialized.yml",
+                      "size": 471,
+                      "mtime": "2026-08-21T10:54:31.000Z"
+                    },
+                    {
+                      "name": "dust_artifact.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/artifact/dust_artifact.yml",
+                      "size": 428,
+                      "mtime": "2026-08-21T10:54:30.000Z"
+                    },
+                    {
+                      "name": "emerald_artifact_specialized.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/artifact/emerald_artifact_specialized.yml",
+                      "size": 477,
+                      "mtime": "2026-08-21T10:54:32.000Z"
+                    },
+                    {
+                      "name": "emerald_artifact.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/artifact/emerald_artifact.yml",
+                      "size": 432,
+                      "mtime": "2026-08-21T10:54:31.000Z"
+                    },
+                    {
+                      "name": "enchantment_artifact_specialized.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/artifact/enchantment_artifact_specialized.yml",
+                      "size": 478,
+                      "mtime": "2026-08-21T10:54:33.000Z"
+                    },
+                    {
+                      "name": "enchantment_artifact.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/artifact/enchantment_artifact.yml",
+                      "size": 435,
+                      "mtime": "2026-08-21T10:54:32.000Z"
+                    },
+                    {
+                      "name": "end_artifact_specialized.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/artifact/end_artifact_specialized.yml",
+                      "size": 470,
+                      "mtime": "2026-08-21T10:54:34.000Z"
+                    },
+                    {
+                      "name": "end_artifact.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/artifact/end_artifact.yml",
+                      "size": 427,
+                      "mtime": "2026-08-21T10:54:34.000Z"
+                    },
+                    {
+                      "name": "fire_artifact_specialized.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/artifact/fire_artifact_specialized.yml",
+                      "size": 471,
+                      "mtime": "2026-08-21T10:54:35.000Z"
+                    },
+                    {
+                      "name": "fire_artifact.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/artifact/fire_artifact.yml",
+                      "size": 426,
+                      "mtime": "2026-08-21T10:54:35.000Z"
+                    },
+                    {
+                      "name": "glow_artifact_specialized.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/artifact/glow_artifact_specialized.yml",
+                      "size": 460,
+                      "mtime": "2026-08-21T10:54:37.000Z"
+                    },
+                    {
+                      "name": "glow_artifact.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/artifact/glow_artifact.yml",
+                      "size": 428,
+                      "mtime": "2026-08-21T10:54:36.000Z"
+                    },
+                    {
+                      "name": "heart_artifact_specialized.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/artifact/heart_artifact_specialized.yml",
+                      "size": 472,
+                      "mtime": "2026-08-21T10:54:38.000Z"
+                    },
+                    {
+                      "name": "heart_artifact.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/artifact/heart_artifact.yml",
+                      "size": 429,
+                      "mtime": "2026-08-21T10:54:38.000Z"
+                    },
+                    {
+                      "name": "honey_artifact_specialized.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/artifact/honey_artifact_specialized.yml",
+                      "size": 481,
+                      "mtime": "2026-08-21T10:54:40.000Z"
+                    },
+                    {
+                      "name": "honey_artifact.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/artifact/honey_artifact.yml",
+                      "size": 438,
+                      "mtime": "2026-08-21T10:54:39.000Z"
+                    },
+                    {
+                      "name": "ink_artifact_specialized.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/artifact/ink_artifact_specialized.yml",
+                      "size": 470,
+                      "mtime": "2026-08-21T10:54:41.000Z"
+                    },
+                    {
+                      "name": "ink_artifact.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/artifact/ink_artifact.yml",
+                      "size": 427,
+                      "mtime": "2026-08-21T10:54:40.000Z"
+                    },
+                    {
+                      "name": "lava_artifact_specialized.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/artifact/lava_artifact_specialized.yml",
+                      "size": 480,
+                      "mtime": "2026-08-21T10:54:42.000Z"
+                    },
+                    {
+                      "name": "lava_artifact.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/artifact/lava_artifact.yml",
+                      "size": 437,
+                      "mtime": "2026-08-21T10:54:41.000Z"
+                    },
+                    {
+                      "name": "light_artifact_specialized.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/artifact/light_artifact_specialized.yml",
+                      "size": 461,
+                      "mtime": "2026-08-21T10:54:43.000Z"
+                    },
+                    {
+                      "name": "light_artifact.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/artifact/light_artifact.yml",
+                      "size": 429,
+                      "mtime": "2026-08-21T10:54:42.000Z"
+                    },
+                    {
+                      "name": "lime_artifact_specialized.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/artifact/lime_artifact_specialized.yml",
+                      "size": 471,
+                      "mtime": "2026-08-21T10:54:45.000Z"
+                    },
+                    {
+                      "name": "lime_artifact.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/artifact/lime_artifact.yml",
+                      "size": 428,
+                      "mtime": "2026-08-21T10:54:44.000Z"
+                    },
+                    {
+                      "name": "magic_artifact_specialized.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/artifact/magic_artifact_specialized.yml",
+                      "size": 472,
+                      "mtime": "2026-08-21T10:54:47.000Z"
+                    },
+                    {
+                      "name": "magic_artifact.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/artifact/magic_artifact.yml",
+                      "size": 429,
+                      "mtime": "2026-08-21T10:54:47.000Z"
+                    },
+                    {
+                      "name": "magma_artifact_specialized.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/artifact/magma_artifact_specialized.yml",
+                      "size": 478,
+                      "mtime": "2026-08-21T10:54:48.000Z"
+                    },
+                    {
+                      "name": "magma_artifact.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/artifact/magma_artifact.yml",
+                      "size": 435,
+                      "mtime": "2026-08-21T10:54:48.000Z"
+                    },
+                    {
+                      "name": "music_artifact_specialized.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/artifact/music_artifact_specialized.yml",
+                      "size": 475,
+                      "mtime": "2026-08-21T10:54:49.000Z"
+                    },
+                    {
+                      "name": "music_artifact.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/artifact/music_artifact.yml",
+                      "size": 432,
+                      "mtime": "2026-08-21T10:54:49.000Z"
+                    },
+                    {
+                      "name": "nautilus_artifact_specialized.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/artifact/nautilus_artifact_specialized.yml",
+                      "size": 484,
+                      "mtime": "2026-08-21T10:54:51.000Z"
+                    },
+                    {
+                      "name": "nautilus_artifact.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/artifact/nautilus_artifact.yml",
+                      "size": 441,
+                      "mtime": "2026-08-21T10:54:50.000Z"
+                    },
+                    {
+                      "name": "nether_artifact_specialized.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/artifact/nether_artifact_specialized.yml",
+                      "size": 479,
+                      "mtime": "2026-08-21T10:54:52.000Z"
+                    },
+                    {
+                      "name": "nether_artifact.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/artifact/nether_artifact.yml",
+                      "size": 436,
+                      "mtime": "2026-08-21T10:54:52.000Z"
+                    },
+                    {
+                      "name": "rain_artifact_specialized.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/artifact/rain_artifact_specialized.yml",
+                      "size": 502,
+                      "mtime": "2026-08-21T10:54:53.000Z"
+                    },
+                    {
+                      "name": "rain_artifact.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/artifact/rain_artifact.yml",
+                      "size": 425,
+                      "mtime": "2026-08-21T10:54:53.000Z"
+                    },
+                    {
+                      "name": "redstone_artifact_specialized.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/artifact/redstone_artifact_specialized.yml",
+                      "size": 475,
+                      "mtime": "2026-08-21T10:54:54.000Z"
+                    },
+                    {
+                      "name": "redstone_artifact.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/artifact/redstone_artifact.yml",
+                      "size": 432,
+                      "mtime": "2026-08-21T10:54:54.000Z"
+                    },
+                    {
+                      "name": "slime_artifact_specialized.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/artifact/slime_artifact_specialized.yml",
+                      "size": 500,
+                      "mtime": "2026-08-21T10:54:55.000Z"
+                    },
+                    {
+                      "name": "slime_artifact.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/artifact/slime_artifact.yml",
+                      "size": 424,
+                      "mtime": "2026-08-21T10:54:55.000Z"
+                    },
+                    {
+                      "name": "smoke_artifact_specialized.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/artifact/smoke_artifact_specialized.yml",
+                      "size": 494,
+                      "mtime": "2026-08-21T10:54:57.000Z"
+                    },
+                    {
+                      "name": "smoke_artifact.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/artifact/smoke_artifact.yml",
+                      "size": 429,
+                      "mtime": "2026-08-21T10:54:56.000Z"
+                    },
+                    {
+                      "name": "snow_artifact_specialized.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/artifact/snow_artifact_specialized.yml",
+                      "size": 471,
+                      "mtime": "2026-08-21T10:54:58.000Z"
+                    },
+                    {
+                      "name": "snow_artifact.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/artifact/snow_artifact.yml",
+                      "size": 428,
+                      "mtime": "2026-08-21T10:54:57.000Z"
+                    },
+                    {
+                      "name": "soul_artifact_specialized.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/artifact/soul_artifact_specialized.yml",
+                      "size": 471,
+                      "mtime": "2026-08-21T10:55:00.000Z"
+                    },
+                    {
+                      "name": "soul_artifact.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/artifact/soul_artifact.yml",
+                      "size": 428,
+                      "mtime": "2026-08-21T10:54:59.000Z"
+                    },
+                    {
+                      "name": "soul_fire_artifact_specialized.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/artifact/soul_fire_artifact_specialized.yml",
+                      "size": 481,
+                      "mtime": "2026-08-21T10:55:01.000Z"
+                    },
+                    {
+                      "name": "soul_fire_artifact.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/artifact/soul_fire_artifact.yml",
+                      "size": 438,
+                      "mtime": "2026-08-21T10:55:00.000Z"
+                    },
+                    {
+                      "name": "spark_artifact_specialized.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/artifact/spark_artifact_specialized.yml",
+                      "size": 461,
+                      "mtime": "2026-08-21T10:55:03.000Z"
+                    },
+                    {
+                      "name": "spark_artifact.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/artifact/spark_artifact.yml",
+                      "size": 429,
+                      "mtime": "2026-08-21T10:55:03.000Z"
+                    },
+                    {
+                      "name": "sparkle_artifact_specialized.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/artifact/sparkle_artifact_specialized.yml",
+                      "size": 474,
+                      "mtime": "2026-08-21T10:55:02.000Z"
+                    },
+                    {
+                      "name": "sparkle_artifact.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/artifact/sparkle_artifact.yml",
+                      "size": 431,
+                      "mtime": "2026-08-21T10:55:01.000Z"
+                    },
+                    {
+                      "name": "spore_artifact_specialized.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/artifact/spore_artifact_specialized.yml",
+                      "size": 461,
+                      "mtime": "2026-08-21T10:55:04.000Z"
+                    },
+                    {
+                      "name": "spore_artifact.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/artifact/spore_artifact.yml",
+                      "size": 429,
+                      "mtime": "2026-08-21T10:55:04.000Z"
+                    },
+                    {
+                      "name": "sweep_artifact_specialized.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/artifact/sweep_artifact_specialized.yml",
+                      "size": 481,
+                      "mtime": "2026-08-21T10:55:06.000Z"
+                    },
+                    {
+                      "name": "sweep_artifact.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/artifact/sweep_artifact.yml",
+                      "size": 438,
+                      "mtime": "2026-08-21T10:55:05.000Z"
+                    },
+                    {
+                      "name": "tear_artifact_specialized.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/artifact/tear_artifact_specialized.yml",
+                      "size": 483,
+                      "mtime": "2026-08-21T10:55:07.000Z"
+                    },
+                    {
+                      "name": "tear_artifact.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/artifact/tear_artifact.yml",
+                      "size": 440,
+                      "mtime": "2026-08-21T10:55:07.000Z"
+                    },
+                    {
+                      "name": "totem_artifact_specialized.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/artifact/totem_artifact_specialized.yml",
+                      "size": 478,
+                      "mtime": "2026-08-21T10:55:08.000Z"
+                    },
+                    {
+                      "name": "totem_artifact.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/artifact/totem_artifact.yml",
+                      "size": 435,
+                      "mtime": "2026-08-21T10:55:08.000Z"
+                    },
+                    {
+                      "name": "villager_artifact_specialized.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/artifact/villager_artifact_specialized.yml",
+                      "size": 503,
+                      "mtime": "2026-08-21T10:55:09.000Z"
+                    },
+                    {
+                      "name": "villager_artifact.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/artifact/villager_artifact.yml",
+                      "size": 438,
+                      "mtime": "2026-08-21T10:55:09.000Z"
+                    },
+                    {
+                      "name": "warped_artifact_specialized.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/artifact/warped_artifact_specialized.yml",
+                      "size": 501,
+                      "mtime": "2026-08-21T10:55:11.000Z"
+                    },
+                    {
+                      "name": "warped_artifact.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/artifact/warped_artifact.yml",
+                      "size": 436,
+                      "mtime": "2026-08-21T10:55:10.000Z"
+                    },
+                    {
+                      "name": "water_artifact_specialized.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/artifact/water_artifact_specialized.yml",
+                      "size": 503,
+                      "mtime": "2026-08-21T10:55:12.000Z"
+                    },
+                    {
+                      "name": "water_artifact.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/artifact/water_artifact.yml",
+                      "size": 438,
+                      "mtime": "2026-08-21T10:55:11.000Z"
+                    },
+                    {
+                      "name": "wax_artifact_specialized.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/artifact/wax_artifact_specialized.yml",
+                      "size": 492,
+                      "mtime": "2026-08-21T10:55:14.000Z"
+                    },
+                    {
+                      "name": "wax_artifact.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/artifact/wax_artifact.yml",
+                      "size": 427,
+                      "mtime": "2026-08-21T10:55:13.000Z"
+                    },
+                    {
+                      "name": "witch_artifact_specialized.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/artifact/witch_artifact_specialized.yml",
+                      "size": 472,
+                      "mtime": "2026-08-21T10:55:15.000Z"
+                    },
+                    {
+                      "name": "witch_artifact.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/artifact/witch_artifact.yml",
+                      "size": 429,
+                      "mtime": "2026-08-21T10:55:14.000Z"
+                    },
+                    {
+                      "name": "zap_artifact_specialized.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/artifact/zap_artifact_specialized.yml",
+                      "size": 470,
+                      "mtime": "2026-08-21T10:55:16.000Z"
+                    },
+                    {
+                      "name": "zap_artifact.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/artifact/zap_artifact.yml",
+                      "size": 427,
+                      "mtime": "2026-08-21T10:55:15.000Z"
+                    }
+                  ]
+                },
+                {
+                  "name": "artifacts.yml",
+                  "type": "file",
+                  "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/artifacts.yml",
+                  "size": 461,
+                  "mtime": "2026-08-21T10:55:16.000Z"
+                },
+                {
+                  "name": "curse",
+                  "type": "directory",
+                  "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/curse",
+                  "children": [
+                    {
+                      "name": "breaklessness_curse.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/curse/breaklessness_curse.yml",
+                      "size": 407,
+                      "mtime": "2026-08-21T10:55:17.000Z"
+                    },
+                    {
+                      "name": "calling_curse.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/curse/calling_curse.yml",
+                      "size": 428,
+                      "mtime": "2026-08-21T10:55:17.000Z"
+                    },
+                    {
+                      "name": "decay_curse.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/curse/decay_curse.yml",
+                      "size": 405,
+                      "mtime": "2026-08-21T10:55:18.000Z"
+                    },
+                    {
+                      "name": "fragility_curse.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/curse/fragility_curse.yml",
+                      "size": 396,
+                      "mtime": "2026-08-21T10:55:18.000Z"
+                    },
+                    {
+                      "name": "harmlessness_curse.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/curse/harmlessness_curse.yml",
+                      "size": 376,
+                      "mtime": "2026-08-21T10:55:20.000Z"
+                    },
+                    {
+                      "name": "hunger_curse.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/curse/hunger_curse.yml",
+                      "size": 373,
+                      "mtime": "2026-08-21T10:55:21.000Z"
+                    },
+                    {
+                      "name": "inaccuracy_curse.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/curse/inaccuracy_curse.yml",
+                      "size": 366,
+                      "mtime": "2026-08-21T10:55:21.000Z"
+                    },
+                    {
+                      "name": "misfortune_curse.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/curse/misfortune_curse.yml",
+                      "size": 417,
+                      "mtime": "2026-08-21T10:55:22.000Z"
+                    },
+                    {
+                      "name": "permanence_curse.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/curse/permanence_curse.yml",
+                      "size": 331,
+                      "mtime": "2026-08-21T10:55:22.000Z"
+                    }
+                  ]
+                },
+                {
+                  "name": "enchants.yml",
+                  "type": "file",
+                  "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/enchants.yml",
+                  "size": 4819,
+                  "mtime": "2026-08-21T10:55:23.000Z"
+                },
+                {
+                  "name": "rarities.yml",
+                  "type": "file",
+                  "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/rarities.yml",
+                  "size": 3730,
+                  "mtime": "2026-08-21T10:55:23.000Z"
+                },
+                {
+                  "name": "simple",
+                  "type": "directory",
+                  "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple",
+                  "children": [
+                    {
+                      "name": "abrasion.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/abrasion.yml",
+                      "size": 418,
+                      "mtime": "2026-08-21T10:55:24.000Z"
+                    },
+                    {
+                      "name": "accumulation.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/accumulation.yml",
+                      "size": 405,
+                      "mtime": "2026-08-21T10:55:24.000Z"
+                    },
+                    {
+                      "name": "aerial.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/aerial.yml",
+                      "size": 372,
+                      "mtime": "2026-08-21T10:55:25.000Z"
+                    },
+                    {
+                      "name": "aiming.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/aiming.yml",
+                      "size": 398,
+                      "mtime": "2026-08-21T10:55:25.000Z"
+                    },
+                    {
+                      "name": "annihilate.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/annihilate.yml",
+                      "size": 401,
+                      "mtime": "2026-08-21T10:55:26.000Z"
+                    },
+                    {
+                      "name": "arachnid.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/arachnid.yml",
+                      "size": 475,
+                      "mtime": "2026-08-21T10:55:28.000Z"
+                    },
+                    {
+                      "name": "arborist.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/arborist.yml",
+                      "size": 411,
+                      "mtime": "2026-08-21T10:55:28.000Z"
+                    },
+                    {
+                      "name": "arcanic.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/arcanic.yml",
+                      "size": 387,
+                      "mtime": "2026-08-21T10:55:29.000Z"
+                    },
+                    {
+                      "name": "atmospheric.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/atmospheric.yml",
+                      "size": 372,
+                      "mtime": "2026-08-21T10:55:29.000Z"
+                    },
+                    {
+                      "name": "backstab.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/backstab.yml",
+                      "size": 371,
+                      "mtime": "2026-08-21T10:55:30.000Z"
+                    },
+                    {
+                      "name": "bantering.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/bantering.yml",
+                      "size": 546,
+                      "mtime": "2026-08-21T10:55:30.000Z"
+                    },
+                    {
+                      "name": "beheading.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/beheading.yml",
+                      "size": 971,
+                      "mtime": "2026-08-21T10:55:31.000Z"
+                    },
+                    {
+                      "name": "blast_mining.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/blast_mining.yml",
+                      "size": 714,
+                      "mtime": "2026-08-21T10:55:31.000Z"
+                    },
+                    {
+                      "name": "blind.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/blind.yml",
+                      "size": 406,
+                      "mtime": "2026-08-21T10:55:32.000Z"
+                    },
+                    {
+                      "name": "block_breather.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/block_breather.yml",
+                      "size": 347,
+                      "mtime": "2026-08-21T10:55:33.000Z"
+                    },
+                    {
+                      "name": "boss_hunter.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/boss_hunter.yml",
+                      "size": 476,
+                      "mtime": "2026-08-21T10:55:33.000Z"
+                    },
+                    {
+                      "name": "buckshot.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/buckshot.yml",
+                      "size": 398,
+                      "mtime": "2026-08-21T10:55:34.000Z"
+                    },
+                    {
+                      "name": "carve.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/carve.yml",
+                      "size": 477,
+                      "mtime": "2026-08-21T10:55:35.000Z"
+                    },
+                    {
+                      "name": "cerebral.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/cerebral.yml",
+                      "size": 399,
+                      "mtime": "2026-08-21T10:55:35.000Z"
+                    },
+                    {
+                      "name": "chopless.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/chopless.yml",
+                      "size": 397,
+                      "mtime": "2026-08-21T10:55:36.000Z"
+                    },
+                    {
+                      "name": "cleave.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/cleave.yml",
+                      "size": 419,
+                      "mtime": "2026-08-21T10:55:36.000Z"
+                    },
+                    {
+                      "name": "collateral.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/collateral.yml",
+                      "size": 382,
+                      "mtime": "2026-08-21T10:55:37.000Z"
+                    },
+                    {
+                      "name": "conceal.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/conceal.yml",
+                      "size": 393,
+                      "mtime": "2026-08-21T10:55:37.000Z"
+                    },
+                    {
+                      "name": "confusion.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/confusion.yml",
+                      "size": 397,
+                      "mtime": "2026-08-21T10:55:38.000Z"
+                    },
+                    {
+                      "name": "conversion.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/conversion.yml",
+                      "size": 412,
+                      "mtime": "2026-08-21T10:55:39.000Z"
+                    },
+                    {
+                      "name": "convertion.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/convertion.yml",
+                      "size": 333,
+                      "mtime": "2026-08-21T10:55:39.000Z"
+                    },
+                    {
+                      "name": "coordination.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/coordination.yml",
+                      "size": 358,
+                      "mtime": "2026-08-21T10:55:40.000Z"
+                    },
+                    {
+                      "name": "corrosive.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/corrosive.yml",
+                      "size": 397,
+                      "mtime": "2026-08-21T10:55:40.000Z"
+                    },
+                    {
+                      "name": "cranial.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/cranial.yml",
+                      "size": 363,
+                      "mtime": "2026-08-21T10:55:41.000Z"
+                    },
+                    {
+                      "name": "criticals.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/criticals.yml",
+                      "size": 365,
+                      "mtime": "2026-08-21T10:55:42.000Z"
+                    },
+                    {
+                      "name": "cubism.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/cubism.yml",
+                      "size": 515,
+                      "mtime": "2026-08-21T10:55:42.000Z"
+                    },
+                    {
+                      "name": "defender.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/defender.yml",
+                      "size": 362,
+                      "mtime": "2026-08-21T10:55:43.000Z"
+                    },
+                    {
+                      "name": "deflection.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/deflection.yml",
+                      "size": 403,
+                      "mtime": "2026-08-21T10:55:43.000Z"
+                    },
+                    {
+                      "name": "defusion.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/defusion.yml",
+                      "size": 589,
+                      "mtime": "2026-08-21T10:55:44.000Z"
+                    },
+                    {
+                      "name": "dejecting.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/dejecting.yml",
+                      "size": 465,
+                      "mtime": "2026-08-21T10:55:45.000Z"
+                    },
+                    {
+                      "name": "dexterous.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/dexterous.yml",
+                      "size": 354,
+                      "mtime": "2026-08-21T10:55:45.000Z"
+                    },
+                    {
+                      "name": "disable.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/disable.yml",
+                      "size": 430,
+                      "mtime": "2026-08-21T10:55:46.000Z"
+                    },
+                    {
+                      "name": "disappear.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/disappear.yml",
+                      "size": 431,
+                      "mtime": "2026-08-21T10:55:46.000Z"
+                    },
+                    {
+                      "name": "diurnal.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/diurnal.yml",
+                      "size": 371,
+                      "mtime": "2026-08-21T10:55:47.000Z"
+                    },
+                    {
+                      "name": "diverse.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/diverse.yml",
+                      "size": 354,
+                      "mtime": "2026-08-21T10:55:48.000Z"
+                    },
+                    {
+                      "name": "dousing.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/dousing.yml",
+                      "size": 382,
+                      "mtime": "2026-08-21T10:55:48.000Z"
+                    },
+                    {
+                      "name": "drill.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/drill.yml",
+                      "size": 521,
+                      "mtime": "2026-08-21T10:55:50.000Z"
+                    },
+                    {
+                      "name": "dullness.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/dullness.yml",
+                      "size": 434,
+                      "mtime": "2026-08-21T10:55:50.000Z"
+                    },
+                    {
+                      "name": "dweller.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/dweller.yml",
+                      "size": 368,
+                      "mtime": "2026-08-21T10:55:51.000Z"
+                    },
+                    {
+                      "name": "economical.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/economical.yml",
+                      "size": 361,
+                      "mtime": "2026-08-21T10:55:51.000Z"
+                    },
+                    {
+                      "name": "electroshock.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/electroshock.yml",
+                      "size": 374,
+                      "mtime": "2026-08-21T10:55:52.000Z"
+                    },
+                    {
+                      "name": "end_infusion.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/end_infusion.yml",
+                      "size": 385,
+                      "mtime": "2026-08-21T10:55:53.000Z"
+                    },
+                    {
+                      "name": "ender_slayer.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/ender_slayer.yml",
+                      "size": 467,
+                      "mtime": "2026-08-21T10:55:53.000Z"
+                    },
+                    {
+                      "name": "energizing.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/energizing.yml",
+                      "size": 401,
+                      "mtime": "2026-08-21T10:55:54.000Z"
+                    },
+                    {
+                      "name": "evasion.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/evasion.yml",
+                      "size": 386,
+                      "mtime": "2026-08-21T10:55:54.000Z"
+                    },
+                    {
+                      "name": "extinguishing.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/extinguishing.yml",
+                      "size": 423,
+                      "mtime": "2026-08-21T10:55:55.000Z"
+                    },
+                    {
+                      "name": "extract.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/extract.yml",
+                      "size": 425,
+                      "mtime": "2026-08-21T10:55:56.000Z"
+                    },
+                    {
+                      "name": "famine.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/famine.yml",
+                      "size": 435,
+                      "mtime": "2026-08-21T10:55:57.000Z"
+                    },
+                    {
+                      "name": "farmhand.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/farmhand.yml",
+                      "size": 407,
+                      "mtime": "2026-08-21T10:55:58.000Z"
+                    },
+                    {
+                      "name": "fetching.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/fetching.yml",
+                      "size": 376,
+                      "mtime": "2026-08-21T10:55:59.000Z"
+                    },
+                    {
+                      "name": "finality.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/finality.yml",
+                      "size": 475,
+                      "mtime": "2026-08-21T10:56:00.000Z"
+                    },
+                    {
+                      "name": "fire_affinity.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/fire_affinity.yml",
+                      "size": 406,
+                      "mtime": "2026-08-21T10:56:00.000Z"
+                    },
+                    {
+                      "name": "first_strike.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/first_strike.yml",
+                      "size": 360,
+                      "mtime": "2026-08-21T10:56:01.000Z"
+                    },
+                    {
+                      "name": "flinch.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/flinch.yml",
+                      "size": 403,
+                      "mtime": "2026-08-21T10:56:01.000Z"
+                    },
+                    {
+                      "name": "force.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/force.yml",
+                      "size": 404,
+                      "mtime": "2026-08-21T10:56:02.000Z"
+                    },
+                    {
+                      "name": "forcefield.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/forcefield.yml",
+                      "size": 461,
+                      "mtime": "2026-08-21T10:56:02.000Z"
+                    },
+                    {
+                      "name": "freerunner.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/freerunner.yml",
+                      "size": 353,
+                      "mtime": "2026-08-21T10:56:03.000Z"
+                    },
+                    {
+                      "name": "frenzy.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/frenzy.yml",
+                      "size": 364,
+                      "mtime": "2026-08-21T10:56:04.000Z"
+                    },
+                    {
+                      "name": "frozen.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/frozen.yml",
+                      "size": 448,
+                      "mtime": "2026-08-21T10:56:05.000Z"
+                    },
+                    {
+                      "name": "fury.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/fury.yml",
+                      "size": 403,
+                      "mtime": "2026-08-21T10:56:05.000Z"
+                    },
+                    {
+                      "name": "goliath.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/goliath.yml",
+                      "size": 377,
+                      "mtime": "2026-08-21T10:56:06.000Z"
+                    },
+                    {
+                      "name": "graceful.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/graceful.yml",
+                      "size": 366,
+                      "mtime": "2026-08-21T10:56:06.000Z"
+                    },
+                    {
+                      "name": "grapple.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/grapple.yml",
+                      "size": 395,
+                      "mtime": "2026-08-21T10:56:07.000Z"
+                    },
+                    {
+                      "name": "green_thumb.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/green_thumb.yml",
+                      "size": 359,
+                      "mtime": "2026-08-21T10:56:08.000Z"
+                    },
+                    {
+                      "name": "grit.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/grit.yml",
+                      "size": 424,
+                      "mtime": "2026-08-21T10:56:08.000Z"
+                    },
+                    {
+                      "name": "hard_to_cure.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/hard_to_cure.yml",
+                      "size": 446,
+                      "mtime": "2026-08-21T10:56:09.000Z"
+                    },
+                    {
+                      "name": "harpoon.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/harpoon.yml",
+                      "size": 360,
+                      "mtime": "2026-08-21T10:56:09.000Z"
+                    },
+                    {
+                      "name": "healing_close_combat.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/healing_close_combat.yml",
+                      "size": 413,
+                      "mtime": "2026-08-21T10:56:10.000Z"
+                    },
+                    {
+                      "name": "healing_ranged_combat.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/healing_ranged_combat.yml",
+                      "size": 439,
+                      "mtime": "2026-08-21T10:56:11.000Z"
+                    },
+                    {
+                      "name": "hellish.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/hellish.yml",
+                      "size": 433,
+                      "mtime": "2026-08-21T10:56:11.000Z"
+                    },
+                    {
+                      "name": "hook.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/hook.yml",
+                      "size": 332,
+                      "mtime": "2026-08-21T10:56:12.000Z"
+                    },
+                    {
+                      "name": "horde.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/horde.yml",
+                      "size": 397,
+                      "mtime": "2026-08-21T10:56:12.000Z"
+                    },
+                    {
+                      "name": "hot_attack.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/hot_attack.yml",
+                      "size": 384,
+                      "mtime": "2026-08-21T10:56:13.000Z"
+                    },
+                    {
+                      "name": "ice_shot.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/ice_shot.yml",
+                      "size": 416,
+                      "mtime": "2026-08-21T10:56:14.000Z"
+                    },
+                    {
+                      "name": "icy_attack.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/icy_attack.yml",
+                      "size": 384,
+                      "mtime": "2026-08-21T10:56:14.000Z"
+                    },
+                    {
+                      "name": "identify.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/identify.yml",
+                      "size": 387,
+                      "mtime": "2026-08-21T10:56:15.000Z"
+                    },
+                    {
+                      "name": "ignite.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/ignite.yml",
+                      "size": 366,
+                      "mtime": "2026-08-21T10:56:15.000Z"
+                    },
+                    {
+                      "name": "illusion_aspect.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/illusion_aspect.yml",
+                      "size": 445,
+                      "mtime": "2026-08-21T10:56:16.000Z"
+                    },
+                    {
+                      "name": "impact.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/impact.yml",
+                      "size": 383,
+                      "mtime": "2026-08-21T10:56:17.000Z"
+                    },
+                    {
+                      "name": "incandescence.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/incandescence.yml",
+                      "size": 426,
+                      "mtime": "2026-08-21T10:56:17.000Z"
+                    },
+                    {
+                      "name": "indestructibility.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/indestructibility.yml",
+                      "size": 372,
+                      "mtime": "2026-08-21T10:56:18.000Z"
+                    },
+                    {
+                      "name": "infernal_touch.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/infernal_touch.yml",
+                      "size": 383,
+                      "mtime": "2026-08-21T10:56:18.000Z"
+                    },
+                    {
+                      "name": "inferno.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/inferno.yml",
+                      "size": 342,
+                      "mtime": "2026-08-21T10:56:19.000Z"
+                    },
+                    {
+                      "name": "infuriate.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/infuriate.yml",
+                      "size": 393,
+                      "mtime": "2026-08-21T10:56:20.000Z"
+                    },
+                    {
+                      "name": "injure.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/injure.yml",
+                      "size": 477,
+                      "mtime": "2026-08-21T10:56:20.000Z"
+                    },
+                    {
+                      "name": "instability.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/instability.yml",
+                      "size": 417,
+                      "mtime": "2026-08-21T10:56:21.000Z"
+                    },
+                    {
+                      "name": "introversion.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/introversion.yml",
+                      "size": 466,
+                      "mtime": "2026-08-21T10:56:21.000Z"
+                    },
+                    {
+                      "name": "invigoration.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/invigoration.yml",
+                      "size": 509,
+                      "mtime": "2026-08-21T10:56:22.000Z"
+                    },
+                    {
+                      "name": "kinetic.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/kinetic.yml",
+                      "size": 366,
+                      "mtime": "2026-08-21T10:56:22.000Z"
+                    },
+                    {
+                      "name": "launch.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/launch.yml",
+                      "size": 380,
+                      "mtime": "2026-08-21T10:56:23.000Z"
+                    },
+                    {
+                      "name": "lesion.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/lesion.yml",
+                      "size": 444,
+                      "mtime": "2026-08-21T10:56:24.000Z"
+                    },
+                    {
+                      "name": "levitate.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/levitate.yml",
+                      "size": 411,
+                      "mtime": "2026-08-21T10:56:24.000Z"
+                    },
+                    {
+                      "name": "lucky_catch.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/lucky_catch.yml",
+                      "size": 349,
+                      "mtime": "2026-08-21T10:56:25.000Z"
+                    },
+                    {
+                      "name": "lumberjack.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/lumberjack.yml",
+                      "size": 565,
+                      "mtime": "2026-08-21T10:56:26.000Z"
+                    },
+                    {
+                      "name": "magnetic.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/magnetic.yml",
+                      "size": 493,
+                      "mtime": "2026-08-21T10:56:26.000Z"
+                    },
+                    {
+                      "name": "marking.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/marking.yml",
+                      "size": 406,
+                      "mtime": "2026-08-21T10:56:27.000Z"
+                    },
+                    {
+                      "name": "marksman.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/marksman.yml",
+                      "size": 374,
+                      "mtime": "2026-08-21T10:56:27.000Z"
+                    },
+                    {
+                      "name": "necrotic.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/necrotic.yml",
+                      "size": 369,
+                      "mtime": "2026-08-21T10:56:28.000Z"
+                    },
+                    {
+                      "name": "nocturnal.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/nocturnal.yml",
+                      "size": 371,
+                      "mtime": "2026-08-21T10:56:28.000Z"
+                    },
+                    {
+                      "name": "optics.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/optics.yml",
+                      "size": 389,
+                      "mtime": "2026-08-21T10:56:29.000Z"
+                    },
+                    {
+                      "name": "oxygenate.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/oxygenate.yml",
+                      "size": 398,
+                      "mtime": "2026-08-21T10:56:30.000Z"
+                    },
+                    {
+                      "name": "paladin.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/paladin.yml",
+                      "size": 362,
+                      "mtime": "2026-08-21T10:56:30.000Z"
+                    },
+                    {
+                      "name": "paralyze.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/paralyze.yml",
+                      "size": 411,
+                      "mtime": "2026-08-21T10:56:31.000Z"
+                    },
+                    {
+                      "name": "parry.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/parry.yml",
+                      "size": 356,
+                      "mtime": "2026-08-21T10:56:31.000Z"
+                    },
+                    {
+                      "name": "pentashot.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/pentashot.yml",
+                      "size": 427,
+                      "mtime": "2026-08-21T10:56:33.000Z"
+                    },
+                    {
+                      "name": "phantasm.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/phantasm.yml",
+                      "size": 450,
+                      "mtime": "2026-08-21T10:56:33.000Z"
+                    },
+                    {
+                      "name": "plasmic.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/plasmic.yml",
+                      "size": 403,
+                      "mtime": "2026-08-21T10:56:34.000Z"
+                    },
+                    {
+                      "name": "preservation.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/preservation.yml",
+                      "size": 495,
+                      "mtime": "2026-08-21T10:56:34.000Z"
+                    },
+                    {
+                      "name": "probation.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/probation.yml",
+                      "size": 461,
+                      "mtime": "2026-08-21T10:56:35.000Z"
+                    },
+                    {
+                      "name": "proximity.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/proximity.yml",
+                      "size": 415,
+                      "mtime": "2026-08-21T10:56:36.000Z"
+                    },
+                    {
+                      "name": "puncture.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/puncture.yml",
+                      "size": 359,
+                      "mtime": "2026-08-21T10:56:36.000Z"
+                    },
+                    {
+                      "name": "radiance.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/radiance.yml",
+                      "size": 388,
+                      "mtime": "2026-08-21T10:56:37.000Z"
+                    },
+                    {
+                      "name": "rage.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/rage.yml",
+                      "size": 418,
+                      "mtime": "2026-08-21T10:56:37.000Z"
+                    },
+                    {
+                      "name": "rapid.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/rapid.yml",
+                      "size": 378,
+                      "mtime": "2026-08-21T10:56:38.000Z"
+                    },
+                    {
+                      "name": "razor.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/razor.yml",
+                      "size": 517,
+                      "mtime": "2026-08-21T10:56:38.000Z"
+                    },
+                    {
+                      "name": "rebounding.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/rebounding.yml",
+                      "size": 411,
+                      "mtime": "2026-08-21T10:56:39.000Z"
+                    },
+                    {
+                      "name": "reel.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/reel.yml",
+                      "size": 335,
+                      "mtime": "2026-08-21T10:56:40.000Z"
+                    },
+                    {
+                      "name": "reinforcement.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/reinforcement.yml",
+                      "size": 353,
+                      "mtime": "2026-08-21T10:56:41.000Z"
+                    },
+                    {
+                      "name": "rejuvenation.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/rejuvenation.yml",
+                      "size": 411,
+                      "mtime": "2026-08-21T10:56:41.000Z"
+                    },
+                    {
+                      "name": "repairing.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/repairing.yml",
+                      "size": 402,
+                      "mtime": "2026-08-21T10:56:42.000Z"
+                    },
+                    {
+                      "name": "replenish.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/replenish.yml",
+                      "size": 388,
+                      "mtime": "2026-08-21T10:56:42.000Z"
+                    },
+                    {
+                      "name": "respirator.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/respirator.yml",
+                      "size": 367,
+                      "mtime": "2026-08-21T10:56:43.000Z"
+                    },
+                    {
+                      "name": "sating.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/sating.yml",
+                      "size": 337,
+                      "mtime": "2026-08-21T10:56:43.000Z"
+                    },
+                    {
+                      "name": "serious_disease.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/serious_disease.yml",
+                      "size": 467,
+                      "mtime": "2026-08-21T10:56:44.000Z"
+                    },
+                    {
+                      "name": "serrated.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/serrated.yml",
+                      "size": 403,
+                      "mtime": "2026-08-21T10:56:44.000Z"
+                    },
+                    {
+                      "name": "severe_illness.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/severe_illness.yml",
+                      "size": 458,
+                      "mtime": "2026-08-21T10:56:45.000Z"
+                    },
+                    {
+                      "name": "shadowless.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/shadowless.yml",
+                      "size": 419,
+                      "mtime": "2026-08-21T10:56:46.000Z"
+                    },
+                    {
+                      "name": "shields.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/shields.yml",
+                      "size": 437,
+                      "mtime": "2026-08-21T10:56:47.000Z"
+                    },
+                    {
+                      "name": "shockwave.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/shockwave.yml",
+                      "size": 383,
+                      "mtime": "2026-08-21T10:56:47.000Z"
+                    },
+                    {
+                      "name": "shot_assist.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/shot_assist.yml",
+                      "size": 412,
+                      "mtime": "2026-08-21T10:56:48.000Z"
+                    },
+                    {
+                      "name": "sickening.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/sickening.yml",
+                      "size": 412,
+                      "mtime": "2026-08-21T10:56:48.000Z"
+                    },
+                    {
+                      "name": "silence.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/silence.yml",
+                      "size": 462,
+                      "mtime": "2026-08-21T10:56:49.000Z"
+                    },
+                    {
+                      "name": "slaughter.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/slaughter.yml",
+                      "size": 573,
+                      "mtime": "2026-08-21T10:56:49.000Z"
+                    },
+                    {
+                      "name": "slicing.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/slicing.yml",
+                      "size": 385,
+                      "mtime": "2026-08-21T10:56:50.000Z"
+                    },
+                    {
+                      "name": "spearfishing.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/spearfishing.yml",
+                      "size": 406,
+                      "mtime": "2026-08-21T10:56:51.000Z"
+                    },
+                    {
+                      "name": "spiked.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/spiked.yml",
+                      "size": 347,
+                      "mtime": "2026-08-21T10:56:51.000Z"
+                    },
+                    {
+                      "name": "splash.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/splash.yml",
+                      "size": 369,
+                      "mtime": "2026-08-21T10:56:52.000Z"
+                    },
+                    {
+                      "name": "spring.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/spring.yml",
+                      "size": 366,
+                      "mtime": "2026-08-21T10:56:52.000Z"
+                    },
+                    {
+                      "name": "stab.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/stab.yml",
+                      "size": 353,
+                      "mtime": "2026-08-21T10:56:54.000Z"
+                    },
+                    {
+                      "name": "stalwart.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/stalwart.yml",
+                      "size": 450,
+                      "mtime": "2026-08-21T10:56:54.000Z"
+                    },
+                    {
+                      "name": "stamina.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/stamina.yml",
+                      "size": 342,
+                      "mtime": "2026-08-21T10:56:55.000Z"
+                    },
+                    {
+                      "name": "stone_switcher.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/stone_switcher.yml",
+                      "size": 463,
+                      "mtime": "2026-08-21T10:56:55.000Z"
+                    },
+                    {
+                      "name": "stray_aspect.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/stray_aspect.yml",
+                      "size": 434,
+                      "mtime": "2026-08-21T10:56:56.000Z"
+                    },
+                    {
+                      "name": "streamlining.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/streamlining.yml",
+                      "size": 339,
+                      "mtime": "2026-08-21T10:56:56.000Z"
+                    },
+                    {
+                      "name": "succession.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/succession.yml",
+                      "size": 382,
+                      "mtime": "2026-08-21T10:56:57.000Z"
+                    },
+                    {
+                      "name": "supercritical.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/supercritical.yml",
+                      "size": 426,
+                      "mtime": "2026-08-21T10:56:57.000Z"
+                    },
+                    {
+                      "name": "swallow.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/swallow.yml",
+                      "size": 391,
+                      "mtime": "2026-08-21T10:56:58.000Z"
+                    },
+                    {
+                      "name": "sycophant.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/sycophant.yml",
+                      "size": 418,
+                      "mtime": "2026-08-21T10:56:58.000Z"
+                    },
+                    {
+                      "name": "tectonic.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/tectonic.yml",
+                      "size": 407,
+                      "mtime": "2026-08-21T10:56:59.000Z"
+                    },
+                    {
+                      "name": "telekinesis.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/telekinesis.yml",
+                      "size": 472,
+                      "mtime": "2026-08-21T10:57:00.000Z"
+                    },
+                    {
+                      "name": "thrive.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/thrive.yml",
+                      "size": 394,
+                      "mtime": "2026-08-21T10:57:01.000Z"
+                    },
+                    {
+                      "name": "tornado.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/tornado.yml",
+                      "size": 401,
+                      "mtime": "2026-08-21T10:57:01.000Z"
+                    },
+                    {
+                      "name": "towering.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/towering.yml",
+                      "size": 542,
+                      "mtime": "2026-08-21T10:57:02.000Z"
+                    },
+                    {
+                      "name": "toxic.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/toxic.yml",
+                      "size": 421,
+                      "mtime": "2026-08-21T10:57:02.000Z"
+                    },
+                    {
+                      "name": "transfuse.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/transfuse.yml",
+                      "size": 484,
+                      "mtime": "2026-08-21T10:57:03.000Z"
+                    },
+                    {
+                      "name": "tripleshot.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/tripleshot.yml",
+                      "size": 422,
+                      "mtime": "2026-08-21T10:57:03.000Z"
+                    },
+                    {
+                      "name": "vein.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/vein.yml",
+                      "size": 752,
+                      "mtime": "2026-08-21T10:57:04.000Z"
+                    },
+                    {
+                      "name": "venom.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/venom.yml",
+                      "size": 417,
+                      "mtime": "2026-08-21T10:57:05.000Z"
+                    },
+                    {
+                      "name": "void_affinity.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/void_affinity.yml",
+                      "size": 362,
+                      "mtime": "2026-08-21T10:57:05.000Z"
+                    },
+                    {
+                      "name": "volatile.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/volatile.yml",
+                      "size": 441,
+                      "mtime": "2026-08-21T10:57:06.000Z"
+                    },
+                    {
+                      "name": "voltage.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/voltage.yml",
+                      "size": 395,
+                      "mtime": "2026-08-21T10:57:06.000Z"
+                    },
+                    {
+                      "name": "water_affinity.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/water_affinity.yml",
+                      "size": 395,
+                      "mtime": "2026-08-21T10:57:07.000Z"
+                    },
+                    {
+                      "name": "water_aspect.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/water_aspect.yml",
+                      "size": 389,
+                      "mtime": "2026-08-21T10:57:07.000Z"
+                    },
+                    {
+                      "name": "weakening.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/weakening.yml",
+                      "size": 396,
+                      "mtime": "2026-08-21T10:57:08.000Z"
+                    },
+                    {
+                      "name": "wisdom.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/wisdom.yml",
+                      "size": 444,
+                      "mtime": "2026-08-21T10:57:08.000Z"
+                    },
+                    {
+                      "name": "wood_switcher.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/wood_switcher.yml",
+                      "size": 530,
+                      "mtime": "2026-08-21T10:57:09.000Z"
+                    },
+                    {
+                      "name": "zeus.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/simple/zeus.yml",
+                      "size": 392,
+                      "mtime": "2026-08-21T10:57:10.000Z"
+                    }
+                  ]
+                },
+                {
+                  "name": "skill",
+                  "type": "directory",
+                  "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/skill",
+                  "children": [
+                    {
+                      "name": "ascend.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/skill/ascend.yml",
+                      "size": 468,
+                      "mtime": "2026-08-21T10:57:10.000Z"
+                    },
+                    {
+                      "name": "catnap.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/skill/catnap.yml",
+                      "size": 569,
+                      "mtime": "2026-08-21T10:57:11.000Z"
+                    },
+                    {
+                      "name": "charge.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/skill/charge.yml",
+                      "size": 486,
+                      "mtime": "2026-08-21T10:57:12.000Z"
+                    },
+                    {
+                      "name": "dynamite.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/skill/dynamite.yml",
+                      "size": 563,
+                      "mtime": "2026-08-21T10:57:12.000Z"
+                    },
+                    {
+                      "name": "flash_back.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/skill/flash_back.yml",
+                      "size": 572,
+                      "mtime": "2026-08-21T10:57:13.000Z"
+                    },
+                    {
+                      "name": "irrigate.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/skill/irrigate.yml",
+                      "size": 499,
+                      "mtime": "2026-08-21T10:57:13.000Z"
+                    },
+                    {
+                      "name": "missile.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/skill/missile.yml",
+                      "size": 498,
+                      "mtime": "2026-08-21T10:57:14.000Z"
+                    },
+                    {
+                      "name": "quake.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/skill/quake.yml",
+                      "size": 507,
+                      "mtime": "2026-08-21T10:57:14.000Z"
+                    },
+                    {
+                      "name": "self_realization.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/skill/self_realization.yml",
+                      "size": 505,
+                      "mtime": "2026-08-21T10:57:16.000Z"
+                    },
+                    {
+                      "name": "stand_and_fight.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/skill/stand_and_fight.yml",
+                      "size": 581,
+                      "mtime": "2026-08-21T10:57:18.000Z"
+                    },
+                    {
+                      "name": "vitalize.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/skill/vitalize.yml",
+                      "size": 501,
+                      "mtime": "2026-08-21T10:57:18.000Z"
+                    },
+                    {
+                      "name": "xray.yml",
+                      "type": "file",
+                      "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/skill/xray.yml",
+                      "size": 1137,
+                      "mtime": "2026-08-21T10:57:19.000Z"
+                    }
+                  ]
+                },
+                {
+                  "name": "skills.yml",
+                  "type": "file",
+                  "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-enchantments/skills.yml",
+                  "size": 421,
+                  "mtime": "2026-08-21T10:57:19.000Z"
+                }
+              ]
+            },
+            {
+              "name": "nereus-plugin.yml",
+              "type": "file",
+              "path": "aiyatsbus-create-enchant-skill/reference-configs/nereus-plugin.yml",
+              "size": 853,
+              "mtime": "2026-08-21T10:57:21.000Z"
+            }
+          ]
+        },
+        {
+          "name": "references",
+          "type": "directory",
+          "path": "aiyatsbus-create-enchant-skill/references",
+          "children": [
+            {
+              "name": "aiyatsbus-fluxon-functions.md",
+              "type": "file",
+              "path": "aiyatsbus-create-enchant-skill/references/aiyatsbus-fluxon-functions.md",
+              "size": 20011,
+              "mtime": "2026-08-21T10:52:34.000Z"
+            },
+            {
+              "name": "artifact-trigger.md",
+              "type": "file",
+              "path": "aiyatsbus-create-enchant-skill/references/artifact-trigger.md",
+              "size": 6399,
+              "mtime": "2026-08-21T10:52:35.000Z"
+            },
+            {
+              "name": "builtin-trigger.md",
+              "type": "file",
+              "path": "aiyatsbus-create-enchant-skill/references/builtin-trigger.md",
+              "size": 4443,
+              "mtime": "2026-08-21T10:52:35.000Z"
+            },
+            {
+              "name": "code-defined.md",
+              "type": "file",
+              "path": "aiyatsbus-create-enchant-skill/references/code-defined.md",
+              "size": 6133,
+              "mtime": "2026-08-21T10:52:35.000Z"
+            },
+            {
+              "name": "config-defined.md",
+              "type": "file",
+              "path": "aiyatsbus-create-enchant-skill/references/config-defined.md",
+              "size": 10554,
+              "mtime": "2026-08-21T10:52:35.000Z"
+            },
+            {
+              "name": "enchantment-fields.md",
+              "type": "file",
+              "path": "aiyatsbus-create-enchant-skill/references/enchantment-fields.md",
+              "size": 11009,
+              "mtime": "2026-08-21T10:52:36.000Z"
+            },
+            {
+              "name": "event-functions.md",
+              "type": "file",
+              "path": "aiyatsbus-create-enchant-skill/references/event-functions.md",
+              "size": 3999,
+              "mtime": "2026-08-21T10:52:36.000Z"
+            },
+            {
+              "name": "fluxon-bukkit-java-semantics.md",
+              "type": "file",
+              "path": "aiyatsbus-create-enchant-skill/references/fluxon-bukkit-java-semantics.md",
+              "size": 6741,
+              "mtime": "2026-08-21T10:52:36.000Z"
+            },
+            {
+              "name": "fluxon-containers.md",
+              "type": "file",
+              "path": "aiyatsbus-create-enchant-skill/references/fluxon-containers.md",
+              "size": 4885,
+              "mtime": "2026-08-21T10:52:36.000Z"
+            },
+            {
+              "name": "fluxon-jvm-interop.md",
+              "type": "file",
+              "path": "aiyatsbus-create-enchant-skill/references/fluxon-jvm-interop.md",
+              "size": 6027,
+              "mtime": "2026-08-21T10:52:37.000Z"
+            },
+            {
+              "name": "fluxon-language.md",
+              "type": "file",
+              "path": "aiyatsbus-create-enchant-skill/references/fluxon-language.md",
+              "size": 6654,
+              "mtime": "2026-08-21T10:52:37.000Z"
+            },
+            {
+              "name": "fluxon-modules.md",
+              "type": "file",
+              "path": "aiyatsbus-create-enchant-skill/references/fluxon-modules.md",
+              "size": 8107,
+              "mtime": "2026-08-21T10:52:37.000Z"
+            },
+            {
+              "name": "fluxon-platform-functions.md",
+              "type": "file",
+              "path": "aiyatsbus-create-enchant-skill/references/fluxon-platform-functions.md",
+              "size": 4292,
+              "mtime": "2026-08-21T10:52:38.000Z"
+            },
+            {
+              "name": "fluxon-stdlib.md",
+              "type": "file",
+              "path": "aiyatsbus-create-enchant-skill/references/fluxon-stdlib.md",
+              "size": 5477,
+              "mtime": "2026-08-21T10:52:38.000Z"
+            },
+            {
+              "name": "listener-trigger.md",
+              "type": "file",
+              "path": "aiyatsbus-create-enchant-skill/references/listener-trigger.md",
+              "size": 8847,
+              "mtime": "2026-08-21T10:52:38.000Z"
+            },
+            {
+              "name": "mechanisms.md",
+              "type": "file",
+              "path": "aiyatsbus-create-enchant-skill/references/mechanisms.md",
+              "size": 8635,
+              "mtime": "2026-08-21T10:52:38.000Z"
+            },
+            {
+              "name": "overview.md",
+              "type": "file",
+              "path": "aiyatsbus-create-enchant-skill/references/overview.md",
+              "size": 5388,
+              "mtime": "2026-08-21T10:52:39.000Z"
+            },
+            {
+              "name": "skill-trigger.md",
+              "type": "file",
+              "path": "aiyatsbus-create-enchant-skill/references/skill-trigger.md",
+              "size": 7788,
+              "mtime": "2026-08-21T10:52:39.000Z"
+            },
+            {
+              "name": "ticker-trigger.md",
+              "type": "file",
+              "path": "aiyatsbus-create-enchant-skill/references/ticker-trigger.md",
+              "size": 7108,
+              "mtime": "2026-08-21T10:52:39.000Z"
+            }
+          ]
+        },
+        {
+          "name": "SKILL.md",
+          "type": "file",
+          "path": "aiyatsbus-create-enchant-skill/SKILL.md",
+          "size": 13091,
+          "mtime": "2026-08-21T10:52:34.000Z"
+        }
+      ]
+    }
+  ]
+}

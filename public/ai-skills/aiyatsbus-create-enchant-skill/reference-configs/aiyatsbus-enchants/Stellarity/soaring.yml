@@ -1,0 +1,34 @@
+# 翱翔 (soaring)
+# 降低重力，延长滑翔距离并降低摔落伤害。
+
+basic:
+  enable: true
+  disable_worlds: [ ]
+  id: soaring
+  name: "翱翔"
+  max_level: 4
+
+rarity: 史诗
+
+targets:
+  - 鞘翅
+
+limitations:
+  - "CONFLICT_ENCHANT:装甲飞行"
+
+display:
+  description:
+    general: "降低重力，延长滑翔距离并降低摔落伤害"
+    specific: "&7重力&a-{重力}&7，摔落伤害&a-{摔落减免}&7。"
+
+variables:
+  leveled:
+    重力: "%:0+5*{level}"
+    摔落减免: "%:0+10*{level}"
+
+alternative:
+  is-vanilla: true
+  is-treasure: true
+  is-discoverable: true
+  is-tradeable: false
+  weight: 2

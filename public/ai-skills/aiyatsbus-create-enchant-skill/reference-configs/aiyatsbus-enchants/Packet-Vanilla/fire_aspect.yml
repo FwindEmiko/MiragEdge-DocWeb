@@ -1,0 +1,18 @@
+basic:
+  id: fire_aspect
+  name: 火焰附加
+  max-level: 2
+alternative:
+  is-vanilla: true
+rarity: 优良
+targets:
+- 剑
+- 重锤
+- 矛
+display:
+  description:
+    general: 点燃击中的生物
+    specific: '&7使击中的生物燃烧&a{燃烧时长}'
+variables:
+  leveled:
+    燃烧时长: 秒:4*{level}

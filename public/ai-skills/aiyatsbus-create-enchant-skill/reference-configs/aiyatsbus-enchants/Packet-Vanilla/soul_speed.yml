@@ -1,0 +1,19 @@
+basic:
+  id: soul_speed
+  name: 灵魂疾行
+  max-level: 3
+alternative:
+  is-vanilla: true
+  is-treasure: true
+  is-tradeable: false
+  is-discoverable: false
+rarity: 稀有
+targets:
+- 靴子
+display:
+  description:
+    general: 提高在灵魂沙和灵魂土上的移动速度
+    specific: '&7使在灵魂沙和灵魂土上的移动速度提高&a{速度}'
+variables:
+  leveled:
+    速度: '%:30+{level}*10.5'

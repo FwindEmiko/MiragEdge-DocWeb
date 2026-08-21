@@ -1,0 +1,55 @@
+name: NereusOpus
+main: hamsteryds.nereusopus.NereusOpus
+version: "3.3.3"
+
+load: STARTUP
+
+api-version: "1.16"
+
+folia-supported: true
+
+authors:
+  - 白熊
+  - TwiShimmer
+  - 关怀他人
+  - xiaozhangup
+
+depend:
+  - Aiyatsbus
+
+softdepend:
+  - Citizens
+  - ItemsAdder
+
+commands:
+  nereusopusteam:
+    aliases:
+      - nerousteam
+      - nosteam
+
+permissions:
+  nereusopus.debug:
+    default: op
+  nereusopus.reload:
+    default: op
+  nereusopus.team.create:
+    default: true
+  nereusopus.team.disband:
+    default: op
+  nereusopus.team.disbandall:
+    default: op
+  nereusopus.team.get:
+    default: true
+  nereusopus.team.info:
+    default: true
+  nereusopus.team.join:
+    default: true
+  nereusopus.team.kick:
+    default: op
+  nereusopus.team.kickall:
+    default: op
+  nereusopus.team.list:
+    default: op
+  nereusopus.team.quit:
+    default: true
+

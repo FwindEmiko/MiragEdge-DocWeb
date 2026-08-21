@@ -1,0 +1,18 @@
+basic:
+  id: lunge
+  name: 突进
+  max-level: 3
+alternative:
+  is-vanilla: true
+dependencies:
+  supports: 12111
+rarity: 优良
+targets:
+- 矛
+display:
+  description:
+    general: 戳刺攻击时向前推进
+    specific: '&7获得&a{速度}&7的加速'
+variables:
+  leveled:
+    速度: 米/秒:9.16*{level}

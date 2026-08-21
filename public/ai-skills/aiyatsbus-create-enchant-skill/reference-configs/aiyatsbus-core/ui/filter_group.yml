@@ -1,0 +1,63 @@
+
+title: "&f<shift:-8><image:miragedge_menu:aiyatsbus_filter_group>"
+
+shape:
+  - '       BC'
+  - ' TTTTTTT '
+  - ' TTTTTTT '
+  - ' TTTTTTT '
+  - ' TTTTTTT '
+  - ' PPRRRNN '
+
+template:
+  'C':
+    material: PAPER
+    custom-model-data: 233
+    name: "&c关闭"
+    feature:
+      - ==: Close
+
+  'B':
+    material: PAPER
+    custom-model-data: 233
+    name: "&b返回 {last}"
+    feature:
+      - ==: Functional
+        keyword: Back
+
+  'P':
+    material: PAPER
+    custom-model-data: 233
+    name: "&e上一页"
+    feature:
+      - ==: Functional
+        keyword: Previous
+
+  'N':
+    material: PAPER
+    custom-model-data: 233
+    name: "&e下一页"
+    feature:
+      - ==: Functional
+        keyword: Next
+
+  'R':
+    material: PAPER
+    custom-model-data: 233
+    name: "&c重置"
+    lore:
+      - "&8| &7点击清除当前的筛选条件"
+    feature:
+      - ==: Functional
+        keyword: FilterGroup:reset
+
+  'T':
+    material: PLAYER_HEAD
+    name: "&f{name} &7(&a{amount}&7)"
+    lore:
+      - "&8| &7左击 &a✓只看适合此类物品的附魔"
+      - "&8| &7Shift + 点击 &e੦清除当前筛选"
+      - "&8| &7右击 &c✗不看适合此类物品的附魔"
+    feature:
+      - ==: Functional
+        keyword: FilterGroup:filter

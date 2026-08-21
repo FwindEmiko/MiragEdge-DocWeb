@@ -1,0 +1,61 @@
+
+title: "&f<shift:-8><image:miragedge_menu:aiyatsbus_menu>"
+
+shape:
+  - 'AAABBBCCC'
+  - 'AAABBBCCC'
+  - 'AAABBBCCC'
+
+template:
+  'A':
+    material: PAPER
+    custom-model-data: 233
+    name: "&e附魔大全"
+    lore:
+      - ""
+      - " &7在这里查询所有附魔，"
+      - " &7你可以通过以下条件&e筛选附魔&7："
+      - "   &7- 品质"
+      - "   &7- 物品类别"
+      - "   &7- 分类/定位"
+      - "   &7- 中英文名"
+      - ""
+      - ""
+      - "  &f| <image:miragedge_menu:left_click> | &e点击打开附魔大全!"
+    feature:
+      - ==: Functional
+        keyword: Menu:enchant_search
+
+  'B':
+    material: PAPER
+    custom-model-data: 233
+    name: "&e物品附魔查询"
+    lore:
+      - ""
+      - " &7在这里查询物品上的附魔，"
+      - " &7你可以点击附魔进入&e详细界面&7。"
+      - ""
+      - ""
+      - "  &f| <image:miragedge_menu:left_click> | &e点击打开物品附魔查询界面!"
+    feature:
+      - ==: Functional
+        keyword: Menu:item_check
+
+  'C':
+    material: PAPER
+    custom-model-data: 233
+    name: "&e铁砧模拟器"
+    lore:
+      - ""
+      - " &7在这里预览铁砧拼合的结果，"
+      - " &7或得知&e不能进行拼合的原因&7："
+      - "   &7- 冲突"
+      - "   &7- 依赖"
+      - "   &7- 等级限制"
+      - "   &7- 词条限制"
+      - ""
+      - ""
+      - "  &f| <image:miragedge_menu:left_click> | &e点击打开铁砧模拟器!"
+    feature:
+      - ==: Functional
+        keyword: Menu:anvil

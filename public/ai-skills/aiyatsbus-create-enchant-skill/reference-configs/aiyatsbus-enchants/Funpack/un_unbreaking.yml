@@ -1,0 +1,45 @@
+# 不修 (un_unbreaking)
+# 对照 Funpack v1.1.0：item_damage 乘以 10。
+
+basic:
+  enable: true
+  disable_worlds: [ ]
+  id: un_unbreaking
+  name: "不修"
+  max_level: 1
+
+rarity: 诅咒
+
+targets:
+  - 可损坏物品
+
+limitations:
+  - "CONFLICT_ENCHANT:耐久"
+
+display:
+  description:
+    general: "物品耐久消耗变为十倍"
+    specific: "&7每次损失耐久时，实际损失量变为&c{耐久消耗倍率}倍&7。"
+
+variables:
+  leveled:
+    耐久消耗倍率: "倍:10"
+
+mechanisms:
+  listeners:
+    on-damage:
+      listen: "player-item-damage"
+      handle: |-
+        if &event::item() != &item then {
+          return
+        }
+
+        damage = &event::damage()
+        &event::setDamage(int(&damage * &耐久消耗倍率))
+
+alternative:
+  is-cursed: true
+  is-treasure: true
+  is-discoverable: true
+  is-tradeable: false
+  grindstoneable: false

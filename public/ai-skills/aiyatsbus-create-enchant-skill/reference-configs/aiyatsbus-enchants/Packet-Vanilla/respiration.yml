@@ -1,0 +1,16 @@
+basic:
+  id: respiration
+  name: 水下呼吸
+  max-level: 3
+alternative:
+  is-vanilla: true
+rarity: 稀有
+targets:
+- 头盔
+display:
+  description:
+    general: 减少水下氧气消耗速率
+    specific: '&7每次消耗氧气值时有&a{概率}&7不消耗氧气或受到窒息伤害'
+variables:
+  leveled:
+    概率: '%:{level}/{level}+1'

@@ -1,0 +1,20 @@
+basic:
+  id: impaling
+  name: 穿刺
+  max-level: 5
+alternative:
+  is-vanilla: true
+limitations:
+- CONFLICT_GROUP:原版增伤类附魔
+- CONFLICT_ENCHANT:致密
+- CONFLICT_ENCHANT:穿刺
+rarity: 稀有
+targets:
+- 三叉戟
+display:
+  description:
+    general: 提高三叉戟对水生生物的基础伤害
+    specific: '&7对水生生物的基础伤害提高&a{伤害提高}'
+variables:
+  leveled:
+    伤害提高: 点:2.5*{level}

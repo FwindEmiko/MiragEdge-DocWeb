@@ -1,0 +1,22 @@
+basic:
+  id: depth_strider
+  name: 深海探索者
+  max-level: 3
+alternative:
+  is-vanilla: true
+rarity: 史诗
+targets:
+- 靴子
+limitations:
+- CONFLICT_ENCHANT:冰霜行者
+display:
+  description:
+    general: 无视部分在水中受到的减速效果
+    specific: '&7无视&a{抵消量}&7在水中受到的减速效果'
+variables:
+  leveled:
+    抵消量:
+      1: 33
+      2: 67
+      3: 100
+      unit: '%'

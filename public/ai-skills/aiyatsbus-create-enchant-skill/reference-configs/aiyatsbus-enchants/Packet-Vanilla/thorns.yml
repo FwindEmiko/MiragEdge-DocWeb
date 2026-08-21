@@ -1,0 +1,19 @@
+basic:
+  id: thorns
+  name: 荆棘
+  max-level: 3
+alternative:
+  is-vanilla: true
+rarity: 优良
+targets:
+- 头盔
+- 胸甲
+- 护腿
+- 靴子
+display:
+  description:
+    general: 受到攻击时有概率对攻击者造成伤害，并消耗盔甲耐久
+    specific: '&7受到攻击时有&a{概率}&7对攻击者造成&a1~5点&7的伤害，并消耗&a2点&7耐久度'
+variables:
+  leveled:
+    概率: '%:15*{level}'

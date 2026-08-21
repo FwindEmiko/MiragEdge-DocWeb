@@ -1,0 +1,64 @@
+# 暴击 (critical_strike)
+# 普通命中有概率准备下一次攻击；准备完成后的下一次主手命中造成两倍伤害。
+
+basic:
+  enable: true
+  disable_worlds: [ ]
+  id: critical_strike
+  name: "暴击"
+  max_level: 3
+
+rarity: 传说
+
+targets:
+  - 剑
+
+limitations:
+  - "CONFLICT_GROUP:原版增伤类附魔"
+
+display:
+  description:
+    general: "攻击有概率准备下一次暴击"
+    specific: "&7每次攻击有&a{准备概率}&7概率准备下一击；准备后的下一次攻击造成&c{暴击倍率}倍&7伤害。"
+
+variables:
+  leveled:
+    准备概率: "%:10.0*{level}"
+    暴击倍率: ":2.0"
+  modifiable:
+    下次攻击暴击: critical_strike_ready=false
+
+mechanisms:
+  listeners:
+    on-attack:
+      listen: "entity-damage-other"
+      handle: |-
+        if &triggerSlot != "HAND" then {
+          return
+        }
+
+        ready = variables::modifiable(&enchant, &item, "下次攻击暴击")
+        if &ready == "true" then {
+          variables::setModifiable(&enchant, &item, "下次攻击暴击", "false")
+
+          damage = &event::damage()
+          &event::setDamage(&damage * &暴击倍率)
+
+          victim = &event::entity()
+          loc = &victim::location()
+          world = &victim::world()
+          &world::spawnParticle("CRIT", &loc, 24, 0.45, 0.6, 0.45, 0.2)
+          &world::playSound(&loc, "minecraft:entity.player.attack.crit", 1.0, 0.9)
+          &player::sendActionBar("&8[&c暴击&8] &7下一击暴击已触发。")
+          return
+        }
+
+        if random(0.0, 100.0) < &准备概率 then {
+          variables::setModifiable(&enchant, &item, "下次攻击暴击", "true")
+          &player::sendActionBar("&8[&c暴击&8] &e已准备下一次暴击。")
+        }
+
+alternative:
+  is-treasure: true
+  is-discoverable: true
+  is-tradeable: false

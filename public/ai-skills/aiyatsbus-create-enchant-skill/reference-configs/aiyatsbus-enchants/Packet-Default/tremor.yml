@@ -1,0 +1,177 @@
+basic:
+  enable: true
+  disable_worlds: []
+  id: tremor
+  name: 震地
+  max-level: 3
+
+alternative:
+  is-tradeable: false
+  is-treasure: true
+  is-discoverable: true
+
+rarity: 至宝
+targets:
+- 弓
+
+display:
+  description:
+    general: 蓄力范围真伤并减速, 满蓄力追加击飞效果
+
+variables:
+  leveled:
+    宽度下限: 格:1+{level}*0.5
+    宽度上限: 格:3.5+{level}*0.5
+    深度增长速度: 格/刻:0.7+{level}*0.1
+    基础伤害倍率: 倍:{level}*2.0
+    敌人缓慢等级: 级:{level}-1
+    冷却: 秒:5
+  ordinary:
+    最大深度: 25.0
+    
+mechanisms:
+  listeners:
+    on-move:
+      listen: player-move
+      handle: |-
+        if &event::player::hasMeta("quake-stuck") then {
+            &event::setCancelled(true)
+        }
+    on-released:
+      listen: aiyatsbus-bow-charge-released
+      handle: '&event::player::setMeta("quake-not-using-hand", "true")'
+    on-break:
+      listen: aiyatsbus-bow-charge-break
+      handle: '&event::player::setMeta("quake-not-using-hand", "true")'
+    on-prepare:
+      listen: aiyatsbus-bow-charge-prepare
+      handle: |-
+        def sendBar(player, counter) = {
+            bar = ""
+            for i in 0..(30-1) then {
+                if &i >= &counter then {
+                    &bar += "§7"
+                } else if &i < 10 then {
+                    &bar += "§e"
+                } else if &i < 25 then {
+                    &bar += "§a"
+                } else {
+                    &bar += "§c"
+                }
+                if &i == 9 || &i == 24 then {
+                    &bar += "§l|§r"
+                } else {
+                    &bar += "|"
+                }
+            }
+            &player::sendActionBar(&bar)
+        }
+
+        if !cooldown::isReady(&player, &enchant, &冷却) then {
+            return
+        }
+        &event::setAllowed(true)
+        counter = 0
+        player = &event::player()
+        effect = &player::getPotionEffect((static cc.polarastrum.aiyatsbus.taboolib.library.xseries.XPotion.GLOWING).get())
+        submit()::delay(1)::period(1)::on(&player)::run(|| {
+            width = max(&宽度上限 - &counter * 0.1, &宽度下限)
+            depth = min(5 + &counter * &深度增长速度, &最大深度)
+
+            location = &player::eyeLocation::clone::add(0.0, -1.5, 0.0)  
+            direction = &player::eyeLocation::direction()
+            forwardDirection = &direction::clone::multiply(&depth)
+            leftDirection = &direction::clone::setY(0)::setX(-&direction::z())::setZ(&direction::x())::normalize::multiply(&width)
+            rightDirection = &direction::clone::setY(0)::setX(&direction::z())::setZ(-&direction::x())::normalize::multiply(&width)
+
+            point1 = &location::clone::add(&leftDirection)
+            point2 = &location::clone::add(&rightDirection)
+            point3 = &point1::clone::add(&forwardDirection)
+            point4 = &point2::clone::add(&forwardDirection)
+
+            point1Y = if &point4::y() > &point1::y() then -2.0 else 2.0
+            point4Y = if &point4::y() > &point1::y() then 2.0 else -2.0
+            area = static org.bukkit.util.BoundingBox.of(
+                &point1::clone::add(0.0, &point1Y, 0.0),
+                &point4::clone::add(0.0, &point4Y, 0.0)
+            )
+
+            color = if &counter < 25 then static java.awt.Color.ORANGE else static java.awt.Color.RED
+            viewers = [&player]
+
+            for oe in &player::getNearbyEntities(40.0, 40.0, 40.0) then {
+              if !(&oe is org.bukkit.entity.LivingEntity) then {
+                  continue
+              }
+              if entity::isNPC(&oe) then {
+                  continue
+              }
+              if &oe is org.bukkit.entity.Player then {
+                  &viewers::add(&oe)
+              }
+              if &oe::boundingBox::overlaps(&area) then {
+                  entity::addPotionEffect(&oe, "SLOWNESS", 10, max(int(&counter / 10), 2))
+                  entity::addPotionEffect(&oe, "GLOWING", 10, 0)
+              }
+            }
+
+            particle = static cc.polarastrum.aiyatsbus.taboolib.library.xseries.particles.ParticleDisplay.of(
+                if &counter < 25 then (static cc.polarastrum.aiyatsbus.taboolib.library.xseries.particles.XParticle.ELECTRIC_SPARK).get()
+                else (static cc.polarastrum.aiyatsbus.taboolib.library.xseries.particles.XParticle.DUST).get()
+            )
+            &particle.withColor(&color)
+            &particle.onlyVisibleTo()
+            &particle.withExtra(0.1)
+            static cc.polarastrum.aiyatsbus.taboolib.library.xseries.particles.Particles.line(&point1, &point2, 0.5, &particle)
+            static cc.polarastrum.aiyatsbus.taboolib.library.xseries.particles.Particles.line(&point1, &point3, 0.5, &particle)
+            static cc.polarastrum.aiyatsbus.taboolib.library.xseries.particles.Particles.line(&point2, &point4, 0.5, &particle)
+            static cc.polarastrum.aiyatsbus.taboolib.library.xseries.particles.Particles.line(&point3, &point4, 0.2, &particle)
+
+            sendBar(&player, &counter)
+
+            if &counter >= 50 || &player::hasMeta("quake-not-using-hand") || &player::isDead() || !&player::isOnline() then {
+                &event::interrupt()
+                entity::removePotionEffect(&player, SLOWNESS)
+                if &effect != null then &player::addPotionEffect(&effect)
+
+                &it::cancel()
+                &player::removeMeta("quake-not-using-hand")
+                &player::removeMeta("quake-stuck")
+
+                if &counter >= 10 then {
+                    for oe in &player::getNearbyEntities(40.0, 40.0, 40.0) then {
+                        if !(&oe is org.bukkit.entity.LivingEntity) then {
+                            continue
+                        }
+                        if entity::isNPC(&oe) then {
+                            continue
+                        }
+                        if &oe::boundingBox::overlaps(&area) then {
+                            entity::addPotionEffect(&oe, SLOWNESS, 60, &敌人缓慢等级)
+                            &oe::damage(&基础伤害倍率 * max(&counter / 25.0, 1.0), &player)
+                            if &counter >= 25 then {
+                                &oe::setVelocity(vector(0.0, 1.0, 0.0)::add(&direction::clone::setY(0)::normalize()))
+                            }
+                        }
+                    }
+                    // TODO: 根据蓄力时长加冷却, 100 + counter
+                    cooldown::addCooldown(&player, &enchant)
+                    // TODO: 不清楚 1.20.4 的兼容性, 改为 XSound
+                    &player::playSound(&player::location(), static org.bukkit.Sound.BLOCK_ANVIL_HIT, static org.bukkit.SoundCategory.PLAYERS, 1, 1)
+                } else {
+                    // TODO: 根据蓄力时长加冷却, 20 + counter
+                    cooldown::addCooldown(&player, &enchant)
+                }
+                return
+            }
+
+            if &counter >= 25 then {
+                isAmbient = if &effect != null then &effect::isAmbient() else false
+                hasParticles = if &effect != null then &effect::hasParticles() else false
+                entity::removePotionEffect(&player, SLOWNESS)
+                entity::addPotionEffect(&player, SLOWNESS, 20, 20, &isAmbient, &hasParticles)
+                &player::setMeta("quake-stuck", "true")
+            }
+
+            &counter += 1
+        })

@@ -1,0 +1,56 @@
+# 沙行 (dune_speed)
+# 原数据包依赖原生 movement_speed 属性修饰符。
+# Aiyatsbus/Fluxon 无法安全维护同一属性的多个修饰符，因此保留药水近似并默认关闭。
+
+basic:
+  enable: false
+  disable_worlds: [ ]
+  id: dune_speed
+  name: "沙行"
+  max_level: 3
+
+rarity: 稀有
+
+targets:
+  - 靴子
+
+limitations:
+  - "CONFLICT_ENCHANT:灵魂疾行"
+
+display:
+  description:
+    general: "在沙地上移动时获得短暂速度效果"
+    specific: "&7在沙地或红沙上移动时获得短暂&a速度&7效果；此为插件近似实现，默认关闭。"
+
+variables:
+  leveled:
+    速度等级: ":{level}-1"
+    耐久消耗概率: "%:1.0"
+
+mechanisms:
+  listeners:
+    on-move:
+      listen: "player-move"
+      handle: |-
+        from = &event::from()
+        to = &event::to()
+        if &from::blockX() == &to::blockX() && &from::blockZ() == &to::blockZ() then {
+          return
+        }
+
+        ground = &to::clone()::subtract(0.0, 0.5, 0.0)::block()
+        groundType = string(&ground::type())
+        if &groundType != "SAND" && &groundType != "RED_SAND" && &groundType != "SANDSTONE" && &groundType != "RED_SANDSTONE" then {
+          return
+        }
+
+        entity::addPotionEffect(&player, "SPEED", 30, int(&速度等级))
+        if random(0.0, 100.0) < &耐久消耗概率 then {
+          damage = &item::durability()
+          &item::setDurability(&damage + 1)
+        }
+
+alternative:
+  is-treasure: true
+  is-discoverable: true
+  is-tradeable: false

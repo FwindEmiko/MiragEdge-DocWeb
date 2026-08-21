@@ -45,6 +45,7 @@ const SITE_TITLE = '锐界幻境 MiragEdge 文档中心';
 const EXCLUDE_DIRS = new Set([
   '.vitepress',
   'node_modules',
+  '.pnpm-store',
   'docs',
   'public',
   'scripts',
@@ -54,6 +55,7 @@ const EXCLUDE_DIRS = new Set([
   'build',
   'test_tool',
   'coverage',
+  'enchant',
 ]);
 
 // 主分区定义：与 .vitepress/config.mts 的 nav / sidebar 结构保持一致
@@ -580,6 +582,8 @@ function buildRootLlmsTxt(sectionEntries, rootEntries, buildMeta) {
   lines.push(`- 每个 HTML 页面同 URL 后追加 .md 即可获取该页清洗后的 Markdown 版本`);
   lines.push(`- /llms-full.txt 为全站页面 Markdown 拼接，适合一次性载入大上下文窗口`);
   lines.push(`- 路径中 index.md 对应 HTML 索引页（如 /start/ 对应 /start/index.md）`);
+  lines.push(`- AI Skills 清单（机器可读）: ${SITE_HOST}/ai-skills/skills.json`);
+  lines.push(`- AI Skills 技能包: ${SITE_HOST}/ai-skills/aiyatsbus-create-enchant-skill.zip`);
   lines.push('');
 
   // 各分区 H2 + 文件清单

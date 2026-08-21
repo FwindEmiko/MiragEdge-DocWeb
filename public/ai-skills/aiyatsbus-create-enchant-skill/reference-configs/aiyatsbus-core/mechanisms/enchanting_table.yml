@@ -1,0 +1,53 @@
+
+
+#         Powered by TabooLib 6.3         #
+
+
+# 是否使用插件的附魔随机器
+# 关闭意味着玩家只能从附魔台得到原版附魔
+enable: false
+# 是否在 1.21 以下版本开启原版附魔必中模式, 有两种情况:
+# - 为 true 时则开启原版附魔必中模式, 此时鼠标悬停在附魔项上会显示原版附魔及花费
+#   附魔出来的产物必定有悬停显示的那一个原版附魔, 同时根据下面的概率+等级计算向其中随机添加附魔
+#   开启则要求所有原版能附魔出来的附魔都不可禁用, 否则会出现问题
+#   且部分原版附魔强度过强, 无法保证平衡
+# - 为 false 时则关闭原版附魔必中模式, 此时鼠标悬停在附魔项上不会显示任何内容
+#   附魔出来的产物完全根据概率+等级计算随机出货
+#   因为关闭后鼠标悬停不会有任何内容, 所以请提前告知玩家避免玩家对此感到困惑
+# 默认关闭 (推荐)
+#
+# 注意: 1.21 及以上版本为数据驱动, 此选项无效. 附魔台有悬停, 且附魔出来的产物完全根据概率+等级计算随机出货
+vanilla_mode: false
+# 一次性附魔得到的附魔个数对应的概率
+# 可用变量：{button}
+more_enchant_chance:
+  - "0.2*{button}" # 一次性出俩附魔的概率
+  - "0.15*{button}" # 在一次出俩附魔的基础上出第三个附魔的概率
+  - "0.1*{button}" # 同理，第四个在出三个基础上的概率
+# 计算出货的等级，最小为1，可用变量：
+# {button} {max_level} {bonus}
+# 注意: 若配置了全局附魔出货最大等级设定, 或为对应附魔配置了出货最大等级限制
+# 则 max_level 为该限制值, 否则才是该附魔的最大等级
+# 不是特别想改，就请勿改动
+# 因为你永远也不知道自己调出来的公式是什么妖魔鬼怪
+level_formula: "{max_level}*{button}/3.0*({bonus}+1.0)/17.0-{random}"
+# 全局附魔出货项最大等级设定
+# -1 则为无限制 (但最高到该附魔的最高等级)
+max_level_limit: -1
+privilege:
+  chance:
+    - "aiyatsbus.privilege.table.vip:{chance}*1.2"
+    - "aiyatsbus.privilege.table.svip:{chance}*1.4"
+  full_level: "aiyatsbus.privilege.table.full"
+# 玩家附魔出特定品质的物品, 执行的操作, 也就是所谓的出金播报
+# 填写语言配置节点, 支持类型: message, title, actionbar
+celebrate-notice:
+  史诗:
+    - "message:celebrate-notice-epic-message"
+  传奇:
+    - "message:celebrate-notice-legendary-message"
+    - "title:celebrate-notice-legendary-title"
+  稀世:
+    - "message:celebrate-notice-splendid-message"
+    - "title:celebrate-notice-splendid-title"
+#    - "actionbar:celebrate-notice-splendid-actionbar" # 这个动作栏信息没有被添加到语言文件, 如果想用需要自己去添加

@@ -1,0 +1,42 @@
+basic:
+  enable: true
+  disable_worlds: []
+  id: replanter
+  name: 再植
+  max_level: 3
+alternative:
+  is-tradeable: false
+  is-treasure: true
+  is-discoverable: true
+
+rarity: 优良
+targets:
+- 靴子
+limitations: []
+display:
+  description:
+    general: 踩坏耕地时，只会使作物退化而不是掉落
+    specific: '&7踩坏耕地时，只会使作物退化&a{退化阶段}'
+variables:
+  leveled:
+    退化阶段: 阶段:3-{level}
+mechanisms:
+  listeners:
+    on-physical:
+      listen: player-interact
+      handle: |-
+        if string(&event::action()) == PHYSICAL then {
+            if string(&event::clickedBlock::type()) == FARMLAND then {
+                loc = &event::clickedBlock::location::clone()
+                &loc::setY(&loc::y() + 1)
+                if &loc::block::blockData() is org.bukkit.block.data.Ageable then {
+                    age = &loc::block::blockData::age()
+                    if &age >= 2 then {
+                        &event::setCancelled(true)
+                        newBlockData = &loc::block::blockData()
+                        &newBlockData::setAge(max(0, &age - int(&退化阶段)))
+                        &loc::block::setBlockData(&newBlockData)
+                    }
+                }
+            }
+        }

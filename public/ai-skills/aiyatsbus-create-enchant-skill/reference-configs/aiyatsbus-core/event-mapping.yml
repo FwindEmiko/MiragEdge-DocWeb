@@ -1,0 +1,160 @@
+
+
+#         Powered by TabooLib 6.3         #
+
+
+# 事件映射文件
+# 别名 -> 事件全类名
+# 别名 -> 触发位置
+
+# 槽位映射
+# HAND 主手, OFFHAND 副手, HEAD 头盔, CHEST 胸甲, LEGS 护腿, FEET 靴子
+mappings:
+  # 破坏方块事件
+  block-break:
+    class: 'org.bukkit.event.block.BlockBreakEvent'
+    slots:
+      - HAND
+      - OFF_HAND
+
+  # 玩家交互事件
+  player-interact:
+    class: 'org.bukkit.event.player.PlayerInteractEvent'
+    # 例如 Physical 需要所有槽位
+    slots:
+      - HAND
+      - OFF_HAND
+      - HEAD
+      - CHEST
+      - LEGS
+      - FEET
+
+  # 实体受伤事件
+  entity-damage:
+    class: 'org.bukkit.event.entity.EntityDamageEvent'
+    slots:
+      - HAND
+      - OFF_HAND
+      - HEAD
+      - CHEST
+      - LEGS
+      - FEET
+
+  # 玩家下蹲事件
+  player-toggle-sneak:
+    class: 'org.bukkit.event.player.PlayerToggleSneakEvent'
+    slots:
+      - HAND
+      - OFF_HAND
+      - HEAD
+      - CHEST
+      - LEGS
+      - FEET
+
+  # 实体攻击其他实体事件
+  entity-damage-other:
+    class: 'org.bukkit.event.entity.EntityDamageByEntityEvent'
+    slots:
+      - HAND
+      - OFF_HAND
+      - HEAD
+      - CHEST
+      - LEGS
+      - FEET
+
+  # 实体受到其他实体攻击事件
+  entity-damaged-by-other:
+    class: 'org.bukkit.event.entity.EntityDamageByEntityEvent'
+    slots:
+      - HAND
+      - OFF_HAND
+      - HEAD
+      - CHEST
+      - LEGS
+      - FEET
+    player: 'entity'
+
+  # 实体死亡事件
+  entity-death:
+    class: 'org.bukkit.event.entity.EntityDeathEvent'
+    slots:
+      - HAND
+      - OFF_HAND
+      - HEAD
+      - CHEST
+      - LEGS
+      - FEET
+
+  # 玩家消耗物品事件
+  player-item-damage:
+    class: 'org.bukkit.event.player.PlayerItemDamageEvent'
+    slots:
+      - HAND
+      - OFF_HAND
+      - HEAD
+      - CHEST
+      - LEGS
+      - FEET
+
+  # 玩家移动事件
+  player-move:
+    class: 'org.bukkit.event.player.PlayerMoveEvent'
+    slots:
+      - HAND
+      - OFF_HAND
+      - HEAD
+      - CHEST
+      - LEGS
+      - FEET
+
+  # 箭射中东西事件
+  projectile-hit:
+    class: 'org.bukkit.event.entity.ProjectileHitEvent'
+    slots:
+      - HAND
+      - OFF_HAND
+
+  # 玩家损坏方块事件
+  block-damage:
+    class: 'org.bukkit.event.block.BlockDamageEvent'
+    slots:
+      - HAND
+      - OFF_HAND
+
+  # 实体射箭事件
+  entity-shoot-bow:
+    class: 'org.bukkit.event.entity.EntityShootBowEvent'
+    slots:
+      - HAND
+
+  # 实体标记生物实体事件
+  entity-target-living-entity:
+    class: 'org.bukkit.event.entity.EntityTargetLivingEntityEvent'
+    slots:
+      - HAND
+      - OFF_HAND
+      - HEAD
+      - CHEST
+      - LEGS
+      - FEET
+
+  # 玩家弓蓄力准备事件
+  aiyatsbus-bow-charge-prepare:
+    class: 'cc.polarastrum.aiyatsbus.core.event.AiyatsbusBowChargeEvent$Prepare'
+    slots:
+      - HAND
+      - OFF_HAND
+
+  # 玩家弓蓄力释放事件
+  aiyatsbus-bow-charge-released:
+    class: 'cc.polarastrum.aiyatsbus.core.event.AiyatsbusBowChargeEvent$Released'
+    slots:
+      - HAND
+      - OFF_HAND
+
+  # 玩家弓蓄力中断事件
+  aiyatsbus-bow-charge-break:
+    class: 'cc.polarastrum.aiyatsbus.core.event.AiyatsbusBowChargeEvent$Break'
+    slots:
+      - HAND
+      - OFF_HAND

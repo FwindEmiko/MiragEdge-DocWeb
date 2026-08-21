@@ -1,0 +1,13 @@
+basic:
+  id: aqua_affinity
+  name: 水下速掘
+  max-level: 1
+alternative:
+  is-vanilla: true
+rarity: 优良
+targets:
+- 头盔
+display:
+  description:
+    general: 无视水下的挖掘速度降低效果
+    specific: '&7水下挖掘速度不受减益'
