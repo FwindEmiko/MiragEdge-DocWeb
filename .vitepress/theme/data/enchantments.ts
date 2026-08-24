@@ -1354,7 +1354,7 @@ export const enchantments: Enchantment[] = [
   sourceDetail: '随机战利品',
   pack: 'vanilla'
 },
-  { name: '错位', id: 'confusion', maxLevel: 3, equipment: '剑', effect: '在攻击时有概率打乱对手主手与副手的物品', rarity: 'epic' ,
+  { name: '错位', id: 'confusion', maxLevel: 2, equipment: '剑', effect: '在攻击时有概率打乱对手主手与副手的物品', rarity: 'epic' ,
   conflicts: [],
   source: 'random_loot',
   sourceDetail: '随机战利品',
@@ -1526,7 +1526,7 @@ export const enchantments: Enchantment[] = [
   sourceDetail: '随机战利品',
   pack: 'vanilla'
 },
-  { name: '索敌', id: 'aiming', maxLevel: 5, equipment: '弓', effect: '射出的箭矢将自动追踪目标', rarity: 'mythic' ,
+  { name: '索敌', id: 'aiming', maxLevel: 3, equipment: '弓', effect: '射出的箭矢将自动追踪目标', rarity: 'mythic' ,
   conflicts: [],
   source: 'random_loot',
   sourceDetail: '随机战利品',
