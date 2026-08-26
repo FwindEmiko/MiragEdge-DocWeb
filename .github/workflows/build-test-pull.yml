@@ -26,11 +26,12 @@ jobs:
     runs-on: ubuntu-22.04
     timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v5
+      # actions 全部固定到 commit SHA（供应链安全），注释标注对应版本
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
         with:
           fetch-depth: 0
-      - uses: pnpm/action-setup@v5
-      - uses: actions/setup-node@v5
+      - uses: pnpm/action-setup@a8198c4bff370c8506180b035930dea56dbd5288 # v5
+      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'pnpm'
@@ -40,7 +41,7 @@ jobs:
         continue-on-error: false
 
   # ============================================================
-  # 构建测试（main push 和 PR 事件）
+  # 构建测试（main push 和 PR 事件）+ 安全门禁
   # ============================================================
   test:
     name: 测试与构建
@@ -49,11 +50,11 @@ jobs:
     if: github.event_name != 'push' || github.ref == 'refs/heads/main'
     timeout-minutes: 20
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
         with:
           fetch-depth: 0
-      - uses: pnpm/action-setup@v5
-      - uses: actions/setup-node@v5
+      - uses: pnpm/action-setup@a8198c4bff370c8506180b035930dea56dbd5288 # v5
+      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'pnpm'
@@ -61,6 +62,20 @@ jobs:
       - name: 单元测试
         run: pnpm run test
         continue-on-error: false
+      # ---------- 安全门禁：密钥泄露扫描 ----------
+      - name: 密钥泄露扫描 (gitleaks)
+        uses: gitleaks/gitleaks-action@v3.0.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITLEAKS_LICENSE: ${{ secrets.GITLEAKS_LICENSE }}
+      # ---------- 安全门禁：依赖漏洞扫描 ----------
+      - name: 依赖漏洞扫描 (osv-scanner)
+        uses: google/osv-scanner-action@v2.5.1
+        with:
+          scan-args: |-
+            -r
+            --skip-git
+            .
       - name: 构建
         run: pnpm run build
       - name: 检查构建产物大小
@@ -71,7 +86,7 @@ jobs:
       - name: 打包
         run: tar -czf site.tar.gz -C .vitepress/dist .
       - name: 上传构建产物
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: site
           path: site.tar.gz
@@ -88,22 +103,38 @@ jobs:
     timeout-minutes: 60
     steps:
       - name: 下载构建产物
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         with:
           name: site
           path: ./
       - name: 配置 SSH
-        uses: webfactory/ssh-agent@v0.9.0
+        uses: webfactory/ssh-agent@dc588b651fe13675774614f8e6a936a468676387 # v0.9.0
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-      - name: 远程部署
+      - name: 校验服务器 SSH 指纹并部署
         run: |
           set -e
           HOST="dev.miragedge.top"
           mkdir -p ~/.ssh
-          ssh-keyscan -H "$HOST" >> ~/.ssh/known_hosts 2>&1 || echo "⚠️ ssh-keyscan 警告"
-          scp -o ConnectTimeout=60 site.tar.gz root@"$HOST":/tmp/
-          ssh -o ConnectTimeout=60 root@"$HOST" << 'ENDSSH'
+          # 1) 获取主机公钥并写入 known_hosts
+          ssh-keyscan -H "$HOST" > ~/.ssh/known_hosts 2>/dev/null
+          # 2) 输出指纹，首次请人工核验（ssh-keyscan -H "$HOST" | ssh-keygen -lf -）
+          #    并把期望指纹填入 secrets.DEV_HOST_SSH_FINGERPRINT，之后每次部署强制比对
+          echo ">>> 服务器指纹："
+          ssh-keygen -lf ~/.ssh/known_hosts 2>/dev/null || true
+          EXPECTED_FP="${{ secrets.DEV_HOST_SSH_FINGERPRINT }}"
+          if [ -n "$EXPECTED_FP" ]; then
+            if ! ssh-keygen -lf ~/.ssh/known_hosts 2>/dev/null | grep -q "$EXPECTED_FP"; then
+              echo "❌ SSH 主机指纹校验失败，终止部署（中间人风险）"
+              exit 1
+            fi
+            echo "✅ SSH 主机指纹校验通过"
+          else
+            echo "⚠️ 未配置 DEV_HOST_SSH_FINGERPRINT，跳过指纹强校验（建议配置）"
+          fi
+          # 3) StrictHostKeyChecking=yes：任何密钥变更立即失败（fail-closed）
+          scp -o StrictHostKeyChecking=yes -o ConnectTimeout=60 site.tar.gz root@"$HOST":/tmp/
+          ssh -o StrictHostKeyChecking=yes -o ConnectTimeout=60 root@"$HOST" << 'ENDSSH'
             set -e
             mkdir -p /www/MiragEdge/MiragEdge-DocWeb/build/miragedge.top/
             rm -rf /www/MiragEdge/MiragEdge-DocWeb/build/miragedge.top/*
@@ -122,11 +153,11 @@ jobs:
     if: github.event_name == 'push' && github.ref != 'refs/heads/main'
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
         with:
           fetch-depth: 0
-      - uses: pnpm/action-setup@v5
-      - uses: actions/setup-node@v5
+      - uses: pnpm/action-setup@a8198c4bff370c8506180b035930dea56dbd5288 # v5
+      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'pnpm'
@@ -135,7 +166,7 @@ jobs:
         run: pnpm run build
         env:
           VITEPRESS_BASE: /MiragEdge-DocWeb/
-      - uses: actions/upload-pages-artifact@v4
+      - uses: actions/upload-pages-artifact@7b1f4a764d45c48632c6b24a0339c27f5614fb0b # v4
         with:
           path: .vitepress/dist
 
@@ -156,4 +187,4 @@ jobs:
     steps:
       - name: 部署
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4

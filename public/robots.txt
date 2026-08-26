@@ -8,6 +8,7 @@ Allow: /
 Disallow: /.vitepress/
 Disallow: /assets/*.map
 Disallow: /*?q=
+Disallow: /ServerStatus/
 
 # 主要搜索引擎单独放行，确保收录
 User-agent: Googlebot
