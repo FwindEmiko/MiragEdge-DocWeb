@@ -64,17 +64,23 @@ jobs:
         continue-on-error: false
       # ---------- 安全门禁：密钥泄露扫描 ----------
       - name: 密钥泄露扫描 (gitleaks)
-        uses: gitleaks/gitleaks-action@v3.0.0
+        uses: gitleaks/gitleaks-action@e0c47f4f8be36e29cdc102c57e68cb5cbf0e8d1e # v3.0.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITLEAKS_LICENSE: ${{ secrets.GITLEAKS_LICENSE }}
       # ---------- 安全门禁：依赖漏洞扫描 ----------
       - name: 依赖漏洞扫描 (osv-scanner)
-        uses: google/osv-scanner-action@v2.5.1
+        uses: google/osv-scanner-action/osv-scanner-action@6e4298ebc4db23e847df9b2e2de2939d6f066c67 # v2.5.1
         with:
           scan-args: |-
-            -r
+            --recursive
             --skip-git
+            # 以下为 dev-server 专用漏洞（vite 5.4.21 / esbuild 0.21.5），静态构建无暴露，
+            # 待 vitepress 升级到 vite 6 后移除排除项
+            --exclude-vulns=GHSA-4w7w-66w2-5vf9
+            --exclude-vulns=GHSA-fx2h-pf6j-xcff
+            --exclude-vulns=GHSA-v6wh-96g9-6wx3
+            --exclude-vulns=GHSA-67mh-4wv8-2f99
             .
       - name: 构建
         run: pnpm run build

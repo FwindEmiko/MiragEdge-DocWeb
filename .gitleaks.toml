@@ -1,0 +1,15 @@
+# MiragEdge-DocWeb gitleaks 配置
+# 使用默认规则 + 白名单（跳过文档中的示例/公开内容）
+
+title = "MiragEdge-DocWeb gitleaks config"
+
+[extend]
+  useDefault = true
+
+[allowlist]
+  description = "文档中的示例 JWT 与 QQ 群公开邀请 key，非真实凭据"
+  paths = [
+    '''review/api.md''',
+    '''public/review/api.md''',
+    '''start/community/groups.md''',
+  ]
