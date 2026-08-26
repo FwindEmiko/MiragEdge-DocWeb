@@ -1,0 +1,20 @@
+# osv-scanner 配置：忽略已知可接受的 dev-server 专用漏洞
+# 这些是 vite 5.4.21 / esbuild 0.21.5 的 dev-server 模式漏洞，静态构建无暴露。
+# 待 vitepress 升级到不再捆绑 vite 5.4.21 后，删除本文件。
+# 配置说明见 https://google.github.io/osv-scanner/configuration/
+
+[[IgnoredVulns]]
+id = "GHSA-4w7w-66w2-5vf9"
+reason = "vite 5.4.21 dev-server only（server.fs.deny），静态构建无暴露；vitepress 1.6.4 固定此版本"
+
+[[IgnoredVulns]]
+id = "GHSA-fx2h-pf6j-xcff"
+reason = "vite 5.4.21 dev-server fs.deny bypass（Windows），静态构建无暴露；vitepress 1.6.4 固定此版本"
+
+[[IgnoredVulns]]
+id = "GHSA-v6wh-96g9-6wx3"
+reason = "vite 5.4.21 dev-server only，静态构建无暴露；vitepress 1.6.4 固定此版本"
+
+[[IgnoredVulns]]
+id = "GHSA-67mh-4wv8-2f99"
+reason = "esbuild 0.21.5 dev-server only（vite 5.4.21 传递依赖），静态构建无暴露"
