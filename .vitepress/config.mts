@@ -280,19 +280,25 @@ export default defineConfig({
         }
         return defaultLinkOpen(tokens, idx, options, env, self)
       }
-      // mcfunction 不是 Shiki 内置语言，映射到 bash 语法高亮（注释/命令风格接近）
+      // mcfunction / fluxon 不是 Shiki 内置语言：mcfunction 映射到 bash（注释/命令风格接近），
+      // fluxon 语法与 JavaScript 最接近，映射到 js 以获得基础高亮；渲染后恢复原始语言标签
       const fence = md.renderer.rules.fence!
       md.renderer.rules.fence = (...args) => {
         const [tokens, idx] = args
         const token = tokens[idx]
         const info = token.info.trim()
-        if (!info.startsWith('mcfunction')) return fence(...args)
-        token.info = info.replace('mcfunction', 'bash')
-        let html = fence(...args)
-        token.info = info
-        html = html.replace(/class="language-bash"/g, 'class="language-mcfunction"')
-        html = html.replace(/>bash</g, '>mcfunction<')
-        return html
+        const mappings: Record<string, string> = { mcfunction: 'bash', fluxon: 'js' }
+        for (const from of Object.keys(mappings)) {
+          if (!info.startsWith(from)) continue
+          const to = mappings[from]
+          token.info = info.replace(from, to)
+          let html = fence(...args)
+          token.info = info
+          html = html.replace(new RegExp('class="language-' + to + '"', 'g'), 'class="language-' + from + '"')
+          html = html.replace(new RegExp('>' + to + '<', 'g'), '>' + from + '<')
+          return html
+        }
+        return fence(...args)
       }
     },
   },
