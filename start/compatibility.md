@@ -1,10 +1,10 @@
 ---
 title: 服内模组支持
-description: 锐界幻境 Minecraft 服务器支持的客户端模组清单：简单语音聊天、光影等模组说明与安装指引。
+description: 锐界幻境 Minecraft 服务器支持的客户端模组清单：简单语音聊天、苹果皮、星辰状态条、聊天图片、Xaero 地图、共享投影、翻滚飞行等模组说明与安装指引。
 head:
   - - meta
     - name: keywords
-      content: 锐界幻境模组, Minecraft 客户端模组, 简单语音聊天, Simple Voice Chat, 光影
+      content: 锐界幻境模组, Minecraft 客户端模组, 简单语音聊天, Simple Voice Chat, 光影, AppleSkin, AsteorBar, ChatImage, Xaero, Xaero's Minimap, Xaero's WorldMap, Syncmatica, Do a Barrel Roll, Litematica, 投影
 ---
 
 # 服内模组支持
@@ -13,10 +13,13 @@ head:
 
 - [简单语音聊天](#简单语音聊天-simple-voice-chat) — 范围语音/全局语音聊天
 - [苹果皮](#苹果皮-appleskin) — 显示饱食度/饱和度
-- [遥远地平线](#遥远地平线-Distant_Horizons) — 支持显示512视距
-- [聊天图片显示](#聊天图片显示-ChatImage) — 群服消息互通可在游戏中查看图片
+- [星辰状态条](#星辰状态条-asteorbar) — 简洁状态条与实体血条
+- [遥远地平线](#遥远地平线-distant-horizons) — 支持显示512视距
+- [聊天图片显示](#聊天图片显示-chatimage) — 聊天中显示 CICode 图片
 - [音乐点播姬](#音乐点播姬-allmusic) — 服务器内点播音乐
-- [Xaero小地图](#xaero的小地图-xaeros-minimap) — 游戏内小地图
+- [Xaero小地图](#xaero的小地图-xaero-s-minimap) — 小地图/世界地图与坐标点同步
+- [共享投影](#共享投影-syncmatica) — 服务器共享投影文件
+- [Do a Barrel Roll](#do-a-barrel-roll-翻滚飞行) — 鞘翅翻滚飞行
 - [连锁采集](#连锁采集-veinminer) — 连锁挖掘快捷键支持
 
 ## 简单语音聊天(Simple Voice Chat)
@@ -54,7 +57,19 @@ head:
 
 > 便捷安装：直接在 PCL2 中搜索「Appleskin」即可一键安装
 
-各种与食物相关的HUD改进，通过服务端侧支持，显示准确的饱食度/饱和度
+各种与食物相关的HUD改进，显示准确的饱食度/饱和度等数值。
+
+> ✅ 服务器已提供 **内核级支持**（不再依赖插件）。安装该模组后即可获得准确的饱食度/饱和度显示。
+
+## 星辰状态条(AsteorBar)
+
+[Modrinth下载页](https://modrinth.com/mod/asteorbar#download "modrepo")(选择你需要的版本)
+
+> 便捷安装：直接在 PCL2 中搜索「AsteorBar」即可一键安装
+
+简洁的状态条 HUD，用细长条显示生命值、饥饿值、盔甲耐久、氧气、经验等状态，并可在生物头顶显示血条与生命值。
+
+> ✅ 服务器已提供 **内核级支持**（不再依赖插件）。饱食度/饱和度等默认不同步的数据也能正确显示。
 
 ## 遥远地平线(Distant_Horizons)
 
@@ -79,7 +94,9 @@ head:
 
 [Modrinth下载页](https://modrinth.com/mod/chatimage#download "ChatImage")(选择你需要的版本)
 
-当客户端安装了此模组，通过群服互通发送的消息包含图片时，可在游戏中显示预览图片
+当客户端安装了此模组，通过群服互通发送的消息包含图片时，可在游戏中显示预览图片。
+
+> ✅ 服务器已提供 **ChatImage 协议支持**。玩家可以直接在聊天框发送使用 CICode 格式（形如 `[CICode,url=图片地址]`）编码的图片，其他玩家即可在聊天中看到对应图片。
 
 <SmartImage
   src="/images/web_image/msreg/mod/chatImage_show.png"
@@ -139,9 +156,29 @@ head:
 
 [Modrinth下载页](https://modrinth.com/mod/xaeros-world-map?version=1.21.11#download "modrepo")(选择你需要的版本)
 
-> 便捷安装：直接在 PCL2 中搜索「Xaero's Minimap」即可一键安装
+> 便捷安装：直接在 PCL2 中搜索「Xaero's Minimap」即可一键安装（WorldMap 搜索「Xaero's World Map」）
 
-限制公平模式 —— 无雷达，无洞穴模式
+限制公平模式 —— 无雷达，无洞穴模式。
+
+> ✅ 服务器已提供 **Xaero 系列地图协议支持**（兼容 Xaero's Minimap 与 Xaero's WorldMap）。玩家坐标点与死亡点会与服务器挂钩存储：即使服务器名称或 IP 发生变化，已保存的坐标点与死亡点也不会被删除或刷新。
+
+## 共享投影(Syncmatica)
+
+[Modrinth下载页](https://modrinth.com/mod/syncmatica#download "modrepo")(选择你需要的版本)
+
+> 前置模组：[投影(Litematica)](https://modrinth.com/mod/litematica) 与 [MaLiLib](https://modrinth.com/mod/malilib)
+
+安装了该模组的玩家可以将自己的投影（Litematica 原理图）上传到服务器，其他同样安装了 Syncmatica 的玩家可以随时下载查看并使用这些共享投影。
+
+> ✅ 服务器已提供 **Syncmatica 共享投影支持**：玩家可上传/下载服务器共享的投影文件，所有安装了 Syncmatica 的玩家都可以查看并使用其他玩家共享的投影。
+
+## Do a Barrel Roll(翻滚飞行)
+
+[Modrinth下载页](https://modrinth.com/mod/do-a-barrel-roll#download "modrepo")(选择你需要的版本)
+
+轻量级纯客户端模组，让鞘翅飞行更灵活、更接近真实飞行：完全解锁镜头方向，飞行时可通过鼠标滚转/俯仰、按键偏航（默认鼠标 X 轴滚转、Y 轴俯仰、A/D 偏航）。
+
+> ✅ 服务器已提供 **Do a Barrel Roll 兼容支持**：飞行中的视觉效果（尤其是玩家模型滚转）会同步给其他同样安装了该模组的玩家。
 
 ## 连锁采集(VeinMiner)
 
