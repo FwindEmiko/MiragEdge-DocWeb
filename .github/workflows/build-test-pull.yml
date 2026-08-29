@@ -135,11 +135,32 @@ jobs:
           scp -o StrictHostKeyChecking=yes -o ConnectTimeout=60 site.tar.gz root@"$HOST":/tmp/
           ssh -o StrictHostKeyChecking=yes -o ConnectTimeout=60 root@"$HOST" << 'ENDSSH'
             set -e
-            mkdir -p /www/MiragEdge/MiragEdge-DocWeb/build/miragedge.top/
-            rm -rf /www/MiragEdge/MiragEdge-DocWeb/build/miragedge.top/*
-            tar -xzf /tmp/site.tar.gz -C /www/MiragEdge/MiragEdge-DocWeb/build/miragedge.top/
-            rm /tmp/site.tar.gz
-            echo "✅ 部署成功"
+            # ════════════════════════════════════════════════════════════
+            # 原子化部署——修复 ESA 边缘缓存 404 问题的关键
+            #
+            # 旧方案 rm -rf <目标>/* 后 tar 解包，存在"整个目录为空"的窗口期：
+            # 期间 ESA 边缘节点回源任意页面都会得到 404，并可能被 ESA 缓存，
+            # 导致玩家看到没改过的页面也 404，必须手动刷新全站 ESA 缓存才恢复。
+            #
+            # 新方案：先完整解压到 staging，再同步到正式目录（目录永不整体清空），
+            # 每份文件都是"先写新、后删旧"，回源始终能拿到内容。
+            # ════════════════════════════════════════════════════════════
+            DEST="/www/MiragEdge/MiragEdge-DocWeb/build/miragedge.top"
+            STAGE="/www/MiragEdge/MiragEdge-DocWeb/build/.site-stage"
+            mkdir -p "$DEST"
+            rm -rf "$STAGE"
+            mkdir -p "$STAGE"
+            tar -xzf /tmp/site.tar.gz -C "$STAGE"
+            if command -v rsync >/dev/null 2>&1; then
+              # rsync --delete：删除已移除的旧文件，同时全程保持目录非空
+              rsync -a --delete "$STAGE/" "$DEST/"
+            else
+              # 无 rsync 兜底：cp 覆盖（旧文件残留无害，安全优先）
+              cp -a "$STAGE"/. "$DEST"/
+            fi
+            rm -rf "$STAGE"
+            rm -f /tmp/site.tar.gz
+            echo "✅ 部署成功（原子化，无空目录窗口期）"
           ENDSSH
 
   # ============================================================
