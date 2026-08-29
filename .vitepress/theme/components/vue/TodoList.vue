@@ -6,7 +6,8 @@
  *
  * 视觉对齐：
  * - 继承 FoodEntry 卡片风格（圆角 + 边框 + 头部信息条）
- * - 状态徽章（5 tone：neutral / active / warn / danger / think / done）
+ * - 状态徽章（6 tone：neutral / active / warn / danger / think / done）
+ * - 已放弃条目自动从待办区抽出，集中到页面底部「已放弃」分区（弱化 + 删除线）
  * - 类标签 chip（添加/调整/修复/升级/兼容 5 种颜色）
  * - 顶部筛选栏（按类 toggle，0 个选中 = 显示全部）
  * - 备注默认折叠（>120 字才出现展开按钮）
@@ -57,6 +58,9 @@ const data = ref<TodoData | null>(null)
 const loadError = ref<string>('')
 const activeFilters = ref<Set<string>>(new Set())
 const expandedNotes = ref<Set<string>>(new Set())
+
+/** 已放弃：从待办区抽出，不参与待办计数 */
+const STATUS_ABANDONED = '已放弃'
 
 onMounted(async () => {
   try {
@@ -136,12 +140,20 @@ const notePreview = (note?: string) => {
 /** 已完成项目：旧字段 scope 兼容新版 */
 const getScope = (item: TodoItem): string => item.scope ?? ''
 
-/** 过滤后的分组计算 */
+/** 过滤后的分组计算（排除已放弃条目） */
 const filteredGroups = computed(() => {
   if (!data.value) return [] as TodoGroup[]
   return data.value.groups
-    .map((g) => ({ ...g, items: g.items.filter(matchesFilter) }))
+    .map((g) => ({ ...g, items: g.items.filter((item) => matchesFilter(item) && item.status !== STATUS_ABANDONED) }))
     .filter((g) => g.items.length > 0)
+})
+
+/** 已放弃条目：从各分组抽出集中展示，不参与待办计数 */
+const abandonedItems = computed(() => {
+  if (!data.value) return [] as TodoItem[]
+  return data.value.groups
+    .flatMap((g) => g.items)
+    .filter((item) => matchesFilter(item) && item.status === STATUS_ABANDONED)
 })
 
 const filteredCompleted = computed(() => {
@@ -151,11 +163,12 @@ const filteredCompleted = computed(() => {
     .filter((g) => g.items.length > 0)
 })
 
-/** Total pending/done count */
+/** Total pending/done/abandoned count（已放弃不计入进行中） */
 const totalItemsCount = computed(() => {
-  const pending = data.value?.groups.reduce((s, g) => s + g.items.length, 0) ?? 0
+  const pending = data.value?.groups.reduce((s, g) => s + g.items.filter((i) => i.status !== STATUS_ABANDONED).length, 0) ?? 0
   const done = data.value?.completed.reduce((s, g) => s + g.items.length, 0) ?? 0
-  return { pending, done, total: pending + done }
+  const abandoned = abandonedItems.value.length
+  return { pending, done, abandoned, total: pending + done + abandoned }
 })
 
 const logsUrl = withBase('/develop/logs')
@@ -316,9 +329,57 @@ const logsUrl = withBase('/develop/logs')
         </div>
       </section>
 
+      <!-- 已放弃 -->
+      <section v-if="abandonedItems.length > 0" class="todo-section todo-section-abandoned">
+        <header class="todo-section-head">
+          <h3 class="todo-section-title">已放弃（确定不做）</h3>
+          <span class="todo-section-sub">{{ abandonedItems.length }} 条 · 保留记录，不再推进</span>
+        </header>
+        <div class="todo-cards">
+          <article
+            v-for="item in abandonedItems"
+            :key="item.id"
+            class="todo-card todo-card-abandoned"
+            :style="{ '--accent': '#9ca3af' }"
+          >
+            <div class="todo-card-head">
+              <h4 class="todo-card-title">
+                <span v-if="item.due" class="todo-due">{{ item.due }}</span>
+                <span class="todo-title-text">{{ item.title }}</span>
+              </h4>
+              <span
+                v-if="item.status"
+                class="todo-status"
+                :style="{
+                  color: getStatusStyle(item.status).color,
+                  background: getStatusStyle(item.status).bg,
+                  borderColor: getStatusStyle(item.status).border,
+                }"
+              >
+                <span class="todo-status-icon">{{ getStatusStyle(item.status).cfg?.icon }}</span>
+                {{ getStatusStyle(item.status).cfg?.label }}
+              </span>
+            </div>
+
+            <div class="todo-meta">
+              <span v-if="item.scope" class="todo-scope">{{ getScope(item) }}</span>
+              <span
+                v-if="item.category"
+                class="todo-cat"
+                :style="{ color: getCategoryColor(item.category), borderColor: getCategoryColor(item.category) }"
+              >[{{ data.categories[item.category]?.label ?? item.category }}]</span>
+            </div>
+
+            <div v-if="item.note" class="todo-note">
+              <span class="todo-note-text">{{ item.note }}</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
       <!-- 空状态 -->
       <div
-        v-if="filteredGroups.length === 0 && filteredCompleted.length === 0"
+        v-if="filteredGroups.length === 0 && filteredCompleted.length === 0 && abandonedItems.length === 0"
         class="todo-empty"
       >
         <p class="todo-empty-text">没有匹配的待办条目</p>
@@ -635,6 +696,34 @@ const logsUrl = withBase('/develop/logs')
 .todo-card-done .todo-title-text {
   text-decoration: line-through;
   text-decoration-color: rgba(34, 197, 94, 0.6);
+  text-decoration-thickness: 1.5px;
+  text-decoration-skip-ink: none;
+}
+
+/* 已放弃卡片视觉弱化 */
+.todo-section-abandoned .todo-section-title {
+  color: #9ca3af;
+}
+
+.todo-card-abandoned {
+  opacity: 0.6;
+  filter: grayscale(0.6);
+  border-left-color: #9ca3af !important;
+}
+
+.todo-card-abandoned:hover {
+  border-color: #9ca3af;
+  box-shadow: none;
+}
+
+.todo-card-abandoned .todo-card-head {
+  background: rgba(0, 0, 0, 0.03);
+}
+
+.todo-card-abandoned .todo-title-text {
+  color: var(--vp-c-text-2, rgba(255, 255, 255, 0.55));
+  text-decoration: line-through;
+  text-decoration-color: rgba(156, 163, 175, 0.55);
   text-decoration-thickness: 1.5px;
   text-decoration-skip-ink: none;
 }
