@@ -9,6 +9,8 @@ outline: deep
 
 装备组合（Kit）是管理员预设的 PvP 装备包。玩家在比赛开始前通过 GUI 选择要使用的组合。
 
+> 所有装备组合管理命令均需管理员权限 `fepvp.admin`，且**不需要** admin 前缀，直接使用 `/fepvp kit ...`。
+
 ## 创建装备组合
 
 ### 从当前背包创建
@@ -17,15 +19,15 @@ outline: deep
 2. 执行：
 
 ```
-/fepvp admin kit create 经典PvP
+/fepvp kit create 经典PvP
 ```
 
-自动将当前背包（36 格）、盔甲（4 格）、副手保存为装备组合。
+自动将当前背包（36 格）、盔甲（4 格）、副手保存为装备组合（默认适用类型 `BOTH`）。
 
 ### 编辑装备组合
 
 ```
-/fepvp admin kit edit 经典PvP
+/fepvp kit edit 经典PvP
 ```
 
 打开 GUI 编辑器，直接拖放物品修改：
@@ -36,21 +38,33 @@ outline: deep
 
 关闭 GUI 时自动保存。
 
+### 设置适用模式
+
+```
+/fepvp kit settype 经典PvP duel     # duel | team | both
+```
+
+### 设置显示图标
+
+```
+/fepvp kit seticon 经典PvP DIAMOND_SWORD
+```
+
 ### 列出所有装备组合
 
 ```
-/fepvp admin kit list
+/fepvp kit list
 ```
 
 ### 删除装备组合
 
 ```
-/fepvp admin kit remove 经典PvP
+/fepvp kit remove 经典PvP
 ```
 
 ## kits.yml 存储格式
 
-文件位置：`plugins/FE_PVP/kits.yml`
+文件位置：```plugins/FE_PVP/kits.yml```
 
 ```yaml
 kits:
@@ -60,7 +74,7 @@ kits:
     description:
       - "§7经典 PvP 装备"
       - "§7钻石剑 + 铁甲"
-    type: DUEL
+    type: DUEL           # DUEL | TEAM | BOTH
     contents:
       0:
         ==: org.bukkit.inventory.ItemStack
@@ -115,14 +129,16 @@ kits:
 
 1. 系统打开「选择装备组合」GUI
 2. 显示所有适用当前竞技场类型的装备组合
-3. 如果 `config.yml` 中 `kit.allow-own-gear: true`，额外显示「使用自己的装备」选项
+3. 如果 ```config.yml``` 中 ```kit.allow-own-gear: true```，额外显示「使用自己的装备」选项
 4. 玩家点击选择，5 秒后自动进入倒计时
 5. 未选择的玩家使用默认装备
 
+> **饥饿游戏（FFA）跳过装备选择**：开局直接使用补给箱装备，玩家清空自带装备（可配置 `start-empty: false` 保留）。
+
 ## 类型过滤规则
 
-| 装备类型 | 单挑竞技场 | 团队竞技场 |
-|----------|-----------|-----------|
-| `DUEL` |  显示 | ❌ 不显示 |
-| `TEAM` | ❌ 不显示 |  显示 |
-| `BOTH` |  显示 |  显示 |
+| 装备类型 | 单挑竞技场 | 团队竞技场 | 饥饿游戏 |
+|----------|-----------|-----------|----------|
+| `DUEL` | ✅ 显示 | ❌ 不显示 | 不使用 |
+| `TEAM` | ❌ 不显示 | ✅ 显示 | 不使用 |
+| `BOTH` | ✅ 显示 | ✅ 显示 | 不使用 |

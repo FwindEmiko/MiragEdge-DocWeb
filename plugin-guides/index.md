@@ -33,7 +33,7 @@ outline: deep
   title="FE_PVP"
   link="/plugin-guides/fepvp/"
 >
-独立的 PvP 竞技系统，包含单挑、团队竞技、快速匹配、观战、装备组合与战绩统计。
+独立的 PvP 竞技系统，包含单挑、团队竞技、饥饿游戏、押注决斗、快速匹配、观战、装备组合与 ELO 段位排行榜。
 </FeatureCard>
 
 ## 从需要解决的事开始

@@ -819,6 +819,8 @@ export default defineConfig({
                 { text: '玩家指南', link: '/plugin-guides/fepvp/guide' },
                 { text: '竞技场管理', link: '/plugin-guides/fepvp/arena' },
                 { text: '装备组合管理', link: '/plugin-guides/fepvp/kit' },
+                { text: '饥饿游戏模式', link: '/plugin-guides/fepvp/hunger-games' },
+                { text: '押注局', link: '/plugin-guides/fepvp/betting' },
                 { text: '命令参考', link: '/plugin-guides/fepvp/commands' },
                 { text: '配置参考', link: '/plugin-guides/fepvp/config' },
                 { text: '权限节点', link: '/plugin-guides/fepvp/permissions' },
