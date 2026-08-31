@@ -29,6 +29,14 @@ outline: deep
 </FeatureCard>
 
 <FeatureCard
+  icon="🔑"
+  title="HFcatLogin"
+  link="/plugin-guides/hfcatlogin/"
+>
+Velocity 代理端登录插件，支持注册/登录、正版自动登录、会话续登、邮箱找回密码，集成 NanoLimbo 虚拟登录服与 LuckPerms 权限上下文，兼容基岩版 Floodgate。
+</FeatureCard>
+
+<FeatureCard
   icon="⚔️"
   title="FE_PVP"
   link="/plugin-guides/fepvp/"

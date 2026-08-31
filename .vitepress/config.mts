@@ -287,7 +287,7 @@ export default defineConfig({
         const [tokens, idx] = args
         const token = tokens[idx]
         const info = token.info.trim()
-        const mappings: Record<string, string> = { mcfunction: 'bash', fluxon: 'js' }
+        const mappings: Record<string, string> = { mcfunction: 'bash', fluxon: 'js', hocon: 'json' }
         for (const from of Object.keys(mappings)) {
           if (!info.startsWith(from)) continue
           const to = mappings[from]
@@ -811,6 +811,16 @@ export default defineConfig({
               ]
             },
             { text: 'DragonMiao', link: '/plugin-guides/dragonmiao/' },
+            {
+              text: 'HFcatLogin 登录插件',
+              link: '/plugin-guides/hfcatlogin/',
+              collapsed: false,
+              items: [
+                { text: '命令参考', link: '/plugin-guides/hfcatlogin/commands' },
+                { text: '权限节点', link: '/plugin-guides/hfcatlogin/permissions' },
+                { text: '配置参考', link: '/plugin-guides/hfcatlogin/config' },
+              ]
+            },
             {
               text: 'FE_PVP 竞技系统',
               link: '/plugin-guides/fepvp/',
