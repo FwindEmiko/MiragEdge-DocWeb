@@ -827,6 +827,18 @@ export default defineConfig({
                 { text: '数据存储', link: '/plugin-guides/fepvp/storage' },
               ]
             },
+            {
+              text: 'FE_Back 死亡回程',
+              link: '/plugin-guides/fe-back/',
+              collapsed: false,
+              items: [
+                { text: '玩家指南', link: '/plugin-guides/fe-back/guide' },
+                { text: '命令参考', link: '/plugin-guides/fe-back/commands' },
+                { text: '配置参考', link: '/plugin-guides/fe-back/config' },
+                { text: '权限节点', link: '/plugin-guides/fe-back/permissions' },
+                { text: '数据存储', link: '/plugin-guides/fe-back/storage' },
+              ]
+            },
           ]
         },
       ],
