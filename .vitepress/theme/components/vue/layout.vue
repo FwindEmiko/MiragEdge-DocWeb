@@ -13,6 +13,7 @@ import AmbientParticles from './AmbientParticles.vue';
 import EffectsToggle from './EffectsToggle.vue';
 import ImageLightbox from './ImageLightbox.vue';
 import { effectsEnabled, initEffectsToggleState } from '../../composables/useEffectsToggle';
+import { initAdaptiveEffects } from '../../composables/useAdaptiveEffects';
 import { useTocAutoScroll } from '../../composables/useTocAutoScroll';
 
 // 右侧「本页目录」长目录自动滚动跟随 active 项
@@ -47,6 +48,7 @@ const contributorsReady = ref(false)
 let searchAnimObserver = null
 let motionMediaQuery = null
 let motionPreferenceHandler = null
+let stopAdaptiveEffects = null
 const searchBoxCleanups = new Map()
 
 /**
@@ -167,6 +169,8 @@ function cleanupSearchAnimations() {
 onMounted(() => {
   contributorsReady.value = true
   initEffectsToggleState()
+  // 自适应性能降级：横屏平板/老旧核显笔记本实测掉帧后自动关闭特效
+  stopAdaptiveEffects = initAdaptiveEffects()
   motionMediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
   motionPreferenceHandler = (event) => {
     prefersReducedMotion.value = event.matches
@@ -182,6 +186,8 @@ onMounted(() => {
 })
 
 onUnmounted(() => {
+  stopAdaptiveEffects?.()
+  stopAdaptiveEffects = null
   window.removeEventListener('scroll', updateScrollProgress)
   searchAnimObserver?.disconnect()
   cleanupSearchAnimations()

@@ -99,13 +99,21 @@ export default defineConfig({
       }
     })],
     // 页面特效开关：在 Vue 水合前同步读取 localStorage 并设置 effects-disabled 类
-    // 避免刷新后开关显示与实际状态不一致的问题
+    // 避免刷新后开关显示与实际状态不一致的问题。
+    // 同时内置静态低配检测（<=2GB 内存 / <=2 逻辑核心 / 流量节省），与
+    // useEffectsToggle.isStaticLowEndDevice 保持一致；老旧横屏平板/核显笔记本
+    // 的动态掉帧检测由 useAdaptiveEffects 在挂载后完成。
     ['script', {}, `(
       function() {
         try {
           var stored = localStorage.getItem('miragedge-effects-enabled');
           var isMobile = window.innerWidth <= 767;
-          var enabled = stored === null ? !isMobile : stored === 'true';
+          var lowEnd = false;
+          var nav = navigator;
+          if (typeof nav.deviceMemory === 'number' && nav.deviceMemory <= 2) lowEnd = true;
+          if (typeof nav.hardwareConcurrency === 'number' && nav.hardwareConcurrency <= 2) lowEnd = true;
+          if (nav.connection && nav.connection.saveData === true) lowEnd = true;
+          var enabled = stored === null ? (!isMobile && !lowEnd) : stored === 'true';
           if (!enabled) document.documentElement.classList.add('effects-disabled');
         } catch(e) {}
       }
