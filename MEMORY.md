@@ -30,8 +30,6 @@
 
 ## 进行中的工作
 
-## 进行中的工作
-
 ### 2026-08 · HFcatLogin 原创插件文档（plugin-guides/hfcatlogin/）
 
 - 新增 4 个页面：index.md（总览/安装）、commands.md（命令参考）、permissions.md（权限节点）、config.md（配置参考）
