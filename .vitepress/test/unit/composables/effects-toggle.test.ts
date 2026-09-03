@@ -37,6 +37,7 @@ const {
   useEffectsToggle,
   effectsEnabled,
   isStaticLowEndDevice,
+  isSuspectTablet,
   hasStoredEffectsPreference,
   isAutoModeActive,
   getAutoEffectsReason,
@@ -242,6 +243,52 @@ describe('useEffectsToggle: 自适应性能降级', () => {
     it('信号缺失（undefined）时按非低配处理', () => {
       vi.stubGlobal('navigator', { userAgent: 'test' })
       expect(isStaticLowEndDevice()).toBe(false)
+    })
+  })
+
+  describe('isSuspectTablet: 横屏触摸平板检测', () => {
+    const coarseMedia = {
+      matches: true,
+      media: '(hover: none) and (pointer: coarse)',
+      onchange: null,
+      addListener: vi.fn(),
+      removeListener: vi.fn(),
+      addEventListener: vi.fn(),
+      removeEventListener: vi.fn(),
+      dispatchEvent: vi.fn(),
+    }
+
+    it('横屏 + 粗指针主输入 → 判定为疑似平板', () => {
+      window.innerWidth = 1280
+      ;(window.matchMedia as any).mockImplementation((query: string) => ({
+        ...coarseMedia,
+        media: query,
+        matches: query === '(hover: none) and (pointer: coarse)',
+      }))
+
+      expect(isSuspectTablet()).toBe(true)
+    })
+
+    it('竖屏宽度（<=767px）不算横屏平板', () => {
+      window.innerWidth = 700
+      ;(window.matchMedia as any).mockImplementation((query: string) => ({
+        ...coarseMedia,
+        media: query,
+        matches: true,
+      }))
+
+      expect(isSuspectTablet()).toBe(false)
+    })
+
+    it('精细指针（鼠标）设备不算疑似平板', () => {
+      window.innerWidth = 1280
+      ;(window.matchMedia as any).mockImplementation((query: string) => ({
+        ...coarseMedia,
+        media: query,
+        matches: false,
+      }))
+
+      expect(isSuspectTablet()).toBe(false)
     })
   })
 

@@ -42,6 +42,24 @@ export function isStaticLowEndDevice(): boolean {
   return false
 }
 
+/**
+ * 疑似低性能平板：横屏 + 主输入为触摸（hover:none & pointer:coarse）。
+ * 华为/Kirin 等弱 GPU 平板属于此列；iPad 也命中，但属于「默认关闭、
+ * 用户可手动恢复」的保守策略，而不是永久禁用。
+ * 移动端竖屏（<=767px）仍由 isMobile 分支处理，这里只针对横屏。
+ */
+export function isSuspectTablet(): boolean {
+  if (!inBrowser) return false
+  try {
+    return (
+      window.innerWidth > 767 &&
+      window.matchMedia('(hover: none) and (pointer: coarse)').matches
+    )
+  } catch {
+    return false
+  }
+}
+
 /** 用户是否已经手动设置过特效开关（有 localStorage 记录即为显式偏好） */
 export function hasStoredEffectsPreference(): boolean {
   if (!inBrowser) return false
@@ -90,7 +108,7 @@ export function initEffectsToggleState() {
   autoReason = ''
 
   const isMobile = window.innerWidth <= 767
-  const defaultValue = isMobile || isStaticLowEndDevice() ? false : true
+  const defaultValue = isMobile || isStaticLowEndDevice() || isSuspectTablet() ? false : true
   const initial = stored === null ? defaultValue : stored === 'true'
 
   effectsEnabled.value = initial

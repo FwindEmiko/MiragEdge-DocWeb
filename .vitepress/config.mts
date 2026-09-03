@@ -113,7 +113,13 @@ export default defineConfig({
           if (typeof nav.deviceMemory === 'number' && nav.deviceMemory <= 2) lowEnd = true;
           if (typeof nav.hardwareConcurrency === 'number' && nav.hardwareConcurrency <= 2) lowEnd = true;
           if (nav.connection && nav.connection.saveData === true) lowEnd = true;
-          var enabled = stored === null ? (!isMobile && !lowEnd) : stored === 'true';
+          // 横屏触摸平板（如华为 MatePad 等弱 GPU 平板）：默认关闭特效，
+          // 与 useEffectsToggle.isSuspectTablet 保持一致
+          var coarseTablet = false;
+          try {
+            coarseTablet = window.matchMedia('(hover: none) and (pointer: coarse)').matches && window.innerWidth > 767;
+          } catch (e2) {}
+          var enabled = stored === null ? (!isMobile && !lowEnd && !coarseTablet) : stored === 'true';
           if (!enabled) document.documentElement.classList.add('effects-disabled');
         } catch(e) {}
       }

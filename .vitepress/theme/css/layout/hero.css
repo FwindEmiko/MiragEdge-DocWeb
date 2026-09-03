@@ -549,3 +549,28 @@ html:not(.dark) .VPHomeHero::after {
     animation: rainbow 8s linear infinite;
   }
 }
+
+/* ==================================================
+   低功耗模式：effects-disabled 时的静态层降级
+   ==================================================
+   特效关闭后，两层 100vw 大半径 blur 的极光背景仍是弱 GPU
+   （Kirin/Mali 平板、老核显）的主要持续开销：
+   - blur(130px) 光栅化/重合成昂贵
+   - mix-blend-mode: multiply/screen 每帧强制回读
+   - will-change 常驻合成层占用显存
+   关闭特效时保留一层低模糊渐变做背景色，去掉第二层与所有混合/合成开销。 */
+html.effects-disabled .VPHomeHero::before,
+html.effects-disabled .VPHomeHero::after {
+  animation: none !important;
+  will-change: auto;
+  filter: blur(30px) saturate(110%);
+}
+
+html.effects-disabled .VPHomeHero::after {
+  display: none;
+}
+
+html.effects-disabled .VPHomeHero::before {
+  mix-blend-mode: normal;
+  opacity: 0.35;
+}

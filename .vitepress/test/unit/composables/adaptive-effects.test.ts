@@ -7,6 +7,7 @@ const {
   evaluatePerformanceSignals,
   computeFrameMetrics,
   computeInteractionMetrics,
+  isInteractionJank,
 } = await import('../../../theme/composables/useAdaptiveEffects')
 
 const emptyInteraction = () => ({ samples: 0, slowCount: 0, p90LatencyMs: 0 })
@@ -48,6 +49,24 @@ describe('computeInteractionMetrics: 交互延迟统计', () => {
     expect(metrics.samples).toBe(4)
     expect(metrics.slowCount).toBe(2)
     expect(metrics.p90LatencyMs).toBe(120)
+  })
+})
+
+describe('isInteractionJank: 交互期掉帧判定', () => {
+  it('样本不足（frames < 12）不判定为掉帧', () => {
+    expect(isInteractionJank({ frames: 8, medianFrameMs: 40, p90FrameMs: 80, droppedRatio: 0.6 })).toBe(false)
+  })
+
+  it('P90 帧间隔 >= 44ms 判定为掉帧', () => {
+    expect(isInteractionJank({ frames: 20, medianFrameMs: 33, p90FrameMs: 46, droppedRatio: 0.2 })).toBe(true)
+  })
+
+  it('掉帧比例 >= 35% 判定为掉帧', () => {
+    expect(isInteractionJank({ frames: 20, medianFrameMs: 25, p90FrameMs: 40, droppedRatio: 0.4 })).toBe(true)
+  })
+
+  it('健康帧率不判定为掉帧', () => {
+    expect(isInteractionJank({ frames: 20, medianFrameMs: 16.7, p90FrameMs: 18, droppedRatio: 0.05 })).toBe(false)
   })
 })
 

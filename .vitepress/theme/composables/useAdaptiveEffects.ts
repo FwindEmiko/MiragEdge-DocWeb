@@ -35,6 +35,12 @@ const SAMPLE_TIMEOUT_MS = 1600
 /** 交互延迟样本阈值：event-timing 中 duration 超过该值的输入事件记为一笔慢交互 */
 const SLOW_INTERACTION_MS = 90
 
+/** 交互期掉帧监测参数：滚动/触摸时短采样，捕捉「空闲时流畅、交互时掉帧」的设备 */
+const WATCH_COOLDOWN_MS = 1200
+const WATCH_WARMUP_FRAMES = 2
+const WATCH_SAMPLE_FRAMES = 20
+const WATCH_TIMEOUT_MS = 700
+
 export interface FrameMetrics {
   /** 有效帧间隔样本数 */
   frames: number
@@ -174,6 +180,18 @@ export function computeInteractionMetrics(latencies: number[]): InteractionMetri
   }
 }
 
+/**
+ * 纯函数：交互期间（滚动/触摸/滚轮）短采样是否判定为掉帧。
+ * 阈值比首屏探针更严：要求样本足够且 P90 帧间隔明显超预算，
+ * 避免正常设备在长文档布局重排时的一次性抖动被误伤。
+ */
+export function isInteractionJank(metrics: FrameMetrics): boolean {
+  return (
+    metrics.frames >= 12 &&
+    (metrics.p90FrameMs >= 44 || metrics.droppedRatio >= 0.35)
+  )
+}
+
 /** 采样 rAF 帧间隔：先热身若干帧，再收集有效样本，超时兜底 */
 function sampleFrames(
   warmup: number,
@@ -297,14 +315,20 @@ export function initAdaptiveEffects(): () => void {
   let longTaskObserver: PerformanceObserver | null = null
   let eventObserver: PerformanceObserver | null = null
   let idleId = 0
+  let stopInteractionWatch: (() => void) | null = null
 
-  const cleanup = () => {
-    disposed = true
-    if (typeof cancelIdleCallback === 'function') cancelIdleCallback(idleId)
+  const disconnectObservers = () => {
     try {
       longTaskObserver?.disconnect()
       eventObserver?.disconnect()
     } catch {}
+  }
+
+  const cleanup = () => {
+    disposed = true
+    if (typeof cancelIdleCallback === 'function') cancelIdleCallback(idleId)
+    disconnectObservers()
+    stopInteractionWatch?.()
   }
 
   const tryObserveLongTasks = () => {
@@ -337,6 +361,68 @@ export function initAdaptiveEffects(): () => void {
     }
   }
 
+  /**
+   * 交互期掉帧监测：首屏探针判定「不慢」后仍保持观察。
+   * 华为平板这类设备空闲时可能满帧，但滚动/触摸时静态 blur + backdrop-filter
+   * 会瞬间压垮 GPU。此时对交互事件做短采样，发现掉帧立即降级。
+   * 触发条件用冷却时间节流，采样本身只读 rAF 时间戳，开销可忽略。
+   */
+  const startInteractionWatch = () => {
+    let watching = true
+    let sampling = false
+    let lastSampleAt = 0
+
+    const stop = () => {
+      watching = false
+      window.removeEventListener('scroll', onInteract)
+      window.removeEventListener('touchmove', onInteract)
+      window.removeEventListener('wheel', onInteract)
+      stopInteractionWatch = null
+    }
+
+    const runSample = () => {
+      if (disposed || !watching || sampling) return
+      const now = Date.now()
+      if (now - lastSampleAt < WATCH_COOLDOWN_MS) return
+
+      // 用户手动偏好 / 特效已被关闭 → 监测失去意义，直接收工
+      if (hasStoredEffectsPreference()) {
+        stop()
+        return
+      }
+      if (document.documentElement.classList.contains('effects-disabled')) {
+        stop()
+        return
+      }
+
+      sampling = true
+      lastSampleAt = now
+      void sampleFrames(WATCH_WARMUP_FRAMES, WATCH_SAMPLE_FRAMES, WATCH_TIMEOUT_MS).then((metrics) => {
+        sampling = false
+        if (disposed || !watching) return
+        if (hasStoredEffectsPreference() ||
+            document.documentElement.classList.contains('effects-disabled')) {
+          stop()
+          return
+        }
+        if (isInteractionJank(metrics)) {
+          writeCache(true)
+          applyAutoEffects(false, '滚动/触摸交互期间掉帧')
+          stop()
+        }
+      })
+    }
+
+    const onInteract = () => {
+      runSample()
+    }
+
+    window.addEventListener('scroll', onInteract, { passive: true })
+    window.addEventListener('touchmove', onInteract, { passive: true })
+    window.addEventListener('wheel', onInteract, { passive: true })
+    stopInteractionWatch = stop
+  }
+
   const run = async () => {
     if (disposed) return
 
@@ -359,8 +445,13 @@ export function initAdaptiveEffects(): () => void {
     writeCache(verdict.slow)
     if (verdict.slow) {
       applyAutoEffects(false, verdict.reasons.join('、') || '渲染性能不达标')
+      cleanup()
+      return
     }
-    cleanup()
+
+    // 探针通过：停止长任务/交互观察，转入交互期掉帧监测
+    disconnectObservers()
+    startInteractionWatch()
   }
 
   if (typeof requestIdleCallback === 'function') {

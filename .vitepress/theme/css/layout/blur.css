@@ -203,3 +203,41 @@ html:not(.dark) .VPNavBar.home.top {
   /* 旧 iOS 友好的惯性滚动 */
   -webkit-overflow-scrolling: touch;
 }
+
+/* ==================================================
+   低功耗磨砂降级
+   ==================================================
+   1. effects-disabled（手动关闭或自适应降级）：backdrop-filter 是弱 GPU
+      （Kirin/Mali 平板、老核显）滚动掉帧的主要来源之一。关闭特效时
+      移除大面积的 backdrop-filter，改用更不透明的实色背景保持可读性。
+   2. 触摸设备全局缩小模糊半径：即使特效开启（用户手动恢复），
+      blur 半径也降为 10px，显著降低滚动时的背景重采样成本。 */
+html.effects-disabled .VPNavBar,
+html.effects-disabled .VPLocalNav,
+html.effects-disabled .DocSearch-Button,
+html.effects-disabled .VPDocAsideOutline.has-outline,
+html.effects-disabled .VPLocalNavOutlineDropdown .items,
+html.effects-disabled .VPMenu,
+html.effects-disabled .VPTeamMembersItem {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* 移除 backdrop 后提高背景不透明度，避免文字与底层内容交叠可读性下降 */
+html.effects-disabled .VPNavBar:not(.has-sidebar):not(.home.top),
+html.effects-disabled .VPNavBar.has-sidebar,
+html.effects-disabled .VPLocalNav {
+  background-color: rgba(255, 255, 255, 0.94) !important;
+}
+html.effects-disabled.dark .VPNavBar:not(.has-sidebar):not(.home.top),
+html.effects-disabled.dark .VPNavBar.has-sidebar,
+html.effects-disabled.dark .VPLocalNav {
+  background-color: rgba(28, 28, 30, 0.94) !important;
+}
+
+@media (pointer: coarse) {
+  :root {
+    --blur-radius: 10px;
+  }
+}
+
