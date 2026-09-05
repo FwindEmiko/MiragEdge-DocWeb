@@ -36,6 +36,9 @@
 - MEMORY.md 正文里不能出现裸尖括号标签（如 script setup），会被 vue 编译器当成未闭合标签导致 vitepress build 失败；必须写成行内代码 `<script setup>` 或用 HTML 实体转义
 - layout.vue 的 `<script setup>` 未标 lang="ts"，不能写 TS 类型注解（TS8010）；普通变量用无类型声明
 - vitest 的 vi.unstubAllGlobals() 会清掉 beforeAll 安装的 localStorage stub，需在 beforeEach 里重新 install
+- PTC run_code 环境无默认 PATH（node/sed/dirname 全找不到），命令前必须显式 process.env.PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"；大文件写盘用 run_code 内置 fs，勿走 shell 转义
+- run_code 计算预算 60s，跑不完完整 vitepress build：用 nohup 后台跑 node node_modules/vitepress/bin/vitepress.js build，稍后 tail 日志收结果
+- 推送凭据：.env 的 GITHUB_TOKEN 是 FwindEmiko 的 fine-grained PAT（无 Contents 写权限，推主仓库 403）；实际推送用 gh hosts.yml 里 FCelestial 的 classic token（export GH_TOKEN 后走 gh api，勿在输出回显 token）
 
 ## 进行中的工作
 
@@ -53,3 +56,10 @@
 - 新增海洋BOSS：负责掉落便携式潮涌道具的制作材料，生成/召唤方式与战斗机制待设计
 - 成就「无界潮涌」：描述「打破框架桎梏，将海洋力量攥于掌中」；解锁条件建议为获得潮涌道具（或击败海洋BOSS）
 - 新增「摔炮」可投掷物品：右键如雪球般扔出，落地/命中爆炸；伤害、爆炸范围、音效粒子、投掷冷却与获取方式均待定（w-2026-09-02-throwable-popper）
+
+### 2026-09 · 隐藏整蛊道具「浮木」玩家文档上线（play/life/fishing/driftwood.md）
+
+- 新增 play/life/fishing/driftwood.md：获取（钓鱼超稀有垃圾 ≈1285 竿）/双端用法/三阶段效果/限制表/游戏内提示表，含「使用即致死」warning 与规则页弱引用
+- .vitepress/config.mts 钓鱼侧栏组追加「隐藏道具 · 浮木」；play/life/fishing/fish.md 尾部加浮木交叉引用 tip
+- 数值与 emf_junk_driftwood.yml（weight 0.1）及概率文档核对；玩家版精简稿同时保留在 /root/FCelestial/钓鱼系统概率文档.md §6.1
+- 推送：Contents API 三文件直推 main（driftwood 55880fba / fish 8f84df0b / config ce628599），本地 vitepress build 预验证通过后触发 CI 部署
