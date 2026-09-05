@@ -11,7 +11,7 @@ COPY default.conf /etc/nginx/conf.d/default.conf
 RUN echo "OK" > /usr/share/nginx/html/health
 
 # 暴露端口
-EXPOSE 80 88
+EXPOSE 80
 
 # 注意：nginx 需要 root 权限绑定 80 端口
 # worker 进程会自动以 nginx 用户运行
