@@ -554,6 +554,7 @@ export default defineConfig({
                 { text: '鱼类图鉴', link: '/play/life/fishing/fish' },
                 { text: '维度钓鱼', link: '/play/life/fishing/dimensions' },
                 { text: '钓鱼比赛', link: '/play/life/fishing/competitions' },
+                { text: '隐藏道具 · 浮木', link: '/play/life/fishing/driftwood' },
               ]
             },
             {
