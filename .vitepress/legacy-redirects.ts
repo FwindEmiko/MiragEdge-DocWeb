@@ -63,7 +63,6 @@ const exactRules: RedirectRule[] = [
   { from: '/manual/promotion', to: '/developer/archive/promotion' },
   { from: '/develop/logs', to: '/developer/ops/changelog' },
   { from: '/develop/ccs_price_list', to: '/developer/ops/compute' },
-  { from: '/develop/serverstatus', to: '/developer/ops/server-status' },
   { from: '/develop/todo', to: '/developer/ops/todo' },
   { from: '/develop/team', to: '/developer/team' },
   { from: '/plugins/info', to: '/developer/process/plugin-lifecycle' },

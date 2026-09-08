@@ -774,7 +774,6 @@ export default defineConfig({
           collapsed: false,
           items: [
             { text: '更新日志', link: '/developer/ops/changelog' },
-            { text: '服务器状态', link: '/developer/ops/server-status' },
             { text: '待办事项', link: '/developer/ops/todo' },
             { text: '计算服务', link: '/developer/ops/compute' },
           ]
