@@ -2,7 +2,7 @@ enabled: true
 name: Preservation
 
 displayName: "捍卫"
-description: "受到的伤害大幅降低"
+description: "受到的攻击伤害大幅降低"
 
 maxLevel: 4
 rarity: legendary
@@ -28,4 +28,4 @@ limits:
   papi: [ ]
 
 params:
-  damage-multiplier: 1-0.04*level
+  damage-multiplier: 1-0.01-0.04*level

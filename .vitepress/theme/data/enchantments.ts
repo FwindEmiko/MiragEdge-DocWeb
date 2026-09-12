@@ -1434,8 +1434,8 @@ export const enchantments: Enchantment[] = [
   sourceDetail: '附魔台/村民交易/随机战利品',
   pack: 'vanilla'
 },
-  { name: '捍卫', id: 'preservation', maxLevel: 4, equipment: '头盔 / 胸甲 / 护腿 / 靴子', effect: '受到的伤害大幅降低', rarity: 'legendary' ,
-  conflicts: [],
+  { name: '捍卫', id: 'preservation', maxLevel: 4, equipment: '头盔 / 胸甲 / 护腿 / 靴子', effect: '受到的攻击伤害大幅降低', rarity: 'legendary' ,
+  conflicts: ['protection', 'fire_protection', 'blast_protection', 'projectile_protection'],
   source: 'structure',
   sourceDetail: '烬域城堡/圣所',
   pack: 'incendium'
