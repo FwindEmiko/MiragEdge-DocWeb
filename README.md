@@ -54,6 +54,23 @@
 
 ---
 
+## 你的幻境引路人
+
+<img src="https://cdn.jsdelivr.net/gh/FwindEmiko/MiragEdge-DocWeb@main/assets/chara.jpg" alt="幻境引路人" width="100%">
+
+不想自己翻目录的话 —— 每个板块都有一个人负责把你带进去：
+
+| 引路人 | 带你去哪 | 她会告诉你什么 |
+| :--- | :--- | :--- |
+| **洛琪希** | [🧭 开始游戏](https://miragedge.top/start/) | 客户端怎么装、账号怎么绑、玩家守则有哪些 |
+| **爱丽丝** | [⚒️ 生存玩法](https://miragedge.top/play/) | 经济、领地、附魔、装备锻造到底怎么玩 |
+| **希露菲** | [✨ 特色功能](https://miragedge.top/plugins/) | 服务端自研玩法，以及那些没人告诉你的机制 |
+| **波奇酱** | [🛠️ 开发者文档](https://miragedge.top/developer/) | 内容设计流程、协作规范、运维与版本日志 |
+
+> 角色立绘来自 AniList，版权归原作者与制作公司所有，此处仅作粉丝向展示。
+
+---
+
 ## 核心特色
 
 <img src="https://cdn.jsdelivr.net/gh/FwindEmiko/MiragEdge-DocWeb@main/assets/features.png" alt="核心特色" width="100%">

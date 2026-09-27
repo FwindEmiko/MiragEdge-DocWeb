@@ -127,4 +127,22 @@ assets:
     text: 远离困扰之地与天堂般的境地，在数字荒漠中打造一片绿洲
     size: 34
     frames: 30
+  chara:
+    kind: chara
+    ext: .jpg
+    palette: miragedge
+    bg_style: dots
+    title: 你的幻境引路人
+    subtitle: 每个板块都有一个人带你走进去
+    cols: 4
+    card_w: 330
+    card_h: 500
+    chara_json: assets/chara/chara.json
+    order: [roxy, eris, sylphie, bocchi]
+    overrides:
+      roxy:    {source: 无职转生, role: 新手引路人}
+      eris:    {source: 无职转生, role: 冒险与战斗}
+      sylphie: {source: 无职转生, role: 社区与互助}
+      bocchi:  {source: 孤独摇滚！, role: 开发者文档}
+    note: 角色立绘来自 AniList，版权归原作者与制作公司所有，此处仅作粉丝向展示
 
