@@ -6,14 +6,14 @@
 
 **锐界幻境 Minecraft Java / 基岩互通服务器 · 官方文档**
 
-<a href="https://github.com/FwindEmiko/MiragEdge-DocWeb/stargazers"><img src="https://img.shields.io/github/stars/FwindEmiko/MiragEdge-DocWeb?style=for-the-badge&color=E05252&labelColor=555&logo=github" alt="stars"></a>
-<a href="LICENSE"><img src="https://img.shields.io/github/license/FwindEmiko/MiragEdge-DocWeb?style=for-the-badge&color=7BD8A8&labelColor=555" alt="license"></a>
-<a href="https://github.com/FwindEmiko/MiragEdge-DocWeb/commits/main"><img src="https://img.shields.io/github/last-commit/FwindEmiko/MiragEdge-DocWeb?style=for-the-badge&color=F0A64A&labelColor=555&logo=git" alt="last commit"></a>
-<a href="https://github.com/FwindEmiko/MiragEdge-DocWeb/graphs/contributors"><img src="https://img.shields.io/github/contributors/FwindEmiko/MiragEdge-DocWeb?style=for-the-badge&color=3FA9A0&labelColor=555" alt="contributors"></a>
-<img src="https://img.shields.io/badge/VitePress-1.6-7C6BD6?style=for-the-badge&labelColor=555&logo=vite&logoColor=white" alt="vitepress">
-<img src="https://img.shields.io/badge/Node-22.x-5FA04E?style=for-the-badge&labelColor=555&logo=nodedotjs&logoColor=white" alt="node">
+<a href="https://github.com/FwindEmiko/MiragEdge-DocWeb/stargazers"><img src="https://img.shields.io/github/stars/FwindEmiko/MiragEdge-DocWeb?style=flat-square&color=C8382F&labelColor=161B22&logo=github" alt="stars"></a>
+<a href="LICENSE"><img src="https://img.shields.io/github/license/FwindEmiko/MiragEdge-DocWeb?style=flat-square&color=4FD1C5&labelColor=161B22" alt="license"></a>
+<a href="https://github.com/FwindEmiko/MiragEdge-DocWeb/commits/main"><img src="https://img.shields.io/github/last-commit/FwindEmiko/MiragEdge-DocWeb?style=flat-square&color=8A93A3&labelColor=161B22&logo=git" alt="last commit"></a>
+<a href="https://github.com/FwindEmiko/MiragEdge-DocWeb/graphs/contributors"><img src="https://img.shields.io/github/contributors/FwindEmiko/MiragEdge-DocWeb?style=flat-square&color=8A93A3&labelColor=161B22" alt="contributors"></a>
+<img src="https://img.shields.io/badge/VitePress-1.6-4FD1C5?style=flat-square&labelColor=161B22&logo=vite&logoColor=white" alt="vitepress">
+<img src="https://img.shields.io/badge/Node-22.x-3C873A?style=flat-square&labelColor=161B22&logo=nodedotjs&logoColor=white" alt="node">
 
-[📖 文档站](https://miragedge.top) · [🏠 官网](https://f.windemiko.top) · [💬 玩家 Q 群](https://qm.qq.com/cgi-bin/qm/qr?k=r_yUquo3bQwX3bL97RwG1aVj41WIEOI3) · [📺 Bilibili](https://space.bilibili.com/359174372) · [🐛 问题反馈](https://github.com/FwindEmiko/MiragEdge-DocWeb/issues)
+[文档站](https://miragedge.top) · [官网](https://f.windemiko.top) · [玩家 Q 群](https://qm.qq.com/cgi-bin/qm/qr?k=r_yUquo3bQwX3bL97RwG1aVj41WIEOI3) · [Bilibili](https://space.bilibili.com/359174372) · [问题反馈](https://github.com/FwindEmiko/MiragEdge-DocWeb/issues)
 
 </div>
 
@@ -25,17 +25,17 @@
 
 锐界幻境是一个基于高版本 Minecraft 的 **Java / 基岩双端互通生存服务器**：手机和电脑在同一张地图上玩，数据完全互通。本仓库负责把这些玩法讲清楚 —— 从怎么装客户端、怎么进服，到附魔怎么算、装备怎么锻、插件怎么写。
 
-**三条路，按你的身份选：**
-
 | 你是 | 去哪 |
-|---|---|
-| 🎮 **想进来玩** | 直接打开 <https://miragedge.top>，从[新手引导](https://miragedge.top/start/)开始；加群绑定账号即可进服 |
-| ✍️ **想改文档** | 读下面的[贡献指南](#贡献指南)，十分钟就能提第一个 PR |
-| 🔧 **想看插件/服务端** | 看[特色功能](https://miragedge.top/plugins/)与[原创插件文档](https://miragedge.top/plugin-guides/) |
+| :--- | :--- |
+| **想进来玩** | 打开 <https://miragedge.top>，从[新手引导](https://miragedge.top/start/)开始；加群绑定账号即可进服 |
+| **想改文档** | 读[参与贡献](#参与贡献)，十分钟能提第一个 PR |
+| **想看插件 / 服务端** | [特色功能](https://miragedge.top/plugins/) 与 [原创插件文档](https://miragedge.top/plugin-guides/) |
 
 > 本仓库同时是**站点工程仓库**：VitePress 配置、30 个自研 Vue 组件、水印与 LLM 文档生成脚本、CI/CD 管线都在这里维护。
 
 ---
+
+<img src="https://cdn.jsdelivr.net/gh/FwindEmiko/MiragEdge-DocWeb@main/assets/art_map.png" alt="文档地图" width="100%">
 
 ## 文档地图
 
@@ -43,33 +43,18 @@
 
 | 板块 | 内容 | 页面数 |
 | :--- | :--- | :---: |
-| [🧭 开始游戏](https://miragedge.top/start/) | 新玩家须知、客户端安装、连接服务器、账号绑定、基岩版兼容、皮肤、玩家守则、工会、生电、世界观 | 18 |
-| [⚒️ 生存玩法](https://miragedge.top/play/) | 经济系统、领地、冒险、烬域、食物系统、附魔体系、装备锻造 | 51 |
-| [✨ 特色功能](https://miragedge.top/plugins/) | 服务端自研功能与玩法机制说明 | 21 |
-| [🛠️ 原创插件文档](https://miragedge.top/plugin-guides/) | 自研插件的独立使用与配置文档 | 27 |
-| [👥 开发者文档](https://miragedge.top/developer/) | 团队协作规范、内容设计流程、运维、版本日志、代码审查 | 76 |
-| [📦 历史归档](https://miragedge.top/archive/) | 往期活动记录 | 7 |
+| [开始游戏](https://miragedge.top/start/) | 新玩家须知、客户端安装、连接服务器、账号绑定、基岩版兼容、皮肤、玩家守则、工会、生电、世界观 | 18 |
+| [生存玩法](https://miragedge.top/play/) | 经济系统、领地、冒险、烬域、食物系统、附魔体系、装备锻造 | 51 |
+| [特色功能](https://miragedge.top/plugins/) | 服务端自研功能与玩法机制说明 | 21 |
+| [原创插件文档](https://miragedge.top/plugin-guides/) | 自研插件的独立使用与配置文档 | 27 |
+| [开发者文档](https://miragedge.top/developer/) | 团队协作规范、内容设计流程、运维、版本日志、代码审查 | 76 |
+| [历史归档](https://miragedge.top/archive/) | 往期活动记录 | 7 |
 
-**给 AI 助手读的版本**：站点在构建时会同步产出 [llms.txt](https://miragedge.top/llms.txt)（摘要索引）与 [llms-full.txt](https://miragedge.top/llms-full.txt)（全量清洗版 Markdown）。把链接丢给任意 AI 助手，它就能直接读懂整个服务器玩法，不需要你手动复制粘贴。
-
----
-
-## 你的幻境引路人
-
-<img src="https://cdn.jsdelivr.net/gh/FwindEmiko/MiragEdge-DocWeb@main/assets/chara.jpg" alt="幻境引路人" width="100%">
-
-不想自己翻目录的话 —— 每个板块都有一个人负责把你带进去：
-
-| 引路人 | 带你去哪 | 她会告诉你什么 |
-| :--- | :--- | :--- |
-| **洛琪希** | [🧭 开始游戏](https://miragedge.top/start/) | 客户端怎么装、账号怎么绑、玩家守则有哪些 |
-| **爱丽丝** | [⚒️ 生存玩法](https://miragedge.top/play/) | 经济、领地、附魔、装备锻造到底怎么玩 |
-| **希露菲** | [✨ 特色功能](https://miragedge.top/plugins/) | 服务端自研玩法，以及那些没人告诉你的机制 |
-| **波奇酱** | [🛠️ 开发者文档](https://miragedge.top/developer/) | 内容设计流程、协作规范、运维与版本日志 |
-
-> 角色立绘来自 AniList，版权归原作者与制作公司所有，此处仅作粉丝向展示。
+**给 AI 助手读的版本**：站点构建时会同步产出 [llms.txt](https://miragedge.top/llms.txt)（摘要索引）与 [llms-full.txt](https://miragedge.top/llms-full.txt)（全量清洗版 Markdown）。把链接丢给任意 AI 助手，它就能直接读懂整个服务器玩法。
 
 ---
+
+<img src="https://cdn.jsdelivr.net/gh/FwindEmiko/MiragEdge-DocWeb@main/assets/art_feature.png" alt="核心特色" width="100%">
 
 ## 核心特色
 
@@ -84,16 +69,16 @@
 文档里出现的合成台、熔炉、附魔台都是**真的 Vue 组件**，不是截图：
 
 ```text
-McItem          物品悬浮卡，鼠标移上去看属性和来源
-CraftingTable   3×3 合成台，配方可视化
-Furnace         熔炉烧炼展示
+McItem                 物品悬浮卡，鼠标移上去看属性和来源
+CraftingTable          3×3 合成台，配方可视化
+Furnace                熔炉烧炼展示
 EnchantmentCalculator  附魔计算器，可交互试算
-FoodStats       食物属性表
-NodeStatus      服务器在线状态
-QQGroupCard     玩家群组卡片
+FoodStats / FoodEntry  食物属性表
+NodeStatus             服务器在线状态
+QQGroupCard            玩家群组卡片
 ```
 
-这样配方改了只改一处数据，全站文档同步更新 —— 不会再出现「文档写的是旧配方」。
+配方改了只改一处数据，全站文档同步更新 —— 不会再出现「文档写的是旧配方」。
 
 **③ 弱设备也能看：自适应特效降级**
 
@@ -101,7 +86,7 @@ QQGroupCard     玩家群组卡片
 
 - 监测 rAF 帧间隔、长任务、交互期掉帧，**组合证据**成立才降级
 - 只降级、不自动升级，避免「开了又关」的振荡
-- 横屏触摸平板（hover:none + pointer:coarse）默认关特效 —— 这类设备空载帧率正常，一滚动才掉帧，静态信号测不出来
+- 横屏触摸平板（`hover:none` + `pointer:coarse`）默认关特效 —— 这类设备空载帧率正常，一滚动才掉帧，静态信号测不出来
 - **绝不覆盖用户的手动选择**：localStorage 显式偏好 > 自适应降级 > 默认值
 
 **④ 推送即上线**
@@ -117,13 +102,21 @@ push main  → 同样的检查 → 打包 site.tar.gz → scp 到线上服务器
 
 ## 项目规模
 
-<img src="https://cdn.jsdelivr.net/gh/FwindEmiko/MiragEdge-DocWeb@main/assets/stats.png" alt="项目规模" width="100%">
+<img src="https://cdn.jsdelivr.net/gh/FwindEmiko/MiragEdge-DocWeb@main/assets/dist.png" alt="文档页面分布" width="62%">
 
-<img src="https://cdn.jsdelivr.net/gh/FwindEmiko/MiragEdge-DocWeb@main/assets/dist.png" alt="文档页面分布" width="70%">
+| 指标 | 数量 |
+| :--- | ---: |
+| 文档页面 | 202 |
+| 自研 Vue 组件 | 30 |
+| 自研构建脚本 | 6 |
+| 静态资源 | 1059 |
+| 单元测试文件 | 8 |
 
 > 页面数由 `find <分区> -name '*.md' | wc -l` 统计（2026-09 数据），仅含已发布文档，不含草稿与内部任务文档。
 
 ---
+
+<img src="https://cdn.jsdelivr.net/gh/FwindEmiko/MiragEdge-DocWeb@main/assets/art_start.png" alt="快速开始" width="100%">
 
 ## 快速开始
 
@@ -132,7 +125,7 @@ push main  → 同样的检查 → 打包 site.tar.gz → scp 到线上服务器
 ### 环境要求
 
 - **Node.js 22.x**（CI 使用 22，本地建议对齐）
-- **pnpm 10.15.0** —— 仓库通过 `packageManager` 字段锁定版本，用 `corepack enable` 可自动匹配
+- **pnpm 10.15.0** —— 仓库通过 `packageManager` 字段锁定版本，`corepack enable` 可自动匹配
 - 无需数据库、无需后端服务，纯静态站点
 
 ### 本地开发
@@ -232,7 +225,7 @@ MiragEdge-DocWeb/
 
 | 脚本 | 作用 |
 | :--- | :--- |
-| `generate-llms.mjs` | 生成 `llms.txt` / `llms-full.txt` 与清洗版 Markdown，让 AI 助手能直接读懂文档 |
+| `generate-llms.mjs` | 生成 `llms.txt` / `llms-full.txt` 与清洗版 Markdown，让 AI 助手直接读懂文档 |
 | `watermark.mjs` | 构建后为站内图片加水印 |
 | `external-watermark.mjs` | 外部资源水印，带头像缓存映射 |
 | `generate-version.mjs` | 生成版本标识，配合边缘缓存做旧页面刷新 |
@@ -241,9 +234,11 @@ MiragEdge-DocWeb/
 
 ---
 
-## 贡献指南
+<img src="https://cdn.jsdelivr.net/gh/FwindEmiko/MiragEdge-DocWeb@main/assets/art_contrib.png" alt="参与贡献" width="100%">
 
-欢迎修错别字、补截图、写新玩法文档。改文档不需要懂前端 —— 会写 Markdown 就够了。
+## 参与贡献
+
+欢迎修错别字、补截图、写新玩法文档。**改文档不需要懂前端** —— 会写 Markdown 就够了。
 
 ### 提交流程
 
@@ -276,7 +271,7 @@ chore: <中文描述>             # 杂项
 
 ### 写作约定
 
-- **中文优先**，术语保留英文原名（如 "TPS"、"PDC"），中英文之间加空格
+- **中文优先**，术语保留英文原名（如 TPS、PDC），中英文之间加空格
 - **面向动作写**：先说要做什么，再给步骤；不要先讲原理
 - **双端差异必须标注**：基岩版做不到的功能要显式写出来，别让手机玩家白试
 - **截图用真实游戏画面**，不要用示意图；新图记得走水印流程
@@ -285,10 +280,10 @@ chore: <中文描述>             # 杂项
 
 ### 可以帮上忙的地方
 
-- 🐛 文档里发现错误、过期截图、失效链接 → [开 Issue](https://github.com/FwindEmiko/MiragEdge-DocWeb/issues)
-- 📝 想补某个玩法的详细说明 → 直接 PR
-- 🌍 想帮忙做英文版 → 开 Issue 聊聊，目前还没有
-- 🎨 想改进主题组件或构建脚本 → 先开 Issue 讨论方案
+- 文档里发现错误、过期截图、失效链接 → [开 Issue](https://github.com/FwindEmiko/MiragEdge-DocWeb/issues)
+- 想补某个玩法的详细说明 → 直接提 PR
+- 想帮忙做英文版 → 开 Issue 聊聊，目前还没有
+- 想改进主题组件或构建脚本 → 先开 Issue 讨论方案
 
 ---
 
@@ -298,36 +293,46 @@ chore: <中文描述>             # 杂项
 <summary><b>这个仓库能下载服务端吗？</b></summary>
 
 不能。这里只有文档源码与站点工程，服务端本体与客户端整合包请到官网或玩家群获取。
+
 </details>
 
 <details>
 <summary><b>我只是想改一个错别字，要走完整流程吗？</b></summary>
 
-不用跑构建，但请至少开一个分支再提 PR —— 直接改 main 会绕过 CI 检查。GitHub 网页端编辑时选「Create a new branch for this commit」即可。
+不用跑构建，但请至少开一个分支再提 PR —— 直接改 main 会绕过 CI 检查。
+GitHub 网页端编辑时选「Create a new branch for this commit」即可。
+
 </details>
 
 <details>
-<summary><b>为什么本地 `pnpm dev` 会先跑一遍 generate-llms？</b></summary>
+<summary><b>为什么本地 <code>pnpm dev</code> 会先跑一遍 generate-llms？</b></summary>
 
 因为 `llms.txt` 是站点的一部分，开发时也要能访问到。这一步很快（约几百毫秒），不用在意。
+
 </details>
 
 <details>
-<summary><b>构建提示 `MEMORY.md` 相关错误怎么办？</b></summary>
+<summary><b>构建提示 MEMORY.md 相关错误怎么办？</b></summary>
 
-项目记忆文件里**不能出现裸的 HTML 标签**（比如直接写 `<script setup>`），会被 Vue 编译器当成未闭合标签导致构建失败。写成行内代码或转义即可。
+项目记忆文件里**不能出现裸的 HTML 标签**（比如直接写 `<script setup>`），会被 Vue 编译器当成未闭合标签导致构建失败。
+写成行内代码或转义即可。
+
 </details>
 
 <details>
 <summary><b>页面在手机上卡顿怎么办？</b></summary>
 
-右下角有特效开关，手动关掉即可，设置会记住。如果设备很弱，站点也会自动降级。如果手动关了还卡，欢迎开 Issue 附上机型。
+右下角有特效开关，手动关掉即可，设置会记住。如果设备很弱，站点也会自动降级。
+如果手动关了还卡，欢迎开 Issue 附上机型。
+
 </details>
 
 <details>
 <summary><b>能部署到自己的服务器吗？</b></summary>
 
-可以，产物就是纯静态文件。`pnpm build` 后把 `.vitepress/dist/` 扔到任意静态托管即可。子路径部署需要设环境变量 `VITEPRESS_BASE=/你的子路径/`。
+可以，产物就是纯静态文件。`pnpm build` 后把 `.vitepress/dist/` 扔到任意静态托管即可。
+子路径部署需要设环境变量 `VITEPRESS_BASE=/你的子路径/`。
+
 </details>
 
 ---
@@ -348,7 +353,7 @@ chore: <中文描述>             # 杂项
 
 <a href="https://github.com/FwindEmiko/MiragEdge-DocWeb/graphs/contributors"><img src="https://contrib.rocks/image?repo=FwindEmiko/MiragEdge-DocWeb" alt="贡献者"></a>
 
-文档内容由 **F.windEmiko（狐风轩汐）** 与社区共同维护；站点的吉祥物是 **狐魇星玖**，见 [soul.md](https://github.com/FwindEmiko/MiragEdge-DocWeb/blob/main/soul.md)。
+文档内容由 **F.windEmiko（狐风轩汐）** 与社区共同维护；站点的守护者是 **狐魇星玖**，设定见 [soul.md](https://github.com/FwindEmiko/MiragEdge-DocWeb/blob/main/soul.md)。
 
 ---
 
@@ -357,10 +362,6 @@ chore: <中文描述>             # 杂项
 本项目采用 **Apache License 2.0**，详见 [LICENSE](https://github.com/FwindEmiko/MiragEdge-DocWeb/blob/main/LICENSE)。
 
 <div align="center">
-
-<img src="https://cdn.jsdelivr.net/gh/FwindEmiko/MiragEdge-DocWeb@main/assets/typing.gif" alt="愿景" width="70%">
-
 <sub>星辰为引，梦魇为翼。</sub>
-
 </div>
 

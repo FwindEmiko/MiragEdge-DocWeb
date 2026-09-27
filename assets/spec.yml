@@ -1,75 +1,122 @@
-# MiragEdge-DocWeb README 配图规格（由 github-readme-anime 技能生成）
+# MiragEdge-DocWeb README 配图规格（github-readme-anime 技能生成）
 #
-# 重新生成（在仓库根目录执行）：
+# 风格：**暗色科技**（近黑墨蓝 + 品牌红单点强调 + 冷青辅助）
+# 二次元素材只做**背景装饰**：角色立绘单色化、大幅淡化、边缘溶解，作为背景纹理出现，
+#   不占视觉主体、不做角色卡墙 —— 这是代码仓库，读者要的是信息与质感。
+#
+# 重新生成：
 #   python ~/.dsh/skills/github-readme-anime/scripts/readme_build.py assets/spec.yml --assets-only --out-dir .
 #
-# 图片在 README.md 中以 jsDelivr 绝对地址引用：
-#   https://cdn.jsdelivr.net/gh/FwindEmiko/MiragEdge-DocWeb@main/assets/<名字>.png
-# 为什么用绝对地址：仓库 README.md 同时会被 VitePress 构建成站点页面 miragedge.top/README，
-#   相对路径在该页面下会 404；放进 public/ 又会被构建期水印脚本盖狐狸水印。
-#   绝对 CDN 地址两处都能正确显示，且不进水印流程。
-# 缓存：jsDelivr 对 @main 分支约 12 小时缓存。改了图想立刻生效，在 URL 后加 ?v=2 之类的查询串即可。
-
+# 图片以 jsDelivr 绝对地址引用（原因见文件末尾注释）
 lang: zh
 project: {name: MiragEdge 文档站, repo: FwindEmiko/MiragEdge-DocWeb}
 
 assets:
   banner:
     kind: banner
-    palette: miragedge
+    palette: docweb
     w: 1800
-    h: 460
-    bg_style: confetti
+    h: 440
+    bg_style: grid
     seed: 5
     title: MiragEdge 文档站
     subtitle: 锐界幻境 · Minecraft Java / 基岩互通服务器官方文档
     tagline: 入服指南 · 生存玩法 · 原创插件 · 开发协作
-    title_size: 76
+    title_size: 60
+    font: tech_b
+    stroke: 3
     version: v2.0
-    badges: [202 页文档, VitePress 1.6]
-    mascot:
+    badges: ["202 页文档", "VitePress 1.6", "Node 22"]
+    mascot: false
+    bg_art:
       image: public/title_img/xingjiu.png
-      crop: [0.06, 0.02, 0.72, 0.68]
-      halo_alpha: 75
+      scale: 1.9
+      opacity: 84
+      mono: true
+      mono_invert: true
+      fade_strength: 0.52
+      inset: 10
+
+  art_map:
+    kind: art_header
+    palette: docweb
+    w: 1600
+    h: 250
+    title: 六个板块，一条路径
+    subtitle: 从装客户端到写插件，按「你要做的事」组织，而不是按文件类型堆放
+    image: assets/chara/roxy.png
+    mono: true
+    mono_invert: true
+    art_opacity: 60
+    fade_strength: 0.5
+    art_scale: 1.8
+
+  art_feature:
+    kind: art_header
+    palette: docweb
+    w: 1600
+    h: 250
+    title: 不只是把文档搬到网上
+    subtitle: 配方可试算 · 双端差异逐条标注 · 弱机自动降特效
+    image: assets/chara/eris.png
+    mono: true
+    mono_invert: true
+    art_opacity: 60
+    fade_strength: 0.5
+    art_scale: 1.8
+
+  art_start:
+    kind: art_header
+    palette: docweb
+    w: 1600
+    h: 250
+    title: 两分钟在本地跑起来
+    subtitle: Node 22 + pnpm 10.15，无需数据库、无需后端服务
+    image: assets/chara/sylphie.png
+    mono: true
+    mono_invert: true
+    art_opacity: 60
+    fade_strength: 0.5
+    art_scale: 1.8
+
+  art_contrib:
+    kind: art_header
+    palette: docweb
+    w: 1600
+    h: 250
+    title: 改文档不需要懂前端
+    subtitle: 会写 Markdown 就够；CI 会给你一个预览站点检查渲染
+    image: assets/chara/bocchi.png
+    mono: true
+    mono_invert: true
+    art_opacity: 60
+    fade_strength: 0.5
+    art_scale: 1.8
 
   features:
     kind: feature
-    palette: miragedge
+    palette: docweb
     bg_style: dots
     title: 这个文档站有什么
     cols: 3
     card_w: 430
     card_h: 196
-    gap: 26
+    font: tech_b
     items:
-      - {icon: book, title: 202 页结构化文档, desc: 入服、玩法、插件、开发四大板块，按任务路径组织而非文件堆叠}
-      - {icon: puzzle, title: 30 个游戏化组件, desc: 合成台、熔炉、附魔计算器直接嵌在正文里，配方可交互试算}
-      - {icon: globe, title: 双端内容对齐, desc: Java 与基岩版差异逐条标注，手机玩家不会点进无效教程}
-      - {icon: bolt, title: 自适应特效降级, desc: 探针监测帧率与长任务，弱机自动关特效，且不覆盖用户手动选择}
-      - {icon: terminal, title: AI 可读文档, desc: 构建时产出 llms.txt 与全量清洗版 Markdown，直接喂给 AI 助手}
-      - {icon: rocket, title: 推送即上线, desc: CI 跑类型检查、单测、构建与产物体积检查，main 分支自动部署到站点}
-
-  stats:
-    kind: stat
-    palette: miragedge
-    bg_style: dots
-    title: 项目规模
-    card_w: 300
-    card_h: 200
-    items:
-      - {value: "202", label: 文档页面, icon: book, color: "#E05252"}
-      - {value: "30", label: 自研 Vue 组件, icon: puzzle, color: "#7C6BD6"}
-      - {value: "6", label: 自研构建脚本, icon: gear, color: "#F0A64A"}
-      - {value: 1059, label: 静态资源, icon: folder, color: "#3FA9A0"}
+      - {icon: book, title: 202 页结构化文档, desc: 入服、玩法、插件、开发四大板块，按任务路径组织}
+      - {icon: puzzle, title: 30 个游戏化组件, desc: 合成台、熔炉、附魔计算器直接嵌在正文里，可交互}
+      - {icon: globe, title: 双端内容对齐, desc: Java 与基岩版差异逐条标注，手机玩家不踩空}
+      - {icon: bolt, title: 自适应特效降级, desc: 探针监测帧率与长任务，弱机自动关特效且不覆盖手动选择}
+      - {icon: terminal, title: AI 可读文档, desc: 构建时产出 llms.txt 与全量清洗版 Markdown}
+      - {icon: rocket, title: 推送即上线, desc: CI 跑类型检查、单测、构建与体积检查，main 自动部署}
 
   dist:
     kind: bar
-    palette: miragedge
+    palette: docweb
     bg_style: dots
     title: 文档页面分布
     w: 980
-    h: 520
-    card_h: 190
+    h: 500
     items:
       - {label: 开发者, value: 76}
       - {label: 生存玩法, value: 51}
@@ -78,11 +125,24 @@ assets:
       - {label: 开始游戏, value: 18}
       - {label: 历史归档, value: 7}
 
+  stack:
+    kind: tech
+    palette: docweb
+    bg_style: dots
+    title: 技术栈
+    font: tech_b
+    w: 1300
+    row_h: 78
+    groups:
+      - {label: 站点, items: [VitePress 1.6, Vue 3.5, TypeScript 5.9, Mermaid]}
+      - {label: 工程, items: [pnpm 10.15, Node 22, Vitest, vue-tsc]}
+      - {label: 脚本, items: [generate-llms, watermark, audit-doc-routes, compress-images]}
+
   quickstart:
     kind: terminal
-    palette: miragedge
+    palette: docweb
     title: local.sh
-    w: 1040
+    w: 1060
     lines:
       - {type: info, text: "环境：Node 22 + pnpm 10.15"}
       - {type: cmd, text: "pnpm install"}
@@ -92,14 +152,13 @@ assets:
       - {type: ok, text: "本地预览 http://localhost:5173"}
       - {type: cmd, text: "pnpm test && pnpm typecheck"}
       - {type: ok, text: "8 个测试文件通过，类型检查无错误"}
-      - {type: cmd, text: "pnpm build"}
-      - {type: info, text: "外链水印 → 生成 LLMs → 构建 → 内页水印 → 版本号"}
 
   pipeline:
     kind: steps
-    palette: miragedge
+    palette: docweb
     bg_style: dots
     title: 构建管线（顺序不可调换）
+    font: tech_b
     row_h: 118
     items:
       - {n: 1, title: 外部资源水印, desc: external-watermark.mjs}
@@ -108,41 +167,8 @@ assets:
       - {n: 4, title: 站内图片水印, desc: watermark.mjs}
       - {n: 5, title: 写入构建版本号, desc: generate-version.mjs}
 
-  stack:
-    kind: tech
-    palette: miragedge
-    bg_style: dots
-    title: 技术栈
-    row_h: 80
-    groups:
-      - {label: 站点, items: [VitePress 1.6, Vue 3.5, TypeScript 5.9, Mermaid]}
-      - {label: 工程, items: [pnpm 10.15, Node 22, Vitest, vue-tsc]}
-      - {label: 脚本, items: [generate-llms, watermark, audit-doc-routes, compress-images]}
-
-  typing:
-    kind: "gif:typing"
-    palette: miragedge
-    w: 1080
-    h: 260
-    text: 远离困扰之地与天堂般的境地，在数字荒漠中打造一片绿洲
-    size: 34
-    frames: 30
-  chara:
-    kind: chara
-    ext: .jpg
-    palette: miragedge
-    bg_style: dots
-    title: 你的幻境引路人
-    subtitle: 每个板块都有一个人带你走进去
-    cols: 4
-    card_w: 330
-    card_h: 500
-    chara_json: assets/chara/chara.json
-    order: [roxy, eris, sylphie, bocchi]
-    overrides:
-      roxy:    {source: 无职转生, role: 新手引路人}
-      eris:    {source: 无职转生, role: 冒险与战斗}
-      sylphie: {source: 无职转生, role: 社区与互助}
-      bocchi:  {source: 孤独摇滚！, role: 开发者文档}
-    note: 角色立绘来自 AniList，版权归原作者与制作公司所有，此处仅作粉丝向展示
+# 引用方式：https://cdn.jsdelivr.net/gh/FwindEmiko/MiragEdge-DocWeb@main/assets/<名字>
+# 为什么用绝对地址：仓库 README.md 同时会被 VitePress 构建成站点页面 miragedge.top/README，
+#   相对路径在该页面下会 404；放进 public/ 又会被构建期水印脚本盖狐狸水印。
+# 缓存：jsDelivr 对 @main 约 12 小时。改了图想立刻生效，在 URL 后加 ?v=2。
 
