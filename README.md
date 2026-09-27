@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="https://cdn.jsdelivr.net/gh/FwindEmiko/MiragEdge-DocWeb@main/assets/banner.png" alt="MiragEdge 文档站" width="100%">
+<img src="https://cdn.jsdelivr.net/gh/FwindEmiko/MiragEdge-DocWeb@main/assets/hero.png" alt="MiragEdge 文档站" width="100%">
 
 # MiragEdge 文档站
 
@@ -58,7 +58,7 @@
 
 ## 核心特色
 
-<img src="https://cdn.jsdelivr.net/gh/FwindEmiko/MiragEdge-DocWeb@main/assets/features.png" alt="核心特色" width="100%">
+<img src="https://cdn.jsdelivr.net/gh/FwindEmiko/MiragEdge-DocWeb@main/assets/feature_grid.png" alt="核心特色" width="100%">
 
 **① 内容是给「做完这件事」写的，不是给「查这个 API」写的**
 
@@ -102,7 +102,7 @@ push main  → 同样的检查 → 打包 site.tar.gz → scp 到线上服务器
 
 ## 项目规模
 
-<img src="https://cdn.jsdelivr.net/gh/FwindEmiko/MiragEdge-DocWeb@main/assets/dist.png" alt="文档页面分布" width="62%">
+<img src="https://cdn.jsdelivr.net/gh/FwindEmiko/MiragEdge-DocWeb@main/assets/doc_dist.png" alt="文档页面分布" width="62%">
 
 | 指标 | 数量 |
 | :--- | ---: |
@@ -209,7 +209,7 @@ MiragEdge-DocWeb/
 
 ## 技术栈
 
-<img src="https://cdn.jsdelivr.net/gh/FwindEmiko/MiragEdge-DocWeb@main/assets/stack.png" alt="技术栈" width="100%">
+<img src="https://cdn.jsdelivr.net/gh/FwindEmiko/MiragEdge-DocWeb@main/assets/tech_stack.png" alt="技术栈" width="100%">
 
 | 层次 | 选型 | 说明 |
 | :--- | :--- | :--- |

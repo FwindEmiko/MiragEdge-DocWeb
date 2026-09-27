@@ -12,7 +12,7 @@ lang: zh
 project: {name: MiragEdge 文档站, repo: FwindEmiko/MiragEdge-DocWeb}
 
 assets:
-  banner:
+  hero:
     kind: banner
     palette: docweb
     w: 1800
@@ -93,7 +93,7 @@ assets:
     fade_strength: 0.5
     art_scale: 1.8
 
-  features:
+  feature_grid:
     kind: feature
     palette: docweb
     bg_style: dots
@@ -110,7 +110,7 @@ assets:
       - {icon: terminal, title: AI 可读文档, desc: 构建时产出 llms.txt 与全量清洗版 Markdown}
       - {icon: rocket, title: 推送即上线, desc: CI 跑类型检查、单测、构建与体积检查，main 自动部署}
 
-  dist:
+  doc_dist:
     kind: bar
     palette: docweb
     bg_style: dots
@@ -125,7 +125,7 @@ assets:
       - {label: 开始游戏, value: 18}
       - {label: 历史归档, value: 7}
 
-  stack:
+  tech_stack:
     kind: tech
     palette: docweb
     bg_style: dots
