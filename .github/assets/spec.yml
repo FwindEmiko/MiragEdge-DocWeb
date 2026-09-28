@@ -8,6 +8,7 @@
 #   python ~/.dsh/skills/github-readme-anime/scripts/readme_build.py .github/assets/spec.yml --assets-only --out-dir .
 #
 # 图片以 jsDelivr 绝对地址引用（原因见文件末尾注释）
+assets_dir: .github/assets
 lang: zh
 project: {name: MiragEdge 文档站, repo: FwindEmiko/MiragEdge-DocWeb}
 
@@ -32,8 +33,8 @@ assets:
       image: public/title_img/xingjiu.png
       scale: 1.9
       opacity: 84
-      mono: true
-      mono_invert: true
+      duotone: ["#3A4756", "#0D1014"]
+      blur: 1.2
       fade_strength: 0.52
       inset: 10
 
@@ -45,9 +46,9 @@ assets:
     title: 六个板块，一条路径
     subtitle: 从装客户端到写插件，按「你要做的事」组织，而不是按文件类型堆放
     image: .github/assets/chara/roxy.png
-    mono: true
-    mono_invert: true
-    art_opacity: 60
+    duotone: ["#3A4756", "#0D1014"]
+    blur: 1.2
+    art_opacity: 94
     fade_strength: 0.5
     art_scale: 1.8
 
@@ -59,9 +60,9 @@ assets:
     title: 不只是把文档搬到网上
     subtitle: 配方可试算 · 双端差异逐条标注 · 弱机自动降特效
     image: .github/assets/chara/eris.png
-    mono: true
-    mono_invert: true
-    art_opacity: 60
+    duotone: ["#3A4756", "#0D1014"]
+    blur: 1.2
+    art_opacity: 94
     fade_strength: 0.5
     art_scale: 1.8
 
@@ -73,9 +74,9 @@ assets:
     title: 两分钟在本地跑起来
     subtitle: Node 22 + pnpm 10.15，无需数据库、无需后端服务
     image: .github/assets/chara/sylphie.png
-    mono: true
-    mono_invert: true
-    art_opacity: 60
+    duotone: ["#3A4756", "#0D1014"]
+    blur: 1.2
+    art_opacity: 94
     fade_strength: 0.5
     art_scale: 1.8
 
@@ -87,9 +88,9 @@ assets:
     title: 改文档不需要懂前端
     subtitle: 会写 Markdown 就够；CI 会给你一个预览站点检查渲染
     image: .github/assets/chara/bocchi.png
-    mono: true
-    mono_invert: true
-    art_opacity: 60
+    duotone: ["#3A4756", "#0D1014"]
+    blur: 1.2
+    art_opacity: 94
     fade_strength: 0.5
     art_scale: 1.8
 
