@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="https://cdn.jsdelivr.net/gh/FwindEmiko/MiragEdge-DocWeb@main/assets/hero.png" alt="MiragEdge 文档站" width="100%">
+<img src="https://cdn.jsdelivr.net/gh/FwindEmiko/MiragEdge-DocWeb@main/.github/assets/hero.png" alt="MiragEdge 文档站" width="100%">
 
 # MiragEdge 文档站
 
@@ -35,7 +35,7 @@
 
 ---
 
-<img src="https://cdn.jsdelivr.net/gh/FwindEmiko/MiragEdge-DocWeb@main/assets/art_map.png" alt="文档地图" width="100%">
+<img src="https://cdn.jsdelivr.net/gh/FwindEmiko/MiragEdge-DocWeb@main/.github/assets/art_map.png" alt="文档地图" width="100%">
 
 ## 文档地图
 
@@ -54,11 +54,11 @@
 
 ---
 
-<img src="https://cdn.jsdelivr.net/gh/FwindEmiko/MiragEdge-DocWeb@main/assets/art_feature.png" alt="核心特色" width="100%">
+<img src="https://cdn.jsdelivr.net/gh/FwindEmiko/MiragEdge-DocWeb@main/.github/assets/art_feature.png" alt="核心特色" width="100%">
 
 ## 核心特色
 
-<img src="https://cdn.jsdelivr.net/gh/FwindEmiko/MiragEdge-DocWeb@main/assets/feature_grid.png" alt="核心特色" width="100%">
+<img src="https://cdn.jsdelivr.net/gh/FwindEmiko/MiragEdge-DocWeb@main/.github/assets/feature_grid.png" alt="核心特色" width="100%">
 
 **① 内容是给「做完这件事」写的，不是给「查这个 API」写的**
 
@@ -102,7 +102,7 @@ push main  → 同样的检查 → 打包 site.tar.gz → scp 到线上服务器
 
 ## 项目规模
 
-<img src="https://cdn.jsdelivr.net/gh/FwindEmiko/MiragEdge-DocWeb@main/assets/doc_dist.png" alt="文档页面分布" width="62%">
+<img src="https://cdn.jsdelivr.net/gh/FwindEmiko/MiragEdge-DocWeb@main/.github/assets/doc_dist.png" alt="文档页面分布" width="62%">
 
 | 指标 | 数量 |
 | :--- | ---: |
@@ -116,11 +116,11 @@ push main  → 同样的检查 → 打包 site.tar.gz → scp 到线上服务器
 
 ---
 
-<img src="https://cdn.jsdelivr.net/gh/FwindEmiko/MiragEdge-DocWeb@main/assets/art_start.png" alt="快速开始" width="100%">
+<img src="https://cdn.jsdelivr.net/gh/FwindEmiko/MiragEdge-DocWeb@main/.github/assets/art_start.png" alt="快速开始" width="100%">
 
 ## 快速开始
 
-<img src="https://cdn.jsdelivr.net/gh/FwindEmiko/MiragEdge-DocWeb@main/assets/quickstart.png" alt="快速开始" width="100%">
+<img src="https://cdn.jsdelivr.net/gh/FwindEmiko/MiragEdge-DocWeb@main/.github/assets/quickstart.png" alt="快速开始" width="100%">
 
 ### 环境要求
 
@@ -166,7 +166,7 @@ pnpm build            # 完整构建（跑通这条基本就不会挂 CI）
 
 ## 构建管线
 
-<img src="https://cdn.jsdelivr.net/gh/FwindEmiko/MiragEdge-DocWeb@main/assets/pipeline.png" alt="构建管线" width="100%">
+<img src="https://cdn.jsdelivr.net/gh/FwindEmiko/MiragEdge-DocWeb@main/.github/assets/pipeline.png" alt="构建管线" width="100%">
 
 `pnpm build` 是五步串联，**顺序不能调换**：
 
@@ -192,7 +192,6 @@ MiragEdge-DocWeb/
 ├── plugin-guides/      原创插件文档（27 页）—— 独立插件使用与配置
 ├── developer/          开发者文档（76 页）—— 团队协作、运维、版本日志、审查
 ├── archive/            历史活动归档（7 页）
-├── assets/             README 配图与生成规格（spec.yml）
 ├── public/             静态资源（图片、llms.txt、站点图标等）
 ├── scripts/            自研构建脚本（6 个）
 ├── .vitepress/
@@ -209,7 +208,7 @@ MiragEdge-DocWeb/
 
 ## 技术栈
 
-<img src="https://cdn.jsdelivr.net/gh/FwindEmiko/MiragEdge-DocWeb@main/assets/tech_stack.png" alt="技术栈" width="100%">
+<img src="https://cdn.jsdelivr.net/gh/FwindEmiko/MiragEdge-DocWeb@main/.github/assets/tech_stack.png" alt="技术栈" width="100%">
 
 | 层次 | 选型 | 说明 |
 | :--- | :--- | :--- |
@@ -234,7 +233,7 @@ MiragEdge-DocWeb/
 
 ---
 
-<img src="https://cdn.jsdelivr.net/gh/FwindEmiko/MiragEdge-DocWeb@main/assets/art_contrib.png" alt="参与贡献" width="100%">
+<img src="https://cdn.jsdelivr.net/gh/FwindEmiko/MiragEdge-DocWeb@main/.github/assets/art_contrib.png" alt="参与贡献" width="100%">
 
 ## 参与贡献
 

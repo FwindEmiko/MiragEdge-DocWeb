@@ -5,9 +5,10 @@
 #   不占视觉主体、不做角色卡墙 —— 这是代码仓库，读者要的是信息与质感。
 #
 # 重新生成：
-#   python ~/.dsh/skills/github-readme-anime/scripts/readme_build.py assets/spec.yml --assets-only --out-dir .
+#   python ~/.dsh/skills/github-readme-anime/scripts/readme_build.py .github/assets/spec.yml --assets-only --out-dir .
 #
 # 图片以 jsDelivr 绝对地址引用（原因见文件末尾注释）
+assets_dir: .github/assets
 lang: zh
 project: {name: MiragEdge 文档站, repo: FwindEmiko/MiragEdge-DocWeb}
 
@@ -32,8 +33,8 @@ assets:
       image: public/title_img/xingjiu.png
       scale: 1.9
       opacity: 84
-      mono: true
-      mono_invert: true
+      duotone: ["#3A4756", "#0D1014"]
+      blur: 1.2
       fade_strength: 0.52
       inset: 10
 
@@ -44,10 +45,10 @@ assets:
     h: 250
     title: 六个板块，一条路径
     subtitle: 从装客户端到写插件，按「你要做的事」组织，而不是按文件类型堆放
-    image: assets/chara/roxy.png
-    mono: true
-    mono_invert: true
-    art_opacity: 60
+    image: .github/assets/chara/roxy.png
+    duotone: ["#3A4756", "#0D1014"]
+    blur: 1.2
+    art_opacity: 94
     fade_strength: 0.5
     art_scale: 1.8
 
@@ -58,10 +59,10 @@ assets:
     h: 250
     title: 不只是把文档搬到网上
     subtitle: 配方可试算 · 双端差异逐条标注 · 弱机自动降特效
-    image: assets/chara/eris.png
-    mono: true
-    mono_invert: true
-    art_opacity: 60
+    image: .github/assets/chara/eris.png
+    duotone: ["#3A4756", "#0D1014"]
+    blur: 1.2
+    art_opacity: 94
     fade_strength: 0.5
     art_scale: 1.8
 
@@ -72,10 +73,10 @@ assets:
     h: 250
     title: 两分钟在本地跑起来
     subtitle: Node 22 + pnpm 10.15，无需数据库、无需后端服务
-    image: assets/chara/sylphie.png
-    mono: true
-    mono_invert: true
-    art_opacity: 60
+    image: .github/assets/chara/sylphie.png
+    duotone: ["#3A4756", "#0D1014"]
+    blur: 1.2
+    art_opacity: 94
     fade_strength: 0.5
     art_scale: 1.8
 
@@ -86,10 +87,10 @@ assets:
     h: 250
     title: 改文档不需要懂前端
     subtitle: 会写 Markdown 就够；CI 会给你一个预览站点检查渲染
-    image: assets/chara/bocchi.png
-    mono: true
-    mono_invert: true
-    art_opacity: 60
+    image: .github/assets/chara/bocchi.png
+    duotone: ["#3A4756", "#0D1014"]
+    blur: 1.2
+    art_opacity: 94
     fade_strength: 0.5
     art_scale: 1.8
 
@@ -167,7 +168,7 @@ assets:
       - {n: 4, title: 站内图片水印, desc: watermark.mjs}
       - {n: 5, title: 写入构建版本号, desc: generate-version.mjs}
 
-# 引用方式：https://cdn.jsdelivr.net/gh/FwindEmiko/MiragEdge-DocWeb@main/assets/<名字>
+# 引用方式：https://cdn.jsdelivr.net/gh/FwindEmiko/MiragEdge-DocWeb@main/.github/assets/<名字>
 # 为什么用绝对地址：仓库 README.md 同时会被 VitePress 构建成站点页面 miragedge.top/README，
 #   相对路径在该页面下会 404；放进 public/ 又会被构建期水印脚本盖狐狸水印。
 # 缓存：jsDelivr 对 @main 约 12 小时。改了图想立刻生效，在 URL 后加 ?v=2。
