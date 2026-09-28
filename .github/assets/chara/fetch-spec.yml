@@ -1,0 +1,6 @@
+characters:
+  - {key: roxy,    cn: 洛琪希, role: "新手引路人", search: "Roxy Migurdia",       anime: "Mushoku Tensei", color: "#5B8DEF"}
+  - {key: eris,    cn: 爱丽丝, role: "冒险与战斗", search: "Eris Boreas Greyrat", anime: "Mushoku Tensei", color: "#E05252"}
+  - {key: sylphie, cn: 希露菲, role: "社区与互助", search: "Sylphiette",          anime: "Mushoku Tensei", color: "#3FA9A0"}
+  - {key: bocchi,  cn: 波奇酱, role: "开发者文档", search: "Hitori Gotou",        anime: "Bocchi the Rock!", color: "#F06FA8"}
+

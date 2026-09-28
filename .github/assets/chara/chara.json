@@ -1,0 +1,69 @@
+{
+  "roxy": {
+    "key": "roxy",
+    "cn": "洛琪希",
+    "full": "Roxy Migurdia",
+    "native": "ロキシー・ミグルディア",
+    "alt": [],
+    "source": "Mushoku Tensei: Isekai Ittara Honki Dasu",
+    "source_native": "無職転生 ～異世界行ったら本気だす～",
+    "role": "新手引路人",
+    "color": "#5B8DEF",
+    "image": "roxy.png",
+    "anilist_id": 88350,
+    "anilist_url": "https://anilist.co/character/88350",
+    "file": "roxy.png"
+  },
+  "eris": {
+    "key": "eris",
+    "cn": "爱丽丝",
+    "full": "Eris Boreas Greyrat",
+    "native": "エリス・ボレアス・グレイラット",
+    "alt": [
+      "Mad Dog"
+    ],
+    "source": "Mushoku Tensei: Isekai Ittara Honki Dasu",
+    "source_native": "無職転生 ～異世界行ったら本気だす～",
+    "role": "冒险与战斗",
+    "color": "#E05252",
+    "image": "eris.png",
+    "anilist_id": 88349,
+    "anilist_url": "https://anilist.co/character/88349",
+    "file": "eris.png"
+  },
+  "sylphie": {
+    "key": "sylphie",
+    "cn": "希露菲",
+    "full": "Sylphiette",
+    "native": "シルフィエット",
+    "alt": [
+      "Sylphy"
+    ],
+    "source": "Mushoku Tensei: Isekai Ittara Honki Dasu",
+    "source_native": "無職転生 ～異世界行ったら本気だす～",
+    "role": "社区与互助",
+    "color": "#3FA9A0",
+    "image": "sylphie.png",
+    "anilist_id": 88346,
+    "anilist_url": "https://anilist.co/character/88346",
+    "file": "sylphie.png"
+  },
+  "bocchi": {
+    "key": "bocchi",
+    "cn": "波奇酱",
+    "full": "Hitori Gotou",
+    "native": "後藤ひとり",
+    "alt": [
+      "Bocchi-chan",
+      "Hitori Gotoh"
+    ],
+    "source": "Bocchi the Rock!",
+    "source_native": "ぼっち・ざ・ろっく！",
+    "role": "开发者文档",
+    "color": "#F06FA8",
+    "image": "bocchi.png",
+    "anilist_id": 257562,
+    "anilist_url": "https://anilist.co/character/257562",
+    "file": "bocchi.png"
+  }
+}
