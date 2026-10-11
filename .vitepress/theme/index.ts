@@ -23,6 +23,7 @@ import CommandEntry from './components/vue/CommandEntry.vue'
 import QQGroupCard from './components/vue/QQGroupCard.vue'
 import SkillBrowser from './components/vue/SkillBrowser.vue'
 import TreeNode from './components/vue/TreeNode.vue'
+import VillagerTradeNav from './components/vue/VillagerTradeNav.vue'
 import './css/custom.css'
 
 // 导入所有样式文件
@@ -95,6 +96,7 @@ export default {
     app.component('QQGroupCard', QQGroupCard)
     app.component('SkillBrowser', SkillBrowser)
     app.component('TreeNode', TreeNode)
+    app.component('VillagerTradeNav', VillagerTradeNav)
 
     // 注入图片查看器全局配置（可在子组件中通过 inject('lightboxConfig') 覆盖）
     setLightboxConfig({

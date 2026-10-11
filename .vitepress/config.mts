@@ -511,6 +511,7 @@ export default defineConfig({
                   items: [
                     { text: '群系与结构', link: '/play/adventure/worlds/stellarity/biomes' },
                     { text: '生物与 Boss', link: '/play/adventure/worlds/stellarity/mobs' },
+                    { text: '末地村庄交易大全', link: '/play/adventure/worlds/stellarity/villager-trades' },
                     { text: '物品与装备', link: '/play/adventure/worlds/stellarity/items' },
                     { text: '高级附魔', link: '/play/adventure/worlds/stellarity/enchantments' },
                     { text: '探索指南', link: '/play/adventure/worlds/stellarity/guide' },

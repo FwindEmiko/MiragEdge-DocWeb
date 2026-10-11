@@ -28,10 +28,18 @@
 - useEffectsToggle（.vitepress/theme/composables/）：特效开关全局单例，含 initEffectsToggleState / applyAutoEffects / isStaticLowEndDevice / hasStoredEffectsPreference，同步 html.effects-disabled 与 data-effects-auto
 - useAdaptiveEffects（.vitepress/theme/composables/）：自适应性能探针，采样 rAF 帧间隔 + PerformanceObserver(longtask/event) + 静态信号，判定后经 applyAutoEffects 落地；sessionStorage 缓存 60s（miragedge-effects-auto）；探针通过后启动交互期掉帧监测（scroll/touchmove/wheel 短采样，isInteractionJank），捕捉「空闲满帧、交互掉帧」的设备
 - layout.vue onMounted 依次调用 initEffectsToggleState → initAdaptiveEffects，onUnmounted 时调用返回的 cleanup
+- VillagerTradeNav.vue（.vitepress/theme/components/vue/）：末地村庄交易页的「职业快速跳转 + 筛选」导航。不维护交易数据副本，而是挂载后扫描本页 `.vp-doc` 内的 h3（职业）/h4（等级）标题动态生成，页面增删职业或等级时导航自动跟随，永不与正文脱节；等级标题须含「共 N 个交易格」才能被解析。已在 theme/index.ts 全局注册
 
 ## 踩坑记录
 
 <!-- 遇到过的问题与解决办法（按时间倒序） -->
+- 工作区 node_modules 可能处于「依赖未链接」状态：`vue`/`vitepress`/`vitest` 只存在于 `node_modules/.ignored/`，`node -e "require('vitepress')"` 与任何 pnpm 脚本都会 MODULE_NOT_FOUND。修复：`$env:CI="true"; pnpm install --prefer-offline --reporter=append-only`（不加 CI 会弹交互确认，自动化下会被误答导致安装未完成）
+- `pnpm run audit:routes` 当前在 HEAD 上就失败，共 3 条既有报错，与本任务无关：侧栏重复路由 `/developer/workflows/enchanting/development-methods`（config.mts 中同一路径出现两次）、`/archive/start/main-city` 与 `/archive/start/new-server` 未进侧栏。判断新增页面有无问题时，只看报错里是否出现自己的路由，不要试图"顺手修好"全站
+- 页面内若有 13 个职业各自的「1 级/2 级…」小标题，标题文本相同会导致 VitePress 生成重名锚点（自动追加 -1/-2）并污染右侧大纲。修法：等级小标题带上职业名，如 `#### 1 级 · 新手（盔甲匠，共 2 个交易格）`
+- 组件若靠读取本页已渲染标题来构建导航，必须 `document.querySelector('.vp-doc')` 再在其中查 `h3/h4`。整篇 HTML 里侧栏分组标题也是 `h3/h4`，不限定容器会多解析出 5 个伪职业；且侧栏标题没有 id，只有正文标题有
+- PowerShell 里给 `node -e "..."` 传含 `[`、`||`、`$`、花括号的 JS 会被当命令解析器语法（ParserError / MissingTypename）。这类脚本一律写成 `.mjs` 文件再 `node file.mjs`，不要内联
+- `pnpm run build` 的水印步骤会报大量 `EPERM: rename ... .wmtmp -> ...`（dist 下图片被占用），但核心 VitePress 构建仍成功且退出码为 0；交付报告里要区分"核心构建成功"与"水印残余报错"，不能笼统写"完全通过"。同理 Git 贡献者插件查不到某邮箱会打印 404 警告，属既有现象
+- `public/logsdata.md` 由用户自行维护并直接提交（不在 llms 生成范围内，生成物是 `public/build/logsdata.md`）；`public/external-wm-map.json` 与 `test_tool/**` 会被构建/测试改写。这些都不是本次改动的成果，最终报告不要混入，验证跑完可用 `git checkout --` 还原非本人改动（还原前先 `git log --oneline -3 -- <file>` 确认最新提交不是用户刚做的）
 - PerformanceObserver.observe 的 durationThreshold 在项目 TS lib 中不存在，event-timing 观察直接用浏览器默认阈值（约 104ms），够用且免类型报错
 - MEMORY.md 正文里不能出现裸尖括号标签（如 script setup），会被 vue 编译器当成未闭合标签导致 vitepress build 失败；必须写成行内代码 `<script setup>` 或用 HTML 实体转义
 - layout.vue 的 `<script setup>` 未标 lang="ts"，不能写 TS 类型注解（TS8010）；普通变量用无类型声明
@@ -63,3 +71,12 @@
 - .vitepress/config.mts 钓鱼侧栏组追加「隐藏道具 · 浮木」；play/life/fishing/fish.md 尾部加浮木交叉引用 tip
 - 数值与 emf_junk_driftwood.yml（weight 0.1）及概率文档核对；玩家版精简稿同时保留在 /root/FCelestial/钓鱼系统概率文档.md §6.1
 - 推送：Contents API 三文件直推 main（driftwood 55880fba / fish 8f84df0b / config ce628599），本地 vitepress build 预验证通过后触发 CI 部署
+
+### 2026-10 · 末地村庄交易大全（play/adventure/worlds/stellarity/villager-trades.md）
+
+- 新增玩家页「末地村庄交易大全」：13 职业 × 5 等级、121 个交易格、173 条交易分支的完整明细表（格位/你付出/你获得/补充说明/补货前可做次数），另含货币说明、表格读法、打折机制、相关页面
+- 落位：外部 prompt 原建议 `features/adventure/endvillage.md` 在本仓库不存在（该路径已被 legacy-redirects 映射到 /play/adventure），实际沿用 `play/adventure/worlds/stellarity/`，与 biomes/mobs/items/guide 同级；侧栏「繁星」分组已插入条目
+- 新增 .vitepress/theme/components/vue/VillagerTradeNav.vue（快速跳转 + 职业/等级筛选），已在 theme/index.ts 注册；正文表格保持裸 Markdown、未塞 McItem（与素材可用性结论一致）
+- 数据保真：正文 §4 表格由脚本从 prompt 原文逐行抽取生成（不手抄），并由独立 subagent 对照 `.research/stellarity-latest` 数据包脚本逐行核对，结论零差异（121 槽 / 173 分支 / 65 个等级文件 / 39 个战利品表全部解析）；随机分支数、maxUses、priceMultiplier 均一致
+- 事实旁证：`data/minecraft/loot_table/blocks/end_stone.json` 权重 98:2 印证「末地石约 2% 掉碎片」；remove_vanilla_trades.mcfunction 整条删除绿宝石交易印证「不收绿宝石」；priceMultiplier 实际只有 0.05/0.2 且无自定义折扣逻辑，印证「沿用原版打折」
+- 验证：typecheck / llms / vitepress build / pnpm test(220 passed) / git diff --check 全绿；audit:routes 的 3 条报错为 HEAD 既有，与本页无关
