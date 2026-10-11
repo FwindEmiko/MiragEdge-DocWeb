@@ -47,17 +47,16 @@
     "jsdom": "^23.2.0",
     "mermaid": "^11.17.2",
     "node-fetch": "^2.7.0",
-    "sharp": "^0.35.4",
+    "sharp": "^0.35.5",
     "terser": "^5.51.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3",
     "vite": "^6.4.3",
     "vitepress": "^1.6.4",
     "vitepress-plugin-mermaid": "^2.0.17",
-    "vitepress-sidebar": "^1.39.0",
     "vitepress-theme-website": "^1.0.8",
     "vitest": "^4.1.11",
-    "vue": "^3.5.41",
+    "vue": "^3.5.43",
     "vue-tsc": "^2.2.12"
   },
   "dependencies": {
@@ -65,7 +64,7 @@
     "@vrcd-community/markdown-it-video": "^1.1.1",
     "dotenv": "^17.4.2",
     "lucide-vue-next": "^0.577.0",
-    "simple-git": "^3.36.0",
+    "simple-git": "^4.0.2",
     "vitepress-plugin-announcement": "^0.1.9",
     "vitepress-plugin-group-icons": "^1.7.6"
   }

@@ -4,3 +4,8 @@
 overrides:
   glob: ">=10.5.0"
   js-yaml: "3.15.2"
+  # katex 0.11.0–0.18.1 存在原型污染信任绕过（GHSA-238p-pmpm-9mq7，当前只有 LOW）。
+  # mermaid（含 12.x）仍声明 ^0.16.47，故用 override 顶到已修复的 0.18.2。
+  # 已核对 0.18.2 保留了 mermaid 唯一用到的 `renderToString(tex, {throwOnError,displayMode,output})`
+  # 接口（含 mathml/htmlAndMathml 取值），并做了运行时冒烟验证。
+  katex: "0.18.2"

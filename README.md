@@ -215,7 +215,7 @@ MiragEdge-DocWeb/
 | 框架 | **VitePress 1.6** + Vue 3.5 + TypeScript 5.9 | 静态站点生成，Markdown 直写 |
 | 包管理 | **pnpm 10.15**（Node 22） | `packageManager` 锁版本，CI 用 corepack |
 | 可视化 | Mermaid、canvas-confetti | 流程图与粒子动效 |
-| 侧边栏 | vitepress-sidebar | 按目录自动生成，避免手维护上千行配置 |
+| 侧边栏 | VitePress 内置 `themeConfig.sidebar` | 在 `.vitepress/config.mts` 显式维护，分区与页面顺序可控 |
 | 搜索 | miniSearch（内置） | 标题权重 6 倍、模糊匹配、AND 组合 |
 | 测试 | Vitest + happy-dom + @testing-library/vue | 组件、composable、构建脚本、配置四类 |
 | 数据 | @octokit/rest | 拉取仓库活跃度、贡献者数据 |

@@ -1,5 +1,7 @@
 import type { Plugin } from 'vite';
-import simpleGit from 'simple-git';
+// simple-git 4.x 移除了默认导出，改为具名导出 simpleGit（3.x 的 `import simpleGit from 'simple-git'`
+// 在这里会变成「模块对象不可调用」，typecheck 报 TS2349）
+import { simpleGit } from 'simple-git';
 import { Octokit } from '@octokit/rest';
 import * as fs from 'fs';
 import * as path from 'path';
