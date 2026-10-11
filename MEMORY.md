@@ -33,6 +33,11 @@
 ## 踩坑记录
 
 <!-- 遇到过的问题与解决办法（按时间倒序） -->
+- CI 的「依赖漏洞扫描 (osv-scanner)」是**门禁**：它失败会跳过同 job 的「构建/打包」，进而 deploy 永不执行，站点长期停在旧版本。排查 CI 失败先看失败的是哪个 step，别默认是代码问题
+- 无 Docker 时复刻 osv-scanner 门禁：脚本解析 `pnpm-lock.yaml` 的 snapshot 段（**注意 v9 格式里 `@scope/name` 是带引号的**，正则不兼容引号会漏掉整个 scope 包），逐个 POST 到 `https://api.osv.dev/v1/querybatch`，再扣掉 `osv-scanner.toml` 里已 ignore 的 id。这套复刻能给出与 CI 完全一致的清单
+- 升级依赖后要重跑 `pnpm run typecheck`：simple-git 4.x **移除了默认导出**，`import simpleGit from 'simple-git'` 会变成「模块对象不可调用」并报 TS2349，必须改成 `import { simpleGit } from 'simple-git'`
+- 判断某依赖能否直接删掉，用「源码 + 全历史」双重确认：`git log --all -S "from 'pkg'"` 为空且当前工作区无引用才可删。`vitepress-sidebar` 就是这样发现的——声明了但从未 import（README 里还写着它负责侧边栏，实际侧栏是 config.mts 手写的），删掉它顺带消除了灰色依赖链 argparse→sprintf-js 的无修复告警
+- 上游锁死有洞的传递依赖时，用 `pnpm-workspace.yaml` 的 `overrides`（pnpm 10 不再读 package.json#pnpm）。katex 即如此：mermaid 11/12 都声明 `^0.16.47`，而修复在 0.18.2；顶版本前先核对实际用到的 API（`renderToString(tex,{throwOnError,displayMode,output})`）并做运行时冒烟
 - 工作区 node_modules 可能处于「依赖未链接」状态：`vue`/`vitepress`/`vitest` 只存在于 `node_modules/.ignored/`，`node -e "require('vitepress')"` 与任何 pnpm 脚本都会 MODULE_NOT_FOUND。修复：`$env:CI="true"; pnpm install --prefer-offline --reporter=append-only`（不加 CI 会弹交互确认，自动化下会被误答导致安装未完成）
 - `pnpm run audit:routes` 当前在 HEAD 上就失败，共 3 条既有报错，与本任务无关：侧栏重复路由 `/developer/workflows/enchanting/development-methods`（config.mts 中同一路径出现两次）、`/archive/start/main-city` 与 `/archive/start/new-server` 未进侧栏。判断新增页面有无问题时，只看报错里是否出现自己的路由，不要试图"顺手修好"全站
 - 页面内若有 13 个职业各自的「1 级/2 级…」小标题，标题文本相同会导致 VitePress 生成重名锚点（自动追加 -1/-2）并污染右侧大纲。修法：等级小标题带上职业名，如 `#### 1 级 · 新手（盔甲匠，共 2 个交易格）`
