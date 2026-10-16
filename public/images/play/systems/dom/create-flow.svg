@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 420" role="img"
+     font-family="-apple-system, 'Segoe UI', 'PingFang SC', sans-serif">
+  <title>创建领地的三个环节：选点、确认范围、设置权限，完成后领地建立并按平面格数扣费</title>
+  <defs>
+    <marker id="dom-arrow" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="var(--vp-c-divider, #e2e2e3)"/>
+    </marker>
+    <marker id="dom-arrow-brand" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="var(--vp-c-brand-1, #e05252)"/>
+    </marker>
+  </defs>
+
+  <text x="40" y="36" font-size="17" font-weight="700" fill="var(--vp-c-text-1, #1b1b1f)">创建领地 · 三个环节</text>
+  <text x="40" y="60" font-size="13" fill="var(--vp-c-text-3, #8e8e93)">门槛：手持木锄头，随身带够灵叶（创建与扩建 2.5 灵叶/格）</text>
+
+  <!-- 环节 1 -->
+  <rect x="40" y="92" width="440" height="88" rx="12"
+        fill="var(--vp-c-bg-soft, #f6f6f7)" stroke="var(--vp-c-divider, #e2e2e3)" stroke-width="1.5"/>
+  <circle cx="76" cy="136" r="22" fill="none" stroke="var(--vp-c-brand-1, #e05252)" stroke-width="2"/>
+  <text x="76" y="142" font-size="15" font-weight="700" fill="var(--vp-c-brand-1, #e05252)" text-anchor="middle">1</text>
+  <text x="116" y="130" font-size="16" font-weight="700" fill="var(--vp-c-text-1, #1b1b1f)">选点</text>
+  <text x="116" y="156" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">手持木锄头点击第一个角与对角</text>
+  <text x="456" y="136" font-size="12" fill="var(--vp-c-text-3, #8e8e93)" text-anchor="end">东西/南北 4~256 格</text>
+
+  <line x1="256" y1="184" x2="256" y2="204" stroke="var(--vp-c-divider, #e2e2e3)"
+        stroke-width="1.5" marker-end="url(#dom-arrow)"/>
+
+  <!-- 环节 2 -->
+  <rect x="40" y="210" width="440" height="88" rx="12"
+        fill="var(--vp-c-bg-soft, #f6f6f7)" stroke="var(--vp-c-divider, #e2e2e3)" stroke-width="1.5"/>
+  <circle cx="76" cy="254" r="22" fill="none" stroke="var(--vp-c-brand-1, #e05252)" stroke-width="2"/>
+  <text x="76" y="260" font-size="15" font-weight="700" fill="var(--vp-c-brand-1, #e05252)" text-anchor="middle">2</text>
+  <text x="116" y="248" font-size="16" font-weight="700" fill="var(--vp-c-text-1, #1b1b1f)">确认范围</text>
+  <text x="116" y="274" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">界面显示选中范围，仍需框选高度</text>
+  <text x="456" y="254" font-size="12" fill="var(--vp-c-text-3, #8e8e93)" text-anchor="end">高度不计费</text>
+
+  <line x1="256" y1="302" x2="256" y2="322" stroke="var(--vp-c-divider, #e2e2e3)"
+        stroke-width="1.5" marker-end="url(#dom-arrow)"/>
+
+  <!-- 环节 3 -->
+  <rect x="40" y="328" width="440" height="72" rx="12"
+        fill="var(--vp-c-bg-soft, #f6f6f7)" stroke="var(--vp-c-divider, #e2e2e3)" stroke-width="1.5"/>
+  <circle cx="76" cy="364" r="22" fill="none" stroke="var(--vp-c-brand-1, #e05252)" stroke-width="2"/>
+  <text x="76" y="370" font-size="15" font-weight="700" fill="var(--vp-c-brand-1, #e05252)" text-anchor="middle">3</text>
+  <text x="116" y="358" font-size="16" font-weight="700" fill="var(--vp-c-text-1, #1b1b1f)">设置权限</text>
+  <text x="116" y="384" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">按提示配置领地的使用权限</text>
+
+  <!-- 汇聚箭头 -->
+  <line x1="504" y1="254" x2="536" y2="254" stroke="var(--vp-c-brand-1, #e05252)"
+        stroke-width="1.5" marker-end="url(#dom-arrow-brand)"/>
+
+  <!-- 结果 -->
+  <rect x="548" y="168" width="312" height="172" rx="14"
+        fill="none" stroke="var(--vp-c-brand-1, #e05252)" stroke-width="1.5"/>
+  <rect x="548" y="168" width="5" height="172" rx="2.5" fill="var(--vp-c-brand-1, #e05252)"/>
+  <text x="578" y="208" font-size="17" font-weight="700" fill="var(--vp-c-brand-1, #e05252)">领地建立</text>
+  <text x="578" y="238" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">按平面格数扣费</text>
+  <line x1="578" y1="258" x2="830" y2="258" stroke="var(--vp-c-divider, #e2e2e3)" stroke-width="1"/>
+  <text x="578" y="284" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">每位玩家最多 5 个领地</text>
+  <text x="578" y="308" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">可再划分 3 级子领地</text>
+  <text x="578" y="330" font-size="12" fill="var(--vp-c-text-3, #8e8e93)">也可选择「自动创建」10 格见方</text>
+</svg>

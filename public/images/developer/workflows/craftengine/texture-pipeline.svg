@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 340" role="img">
+  <title>CraftEngine 材质管线的四个步骤</title>
+  <desc>横向四步：定义（在 CE 配置声明物品、方块、图标与归属 pack）、纹理（PNG 放入 assets 对应目录）、模型（model JSON 引用纹理）、基岩转换（冻结版本后审查映射并受控部署）。前三步属于 Java 侧 CE 资源包，第四步属于基岩侧 Geyser 转换。</desc>
+  <defs>
+    <style>
+      /* These SVGs are loaded through an img element by SmartImage, so the
+         page CSS custom properties do not cascade in. Every token is
+         var(--vp-c-*, literal-fallback) and the dark branch is re-declared
+         for prefers-color-scheme. If an SVG is ever inlined instead, the real
+         VitePress variables win in both themes. */
+      :root {
+        --d-text-1: var(--vp-c-text-1, #3c3c43);
+        --d-text-2: var(--vp-c-text-2, #6b6b70);
+        --d-text-3: var(--vp-c-text-3, #8e8e93);
+        --d-line:   var(--vp-c-divider, #e2e2e4);
+        --d-panel:  var(--vp-c-bg, #ffffff);
+        --d-band:   var(--vp-c-bg-alt, #f6f6f7);
+        --d-soft:   var(--vp-c-bg-soft, #f6f6f7);
+        --d-brand:  var(--vp-c-brand-1, #e05252);
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --d-text-1: var(--vp-c-text-1, #e6e6e1);
+          --d-text-2: var(--vp-c-text-2, #b0b0b4);
+          --d-text-3: var(--vp-c-text-3, #85858a);
+          --d-line:   var(--vp-c-divider, #414146);
+          --d-panel:  var(--vp-c-bg, #1b1b1f);
+          --d-band:   var(--vp-c-bg-alt, #161618);
+          --d-soft:   var(--vp-c-bg-soft, #202127);
+        }
+      }
+      text { font-family: -apple-system, 'Segoe UI', 'PingFang SC', sans-serif; }
+      .h { font-size: 15px; font-weight: 600; fill: var(--d-text-1); }
+      .t { font-size: 14px; font-weight: 600; fill: var(--d-text-1); }
+      .d { font-size: 12.5px; fill: var(--d-text-2); }
+      .m { font-size: 12.5px; fill: var(--d-text-3); }
+      .a { font-size: 12.5px; font-weight: 600; fill: var(--d-brand); }
+      .n { font-size: 13px; font-weight: 700; fill: var(--d-brand); }
+      .p { font-size: 12.5px; fill: var(--d-text-2);
+           font-family: ui-monospace, SFMono-Regular, Consolas, 'Courier New', monospace; }
+      .box   { fill: var(--d-panel); stroke: var(--d-line); stroke-width: 1.5; }
+      .band  { fill: var(--d-band);  stroke: var(--d-line); stroke-width: 1; }
+      .soft  { fill: var(--d-soft);  stroke: var(--d-line); stroke-width: 1; }
+      .chip  { fill: var(--d-band);  stroke: var(--d-line); stroke-width: 1; }
+      .ln    { stroke: var(--d-line);  stroke-width: 1.5; fill: none; }
+      .ac    { stroke: var(--d-brand); stroke-width: 2; fill: none; }
+    </style>
+    <marker id="ar" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="var(--d-line)"/>
+    </marker>
+    <marker id="arb" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="var(--d-brand)"/>
+    </marker>
+  </defs>
+  <text class="h" x="24" y="34">CraftEngine 材质管线</text>
+  <text class="m" x="24" y="56">定义 → 纹理 → 模型 → 基岩转换</text>
+  <rect class="box" x="20" y="96" width="212" height="170" rx="10"/>
+  <circle cx="50" cy="130" r="13" fill="var(--d-brand)" fill-opacity="0.12" stroke="var(--d-brand)" stroke-width="1"/>
+  <text class="n" x="50" y="135" text-anchor="middle">1</text>
+  <text class="h" x="72" y="135">定义</text>
+  <line class="ln" x1="36" y1="154" x2="216" y2="154"/>
+  <text class="d" x="36" y="180">在 CE 配置里声明内容</text>
+  <text class="d" x="36" y="202">items / blocks / images</text>
+  <text class="d" x="36" y="224">ID 写成 namespace:id</text>
+  <text class="d" x="36" y="246">先决定归属哪个 pack</text>
+  <rect class="box" x="256" y="96" width="212" height="170" rx="10"/>
+  <circle cx="286" cy="130" r="13" fill="var(--d-brand)" fill-opacity="0.12" stroke="var(--d-brand)" stroke-width="1"/>
+  <text class="n" x="286" y="135" text-anchor="middle">2</text>
+  <text class="h" x="308" y="135">纹理</text>
+  <line class="ln" x1="272" y1="154" x2="452" y2="154"/>
+  <text class="d" x="272" y="180">PNG 放 assets/&lt;ns&gt;/</text>
+  <text class="d" x="272" y="202">textures/ 对应目录</text>
+  <text class="d" x="272" y="224">CE 引用不带 .png</text>
+  <text class="d" x="272" y="246">注意分辨率与图集</text>
+  <rect class="box" x="492" y="96" width="212" height="170" rx="10"/>
+  <circle cx="522" cy="130" r="13" fill="var(--d-brand)" fill-opacity="0.12" stroke="var(--d-brand)" stroke-width="1"/>
+  <text class="n" x="522" y="135" text-anchor="middle">3</text>
+  <text class="h" x="544" y="135">模型</text>
+  <line class="ln" x1="508" y1="154" x2="688" y2="154"/>
+  <text class="d" x="508" y="180">写 model JSON 文件</text>
+  <text class="d" x="508" y="202">引用上一步的纹理</text>
+  <text class="d" x="508" y="224">避免基岩不支持的写法</text>
+  <text class="d" x="508" y="246">复杂模型会降级或丢失</text>
+  <rect class="box" x="728" y="96" width="212" height="170" rx="10"/>
+  <circle cx="758" cy="130" r="13" fill="var(--d-brand)" fill-opacity="0.12" stroke="var(--d-brand)" stroke-width="1"/>
+  <text class="n" x="758" y="135" text-anchor="middle">4</text>
+  <text class="h" x="780" y="135">基岩转换</text>
+  <line class="ln" x1="744" y1="154" x2="924" y2="154"/>
+  <text class="d" x="744" y="180">冻结版本与输入包</text>
+  <text class="d" x="744" y="202">审查纹理与模型映射</text>
+  <text class="d" x="744" y="224">受控部署并保留上一版</text>
+  <text class="d" x="744" y="246">详见 Geyser 工作流</text>
+  <line class="ln" x1="235" y1="181.0" x2="256" y2="181.0" marker-end="url(#ar)"/>
+  <line class="ln" x1="471" y1="181.0" x2="492" y2="181.0" marker-end="url(#ar)"/>
+  <line class="ln" x1="707" y1="181.0" x2="728" y2="181.0" marker-end="url(#ar)"/>
+  <path class="ln" d="M20,290 V282 M20,290 H704 M704,290 V282"/>
+  <text class="m" x="362.0" y="310" text-anchor="middle">Java 侧：CE 资源包</text>
+  <path class="ln" d="M728,290 V282 M728,290 H940 M940,290 V282"/>
+  <text class="m" x="834.0" y="310" text-anchor="middle">基岩侧：Geyser 转换</text>
+</svg>

@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" role="img"
+     font-family="-apple-system, 'Segoe UI', 'PingFang SC', sans-serif">
+  <title>附魔的三条来路：附魔台、祛魔、村民交易，最终汇入同一套附魔体系</title>
+  <defs>
+    <marker id="ep-arrow" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="var(--vp-c-divider, #e2e2e3)"/>
+    </marker>
+    <marker id="ep-arrow-brand" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="var(--vp-c-brand-1, #e05252)"/>
+    </marker>
+  </defs>
+
+  <text x="40" y="36" font-size="17" font-weight="700" fill="var(--vp-c-text-1, #1b1b1f)">附魔的三条来路</text>
+  <text x="40" y="60" font-size="13" fill="var(--vp-c-text-3, #8e8e93)">三条来路都只出原版附魔；自定义附魔要去野外探索</text>
+
+  <!-- 来路 1 附魔台 -->
+  <rect x="40" y="96" width="272" height="80" rx="12"
+        fill="var(--vp-c-bg-soft, #f6f6f7)" stroke="var(--vp-c-divider, #e2e2e3)" stroke-width="1.5"/>
+  <text x="64" y="128" font-size="15" font-weight="700" fill="var(--vp-c-text-1, #1b1b1f)">附魔台</text>
+  <text x="64" y="154" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">消耗经验与青金石直接附魔</text>
+  <text x="288" y="116" font-size="12" fill="var(--vp-c-text-3, #8e8e93)" text-anchor="end">原版</text>
+
+  <!-- 来路 2 祛魔 -->
+  <rect x="40" y="192" width="272" height="80" rx="12"
+        fill="var(--vp-c-bg-soft, #f6f6f7)" stroke="var(--vp-c-divider, #e2e2e3)" stroke-width="1.5"/>
+  <text x="64" y="224" font-size="15" font-weight="700" fill="var(--vp-c-text-1, #1b1b1f)">祛魔</text>
+  <text x="64" y="250" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">取出附魔，转移到别的物品</text>
+  <text x="288" y="212" font-size="12" fill="var(--vp-c-text-3, #8e8e93)" text-anchor="end">转移</text>
+
+  <!-- 来路 3 村民交易 -->
+  <rect x="40" y="288" width="272" height="80" rx="12"
+        fill="var(--vp-c-bg-soft, #f6f6f7)" stroke="var(--vp-c-divider, #e2e2e3)" stroke-width="1.5"/>
+  <text x="64" y="320" font-size="15" font-weight="700" fill="var(--vp-c-text-1, #1b1b1f)">村民交易</text>
+  <text x="64" y="346" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">向图书管理员购买附魔书</text>
+  <text x="288" y="308" font-size="12" fill="var(--vp-c-text-3, #8e8e93)" text-anchor="end">原版</text>
+
+  <!-- 汇流 -->
+  <path d="M312,136 H344" fill="none" stroke="var(--vp-c-divider, #e2e2e3)"
+        stroke-width="1.5" marker-end="url(#ep-arrow)"/>
+  <path d="M312,232 H344" fill="none" stroke="var(--vp-c-divider, #e2e2e3)"
+        stroke-width="1.5" marker-end="url(#ep-arrow)"/>
+  <path d="M312,328 H344" fill="none" stroke="var(--vp-c-divider, #e2e2e3)"
+        stroke-width="1.5" marker-end="url(#ep-arrow)"/>
+
+  <!-- 体系 -->
+  <rect x="356" y="152" width="212" height="160" rx="14"
+        fill="none" stroke="var(--vp-c-brand-1, #e05252)" stroke-width="1.5"/>
+  <text x="462" y="212" font-size="17" font-weight="700" fill="var(--vp-c-brand-1, #e05252)" text-anchor="middle">附魔体系</text>
+  <text x="462" y="240" font-size="13" fill="var(--vp-c-text-2, #3c3c43)" text-anchor="middle">原版附魔与自定义附魔</text>
+  <text x="462" y="264" font-size="13" fill="var(--vp-c-text-2, #3c3c43)" text-anchor="middle">共用同一套品质与等级规则</text>
+
+  <path d="M568,232 H620" fill="none" stroke="var(--vp-c-brand-1, #e05252)"
+        stroke-width="1.5"/>
+  <path d="M596,196 V268" fill="none" stroke="var(--vp-c-divider, #e2e2e3)" stroke-width="1.5"/>
+  <path d="M596,196 H620" fill="none" stroke="var(--vp-c-divider, #e2e2e3)"
+        stroke-width="1.5" marker-end="url(#ep-arrow)"/>
+  <path d="M596,268 H620" fill="none" stroke="var(--vp-c-divider, #e2e2e3)"
+        stroke-width="1.5" marker-end="url(#ep-arrow)"/>
+
+  <!-- 出项 -->
+  <rect x="632" y="164" width="228" height="64" rx="12"
+        fill="var(--vp-c-bg-soft, #f6f6f7)" stroke="var(--vp-c-divider, #e2e2e3)" stroke-width="1.5"/>
+  <text x="654" y="192" font-size="15" font-weight="700" fill="var(--vp-c-text-1, #1b1b1f)">原版附魔</text>
+  <text x="654" y="214" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">三条来路都能拿到</text>
+
+  <rect x="632" y="240" width="228" height="64" rx="12"
+        fill="var(--vp-c-bg-soft, #f6f6f7)" stroke="var(--vp-c-divider, #e2e2e3)" stroke-width="1.5"/>
+  <text x="654" y="268" font-size="15" font-weight="700" fill="var(--vp-c-text-1, #1b1b1f)">自定义附魔</text>
+  <text x="654" y="290" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">需去野外探索</text>
+
+  <!-- 底注 -->
+  <rect x="40" y="396" width="820" height="56" rx="12"
+        fill="var(--vp-c-bg-soft, #f6f6f7)" stroke="var(--vp-c-divider, #e2e2e3)" stroke-width="1"/>
+  <text x="64" y="420" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">新手阶段先用附魔台和村民交易拿原版附魔即可；传说、至宝品质的附魔非常稀有，</text>
+  <text x="64" y="440" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">主要来自地牢、要塞、末地城等高级地点和大量材料重铸。</text>
+</svg>

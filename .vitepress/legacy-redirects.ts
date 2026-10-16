@@ -33,13 +33,15 @@ const prefixRules: PrefixRule[] = [
   ['/develop/gameplay', '/developer/design'],
   ['/develop/webdev', '/developer/website'],
   ['/develop', '/developer'],
-  ['/plugins/fepvp', '/plugin-guides/fepvp'],
-  ['/plugins/pvp', '/plugin-guides/fepvp'],
-  ['/developer/archive/plugins/pvp', '/plugin-guides/fepvp'],
+  // PvP 已上线，/plugins/pvp* 的旧地址由下方 exactRules 指向玩家区 /features/pvp（不再映射到 plugin-guides）
   ['/plugins/bugenchantremover', '/plugin-guides/bug-enchant-remover'],
   ['/plugins/bug-enchant-remover', '/plugin-guides/bug-enchant-remover'],
   ['/developer/reference/plugins/bug-enchant-remover', '/plugin-guides/bug-enchant-remover'],
   ['/plugin-guides/ultimateshop', '/developer/reference/ultimateshop'],
+  // 2026-10 全量重构：plugins/ 改名 /features/
+  // 必须放在此处（列表末尾）：mapPrefixRoute 按顺序遍历，前缀映射对每个现存路由
+  // 反推出旧 URL，从而为全部 /features/** 页面保留其 /plugins/** 旧地址。
+  ['/plugins', '/features'],
 ]
 
 const exactRules: RedirectRule[] = [
@@ -66,39 +68,42 @@ const exactRules: RedirectRule[] = [
   { from: '/develop/todo', to: '/developer/ops/todo' },
   { from: '/develop/team', to: '/developer/team' },
   { from: '/plugins/info', to: '/developer/process/plugin-lifecycle' },
-  { from: '/plugins/list', to: '/plugins' },
-  { from: '/plugins/emcshop', to: '/plugins/custom/emc-shop' },
-  { from: '/plugins/fe_itemscore', to: '/plugins/custom/emc-shop' },
+  { from: '/plugins/list', to: '/features' },
+  { from: '/plugins/emcshop', to: '/features/block-bank' },
+  { from: '/plugins/fe_itemscore', to: '/features/block-bank' },
   { from: '/plugins/fe_quests', to: '/play/systems/economy' },
-  { from: '/plugins/miragedgehome', to: '/plugins/custom/miragedge-home' },
-  { from: '/plugins/miragedgetitle', to: '/plugins/custom/miragedge-title' },
-  { from: '/plugins/SkyElytra', to: '/plugins/custom/sky-elytra' },
+  { from: '/plugins/miragedgehome', to: '/features/anchor' },
+  { from: '/plugins/miragedgetitle', to: '/features/title' },
+  { from: '/plugins/SkyElytra', to: '/features/sky-elytra' },
   { from: '/plugins/fe_fly', to: '/developer/archive/plugins/fe-fly' },
-  { from: '/plugins/fepvp', to: '/plugin-guides/fepvp' },
-  { from: '/plugins/pvp', to: '/plugin-guides/fepvp' },
+  // PvP 已上线：旧 /plugins/pvp* 指向玩家区新页（而非插件文档）
+  { from: '/plugins/fepvp', to: '/features/pvp' },
+  { from: '/plugins/pvp', to: '/features/pvp' },
   { from: '/plugins/custom/items-core', to: '/developer/archive/plugins/items-core' },
   { from: '/plugins/custom/quests', to: '/developer/archive/plugins/quests' },
-  { from: '/plugins/custom/sky-elytra', to: '/developer/archive/plugins/sky-elytra' },
+  // 注：/plugins/custom/sky-elytra 的旧跳转已移除——该功能现已上线，活页在 /features/sky-elytra，
+  // 由 prefixRules 的 ['/plugins','/features'] 统一处理；保留旧规则会与它抢同一个 from 并把它错误地送往归档页
+  { from: '/developer/archive/plugins/sky-elytra', to: '/features/sky-elytra' },
   { from: '/developer/reference/plugins', to: '/developer/reference/server-modules' },
   { from: '/features/pastoral/croups/info', to: '/developer/archive/design/farming' },
-  { from: '/plugins/custom', to: '/plugins' },
-  { from: '/play/adventure/miragedgehome', to: '/plugins/custom/miragedge-home' },
-  { from: '/features/adventure/miragedgehome', to: '/plugins/custom/miragedge-home' },
-  { from: '/play/adventure/identity', to: '/plugins/custom/miragedge-title' },
-  { from: '/features/adventure/identity', to: '/plugins/custom/miragedge-title' },
-  { from: '/play/adventure/deathreincarnation', to: '/plugins/custom/death-return' },
-  { from: '/features/adventure/deathreincarnation', to: '/plugins/custom/death-return' },
-  { from: '/play/systems/playerguild', to: '/start/guild' },
-  { from: '/features/base/playerguild', to: '/start/guild' },
-  { from: '/play/systems/redstone', to: '/start/redstone' },
-  { from: '/play/systems/function', to: '/plugins/daily-tools' },
-  { from: '/features/base/function', to: '/plugins/daily-tools' },
-  { from: '/play/adventure/elytrabind', to: '/plugins/elytra-bind' },
-  { from: '/features/adventure/elytrabind', to: '/plugins/elytra-bind' },
-  { from: '/play/life/builder', to: '/plugins/building-tools' },
-  { from: '/features/pastoral/builder', to: '/plugins/building-tools' },
-  { from: '/play/adventure/equipment/forge', to: '/plugins/forge' },
-  { from: '/features/adventure/mmo/forge', to: '/plugins/forge' },
+  { from: '/plugins/custom', to: '/features' },
+  { from: '/play/adventure/miragedgehome', to: '/features/anchor' },
+  { from: '/features/adventure/miragedgehome', to: '/features/anchor' },
+  { from: '/play/adventure/identity', to: '/features/title' },
+  { from: '/features/adventure/identity', to: '/features/title' },
+  { from: '/play/adventure/deathreincarnation', to: '/features/death-return' },
+  { from: '/features/adventure/deathreincarnation', to: '/features/death-return' },
+  { from: '/play/systems/playerguild', to: '/play/systems/guild' },
+  { from: '/features/base/playerguild', to: '/play/systems/guild' },
+  { from: '/start/guild', to: '/play/systems/guild' },
+  { from: '/play/systems/function', to: '/features/daily-tools' },
+  { from: '/features/base/function', to: '/features/daily-tools' },
+  { from: '/play/adventure/elytrabind', to: '/features/elytra-bind' },
+  { from: '/features/adventure/elytrabind', to: '/features/elytra-bind' },
+  { from: '/play/life/builder', to: '/features/building-tools' },
+  { from: '/features/pastoral/builder', to: '/features/building-tools' },
+  { from: '/play/adventure/equipment/forge', to: '/features/forge' },
+  { from: '/features/adventure/mmo/forge', to: '/features/forge' },
   { from: '/play/adventure/levelledmobs', to: '/developer/archive/design/levelledmobs' },
   { from: '/features/adventure/levelledmobs', to: '/developer/archive/design/levelledmobs' },
   { from: '/play/adventure/equipment/info', to: '/developer/archive/design/equipment-upgrade' },
@@ -113,6 +118,74 @@ const exactRules: RedirectRule[] = [
   { from: '/play/adventure/worlds/rare-structures/overview', to: '/play/adventure/worlds/structures' },
   { from: '/play/adventure/worlds/incendium/advancements', to: '/play/adventure/worlds/incendium/guide' },
   { from: '/play/adventure/worlds/stellarity/advancements', to: '/play/adventure/worlds/stellarity/guide' },
+  // ── 2026-10 全量重构：逐条补齐（由 scripts/refactor-verify-redirects.mjs 从 git HEAD 的旧路由清单比对得出）──
+  // 社区提为一等分区
+  { from: '/start/community', to: '/community' },
+  { from: '/start/community/groups', to: '/community/groups' },
+  { from: '/start/community/voice', to: '/community/voice' },
+  { from: '/start/community/faq', to: '/community/faq' },
+  { from: '/start/community/promotion', to: '/community/promotion' },
+  { from: '/start/community/qqbot', to: '/community/qqbot' },
+  // 归档里其实是现行规则的两页
+  { from: '/archive/start/main-city', to: '/start/main-city' },
+  { from: '/archive/start/new-server', to: '/start/new-server' },
+  // 跨区归位
+  { from: '/start/redstone', to: '/play/systems/redstone' },   // 目标页由阶段 2 拆页产出
+  { from: '/plugins/fec-armor', to: '/features/body-size' },
+  // 按站主指示下线（整体迁往另一站点，源文件留档在 docs/）
+  { from: '/developer/ops/compute', to: '/developer/ops/todo' },
+  // 玩家内容迁出后删除的插件文档页
+  { from: '/plugin-guides/fe-back/guide', to: '/features/death-return' },
+  { from: '/plugin-guides/fepvp/guide', to: '/features/pvp' },
+  // 阶段 3 拆页/改名
+  { from: '/developer/workflows/enchanting/aiyatsbus-fluxon-functions', to: '/developer/workflows/enchanting/host-functions' },
+  { from: '/developer/workflows/enchanting/reference', to: '/developer/workflows/enchanting/fluxon-pitfalls' },
+  { from: '/developer/workflows/datapack/modules', to: '/developer/workflows/datapack/modules/functions' },
+  { from: '/developer/workflows/geyser/index', to: '/developer/workflows/geyser' },
+  { from: '/developer/workflows/geyser/conversion', to: '/developer/workflows/geyser/conversion/' },
+  { from: '/developer/workflows/geyser/craftengine', to: '/developer/workflows/geyser/craftengine/' },
+  { from: '/developer/workflows/fishing/reference', to: '/developer/workflows/fishing' },
+  // 拆页：经济审查方法论（38KB → 5 页）
+  { from: '/developer/reference/economy-audit-workflow', to: '/developer/reference/economy-audit' },
+  // 未上线运营方案归位
+  { from: '/developer/design/liveops_260107', to: '/developer/archive/design/liveops_260107' },
+  // plugins/custom/ 打平后逐个改名
+  { from: '/plugins/custom/miragedge-home', to: '/features/anchor' },
+  { from: '/plugins/custom/death-return', to: '/features/death-return' },
+  { from: '/plugins/custom/sky-elytra', to: '/features/sky-elytra' },
+  { from: '/plugins/custom/slime-boots', to: '/features/slime-boots' },
+  { from: '/plugins/custom/chest-shop', to: '/features/chest-shop' },
+  { from: '/plugins/custom/global-market', to: '/features/global-market' },
+  { from: '/plugins/custom/emc-shop', to: '/features/block-bank' },
+  { from: '/plugins/custom/bounty-hunter', to: '/features/bounty-hunter' },
+  { from: '/plugins/custom/mob-capture', to: '/features/mob-capture' },
+  { from: '/plugins/custom/quiz', to: '/features/quiz' },
+  { from: '/plugins/custom/miragedge-title', to: '/features/title' },
+  { from: '/plugins/custom/monthly-pass', to: '/features/monthly-pass' },
+  { from: '/plugins/custom/flight-guard', to: '/features/flight-guard' },
+  { from: '/plugins/custom/nophantom', to: '/features/nophantom' },
+  { from: '/plugins/custom/piglin-talisman', to: '/features/piglin-talisman' },
+  // play/adventure 拆页（villager-trades 拆 14 页、items 拆 4 页、list 并入 index）
+  { from: '/play/adventure/worlds/stellarity/villager-trades', to: '/play/adventure/worlds/stellarity/trades' },
+  { from: '/play/adventure/worlds/stellarity/items', to: '/play/adventure/worlds/stellarity/equipment' },
+  { from: '/play/adventure/enchantments/list', to: '/play/adventure/enchantments' },
+  { from: '/play/adventure/enchantments/info', to: '/play/adventure/enchantments' },
+  // play/life 重排
+  { from: '/play/life/food/info', to: '/play/life/food' },
+  { from: '/play/life/food/bakery', to: '/play/life/food/desserts-and-bakes' },
+  { from: '/play/life/food/desserts', to: '/play/life/food/desserts-and-bakes' },
+  { from: '/play/life/food/eggs', to: '/play/life/food/eggs-and-specialties' },
+  { from: '/play/life/food/special', to: '/play/life/food/eggs-and-specialties' },
+  { from: '/play/life/fishing/info', to: '/play/life/fishing' },
+  { from: '/play/life/fishing/rods', to: '/play/life/fishing/guide' },
+  { from: '/play/life/fishing/baits', to: '/play/life/fishing/guide' },
+  { from: '/play/life/fishing/dimensions', to: '/play/life/fishing/guide' },
+  { from: '/play/life/seasons/info', to: '/play/life/seasons' },
+  { from: '/play/life/seasons/temperature', to: '/play/life/seasons/mechanisms' },
+  { from: '/play/life/seasons/spring', to: '/play/life/seasons/spring-summer' },
+  { from: '/play/life/seasons/summer', to: '/play/life/seasons/spring-summer' },
+  { from: '/play/life/seasons/fall', to: '/play/life/seasons/autumn-winter' },
+  { from: '/play/life/seasons/winter', to: '/play/life/seasons/autumn-winter' },
 ]
 
 function normalizeRoute(route: string): string {
@@ -162,18 +235,54 @@ function mapPrefixRoute(route: string, fromPrefix: string, toPrefix: string): st
 }
 
 function buildRedirectRules(root: string): RedirectRule[] {
-  const rules = [...exactRules]
-  const seen = new Set(rules.map((rule) => `${rule.from}->${rule.to}`))
+  const routes = collectMarkdownRoutes(root)
+  const liveRoutes = new Set(routes)
+  // 这些源页在本阶段仍物理存在，但阶段 2 会被并入他页后删除；
+  // 若此刻因「已是活路由」而拒绝生成存根，它们删除后会直接 404。故显式放行，
+  // 让存根现在就位：源页存在期间由页面本身兑付，源页删除后由存根接手。
+  const MERGE_SOURCES_PENDING_REMOVAL = new Set([
+    '/play/life/food/desserts',
+    '/play/life/food/special',
+    '/play/life/seasons/summer',
+    '/play/life/seasons/winter',
+    '/play/life/fishing/baits',
+    '/play/life/fishing/dimensions',
+    '/start/redstone',              // 拆为玩家半页 /play/systems/redstone + 管理员半页
+  ])
+  const rules: RedirectRule[] = []
+  // 以 from 去重（原实现用 from->to 去重，会让「同一 from 两条规则」静默共存，
+  // 最终由 emitFile 写入顺序决定谁生效）。改为按 from 独占并显式告警。
+  const byFrom = new Map<string, string>()
+  const conflicts: string[] = []
 
-  for (const route of collectMarkdownRoutes(root)) {
+  const add = (from: string, to: string) => {
+    const key = normalizeRoute(from)
+    if (key === normalizeRoute(to)) return          // 自指规则：不产生任何跳转，跳过
+    // 通用守卫：from 已是当前真实页面路由时不得生成跳转存根，
+    // 否则会在 build 产物里以同名文件覆盖该真实页面（页面不进 Rollup bundle，静默无警告）。
+    if (liveRoutes.has(key) && !MERGE_SOURCES_PENDING_REMOVAL.has(key)) return
+    const prev = byFrom.get(key)
+    if (prev !== undefined) {
+      if (prev !== to) conflicts.push(`${key}: "${prev}" 被后出现的 "${to}" 顶替`)
+      return
+    }
+    byFrom.set(key, to)
+    rules.push({ from: key, to })
+  }
+
+  for (const rule of exactRules) add(rule.from, rule.to)
+
+  for (const route of routes) {
     for (const [from, to] of prefixRules) {
       const legacy = mapPrefixRoute(route, from, to)
       if (!legacy) continue
-      const key = `${legacy}->${route}`
-      if (seen.has(key)) continue
-      seen.add(key)
-      rules.push({ from: legacy, to: route })
+      add(legacy, route)
     }
+  }
+
+  if (conflicts.length) {
+    console.warn(`[legacy-redirects] ${conflicts.length} 条同 from 冲突（已保留先出现者）：`)
+    for (const c of conflicts) console.warn(`  - ${c}`)
   }
 
   return rules

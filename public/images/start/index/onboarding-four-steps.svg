@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 270" role="img"
+     font-family="-apple-system, 'Segoe UI', 'PingFang SC', sans-serif">
+  <title>入服四步：先看新玩家须知，再安装客户端，然后连接服务器，最后绑定账号</title>
+  <defs>
+    <marker id="ob-arrow" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="var(--vp-c-divider, #e2e2e3)"/>
+    </marker>
+  </defs>
+
+  <text x="36" y="34" font-size="17" font-weight="700" fill="var(--vp-c-text-1, #1b1b1f)">第一次进入服务器 · 四步</text>
+  <text x="36" y="58" font-size="13" fill="var(--vp-c-text-3, #8e8e93)">按顺序完成后即可正常游玩；每一步对应一页详细说明</text>
+
+  <!-- 1 看须知 -->
+  <rect x="36" y="90" width="200" height="150" rx="12"
+        fill="var(--vp-c-bg-soft, #f6f6f7)" stroke="var(--vp-c-divider, #e2e2e3)" stroke-width="1.5"/>
+  <circle cx="70" cy="122" r="15" fill="none" stroke="var(--vp-c-brand-1, #e05252)" stroke-width="2"/>
+  <text x="70" y="127" font-size="14" font-weight="700" fill="var(--vp-c-brand-1, #e05252)" text-anchor="middle">1</text>
+  <text x="96" y="128" font-size="16" font-weight="700" fill="var(--vp-c-text-1, #1b1b1f)">看新玩家须知</text>
+  <line x1="56" y1="148" x2="216" y2="148" stroke="var(--vp-c-divider, #e2e2e3)" stroke-width="1"/>
+  <text x="56" y="172" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">确认入服前要了解</text>
+  <text x="56" y="192" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">的内容与规则</text>
+
+  <line x1="240" y1="165" x2="268" y2="165" stroke="var(--vp-c-divider, #e2e2e3)"
+        stroke-width="1.5" marker-end="url(#ob-arrow)"/>
+
+  <!-- 2 装客户端 -->
+  <rect x="272" y="90" width="200" height="150" rx="12"
+        fill="var(--vp-c-bg-soft, #f6f6f7)" stroke="var(--vp-c-divider, #e2e2e3)" stroke-width="1.5"/>
+  <circle cx="306" cy="122" r="15" fill="none" stroke="var(--vp-c-brand-1, #e05252)" stroke-width="2"/>
+  <text x="306" y="127" font-size="14" font-weight="700" fill="var(--vp-c-brand-1, #e05252)" text-anchor="middle">2</text>
+  <text x="332" y="128" font-size="16" font-weight="700" fill="var(--vp-c-text-1, #1b1b1f)">安装客户端</text>
+  <line x1="292" y1="148" x2="452" y2="148" stroke="var(--vp-c-divider, #e2e2e3)" stroke-width="1"/>
+  <text x="292" y="172" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">准备 Java 版所需的</text>
+  <text x="292" y="192" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">客户端环境</text>
+
+  <line x1="476" y1="165" x2="504" y2="165" stroke="var(--vp-c-divider, #e2e2e3)"
+        stroke-width="1.5" marker-end="url(#ob-arrow)"/>
+
+  <!-- 3 连接服务器 -->
+  <rect x="508" y="90" width="200" height="150" rx="12"
+        fill="var(--vp-c-bg-soft, #f6f6f7)" stroke="var(--vp-c-divider, #e2e2e3)" stroke-width="1.5"/>
+  <circle cx="542" cy="122" r="15" fill="none" stroke="var(--vp-c-brand-1, #e05252)" stroke-width="2"/>
+  <text x="542" y="127" font-size="14" font-weight="700" fill="var(--vp-c-brand-1, #e05252)" text-anchor="middle">3</text>
+  <text x="568" y="128" font-size="16" font-weight="700" fill="var(--vp-c-text-1, #1b1b1f)">连接服务器</text>
+  <line x1="528" y1="148" x2="688" y2="148" stroke="var(--vp-c-divider, #e2e2e3)" stroke-width="1"/>
+  <text x="528" y="172" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">获取地址与端口，完</text>
+  <text x="528" y="192" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">成第一次登录</text>
+
+  <line x1="712" y1="165" x2="740" y2="165" stroke="var(--vp-c-divider, #e2e2e3)"
+        stroke-width="1.5" marker-end="url(#ob-arrow)"/>
+
+  <!-- 4 绑定账号 -->
+  <rect x="744" y="90" width="180" height="150" rx="12"
+        fill="var(--vp-c-bg-soft, #f6f6f7)" stroke="var(--vp-c-brand-1, #e05252)" stroke-width="1.5"/>
+  <circle cx="778" cy="122" r="15" fill="var(--vp-c-brand-1, #e05252)"/>
+  <text x="778" y="127" font-size="14" font-weight="700" fill="var(--vp-c-bg, #ffffff)" text-anchor="middle">4</text>
+  <text x="804" y="128" font-size="16" font-weight="700" fill="var(--vp-c-brand-1, #e05252)">绑定账号</text>
+  <line x1="764" y1="148" x2="904" y2="148" stroke="var(--vp-c-divider, #e2e2e3)" stroke-width="1"/>
+  <text x="764" y="172" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">完成后即可自由</text>
+  <text x="764" y="192" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">进出服务器</text>
+</svg>

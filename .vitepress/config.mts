@@ -406,18 +406,18 @@ export default defineConfig({
       }
     },
     
-    // 品牌标题本身返回首页；顶栏保留玩家常用入口和始终可达的开发入口。
+    // 玩家导航：只放玩家入口，开发者入口改由页脚固定链接提供（见下方 footer）
     nav: [
       { text: '🏠 首页', link: '/' },
       { text: '🧭 开始游戏', link: '/start/', activeMatch: '^/start/' },
-      { text: '⚒️ 生存玩法', link: '/play/', activeMatch: '^/play/' },
-      { text: '✨ 特色功能', link: '/plugins/', activeMatch: '^/plugins/' },
-      { text: '🛠️ 开发者文档', link: '/developer/', activeMatch: '^/developer/' },
+      { text: '⚒️ 玩法', link: '/play/', activeMatch: '^/play/' },
+      { text: '✨ 功能', link: '/features/', activeMatch: '^/features/' },
+      { text: '💬 社区', link: '/community/', activeMatch: '^/community/' },
       {
         text: '更多',
         items: [
-          { text: '原创插件文档', link: '/plugin-guides/', activeMatch: '^/plugin-guides/' },
           { text: '历史活动记录', link: '/archive/' },
+          { text: '开发者与服主入口', link: '/developer/', rel: 'nofollow' },
           { text: '网站源码仓库', link: 'https://github.com/fwindemiko/MiragEdge-DocWeb', target: '_blank', rel: 'noopener noreferrer' },
         ]
       },
@@ -435,18 +435,21 @@ export default defineConfig({
             { text: '客户端安装', link: '/start/install' },
             { text: '连接服务器', link: '/start/join' },
             { text: '账号绑定', link: '/start/account' },
+            { text: '登录与注册', link: '/start/login' },
+            { text: '主城共建', link: '/start/main-city' },
+            { text: '新服规则与区域', link: '/start/new-server' },
           ]
         },
         {
           text: '💬 社区与支持',
           collapsed: false,
           items: [
-            { text: '支持总览', link: '/start/community/' },
-            { text: '玩家交流群组', link: '/start/community/groups' },
-            { text: '官方语音频道', link: '/start/community/voice' },
-            { text: '群服互通机器人', link: '/start/community/qqbot' },
-            { text: '常见问题', link: '/start/community/faq' },
-            { text: '宣传支持', link: '/start/community/promotion' },
+            { text: '支持总览', link: '/community/' },
+            { text: '玩家交流群组', link: '/community/groups' },
+            { text: '官方语音频道', link: '/community/voice' },
+            { text: '群服互通机器人', link: '/community/qqbot' },
+            { text: '常见问题', link: '/community/faq' },
+            { text: '宣传支持', link: '/community/promotion' },
           ]
         },
         {
@@ -463,8 +466,8 @@ export default defineConfig({
           text: '🏘️ 长期游玩',
           collapsed: false,
           items: [
-            { text: '玩家工会', link: '/start/guild' },
-            { text: '生电与特性', link: '/start/redstone' },
+            { text: '玩家工会', link: '/play/systems/guild' },
+            { text: '生电与特性', link: '/play/systems/redstone' },
             { text: '世界观设定', link: '/start/worldview' },
           ]
         },
@@ -511,8 +514,30 @@ export default defineConfig({
                   items: [
                     { text: '群系与结构', link: '/play/adventure/worlds/stellarity/biomes' },
                     { text: '生物与 Boss', link: '/play/adventure/worlds/stellarity/mobs' },
-                    { text: '末地村庄交易大全', link: '/play/adventure/worlds/stellarity/villager-trades' },
-                    { text: '物品与装备', link: '/play/adventure/worlds/stellarity/items' },
+                    {
+                      text: '末地村庄交易大全',
+                      collapsed: true,
+                      link: '/play/adventure/worlds/stellarity/trades/',
+                      items: [
+                        { text: '盔甲匠', link: '/play/adventure/worlds/stellarity/trades/armorer' },
+                        { text: '屠夫', link: '/play/adventure/worlds/stellarity/trades/butcher' },
+                        { text: '制图师', link: '/play/adventure/worlds/stellarity/trades/cartographer' },
+                        { text: '神职人员', link: '/play/adventure/worlds/stellarity/trades/cleric' },
+                        { text: '农民', link: '/play/adventure/worlds/stellarity/trades/farmer' },
+                        { text: '渔夫', link: '/play/adventure/worlds/stellarity/trades/fisherman' },
+                        { text: '制箭师', link: '/play/adventure/worlds/stellarity/trades/fletcher' },
+                        { text: '皮匠', link: '/play/adventure/worlds/stellarity/trades/leatherworker' },
+                        { text: '图书管理员', link: '/play/adventure/worlds/stellarity/trades/librarian' },
+                        { text: '石匠', link: '/play/adventure/worlds/stellarity/trades/mason' },
+                        { text: '牧羊人', link: '/play/adventure/worlds/stellarity/trades/shepherd' },
+                        { text: '工具匠', link: '/play/adventure/worlds/stellarity/trades/toolsmith' },
+                        { text: '武器匠', link: '/play/adventure/worlds/stellarity/trades/weaponsmith' },
+                      ]
+                    },
+                    { text: '诅咒祭坛与合成', link: '/play/adventure/worlds/stellarity/altar' },
+                    { text: '圣弓与光灵之怒', link: '/play/adventure/worlds/stellarity/sharanga' },
+                    { text: '龙息炼药锅', link: '/play/adventure/worlds/stellarity/cauldron' },
+                    { text: '特殊装备与材料', link: '/play/adventure/worlds/stellarity/equipment' },
                     { text: '高级附魔', link: '/play/adventure/worlds/stellarity/enchantments' },
                     { text: '探索指南', link: '/play/adventure/worlds/stellarity/guide' },
                   ]
@@ -528,9 +553,8 @@ export default defineConfig({
                   text: '附魔系统',
                   collapsed: false,
                   items: [
-                    { text: '入门说明', link: '/play/adventure/enchantments/info' },
+                    { text: '附魔总览', link: '/play/adventure/enchantments/' },
                     { text: '品质等级', link: '/play/adventure/enchantments/rarity' },
-                    { text: '附魔大全', link: '/play/adventure/enchantments/list' },
                     { text: '分类搭配', link: '/play/adventure/enchantments/group' },
                     { text: '祛魔系统', link: '/play/adventure/enchantments/separator' },
                     { text: '附魔管理', link: '/play/adventure/enchantments/system' },
@@ -549,92 +573,96 @@ export default defineConfig({
               text: '钓鱼系统',
               collapsed: false,
               items: [
-                { text: '入门说明', link: '/play/life/fishing/info' },
-                { text: '鱼竿进阶', link: '/play/life/fishing/rods' },
-                { text: '鱼饵系统', link: '/play/life/fishing/baits' },
+                { text: '入门说明', link: '/play/life/fishing/' },
+                { text: '鱼竿与鱼饵', link: '/play/life/fishing/guide' },
                 { text: '鱼类图鉴', link: '/play/life/fishing/fish' },
-                { text: '维度钓鱼', link: '/play/life/fishing/dimensions' },
                 { text: '钓鱼比赛', link: '/play/life/fishing/competitions' },
-                { text: '特殊道具', link: '/play/life/fishing/driftwood' },
+                { text: '隐藏道具 · 浮木', link: '/play/life/fishing/driftwood' },
               ]
             },
             {
               text: '食物系统',
               collapsed: false,
               items: [
-                { text: '入门说明', link: '/play/life/food/info' },
+                { text: '入门说明', link: '/play/life/food/' },
                 { text: '食物速查表', link: '/play/life/food/reference' },
                 { text: '早餐简餐', link: '/play/life/food/breakfast' },
                 { text: '主菜肉食', link: '/play/life/food/mains' },
                 { text: '沙拉凉菜', link: '/play/life/food/salads' },
-                { text: '烘焙糕点', link: '/play/life/food/bakery' },
-                { text: '甜品', link: '/play/life/food/desserts' },
+                { text: '烘焙与甜品', link: '/play/life/food/desserts-and-bakes' },
+                { text: '煎蛋与特色食物', link: '/play/life/food/eggs-and-specialties' },
                 { text: '饮品', link: '/play/life/food/drinks' },
-                { text: '煎蛋系列', link: '/play/life/food/eggs' },
                 { text: '糖果零食', link: '/play/life/food/snacks' },
-                { text: '特色食物', link: '/play/life/food/special' },
               ]
             },
             {
-              text: '真实季节(暂弃)',
+              text: '季节系统',
               collapsed: true,
               items: [
-                { text: '季节总览', link: '/play/life/seasons/info' },
-                { text: '温度系统', link: '/play/life/seasons/temperature' },
-                { text: '春季', link: '/play/life/seasons/spring' },
-                { text: '夏季', link: '/play/life/seasons/summer' },
-                { text: '秋季', link: '/play/life/seasons/fall' },
-                { text: '冬季', link: '/play/life/seasons/winter' },
+                { text: '季节总览', link: '/play/life/seasons/' },
+                { text: '温度机制', link: '/play/life/seasons/mechanisms' },
+                { text: '春季与夏季', link: '/play/life/seasons/spring-summer' },
+                { text: '秋季与冬季', link: '/play/life/seasons/autumn-winter' },
               ]
             },
           ]
         },
       ],
 
-      '/plugins/': [
-        { text: '✨ 特色功能', link: '/plugins/' },
+      '/features/': [
+        { text: '✨ 服务器功能', link: '/features/' },
         {
           text: '🧰 移动与日常',
           collapsed: false,
           items: [
-            { text: '日常便利', link: '/plugins/daily-tools' },
-            { text: '星辉锚点', link: '/plugins/custom/miragedge-home' },
-            { text: '死亡回程', link: '/plugins/custom/death-return' },
-            { text: '幻空翼', link: '/plugins/custom/sky-elytra' },
+            { text: '星辉锚点', link: '/features/anchor' },
+            { text: '死亡回程', link: '/features/death-return' },
+            { text: '日常便利', link: '/features/daily-tools' },
+            { text: '幻空翼', link: '/features/sky-elytra' },
           ]
         },
         {
           text: '🏗️ 建造与装备',
           collapsed: false,
           items: [
-            { text: '建筑大师', link: '/plugins/building-tools' },
-            { text: '锻造升级', link: '/plugins/forge' },
-            { text: '契约之翼', link: '/plugins/elytra-bind' },
-            { text: '史莱姆靴', link: '/plugins/custom/slime-boots' },
-            { text: '随地大小变', link: '/plugins/fec-armor' },
+            { text: '建筑大师', link: '/features/building-tools' },
+            { text: '史莱姆靴', link: '/features/slime-boots' },
+            { text: '锻造升级', link: '/features/forge' },
+            { text: '契约之翼', link: '/features/elytra-bind' },
+            { text: '体型装备', link: '/features/body-size' },
           ]
         },
         {
           text: '💬 交易与互动',
           collapsed: false,
           items: [
-            { text: '箱子商店', link: '/plugins/custom/chest-shop' },
-            { text: '全服市场', link: '/plugins/custom/global-market' },
-            { text: '方块银行', link: '/plugins/custom/emc-shop' },
-            { text: '赏金猎人', link: '/plugins/custom/bounty-hunter' },
-            { text: '生物捕捉', link: '/plugins/custom/mob-capture' },
-            { text: '知识问答', link: '/plugins/custom/quiz' },
-            { text: '称号与入服消息', link: '/plugins/custom/miragedge-title' },
-            { text: '月卡与通行权益', link: '/plugins/custom/monthly-pass' },
+            { text: '箱子商店', link: '/features/chest-shop' },
+            { text: '全服市场', link: '/features/global-market' },
+            { text: '方块银行', link: '/features/block-bank' },
+            { text: '知识问答', link: '/features/quiz' },
+            { text: '赏金猎人', link: '/features/bounty-hunter' },
+            { text: '生物捕捉', link: '/features/mob-capture' },
+            { text: '称号与入服消息', link: '/features/title' },
+            { text: '月卡与通行权益', link: '/features/monthly-pass' },
+          ]
+        },
+        {
+          text: '⚔️ 竞技与对战',
+          collapsed: false,
+          items: [
+            { text: '竞技系统总览', link: '/features/pvp/' },
+            { text: '饥饿游戏', link: '/features/pvp/hunger-games' },
+            { text: '押注决斗', link: '/features/pvp/betting' },
+            { text: '段位与排行榜', link: '/features/pvp/ranking' },
           ]
         },
         {
           text: '🛡️ 自动规则',
           collapsed: false,
           items: [
-            { text: '飞行武器限制', link: '/plugins/custom/flight-guard' },
-            { text: '免幻翼', link: '/plugins/custom/nophantom' },
-            { text: '缚灵钢符', link: '/plugins/custom/piglin-talisman' },
+            { text: '飞行武器限制', link: '/features/flight-guard' },
+            { text: '免幻翼', link: '/features/nophantom' },
+            { text: '缚灵钢符', link: '/features/piglin-talisman' },
           ]
         },
       ],
@@ -651,7 +679,14 @@ export default defineConfig({
               collapsed: true,
               items: [
                 { text: '前置与环境', link: '/developer/workflows/datapack/prerequisites' },
-                { text: '模块实现', link: '/developer/workflows/datapack/modules' },
+                { text: '函数 Functions', link: '/developer/workflows/datapack/modules/functions' },
+                { text: '战利品表 Loot Tables', link: '/developer/workflows/datapack/modules/loot-tables' },
+                { text: '配方 Recipes', link: '/developer/workflows/datapack/modules/recipes' },
+                { text: '生物掉落 Mob Drops', link: '/developer/workflows/datapack/modules/mob-drops' },
+                { text: 'CE 自定义物品', link: '/developer/workflows/datapack/modules/ce-items' },
+                { text: '结构 Structures', link: '/developer/workflows/datapack/modules/structures' },
+                { text: 'CraftEngine 集成', link: '/developer/workflows/datapack/ce-integration' },
+                { text: 'AI 使用指南', link: '/developer/workflows/datapack/ai-guide' },
                 { text: '参考规则', link: '/developer/workflows/datapack/reference' },
                 { text: '排错与适配', link: '/developer/workflows/datapack/troubleshooting' },
               ]
@@ -670,12 +705,21 @@ export default defineConfig({
               link: '/developer/workflows/geyser/',
               collapsed: true,
               items: [
-                { text: '转换与发布', link: '/developer/workflows/geyser/conversion' },
+                { text: '资源包结构', link: '/developer/workflows/geyser/bedrock-pack' },
+                { text: '物品映射', link: '/developer/workflows/geyser/item-mapping' },
+                { text: '方块映射', link: '/developer/workflows/geyser/block-mapping' },
+                { text: 'Extension API 开发', link: '/developer/workflows/geyser/extension-dev' },
+                { text: '转换与发布', link: '/developer/workflows/geyser/conversion/' },
+                { text: '冻结与输入锁定', link: '/developer/workflows/geyser/conversion/input-lock' },
+                { text: 'Rainbow 采集与映射审查', link: '/developer/workflows/geyser/conversion/rainbow' },
+                { text: '受控部署与回滚', link: '/developer/workflows/geyser/conversion/deploy' },
+                { text: 'CE 资源来源', link: '/developer/workflows/geyser/craftengine/resource-sources' },
                 { text: 'Stellarity 5.5.3 末地批次', link: '/developer/workflows/geyser/stellarity' },
                 { text: 'CraftEngine 与合并资源包', link: '/developer/workflows/geyser/craftengine' },
                 { text: '复杂数据包实体与展示', link: '/developer/workflows/geyser/entities' },
                 { text: '验收与排错', link: '/developer/workflows/geyser/validation' },
                 { text: '协议与产物参考', link: '/developer/workflows/geyser/reference' },
+                { text: 'AI 交付规范（共享）', link: '/developer/workflows/_shared/ai-delivery' },
               ]
             },
             {
@@ -690,7 +734,6 @@ export default defineConfig({
                   link: '/developer/workflows/enchanting/development-methods',
                   collapsed: true,
                   items: [
-                    { text: '开发方式总览', link: '/developer/workflows/enchanting/development-methods' },
                     { text: '纯代码附魔', link: '/developer/workflows/enchanting/code-defined' },
                     { text: 'YAML 附魔', link: '/developer/workflows/enchanting/config-defined' },
                     { text: '附魔字段速查', link: '/developer/workflows/enchanting/enchantment-fields' },
@@ -720,10 +763,12 @@ export default defineConfig({
                     { text: 'Import 模块参考', link: '/developer/workflows/enchanting/fluxon-modules' },
                     { text: '平台函数', link: '/developer/workflows/enchanting/fluxon-platform-functions' },
                     { text: '运行时容器', link: '/developer/workflows/enchanting/fluxon-containers' },
-                    { text: 'Aiyatsbus 函数', link: '/developer/workflows/enchanting/aiyatsbus-fluxon-functions' },
+                    { text: '宿主函数总览', link: '/developer/workflows/enchanting/host-functions/' },
+                { text: '世界与实体函数', link: '/developer/workflows/enchanting/host-functions/world-entity' },
+                { text: '变量与常用组合', link: '/developer/workflows/enchanting/host-functions/variables-combos' },
                   ]
                 },
-                { text: 'Fluxon 参考(整合)', link: '/developer/workflows/enchanting/reference' },
+                { text: 'Fluxon 避坑与旧写法', link: '/developer/workflows/enchanting/fluxon-pitfalls' },
                 { text: '官方技能包文件浏览', link: '/developer/workflows/enchanting/skill-files' },
                 { text: '数据包边界', link: '/developer/workflows/enchanting/datapack-boundaries' },
                 { text: '验证与验收', link: '/developer/workflows/enchanting/validation' },
@@ -738,7 +783,6 @@ export default defineConfig({
               items: [
                 { text: '前置与环境', link: '/developer/workflows/fishing/prerequisites' },
                 { text: '模块实现', link: '/developer/workflows/fishing/modules' },
-                { text: '参考规则', link: '/developer/workflows/fishing/reference' },
                 { text: '排错与适配', link: '/developer/workflows/fishing/troubleshooting' },
               ]
             },
@@ -749,11 +793,16 @@ export default defineConfig({
           collapsed: false,
           items: [
             { text: '服务器模块职责', link: '/developer/reference/server-modules' },
+            { text: 'Leaf 性能与生电调优', link: '/developer/reference/leaf-tuning' },
             { text: '附魔 ID 对照表', link: '/developer/reference/enchantment_ids' },
             { text: '内部隐藏技术附魔', link: '/developer/reference/stellarity-technical-enchantments' },
             { text: '祛魔成本计算器', link: '/developer/reference/enchantment-calculator' },
             { text: '经济基准参考', link: '/developer/reference/economy' },
-            { text: '经济自动化审查', link: '/developer/reference/economy-audit-workflow' },
+            { text: '经济审查流程', link: '/developer/reference/economy-audit/' },
+            { text: '审查检查清单', link: '/developer/reference/economy-audit/checklist' },
+            { text: '定价方法论', link: '/developer/reference/economy-audit/pricing-methods' },
+            { text: '审查报告模板', link: '/developer/reference/economy-audit/report-template' },
+            { text: '全插件经济速查', link: '/developer/reference/economy-audit/plugin-economy-matrix' },
             { text: '高级商店系统', link: '/developer/reference/ultimateshop/' },
           ]
         },
@@ -766,6 +815,7 @@ export default defineConfig({
             { text: '文档站内容维护工作流', link: '/developer/website/content-workflow' },
             { text: '图片自动化模块', link: '/developer/website/autoimage' },
             { text: '配方可视化组件', link: '/developer/website/mcrecipe' },
+            { text: '已注册物品与材质', link: '/developer/website/mc-textures' },
             { text: '统一图标系统', link: '/developer/website/vectoricons' },
             { text: 'AI Skills 系统', link: '/developer/ai-skills' },
           ]
@@ -776,7 +826,6 @@ export default defineConfig({
           items: [
             { text: '更新日志', link: '/developer/ops/changelog' },
             { text: '待办事项', link: '/developer/ops/todo' },
-            { text: '计算服务', link: '/developer/ops/compute' },
           ]
         },
         {
@@ -785,7 +834,7 @@ export default defineConfig({
           items: [
             { text: '宣传推广记录', link: '/developer/archive/promotion' },
             { text: '种植系统设计占位', link: '/developer/archive/design/farming' },
-            { text: '赛季设计记录', link: '/developer/design/liveops_260107' },
+            { text: '赛季设计记录', link: '/developer/archive/design/liveops_260107' },
             {
               text: '弃案设计',
               collapsed: true,
@@ -826,6 +875,7 @@ export default defineConfig({
                 { text: 'UberEnchant 兼容', link: '/plugin-guides/bug-enchant-remover/uber_enchant' },
               ]
             },
+            { text: 'BountyHunter 赏金猎人', link: '/plugin-guides/bounty-hunter/' },
             { text: 'DragonMiao', link: '/plugin-guides/dragonmiao/' },
             {
               text: 'HFcatLogin 登录插件',
@@ -842,7 +892,6 @@ export default defineConfig({
               link: '/plugin-guides/fepvp/',
               collapsed: false,
               items: [
-                { text: '玩家指南', link: '/plugin-guides/fepvp/guide' },
                 { text: '竞技场管理', link: '/plugin-guides/fepvp/arena' },
                 { text: '装备组合管理', link: '/plugin-guides/fepvp/kit' },
                 { text: '饥饿游戏模式', link: '/plugin-guides/fepvp/hunger-games' },
@@ -858,7 +907,6 @@ export default defineConfig({
               link: '/plugin-guides/fe-back/',
               collapsed: false,
               items: [
-                { text: '玩家指南', link: '/plugin-guides/fe-back/guide' },
                 { text: '命令参考', link: '/plugin-guides/fe-back/commands' },
                 { text: '配置参考', link: '/plugin-guides/fe-back/config' },
                 { text: '权限节点', link: '/plugin-guides/fe-back/permissions' },

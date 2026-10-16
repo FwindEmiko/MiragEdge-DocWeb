@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 280" role="img"
+     font-family="-apple-system, 'Segoe UI', 'PingFang SC', sans-serif">
+  <title>钓鱼比赛赛程：报名、开赛、计分、结算三档奖励</title>
+  <defs>
+    <marker id="fc-arrow" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="var(--vp-c-divider, #e2e2e3)"/>
+    </marker>
+  </defs>
+
+  <text x="40" y="34" font-size="17" font-weight="700" fill="var(--vp-c-text-1, #1b1b1f)">钓鱼比赛 · 赛程</text>
+  <text x="40" y="58" font-size="13" fill="var(--vp-c-text-3, #8e8e93)">每天多场，随时可参加；比赛期间鱼饵统一失效以保证公平</text>
+
+  <!-- 1 报名 -->
+  <rect x="40" y="88" width="196" height="140" rx="12"
+        fill="var(--vp-c-bg-soft, #f6f6f7)" stroke="var(--vp-c-divider, #e2e2e3)" stroke-width="1.5"/>
+  <text x="62" y="124" font-size="15" font-weight="700" fill="var(--vp-c-text-1, #1b1b1f)">报名</text>
+  <line x1="62" y1="140" x2="214" y2="140" stroke="var(--vp-c-divider, #e2e2e3)" stroke-width="1"/>
+  <text x="62" y="166" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">等比赛开始广播</text>
+  <text x="62" y="188" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">屏幕顶部出现倒计时</text>
+
+  <line x1="240" y1="158" x2="264" y2="158" stroke="var(--vp-c-divider, #e2e2e3)"
+        stroke-width="1.5" marker-end="url(#fc-arrow)"/>
+
+  <!-- 2 开赛 -->
+  <rect x="268" y="88" width="196" height="140" rx="12"
+        fill="var(--vp-c-bg-soft, #f6f6f7)" stroke="var(--vp-c-divider, #e2e2e3)" stroke-width="1.5"/>
+  <text x="290" y="124" font-size="15" font-weight="700" fill="var(--vp-c-text-1, #1b1b1f)">开赛</text>
+  <line x1="290" y1="140" x2="442" y2="140" stroke="var(--vp-c-divider, #e2e2e3)" stroke-width="1"/>
+  <text x="290" y="166" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">在比赛时间内钓鱼</text>
+  <text x="290" y="188" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">时长 10~60 分钟</text>
+
+  <line x1="468" y1="158" x2="492" y2="158" stroke="var(--vp-c-divider, #e2e2e3)"
+        stroke-width="1.5" marker-end="url(#fc-arrow)"/>
+
+  <!-- 3 计分 -->
+  <rect x="496" y="88" width="196" height="140" rx="12"
+        fill="var(--vp-c-bg-soft, #f6f6f7)" stroke="var(--vp-c-divider, #e2e2e3)" stroke-width="1.5"/>
+  <text x="518" y="124" font-size="15" font-weight="700" fill="var(--vp-c-text-1, #1b1b1f)">计分</text>
+  <line x1="518" y1="140" x2="670" y2="140" stroke="var(--vp-c-divider, #e2e2e3)" stroke-width="1"/>
+  <text x="518" y="166" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">系统自动记录成绩</text>
+  <text x="518" y="188" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">不用手动提交</text>
+
+  <line x1="696" y1="158" x2="720" y2="158" stroke="var(--vp-c-divider, #e2e2e3)"
+        stroke-width="1.5" marker-end="url(#fc-arrow)"/>
+
+  <!-- 4 结算 -->
+  <rect x="724" y="88" width="260" height="140" rx="12"
+        fill="none" stroke="var(--vp-c-brand-1, #e05252)" stroke-width="1.5"/>
+  <rect x="724" y="88" width="5" height="140" rx="2.5" fill="var(--vp-c-brand-1, #e05252)"/>
+  <text x="748" y="120" font-size="15" font-weight="700" fill="var(--vp-c-brand-1, #e05252)">结算 · 三档奖励</text>
+  <line x1="748" y1="134" x2="962" y2="134" stroke="var(--vp-c-divider, #e2e2e3)" stroke-width="1"/>
+  <text x="748" y="158" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">第 1 名　灵叶 + 经验</text>
+  <text x="748" y="182" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">第 2~5 名　依次减少</text>
+  <text x="748" y="206" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">参与奖　少量灵叶</text>
+
+  <path d="M854,228 V248" fill="none" stroke="var(--vp-c-divider, #e2e2e3)"
+        stroke-width="1.5" marker-end="url(#fc-arrow)"/>
+  <text x="854" y="268" font-size="12" fill="var(--vp-c-text-3, #8e8e93)" text-anchor="middle">周末大满贯与周日冲刺的奖励更丰厚</text>
+</svg>

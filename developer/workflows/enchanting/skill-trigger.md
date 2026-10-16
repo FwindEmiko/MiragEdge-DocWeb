@@ -1,11 +1,10 @@
 ---
-title: "Skill 触发器"
-description: "由玩家主动动作触发的 Fluxon 技能脚本"
+title: Skill 触发器
+description: 由玩家主动动作触发并支持冷却的 Fluxon 技能配置参考，含三种动作的事件对应、冷却键共享规则、短路行为和副作用执行顺序。
+outline: [2, 3]
 ---
 
 # Skill 触发器
-
-> 本文档基于 Aiyatsbus 官方技能包 v0.0.2，以当前服务器源码和配置为准。
 
 Skill 由玩家主动动作触发，内置动作判断、潜行条件、冷却、声音和粒子处理。项目当前没有自带的 Skill 附魔实例，以下结构根据 `Skill` 和 `DefaultAiyatsbusSkillHandler` 源码整理，生成后应在服务器中验证。
 

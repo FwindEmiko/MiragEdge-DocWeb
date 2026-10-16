@@ -1,15 +1,14 @@
 ---
-title: "Fluxon 语言参考"
-description: "Fluxon 脚本语言的语法、变量引用、运算符、控制流和函数定义"
+title: Fluxon 语言参考
+description: "Fluxon 脚本语言的语法与控制流参考，含字面量、变量引用、运算符优先级、函数与 Lambda、条件与循环，以及上下文调用 :: 的写法。"
+outline: [2, 3]
 ---
 
 # Fluxon 语言参考
 
-> 本文档基于 Aiyatsbus 官方技能包 v0.0.2，以当前服务器源码和配置为准。
-
 ## 现有 API 优先
 
-语言语法能表达某种实现，不代表应该自行实现。Aiyatsbus 脚本应优先使用 [Aiyatsbus Fluxon 函数](./aiyatsbus-fluxon-functions)、[平台函数](./fluxon-platform-functions)、[内置函数与扩展函数](./fluxon-stdlib) 和 [Import 模块参考](./fluxon-modules) 已提供的函数，再考虑 [JVM 互操作参考](./fluxon-jvm-interop)。已有函数能完成需求时不要用 Java 静态方法、反射或手写循环重复造轮子。
+语言语法能表达某种实现，不代表应该自行实现。Aiyatsbus 脚本应优先使用 [Aiyatsbus Fluxon 函数](./host-functions/)、[平台函数](./fluxon-platform-functions)、[内置函数与扩展函数](./fluxon-stdlib) 和 [Import 模块参考](./fluxon-modules) 已提供的函数，再考虑 [JVM 互操作参考](./fluxon-jvm-interop)。已有函数能完成需求时不要用 Java 静态方法、反射或手写循环重复造轮子。
 
 ## 黄金规则
 

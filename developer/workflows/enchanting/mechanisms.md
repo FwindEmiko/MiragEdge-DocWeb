@@ -1,11 +1,10 @@
 ---
-title: "机制总览"
-description: "Aiyatsbus 支持的 5 类附魔机制：Listener、Ticker、Skill、Builtin、Artifact。"
+title: 机制总览
+description: Aiyatsbus 5 类附魔机制的选择规则与配置结构，含优先级、自动门控矩阵、加载失败模型和触发器 ID 的命名限制。
+outline: [2, 3]
 ---
 
 # 机制总览
-
-> 本文档基于 Aiyatsbus 官方技能包 v0.0.2，以当前服务器源码和配置为准。
 
 Aiyatsbus 支持 5 类附魔机制。先根据效果来源选择机制，再阅读对应参考文档。
 
@@ -128,7 +127,7 @@ Fluxon 只能写在以下 YAML 脚本块中：
 
 1. 当前开发者明确提供的项目规范。
 2. [fluxon-language](./fluxon-language) 和 [fluxon-bukkit-java-semantics](./fluxon-bukkit-java-semantics)。
-3. [aiyatsbus-fluxon-functions](./aiyatsbus-fluxon-functions)。
+3. [宿主函数总览](./host-functions/)。
 4. 默认附魔 YAML 中的历史示例。
 
 默认 YAML 与严格语义冲突时，不要照抄历史写法。无参数 getter 必须去掉 `get`，有参数 getter 必须保留 `get`；十个跨版本兼容函数优先于 `static`，其他 Bukkit 或 Java 枚举使用 `static`；Java 嵌套类必须用 `$` 连接外部类和嵌套类。

@@ -1,9 +1,10 @@
 ---
 title: 数据存储
-outline: deep
+description: FE_PVP 的数据存储参考——文件清单、SQLite 与 MySQL 的切换方式、三张数据表的结构、备份策略，以及 PlaceholderAPI 占位符清单。
+outline: [2, 3]
 ---
 
-# 08 — 数据存储
+# 数据存储
 
 ## 文件列表
 

@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 270" role="img"
+     font-family="-apple-system, 'Segoe UI', 'PingFang SC', sans-serif">
+  <title>箱子商店从摆摊到成交：放入商品、设置价格、买家购买、收货入账，成交时抽取 5% 税额</title>
+  <defs>
+    <marker id="cs-arrow" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="var(--vp-c-divider, #e2e2e3)"/>
+    </marker>
+  </defs>
+
+  <text x="40" y="34" font-size="17" font-weight="700" fill="var(--vp-c-text-1, #1b1b1f)">从摆摊到成交 · 四步</text>
+  <text x="40" y="58" font-size="13" fill="var(--vp-c-text-3, #8e8e93)">开店需服务器授予资格；创建一间商店需 10 灵叶</text>
+
+  <!-- 1 放入商品 -->
+  <rect x="40" y="88" width="176" height="140" rx="12"
+        fill="var(--vp-c-bg-soft, #f6f6f7)" stroke="var(--vp-c-divider, #e2e2e3)" stroke-width="1.5"/>
+  <text x="62" y="124" font-size="15" font-weight="700" fill="var(--vp-c-text-1, #1b1b1f)">放入商品</text>
+  <line x1="62" y1="140" x2="194" y2="140" stroke="var(--vp-c-divider, #e2e2e3)" stroke-width="1"/>
+  <text x="62" y="166" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">手持样品，</text>
+  <text x="62" y="186" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">左键容器。</text>
+
+  <line x1="220" y1="158" x2="244" y2="158" stroke="var(--vp-c-divider, #e2e2e3)"
+        stroke-width="1.5" marker-end="url(#cs-arrow)"/>
+
+  <!-- 2 设置价格 -->
+  <rect x="248" y="88" width="176" height="140" rx="12"
+        fill="var(--vp-c-bg-soft, #f6f6f7)" stroke="var(--vp-c-divider, #e2e2e3)" stroke-width="1.5"/>
+  <text x="270" y="124" font-size="15" font-weight="700" fill="var(--vp-c-text-1, #1b1b1f)">设置价格</text>
+  <line x1="270" y1="140" x2="402" y2="140" stroke="var(--vp-c-divider, #e2e2e3)" stroke-width="1"/>
+  <text x="270" y="166" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">按提示填价，</text>
+  <text x="270" y="186" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">挂上告示牌。</text>
+
+  <line x1="428" y1="158" x2="452" y2="158" stroke="var(--vp-c-divider, #e2e2e3)"
+        stroke-width="1.5" marker-end="url(#cs-arrow)"/>
+
+  <!-- 3 买家购买 -->
+  <rect x="456" y="88" width="176" height="140" rx="12"
+        fill="var(--vp-c-bg-soft, #f6f6f7)" stroke="var(--vp-c-divider, #e2e2e3)" stroke-width="1.5"/>
+  <text x="478" y="124" font-size="15" font-weight="700" fill="var(--vp-c-text-1, #1b1b1f)">买家购买</text>
+  <line x1="478" y1="140" x2="610" y2="140" stroke="var(--vp-c-divider, #e2e2e3)" stroke-width="1"/>
+  <text x="478" y="166" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">左键商店，</text>
+  <text x="478" y="186" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">输入本次数量。</text>
+
+  <line x1="636" y1="158" x2="660" y2="158" stroke="var(--vp-c-divider, #e2e2e3)"
+        stroke-width="1.5" marker-end="url(#cs-arrow)"/>
+
+  <!-- 4 收货入账 -->
+  <rect x="664" y="88" width="196" height="140" rx="12"
+        fill="none" stroke="var(--vp-c-brand-1, #e05252)" stroke-width="1.5"/>
+  <rect x="664" y="88" width="5" height="140" rx="2.5" fill="var(--vp-c-brand-1, #e05252)"/>
+  <text x="688" y="124" font-size="15" font-weight="700" fill="var(--vp-c-brand-1, #e05252)">收货入账</text>
+  <line x1="688" y1="140" x2="838" y2="140" stroke="var(--vp-c-divider, #e2e2e3)" stroke-width="1"/>
+  <text x="688" y="164" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">物品进背包</text>
+  <text x="688" y="184" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">背包满则入邮箱</text>
+  <text x="688" y="204" font-size="12" fill="var(--vp-c-text-3, #8e8e93)">结算抽 5% 税额</text>
+</svg>

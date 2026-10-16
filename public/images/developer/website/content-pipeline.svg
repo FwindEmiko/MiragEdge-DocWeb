@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 390" role="img">
+  <title>文档站内容流水线：源 markdown、生成 llms、构建、水印</title>
+  <desc>横向四步：源 markdown（项目根的 start/、play/、features/、developer/、archive/）、生成 llms（generate-llms.mjs 产出 public/llms*.txt 与 public/**/*.md）、构建（vitepress build）、水印（watermark.mjs）。底部为 pnpm build 的实际脚本顺序。</desc>
+  <defs>
+    <style>
+      /* These SVGs are loaded through an img element by SmartImage, so the
+         page CSS custom properties do not cascade in. Every token is
+         var(--vp-c-*, literal-fallback) and the dark branch is re-declared
+         for prefers-color-scheme. If an SVG is ever inlined instead, the real
+         VitePress variables win in both themes. */
+      :root {
+        --d-text-1: var(--vp-c-text-1, #3c3c43);
+        --d-text-2: var(--vp-c-text-2, #6b6b70);
+        --d-text-3: var(--vp-c-text-3, #8e8e93);
+        --d-line:   var(--vp-c-divider, #e2e2e4);
+        --d-panel:  var(--vp-c-bg, #ffffff);
+        --d-band:   var(--vp-c-bg-alt, #f6f6f7);
+        --d-soft:   var(--vp-c-bg-soft, #f6f6f7);
+        --d-brand:  var(--vp-c-brand-1, #e05252);
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --d-text-1: var(--vp-c-text-1, #e6e6e1);
+          --d-text-2: var(--vp-c-text-2, #b0b0b4);
+          --d-text-3: var(--vp-c-text-3, #85858a);
+          --d-line:   var(--vp-c-divider, #414146);
+          --d-panel:  var(--vp-c-bg, #1b1b1f);
+          --d-band:   var(--vp-c-bg-alt, #161618);
+          --d-soft:   var(--vp-c-bg-soft, #202127);
+        }
+      }
+      text { font-family: -apple-system, 'Segoe UI', 'PingFang SC', sans-serif; }
+      .h { font-size: 15px; font-weight: 600; fill: var(--d-text-1); }
+      .t { font-size: 14px; font-weight: 600; fill: var(--d-text-1); }
+      .d { font-size: 12.5px; fill: var(--d-text-2); }
+      .m { font-size: 12.5px; fill: var(--d-text-3); }
+      .a { font-size: 12.5px; font-weight: 600; fill: var(--d-brand); }
+      .n { font-size: 13px; font-weight: 700; fill: var(--d-brand); }
+      .p { font-size: 12.5px; fill: var(--d-text-2);
+           font-family: ui-monospace, SFMono-Regular, Consolas, 'Courier New', monospace; }
+      .box   { fill: var(--d-panel); stroke: var(--d-line); stroke-width: 1.5; }
+      .band  { fill: var(--d-band);  stroke: var(--d-line); stroke-width: 1; }
+      .soft  { fill: var(--d-soft);  stroke: var(--d-line); stroke-width: 1; }
+      .chip  { fill: var(--d-band);  stroke: var(--d-line); stroke-width: 1; }
+      .ln    { stroke: var(--d-line);  stroke-width: 1.5; fill: none; }
+      .ac    { stroke: var(--d-brand); stroke-width: 2; fill: none; }
+    </style>
+    <marker id="ar" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="var(--d-line)"/>
+    </marker>
+    <marker id="arb" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="var(--d-brand)"/>
+    </marker>
+  </defs>
+  <text class="h" x="24" y="34">文档站内容流水线</text>
+  <text class="m" x="24" y="56">源 markdown → 生成 llms → 构建 → 水印</text>
+  <rect class="box" x="20" y="90" width="212" height="170" rx="10"/>
+  <circle cx="50" cy="124" r="13" fill="var(--d-brand)" fill-opacity="0.12" stroke="var(--d-brand)" stroke-width="1"/>
+  <text class="n" x="50" y="129" text-anchor="middle">1</text>
+  <text class="h" x="72" y="129">源 markdown</text>
+  <line class="ln" x1="36" y1="148" x2="216" y2="148"/>
+  <text class="d" x="36" y="174">start/ play/ features/</text>
+  <text class="d" x="36" y="196">developer/ archive/</text>
+  <text class="d" x="36" y="218">正文的唯一来源</text>
+  <text class="d" x="36" y="240">public/ 下同名是生成物</text>
+  <rect class="box" x="256" y="90" width="212" height="170" rx="10"/>
+  <circle cx="286" cy="124" r="13" fill="var(--d-brand)" fill-opacity="0.12" stroke="var(--d-brand)" stroke-width="1"/>
+  <text class="n" x="286" y="129" text-anchor="middle">2</text>
+  <text class="h" x="308" y="129">生成 llms</text>
+  <line class="ln" x1="272" y1="148" x2="452" y2="148"/>
+  <text class="d" x="272" y="174">scripts/generate-llms.mjs</text>
+  <text class="d" x="272" y="196">产出 public/llms*.txt</text>
+  <text class="d" x="272" y="218">与 public/**/*.md</text>
+  <text class="d" x="272" y="240">生成物，禁止手改</text>
+  <rect class="box" x="492" y="90" width="212" height="170" rx="10"/>
+  <circle cx="522" cy="124" r="13" fill="var(--d-brand)" fill-opacity="0.12" stroke="var(--d-brand)" stroke-width="1"/>
+  <text class="n" x="522" y="129" text-anchor="middle">3</text>
+  <text class="h" x="544" y="129">构建</text>
+  <line class="ln" x1="508" y1="148" x2="688" y2="148"/>
+  <text class="d" x="508" y="174">vitepress build</text>
+  <text class="d" x="508" y="196">VitePress 1.6.4</text>
+  <text class="d" x="508" y="218">Vue 3.5</text>
+  <text class="d" x="508" y="240">产物 .vitepress/dist</text>
+  <rect class="box" x="728" y="90" width="212" height="170" rx="10"/>
+  <circle cx="758" cy="124" r="13" fill="var(--d-brand)" fill-opacity="0.12" stroke="var(--d-brand)" stroke-width="1"/>
+  <text class="n" x="758" y="129" text-anchor="middle">4</text>
+  <text class="h" x="780" y="129">水印</text>
+  <line class="ln" x1="744" y1="148" x2="924" y2="148"/>
+  <text class="d" x="744" y="174">watermark.mjs</text>
+  <text class="d" x="744" y="196">external-watermark</text>
+  <text class="d" x="744" y="218">generate-version</text>
+  <text class="d" x="744" y="240">按批次标记发布物</text>
+  <line class="ln" x1="235" y1="175.0" x2="256" y2="175.0" marker-end="url(#ar)"/>
+  <line class="ln" x1="471" y1="175.0" x2="492" y2="175.0" marker-end="url(#ar)"/>
+  <line class="ln" x1="707" y1="175.0" x2="728" y2="175.0" marker-end="url(#ar)"/>
+  <rect class="soft" x="20" y="282" width="920" height="84" rx="10"/>
+  <rect x="20" y="282" width="4" height="84" rx="2.00" fill="var(--d-brand)"/>
+  <text class="m" x="44" y="314">pnpm build</text>
+  <text class="p" x="132" y="314">external-watermark → generate-llms → vitepress build → watermark → generate-version</text>
+  <text class="m" x="44" y="342">pnpm dev</text>
+  <text class="p" x="132" y="342">generate-llms → vitepress dev</text>
+</svg>

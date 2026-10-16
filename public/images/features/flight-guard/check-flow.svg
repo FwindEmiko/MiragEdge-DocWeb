@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 604" role="img"
+     font-family="-apple-system, 'Segoe UI', 'PingFang SC', sans-serif">
+  <title>飞行的四道判定：时间余额、战斗状态、手持武器、区域与高度，四道全通过才能开启飞行</title>
+  <defs>
+    <marker id="fg-arrow" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="var(--vp-c-divider, #e2e2e3)"/>
+    </marker>
+    <marker id="fg-arrow-brand" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="var(--vp-c-brand-1, #e05252)"/>
+    </marker>
+  </defs>
+
+  <text x="40" y="36" font-size="17" font-weight="700" fill="var(--vp-c-text-1, #1b1b1f)">飞行 · 四道判定</text>
+  <text x="40" y="60" font-size="13" fill="var(--vp-c-text-3, #8e8e93)">只要有一道不通过，就无法开启飞行；正在飞行时会立即结束</text>
+
+  <!-- 判定 1 -->
+  <rect x="150" y="96" width="660" height="76" rx="12"
+        fill="var(--vp-c-bg-soft, #f6f6f7)" stroke="var(--vp-c-divider, #e2e2e3)" stroke-width="1.5"/>
+  <circle cx="190" cy="134" r="19" fill="none" stroke="var(--vp-c-brand-1, #e05252)" stroke-width="2"/>
+  <text x="190" y="139" font-size="14" font-weight="700" fill="var(--vp-c-brand-1, #e05252)" text-anchor="middle">1</text>
+  <text x="228" y="128" font-size="15" font-weight="700" fill="var(--vp-c-text-1, #1b1b1f)">时间余额</text>
+  <text x="228" y="152" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">余额耗尽后不能开启飞行</text>
+
+  <line x1="480" y1="172" x2="480" y2="196" stroke="var(--vp-c-divider, #e2e2e3)"
+        stroke-width="1.5" marker-end="url(#fg-arrow)"/>
+
+  <!-- 判定 2 -->
+  <rect x="150" y="200" width="660" height="76" rx="12"
+        fill="var(--vp-c-bg-soft, #f6f6f7)" stroke="var(--vp-c-divider, #e2e2e3)" stroke-width="1.5"/>
+  <circle cx="190" cy="238" r="19" fill="none" stroke="var(--vp-c-brand-1, #e05252)" stroke-width="2"/>
+  <text x="190" y="243" font-size="14" font-weight="700" fill="var(--vp-c-brand-1, #e05252)" text-anchor="middle">2</text>
+  <text x="228" y="232" font-size="15" font-weight="700" fill="var(--vp-c-text-1, #1b1b1f)">战斗状态</text>
+  <text x="228" y="256" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">攻击或被玩家、生物攻击后禁飞：玩家约 18 秒，生物约 10 秒</text>
+
+  <line x1="480" y1="276" x2="480" y2="300" stroke="var(--vp-c-divider, #e2e2e3)"
+        stroke-width="1.5" marker-end="url(#fg-arrow)"/>
+
+  <!-- 判定 3 -->
+  <rect x="150" y="304" width="660" height="76" rx="12"
+        fill="var(--vp-c-bg-soft, #f6f6f7)" stroke="var(--vp-c-divider, #e2e2e3)" stroke-width="1.5"/>
+  <circle cx="190" cy="342" r="19" fill="none" stroke="var(--vp-c-brand-1, #e05252)" stroke-width="2"/>
+  <text x="190" y="347" font-size="14" font-weight="700" fill="var(--vp-c-brand-1, #e05252)" text-anchor="middle">3</text>
+  <text x="228" y="336" font-size="15" font-weight="700" fill="var(--vp-c-text-1, #1b1b1f)">手持武器</text>
+  <text x="228" y="360" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">主手或副手持有重锤、任意材质长矛时不能飞行</text>
+
+  <line x1="480" y1="380" x2="480" y2="404" stroke="var(--vp-c-divider, #e2e2e3)"
+        stroke-width="1.5" marker-end="url(#fg-arrow)"/>
+
+  <!-- 判定 4 -->
+  <rect x="150" y="408" width="660" height="76" rx="12"
+        fill="var(--vp-c-bg-soft, #f6f6f7)" stroke="var(--vp-c-divider, #e2e2e3)" stroke-width="1.5"/>
+  <circle cx="190" cy="446" r="19" fill="none" stroke="var(--vp-c-brand-1, #e05252)" stroke-width="2"/>
+  <text x="190" y="451" font-size="14" font-weight="700" fill="var(--vp-c-brand-1, #e05252)" text-anchor="middle">4</text>
+  <text x="228" y="440" font-size="15" font-weight="700" fill="var(--vp-c-text-1, #1b1b1f)">区域与高度</text>
+  <text x="228" y="464" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">所在区域与当前高度允许飞行</text>
+
+  <!-- 汇聚 -->
+  <line x1="480" y1="484" x2="480" y2="496" stroke="var(--vp-c-brand-1, #e05252)"
+        stroke-width="1.5" marker-end="url(#fg-arrow-brand)"/>
+  <text x="496" y="500" font-size="13" font-weight="700" fill="var(--vp-c-brand-1, #e05252)">四道全部通过</text>
+
+  <!-- 结果 -->
+  <rect x="150" y="516" width="660" height="72" rx="14"
+        fill="none" stroke="var(--vp-c-brand-1, #e05252)" stroke-width="1.5"/>
+  <rect x="150" y="516" width="5" height="72" rx="2.5" fill="var(--vp-c-brand-1, #e05252)"/>
+  <text x="180" y="546" font-size="16" font-weight="700" fill="var(--vp-c-brand-1, #e05252)">可以开启并维持飞行</text>
+  <text x="180" y="570" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">因武器限制结束飞行有安全降落缓冲；因进入战斗中断飞行则没有。</text>
+</svg>

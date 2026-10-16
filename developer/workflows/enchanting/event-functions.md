@@ -1,11 +1,9 @@
 ---
-title: "EventFunctions 回调索引"
-description: "Java 回调函数索引"
+title: EventFunctions 回调索引
+description: Java EventFunctions 的回调签名索引，含各 Bukkit 事件对应的覆写方法与参数，以及 tickTask 的调度语义和取模控制执行间隔。
 ---
 
 # EventFunctions 回调索引
-
-> 本文档基于 Aiyatsbus 官方技能包 v0.0.2，以当前服务器源码和配置为准。
 
 以下 Java 回调由 `cc.polarastrum.aiyatsbus.core.data.trigger.builtin.EventFunctions` 定义。使用时导入对应的 Bukkit 事件类。
 

@@ -1,11 +1,10 @@
 ---
-title: "Artifact 触发器"
-description: "快速配置粒子附魔"
+title: Artifact 触发器
+description: 只靠数据配置生成粒子附魔的参考页，含基础、方块数据与灰尘三种粒子写法、参数校验规则、与 Builtin 共用的概率门控和触发行为。
+outline: [2, 3]
 ---
 
 # Artifact 触发器
-
-> 本文档基于 Aiyatsbus 官方技能包 v0.0.2，以当前服务器源码和配置为准。
 
 Artifact 用于快速创建粒子附魔，不需要编写事件脚本或 Java `Builtin`。需要条件判断、状态修改或其他游戏逻辑时，应改用对应的 Listener、Ticker、Skill 或 Builtin。
 

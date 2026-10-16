@@ -1,13 +1,12 @@
 ---
-title: "Listener 触发器"
-description: "使用 Bukkit 事件监听器编写 Fluxon 脚本"
+title: Listener 触发器
+description: 监听 Bukkit 事件执行 Fluxon 脚本的完整配置参考：事件映射 ID 清单、默认映射的触发实体与槽位语义，以及不触发时的排查口径。
+outline: [2, 3]
 ---
 
 # Listener 触发器
 
-> 本文档基于 Aiyatsbus 官方技能包 v0.0.2，以当前服务器源码和配置为准。
-
-Listener 通过 Aiyatsbus 事件映射监听 Bukkit 事件，并执行配置中的脚本。Java 效果应使用 `Builtin`，不要把 Listener 当作 Java 事件监听器。
+Listener 通过 Aiyatsbus 事件映射监听 Bukkit 事件，并执行配置中的脚本。Java 效果必须使用 `Builtin`。
 
 Listener 只使用 Fluxon。`handle` 必须遵循 [Fluxon 语言参考](./fluxon-language)；读取上下文变量必须使用 `&name`，调用扩展函数优先使用 `::`。脚本必须直接写在 `handle: |-` 中，不能创建独立 `.fs` 文件。通常省略 `type`，不要生成冗余的 `type: FLUXON`。
 
@@ -101,9 +100,9 @@ if !entity::isPlayer(&player) {
 | `block-damage` | `BlockDamageEvent` | 损坏方块的玩家 | 主手、副手 | 每个槽位分别解析装备物品 |
 | `entity-shoot-bow` | `EntityShootBowEvent` | 射击的 `LivingEntity` | 主手 | 可能是非玩家生物 |
 | `entity-target-living-entity` | `EntityTargetLivingEntityEvent` | 发起索敌的 `LivingEntity` | 全部装备槽 | `player` 通常是索敌生物，不是被锁定目标 |
-| `aiyatsbus-bow-charge-prepare` | `AiyatsbusBowChargeEvent.Prepare` | 蓄力玩家 | 主手、副手 | 弓事件扩展见 [Aiyatsbus 函数](./aiyatsbus-fluxon-functions) |
-| `aiyatsbus-bow-charge-released` | `AiyatsbusBowChargeEvent.Released` | 蓄力玩家 | 主手、副手 | 弓事件扩展见 [Aiyatsbus 函数](./aiyatsbus-fluxon-functions) |
-| `aiyatsbus-bow-charge-break` | `AiyatsbusBowChargeEvent.Break` | 蓄力玩家 | 主手、副手 | 弓事件扩展见 [Aiyatsbus 函数](./aiyatsbus-fluxon-functions) |
+| `aiyatsbus-bow-charge-prepare` | `AiyatsbusBowChargeEvent.Prepare` | 蓄力玩家 | 主手、副手 | 弓事件扩展见 [宿主函数](./host-functions/world-entity) |
+| `aiyatsbus-bow-charge-released` | `AiyatsbusBowChargeEvent.Released` | 蓄力玩家 | 主手、副手 | 弓事件扩展见 [宿主函数](./host-functions/world-entity) |
+| `aiyatsbus-bow-charge-break` | `AiyatsbusBowChargeEvent.Break` | 蓄力玩家 | 主手、副手 | 弓事件扩展见 [宿主函数](./host-functions/world-entity) |
 
 伤害 resolver 的源码意图是任一方为 NPC 时停止，但当前双方检查分支没有 `return`，实际只会可靠排除最终解析成 `player` 变量的触发实体为 NPC。由此，`entity-damage-other` 中非 NPC 玩家攻击 NPC 受害者仍可能触发，`entity-damaged-by-other` 中 NPC 攻击非 NPC 受害者也仍可能触发。脚本需要排除另一方 NPC 时，必须从 `event` 取得攻击者或受害者并显式调用 `entity::isNPC(...)`。其他映射解析出的触发实体是 NPC 时会直接结束。
 

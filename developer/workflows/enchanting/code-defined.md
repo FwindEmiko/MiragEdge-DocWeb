@@ -1,11 +1,10 @@
 ---
-title: "纯代码附魔"
-description: "使用 BuiltinAiyatsbusEnchantment.builder() 在 Java 中定义附魔信息和效果。"
+title: 纯代码附魔
+description: 用 Java 同时定义附魔信息和效果的完整路线：Builder 调用契约、变量暴露规则、API 入口，以及注册时机和不能实例化的类型。
+outline: [2, 3]
 ---
 
 # 纯代码附魔
-
-> 本文档基于 Aiyatsbus 官方技能包 v0.0.2，以当前服务器源码和配置为准。
 
 当 Java 需要同时定义附魔信息和效果时使用此路线。入口是 Kotlin 接口向 Java 暴露的静态方法 `BuiltinAiyatsbusEnchantment.builder()`。
 

@@ -1,24 +1,23 @@
 ---
-title: "运行时容器"
-description: "Fluxon 触发器的运行时私有容器和全局容器"
+title: Fluxon 运行时容器
+description: 触发器私有容器与全局容器的取值范围、结构选择和清理要求，以及与 LEVELED、MODIFIABLE、数据库等持久化方式的职责区别。
+outline: [2, 3]
 ---
 
 # Fluxon 运行时容器
-
-> 本文档基于 Aiyatsbus 官方技能包 v0.0.2，以当前服务器源码和配置为准。
 
 Aiyatsbus 会为 Fluxon 触发器注入两个运行时 Map：当前附魔私有的 `container`，以及插件全局共享的 `globalContainer`。
 
 这两个容器都是运行时内存数据，不是 YAML 变量，也不是持久化存储。服务器重启、插件生命周期变化或附魔重载后的状态保留不应依赖容器；需要写入物品时使用 `MODIFIABLE`，需要数据库或跨重启存储时使用持久化方案。
 
-## 变量
+## 容器变量
 
 | 变量 | 类型 | 作用范围 | 适用场景 |
 | --- | --- | --- | --- |
 | `container` | `HashMap<Any?, Any?>` | 当前附魔 | 当前附魔内部共享的运行时状态、缓存、计数 |
 | `globalContainer` | `HashMap<Any?, Any?>` | 插件全部附魔 | 跨附魔共享的运行时状态或缓存 |
 
-两个变量会注入 Listener、Ticker 和 Skill 的脚本上下文。Ticker 的 `pre-handle`、`handle`、`post-handle` 也可以使用它们。
+两个变量会注入 Listener、Ticker 和 Skill 的脚本上下文，Ticker 的 `pre-handle`、`handle`、`post-handle` 也可以使用它们。
 
 读取 Fluxon 变量必须使用 `&`：
 

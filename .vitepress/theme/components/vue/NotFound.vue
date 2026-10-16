@@ -56,7 +56,7 @@ const homeUrl = withBase('/')
 const commonRoutes = [
   { label: '新手指南', href: withBase('/start/'), icon: Map },
   { label: '玩法手册', href: withBase('/play/'), icon: Compass },
-  { label: '插件功能', href: withBase('/plugins/'), icon: Puzzle },
+  { label: '服务器功能', href: withBase('/features/'), icon: Puzzle },
 ]
 
 function goBack() {

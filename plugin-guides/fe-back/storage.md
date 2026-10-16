@@ -1,9 +1,10 @@
 ---
 title: 数据存储
-outline: deep
+description: FE_Back 的数据存储参考——SQLite 四张表的结构与索引、HikariCP 连接池设置、数据生命周期与清理方式、备份建议，以及背包补丁的行为。
+outline: [2, 3]
 ---
 
-# 05 — 数据存储
+# 数据存储
 
 ## 文件列表
 

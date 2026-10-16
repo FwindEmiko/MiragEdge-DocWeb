@@ -1,11 +1,10 @@
 ---
-title: "开发方式总览"
-description: "Aiyatsbus 提供的三种附魔开发方式：纯代码附魔、YAML+Builtin、YAML+Fluxon。"
+title: 开发方式总览
+description: 三种附魔开发方式的选择指南：纯代码附魔、YAML + Builtin 与 YAML + Fluxon 各由谁负责基础信息和效果，以及注册生命周期与对象关系。
+outline: [2, 3]
 ---
 
 # 开发方式总览
-
-> 本文档基于 Aiyatsbus 官方技能包 v0.0.2，以当前服务器源码和配置为准。
 
 ## 三种附魔开发方式
 

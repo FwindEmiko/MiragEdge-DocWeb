@@ -1,9 +1,10 @@
 ---
 title: 配置参考
-outline: deep
+description: FE_PVP 的 config.yml 全字段参考，按基础、比赛、饥饿游戏、装备、押注与数据库分组，逐字段标注类型与默认值，并附方块复原说明与示例配置。
+outline: [2, 3]
 ---
 
-# 05 — 配置参考
+# 配置参考
 
 文件位置：```plugins/FE_PVP/config.yml```
 

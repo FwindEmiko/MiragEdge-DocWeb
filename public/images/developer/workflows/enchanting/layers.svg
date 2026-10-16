@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 672" role="img">
+  <title>附魔系统的四层结构图：数据包、插件、触发器、运行时</title>
+  <desc>自上而下四层。数据包负责静态定义（附魔 ID、等级、显示名与变量）；插件负责加载与注册并绑定触发器；触发器是效果入口（Listener、Ticker、Skill、Builtin、Artifact）；运行时才是真实玩家行为。底部说明归属裁决：同一效果只由一层实现。</desc>
+  <defs>
+    <style>
+      /* These SVGs are loaded through an img element by SmartImage, so the
+         page CSS custom properties do not cascade in. Every token is
+         var(--vp-c-*, literal-fallback) and the dark branch is re-declared
+         for prefers-color-scheme. If an SVG is ever inlined instead, the real
+         VitePress variables win in both themes. */
+      :root {
+        --d-text-1: var(--vp-c-text-1, #3c3c43);
+        --d-text-2: var(--vp-c-text-2, #6b6b70);
+        --d-text-3: var(--vp-c-text-3, #8e8e93);
+        --d-line:   var(--vp-c-divider, #e2e2e4);
+        --d-panel:  var(--vp-c-bg, #ffffff);
+        --d-band:   var(--vp-c-bg-alt, #f6f6f7);
+        --d-soft:   var(--vp-c-bg-soft, #f6f6f7);
+        --d-brand:  var(--vp-c-brand-1, #e05252);
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --d-text-1: var(--vp-c-text-1, #e6e6e1);
+          --d-text-2: var(--vp-c-text-2, #b0b0b4);
+          --d-text-3: var(--vp-c-text-3, #85858a);
+          --d-line:   var(--vp-c-divider, #414146);
+          --d-panel:  var(--vp-c-bg, #1b1b1f);
+          --d-band:   var(--vp-c-bg-alt, #161618);
+          --d-soft:   var(--vp-c-bg-soft, #202127);
+        }
+      }
+      text { font-family: -apple-system, 'Segoe UI', 'PingFang SC', sans-serif; }
+      .h { font-size: 15px; font-weight: 600; fill: var(--d-text-1); }
+      .t { font-size: 14px; font-weight: 600; fill: var(--d-text-1); }
+      .d { font-size: 12.5px; fill: var(--d-text-2); }
+      .m { font-size: 12.5px; fill: var(--d-text-3); }
+      .a { font-size: 12.5px; font-weight: 600; fill: var(--d-brand); }
+      .n { font-size: 13px; font-weight: 700; fill: var(--d-brand); }
+      .p { font-size: 12.5px; fill: var(--d-text-2);
+           font-family: ui-monospace, SFMono-Regular, Consolas, 'Courier New', monospace; }
+      .box   { fill: var(--d-panel); stroke: var(--d-line); stroke-width: 1.5; }
+      .band  { fill: var(--d-band);  stroke: var(--d-line); stroke-width: 1; }
+      .soft  { fill: var(--d-soft);  stroke: var(--d-line); stroke-width: 1; }
+      .chip  { fill: var(--d-band);  stroke: var(--d-line); stroke-width: 1; }
+      .ln    { stroke: var(--d-line);  stroke-width: 1.5; fill: none; }
+      .ac    { stroke: var(--d-brand); stroke-width: 2; fill: none; }
+    </style>
+    <marker id="ar" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="var(--d-line)"/>
+    </marker>
+    <marker id="arb" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="var(--d-brand)"/>
+    </marker>
+  </defs>
+  <text class="h" x="24" y="34">附魔系统的四层结构</text>
+  <text class="m" x="24" y="56">数据包 → 插件 → 触发器 → 运行时，越往下越接近真实行为</text>
+  <rect class="band" x="24" y="76" width="912" height="96" rx="10"/>
+  <text class="h" x="52" y="116">数据包</text>
+  <text class="m" x="52" y="140">datapack · YAML</text>
+  <line class="ln" x1="250" y1="94" x2="250" y2="154"/>
+  <text class="t" x="276" y="112">静态定义</text>
+  <text class="d" x="276" y="134">附魔 ID、等级上限、显示名与变量</text>
+  <text class="d" x="276" y="154">只声明数据，不执行效果</text>
+  <text class="m" x="912" y="154" text-anchor="end">datapack 目录</text>
+  <rect class="band" x="24" y="200" width="912" height="96" rx="10"/>
+  <text class="h" x="52" y="240">插件</text>
+  <text class="m" x="52" y="264">Aiyatsbus · Fluxon</text>
+  <line class="ln" x1="250" y1="218" x2="250" y2="278"/>
+  <text class="t" x="276" y="236">加载与注册</text>
+  <text class="d" x="276" y="258">读取 YAML 与 Java Builder 定义</text>
+  <text class="d" x="276" y="278">把附魔注册进服务器，绑定触发器</text>
+  <text class="m" x="912" y="278" text-anchor="end">plugins/*.jar</text>
+  <rect class="band" x="24" y="324" width="912" height="96" rx="10"/>
+  <text class="h" x="52" y="364">触发器</text>
+  <text class="m" x="52" y="388">Listener · Ticker</text>
+  <line class="ln" x1="250" y1="342" x2="250" y2="402"/>
+  <text class="t" x="276" y="360">效果入口</text>
+  <text class="d" x="276" y="382">事件监听、周期 tick、主动技能</text>
+  <text class="d" x="276" y="402">Builtin 用 Java，Artifact 配粒子</text>
+  <text class="m" x="912" y="402" text-anchor="end">Fluxon 脚本</text>
+  <rect class="band" x="24" y="448" width="912" height="96" rx="10"/>
+  <text class="h" x="52" y="488">运行时</text>
+  <text class="m" x="52" y="512">Bukkit 事件</text>
+  <line class="ln" x1="250" y1="466" x2="250" y2="526"/>
+  <text class="t" x="276" y="484">真实行为</text>
+  <text class="d" x="276" y="506">事件回调、tick 循环、冷却与条件</text>
+  <text class="d" x="276" y="526">只有这一层能改变世界状态</text>
+  <text class="m" x="912" y="526" text-anchor="end">Bukkit 主线程</text>
+  <line class="ac" x1="480" y1="172" x2="480" y2="200" marker-end="url(#arb)"/>
+  <line class="ac" x1="480" y1="296" x2="480" y2="324" marker-end="url(#arb)"/>
+  <line class="ac" x1="480" y1="420" x2="480" y2="448" marker-end="url(#arb)"/>
+  <rect class="soft" x="24" y="572" width="912" height="76" rx="10"/>
+  <rect x="24" y="572" width="4" height="76" rx="2.00" fill="var(--d-brand)"/>
+  <text class="a" x="52" y="602">归属裁决</text>
+  <text class="d" x="168" y="602">同一效果只由一层实现，不要在多处重复生效。</text>
+  <text class="d" x="52" y="628">遇到冲突以实际加载的 JAR 与当前上游源码为准；插件升级后重新核实受影响的 API。</text>
+</svg>

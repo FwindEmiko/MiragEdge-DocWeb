@@ -1,11 +1,10 @@
 ---
-title: Aiyatsbus 附魔配置工作流 · 模块结构
-description: 按职责拆分 Aiyatsbus YAML：定义、显示、变量、机制与可选元数据。
+title: 模块结构
+description: 按职责拆分一份附魔 YAML：定义层、显示层、变量层和机制层各自负责什么，修改字段时的建议粒度，以及必须避免的常见误用写法。
+outline: [2, 3]
 ---
 
 # 模块结构
-
-> 本文档基于 Aiyatsbus 官方技能包 v0.0.2，以当前服务器源码和配置为准。
 
 一份附魔配置应按职责组织，而不是把数值、显示和脚本混在同一段里。当前上游默认包的基本结构如下：
 
@@ -109,7 +108,7 @@ variables:
 
 脚本中统一通过函数读写：
 
-```text
+```fluxon
 total = int(variables::modifiable(&enchant, &item, "当前累计"))
 variables::setModifiable(&enchant, &item, "当前累计", &total + 1)
 ```

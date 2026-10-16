@@ -1,17 +1,19 @@
 ---
 title: 官方技能包文件浏览
-description: 通过 AI Skills 浏览器直接访问 Aiyatsbus 官方技能包的全部参考文件与真实服务器配置。
+description: 直接浏览 Aiyatsbus 官方技能包的技能主文件、全部参考文档和真实服务器配置示例，并给出原始文件的访问路径与目录含义。
 ---
 
 # 官方技能包文件浏览
 
-本页面通过 AI Skills 系统提供 Aiyatsbus 官方技能包的完整文件浏览，包括：
-
-- `SKILL.md` — 技能主文件
-- `references/` — 全部官方参考文档（开发方式、触发器、Fluxon 语言等）
-- `reference-configs/` — 服务器真实配置示例（YAML 配置、附魔示例、NereusOpus 资源包）
+这页提供 Aiyatsbus 官方技能包的完整文件浏览入口，可以直接打开技能主文件、全部参考文档和真实服务器配置示例。
 
 <SkillBrowser skill-id="aiyatsbus-create-enchant-skill" />
+
+## 技能包内容
+
+- `SKILL.md`：技能主文件
+- `references/`：全部官方参考文档，覆盖开发方式、触发器、Fluxon 语言等
+- `reference-configs/`：服务器真实配置示例，含 YAML 配置、附魔示例和 NereusOpus 资源包
 
 ## 原始文件访问
 

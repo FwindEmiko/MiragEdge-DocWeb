@@ -1,11 +1,10 @@
 ---
-title: "Ticker 触发器"
-description: "按固定 tick 间隔执行 Fluxon 脚本"
+title: Ticker 触发器
+description: 按固定 tick 间隔执行 Fluxon 脚本的配置参考，含三阶段脚本的进入与退出语义、重载后不补发后处理的原因，以及状态清理的正确做法。
+outline: [2, 3]
 ---
 
 # Ticker 触发器
-
-> 本文档基于 Aiyatsbus 官方技能包 v0.0.2，以当前服务器源码和配置为准。
 
 Ticker 按固定 tick 间隔检查玩家装备并执行脚本，适合持续效果、周期消耗和进入或离开生效状态时的处理。
 

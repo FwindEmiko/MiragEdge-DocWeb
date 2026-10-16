@@ -14,6 +14,7 @@ import EnchantmentList from './components/vue/EnchantmentList.vue'
 import EnchantmentIdTable from './components/vue/EnchantmentIdTable.vue'
 import McItem from './components/vue/McItem.vue'
 import CraftingTable from './components/vue/CraftingTable.vue'
+import DataTable from './components/vue/DataTable.vue'
 import Furnace from './components/vue/Furnace.vue'
 import FoodStats from './components/vue/FoodStats.vue'
 import FoodEntry from './components/vue/FoodEntry.vue'
@@ -86,6 +87,7 @@ export default {
     app.component('EnchantmentIdTable', EnchantmentIdTable)
     app.component('McItem', McItem)
     app.component('CraftingTable', CraftingTable)
+    app.component('DataTable', DataTable)
     app.component('Furnace', Furnace)
     app.component('FoodStats', FoodStats)
     app.component('FoodEntry', FoodEntry)

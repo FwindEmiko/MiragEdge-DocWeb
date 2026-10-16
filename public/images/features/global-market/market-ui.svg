@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 520" role="img"
+     font-family="-apple-system, 'Segoe UI', 'PingFang SC', sans-serif">
+  <title>全服市场界面示意：四个区块为在售商品、收购需求、拍卖与个人邮箱</title>
+
+  <text x="40" y="36" font-size="17" font-weight="700" fill="var(--vp-c-text-1, #1b1b1f)">全服市场 · 界面示意</text>
+  <text x="40" y="60" font-size="13" fill="var(--vp-c-text-3, #8e8e93)">同时使用灵叶与星痕石结算，两种货币不会自动互换</text>
+
+  <!-- 界面外框 -->
+  <rect x="40" y="78" width="880" height="406" rx="16"
+        fill="var(--vp-c-bg-soft, #f6f6f7)" stroke="var(--vp-c-divider, #e2e2e3)" stroke-width="1.5"/>
+
+  <!-- 标题条 -->
+  <text x="68" y="112" font-size="15" font-weight="700" fill="var(--vp-c-text-1, #1b1b1f)">全服市场</text>
+  <text x="892" y="112" font-size="12" fill="var(--vp-c-text-3, #8e8e93)" text-anchor="end">输入 /market 打开</text>
+  <line x1="68" y1="126" x2="892" y2="126" stroke="var(--vp-c-divider, #e2e2e3)" stroke-width="1"/>
+
+  <!-- 区块 1 在售商品 -->
+  <rect x="68" y="144" width="396" height="152" rx="10"
+        fill="var(--vp-c-bg, #ffffff)" stroke="var(--vp-c-divider, #e2e2e3)" stroke-width="1"/>
+  <text x="88" y="172" font-size="15" font-weight="700" fill="var(--vp-c-text-1, #1b1b1f)">在售商品</text>
+  <text x="444" y="172" font-size="12" fill="var(--vp-c-text-3, #8e8e93)" text-anchor="end">/market sell 价格</text>
+  <line x1="88" y1="186" x2="444" y2="186" stroke="var(--vp-c-divider, #e2e2e3)" stroke-width="1"/>
+  <line x1="88" y1="206" x2="356" y2="206" stroke="var(--vp-c-text-3, #8e8e93)" stroke-width="7" stroke-linecap="round" stroke-opacity="0.32"/>
+  <line x1="88" y1="230" x2="316" y2="230" stroke="var(--vp-c-text-3, #8e8e93)" stroke-width="7" stroke-linecap="round" stroke-opacity="0.32"/>
+  <line x1="88" y1="254" x2="336" y2="254" stroke="var(--vp-c-text-3, #8e8e93)" stroke-width="7" stroke-linecap="round" stroke-opacity="0.32"/>
+  <text x="88" y="282" font-size="12" fill="var(--vp-c-text-3, #8e8e93)">最多同时保有 10 件，保留 10 天</text>
+
+  <!-- 区块 2 收购需求 -->
+  <rect x="496" y="144" width="396" height="152" rx="10"
+        fill="var(--vp-c-bg, #ffffff)" stroke="var(--vp-c-divider, #e2e2e3)" stroke-width="1"/>
+  <text x="516" y="172" font-size="15" font-weight="700" fill="var(--vp-c-text-1, #1b1b1f)">收购需求</text>
+  <text x="872" y="172" font-size="12" fill="var(--vp-c-text-3, #8e8e93)" text-anchor="end">/market buy 定金</text>
+  <line x1="516" y1="186" x2="872" y2="186" stroke="var(--vp-c-divider, #e2e2e3)" stroke-width="1"/>
+  <line x1="516" y1="206" x2="784" y2="206" stroke="var(--vp-c-text-3, #8e8e93)" stroke-width="7" stroke-linecap="round" stroke-opacity="0.32"/>
+  <line x1="516" y1="230" x2="744" y2="230" stroke="var(--vp-c-text-3, #8e8e93)" stroke-width="7" stroke-linecap="round" stroke-opacity="0.32"/>
+  <line x1="516" y1="254" x2="764" y2="254" stroke="var(--vp-c-text-3, #8e8e93)" stroke-width="7" stroke-linecap="round" stroke-opacity="0.32"/>
+  <text x="516" y="282" font-size="12" fill="var(--vp-c-text-3, #8e8e93)">最多同时保有 10 件，保留 10 天</text>
+
+  <!-- 区块 3 拍卖 -->
+  <rect x="496" y="312" width="396" height="152" rx="10"
+        fill="var(--vp-c-bg, #ffffff)" stroke="var(--vp-c-divider, #e2e2e3)" stroke-width="1"/>
+  <text x="516" y="340" font-size="15" font-weight="700" fill="var(--vp-c-text-1, #1b1b1f)">拍卖</text>
+  <text x="872" y="340" font-size="12" fill="var(--vp-c-text-3, #8e8e93)" text-anchor="end">/auction</text>
+  <line x1="516" y1="354" x2="872" y2="354" stroke="var(--vp-c-divider, #e2e2e3)" stroke-width="1"/>
+  <text x="516" y="382" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">起拍价　当前最高价　剩余时间</text>
+  <text x="516" y="408" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">默认保留约 3 分钟，不自动加时</text>
+  <text x="516" y="434" font-size="12" fill="var(--vp-c-text-3, #8e8e93)">每人同时最多 2 场，成交前可能被撤回</text>
+
+  <!-- 区块 4 个人邮箱 -->
+  <rect x="68" y="312" width="396" height="152" rx="10"
+        fill="var(--vp-c-bg, #ffffff)" stroke="var(--vp-c-brand-1, #e05252)" stroke-width="1.5"/>
+  <text x="88" y="340" font-size="15" font-weight="700" fill="var(--vp-c-brand-1, #e05252)">个人邮箱</text>
+  <text x="444" y="340" font-size="12" fill="var(--vp-c-text-3, #8e8e93)" text-anchor="end">/mailbox gui</text>
+  <line x1="88" y1="354" x2="444" y2="354" stroke="var(--vp-c-divider, #e2e2e3)" stroke-width="1"/>
+  <text x="88" y="382" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">领取购买的物品与交易获得的物品</text>
+  <text x="88" y="408" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">接收过期或下架后退回的商品</text>
+  <text x="88" y="434" font-size="12" fill="var(--vp-c-text-3, #8e8e93)">最多 30 封，每封签收期限 15 天</text>
+
+  <!-- 底注 -->
+  <text x="40" y="510" font-size="13" fill="var(--vp-c-text-3, #8e8e93)">出售、收购与拍卖上架均收取 5% 税额；背包没有空位时，购买的物品会送入邮箱。</text>
+</svg>

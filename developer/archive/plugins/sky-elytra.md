@@ -1,5 +1,5 @@
 ---
-title: SkyElytra 幻空翼飞行系统插件
+title: SkyElytra 幻空翼飞行系统
 description: SkyElytra 为 Paper 1.21.11 服务端打造的精细化飞行管理插件：为建筑玩家提供领地内平衡可控的无限飞行，为冒险玩家提供幻空翼、经验双模式限时飞行与粒子特效。
 head:
   - - meta
@@ -7,7 +7,7 @@ head:
       content: SkyElytra, 幻空翼, Minecraft 飞行插件, Paper 插件, 飞行管理, 鞘翅飞行
 ---
 
-# SkyElytra（幻空翼飞行系统）插件文档
+# SkyElytra 幻空翼飞行系统
 ### 核心定位
 为Paper1.21.11服务端打造的**精细化飞行管理插件**，针对**建筑玩家**实现领地内平衡可控的无限飞行体验，为**冒险玩家**提供幻空翼、经验双模式限时飞行功能，粒子特效。
 

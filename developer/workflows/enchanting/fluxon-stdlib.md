@@ -1,13 +1,12 @@
 ---
-title: "内置函数与扩展函数"
-description: "Fluxon 全局内置函数和扩展函数 API 速查"
+title: Fluxon 内置函数与扩展函数参考
+description: Fluxon 全局内置函数与扩展函数速查表，含系统函数、类型转换、数学函数，以及 String、集合、Map、可迭代对象和 Domain 表达式。
+outline: [2, 3]
 ---
 
 # Fluxon 内置函数与扩展函数参考
 
-> 本文档基于 Aiyatsbus 官方技能包 v0.0.2，以当前服务器源码和配置为准。
-
-本文函数和扩展优先于通过 JVM 互操作自行实现同类工具。字符串、集合、数学或类型转换需求先查本文；已有函数可用时不要改用 Java 静态工具或手写重复算法。
+以下函数和扩展优先于通过 JVM 互操作自行实现同类工具。字符串、集合、数学或类型转换需求先查本页；已有函数可用时不要改用 Java 静态工具或手写重复算法。
 
 ## 1. 全局内置函数
 
@@ -101,7 +100,7 @@ description: "Fluxon 全局内置函数和扩展函数 API 速查"
 | 集合运算 | `union(list)`, `intersect(list)`, `subtract(list)`, `distinct()`, `distinctBy(fn)` |
 | 遍历 | `each(fn)` |
 
-Lambda 参数约定：单参数用 `|| &it`，多参数用 `|a, b| ...`
+Lambda 参数约定：单参数用 `|| &it`，多参数用 `|a, b| ...`。
 
 ### List（有序列表专用）
 

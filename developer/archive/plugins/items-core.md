@@ -1,3 +1,8 @@
+---
+title: FE_ItemsCore（物品功能核心）
+description: FE_ItemsCore 插件的工程归档——插件状态、基本信息与三个自定义物品效果（胡萝卜镐、辛辣之刃等）的历史实现记录。
+---
+
 # FE_ItemsCore（物品功能核心）
 
 ## 项目状态：E

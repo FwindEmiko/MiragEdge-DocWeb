@@ -1,19 +1,16 @@
 ---
 title: 原创插件文档
-description: 锐界幻境原创 Minecraft 插件的安装、配置与维护文档。
-outline: deep
+description: 锐界幻境原创插件的部署与维护文档入口。BugEnchantRemover、DragonMiao、HFcatLogin、FE_PVP、FE_Back 五个插件各有独立的安装、配置、命令、权限与排错文档。
+outline: [2, 3]
 ---
 
 # 原创插件文档
 
-这里收录可独立部署的锐界幻境原创插件。每个插件都有自己的安装步骤、配置说明、命令与排错资料，方便服主和维护者按插件单独查阅。
-
-服务器内已经向玩家开放的功能仍在[特色功能](/plugins/)中说明；这里不重复讲游戏玩法，只记录插件实际如何部署和维护。
+这里收录可独立部署的锐界幻境原创插件。每个插件都有自己的安装步骤、配置说明、命令与排错资料，供服主和维护者按插件单独查阅。
 
 ## 已发布插件
 
 <FeatureCard
-  icon="🧹"
   title="BugEnchantRemover"
   link="/plugin-guides/bug-enchant-remover/"
 >
@@ -21,7 +18,6 @@ outline: deep
 </FeatureCard>
 
 <FeatureCard
-  icon="🐉"
   title="DragonMiao"
   link="/plugin-guides/dragonmiao/"
 >
@@ -29,15 +25,13 @@ outline: deep
 </FeatureCard>
 
 <FeatureCard
-  icon="🔑"
   title="HFcatLogin"
   link="/plugin-guides/hfcatlogin/"
 >
-Velocity 代理端登录插件，支持注册/登录、正版自动登录、会话续登、邮箱找回密码，集成 NanoLimbo 虚拟登录服与 LuckPerms 权限上下文，兼容基岩版 Floodgate。
+Velocity 代理端登录插件，支持注册与登录、正版自动登录、会话续登、邮箱找回密码，集成 NanoLimbo 虚拟登录服与 LuckPerms 权限上下文，兼容基岩版 Floodgate。
 </FeatureCard>
 
 <FeatureCard
-  icon="⚔️"
   title="FE_PVP"
   link="/plugin-guides/fepvp/"
 >
@@ -45,17 +39,14 @@ Velocity 代理端登录插件，支持注册/登录、正版自动登录、会�
 </FeatureCard>
 
 <FeatureCard
-  icon="💀"
   title="FE_Back"
   link="/plugin-guides/fe-back/"
 >
-死亡点记录与 /back 返回，每日阶梯死亡惩罚与「遗失的灵叶」金粒拾取结算，Java / 基岩双端兼容。
+死亡点记录与 `/back` 返回，每日阶梯死亡惩罚与「遗失的灵叶」金粒掉落，Java 与基岩双端兼容。
 </FeatureCard>
 
-## 从需要解决的事开始
+## 新插件接入顺序
 
-首次接入插件时，先阅读对应插件首页确认服务端要求和安装顺序；出现异常物品、配置不生效或需要临时处置时，再从侧栏进入命令、配置和使用场景。技术实现、源码协作和服务器模块职责则保留在[开发者文档](/developer/)中。
-
-## 收录范围
-
-本目录只放独立插件的公开使用文档。新增插件时，为它建立独立的子目录与侧栏条目；服务器专属玩法、尚未确定的设计和内部开发归档不放在这里。
+1. 建独立子目录，放入插件的安装、配置、命令与权限文档。
+2. 补齐 frontmatter 的 `title` 与 `description`。
+3. 在侧栏增加该插件的目录条目。

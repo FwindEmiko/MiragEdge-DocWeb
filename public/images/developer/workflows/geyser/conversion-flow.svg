@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 624" role="img">
+  <title>从 Java 资源包到基岩资源包的转换流程</title>
+  <desc>五个步骤自上而下：冻结版本（记录 release.json 版本字段）、选择输入包（只用同批次未保护包）、采集（记录 SHA256 与目录差异）、审查映射（核对纹理与模型）、受控部署（可回滚发布）。</desc>
+  <defs>
+    <style>
+      /* These SVGs are loaded through an img element by SmartImage, so the
+         page CSS custom properties do not cascade in. Every token is
+         var(--vp-c-*, literal-fallback) and the dark branch is re-declared
+         for prefers-color-scheme. If an SVG is ever inlined instead, the real
+         VitePress variables win in both themes. */
+      :root {
+        --d-text-1: var(--vp-c-text-1, #3c3c43);
+        --d-text-2: var(--vp-c-text-2, #6b6b70);
+        --d-text-3: var(--vp-c-text-3, #8e8e93);
+        --d-line:   var(--vp-c-divider, #e2e2e4);
+        --d-panel:  var(--vp-c-bg, #ffffff);
+        --d-band:   var(--vp-c-bg-alt, #f6f6f7);
+        --d-soft:   var(--vp-c-bg-soft, #f6f6f7);
+        --d-brand:  var(--vp-c-brand-1, #e05252);
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --d-text-1: var(--vp-c-text-1, #e6e6e1);
+          --d-text-2: var(--vp-c-text-2, #b0b0b4);
+          --d-text-3: var(--vp-c-text-3, #85858a);
+          --d-line:   var(--vp-c-divider, #414146);
+          --d-panel:  var(--vp-c-bg, #1b1b1f);
+          --d-band:   var(--vp-c-bg-alt, #161618);
+          --d-soft:   var(--vp-c-bg-soft, #202127);
+        }
+      }
+      text { font-family: -apple-system, 'Segoe UI', 'PingFang SC', sans-serif; }
+      .h { font-size: 15px; font-weight: 600; fill: var(--d-text-1); }
+      .t { font-size: 14px; font-weight: 600; fill: var(--d-text-1); }
+      .d { font-size: 12.5px; fill: var(--d-text-2); }
+      .m { font-size: 12.5px; fill: var(--d-text-3); }
+      .a { font-size: 12.5px; font-weight: 600; fill: var(--d-brand); }
+      .n { font-size: 13px; font-weight: 700; fill: var(--d-brand); }
+      .p { font-size: 12.5px; fill: var(--d-text-2);
+           font-family: ui-monospace, SFMono-Regular, Consolas, 'Courier New', monospace; }
+      .box   { fill: var(--d-panel); stroke: var(--d-line); stroke-width: 1.5; }
+      .band  { fill: var(--d-band);  stroke: var(--d-line); stroke-width: 1; }
+      .soft  { fill: var(--d-soft);  stroke: var(--d-line); stroke-width: 1; }
+      .chip  { fill: var(--d-band);  stroke: var(--d-line); stroke-width: 1; }
+      .ln    { stroke: var(--d-line);  stroke-width: 1.5; fill: none; }
+      .ac    { stroke: var(--d-brand); stroke-width: 2; fill: none; }
+    </style>
+    <marker id="ar" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="var(--d-line)"/>
+    </marker>
+    <marker id="arb" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="var(--d-brand)"/>
+    </marker>
+  </defs>
+  <text class="h" x="24" y="34">Java 资源包 → 基岩资源包</text>
+  <text class="m" x="24" y="56">冻结版本 → 选择输入包 → 采集 → 审查映射 → 受控部署</text>
+  <rect class="box" x="24" y="84" width="912" height="84" rx="10"/>
+  <circle cx="72" cy="126" r="14" fill="var(--d-brand)" fill-opacity="0.12" stroke="var(--d-brand)" stroke-width="1"/>
+  <text class="n" x="72" y="131" text-anchor="middle">1</text>
+  <text class="h" x="106" y="120">冻结版本</text>
+  <text class="d" x="106" y="142">Java 服务端、Geyser、Bedrock 协议、Rainbow、CE 包版本全部记入</text>
+  <rect class="chip" x="808.5" y="111" width="103.5" height="30" rx="6"/>
+  <text class="d" x="860.25" y="131" text-anchor="middle">release.json</text>
+  <rect class="box" x="24" y="192" width="912" height="84" rx="10"/>
+  <circle cx="72" cy="234" r="14" fill="var(--d-brand)" fill-opacity="0.12" stroke="var(--d-brand)" stroke-width="1"/>
+  <text class="n" x="72" y="239" text-anchor="middle">2</text>
+  <text class="h" x="106" y="228">选择输入包</text>
+  <text class="d" x="106" y="250">只取同批次的未保护包，排除受保护主包与 map 专用包</text>
+  <rect class="chip" x="695.875" y="219" width="216.125" height="30" rx="6"/>
+  <text class="d" x="803.9375" y="239" text-anchor="middle">resource_pack_unprotected.zip</text>
+  <rect class="box" x="24" y="300" width="912" height="84" rx="10"/>
+  <circle cx="72" cy="342" r="14" fill="var(--d-brand)" fill-opacity="0.12" stroke="var(--d-brand)" stroke-width="1"/>
+  <text class="n" x="72" y="347" text-anchor="middle">3</text>
+  <text class="h" x="106" y="336">采集</text>
+  <text class="d" x="106" y="358">记录 SHA256、文件数与目录差异，产出审计结果</text>
+  <rect class="chip" x="778.375" y="327" width="133.625" height="30" rx="6"/>
+  <text class="d" x="845.1875" y="347" text-anchor="middle">SHA256 + 目录统计</text>
+  <rect class="box" x="24" y="408" width="912" height="84" rx="10"/>
+  <circle cx="72" cy="450" r="14" fill="var(--d-brand)" fill-opacity="0.12" stroke="var(--d-brand)" stroke-width="1"/>
+  <text class="n" x="72" y="455" text-anchor="middle">4</text>
+  <text class="h" x="106" y="444">审查映射</text>
+  <text class="d" x="106" y="466">逐项核对纹理与模型映射，未覆盖项单独列出</text>
+  <rect class="chip" x="813.0" y="435" width="99.0" height="30" rx="6"/>
+  <text class="d" x="862.5" y="455" text-anchor="middle">映射差异报告</text>
+  <rect class="box" x="24" y="516" width="912" height="84" rx="10"/>
+  <circle cx="72" cy="558" r="14" fill="var(--d-brand)" fill-opacity="0.12" stroke="var(--d-brand)" stroke-width="1"/>
+  <text class="n" x="72" y="563" text-anchor="middle">5</text>
+  <text class="h" x="106" y="552">受控部署</text>
+  <text class="d" x="106" y="574">按批次替换并保留上一版，异常时可回滚</text>
+  <rect class="chip" x="813.0" y="543" width="99.0" height="30" rx="6"/>
+  <text class="d" x="862.5" y="563" text-anchor="middle">可回滚发布物</text>
+  <line class="ln" x1="480" y1="168" x2="480" y2="192" marker-end="url(#ar)"/>
+  <line class="ln" x1="480" y1="276" x2="480" y2="300" marker-end="url(#ar)"/>
+  <line class="ln" x1="480" y1="384" x2="480" y2="408" marker-end="url(#ar)"/>
+  <line class="ln" x1="480" y1="492" x2="480" y2="516" marker-end="url(#ar)"/>
+</svg>

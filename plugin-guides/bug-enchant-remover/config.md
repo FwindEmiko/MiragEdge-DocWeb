@@ -1,6 +1,7 @@
 ---
 title: 配置参考
-outline: deep
+description: BugEnchantRemover 的 config.yml 全字段参考——关键词匹配、扫描行为、自定义物品保护与消息设置，并附多组可直接复制的配置示例。
+outline: [2, 3]
 ---
 
 # 配置参考
