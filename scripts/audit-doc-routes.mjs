@@ -55,15 +55,34 @@ if (sidebarStart === -1 || sidebarEnd === -1) {
 }
 
 const sidebarSource = config.slice(sidebarStart, sidebarEnd)
-const sidebarLinks = [...sidebarSource.matchAll(/link:\s*'([^']+)'/g)]
-  .map((match) => match[1])
-  .filter((link) => link.startsWith('/'))
-  .map(normalizeRoute)
-const sidebarRouteSet = new Set(sidebarLinks)
+// VitePress 的多 sidebar 模型：每个路径前缀一套独立的 sidebar，页面只看自己那套。
+// 因此判重必须【按块内部】判，全局去重会把「/ 块的社区入口」与「/community/ 块的首页入口」
+// 这类正常的跨块重复误判成缺陷。
+const blocks = []
+{
+  const re = /^\s*'(\/[^']*)':\s*\[/gm
+  const hits = []
+  let m
+  while ((m = re.exec(sidebarSource)) !== null) hits.push({ prefix: m[1], start: m.index })
+  for (let i = 0; i < hits.length; i++) {
+    const end = i + 1 < hits.length ? hits[i + 1].start : sidebarSource.length
+    const body = sidebarSource.slice(hits[i].start, end)
+    const links = [...body.matchAll(/link:\s*'([^']+)'/g)]
+      .map((x) => x[1])
+      .filter((x) => x.startsWith('/'))
+      .map(normalizeRoute)
+    blocks.push({ prefix: hits[i].prefix, links })
+  }
+}
 
 const problems = []
-const duplicates = [...new Set(sidebarLinks.filter((route, index) => sidebarLinks.indexOf(route) !== index))]
-for (const route of duplicates) problems.push(`侧栏重复路由: ${route}`)
+for (const b of blocks) {
+  const dups = [...new Set(b.links.filter((r, i) => b.links.indexOf(r) !== i))]
+  for (const d of dups) problems.push(`侧栏重复路由: ${d}（在 ${b.prefix} 块内）`)
+}
+
+const sidebarLinks = blocks.flatMap((b) => b.links)
+const sidebarRouteSet = new Set(sidebarLinks)
 
 for (const route of sidebarRouteSet) {
   if (!routes.has(route)) problems.push(`侧栏链接不存在: ${route}`)

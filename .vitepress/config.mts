@@ -425,6 +425,11 @@ export default defineConfig({
 
     // 只给一级分区加 emoji；二级及页面名称保持纯文字，便于扫描和搜索。
     sidebar: {
+      '/': [
+        { text: '🧭 开始游戏', link: '/start/' },
+        { text: '💬 社区与支持', link: '/community/' },
+      ],
+
       '/start/': [
         { text: '🧭 开始游戏', link: '/start/' },
         {
@@ -438,18 +443,6 @@ export default defineConfig({
             { text: '登录与注册', link: '/start/login' },
             { text: '主城共建', link: '/start/main-city' },
             { text: '新服规则与区域', link: '/start/new-server' },
-          ]
-        },
-        {
-          text: '💬 社区与支持',
-          collapsed: false,
-          items: [
-            { text: '支持总览', link: '/community/' },
-            { text: '玩家交流群组', link: '/community/groups' },
-            { text: '官方语音频道', link: '/community/voice' },
-            { text: '群服互通机器人', link: '/community/qqbot' },
-            { text: '常见问题', link: '/community/faq' },
-            { text: '宣传支持', link: '/community/promotion' },
           ]
         },
         {
@@ -854,6 +847,21 @@ export default defineConfig({
                 { text: '幻空翼历史草稿', link: '/developer/archive/plugins/sky-elytra' },
               ]
             },
+          ]
+        },
+      ],
+
+      '/community/': [
+        { text: '💬 社区与支持', link: '/community/' },
+        {
+          text: '📢 参与社区',
+          collapsed: false,
+          items: [
+            { text: '玩家交流群组', link: '/community/groups' },
+            { text: '官方语音频道', link: '/community/voice' },
+            { text: '群服互通机器人', link: '/community/qqbot' },
+            { text: '常见问题', link: '/community/faq' },
+            { text: '宣传支持', link: '/community/promotion' },
           ]
         },
       ],
