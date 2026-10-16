@@ -82,3 +82,5 @@ public/review/*.md
 .commitmsg.tmp
 COMMIT_MSG_TMP.txt
 *.tmp
+*tmp-commit-msg*.txt
+*COMMIT_MSG*.txt
