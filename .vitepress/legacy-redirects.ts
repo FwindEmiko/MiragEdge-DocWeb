@@ -132,6 +132,8 @@ const exactRules: RedirectRule[] = [
   // 跨区归位
   { from: '/start/redstone', to: '/play/systems/redstone' },   // 目标页由阶段 2 拆页产出
   { from: '/plugins/fec-armor', to: '/features/body-size' },
+  // 按站主指示下线（整体迁往另一站点，源文件留档在 docs/）
+  { from: '/developer/ops/compute', to: '/developer/ops/todo' },
   // 玩家内容迁出后删除的插件文档页
   { from: '/plugin-guides/fe-back/guide', to: '/features/death-return' },
   { from: '/plugin-guides/fepvp/guide', to: '/features/pvp' },

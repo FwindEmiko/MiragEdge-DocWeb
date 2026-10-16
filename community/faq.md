@@ -10,7 +10,7 @@ outline: [2, 3]
 
 ## 无法连接服务器
 
-1. 确认地址是 `miragedge.top`；Java 版不填端口，基岩版端口是 `19132`。
+1. Java 版 确认地址是 `mc.miragedge.top`；基岩版确认地址是`be.miragedge.top`，端口是 `52051`。
 2. 确认客户端版本符合[客户端安装](/start/install)页面的要求。
 3. 确认自己的账号已经完成绑定。
 
