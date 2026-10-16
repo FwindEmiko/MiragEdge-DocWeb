@@ -1,0 +1,19 @@
+fix(llms): 重新生成 llms 产物，清除 public/plugins 残留
+
+public/plugins/ 下遗留 22 个旧文件（21 个 .md + 1 个 llms.txt），且 22 个全部
+进了构建产物 —— 线上 /plugins/*.md 仍能访问到改名前的旧内容与过期的 llms.txt。
+
+根因不是生成器的缺陷：generate-llms.mjs 的 cleanOldOutputs() 已正确处理
+LEGACY_SECTIONS（含 'plugins'），会删掉这些 .md 与 llms.txt。是我手改
+SECTIONS（plugins → features、新增 community）之后没有重新跑 pnpm llms，
+所以清理逻辑一直没执行。
+
+跑 pnpm llms 后：public/plugins/ 22 → 0、public/develop/ 0，产物目录正确落在
+features/ 与 community/。重建后 dist/plugins/ 只剩 127 个 .html 跳转存根
+（.md / .txt 均为 0），旧 URL 仍正常重定向。
+
+新增 scripts/check-stale-public.mjs：检查 public/ 下已废弃分区目录里是否还有
+残留文件、以及它们是否进了 dist。
+
+门禁：build 0 死链 · typecheck 通过 · 220 tests passed · audit:routes 通过 ·
+六项内容门禁全 PASS · 孤儿页面 0 · 存根冲突 0

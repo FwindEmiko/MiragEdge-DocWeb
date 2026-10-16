@@ -1,7 +1,7 @@
 <!-- 来源页面: https://miragedge.top/plugin-guides/fe-back/storage -->
 <!-- 由 llms.txt 标准生成器自动产出，源文件: plugin-guides/fe-back/storage.md -->
 
-# 05 — 数据存储
+# 数据存储
 
 ## 文件列表
 

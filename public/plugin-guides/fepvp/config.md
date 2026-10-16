@@ -1,7 +1,7 @@
 <!-- 来源页面: https://miragedge.top/plugin-guides/fepvp/config -->
 <!-- 由 llms.txt 标准生成器自动产出，源文件: plugin-guides/fepvp/config.md -->
 
-# 05 — 配置参考
+# 配置参考
 
 文件位置：```plugins/FE_PVP/config.yml```
 

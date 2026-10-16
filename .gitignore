@@ -78,10 +78,6 @@ public/soul.md
 public/review.md
 public/review/*.md
 
-# ��ʱ�ύ��Ϣ�ļ�
-
-COMMIT_MSG_TMP.txt
-
 # 临时文件（提交信息 / 暂存）
 .commitmsg.tmp
 COMMIT_MSG_TMP.txt

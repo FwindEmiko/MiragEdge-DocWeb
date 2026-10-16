@@ -1,7 +1,7 @@
 <!-- 来源页面: https://miragedge.top/plugin-guides/fepvp/permissions -->
 <!-- 由 llms.txt 标准生成器自动产出，源文件: plugin-guides/fepvp/permissions.md -->
 
-# 06 — 权限节点
+# 权限节点
 
 ## 权限树
 

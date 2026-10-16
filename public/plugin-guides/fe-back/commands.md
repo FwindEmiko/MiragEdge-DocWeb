@@ -1,7 +1,7 @@
 <!-- 来源页面: https://miragedge.top/plugin-guides/fe-back/commands -->
 <!-- 由 llms.txt 标准生成器自动产出，源文件: plugin-guides/fe-back/commands.md -->
 
-# 02 — 命令参考
+# 命令参考
 
 全部命令支持 Tab 补全。管理类子命令对「控制台」的支持情况见各节说明。
 

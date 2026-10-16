@@ -3,7 +3,7 @@
 
 # BugEnchantRemover 使用文档
 
-> 自动检测并清除数据包/插件带来的异常附魔，支持 UberEnchant PDC 附魔兼容。
+自动检测并清除数据包与插件带来的异常附魔，兼容 UberEnchant 的 PDC 附魔存储。
 
 ## 简介
 

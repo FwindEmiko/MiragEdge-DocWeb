@@ -1,7 +1,7 @@
 <!-- 来源页面: https://miragedge.top/plugin-guides/fe-back/permissions -->
 <!-- 由 llms.txt 标准生成器自动产出，源文件: plugin-guides/fe-back/permissions.md -->
 
-# 04 — 权限节点
+# 权限节点
 
 | 权限 | 默认值 | 说明 |
 |------|--------|------|
@@ -12,7 +12,7 @@
 | `feback.admin` | `op` | `/feb` 管理命令（reload / status / clear / setpoint / tiers） |
 | `feback.toggle` | `true` | 使用 `/febtoggle` 切换基岩版返回表单 |
 | `feback.suicide` | `false` | 使用 `/febsuicide`（控制台默认拥有所有权限） |
-| `feback.notify` | `true` | ⚠️ 已在 plugin.yml 声明但**当前代码未使用**；拾取通知实际由 `settings.notify-on-pickup-others` 控制 |
+| `feback.notify` | `true` | 已在 plugin.yml 声明但**当前代码未使用**；拾取通知实际由 `settings.notify-on-pickup-others` 控制 |
 
 注意事项：
 

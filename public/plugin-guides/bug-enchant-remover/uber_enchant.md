@@ -1,7 +1,7 @@
 <!-- 来源页面: https://miragedge.top/plugin-guides/bug-enchant-remover/uber_enchant -->
 <!-- 由 llms.txt 标准生成器自动产出，源文件: plugin-guides/bug-enchant-remover/uber_enchant.md -->
 
-# UberEnchant 兼容（v1.3 新特性）
+# UberEnchant 兼容
 
 ## 背景
 

@@ -1,11 +1,11 @@
 <!-- 来源页面: https://miragedge.top/plugin-guides/fe-back/config -->
 <!-- 由 llms.txt 标准生成器自动产出，源文件: plugin-guides/fe-back/config.md -->
 
-# 03 — 配置参考
+# 配置参考
 
-文件位置：`plugins/FE_Back/config.yml`，修改后执行 `/feb reload` 即可生效（无需重启）。
+文件位置：`plugins/FE_Back/config.yml`，修改后执行 `/feb reload` 即可生效，无需重启。
 
-以下均为仓库内随插件发布的**默认值**；实际服务器可能已调整。
+以下数值取自插件随包发布的默认配置，不等于线上服务器的当前取值。
 
 ## settings — 基础设置
 
@@ -14,8 +14,8 @@
 | `settings.debug` | Boolean | `false` | 调试日志输出到控制台 |
 | `settings.excluded-worlds` | String[] | `[pvp, zc]` | 排除世界：死亡记录、返回、惩罚全部禁用 |
 | `settings.require-permission-for-cross-world` | Boolean | `false` | 跨世界返回是否要求 `feback.bypass.world` |
-| `settings.require-permission-for-same-world` | Boolean | `false` | ⚠️ 已解析但**当前代码未使用**（预留字段） |
-| `settings.overwrite-on-death` | Boolean | `true` | ⚠️ 已解析但**当前代码未使用**；当前行为即「新死亡覆盖旧记录」 |
+| `settings.require-permission-for-same-world` | Boolean | `false` | 已解析但**当前代码未使用**（预留字段） |
+| `settings.overwrite-on-death` | Boolean | `true` | 已解析但**当前代码未使用**；当前行为即「新死亡覆盖旧记录」 |
 | `settings.cooldown-seconds` | Long | `5` | `/back` 冷却秒数（0 = 关闭） |
 | `settings.notify-on-pickup-others` | Boolean | `false` | 金粒被他人拾取时是否通知原主（当前由**本配置**控制，与权限 `feback.notify` 无关） |
 | `settings.database.type` | String | `sqlite` | 数据库类型（当前仅实现 sqlite） |
@@ -96,7 +96,7 @@
 | `currency-item.despawn-seconds` | Long | `360` | 金粒存在时间 / 清理边界（秒） |
 | `currency-item.lifespan-seconds` | Long | `360` | 落地到消失（秒，最小 20） |
 | `currency-item.prevent-merge` | Boolean | `true` | 阻止掉落物合并（每颗金粒 PDC token 唯一，原版本身不会合并） |
-| `currency-item.pickable` | Boolean | `true` | ⚠️ 已废弃：拾取规则固定由监听器控制（本人走回可拾 / 他人可拾 / /back 后本人不可拾） |
+| `currency-item.pickable` | Boolean | `true` | 已废弃：拾取规则固定由监听器控制（本人走回可拾 / 他人可拾 / /back 后本人不可拾） |
 | `currency-item.deposit-to` | String | `VAULT` | 金粒被拾取时入账去向：`VAULT` / `POINTS` / `BOTH` |
 | `currency-item.vault-per-nugget` | Double | `1.0` | 1 单位金粒兑换多少 Vault 金额 |
 | `currency-item.points-per-nugget` | Int | `1` | 1 单位金粒兑换多少 Points |

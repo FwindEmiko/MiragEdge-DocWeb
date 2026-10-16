@@ -1,7 +1,7 @@
 <!-- 来源页面: https://miragedge.top/plugin-guides/fepvp/storage -->
 <!-- 由 llms.txt 标准生成器自动产出，源文件: plugin-guides/fepvp/storage.md -->
 
-# 08 — 数据存储
+# 数据存储
 
 ## 文件列表
 
