@@ -79,7 +79,10 @@ public/review.md
 public/review/*.md
 
 # ��ʱ�ύ��Ϣ�ļ�
-COMMMIT_MSG_TMP.txt
 
-# 临时提交信息文件
 COMMIT_MSG_TMP.txt
+
+# 临时文件（提交信息 / 暂存）
+.commitmsg.tmp
+COMMIT_MSG_TMP.txt
+*.tmp
