@@ -180,9 +180,9 @@ head:
 
 ## 相关页面
 
-- [群服互通机器人](/start/community/qqbot) · 账号绑定与群服消息互通
-- [玩家交流群组](/start/community/groups) · 官方交流渠道
-- [官方语音频道](/start/community/voice) · 语音频道使用方式
+- [群服互通机器人](/community/qqbot) · 账号绑定与群服消息互通
+- [玩家交流群组](/community/groups) · 官方交流渠道
+- [官方语音频道](/community/voice) · 语音频道使用方式
 - [生电与特性](/start/redstone) · 服务器配置与反作弊口径
 - [幻域领地](/play/systems/dom) · 领地保护与边界
 - [经济系统](/play/systems/economy) · 货币与商店机制

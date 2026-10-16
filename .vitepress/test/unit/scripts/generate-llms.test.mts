@@ -401,10 +401,11 @@ describe('generateLlms', () => {
     expect(result.totalFiles).toBeGreaterThan(100)
     expect(result.cleanedCount).toBe(result.totalFiles)
     expect(result.failures).toEqual([])
-    // 四个主分区都有页面
+    // 主分区都有页面（2026-10 重构：plugins 已改名为 features，community 提为一等分区）
     expect(result.sectionCounts.start).toBeGreaterThan(0)
     expect(result.sectionCounts.play).toBeGreaterThan(0)
-    expect(result.sectionCounts.plugins).toBeGreaterThan(0)
+    expect(result.sectionCounts.features).toBeGreaterThan(0)
+    expect(result.sectionCounts.community).toBeGreaterThan(0)
     expect(result.sectionCounts.developer).toBeGreaterThan(0)
     expect(result.sectionCounts.archive).toBeGreaterThan(0)
     expect(result.rootCount).toBeGreaterThan(0)

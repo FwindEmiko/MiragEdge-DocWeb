@@ -17,15 +17,15 @@ description: 锐界幻境冒险玩法入口：从探索世界、处理战利品�
 
 ## 强化装备
 
-[锻造升级](/plugins/forge)和[附魔系统](./enchantments/info)分别讲当前保留的装备升级与附魔搭配。先解决当前缺口，不需要一开始追求完整配置。
+[锻造升级](/features/forge)和[附魔系统](./enchantments/info)分别讲当前保留的装备升级与附魔搭配。先解决当前缺口，不需要一开始追求完整配置。
 
 ## 应对风险
 
-[契约之翼](/plugins/elytra-bind)说明正式鞘翅的契约、升阶路线和保管边界；死亡后需要返回原处时，查看[死亡回程](/plugins/custom/death-return)。
+[契约之翼](/features/elytra-bind)说明正式鞘翅的契约、升阶路线和保管边界；死亡后需要返回原处时，查看[死亡回程](/features/death-return)。
 
 ## 推荐路线
 
-先确认[战利品与探索区域](./loot)的领取规则，再从主世界结构开始探索；有稳定装备后再进入下界和末地。面对高风险区域或 Boss 时，回到[附魔系统](./enchantments/info)和[锻造升级](/plugins/forge)补齐准备。
+先确认[战利品与探索区域](./loot)的领取规则，再从主世界结构开始探索；有稳定装备后再进入下界和末地。面对高风险区域或 Boss 时，回到[附魔系统](./enchantments/info)和[锻造升级](/features/forge)补齐准备。
 
 ## 探索不只看奖励
 

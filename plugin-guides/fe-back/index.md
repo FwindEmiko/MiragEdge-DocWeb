@@ -102,5 +102,5 @@ plugins/
 - [配置参考](./config)
 - [权限节点](./permissions)
 - [数据存储](./storage)
-- 玩家向说明页：[死亡回程](/plugins/custom/death-return)
+- 玩家向说明页：[死亡回程](/features/death-return)
 - [经济系统](/play/systems/economy)

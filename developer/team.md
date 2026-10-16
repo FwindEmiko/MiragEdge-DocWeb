@@ -41,7 +41,7 @@ head:
 
 | 插件 | 说明 | 文档 |
 |------|------|------|
-| EMCShop | 等价交换商店，集成物品银行系统，支持物品与货币双向兑换 | [EMCShop 文档](/plugins/custom/emc-shop) |
+| EMCShop | 等价交换商店，集成物品银行系统，支持物品与货币双向兑换 | [EMCShop 文档](/features/block-bank) |
 | FE_Fly | 幻空翼飞行，限时飞行权限管理系统，支持飞行时长配置 | [历史文档](/developer/archive/plugins/fe-fly) |
 
 ###  开发规范与协作

@@ -11,7 +11,9 @@
 ## 约定/规范
 
 <!-- 项目约定：命名、风格、版本、操作习惯 -->
-（待补充）
+- 全站术语唯一写法定死在 `docs/文档站全量重构261016/13-术语表.md`：烬域/繁星（禁 incendium/stellarity 出现在**正文可见文字**）、灵叶/块币/星痕石、21 个玩家功能名。已裁决的「一名多写」：`fec-armor`→**体型装备**、`emc-shop`→**方块银行**（`plugins/building-tools.md` 的「建材等价交换」小节是同一系统的重复，不是第二个功能）
+- **禁词扫描必须内置四类豁免**，否则门禁必红：① URL 查询串（QQ 邀请链接 `jump_from=webapi` 会被 `API` 规则误报）② 货币英文名 `Spirit Leaf`/`Starscar Gem` ③ 图片路径 `/images/datapack/…`（`play/adventure` 12 页的 `datapack` 命中 100% 来自 `src=` 属性，正文一字未犯）④ 英文词一律加词边界（`\bAPI\b` 才不误伤 `webapi`）。`archive/events/20260801.md:68` 的 API（大模型 API 网关）是**真实命中**，不是误报
+- `archive/**` 是历史活动记录，**豁免正文禁词**（纲领 §2.2 禁删历史内容；历史公告里的技术词是当时的真实表述）。扫描报告命中数但**不判负**
 
 ## 关键决策
 
@@ -21,6 +23,9 @@
 - 静态低配信号（deviceMemory<=2 / hardwareConcurrency<=2 / saveData）在 config.mts 水合前内联脚本与 useEffectsToggle.isStaticLowEndDevice 中保持一致，需同步修改
 - 横屏触摸平板（hover:none + pointer:coarse + width>767）默认关闭特效：华为/Kirin 等弱 GPU 平板空载帧率正常但滚动时掉帧，靠静态信号测不出，用 isSuspectTablet + config.mts 内联脚本在首帧前关掉；iPad 也命中，属保守策略，用户可手动恢复
 - 特效关闭 ≠ 性能安全：130px 大半径 blur 的极光层与大面积 backdrop-filter 在弱 GPU 上即使静止也持续消耗；effects-disabled 下必须同步降级静态层（hero.css/blur.css 有专门降级段）
+- **`/features/` 重定向碰撞（全量重构阶段 0 实测确认，未修）**：`legacy-redirects.ts` 的 `prefixRules` 含 `['/features','/play']`，`generateBundle()` 会为每个现存 `/play/**` 路由反推并 `emitFile` 出重定向存根。实测 `dist/features/` 下 **211 个 html 全是「页面已迁移」存根**，`dist/features/index.html` 是存根**而不是**真实页 → **存根覆盖真实页**。根因：存根经 VitePress 的 `fs.writeFile` 落盘，而页面不进 Rollup bundle，故**无警告、退出码 0**。既有缺陷佐证：`dist/plugins/custom/sky-elytra.html` 是真实页，同路径 `.../index.html` 仍是存根。裁决：保留 `/features/`（删该前缀规则会一次丢掉 106 条旧 `/features/*` 路由），但必须加「`from` 已是当前真实页路由则不生成存根」的通用守卫
+- **`plugins/` → `/features/` 改名必须同批修改 4 个非 md 文件**，漏改会让 `pnpm test` 直接变红：`scripts/generate-llms.mjs`（`SECTIONS` 的 `plugins`）、`.vitepress/test/config/config.test.ts:120`、`.vitepress/test/unit/scripts/generate-llms.test.mts:407`、`.vitepress/theme/components/vue/NotFound.vue:59`
+- **全站没有 `<DataTable>` / `<StepFlow>` / `<CompareTable>` / `<Tabs>`**：纲领 §8.2 把它们列为「候选组件」，实测 `theme/components/vue/` 下不存在。所以「超 18 KB 改组件」这条路径当前无法落地，7 个超重页只能走拆页
 
 ## 模块/组件
 
@@ -85,3 +90,12 @@
 - 数据保真：正文 §4 表格由脚本从 prompt 原文逐行抽取生成（不手抄），并由独立 subagent 对照 `.research/stellarity-latest` 数据包脚本逐行核对，结论零差异（121 槽 / 173 分支 / 65 个等级文件 / 39 个战利品表全部解析）；随机分支数、maxUses、priceMultiplier 均一致
 - 事实旁证：`data/minecraft/loot_table/blocks/end_stone.json` 权重 98:2 印证「末地石约 2% 掉碎片」；remove_vanilla_trades.mcfunction 整条删除绿宝石交易印证「不收绿宝石」；priceMultiplier 实际只有 0.05/0.2 且无自定义折扣逻辑，印证「沿用原版打折」
 - 验证：typecheck / llms / vitepress build / pnpm test(220 passed) / git diff --check 全绿；audit:routes 的 3 条报错为 HEAD 既有，与本页无关
+
+### 2026-10 · 文档站全量重构（阶段 0 已完成，待用户确认后进阶段 1）
+
+- 纲领：`docs/文档站全量重构261016/00-重构纲领-交给DSH.md`（791 行，含硬约束、目标 IA、写作/配图规范、阶段门禁、子代理编排）。基线：`02-现状体检-基线数据.md`
+- **阶段 0 四份交付物已产出**：`10-信息架构方案.md`（目标目录树 + 两套导航 + 旧→新 URL 映射表 74 条）· `11-内容分域清单.md`（**202 页逐页判定，脚本校验 202/202 无重复无遗漏**）· `12-组件与配图计划.md`（16 项必配图落位 + 组件决策）· `13-术语表.md`（唯一用词标准）
+- 分域核心结论：`plugin-guides/` 的 2 页纯玩家内容（`fe-back/guide.md`、`fepvp/guide.md`）与 7 个混合页要拆出玩家区；`start/redstone.md` 是全站唯一真管理员页需拆半；`archive/{main-city,new-server}` 其实是现行规则需迁回活跃区
+- 辅助脚本（新增，只读）：`scripts/refactor-inventory.mjs`（扫全站骨架→`_inventory.json`）· `refactor-links.mjs`（183 条站内链接、0 死链）· `refactor-verify-parts.mjs` / `refactor-verify-11.mjs`（覆盖校验）· `refactor-verify-urlmap.mjs`（URL 映射覆盖门禁，实测 **0 遗漏**）
+- 待用户拍板 6 项（详见 `10-信息架构方案.md` §6）：① 内部代号目录是否改名（建议**不改**）② villager-trades 拆 14 页 vs 改组件（建议**拆页**）③ FE_PVP 是否已上线（决定 4 个玩家页建不建）④ `start/install.md` 合规风险内容删除 ⑤ `archive/` 禁词门禁豁免 ⑥ 阶段 5 是否新建 `<DataTable>`
+- **阻塞项**：死亡回程「返回是否收费/金粒能否拾取」在玩家页与插件文档间**互相矛盾**（`plugins/custom/death-return.md` vs `plugin-guides/fe-back/guide.md`），裁决前该页与必配图第 6 项不能落笔

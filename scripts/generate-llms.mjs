@@ -72,9 +72,14 @@ const SECTIONS = [
     description: '基础系统、冒险探索、装备成长和田园生活的玩家使用说明',
   },
   {
-    name: 'plugins',
-    title: '插件教程',
-    description: '锐界幻境服务器专属插件的使用教程与功能说明',
+    name: 'features',
+    title: '服务器功能',
+    description: '锐界幻境服务器专属功能的玩家使用教程与功能说明',
+  },
+  {
+    name: 'community',
+    title: '社区与支持',
+    description: '玩家交流群组、语音频道、群服互通机器人与常见问题',
   },
   {
     name: 'developer',
@@ -89,7 +94,8 @@ const SECTIONS = [
 ];
 
 // 旧分区下的生成物是构建缓存，不属于当前公开文档；清理时只删除脚本自己生成的文件。
-const LEGACY_SECTIONS = ['manual', 'features', 'develop'];
+// 2026-10 重构：'plugins' 已改名为 'features'，故从本列表移除、加入 'plugins' 以清掉旧产物。
+const LEGACY_SECTIONS = ['manual', 'features', 'develop', 'plugins'];
 
 // ============================================================
 // 工具函数

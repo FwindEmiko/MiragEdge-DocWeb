@@ -406,18 +406,18 @@ export default defineConfig({
       }
     },
     
-    // 品牌标题本身返回首页；顶栏保留玩家常用入口和始终可达的开发入口。
+    // 玩家导航：只放玩家入口，开发者入口改由页脚固定链接提供（见下方 footer）
     nav: [
       { text: '🏠 首页', link: '/' },
       { text: '🧭 开始游戏', link: '/start/', activeMatch: '^/start/' },
-      { text: '⚒️ 生存玩法', link: '/play/', activeMatch: '^/play/' },
-      { text: '✨ 特色功能', link: '/plugins/', activeMatch: '^/plugins/' },
-      { text: '🛠️ 开发者文档', link: '/developer/', activeMatch: '^/developer/' },
+      { text: '⚒️ 玩法', link: '/play/', activeMatch: '^/play/' },
+      { text: '✨ 功能', link: '/features/', activeMatch: '^/features/' },
+      { text: '💬 社区', link: '/community/', activeMatch: '^/community/' },
       {
         text: '更多',
         items: [
-          { text: '原创插件文档', link: '/plugin-guides/', activeMatch: '^/plugin-guides/' },
           { text: '历史活动记录', link: '/archive/' },
+          { text: '开发者与服主入口', link: '/developer/', rel: 'nofollow' },
           { text: '网站源码仓库', link: 'https://github.com/fwindemiko/MiragEdge-DocWeb', target: '_blank', rel: 'noopener noreferrer' },
         ]
       },
@@ -441,12 +441,12 @@ export default defineConfig({
           text: '💬 社区与支持',
           collapsed: false,
           items: [
-            { text: '支持总览', link: '/start/community/' },
-            { text: '玩家交流群组', link: '/start/community/groups' },
-            { text: '官方语音频道', link: '/start/community/voice' },
-            { text: '群服互通机器人', link: '/start/community/qqbot' },
-            { text: '常见问题', link: '/start/community/faq' },
-            { text: '宣传支持', link: '/start/community/promotion' },
+            { text: '支持总览', link: '/community/' },
+            { text: '玩家交流群组', link: '/community/groups' },
+            { text: '官方语音频道', link: '/community/voice' },
+            { text: '群服互通机器人', link: '/community/qqbot' },
+            { text: '常见问题', link: '/community/faq' },
+            { text: '宣传支持', link: '/community/promotion' },
           ]
         },
         {
@@ -463,8 +463,8 @@ export default defineConfig({
           text: '🏘️ 长期游玩',
           collapsed: false,
           items: [
-            { text: '玩家工会', link: '/start/guild' },
-            { text: '生电与特性', link: '/start/redstone' },
+            { text: '玩家工会', link: '/play/systems/guild' },
+            { text: '生电与特性', link: '/play/systems/redstone' },
             { text: '世界观设定', link: '/start/worldview' },
           ]
         },
@@ -549,8 +549,8 @@ export default defineConfig({
               text: '钓鱼系统',
               collapsed: false,
               items: [
-                { text: '入门说明', link: '/play/life/fishing/info' },
-                { text: '鱼竿进阶', link: '/play/life/fishing/rods' },
+                { text: '入门说明', link: '/play/life/fishing/' },
+                { text: '鱼竿进阶', link: '/play/life/fishing/guide' },
                 { text: '鱼饵系统', link: '/play/life/fishing/baits' },
                 { text: '鱼类图鉴', link: '/play/life/fishing/fish' },
                 { text: '维度钓鱼', link: '/play/life/fishing/dimensions' },
@@ -562,15 +562,15 @@ export default defineConfig({
               text: '食物系统',
               collapsed: false,
               items: [
-                { text: '入门说明', link: '/play/life/food/info' },
+                { text: '入门说明', link: '/play/life/food/' },
                 { text: '食物速查表', link: '/play/life/food/reference' },
                 { text: '早餐简餐', link: '/play/life/food/breakfast' },
                 { text: '主菜肉食', link: '/play/life/food/mains' },
                 { text: '沙拉凉菜', link: '/play/life/food/salads' },
-                { text: '烘焙糕点', link: '/play/life/food/bakery' },
+                { text: '烘焙糕点', link: '/play/life/food/desserts-and-bakes' },
                 { text: '甜品', link: '/play/life/food/desserts' },
                 { text: '饮品', link: '/play/life/food/drinks' },
-                { text: '煎蛋系列', link: '/play/life/food/eggs' },
+                { text: '煎蛋系列', link: '/play/life/food/eggs-and-specialties' },
                 { text: '糖果零食', link: '/play/life/food/snacks' },
                 { text: '特色食物', link: '/play/life/food/special' },
               ]
@@ -579,11 +579,11 @@ export default defineConfig({
               text: '真实季节(暂弃)',
               collapsed: true,
               items: [
-                { text: '季节总览', link: '/play/life/seasons/info' },
-                { text: '温度系统', link: '/play/life/seasons/temperature' },
-                { text: '春季', link: '/play/life/seasons/spring' },
+                { text: '季节总览', link: '/play/life/seasons/' },
+                { text: '温度系统', link: '/play/life/seasons/mechanisms' },
+                { text: '春季', link: '/play/life/seasons/spring-summer' },
                 { text: '夏季', link: '/play/life/seasons/summer' },
-                { text: '秋季', link: '/play/life/seasons/fall' },
+                { text: '秋季', link: '/play/life/seasons/autumn-winter' },
                 { text: '冬季', link: '/play/life/seasons/winter' },
               ]
             },
@@ -591,53 +591,63 @@ export default defineConfig({
         },
       ],
 
-      '/plugins/': [
-        { text: '✨ 特色功能', link: '/plugins/' },
+      '/features/': [
+        { text: '✨ 服务器功能', link: '/features/' },
         {
           text: '🧰 移动与日常',
           collapsed: false,
           items: [
-            { text: '日常便利', link: '/plugins/daily-tools' },
-            { text: '星辉锚点', link: '/plugins/custom/miragedge-home' },
-            { text: '死亡回程', link: '/plugins/custom/death-return' },
-            { text: '幻空翼', link: '/plugins/custom/sky-elytra' },
+            { text: '星辉锚点', link: '/features/anchor' },
+            { text: '死亡回程', link: '/features/death-return' },
+            { text: '日常便利', link: '/features/daily-tools' },
+            { text: '幻空翼', link: '/features/sky-elytra' },
           ]
         },
         {
           text: '🏗️ 建造与装备',
           collapsed: false,
           items: [
-            { text: '建筑大师', link: '/plugins/building-tools' },
-            { text: '锻造升级', link: '/plugins/forge' },
-            { text: '契约之翼', link: '/plugins/elytra-bind' },
-            { text: '史莱姆靴', link: '/plugins/custom/slime-boots' },
-            { text: '随地大小变', link: '/plugins/fec-armor' },
+            { text: '建筑大师', link: '/features/building-tools' },
+            { text: '史莱姆靴', link: '/features/slime-boots' },
+            { text: '锻造升级', link: '/features/forge' },
+            { text: '契约之翼', link: '/features/elytra-bind' },
+            { text: '体型装备', link: '/features/body-size' },
           ]
         },
         {
           text: '💬 交易与互动',
           collapsed: false,
           items: [
-            { text: '箱子商店', link: '/plugins/custom/chest-shop' },
-            { text: '全服市场', link: '/plugins/custom/global-market' },
-            { text: '方块银行', link: '/plugins/custom/emc-shop' },
-            { text: '赏金猎人', link: '/plugins/custom/bounty-hunter' },
-            { text: '生物捕捉', link: '/plugins/custom/mob-capture' },
-            { text: '知识问答', link: '/plugins/custom/quiz' },
-            { text: '称号与入服消息', link: '/plugins/custom/miragedge-title' },
-            { text: '月卡与通行权益', link: '/plugins/custom/monthly-pass' },
+            { text: '箱子商店', link: '/features/chest-shop' },
+            { text: '全服市场', link: '/features/global-market' },
+            { text: '方块银行', link: '/features/block-bank' },
+            { text: '知识问答', link: '/features/quiz' },
+            { text: '赏金猎人', link: '/features/bounty-hunter' },
+            { text: '生物捕捉', link: '/features/mob-capture' },
+            { text: '称号与入服消息', link: '/features/title' },
+            { text: '月卡与通行权益', link: '/features/monthly-pass' },
+          ]
+        },
+        {
+          text: '⚔️ 竞技与对战',
+          collapsed: false,
+          items: [
+            { text: '竞技系统总览', link: '/features/pvp/' },
+            { text: '饥饿游戏', link: '/features/pvp/hunger-games' },
+            { text: '押注决斗', link: '/features/pvp/betting' },
+            { text: '段位与排行榜', link: '/features/pvp/ranking' },
           ]
         },
         {
           text: '🛡️ 自动规则',
           collapsed: false,
           items: [
-            { text: '飞行武器限制', link: '/plugins/custom/flight-guard' },
-            { text: '免幻翼', link: '/plugins/custom/nophantom' },
-            { text: '缚灵钢符', link: '/plugins/custom/piglin-talisman' },
+            { text: '飞行武器限制', link: '/features/flight-guard' },
+            { text: '免幻翼', link: '/features/nophantom' },
+            { text: '缚灵钢符', link: '/features/piglin-talisman' },
           ]
         },
-      ],
+      ],,
 
       '/developer/': [
         { text: '🛠️ 开发者文档', link: '/developer/' },
@@ -785,7 +795,7 @@ export default defineConfig({
           items: [
             { text: '宣传推广记录', link: '/developer/archive/promotion' },
             { text: '种植系统设计占位', link: '/developer/archive/design/farming' },
-            { text: '赛季设计记录', link: '/developer/design/liveops_260107' },
+            { text: '赛季设计记录', link: '/developer/archive/design/liveops_260107' },
             {
               text: '弃案设计',
               collapsed: true,
