@@ -8,7 +8,8 @@ outline: [2, 3]
 
 飞行与部分武器不能同时使用。拿起重锤或长矛会结束飞行，进入战斗后也会暂时禁飞。
 
-<SmartImage src="/images/features/flight-guard/check-flow.svg" caption="图 1：飞行的四道判定——时间余额、战斗状态、手持武器、区域与高度" width="720" />
+<SmartImage src="/images/features/flight-guard/check-flow.svg"
+  alt="飞行四道判定流程图：时间余额、战斗状态、手持武器、区域与高度" caption="图 1：飞行的四道判定——时间余额、战斗状态、手持武器、区域与高度" width="720" />
 
 ## 不能持用的武器
 

@@ -8,7 +8,8 @@ outline: [2, 3]
 
 这页用于确认服务器内部模块的职责边界、物理与反作弊桥接规范，以及配置改动的维护顺序。
 
-<SmartImage src="/images/developer/reference/architecture.svg" caption="图 1：服务器整体架构——客户端 → 代理 → 后端 → 内容层" width="880" />
+<SmartImage src="/images/developer/reference/architecture.svg"
+  alt="服务器整体架构图：客户端、代理层、后端层、内容层四层及层间数据流" caption="图 1：服务器整体架构——客户端 → 代理 → 后端 → 内容层" width="880" />
 
 ::: danger 禁止外泄
 不要把数据库地址、代理密钥、账号信息或其他敏感字段复制到公开文档。服务端内容索引只用于核对功能，不是公开配置备份。

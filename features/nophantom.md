@@ -10,7 +10,8 @@ outline: [2, 3]
 
 免幻翼守护为已解锁的玩家留出一片安心区域。只要你在主世界，周围一定范围内不会再生成新的幻翼。
 
-<SmartImage src="/images/features/nophantom/activation-flow.svg" caption="图 1：免幻翼的激活判定——符合条件则生效，否则维持原版行为" width="720" />
+<SmartImage src="/images/features/nophantom/activation-flow.svg"
+  alt="免幻翼激活判定流程图，不符合则维持原版行为" caption="图 1：免幻翼的激活判定——符合条件则生效，否则维持原版行为" width="720" />
 
 ## 解锁方式
 

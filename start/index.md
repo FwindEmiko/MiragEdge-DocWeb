@@ -10,7 +10,8 @@ outline: [2, 3]
 
 ## 第一次入服
 
-<SmartImage src="/images/start/index/onboarding-four-steps.svg" caption="图 1：入服四步——先看须知，再装客户端，然后连接服务器，最后绑定账号" width="720" />
+<SmartImage src="/images/start/index/onboarding-four-steps.svg"
+  alt="入服四步流程图：看新玩家须知、安装客户端、连接服务器、绑定账号" caption="图 1：入服四步——先看须知，再装客户端，然后连接服务器，最后绑定账号" width="720" />
 
 1. [新玩家须知](/start/welcome)：确认入服前需要了解的内容。
 2. [客户端安装](/start/install)：准备 Java 版所需的客户端环境。

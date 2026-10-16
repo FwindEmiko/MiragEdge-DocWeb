@@ -1,509 +1,509 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuites name="vitest tests" tests="220" failures="0" errors="0" time="3.7004781">
-    <testsuite name=".vitepress/test/config/config.test.ts" timestamp="2026-10-16T10:35:52.651Z" hostname="TUF-Air-F" tests="23" failures="0" errors="0" skipped="0" time="0.0056217">
-        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; 文件存在性 &gt; config.mts 文件应存在" time="0.0016403">
+<testsuites name="vitest tests" tests="220" failures="0" errors="0" time="4.1169373">
+    <testsuite name=".vitepress/test/config/config.test.ts" timestamp="2026-10-16T12:00:25.319Z" hostname="TUF-Air-F" tests="23" failures="0" errors="0" skipped="0" time="0.0068559">
+        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; 文件存在性 &gt; config.mts 文件应存在" time="0.0023636">
         </testcase>
-        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; 文件存在性 &gt; 应使用 defineConfig 导出配置" time="0.0002592">
+        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; 文件存在性 &gt; 应使用 defineConfig 导出配置" time="0.0004163">
         </testcase>
-        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; 顶层必要字段 &gt; 应配置 title（字符串字面量或常量引用）" time="0.000175">
+        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; 顶层必要字段 &gt; 应配置 title（字符串字面量或常量引用）" time="0.0002527">
         </testcase>
-        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; 顶层必要字段 &gt; 应配置 description（字符串字面量或常量引用）" time="0.0001354">
+        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; 顶层必要字段 &gt; 应配置 description（字符串字面量或常量引用）" time="0.0001442">
         </testcase>
-        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; 顶层必要字段 &gt; 应配置 base 路径（字符串字面量或常量引用）" time="0.0001319">
+        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; 顶层必要字段 &gt; 应配置 base 路径（字符串字面量或常量引用）" time="0.0001055">
         </testcase>
-        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; 顶层必要字段 &gt; 应支持通过环境变量配置子路径部署" time="0.0001816">
+        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; 顶层必要字段 &gt; 应支持通过环境变量配置子路径部署" time="0.0000911">
         </testcase>
-        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; 顶层必要字段 &gt; 应配置 outDir 输出目录" time="0.0001209">
+        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; 顶层必要字段 &gt; 应配置 outDir 输出目录" time="0.0000799">
         </testcase>
-        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; locales 与 head 配置 &gt; 应配置 locales 多语言" time="0.0001328">
+        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; locales 与 head 配置 &gt; 应配置 locales 多语言" time="0.0000789">
         </testcase>
-        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; locales 与 head 配置 &gt; 应配置中文根 locale" time="0.000087">
+        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; locales 与 head 配置 &gt; 应配置中文根 locale" time="0.0000752">
         </testcase>
-        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; locales 与 head 配置 &gt; 应配置 head 数组（SEO/OG 标签）" time="0.0000561">
+        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; locales 与 head 配置 &gt; 应配置 head 数组（SEO/OG 标签）" time="0.0000585">
         </testcase>
-        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; locales 与 head 配置 &gt; head 应包含 Open Graph 元数据" time="0.0000703">
+        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; locales 与 head 配置 &gt; head 应包含 Open Graph 元数据" time="0.0000812">
         </testcase>
-        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; locales 与 head 配置 &gt; head 应包含 canonical 或 JSON-LD 结构化数据" time="0.0000877">
+        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; locales 与 head 配置 &gt; head 应包含 canonical 或 JSON-LD 结构化数据" time="0.0000823">
         </testcase>
-        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; themeConfig 配置 &gt; 应配置 themeConfig 对象" time="0.0000767">
+        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; themeConfig 配置 &gt; 应配置 themeConfig 对象" time="0.0000888">
         </testcase>
-        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; themeConfig 配置 &gt; 应配置本地搜索" time="0.000081">
+        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; themeConfig 配置 &gt; 应配置本地搜索" time="0.0001004">
         </testcase>
-        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; themeConfig 配置 &gt; 应配置 nav 导航栏数组" time="0.0000957">
+        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; themeConfig 配置 &gt; 应配置 nav 导航栏数组" time="0.0000896">
         </testcase>
-        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; themeConfig 配置 &gt; 应配置 sidebar 侧边栏" time="0.0000946">
+        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; themeConfig 配置 &gt; 应配置 sidebar 侧边栏" time="0.000057">
         </testcase>
-        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; themeConfig 配置 &gt; 应配置 outline 本页目录" time="0.0001615">
+        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; themeConfig 配置 &gt; 应配置 outline 本页目录" time="0.0001314">
         </testcase>
-        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; Markdown 与 Vite 配置 &gt; 应配置 markdown 主题" time="0.0000878">
+        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; Markdown 与 Vite 配置 &gt; 应配置 markdown 主题" time="0.0000627">
         </testcase>
-        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; Markdown 与 Vite 配置 &gt; 应启用代码行号" time="0.0001134">
+        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; Markdown 与 Vite 配置 &gt; 应启用代码行号" time="0.0000867">
         </testcase>
-        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; Markdown 与 Vite 配置 &gt; 应配置 vite 插件（mermaid 等）" time="0.0000725">
+        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; Markdown 与 Vite 配置 &gt; 应配置 vite 插件（mermaid 等）" time="0.0000719">
         </testcase>
-        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; SEO 与构建版本 &gt; 应注入构建版本标识 meta（x-build-id）" time="0.0000557">
+        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; SEO 与构建版本 &gt; 应注入构建版本标识 meta（x-build-id）" time="0.0000475">
         </testcase>
-        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; SEO 与构建版本 &gt; 应配置 transformHead 钩子（自动注入每页 SEO）" time="0.000069">
+        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; SEO 与构建版本 &gt; 应配置 transformHead 钩子（自动注入每页 SEO）" time="0.0000512">
         </testcase>
-        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; SEO 与构建版本 &gt; 应配置 transformPageData 钩子（自动补全描述）" time="0.0000592">
-        </testcase>
-    </testsuite>
-    <testsuite name=".vitepress/test/unit/components/nav-icons.test.ts" timestamp="2026-10-16T10:35:52.658Z" hostname="TUF-Air-F" tests="19" failures="0" errors="0" skipped="0" time="0.0150576">
-        <testcase classname=".vitepress/test/unit/components/nav-icons.test.ts" name="nav-icons: emoji 提取逻辑 &gt; hasLeadingEmoji &gt; 单字符 emoji 开头应返回 true" time="0.0027912">
-        </testcase>
-        <testcase classname=".vitepress/test/unit/components/nav-icons.test.ts" name="nav-icons: emoji 提取逻辑 &gt; hasLeadingEmoji &gt; ZWJ 序列 emoji 开头应返回 true" time="0.0002875">
-        </testcase>
-        <testcase classname=".vitepress/test/unit/components/nav-icons.test.ts" name="nav-icons: emoji 提取逻辑 &gt; hasLeadingEmoji &gt; 纯文本开头应返回 false" time="0.0003171">
-        </testcase>
-        <testcase classname=".vitepress/test/unit/components/nav-icons.test.ts" name="nav-icons: emoji 提取逻辑 &gt; hasLeadingEmoji &gt; 空字符串应返回 false" time="0.0001285">
-        </testcase>
-        <testcase classname=".vitepress/test/unit/components/nav-icons.test.ts" name="nav-icons: emoji 提取逻辑 &gt; hasLeadingEmoji &gt; 数字开头应返回 false（数字不是 emoji）" time="0.0001234">
-        </testcase>
-        <testcase classname=".vitepress/test/unit/components/nav-icons.test.ts" name="nav-icons: emoji 提取逻辑 &gt; hasLeadingEmoji &gt; emoji 不在开头时应返回 false" time="0.0001175">
-        </testcase>
-        <testcase classname=".vitepress/test/unit/components/nav-icons.test.ts" name="nav-icons: emoji 提取逻辑 &gt; extractLeadingEmoji &gt; 应正确提取单字符 emoji 与剩余文本" time="0.0002591">
-        </testcase>
-        <testcase classname=".vitepress/test/unit/components/nav-icons.test.ts" name="nav-icons: emoji 提取逻辑 &gt; extractLeadingEmoji &gt; 应正确提取 ZWJ 序列 emoji（不拆分）" time="0.0001255">
-        </testcase>
-        <testcase classname=".vitepress/test/unit/components/nav-icons.test.ts" name="nav-icons: emoji 提取逻辑 &gt; extractLeadingEmoji &gt; 应正确提取肤色修饰符 emoji" time="0.0001651">
-        </testcase>
-        <testcase classname=".vitepress/test/unit/components/nav-icons.test.ts" name="nav-icons: emoji 提取逻辑 &gt; extractLeadingEmoji &gt; 无 emoji 时应返回 null" time="0.0001268">
-        </testcase>
-        <testcase classname=".vitepress/test/unit/components/nav-icons.test.ts" name="nav-icons: emoji 提取逻辑 &gt; extractLeadingEmoji &gt; 无空格分隔时应正确提取" time="0.0001683">
-        </testcase>
-        <testcase classname=".vitepress/test/unit/components/nav-icons.test.ts" name="nav-icons: emoji 提取逻辑 &gt; extractLeadingEmoji &gt; 应去除剩余文本的首尾空白" time="0.0001271">
-        </testcase>
-        <testcase classname=".vitepress/test/unit/components/nav-icons.test.ts" name="nav-icons: 元素增强逻辑 &gt; 应将开头 emoji 包裹到 nav-icon-emoji span 中" time="0.004372">
-        </testcase>
-        <testcase classname=".vitepress/test/unit/components/nav-icons.test.ts" name="nav-icons: 元素增强逻辑 &gt; 应把剩余文本作为文本节点处理" time="0.0006041">
-        </testcase>
-        <testcase classname=".vitepress/test/unit/components/nav-icons.test.ts" name="nav-icons: 元素增强逻辑 &gt; 无 emoji 时不应修改元素" time="0.0003684">
-        </testcase>
-        <testcase classname=".vitepress/test/unit/components/nav-icons.test.ts" name="nav-icons: 元素增强逻辑 &gt; 已处理过的元素不应重复处理（幂等）" time="0.000638">
-        </testcase>
-        <testcase classname=".vitepress/test/unit/components/nav-icons.test.ts" name="nav-icons: 元素增强逻辑 &gt; 传入 null 应安全跳过" time="0.0008816">
-        </testcase>
-        <testcase classname=".vitepress/test/unit/components/nav-icons.test.ts" name="nav-icons: 元素增强逻辑 &gt; 已有子元素的节点应跳过（避免破坏嵌套结构）" time="0.0002766">
-        </testcase>
-        <testcase classname=".vitepress/test/unit/components/nav-icons.test.ts" name="nav-icons: 元素增强逻辑 &gt; 空文本元素应安全跳过" time="0.0002014">
+        <testcase classname=".vitepress/test/config/config.test.ts" name="VitePress 配置文件验证 &gt; SEO 与构建版本 &gt; 应配置 transformPageData 钩子（自动补全描述）" time="0.0000519">
         </testcase>
     </testsuite>
-    <testsuite name=".vitepress/test/unit/scripts/generate-llms.test.mts" timestamp="2026-10-16T10:35:52.661Z" hostname="TUF-Air-F" tests="36" failures="0" errors="0" skipped="0" time="0.1920476">
-        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="parseFrontmatter &gt; 无 frontmatter 时返回空对象" time="0.0026037">
+    <testsuite name=".vitepress/test/unit/components/nav-icons.test.ts" timestamp="2026-10-16T12:00:25.325Z" hostname="TUF-Air-F" tests="19" failures="0" errors="0" skipped="0" time="0.0139201">
+        <testcase classname=".vitepress/test/unit/components/nav-icons.test.ts" name="nav-icons: emoji 提取逻辑 &gt; hasLeadingEmoji &gt; 单字符 emoji 开头应返回 true" time="0.0025162">
         </testcase>
-        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="parseFrontmatter &gt; 解析简单 title / description 标量字段" time="0.0003798">
+        <testcase classname=".vitepress/test/unit/components/nav-icons.test.ts" name="nav-icons: emoji 提取逻辑 &gt; hasLeadingEmoji &gt; ZWJ 序列 emoji 开头应返回 true" time="0.0002415">
         </testcase>
-        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="parseFrontmatter &gt; 剥离单双引号包裹的值" time="0.0002589">
+        <testcase classname=".vitepress/test/unit/components/nav-icons.test.ts" name="nav-icons: emoji 提取逻辑 &gt; hasLeadingEmoji &gt; 纯文本开头应返回 false" time="0.0002914">
         </testcase>
-        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="parseFrontmatter &gt; 识别 layout / outline / lastUpdated 字段" time="0.0003236">
+        <testcase classname=".vitepress/test/unit/components/nav-icons.test.ts" name="nav-icons: emoji 提取逻辑 &gt; hasLeadingEmoji &gt; 空字符串应返回 false" time="0.000142">
         </testcase>
-        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="parseFrontmatter &gt; 跳过块级字段（hero / features 等缩进块）" time="0.0007144">
+        <testcase classname=".vitepress/test/unit/components/nav-icons.test.ts" name="nav-icons: emoji 提取逻辑 &gt; hasLeadingEmoji &gt; 数字开头应返回 false（数字不是 emoji）" time="0.0001148">
         </testcase>
-        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="extractH1 &gt; 返回首个 H1 文本" time="0.0002137">
+        <testcase classname=".vitepress/test/unit/components/nav-icons.test.ts" name="nav-icons: emoji 提取逻辑 &gt; hasLeadingEmoji &gt; emoji 不在开头时应返回 false" time="0.0000885">
         </testcase>
-        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="extractH1 &gt; 跳过 H2 / H3，仅匹配 H1" time="0.0001951">
+        <testcase classname=".vitepress/test/unit/components/nav-icons.test.ts" name="nav-icons: emoji 提取逻辑 &gt; extractLeadingEmoji &gt; 应正确提取单字符 emoji 与剩余文本" time="0.0002476">
         </testcase>
-        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="extractH1 &gt; 无 H1 时返回空字符串" time="0.0001195">
+        <testcase classname=".vitepress/test/unit/components/nav-icons.test.ts" name="nav-icons: emoji 提取逻辑 &gt; extractLeadingEmoji &gt; 应正确提取 ZWJ 序列 emoji（不拆分）" time="0.0001497">
         </testcase>
-        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="extractH1 &gt; 容忍标题尾随空白" time="0.000097">
+        <testcase classname=".vitepress/test/unit/components/nav-icons.test.ts" name="nav-icons: emoji 提取逻辑 &gt; extractLeadingEmoji &gt; 应正确提取肤色修饰符 emoji" time="0.0001656">
         </testcase>
-        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="extractFirstParagraph &gt; 跳过标题与引用，返回第一段正文" time="0.0003836">
+        <testcase classname=".vitepress/test/unit/components/nav-icons.test.ts" name="nav-icons: emoji 提取逻辑 &gt; extractLeadingEmoji &gt; 无 emoji 时应返回 null" time="0.0001517">
         </testcase>
-        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="extractFirstParagraph &gt; 剥离行内 markdown 语法（粗体 / 行内代码 / 链接）" time="0.0001325">
+        <testcase classname=".vitepress/test/unit/components/nav-icons.test.ts" name="nav-icons: emoji 提取逻辑 &gt; extractLeadingEmoji &gt; 无空格分隔时应正确提取" time="0.0002301">
         </testcase>
-        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="extractFirstParagraph &gt; 跳过列表项与表格行" time="0.0000618">
+        <testcase classname=".vitepress/test/unit/components/nav-icons.test.ts" name="nav-icons: emoji 提取逻辑 &gt; extractLeadingEmoji &gt; 应去除剩余文本的首尾空白" time="0.0004283">
         </testcase>
-        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="extractFirstParagraph &gt; 跳过 HTML 标签起始行" time="0.000072">
+        <testcase classname=".vitepress/test/unit/components/nav-icons.test.ts" name="nav-icons: 元素增强逻辑 &gt; 应将开头 emoji 包裹到 nav-icon-emoji span 中" time="0.0042684">
         </testcase>
-        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="extractFirstParagraph &gt; 超长段落截断并加省略号" time="0.0000848">
+        <testcase classname=".vitepress/test/unit/components/nav-icons.test.ts" name="nav-icons: 元素增强逻辑 &gt; 应把剩余文本作为文本节点处理" time="0.0004972">
         </testcase>
-        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="extractFirstParagraph &gt; 无可用段落时返回空字符串" time="0.0000636">
+        <testcase classname=".vitepress/test/unit/components/nav-icons.test.ts" name="nav-icons: 元素增强逻辑 &gt; 无 emoji 时不应修改元素" time="0.0002532">
         </testcase>
-        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="processVueComponents &gt; 自闭合组件替换为占位说明" time="0.0005384">
+        <testcase classname=".vitepress/test/unit/components/nav-icons.test.ts" name="nav-icons: 元素增强逻辑 &gt; 已处理过的元素不应重复处理（幂等）" time="0.0008541">
         </testcase>
-        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="processVueComponents &gt; 提取自闭合组件的 title / link / icon 属性" time="0.0003477">
+        <testcase classname=".vitepress/test/unit/components/nav-icons.test.ts" name="nav-icons: 元素增强逻辑 &gt; 传入 null 应安全跳过" time="0.0010314">
         </testcase>
-        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="processVueComponents &gt; 容器型组件保留内部文本并加组件头注释" time="0.0003225">
+        <testcase classname=".vitepress/test/unit/components/nav-icons.test.ts" name="nav-icons: 元素增强逻辑 &gt; 已有子元素的节点应跳过（避免破坏嵌套结构）" time="0.0002426">
         </testcase>
-        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="processVueComponents &gt; 保留代码块内的 Vue 标签原样不动" time="0.0001735">
-        </testcase>
-        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="processVueComponents &gt; 剥离行内 HTML 标签但保留内容" time="0.0000945">
-        </testcase>
-        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="cleanMarkdown &gt; 剥离 YAML frontmatter、脚本、样式、HTML 注释" time="0.0008337">
-        </testcase>
-        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="cleanMarkdown &gt; 剥离 VitePress 容器标记 ::: 但保留内部内容" time="0.0001858">
-        </testcase>
-        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="cleanMarkdown &gt; 相对链接转换为站点绝对地址" time="0.0002267">
-        </testcase>
-        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="cleanMarkdown &gt; 保留外部链接与锚点不动" time="0.0001153">
-        </testcase>
-        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="cleanMarkdown &gt; 折叠 3 个及以上换行为 2 个" time="0.0001971">
-        </testcase>
-        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="cleanMarkdown &gt; layout: home 页面把 hero / features 展开为 Markdown" time="0.0009025">
-        </testcase>
-        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="cleanMarkdown &gt; frontmatter 缺失 title 时回退到 H1" time="0.0001402">
-        </testcase>
-        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="cleanMarkdown &gt; frontmatter 与 H1 均无标题时回退到文件名" time="0.0001537">
-        </testcase>
-        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="scanMarkdownFiles &gt; 递归扫描所有 .md 文件并返回 posix 路径" time="0.0039131">
-        </testcase>
-        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="scanMarkdownFiles &gt; 默认排除 node_modules / public 等目录" time="0.0012034">
-        </testcase>
-        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="scanMarkdownFiles &gt; 跳过隐藏文件" time="0.001837">
-        </testcase>
-        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="scanMarkdownFiles &gt; 结果已排序" time="0.0013063">
-        </testcase>
-        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="scanMarkdownFiles &gt; 支持自定义 excludeDirs" time="0.0012316">
-        </testcase>
-        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="scanMarkdownFiles &gt; Windows 反斜杠路径被规范化为 posix 风格" time="0.0011661">
-        </testcase>
-        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="generateLlms &gt; checkOnly 模式扫描真实源码并返回统计，不写文件" time="0.0968693">
-        </testcase>
-        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="generateLlms &gt; checkOnly 模式不返回写盘相关字段" time="0.0502366">
+        <testcase classname=".vitepress/test/unit/components/nav-icons.test.ts" name="nav-icons: 元素增强逻辑 &gt; 空文本元素应安全跳过" time="0.0001734">
         </testcase>
     </testsuite>
-    <testsuite name=".vitepress/test/unit/composables/adaptive-effects.test.ts" timestamp="2026-10-16T10:35:52.668Z" hostname="TUF-Air-F" tests="15" failures="0" errors="0" skipped="0" time="0.0046609">
-        <testcase classname=".vitepress/test/unit/composables/adaptive-effects.test.ts" name="computeFrameMetrics: 帧间隔统计 &gt; 空样本返回零值" time="0.0017733">
+    <testsuite name=".vitepress/test/unit/scripts/generate-llms.test.mts" timestamp="2026-10-16T12:00:25.331Z" hostname="TUF-Air-F" tests="36" failures="0" errors="0" skipped="0" time="0.1946839">
+        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="parseFrontmatter &gt; 无 frontmatter 时返回空对象" time="0.0030034">
         </testcase>
-        <testcase classname=".vitepress/test/unit/composables/adaptive-effects.test.ts" name="computeFrameMetrics: 帧间隔统计 &gt; 稳定 60fps 样本：中位 16.7ms，无掉帧" time="0.0004288">
+        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="parseFrontmatter &gt; 解析简单 title / description 标量字段" time="0.0007336">
         </testcase>
-        <testcase classname=".vitepress/test/unit/composables/adaptive-effects.test.ts" name="computeFrameMetrics: 帧间隔统计 &gt; 偶发长帧会计入掉帧比例" time="0.0001755">
+        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="parseFrontmatter &gt; 剥离单双引号包裹的值" time="0.0003618">
         </testcase>
-        <testcase classname=".vitepress/test/unit/composables/adaptive-effects.test.ts" name="computeInteractionMetrics: 交互延迟统计 &gt; 过滤非有限值并统计慢交互" time="0.0001985">
+        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="parseFrontmatter &gt; 识别 layout / outline / lastUpdated 字段" time="0.0004326">
         </testcase>
-        <testcase classname=".vitepress/test/unit/composables/adaptive-effects.test.ts" name="isInteractionJank: 交互期掉帧判定 &gt; 样本不足（frames &lt; 12）不判定为掉帧" time="0.0000802">
+        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="parseFrontmatter &gt; 跳过块级字段（hero / features 等缩进块）" time="0.0006201">
         </testcase>
-        <testcase classname=".vitepress/test/unit/composables/adaptive-effects.test.ts" name="isInteractionJank: 交互期掉帧判定 &gt; P90 帧间隔 &gt;= 44ms 判定为掉帧" time="0.0000507">
+        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="extractH1 &gt; 返回首个 H1 文本" time="0.0002021">
         </testcase>
-        <testcase classname=".vitepress/test/unit/composables/adaptive-effects.test.ts" name="isInteractionJank: 交互期掉帧判定 &gt; 掉帧比例 &gt;= 35% 判定为掉帧" time="0.0000471">
+        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="extractH1 &gt; 跳过 H2 / H3，仅匹配 H1" time="0.0002249">
         </testcase>
-        <testcase classname=".vitepress/test/unit/composables/adaptive-effects.test.ts" name="isInteractionJank: 交互期掉帧判定 &gt; 健康帧率不判定为掉帧" time="0.0000459">
+        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="extractH1 &gt; 无 H1 时返回空字符串" time="0.0001798">
         </testcase>
-        <testcase classname=".vitepress/test/unit/composables/adaptive-effects.test.ts" name="evaluatePerformanceSignals: 降级判定 &gt; 健康设备（60fps、无长任务、无慢交互）不降级" time="0.0001813">
+        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="extractH1 &gt; 容忍标题尾随空白" time="0.0001209">
         </testcase>
-        <testcase classname=".vitepress/test/unit/composables/adaptive-effects.test.ts" name="evaluatePerformanceSignals: 降级判定 &gt; 严重掉帧（P90 &gt;= 48ms）直接降级" time="0.0001101">
+        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="extractFirstParagraph &gt; 跳过标题与引用，返回第一段正文" time="0.0003962">
         </testcase>
-        <testcase classname=".vitepress/test/unit/composables/adaptive-effects.test.ts" name="evaluatePerformanceSignals: 降级判定 &gt; 轻微掉帧 + 静态低配信号 → 降级" time="0.0000582">
+        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="extractFirstParagraph &gt; 剥离行内 markdown 语法（粗体 / 行内代码 / 链接）" time="0.0002361">
         </testcase>
-        <testcase classname=".vitepress/test/unit/composables/adaptive-effects.test.ts" name="evaluatePerformanceSignals: 降级判定 &gt; 轻微掉帧但无其它证据 → 不降级（避免误伤）" time="0.0000854">
+        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="extractFirstParagraph &gt; 跳过列表项与表格行" time="0.0001441">
         </testcase>
-        <testcase classname=".vitepress/test/unit/composables/adaptive-effects.test.ts" name="evaluatePerformanceSignals: 降级判定 &gt; 主线程长任务极端严重 → 降级" time="0.0000591">
+        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="extractFirstParagraph &gt; 跳过 HTML 标签起始行" time="0.0001258">
         </testcase>
-        <testcase classname=".vitepress/test/unit/composables/adaptive-effects.test.ts" name="evaluatePerformanceSignals: 降级判定 &gt; 交互延迟极端（两笔慢交互）→ 降级" time="0.0000482">
+        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="extractFirstParagraph &gt; 超长段落截断并加省略号" time="0.00016">
         </testcase>
-        <testcase classname=".vitepress/test/unit/composables/adaptive-effects.test.ts" name="evaluatePerformanceSignals: 降级判定 &gt; 样本不足（frames &lt; 16）时帧信号不参与判定" time="0.0000703">
+        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="extractFirstParagraph &gt; 无可用段落时返回空字符串" time="0.0001159">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="processVueComponents &gt; 自闭合组件替换为占位说明" time="0.0008755">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="processVueComponents &gt; 提取自闭合组件的 title / link / icon 属性" time="0.0003014">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="processVueComponents &gt; 容器型组件保留内部文本并加组件头注释" time="0.0002707">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="processVueComponents &gt; 保留代码块内的 Vue 标签原样不动" time="0.0001706">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="processVueComponents &gt; 剥离行内 HTML 标签但保留内容" time="0.0001051">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="cleanMarkdown &gt; 剥离 YAML frontmatter、脚本、样式、HTML 注释" time="0.0010046">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="cleanMarkdown &gt; 剥离 VitePress 容器标记 ::: 但保留内部内容" time="0.0002985">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="cleanMarkdown &gt; 相对链接转换为站点绝对地址" time="0.0003675">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="cleanMarkdown &gt; 保留外部链接与锚点不动" time="0.0001953">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="cleanMarkdown &gt; 折叠 3 个及以上换行为 2 个" time="0.0002102">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="cleanMarkdown &gt; layout: home 页面把 hero / features 展开为 Markdown" time="0.0010948">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="cleanMarkdown &gt; frontmatter 缺失 title 时回退到 H1" time="0.0001574">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="cleanMarkdown &gt; frontmatter 与 H1 均无标题时回退到文件名" time="0.000191">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="scanMarkdownFiles &gt; 递归扫描所有 .md 文件并返回 posix 路径" time="0.0073368">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="scanMarkdownFiles &gt; 默认排除 node_modules / public 等目录" time="0.003434">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="scanMarkdownFiles &gt; 跳过隐藏文件" time="0.0014348">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="scanMarkdownFiles &gt; 结果已排序" time="0.0011847">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="scanMarkdownFiles &gt; 支持自定义 excludeDirs" time="0.0011195">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="scanMarkdownFiles &gt; Windows 反斜杠路径被规范化为 posix 风格" time="0.0009629">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="generateLlms &gt; checkOnly 模式扫描真实源码并返回统计，不写文件" time="0.0823729">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/scripts/generate-llms.test.mts" name="generateLlms &gt; checkOnly 模式不返回写盘相关字段" time="0.0576451">
         </testcase>
     </testsuite>
-    <testsuite name=".vitepress/test/unit/composables/effects-toggle.test.ts" timestamp="2026-10-16T10:35:52.671Z" hostname="TUF-Air-F" tests="28" failures="0" errors="0" skipped="0" time="0.0166969">
-        <testcase classname=".vitepress/test/unit/composables/effects-toggle.test.ts" name="useEffectsToggle: 特效开关 composable &gt; initEffectsToggleState: 状态初始化 &gt; 无存储偏好时桌面端应默认开启" time="0.0032111">
+    <testsuite name=".vitepress/test/unit/utils/css-value.test.ts" timestamp="2026-10-16T12:00:25.336Z" hostname="TUF-Air-F" tests="3" failures="0" errors="0" skipped="0" time="0.01079">
+        <testcase classname=".vitepress/test/unit/utils/css-value.test.ts" name="normalizeCssLength &gt; 数字与纯数字字符串应追加 px" time="0.005756">
         </testcase>
-        <testcase classname=".vitepress/test/unit/composables/effects-toggle.test.ts" name="useEffectsToggle: 特效开关 composable &gt; initEffectsToggleState: 状态初始化 &gt; 无存储偏好时移动端应默认关闭" time="0.0005469">
+        <testcase classname=".vitepress/test/unit/utils/css-value.test.ts" name="normalizeCssLength &gt; 合法 CSS 长度应原样保留" time="0.0008149">
         </testcase>
-        <testcase classname=".vitepress/test/unit/composables/effects-toggle.test.ts" name="useEffectsToggle: 特效开关 composable &gt; initEffectsToggleState: 状态初始化 &gt; 移动端断点 767px 应判定为移动端（默认关闭）" time="0.0003463">
+        <testcase classname=".vitepress/test/unit/utils/css-value.test.ts" name="normalizeCssLength &gt; 空值和非有限数字应忽略" time="0.0007575">
         </testcase>
-        <testcase classname=".vitepress/test/unit/composables/effects-toggle.test.ts" name="useEffectsToggle: 特效开关 composable &gt; initEffectsToggleState: 状态初始化 &gt; 桌面端断点 768px 应判定为桌面端（默认开启）" time="0.0005425">
+    </testsuite>
+    <testsuite name=".vitepress/test/unit/utils/markdown.test.ts" timestamp="2026-10-16T12:00:25.337Z" hostname="TUF-Air-F" tests="3" failures="0" errors="0" skipped="0" time="0.0062282">
+        <testcase classname=".vitepress/test/unit/utils/markdown.test.ts" name="markdown 安全格式化 &gt; 允许常用安全协议、锚点和相对路径" time="0.0034368">
         </testcase>
-        <testcase classname=".vitepress/test/unit/composables/effects-toggle.test.ts" name="useEffectsToggle: 特效开关 composable &gt; initEffectsToggleState: 状态初始化 &gt; localStorage 存储为 &quot;true&quot; 时应恢复开启状态" time="0.0004094">
+        <testcase classname=".vitepress/test/unit/utils/markdown.test.ts" name="markdown 安全格式化 &gt; 拒绝脚本、数据和协议相对 URL" time="0.0003281">
         </testcase>
-        <testcase classname=".vitepress/test/unit/composables/effects-toggle.test.ts" name="useEffectsToggle: 特效开关 composable &gt; initEffectsToggleState: 状态初始化 &gt; localStorage 存储为 &quot;false&quot; 时应恢复关闭状态" time="0.0003181">
+        <testcase classname=".vitepress/test/unit/utils/markdown.test.ts" name="markdown 安全格式化 &gt; 转义 HTML，并只渲染安全链接" time="0.0005215">
         </testcase>
-        <testcase classname=".vitepress/test/unit/composables/effects-toggle.test.ts" name="useEffectsToggle: 特效开关 composable &gt; initEffectsToggleState: 状态初始化 &gt; localStorage 存储值优先于移动端默认值" time="0.0003227">
+    </testsuite>
+    <testsuite name=".vitepress/test/unit/composables/adaptive-effects.test.ts" timestamp="2026-10-16T12:00:25.339Z" hostname="TUF-Air-F" tests="15" failures="0" errors="0" skipped="0" time="0.0046078">
+        <testcase classname=".vitepress/test/unit/composables/adaptive-effects.test.ts" name="computeFrameMetrics: 帧间隔统计 &gt; 空样本返回零值" time="0.0017483">
         </testcase>
-        <testcase classname=".vitepress/test/unit/composables/effects-toggle.test.ts" name="useEffectsToggle: 特效开关 composable &gt; useEffectsToggle: 切换与持久化 &gt; 初始状态为 true 时 toggle 应切换为 false" time="0.0004539">
+        <testcase classname=".vitepress/test/unit/composables/adaptive-effects.test.ts" name="computeFrameMetrics: 帧间隔统计 &gt; 稳定 60fps 样本：中位 16.7ms，无掉帧" time="0.0003905">
         </testcase>
-        <testcase classname=".vitepress/test/unit/composables/effects-toggle.test.ts" name="useEffectsToggle: 特效开关 composable &gt; useEffectsToggle: 切换与持久化 &gt; 当前状态为 false 时 toggle 应切换为 true" time="0.0003281">
+        <testcase classname=".vitepress/test/unit/composables/adaptive-effects.test.ts" name="computeFrameMetrics: 帧间隔统计 &gt; 偶发长帧会计入掉帧比例" time="0.0001928">
         </testcase>
-        <testcase classname=".vitepress/test/unit/composables/effects-toggle.test.ts" name="useEffectsToggle: 特效开关 composable &gt; useEffectsToggle: 切换与持久化 &gt; 连续 toggle 应在 true/false 间来回切换并同步持久化" time="0.0003515">
+        <testcase classname=".vitepress/test/unit/composables/adaptive-effects.test.ts" name="computeInteractionMetrics: 交互延迟统计 &gt; 过滤非有限值并统计慢交互" time="0.0001652">
         </testcase>
-        <testcase classname=".vitepress/test/unit/composables/effects-toggle.test.ts" name="useEffectsToggle: 特效开关 composable &gt; useEffectsToggle: 切换与持久化 &gt; toggle 后 DOM 类名应同步更新" time="0.0003434">
+        <testcase classname=".vitepress/test/unit/composables/adaptive-effects.test.ts" name="isInteractionJank: 交互期掉帧判定 &gt; 样本不足（frames &lt; 12）不判定为掉帧" time="0.0000779">
         </testcase>
-        <testcase classname=".vitepress/test/unit/composables/effects-toggle.test.ts" name="useEffectsToggle: 特效开关 composable &gt; useEffectsToggle: 切换与持久化 &gt; useEffectsToggle 返回的 effectsEnabled 应与全局 ref 同步" time="0.0002313">
+        <testcase classname=".vitepress/test/unit/composables/adaptive-effects.test.ts" name="isInteractionJank: 交互期掉帧判定 &gt; P90 帧间隔 &gt;= 44ms 判定为掉帧" time="0.0000567">
         </testcase>
-        <testcase classname=".vitepress/test/unit/composables/effects-toggle.test.ts" name="useEffectsToggle: 自适应性能降级 &gt; isStaticLowEndDevice: 静态低配信号 &gt; 无任何低配信号时应返回 false" time="0.0003663">
+        <testcase classname=".vitepress/test/unit/composables/adaptive-effects.test.ts" name="isInteractionJank: 交互期掉帧判定 &gt; 掉帧比例 &gt;= 35% 判定为掉帧" time="0.0000483">
         </testcase>
-        <testcase classname=".vitepress/test/unit/composables/effects-toggle.test.ts" name="useEffectsToggle: 自适应性能降级 &gt; isStaticLowEndDevice: 静态低配信号 &gt; deviceMemory &lt;= 2 时应判定为低配" time="0.00024">
+        <testcase classname=".vitepress/test/unit/composables/adaptive-effects.test.ts" name="isInteractionJank: 交互期掉帧判定 &gt; 健康帧率不判定为掉帧" time="0.0000445">
         </testcase>
-        <testcase classname=".vitepress/test/unit/composables/effects-toggle.test.ts" name="useEffectsToggle: 自适应性能降级 &gt; isStaticLowEndDevice: 静态低配信号 &gt; hardwareConcurrency &lt;= 2 时应判定为低配" time="0.0002287">
+        <testcase classname=".vitepress/test/unit/composables/adaptive-effects.test.ts" name="evaluatePerformanceSignals: 降级判定 &gt; 健康设备（60fps、无长任务、无慢交互）不降级" time="0.0001578">
         </testcase>
-        <testcase classname=".vitepress/test/unit/composables/effects-toggle.test.ts" name="useEffectsToggle: 自适应性能降级 &gt; isStaticLowEndDevice: 静态低配信号 &gt; 开启流量节省模式时应判定为低配" time="0.0002298">
+        <testcase classname=".vitepress/test/unit/composables/adaptive-effects.test.ts" name="evaluatePerformanceSignals: 降级判定 &gt; 严重掉帧（P90 &gt;= 48ms）直接降级" time="0.0000975">
         </testcase>
-        <testcase classname=".vitepress/test/unit/composables/effects-toggle.test.ts" name="useEffectsToggle: 自适应性能降级 &gt; isStaticLowEndDevice: 静态低配信号 &gt; 信号缺失（undefined）时按非低配处理" time="0.0002965">
+        <testcase classname=".vitepress/test/unit/composables/adaptive-effects.test.ts" name="evaluatePerformanceSignals: 降级判定 &gt; 轻微掉帧 + 静态低配信号 → 降级" time="0.0000553">
         </testcase>
-        <testcase classname=".vitepress/test/unit/composables/effects-toggle.test.ts" name="useEffectsToggle: 自适应性能降级 &gt; isSuspectTablet: 横屏触摸平板检测 &gt; 横屏 + 粗指针主输入 → 判定为疑似平板" time="0.0003108">
+        <testcase classname=".vitepress/test/unit/composables/adaptive-effects.test.ts" name="evaluatePerformanceSignals: 降级判定 &gt; 轻微掉帧但无其它证据 → 不降级（避免误伤）" time="0.000075">
         </testcase>
-        <testcase classname=".vitepress/test/unit/composables/effects-toggle.test.ts" name="useEffectsToggle: 自适应性能降级 &gt; isSuspectTablet: 横屏触摸平板检测 &gt; 竖屏宽度（&lt;=767px）不算横屏平板" time="0.0002529">
+        <testcase classname=".vitepress/test/unit/composables/adaptive-effects.test.ts" name="evaluatePerformanceSignals: 降级判定 &gt; 主线程长任务极端严重 → 降级" time="0.0000523">
         </testcase>
-        <testcase classname=".vitepress/test/unit/composables/effects-toggle.test.ts" name="useEffectsToggle: 自适应性能降级 &gt; isSuspectTablet: 横屏触摸平板检测 &gt; 精细指针（鼠标）设备不算疑似平板" time="0.0002846">
+        <testcase classname=".vitepress/test/unit/composables/adaptive-effects.test.ts" name="evaluatePerformanceSignals: 降级判定 &gt; 交互延迟极端（两笔慢交互）→ 降级" time="0.0000478">
         </testcase>
-        <testcase classname=".vitepress/test/unit/composables/effects-toggle.test.ts" name="useEffectsToggle: 自适应性能降级 &gt; hasStoredEffectsPreference: 显式偏好检测 &gt; 无记录时返回 false" time="0.0002407">
+        <testcase classname=".vitepress/test/unit/composables/adaptive-effects.test.ts" name="evaluatePerformanceSignals: 降级判定 &gt; 样本不足（frames &lt; 16）时帧信号不参与判定" time="0.0000694">
         </testcase>
-        <testcase classname=".vitepress/test/unit/composables/effects-toggle.test.ts" name="useEffectsToggle: 自适应性能降级 &gt; hasStoredEffectsPreference: 显式偏好检测 &gt; 有记录时返回 true" time="0.0002538">
+    </testsuite>
+    <testsuite name=".vitepress/test/unit/composables/effects-toggle.test.ts" timestamp="2026-10-16T12:00:25.342Z" hostname="TUF-Air-F" tests="28" failures="0" errors="0" skipped="0" time="0.0209348">
+        <testcase classname=".vitepress/test/unit/composables/effects-toggle.test.ts" name="useEffectsToggle: 特效开关 composable &gt; initEffectsToggleState: 状态初始化 &gt; 无存储偏好时桌面端应默认开启" time="0.0043448">
         </testcase>
-        <testcase classname=".vitepress/test/unit/composables/effects-toggle.test.ts" name="useEffectsToggle: 自适应性能降级 &gt; applyAutoEffects: 探针结果落地 &gt; 无显式偏好时自动关闭特效并同步 DOM，但不写入 localStorage" time="0.0014213">
+        <testcase classname=".vitepress/test/unit/composables/effects-toggle.test.ts" name="useEffectsToggle: 特效开关 composable &gt; initEffectsToggleState: 状态初始化 &gt; 无存储偏好时移动端应默认关闭" time="0.0010607">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/composables/effects-toggle.test.ts" name="useEffectsToggle: 特效开关 composable &gt; initEffectsToggleState: 状态初始化 &gt; 移动端断点 767px 应判定为移动端（默认关闭）" time="0.0004843">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/composables/effects-toggle.test.ts" name="useEffectsToggle: 特效开关 composable &gt; initEffectsToggleState: 状态初始化 &gt; 桌面端断点 768px 应判定为桌面端（默认开启）" time="0.0004534">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/composables/effects-toggle.test.ts" name="useEffectsToggle: 特效开关 composable &gt; initEffectsToggleState: 状态初始化 &gt; localStorage 存储为 &quot;true&quot; 时应恢复开启状态" time="0.0003579">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/composables/effects-toggle.test.ts" name="useEffectsToggle: 特效开关 composable &gt; initEffectsToggleState: 状态初始化 &gt; localStorage 存储为 &quot;false&quot; 时应恢复关闭状态" time="0.0002936">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/composables/effects-toggle.test.ts" name="useEffectsToggle: 特效开关 composable &gt; initEffectsToggleState: 状态初始化 &gt; localStorage 存储值优先于移动端默认值" time="0.0002724">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/composables/effects-toggle.test.ts" name="useEffectsToggle: 特效开关 composable &gt; useEffectsToggle: 切换与持久化 &gt; 初始状态为 true 时 toggle 应切换为 false" time="0.0004638">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/composables/effects-toggle.test.ts" name="useEffectsToggle: 特效开关 composable &gt; useEffectsToggle: 切换与持久化 &gt; 当前状态为 false 时 toggle 应切换为 true" time="0.0004602">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/composables/effects-toggle.test.ts" name="useEffectsToggle: 特效开关 composable &gt; useEffectsToggle: 切换与持久化 &gt; 连续 toggle 应在 true/false 间来回切换并同步持久化" time="0.00039">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/composables/effects-toggle.test.ts" name="useEffectsToggle: 特效开关 composable &gt; useEffectsToggle: 切换与持久化 &gt; toggle 后 DOM 类名应同步更新" time="0.0005275">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/composables/effects-toggle.test.ts" name="useEffectsToggle: 特效开关 composable &gt; useEffectsToggle: 切换与持久化 &gt; useEffectsToggle 返回的 effectsEnabled 应与全局 ref 同步" time="0.0003939">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/composables/effects-toggle.test.ts" name="useEffectsToggle: 自适应性能降级 &gt; isStaticLowEndDevice: 静态低配信号 &gt; 无任何低配信号时应返回 false" time="0.0003517">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/composables/effects-toggle.test.ts" name="useEffectsToggle: 自适应性能降级 &gt; isStaticLowEndDevice: 静态低配信号 &gt; deviceMemory &lt;= 2 时应判定为低配" time="0.000323">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/composables/effects-toggle.test.ts" name="useEffectsToggle: 自适应性能降级 &gt; isStaticLowEndDevice: 静态低配信号 &gt; hardwareConcurrency &lt;= 2 时应判定为低配" time="0.0003942">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/composables/effects-toggle.test.ts" name="useEffectsToggle: 自适应性能降级 &gt; isStaticLowEndDevice: 静态低配信号 &gt; 开启流量节省模式时应判定为低配" time="0.0003176">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/composables/effects-toggle.test.ts" name="useEffectsToggle: 自适应性能降级 &gt; isStaticLowEndDevice: 静态低配信号 &gt; 信号缺失（undefined）时按非低配处理" time="0.0002169">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/composables/effects-toggle.test.ts" name="useEffectsToggle: 自适应性能降级 &gt; isSuspectTablet: 横屏触摸平板检测 &gt; 横屏 + 粗指针主输入 → 判定为疑似平板" time="0.0001939">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/composables/effects-toggle.test.ts" name="useEffectsToggle: 自适应性能降级 &gt; isSuspectTablet: 横屏触摸平板检测 &gt; 竖屏宽度（&lt;=767px）不算横屏平板" time="0.0001608">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/composables/effects-toggle.test.ts" name="useEffectsToggle: 自适应性能降级 &gt; isSuspectTablet: 横屏触摸平板检测 &gt; 精细指针（鼠标）设备不算疑似平板" time="0.0002424">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/composables/effects-toggle.test.ts" name="useEffectsToggle: 自适应性能降级 &gt; hasStoredEffectsPreference: 显式偏好检测 &gt; 无记录时返回 false" time="0.0003624">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/composables/effects-toggle.test.ts" name="useEffectsToggle: 自适应性能降级 &gt; hasStoredEffectsPreference: 显式偏好检测 &gt; 有记录时返回 true" time="0.000237">
+        </testcase>
+        <testcase classname=".vitepress/test/unit/composables/effects-toggle.test.ts" name="useEffectsToggle: 自适应性能降级 &gt; applyAutoEffects: 探针结果落地 &gt; 无显式偏好时自动关闭特效并同步 DOM，但不写入 localStorage" time="0.0017994">
             <system-out>
 [effects-auto] 已自动关闭页面特效（帧率不达标），可点击导航栏特效开关手动恢复
 
             </system-out>
         </testcase>
-        <testcase classname=".vitepress/test/unit/composables/effects-toggle.test.ts" name="useEffectsToggle: 自适应性能降级 &gt; applyAutoEffects: 探针结果落地 &gt; 自动关闭后可自动恢复开启" time="0.000636">
+        <testcase classname=".vitepress/test/unit/composables/effects-toggle.test.ts" name="useEffectsToggle: 自适应性能降级 &gt; applyAutoEffects: 探针结果落地 &gt; 自动关闭后可自动恢复开启" time="0.0010361">
             <system-out>
 [effects-auto] 已自动关闭页面特效（帧率不达标），可点击导航栏特效开关手动恢复
 
             </system-out>
         </testcase>
-        <testcase classname=".vitepress/test/unit/composables/effects-toggle.test.ts" name="useEffectsToggle: 自适应性能降级 &gt; applyAutoEffects: 探针结果落地 &gt; 已有显式偏好时不干预并返回 false" time="0.0002659">
+        <testcase classname=".vitepress/test/unit/composables/effects-toggle.test.ts" name="useEffectsToggle: 自适应性能降级 &gt; applyAutoEffects: 探针结果落地 &gt; 已有显式偏好时不干预并返回 false" time="0.0003042">
         </testcase>
-        <testcase classname=".vitepress/test/unit/composables/effects-toggle.test.ts" name="useEffectsToggle: 自适应性能降级 &gt; applyAutoEffects: 探针结果落地 &gt; 自动降级后用户手动切换应清除自动接管状态并持久化" time="0.0003123">
+        <testcase classname=".vitepress/test/unit/composables/effects-toggle.test.ts" name="useEffectsToggle: 自适应性能降级 &gt; applyAutoEffects: 探针结果落地 &gt; 自动降级后用户手动切换应清除自动接管状态并持久化" time="0.0004621">
             <system-out>
 [effects-auto] 已自动关闭页面特效（帧率不达标），可点击导航栏特效开关手动恢复
 
             </system-out>
         </testcase>
-        <testcase classname=".vitepress/test/unit/composables/effects-toggle.test.ts" name="useEffectsToggle: 自适应性能降级 &gt; initEffectsToggleState: 静态低配默认关闭 &gt; 桌面宽度但静态低配设备默认关闭" time="0.0002174">
+        <testcase classname=".vitepress/test/unit/composables/effects-toggle.test.ts" name="useEffectsToggle: 自适应性能降级 &gt; initEffectsToggleState: 静态低配默认关闭 &gt; 桌面宽度但静态低配设备默认关闭" time="0.000381">
         </testcase>
-        <testcase classname=".vitepress/test/unit/composables/effects-toggle.test.ts" name="useEffectsToggle: 自适应性能降级 &gt; initEffectsToggleState: 静态低配默认关闭 &gt; 静态低配时显式开启偏好仍优先" time="0.0001414">
-        </testcase>
-    </testsuite>
-    <testsuite name=".vitepress/test/unit/utils/css-value.test.ts" timestamp="2026-10-16T10:35:52.676Z" hostname="TUF-Air-F" tests="3" failures="0" errors="0" skipped="0" time="0.0046458">
-        <testcase classname=".vitepress/test/unit/utils/css-value.test.ts" name="normalizeCssLength &gt; 数字与纯数字字符串应追加 px" time="0.0023534">
-        </testcase>
-        <testcase classname=".vitepress/test/unit/utils/css-value.test.ts" name="normalizeCssLength &gt; 合法 CSS 长度应原样保留" time="0.0003386">
-        </testcase>
-        <testcase classname=".vitepress/test/unit/utils/css-value.test.ts" name="normalizeCssLength &gt; 空值和非有限数字应忽略" time="0.0002129">
+        <testcase classname=".vitepress/test/unit/composables/effects-toggle.test.ts" name="useEffectsToggle: 自适应性能降级 &gt; initEffectsToggleState: 静态低配默认关闭 &gt; 静态低配时显式开启偏好仍优先" time="0.0002721">
         </testcase>
     </testsuite>
-    <testsuite name=".vitepress/test/unit/utils/markdown.test.ts" timestamp="2026-10-16T10:35:52.677Z" hostname="TUF-Air-F" tests="3" failures="0" errors="0" skipped="0" time="0.0035413">
-        <testcase classname=".vitepress/test/unit/utils/markdown.test.ts" name="markdown 安全格式化 &gt; 允许常用安全协议、锚点和相对路径" time="0.0016248">
+    <testsuite name=".research/fork-audit/smashyalts/packages/core/test/accuracy.test.ts" timestamp="2026-10-16T12:00:25.350Z" hostname="TUF-Air-F" tests="9" failures="0" errors="0" skipped="0" time="0.1743954">
+        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/accuracy.test.ts" name="accuracy improvements &gt; converts block models with vanilla parents via the builtin library" time="0.0870056">
         </testcase>
-        <testcase classname=".vitepress/test/unit/utils/markdown.test.ts" name="markdown 安全格式化 &gt; 拒绝脚本、数据和协议相对 URL" time="0.0002258">
+        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/accuracy.test.ts" name="accuracy improvements &gt; bakes rescale into cube coordinates (cross models)" time="0.0163783">
         </testcase>
-        <testcase classname=".vitepress/test/unit/utils/markdown.test.ts" name="markdown 安全格式化 &gt; 转义 HTML，并只渲染安全链接" time="0.0004514">
+        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/accuracy.test.ts" name="accuracy improvements &gt; armor attachables hide the matching skin layer" time="0.0134402">
         </testcase>
-    </testsuite>
-    <testsuite name=".research/fork-audit/smashyalts/packages/core/test/accuracy.test.ts" timestamp="2026-10-16T10:35:52.678Z" hostname="TUF-Air-F" tests="9" failures="0" errors="0" skipped="0" time="0.1776515">
-        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/accuracy.test.ts" name="accuracy improvements &gt; converts block models with vanilla parents via the builtin library" time="0.0892929">
+        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/accuracy.test.ts" name="accuracy improvements &gt; assigns ascending priority to range_dispatch thresholds" time="0.0176948">
         </testcase>
-        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/accuracy.test.ts" name="accuracy improvements &gt; bakes rescale into cube coordinates (cross models)" time="0.0321586">
+        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/accuracy.test.ts" name="accuracy improvements &gt; sizes visible bounds to the model extents" time="0.0138702">
         </testcase>
-        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/accuracy.test.ts" name="accuracy improvements &gt; armor attachables hide the matching skin layer" time="0.0118082">
+        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/accuracy.test.ts" name="accuracy improvements &gt; converts blockstate x/y rotations to block transformations" time="0.0068412">
         </testcase>
-        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/accuracy.test.ts" name="accuracy improvements &gt; assigns ascending priority to range_dispatch thresholds" time="0.0109053">
+        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/accuracy.test.ts" name="accuracy improvements &gt; converts Java positional lang args to Bedrock syntax" time="0.0057006">
         </testcase>
-        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/accuracy.test.ts" name="accuracy improvements &gt; sizes visible bounds to the model extents" time="0.0144013">
+        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/accuracy.test.ts" name="accuracy improvements &gt; uses config display names over filename guesses" time="0.0056575">
         </testcase>
-        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/accuracy.test.ts" name="accuracy improvements &gt; converts blockstate x/y rotations to block transformations" time="0.0060899">
-        </testcase>
-        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/accuracy.test.ts" name="accuracy improvements &gt; converts Java positional lang args to Bedrock syntax" time="0.0026422">
-        </testcase>
-        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/accuracy.test.ts" name="accuracy improvements &gt; uses config display names over filename guesses" time="0.0055216">
-        </testcase>
-        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/accuracy.test.ts" name="accuracy improvements &gt; flags sound events referencing files missing from the pack" time="0.0022006">
+        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/accuracy.test.ts" name="accuracy improvements &gt; flags sound events referencing files missing from the pack" time="0.0050536">
         </testcase>
     </testsuite>
-    <testsuite name=".research/fork-audit/smashyalts/packages/core/test/armor.test.ts" timestamp="2026-10-16T10:35:52.681Z" hostname="TUF-Air-F" tests="3" failures="0" errors="0" skipped="0" time="0.1173557">
-        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/armor.test.ts" name="custom armor &gt; renames vanilla armor layer textures" time="0.0723116">
+    <testsuite name=".research/fork-audit/smashyalts/packages/core/test/armor.test.ts" timestamp="2026-10-16T12:00:25.353Z" hostname="TUF-Air-F" tests="3" failures="0" errors="0" skipped="0" time="0.2318223">
+        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/armor.test.ts" name="custom armor &gt; renames vanilla armor layer textures" time="0.1661474">
         </testcase>
-        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/armor.test.ts" name="custom armor &gt; converts modern equipment assets into attachables bound to item mappings" time="0.0287519">
+        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/armor.test.ts" name="custom armor &gt; converts modern equipment assets into attachables bound to item mappings" time="0.046969">
         </testcase>
-        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/armor.test.ts" name="custom armor &gt; detects legacy custom armor layer textures" time="0.0134755">
-        </testcase>
-    </testsuite>
-    <testsuite name=".research/fork-audit/smashyalts/packages/core/test/atlas.test.ts" timestamp="2026-10-16T10:35:52.683Z" hostname="TUF-Air-F" tests="3" failures="0" errors="0" skipped="0" time="0.0075288">
-        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/atlas.test.ts" name="atlas packing &gt; reproduces the max-tile grid for uniform sizes" time="0.0020315">
-        </testcase>
-        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/atlas.test.ts" name="atlas packing &gt; shrinks mixed-size atlases below the max-tile grid, no overlap or clipping" time="0.0026798">
-        </testcase>
-        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/atlas.test.ts" name="atlas packing &gt; packs a single texture as itself" time="0.0008886">
+        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/armor.test.ts" name="custom armor &gt; detects legacy custom armor layer textures" time="0.0152328">
         </testcase>
     </testsuite>
-    <testsuite name=".research/fork-audit/smashyalts/packages/core/test/auxStages.test.ts" timestamp="2026-10-16T10:35:52.685Z" hostname="TUF-Air-F" tests="7" failures="0" errors="0" skipped="0" time="0.3263524">
-        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/auxStages.test.ts" name="aux stages &gt; converts block flipbook animations" time="0.0931707">
+    <testsuite name=".research/fork-audit/smashyalts/packages/core/test/atlas.test.ts" timestamp="2026-10-16T12:00:25.354Z" hostname="TUF-Air-F" tests="3" failures="0" errors="0" skipped="0" time="0.0069891">
+        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/atlas.test.ts" name="atlas packing &gt; reproduces the max-tile grid for uniform sizes" time="0.0022172">
         </testcase>
-        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/auxStages.test.ts" name="aux stages &gt; converts sounds.json and copies oggs" time="0.0331378">
+        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/atlas.test.ts" name="atlas packing &gt; shrinks mixed-size atlases below the max-tile grid, no overlap or clipping" time="0.0015916">
         </testcase>
-        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/auxStages.test.ts" name="aux stages &gt; converts lang files with locale casing" time="0.0060579">
-        </testcase>
-        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/auxStages.test.ts" name="aux stages &gt; places bitmap font glyphs into glyph pages" time="0.091388">
-        </testcase>
-        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/auxStages.test.ts" name="aux stages &gt; bakes the Java ascent into each glyph&apos;s vertical position in its cell" time="0.0392405">
-        </testcase>
-        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/auxStages.test.ts" name="aux stages &gt; drops glyphs hidden in Java by an off-screen ascent instead of showing them" time="0.0267552">
-        </testcase>
-        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/auxStages.test.ts" name="aux stages &gt; stitches paintings into kz.png" time="0.0329384">
+        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/atlas.test.ts" name="atlas packing &gt; packs a single texture as itself" time="0.0003534">
         </testcase>
     </testsuite>
-    <testsuite name=".research/fork-audit/smashyalts/packages/core/test/blocks.test.ts" timestamp="2026-10-16T10:35:52.686Z" hostname="TUF-Air-F" tests="2" failures="0" errors="0" skipped="0" time="0.0974239">
-        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/blocks.test.ts" name="custom blocks &gt; converts note_block state overrides into Geyser block mappings v1" time="0.0756084">
+    <testsuite name=".research/fork-audit/smashyalts/packages/core/test/auxStages.test.ts" timestamp="2026-10-16T12:00:25.356Z" hostname="TUF-Air-F" tests="7" failures="0" errors="0" skipped="0" time="0.2546737">
+        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/auxStages.test.ts" name="aux stages &gt; converts block flipbook animations" time="0.0499374">
         </testcase>
-        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/blocks.test.ts" name="custom blocks &gt; converts non-cube block models to custom geometry" time="0.0197131">
+        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/auxStages.test.ts" name="aux stages &gt; converts sounds.json and copies oggs" time="0.0086751">
         </testcase>
-    </testsuite>
-    <testsuite name=".research/fork-audit/smashyalts/packages/core/test/bowPull.test.ts" timestamp="2026-10-16T10:35:52.687Z" hostname="TUF-Air-F" tests="6" failures="0" errors="0" skipped="0" time="0.1950073">
-        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/bowPull.test.ts" name="bow-pull render controller &gt; emits a charge-progress render controller and attachable for vanilla bow overrides" time="0.0679702">
+        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/auxStages.test.ts" name="aux stages &gt; converts lang files with locale casing" time="0.0049404">
         </testcase>
-        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/bowPull.test.ts" name="bow-pull render controller &gt; works with a 2-stage bow (only pulling:1, no continuous pull)" time="0.0167695">
+        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/auxStages.test.ts" name="aux stages &gt; places bitmap font glyphs into glyph pages" time="0.0739894">
         </testcase>
-        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/bowPull.test.ts" name="bow-pull render controller &gt; converts a modern custom-model bow (using_item → range_dispatch use_duration)" time="0.0307416">
+        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/auxStages.test.ts" name="aux stages &gt; bakes the Java ascent into each glyph&apos;s vertical position in its cell" time="0.0485487">
         </testcase>
-        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/bowPull.test.ts" name="bow-pull render controller &gt; skips bows that mix sprite and 3D pull stages" time="0.0137809">
+        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/auxStages.test.ts" name="aux stages &gt; drops glyphs hidden in Java by an off-screen ascent instead of showing them" time="0.0293765">
         </testcase>
-        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/bowPull.test.ts" name="bow-pull render controller &gt; converts a 3D custom-model bow with a geometry array per pull stage" time="0.0515583">
-        </testcase>
-        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/bowPull.test.ts" name="bow-pull render controller &gt; does not emit bow-pull entries for items without pulling overrides" time="0.0121687">
+        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/auxStages.test.ts" name="aux stages &gt; stitches paintings into kz.png" time="0.0350998">
         </testcase>
     </testsuite>
-    <testsuite name=".research/fork-audit/smashyalts/packages/core/test/encodePool.test.ts" timestamp="2026-10-16T10:35:52.689Z" hostname="TUF-Air-F" tests="2" failures="0" errors="0" skipped="0" time="1.0234206">
-        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/encodePool.test.ts" name="parallel PNG encoder &gt; produces byte-identical output to the in-process path and is used above threshold" time="0.7971892">
+    <testsuite name=".research/fork-audit/smashyalts/packages/core/test/blocks.test.ts" timestamp="2026-10-16T12:00:25.357Z" hostname="TUF-Air-F" tests="2" failures="0" errors="0" skipped="0" time="0.0724724">
+        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/blocks.test.ts" name="custom blocks &gt; converts note_block state overrides into Geyser block mappings v1" time="0.0580029">
         </testcase>
-        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/encodePool.test.ts" name="parallel PNG encoder &gt; encodes in-process when no encoder is injected (node/CLI path)" time="0.2241672">
-        </testcase>
-    </testsuite>
-    <testsuite name=".research/fork-audit/smashyalts/packages/core/test/entityComposites.test.ts" timestamp="2026-10-16T10:35:52.689Z" hostname="TUF-Air-F" tests="2" failures="0" errors="0" skipped="0" time="0.1133545">
-        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/entityComposites.test.ts" name="entity composites &gt; rearranges single chests and stitches double chests for Bedrock" time="0.0944016">
-        </testcase>
-        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/entityComposites.test.ts" name="entity composites &gt; leaves pre-1.15 chest layouts untouched" time="0.0159326">
+        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/blocks.test.ts" name="custom blocks &gt; converts non-cube block models to custom geometry" time="0.0118753">
         </testcase>
     </testsuite>
-    <testsuite name=".research/fork-audit/smashyalts/packages/core/test/flipbook.test.ts" timestamp="2026-10-16T10:35:52.690Z" hostname="TUF-Air-F" tests="6" failures="0" errors="0" skipped="0" time="0.3013288">
-        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/flipbook.test.ts" name="flipbook item animation &gt; emits per-frame atlases and a time-indexed render controller" time="0.1518658">
+    <testsuite name=".research/fork-audit/smashyalts/packages/core/test/bowPull.test.ts" timestamp="2026-10-16T12:00:25.358Z" hostname="TUF-Air-F" tests="6" failures="0" errors="0" skipped="0" time="0.317399">
+        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/bowPull.test.ts" name="bow-pull render controller &gt; emits a charge-progress render controller and attachable for vanilla bow overrides" time="0.1668942">
         </testcase>
-        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/flipbook.test.ts" name="flipbook item animation &gt; blends interpolated animations on a 1-tick grid" time="0.0270248">
+        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/bowPull.test.ts" name="bow-pull render controller &gt; works with a 2-stage bow (only pulling:1, no continuous pull)" time="0.0299257">
         </testcase>
-        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/flipbook.test.ts" name="flipbook item animation &gt; plays multi-strip items at correct per-texture speeds (no 2x bug)" time="0.0206771">
+        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/bowPull.test.ts" name="bow-pull render controller &gt; converts a modern custom-model bow (using_item → range_dispatch use_duration)" time="0.0222371">
         </testcase>
-        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/flipbook.test.ts" name="flipbook item animation &gt; honours per-frame time values in mcmeta" time="0.0156304">
+        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/bowPull.test.ts" name="bow-pull render controller &gt; skips bows that mix sprite and 3D pull stages" time="0.0145368">
         </testcase>
-        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/flipbook.test.ts" name="flipbook item animation &gt; keeps full animations by default (no cap)" time="0.0404845">
+        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/bowPull.test.ts" name="bow-pull render controller &gt; converts a 3D custom-model bow with a geometry array per pull stage" time="0.0695881">
         </testcase>
-        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/flipbook.test.ts" name="flipbook item animation &gt; subsamples very long flipbooks when a frame cap is set" time="0.0415476">
-        </testcase>
-    </testsuite>
-    <testsuite name=".research/fork-audit/smashyalts/packages/core/test/geometryFlip.test.ts" timestamp="2026-10-16T10:35:52.691Z" hostname="TUF-Air-F" tests="3" failures="0" errors="0" skipped="0" time="0.0072706">
-        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/geometryFlip.test.ts" name="geometry facing flip (crossbow) &gt; leaves geometry unchanged without flipFacing" time="0.0038216">
-        </testcase>
-        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/geometryFlip.test.ts" name="geometry facing flip (crossbow) &gt; turns a Y-rotated cube by +180° so splayed limbs re-aim (not just reposition)" time="0.0014322">
-        </testcase>
-        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/geometryFlip.test.ts" name="geometry facing flip (crossbow) &gt; swaps front and back when flipFacing is set (180° about Y)" time="0.0005084">
+        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/bowPull.test.ts" name="bow-pull render controller &gt; does not emit bow-pull entries for items without pulling overrides" time="0.0106234">
         </testcase>
     </testsuite>
-    <testsuite name=".research/fork-audit/smashyalts/packages/core/test/iconRender.test.ts" timestamp="2026-10-16T10:35:52.691Z" hostname="TUF-Air-F" tests="2" failures="0" errors="0" skipped="0" time="0.0090388">
-        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/iconRender.test.ts" name="model icon renderer &gt; renders a cube with isometric shading and transparent background" time="0.0060393">
+    <testsuite name=".research/fork-audit/smashyalts/packages/core/test/encodePool.test.ts" timestamp="2026-10-16T12:00:25.361Z" hostname="TUF-Air-F" tests="2" failures="0" errors="0" skipped="0" time="1.0231462">
+        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/encodePool.test.ts" name="parallel PNG encoder &gt; produces byte-identical output to the in-process path and is used above threshold" time="0.8736802">
         </testcase>
-        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/iconRender.test.ts" name="model icon renderer &gt; alphaBleed copies edge colours into transparent pixels without changing alpha" time="0.0008252">
-        </testcase>
-    </testsuite>
-    <testsuite name=".research/fork-audit/smashyalts/packages/core/test/items2d.test.ts" timestamp="2026-10-16T10:35:52.691Z" hostname="TUF-Air-F" tests="11" failures="0" errors="0" skipped="0" time="0.1664163">
-        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/items2d.test.ts" name="2D custom items &gt; bakes config dye colours into tinted-base-item icons" time="0.0379366">
-        </testcase>
-        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/items2d.test.ts" name="2D custom items &gt; maps legacy cast/charged/firework predicates to Geyser conditions" time="0.018184">
-        </testcase>
-        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/items2d.test.ts" name="2D custom items &gt; converts legacy custom_model_data overrides to v2 legacy mappings" time="0.0117314">
-        </testcase>
-        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/items2d.test.ts" name="2D custom items &gt; converts modern item definitions (1.21.4+) with range_dispatch and condition" time="0.0097808">
-        </testcase>
-        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/items2d.test.ts" name="2D custom items &gt; drops Geyser-unsupported condition properties, keeping the default branch" time="0.0137501">
-        </testcase>
-        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/items2d.test.ts" name="2D custom items &gt; composites multi-layer sprites into one icon" time="0.0097501">
-        </testcase>
-        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/items2d.test.ts" name="2D custom items &gt; infers host item from model parent chain for custom-namespace modern items" time="0.0091772">
-        </testcase>
-        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/items2d.test.ts" name="2D custom items &gt; falls back to modernBaseItem when model parents to a generic vanilla parent" time="0.0049194">
-        </testcase>
-        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/items2d.test.ts" name="2D custom items &gt; infers host item for non-handheld vanilla items not in BUILTIN_MODELS" time="0.0162732">
-        </testcase>
-        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/items2d.test.ts" name="2D custom items &gt; leaves animated 2D sprites unanimated by default (icon-only, first frame)" time="0.0071958">
-        </testcase>
-        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/items2d.test.ts" name="2D custom items &gt; animates the held form of a 2D sprite when animate2dHeldItems is on" time="0.0254015">
+        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/encodePool.test.ts" name="parallel PNG encoder &gt; encodes in-process when no encoder is injected (node/CLI path)" time="0.1469822">
         </testcase>
     </testsuite>
-    <testsuite name=".research/fork-audit/smashyalts/packages/core/test/items3d.test.ts" timestamp="2026-10-16T10:35:52.693Z" hostname="TUF-Air-F" tests="1" failures="0" errors="0" skipped="0" time="0.157165">
-        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/items3d.test.ts" name="3D custom items &gt; emits geometry, attachable, animations, atlas and mapping" time="0.1543577">
+    <testsuite name=".research/fork-audit/smashyalts/packages/core/test/entityComposites.test.ts" timestamp="2026-10-16T12:00:25.361Z" hostname="TUF-Air-F" tests="2" failures="0" errors="0" skipped="0" time="0.1409713">
+        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/entityComposites.test.ts" name="entity composites &gt; rearranges single chests and stitches double chests for Bedrock" time="0.1272234">
+        </testcase>
+        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/entityComposites.test.ts" name="entity composites &gt; leaves pre-1.15 chest layouts untouched" time="0.0105846">
         </testcase>
     </testsuite>
-    <testsuite name=".research/fork-audit/smashyalts/packages/core/test/optimize.test.ts" timestamp="2026-10-16T10:35:52.694Z" hostname="TUF-Air-F" tests="3" failures="0" errors="0" skipped="0" time="0.1161871">
-        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/optimize.test.ts" name="lossless pack optimizer &gt; merges duplicate textures and rewrites references; minifies JSON" time="0.0714368">
+    <testsuite name=".research/fork-audit/smashyalts/packages/core/test/flipbook.test.ts" timestamp="2026-10-16T12:00:25.362Z" hostname="TUF-Air-F" tests="6" failures="0" errors="0" skipped="0" time="0.3725565">
+        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/flipbook.test.ts" name="flipbook item animation &gt; emits per-frame atlases and a time-indexed render controller" time="0.1998592">
         </testcase>
-        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/optimize.test.ts" name="lossless pack optimizer &gt; runs zopfli only with maxCompression; PNGs stay valid" time="0.0260861">
+        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/flipbook.test.ts" name="flipbook item animation &gt; blends interpolated animations on a 1-tick grid" time="0.0361305">
         </testcase>
-        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/optimize.test.ts" name="lossless pack optimizer &gt; respects optimizePack: false" time="0.0156914">
+        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/flipbook.test.ts" name="flipbook item animation &gt; plays multi-strip items at correct per-texture speeds (no 2x bug)" time="0.0359961">
         </testcase>
-    </testsuite>
-    <testsuite name=".research/fork-audit/smashyalts/packages/core/test/oraxen.test.ts" timestamp="2026-10-16T10:35:52.695Z" hostname="TUF-Air-F" tests="16" failures="0" errors="0" skipped="0" time="0.3317811">
-        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/oraxen.test.ts" name="oraxen config hints &gt; parses item base materials from yml configs" time="0.0776657">
+        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/flipbook.test.ts" name="flipbook item animation &gt; honours per-frame time values in mcmeta" time="0.0213161">
         </testcase>
-        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/oraxen.test.ts" name="oraxen config hints &gt; parses ItemsAdder configs (items section, resource.material, model_path)" time="0.0035681">
+        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/flipbook.test.ts" name="flipbook item animation &gt; keeps full animations by default (no cap)" time="0.0407163">
         </testcase>
-        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/oraxen.test.ts" name="oraxen config hints &gt; detects HMCCosmetics backpack items (nexo ref and material+cmd forms)" time="0.024697">
-        </testcase>
-        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/oraxen.test.ts" name="oraxen config hints &gt; extracts fixed dye colours (R,G,B and hex forms)" time="0.0061957">
-        </testcase>
-        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/oraxen.test.ts" name="oraxen config hints &gt; detects furniture items (Oraxen Mechanics + ItemsAdder behaviours)" time="0.0097656">
-        </testcase>
-        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/oraxen.test.ts" name="oraxen config hints &gt; emits GeyserDisplayEntity mappings YAML for furniture items" time="0.0560483">
-        </testcase>
-        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/oraxen.test.ts" name="oraxen config hints &gt; derives a per-item y-offset from a 3D furniture model&apos;s height" time="0.0348088">
-        </testcase>
-        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/oraxen.test.ts" name="oraxen config hints &gt; emits display.fixed rotation and seats furniture by its stood-up height" time="0.0144066">
-        </testcase>
-        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/oraxen.test.ts" name="oraxen config hints &gt; omits the furniture config.yml when no furniture uses a hidden base item" time="0.0065393">
-        </testcase>
-        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/oraxen.test.ts" name="oraxen config hints &gt; renders opaque 3D furniture double-sided (entity_nocull) so concave pieces keep their faces" time="0.0171733">
-        </testcase>
-        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/oraxen.test.ts" name="oraxen config hints &gt; double-sides furniture that samples only opaque texels of a padded texture" time="0.0276257">
-        </testcase>
-        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/oraxen.test.ts" name="oraxen config hints &gt; keeps transparent 3D furniture one-sided (entity_nocull would show cutout pixels as solid)" time="0.0149473">
-        </testcase>
-        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/oraxen.test.ts" name="oraxen config hints &gt; maps modern item definitions under hinted base items" time="0.0078983">
-        </testcase>
-        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/oraxen.test.ts" name="oraxen config hints &gt; parses custom-plugin (oxywire) configs: material, nested item-model, name, decimal color" time="0.0020031">
-        </testcase>
-        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/oraxen.test.ts" name="oraxen config hints &gt; emits equippable head for a 3D model with a head display transform (hat cosmetic)" time="0.0119837">
-        </testcase>
-        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/oraxen.test.ts" name="oraxen config hints &gt; does NOT mark a held 3D item (hand display transforms) as head-equippable" time="0.0126094">
+        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/flipbook.test.ts" name="flipbook item animation &gt; subsamples very long flipbooks when a frame cap is set" time="0.0345128">
         </testcase>
     </testsuite>
-    <testsuite name=".research/fork-audit/smashyalts/packages/core/test/palettePng.test.ts" timestamp="2026-10-16T10:35:52.699Z" hostname="TUF-Air-F" tests="1" failures="0" errors="0" skipped="0" time="0.0107013">
-        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/palettePng.test.ts" name="palette png decoding &gt; unpacks 4-bit indexed pixels with palette colours and tRNS alpha" time="0.0089391">
+    <testsuite name=".research/fork-audit/smashyalts/packages/core/test/geometryFlip.test.ts" timestamp="2026-10-16T12:00:25.364Z" hostname="TUF-Air-F" tests="3" failures="0" errors="0" skipped="0" time="0.0068001">
+        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/geometryFlip.test.ts" name="geometry facing flip (crossbow) &gt; leaves geometry unchanged without flipFacing" time="0.0027613">
+        </testcase>
+        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/geometryFlip.test.ts" name="geometry facing flip (crossbow) &gt; turns a Y-rotated cube by +180° so splayed limbs re-aim (not just reposition)" time="0.0014986">
+        </testcase>
+        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/geometryFlip.test.ts" name="geometry facing flip (crossbow) &gt; swaps front and back when flipFacing is set (180° about Y)" time="0.0005184">
         </testcase>
     </testsuite>
-    <testsuite name=".research/fork-audit/smashyalts/packages/core/test/pipeline.test.ts" timestamp="2026-10-16T10:35:52.699Z" hostname="TUF-Air-F" tests="3" failures="0" errors="0" skipped="0" time="0.0301385">
-        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/pipeline.test.ts" name="convertPack &gt; converts a minimal pack: manifest, renamed + passthrough textures" time="0.0220426">
+    <testsuite name=".research/fork-audit/smashyalts/packages/core/test/iconRender.test.ts" timestamp="2026-10-16T12:00:25.365Z" hostname="TUF-Air-F" tests="2" failures="0" errors="0" skipped="0" time="0.0088997">
+        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/iconRender.test.ts" name="model icon renderer &gt; renders a cube with isometric shading and transparent background" time="0.0061604">
         </testcase>
-        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/pipeline.test.ts" name="convertPack &gt; handles packs nested one folder deep" time="0.0031016">
-        </testcase>
-        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/pipeline.test.ts" name="convertPack &gt; produces deterministic manifest UUIDs per pack name" time="0.0027233">
+        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/iconRender.test.ts" name="model icon renderer &gt; alphaBleed copies edge colours into transparent pixels without changing alpha" time="0.0007768">
         </testcase>
     </testsuite>
-    <testsuite name=".research/fork-audit/smashyalts/packages/core/test/pngEncode.test.ts" timestamp="2026-10-16T10:35:52.700Z" hostname="TUF-Air-F" tests="7" failures="0" errors="0" skipped="0" time="0.2260178">
-        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/pngEncode.test.ts" name="indexed PNG encoding &gt; roundtrips palette images bit-identically and beats RGBA size" time="0.0429757">
+    <testsuite name=".research/fork-audit/smashyalts/packages/core/test/items2d.test.ts" timestamp="2026-10-16T12:00:25.365Z" hostname="TUF-Air-F" tests="11" failures="0" errors="0" skipped="0" time="0.2817101">
+        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/items2d.test.ts" name="2D custom items &gt; bakes config dye colours into tinted-base-item icons" time="0.0615817">
         </testcase>
-        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/pngEncode.test.ts" name="indexed PNG encoding &gt; packs tiny palettes below 8 bits per pixel" time="0.0036646">
+        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/items2d.test.ts" name="2D custom items &gt; maps legacy cast/charged/firework predicates to Geyser conditions" time="0.0462698">
         </testcase>
-        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/pngEncode.test.ts" name="indexed PNG encoding &gt; falls back to RGBA above 256 colours, still lossless" time="0.0737384">
+        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/items2d.test.ts" name="2D custom items &gt; converts legacy custom_model_data overrides to v2 legacy mappings" time="0.0404113">
         </testcase>
-        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/pngEncode.test.ts" name="grayscale PNG encoding &gt; encodes opaque grayscale as colour-type 0 and beats indexed (no palette)" time="0.0250848">
+        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/items2d.test.ts" name="2D custom items &gt; converts modern item definitions (1.21.4+) with range_dispatch and condition" time="0.0164704">
         </testcase>
-        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/pngEncode.test.ts" name="grayscale PNG encoding &gt; packs 2-level grayscale at bit depth 1" time="0.0033558">
+        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/items2d.test.ts" name="2D custom items &gt; drops Geyser-unsupported condition properties, keeping the default branch" time="0.0200434">
         </testcase>
-        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/pngEncode.test.ts" name="grayscale PNG encoding &gt; declines translucent or coloured images (needs palette/RGBA)" time="0.0016264">
+        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/items2d.test.ts" name="2D custom items &gt; composites multi-layer sprites into one icon" time="0.0148555">
         </testcase>
-        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/pngEncode.test.ts" name="passthrough texture re-encode &gt; shrinks bloated pack textures without changing pixels" time="0.0722382">
+        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/items2d.test.ts" name="2D custom items &gt; infers host item from model parent chain for custom-namespace modern items" time="0.0096512">
         </testcase>
-    </testsuite>
-    <testsuite name=".research/fork-audit/smashyalts/packages/core/test/tar.test.ts" timestamp="2026-10-16T10:35:52.701Z" hostname="TUF-Air-F" tests="4" failures="0" errors="0" skipped="0" time="0.0327845">
-        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/tar.test.ts" name="tar.gz ingest &gt; detects gzip magic" time="0.0056045">
+        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/items2d.test.ts" name="2D custom items &gt; falls back to modernBaseItem when model parents to a generic vanilla parent" time="0.0083261">
         </testcase>
-        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/tar.test.ts" name="tar.gz ingest &gt; parses a plain tar into files" time="0.001661">
+        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/items2d.test.ts" name="2D custom items &gt; infers host item for non-handheld vanilla items not in BUILTIN_MODELS" time="0.0080922">
         </testcase>
-        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/tar.test.ts" name="tar.gz ingest &gt; reads a gzipped tar into a VirtualFs" time="0.0043092">
+        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/items2d.test.ts" name="2D custom items &gt; leaves animated 2D sprites unanimated by default (icon-only, first frame)" time="0.006969">
         </testcase>
-        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/tar.test.ts" name="tar.gz ingest &gt; converts a pack delivered as .tar.gz end to end" time="0.0188652">
+        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/items2d.test.ts" name="2D custom items &gt; animates the held form of a 2D sprite when animate2dHeldItems is on" time="0.0435649">
         </testcase>
     </testsuite>
-    <testsuite name=".research/fork-audit/smashyalts/packages/core/test/zipReader.test.ts" timestamp="2026-10-16T10:35:52.702Z" hostname="TUF-Air-F" tests="2" failures="0" errors="0" skipped="0" time="0.0112818">
-        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/zipReader.test.ts" name="resilient zip reader &gt; reads archives with corrupted uncompressed-size fields (Oraxen protection)" time="0.0082737">
+    <testsuite name=".research/fork-audit/smashyalts/packages/core/test/items3d.test.ts" timestamp="2026-10-16T12:00:25.368Z" hostname="TUF-Air-F" tests="1" failures="0" errors="0" skipped="0" time="0.0952328">
+        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/items3d.test.ts" name="3D custom items &gt; emits geometry, attachable, animations, atlas and mapping" time="0.0910158">
         </testcase>
-        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/zipReader.test.ts" name="resilient zip reader &gt; skips corrupt entries instead of failing the archive" time="0.0010496">
+    </testsuite>
+    <testsuite name=".research/fork-audit/smashyalts/packages/core/test/optimize.test.ts" timestamp="2026-10-16T12:00:25.368Z" hostname="TUF-Air-F" tests="3" failures="0" errors="0" skipped="0" time="0.2330577">
+        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/optimize.test.ts" name="lossless pack optimizer &gt; merges duplicate textures and rewrites references; minifies JSON" time="0.1863938">
+        </testcase>
+        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/optimize.test.ts" name="lossless pack optimizer &gt; runs zopfli only with maxCompression; PNGs stay valid" time="0.0301923">
+        </testcase>
+        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/optimize.test.ts" name="lossless pack optimizer &gt; respects optimizePack: false" time="0.0129349">
+        </testcase>
+    </testsuite>
+    <testsuite name=".research/fork-audit/smashyalts/packages/core/test/oraxen.test.ts" timestamp="2026-10-16T12:00:25.369Z" hostname="TUF-Air-F" tests="16" failures="0" errors="0" skipped="0" time="0.2438987">
+        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/oraxen.test.ts" name="oraxen config hints &gt; parses item base materials from yml configs" time="0.0222207">
+        </testcase>
+        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/oraxen.test.ts" name="oraxen config hints &gt; parses ItemsAdder configs (items section, resource.material, model_path)" time="0.0027211">
+        </testcase>
+        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/oraxen.test.ts" name="oraxen config hints &gt; detects HMCCosmetics backpack items (nexo ref and material+cmd forms)" time="0.0052683">
+        </testcase>
+        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/oraxen.test.ts" name="oraxen config hints &gt; extracts fixed dye colours (R,G,B and hex forms)" time="0.0020741">
+        </testcase>
+        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/oraxen.test.ts" name="oraxen config hints &gt; detects furniture items (Oraxen Mechanics + ItemsAdder behaviours)" time="0.002592">
+        </testcase>
+        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/oraxen.test.ts" name="oraxen config hints &gt; emits GeyserDisplayEntity mappings YAML for furniture items" time="0.0309145">
+        </testcase>
+        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/oraxen.test.ts" name="oraxen config hints &gt; derives a per-item y-offset from a 3D furniture model&apos;s height" time="0.050495">
+        </testcase>
+        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/oraxen.test.ts" name="oraxen config hints &gt; emits display.fixed rotation and seats furniture by its stood-up height" time="0.0189472">
+        </testcase>
+        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/oraxen.test.ts" name="oraxen config hints &gt; omits the furniture config.yml when no furniture uses a hidden base item" time="0.0156987">
+        </testcase>
+        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/oraxen.test.ts" name="oraxen config hints &gt; renders opaque 3D furniture double-sided (entity_nocull) so concave pieces keep their faces" time="0.0208064">
+        </testcase>
+        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/oraxen.test.ts" name="oraxen config hints &gt; double-sides furniture that samples only opaque texels of a padded texture" time="0.0206665">
+        </testcase>
+        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/oraxen.test.ts" name="oraxen config hints &gt; keeps transparent 3D furniture one-sided (entity_nocull would show cutout pixels as solid)" time="0.0134569">
+        </testcase>
+        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/oraxen.test.ts" name="oraxen config hints &gt; maps modern item definitions under hinted base items" time="0.0087135">
+        </testcase>
+        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/oraxen.test.ts" name="oraxen config hints &gt; parses custom-plugin (oxywire) configs: material, nested item-model, name, decimal color" time="0.0033728">
+        </testcase>
+        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/oraxen.test.ts" name="oraxen config hints &gt; emits equippable head for a 3D model with a head display transform (hat cosmetic)" time="0.0099004">
+        </testcase>
+        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/oraxen.test.ts" name="oraxen config hints &gt; does NOT mark a held 3D item (hand display transforms) as head-equippable" time="0.0116564">
+        </testcase>
+    </testsuite>
+    <testsuite name=".research/fork-audit/smashyalts/packages/core/test/palettePng.test.ts" timestamp="2026-10-16T12:00:25.372Z" hostname="TUF-Air-F" tests="1" failures="0" errors="0" skipped="0" time="0.0098108">
+        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/palettePng.test.ts" name="palette png decoding &gt; unpacks 4-bit indexed pixels with palette colours and tRNS alpha" time="0.0082753">
+        </testcase>
+    </testsuite>
+    <testsuite name=".research/fork-audit/smashyalts/packages/core/test/pipeline.test.ts" timestamp="2026-10-16T12:00:25.373Z" hostname="TUF-Air-F" tests="3" failures="0" errors="0" skipped="0" time="0.095217">
+        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/pipeline.test.ts" name="convertPack &gt; converts a minimal pack: manifest, renamed + passthrough textures" time="0.066301">
+        </testcase>
+        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/pipeline.test.ts" name="convertPack &gt; handles packs nested one folder deep" time="0.0086694">
+        </testcase>
+        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/pipeline.test.ts" name="convertPack &gt; produces deterministic manifest UUIDs per pack name" time="0.0167">
+        </testcase>
+    </testsuite>
+    <testsuite name=".research/fork-audit/smashyalts/packages/core/test/pngEncode.test.ts" timestamp="2026-10-16T12:00:25.374Z" hostname="TUF-Air-F" tests="7" failures="0" errors="0" skipped="0" time="0.2262574">
+        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/pngEncode.test.ts" name="indexed PNG encoding &gt; roundtrips palette images bit-identically and beats RGBA size" time="0.0372092">
+        </testcase>
+        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/pngEncode.test.ts" name="indexed PNG encoding &gt; packs tiny palettes below 8 bits per pixel" time="0.011236">
+        </testcase>
+        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/pngEncode.test.ts" name="indexed PNG encoding &gt; falls back to RGBA above 256 colours, still lossless" time="0.0858133">
+        </testcase>
+        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/pngEncode.test.ts" name="grayscale PNG encoding &gt; encodes opaque grayscale as colour-type 0 and beats indexed (no palette)" time="0.0071094">
+        </testcase>
+        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/pngEncode.test.ts" name="grayscale PNG encoding &gt; packs 2-level grayscale at bit depth 1" time="0.0035001">
+        </testcase>
+        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/pngEncode.test.ts" name="grayscale PNG encoding &gt; declines translucent or coloured images (needs palette/RGBA)" time="0.0006329">
+        </testcase>
+        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/pngEncode.test.ts" name="passthrough texture re-encode &gt; shrinks bloated pack textures without changing pixels" time="0.0762818">
+        </testcase>
+    </testsuite>
+    <testsuite name=".research/fork-audit/smashyalts/packages/core/test/tar.test.ts" timestamp="2026-10-16T12:00:25.377Z" hostname="TUF-Air-F" tests="4" failures="0" errors="0" skipped="0" time="0.0495557">
+        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/tar.test.ts" name="tar.gz ingest &gt; detects gzip magic" time="0.015548">
+        </testcase>
+        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/tar.test.ts" name="tar.gz ingest &gt; parses a plain tar into files" time="0.0060058">
+        </testcase>
+        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/tar.test.ts" name="tar.gz ingest &gt; reads a gzipped tar into a VirtualFs" time="0.0079037">
+        </testcase>
+        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/tar.test.ts" name="tar.gz ingest &gt; converts a pack delivered as .tar.gz end to end" time="0.0157163">
+        </testcase>
+    </testsuite>
+    <testsuite name=".research/fork-audit/smashyalts/packages/core/test/zipReader.test.ts" timestamp="2026-10-16T12:00:25.378Z" hostname="TUF-Air-F" tests="2" failures="0" errors="0" skipped="0" time="0.0140507">
+        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/zipReader.test.ts" name="resilient zip reader &gt; reads archives with corrupted uncompressed-size fields (Oraxen protection)" time="0.0099569">
+        </testcase>
+        <testcase classname=".research/fork-audit/smashyalts/packages/core/test/zipReader.test.ts" name="resilient zip reader &gt; skips corrupt entries instead of failing the archive" time="0.0010087">
         </testcase>
     </testsuite>
 </testsuites>

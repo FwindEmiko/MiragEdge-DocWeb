@@ -3,6 +3,64 @@ title: 全插件经济速查表
 description: 涉及经济的全插件速查表——灵叶与星痕石的产出源和消耗端、珍材商店价目、稀有资源交易所价目、签到与在线奖励、祛魔成本，以及确认不产出星痕石的插件清单。
 outline: [2, 3]
 ---
+<script setup>
+// §1-4 的产出源与消耗端合并为一张可筛选表：按「货币 · 方向」筛选，或直接搜插件名。
+// 数据源即原文 §1-4 的表格内容，逐行搬运未做改动。
+const ecoColumns = [
+  { key: 'plugin', label: '插件' },
+  { key: 'feature', label: '功能' },
+  { key: 'amount', label: '数值', align: 'right' },
+  { key: 'freq', label: '频率' },
+  { key: 'cap', label: '上限' },
+  { key: 'note', label: '备注' },
+]
+
+const ecoRows = [
+  { plugin: 'MiragEdgeMenu', feature: '在线奖励（满 8h）', amount: '10,000', freq: '每日', cap: '无', note: '阶梯发放', group: '灵叶 · 产出' },
+  { plugin: 'MiragEdgeMenu', feature: '每日任务', amount: '1,000~3,000/个', freq: '每日 5 个', cap: '无', note: '2 易 + 2 中 + 1 难', group: '灵叶 · 产出' },
+  { plugin: 'MiragEdgeMenu', feature: '周任务', amount: '5,000~15,000/个', freq: '每周 8 个', cap: '无', note: '周入约 40K~65K', group: '灵叶 · 产出' },
+  { plugin: 'MiragEdgeMenu', feature: '全完成奖励', amount: '+7,000~12,000', freq: '每日或每周', cap: '无', note: '做满额外', group: '灵叶 · 产出' },
+  { plugin: 'LiteSignIn', feature: '每日签到', amount: '800', freq: '每日', cap: '无', note: '全服第一翻倍 1,600', group: '灵叶 · 产出' },
+  { plugin: 'FE_ABCQ', feature: '知识问答', amount: '500', freq: '约 15min/题', cap: '无', note: '需不少于 4 人在线', group: '灵叶 · 产出' },
+  { plugin: 'FE_PVP', feature: '竞技场', amount: '200×段位×加成', freq: '每场', cap: '10,000', note: '基准 200', group: '灵叶 · 产出' },
+  { plugin: 'BountyHunter', feature: '赏金猎人', amount: '3,275~5,000', freq: '每日', cap: '日限量', note: '跨日重置', group: '灵叶 · 产出' },
+  { plugin: 'Welcome-NEXT', feature: '欢迎新玩家', amount: '100~150', freq: '每位新玩家', cap: '无', note: '60 秒内', group: '灵叶 · 产出' },
+  { plugin: 'FE_PassPlus', feature: '月卡（飞行）', amount: '无', freq: '每日', cap: '无', note: '给飞行时间，不给灵叶', group: '灵叶 · 产出' },
+  { plugin: 'MiragEdgeMenu', feature: '在线奖励', amount: '30', freq: '每日', cap: '无', note: '阶梯发放', group: '星痕石 · 产出' },
+  { plugin: 'MiragEdgeMenu', feature: '每日任务', amount: '5~15/个', freq: '每日 5 个', cap: '无', note: '全完成另加 8~12', group: '星痕石 · 产出' },
+  { plugin: 'MiragEdgeMenu', feature: '周任务', amount: '10~30/个', freq: '每周 8 个', cap: '无', note: '全完成另加 45', group: '星痕石 · 产出' },
+  { plugin: 'LiteSignIn', feature: '每日签到', amount: '35', freq: '每日', cap: '无', note: '补签 30，全服第一 70', group: '星痕石 · 产出' },
+  { plugin: 'FE_ABCQ', feature: '知识问答', amount: '5', freq: '约 15min/题', cap: '无', note: '需不少于 4 人在线', group: '星痕石 · 产出' },
+  { plugin: 'FE_PVP', feature: '竞技场', amount: '1×段位×加成', freq: '每场', cap: '50', note: '基准 1', group: '星痕石 · 产出' },
+  { plugin: 'Welcome-NEXT', feature: '欢迎新玩家', amount: '2~10', freq: '每位新玩家', cap: '无', note: '随机值', group: '星痕石 · 产出' },
+  { plugin: 'CyberLevels', feature: '等级奖励', amount: '10~15', freq: '一次性', cap: '无', note: '2 级与 3 级、10 级为 10，11~100 级为 15', group: '星痕石 · 产出' },
+  { plugin: 'FE_PassPlus', feature: '星痕石月卡·新秀', amount: '+28/天', freq: '每日', cap: '无', note: '权限 `fepp.points.1`', group: '星痕石 · 产出' },
+  { plugin: 'FE_PassPlus', feature: '星痕石月卡·精英', amount: '+55/天', freq: '每日', cap: '无', note: '权限 `fepp.points.2`', group: '星痕石 · 产出' },
+  { plugin: 'FE_PassPlus', feature: '星痕石月卡·大师', amount: '+110/天', freq: '每日', cap: '无', note: '权限 `fepp.points.3`', group: '星痕石 · 产出' },
+  { plugin: 'Crucible（祛魔）', feature: '祛魔普通', amount: '300', freq: '按需', cap: '', note: '另加 3 级经验', group: '灵叶 · 消耗' },
+  { plugin: 'Crucible（祛魔）', feature: '祛魔至宝', amount: '1,050', freq: '按需', cap: '', note: '另加 10 级经验与 8 星痕石', group: '灵叶 · 消耗' },
+  { plugin: 'Crucible（重铸）', feature: '重铸普通', amount: '50', freq: '按需', cap: '', note: '另加 3 粉尘', group: '灵叶 · 消耗' },
+  { plugin: 'Crucible（重铸）', feature: '重铸至宝', amount: '8,000', freq: '按需', cap: '', note: '另加 25 结晶与 15 星痕石', group: '灵叶 · 消耗' },
+  { plugin: 'Crucible（增幅）', feature: '增幅附魔', amount: '30~200', freq: '按需', cap: '', note: '另加材料', group: '灵叶 · 消耗' },
+  { plugin: 'Crucible（结晶）', feature: '粉尘→结晶', amount: '100/组', freq: '按需', cap: '', note: '无', group: '灵叶 · 消耗' },
+  { plugin: 'FE_Pluck', feature: 'RTP 随机传送', amount: '100', freq: '按需', cap: '', note: '无', group: '灵叶 · 消耗' },
+  { plugin: 'MiragEdgeHome', feature: '创建家', amount: '350', freq: '按需', cap: '', note: '无', group: '灵叶 · 消耗' },
+  { plugin: 'MiragEdgeHome', feature: 'TPA 传送', amount: '100', freq: '按需', cap: '', note: '无', group: '灵叶 · 消耗' },
+  { plugin: 'MiragEdgeHome', feature: '死亡返回', amount: '阶梯', freq: '按需', cap: '', note: '前 30 次免费', group: '灵叶 · 消耗' },
+  { plugin: 'UltimateShop', feature: '稀有资源·钻石买', amount: '1,600', freq: '按需', cap: '', note: '供应池限量', group: '灵叶 · 消耗' },
+  { plugin: 'UltimateShop', feature: '稀有资源·远古残骸买', amount: '4,000', freq: '按需', cap: '', note: '供应池限量', group: '灵叶 · 消耗' },
+  { plugin: 'UltimateShop', feature: '稀有资源·下界合金买', amount: '7,000', freq: '按需', cap: '', note: '供应池限量', group: '灵叶 · 消耗' },
+  { plugin: 'Crucible', feature: '祛魔至宝', amount: '8', freq: '按需', cap: '', note: '另加 1,050 灵叶与 10 级经验', group: '星痕石 · 消耗' },
+  { plugin: 'Crucible', feature: '祛魔传说', amount: '5', freq: '按需', cap: '', note: '无', group: '星痕石 · 消耗' },
+  { plugin: 'Crucible', feature: '祛魔史诗', amount: '2', freq: '按需', cap: '', note: '无', group: '星痕石 · 消耗' },
+  { plugin: 'Crucible', feature: '重铸至宝', amount: '15', freq: '按需', cap: '', note: '另加 8,000 灵叶与 25 结晶', group: '星痕石 · 消耗' },
+  { plugin: 'Crucible', feature: '重铸传说', amount: '5', freq: '按需', cap: '', note: '无', group: '星痕石 · 消耗' },
+  { plugin: 'Crucible', feature: '增幅高品质', amount: '1~2', freq: '按需', cap: '', note: '无', group: '星痕石 · 消耗' },
+  { plugin: 'UltimateShop', feature: '珍材商店·各物品', amount: '见下一节', freq: '按需', cap: '', note: '无', group: '星痕石 · 消耗' },
+]
+</script>
+
+
 
 # 全插件经济速查表
 
@@ -10,68 +68,21 @@ outline: [2, 3]
 
 数据截止 2026-09-02，数值变动后需同步更新本表。审查方法见 [经济审查工作流](/developer/reference/economy-audit/index)。
 
-## 1. 灵叶（Vault）产出源
+## 1. 产出源与消耗端总表
 
-| 插件 | 功能 | 单次产出 | 频率 | 日上限 | 备注 |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| MiragEdgeMenu | 在线奖励（满 8h） | 10,000 | 每日 | 无 | 阶梯发放 |
-| MiragEdgeMenu | 每日任务 | 1,000~3,000/个 | 每日 5 个 | 无 | 2 易 + 2 中 + 1 难 |
-| MiragEdgeMenu | 周任务 | 5,000~15,000/个 | 每周 8 个 | 无 | 周入约 40K~65K |
-| MiragEdgeMenu | 全完成奖励 | +7,000~12,000 | 每日或每周 | 无 | 做满额外 |
-| LiteSignIn | 每日签到 | 800 | 每日 | 无 | 全服第一翻倍 1,600 |
-| FE_ABCQ | 知识问答 | 500 | 约 15min/题 | 无 | 需不少于 4 人在线 |
-| FE_PVP | 竞技场 | 200×段位×加成 | 每场 | 10,000 | 基准 200 |
-| BountyHunter | 赏金猎人 | 3,275~5,000 | 每日 | 日限量 | 跨日重置 |
-| Welcome-NEXT | 欢迎新玩家 | 100~150 | 每位新玩家 | 无 | 60 秒内 |
-| FE_PassPlus | 月卡（飞行） | 无 | 每日 | 无 | 给飞行时间，不给灵叶 |
+审查改动时先在这里定位：按「货币 · 方向」筛选，或直接搜插件名，可以一次看清某个插件动了哪些经济环节。
 
-## 2. 星痕石（PlayerPoints）产出源
+<DataTable
+  :columns="ecoColumns"
+  :rows="ecoRows"
+  group-key="group"
+  :page-size="0"
+  search-placeholder="输入插件名或功能筛选"
+  note="共 41 条，覆盖灵叶与星痕石的产出源和消耗端；数据截止 2026-09-02。"
+/>
 
-| 插件 | 功能 | 单次产出 | 频率 | 日上限 | 备注 |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| MiragEdgeMenu | 在线奖励 | 30 | 每日 | 无 | 阶梯发放 |
-| MiragEdgeMenu | 每日任务 | 5~15/个 | 每日 5 个 | 无 | 全完成另加 8~12 |
-| MiragEdgeMenu | 周任务 | 10~30/个 | 每周 8 个 | 无 | 全完成另加 45 |
-| LiteSignIn | 每日签到 | 35 | 每日 | 无 | 补签 30，全服第一 70 |
-| FE_ABCQ | 知识问答 | 5 | 约 15min/题 | 无 | 需不少于 4 人在线 |
-| FE_PVP | 竞技场 | 1×段位×加成 | 每场 | 50 | 基准 1 |
-| Welcome-NEXT | 欢迎新玩家 | 2~10 | 每位新玩家 | 无 | 随机值 |
-| CyberLevels | 等级奖励 | 10~15 | 一次性 | 无 | 2 级与 3 级、10 级为 10，11~100 级为 15 |
-| FE_PassPlus | 星痕石月卡·新秀 | +28/天 | 每日 | 无 | 权限 `fepp.points.1` |
-| FE_PassPlus | 星痕石月卡·精英 | +55/天 | 每日 | 无 | 权限 `fepp.points.2` |
-| FE_PassPlus | 星痕石月卡·大师 | +110/天 | 每日 | 无 | 权限 `fepp.points.3` |
 
-## 3. 灵叶（Vault）消耗端
-
-| 插件 | 功能 | 单次消耗 | 频率 | 备注 |
-| :--- | :--- | :--- | :--- | :--- |
-| Crucible（祛魔） | 祛魔普通 | 300 | 按需 | 另加 3 级经验 |
-| Crucible（祛魔） | 祛魔至宝 | 1,050 | 按需 | 另加 10 级经验与 8 星痕石 |
-| Crucible（重铸） | 重铸普通 | 50 | 按需 | 另加 3 粉尘 |
-| Crucible（重铸） | 重铸至宝 | 8,000 | 按需 | 另加 25 结晶与 15 星痕石 |
-| Crucible（增幅） | 增幅附魔 | 30~200 | 按需 | 另加材料 |
-| Crucible（结晶） | 粉尘→结晶 | 100/组 | 按需 | 无 |
-| FE_Pluck | RTP 随机传送 | 100 | 按需 | 无 |
-| MiragEdgeHome | 创建家 | 350 | 按需 | 无 |
-| MiragEdgeHome | TPA 传送 | 100 | 按需 | 无 |
-| MiragEdgeHome | 死亡返回 | 阶梯 | 按需 | 前 30 次免费 |
-| UltimateShop | 稀有资源·钻石买 | 1,600 | 按需 | 供应池限量 |
-| UltimateShop | 稀有资源·远古残骸买 | 4,000 | 按需 | 供应池限量 |
-| UltimateShop | 稀有资源·下界合金买 | 7,000 | 按需 | 供应池限量 |
-
-## 4. 星痕石（PlayerPoints）消耗端
-
-| 插件 | 功能 | 单次消耗 | 频率 | 备注 |
-| :--- | :--- | :--- | :--- | :--- |
-| Crucible | 祛魔至宝 | 8 | 按需 | 另加 1,050 灵叶与 10 级经验 |
-| Crucible | 祛魔传说 | 5 | 按需 | 无 |
-| Crucible | 祛魔史诗 | 2 | 按需 | 无 |
-| Crucible | 重铸至宝 | 15 | 按需 | 另加 8,000 灵叶与 25 结晶 |
-| Crucible | 重铸传说 | 5 | 按需 | 无 |
-| Crucible | 增幅高品质 | 1~2 | 按需 | 无 |
-| UltimateShop | 珍材商店·各物品 | 见下一节 | 按需 | 无 |
-
-## 5. 珍材商店价目表（星痕石）
+## 2. 珍材商店价目表（星痕石）
 
 | 代号 | 物品 | 价格（星痕石） | 肝度 | 占日收入 | 评估 |
 | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -104,7 +115,7 @@ outline: [2, 3]
 
 肝度按 1~5 级计：1 级为登录或挂机即得，5 级为几乎不可重复。分级标准见[经济审查工作流](/developer/reference/economy-audit/index)。
 
-## 6. 稀有资源交易所价目表（灵叶·供应池模式）
+## 3. 稀有资源交易所价目表（灵叶·供应池模式）
 
 | 代号 | 物品 | 卖价（玩家得） | 买价（玩家付） | 差价 | 回收率 | 个人日卖限 | VIP 日卖限 | 全服池限 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -113,7 +124,7 @@ outline: [2, 3]
 | C | 下界合金锭 | 5,000 | 7,000 | 2,000 | 29% | 1 | 2 | 10 |
 | D | 下界合金碎片 | 1,500 | 2,000 | 500 | 25% | 2 | 3 | 32 |
 
-## 7. 签到奖励详表
+## 4. 签到奖励详表
 
 | 触发条件 | 灵叶 | 星痕石 | 物品 | 备注 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -128,7 +139,7 @@ outline: [2, 3]
 | 周日额外 | 无 | 无 | 金苹果×1 | 无 |
 | 每周期 7 天 | 无 | 无 | 铁锭×5 | 循环 |
 
-## 8. 在线奖励阶梯
+## 5. 在线奖励阶梯
 
 | 时长 | 灵叶 | 星痕石 | 累计灵叶 | 累计星痕石 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -139,7 +150,7 @@ outline: [2, 3]
 | 360 分钟 | 2,400 | 9 | 8,200 | 25 |
 | 480 分钟 | 1,800 | 5 | 10,000 | 30 |
 
-## 9. 祛魔成本详表（Crucible）
+## 6. 祛魔成本详表（Crucible）
 
 | 品质 | 经验等级 | 灵叶 | 星痕石 | 材料 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -150,7 +161,7 @@ outline: [2, 3]
 | 史诗 | 15 | 3,000 | 5 | 8 结晶 |
 | 至宝 | 30 | 8,000 | 15 | 25 结晶 |
 
-## 10. 不产出星痕石的插件
+## 7. 不产出星痕石的插件
 
 以下插件经全量扫描确认不涉及星痕石产出，审查时无需检查。
 

@@ -10,7 +10,8 @@ outline: [2, 3]
 
 相关内容见 [CraftEngine 与合并资源包](../craftengine/)与[复杂数据包实体与展示](../entities)。
 
-<SmartImage src="/images/developer/workflows/geyser/conversion-flow.svg" caption="图 1：Geyser 转换链路——冻结版本 → 选输入包 → Java 客户端采集 → 审查映射 → 受控部署" width="880" />
+<SmartImage src="/images/developer/workflows/geyser/conversion-flow.svg"
+  alt="Geyser 资源包转换链路图：冻结版本、选输入包、采集、审查映射、受控部署" caption="图 1：Geyser 转换链路——冻结版本 → 选输入包 → Java 客户端采集 → 审查映射 → 受控部署" width="880" />
 
 ## 四个阶段
 

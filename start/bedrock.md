@@ -16,7 +16,8 @@ outline: [2, 3]
 
 基岩版玩家与 Java 版玩家在同一张地图上游玩。受互通机制限制，部分模型、动画和界面无法完美还原。
 
-<SmartImage src="/images/start/bedrock/java-vs-bedrock.svg" caption="图 1：Java 版与基岩版的差异——左列完整可用，右列受限项，中间标注互通带来的硬限制" width="720" />
+<SmartImage src="/images/start/bedrock/java-vs-bedrock.svg"
+  alt="Java 版与基岩版差异对照图，中间标注互通硬限制" caption="图 1：Java 版与基岩版的差异——左列完整可用，右列受限项，中间标注互通带来的硬限制" width="720" />
 
 ## 稳定性与性能
 

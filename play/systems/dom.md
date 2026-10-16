@@ -15,6 +15,13 @@ outline: [2, 3]
 
 ## 创建领地
 
+<SmartImage
+  src="/images/play/systems/dom/create-flow.svg"
+  alt="创建领地三环节流程图：选点、确认范围、设置权限"
+  caption="图 1：创建领地的三个环节——选点、确认范围、设置权限"
+  width="720"
+/>
+
 ### 自动创建
 
 1. 打开领地界面。

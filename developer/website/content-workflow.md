@@ -72,7 +72,8 @@ Get-Content -Raw package.json
 
 ## 修改闭环
 
-<SmartImage src="/images/developer/website/content-pipeline.svg" caption="图 1：文档站的内容流水线——源 markdown → 生成 llms → 构建 → 水印" width="880" />
+<SmartImage src="/images/developer/website/content-pipeline.svg"
+  alt="文档站内容流水线图：源 markdown、生成 llms、构建、水印" caption="图 1：文档站的内容流水线——源 markdown → 生成 llms → 构建 → 水印" width="880" />
 
 ### 轻量操作：待办维护
 

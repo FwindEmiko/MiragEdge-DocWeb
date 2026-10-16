@@ -8,7 +8,8 @@ outline: [2, 3]
 
 首次进入服务器必须绑定 QQ 号，否则无法正常游玩。绑定后即可自由进出服务器，并使用群服互通功能。
 
-<SmartImage src="/images/start/account/bind-flow.svg" caption="图 1：绑定三步——进服拿到 4 位验证码，回群发送「绑定 + 验证码」，绑定成功后即可自由进出" width="720" />
+<SmartImage src="/images/start/account/bind-flow.svg"
+  alt="账号绑定三步流程图：进服拿 4 位验证码、回群发送「绑定 + 验证码」、绑定生效" caption="图 1：绑定三步——进服拿到 4 位验证码，回群发送「绑定 + 验证码」，绑定成功后即可自由进出" width="720" />
 
 ::: warning 隐私声明
 服务器会收集你的 QQ 号、关联的游戏 ID 和连接 IP 属地。这些信息仅用于服务器功能。

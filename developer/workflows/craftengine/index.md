@@ -25,7 +25,8 @@ CraftEngine 负责物品、方块、字体图标和资源包的注册与生成�
 
 ## 流程图
 
-<SmartImage src="/images/developer/workflows/craftengine/texture-pipeline.svg" caption="图 1：CraftEngine 内容链路——定义（pack.yml 与 configuration）→ 纹理（resourcepack/assets 下的 PNG）→ 模型（模型 JSON 与模板）→ 基岩转换（Geyser 映射与资源包）" width="880" />
+<SmartImage src="/images/developer/workflows/craftengine/texture-pipeline.svg"
+  alt="CraftEngine 材质管线图：定义、纹理、模型、基岩转换" caption="图 1：CraftEngine 内容链路——定义（pack.yml 与 configuration）→ 纹理（resourcepack/assets 下的 PNG）→ 模型（模型 JSON 与模板）→ 基岩转换（Geyser 映射与资源包）" width="880" />
 
 ## 适用边界
 

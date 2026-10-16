@@ -32,7 +32,8 @@ head:
 
 先读前置与环境，确认版本、目录与测试条件。再按需求进入对应的内容类型页。遇到加载失败或校验报错时，查参考规则与排错页。
 
-<SmartImage src="/images/developer/workflows/datapack/stage-flow.svg" caption="图 1：数据包的四个阶段——编写（函数 / 战利品表 / 配方 / 生物 / 结构）→ 校验（/reload、/function、日志）→ 部署（datapacks/ 与版本锁定）→ 回滚（保留上一版可加载包）" width="880" />
+<SmartImage src="/images/developer/workflows/datapack/stage-flow.svg"
+  alt="数据包工作流四阶段循环图：编写、校验、部署、回滚" caption="图 1：数据包的四个阶段——编写（函数 / 战利品表 / 配方 / 生物 / 结构）→ 校验（/reload、/function、日志）→ 部署（datapacks/ 与版本锁定）→ 回滚（保留上一版可加载包）" width="880" />
 
 ## 页面索引
 

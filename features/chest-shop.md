@@ -10,7 +10,8 @@ outline: [2, 3]
 
 它和[全服市场](/features/global-market)各有用途。全服市场适合随时搜索和上架，箱子商店适合在固定地点长期补货。
 
-<SmartImage src="/images/features/chest-shop/trade-flow.svg" caption="图 1：从摆摊到成交——放入商品、设置价格、买家购买、收货入账" width="720" />
+<SmartImage src="/images/features/chest-shop/trade-flow.svg"
+  alt="箱子商店从摆摊到成交的四步流程图" caption="图 1：从摆摊到成交——放入商品、设置价格、买家购买、收货入账" width="720" />
 
 ## 找到并完成一笔交易
 

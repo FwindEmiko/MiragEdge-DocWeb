@@ -12,7 +12,8 @@ outline: [2, 3]
 
 服务器附魔分两块：原版附魔和自定义附魔。原版附魔用附魔台就能弄到，自定义附魔必须去野外探索。
 
-<SmartImage src="/images/play/adventure/enchantments/acquire-paths.svg" caption="图 1：附魔的三条来路——附魔台、祛魔、村民交易，最终汇入同一套附魔体系" width="720" />
+<SmartImage src="/images/play/adventure/enchantments/acquire-paths.svg"
+  alt="附魔三条来路汇入同一套附魔体系的关系图" caption="图 1：附魔的三条来路——附魔台、祛魔、村民交易，最终汇入同一套附魔体系" width="720" />
 
 ## 新手阶段：先玩原版
 

@@ -8,7 +8,8 @@ outline: [2, 3]
 
 这页说明比赛怎么开、按什么判胜负、奖励发多少。每天多场，随时能参加。
 
-<SmartImage src="/images/play/life/fishing/competitions-flow.svg" caption="图 1：钓鱼比赛的赛程——报名、开赛、计分、结算三档奖励" width="720" />
+<SmartImage src="/images/play/life/fishing/competitions-flow.svg"
+  alt="钓鱼比赛赛程图：报名、开赛、计分、结算三档奖励" caption="图 1：钓鱼比赛的赛程——报名、开赛、计分、结算三档奖励" width="720" />
 
 ## 比赛类型
 

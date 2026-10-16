@@ -19,7 +19,8 @@ outline: [2, 3]
 | <span style="color:#3b82f6;font-weight:700">稀有</span> | 强力的战斗效果 | 大火腿、牛肉炖、汉堡 |
 | <span style="color:#f59e0b;font-weight:700">传说</span> | 终极增益，材料极稀有 | 七彩蛋羹、煎龙蛋 |
 
-<SmartImage src="/images/play/life/food/food-map.svg" caption="图 1：食物的分类、品质与效果之间的关系" width="720" />
+<SmartImage src="/images/play/life/food/food-map.svg"
+  alt="食物分类、品质与效果三层关系图" caption="图 1：食物的分类、品质与效果之间的关系" width="720" />
 
 ## 食物分类
 

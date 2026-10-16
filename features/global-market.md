@@ -10,7 +10,8 @@ outline: [2, 3]
 
 市场同时使用灵叶和星痕石结算。下单前先看清商品显示的货币、单价、数量和剩余时间；两种货币不会自动互换。
 
-<SmartImage src="/images/features/global-market/market-ui.svg" caption="图 1：全服市场的四个区块——在售商品、收购需求、拍卖与个人邮箱" width="720" />
+<SmartImage src="/images/features/global-market/market-ui.svg"
+  alt="全服市场界面示意图，含在售商品、收购需求、拍卖、个人邮箱四个区块" caption="图 1：全服市场的四个区块——在售商品、收购需求、拍卖与个人邮箱" width="720" />
 
 ## 常用入口
 

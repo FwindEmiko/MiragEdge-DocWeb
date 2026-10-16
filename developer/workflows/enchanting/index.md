@@ -9,7 +9,8 @@ description: 从版本核对到实服验收的 Aiyatsbus 附魔开发入口：�
 
 本轮基线为 [PolarAstrum/aiyatsbus](https://github.com/PolarAstrum/aiyatsbus) 源码，以及 Fluxon Bukkit 1.1.4 的扩展源码。插件升级后先重新核实受影响的 API，再复用本文示例。
 
-<SmartImage src="/images/developer/workflows/enchanting/layers.svg" caption="图 1：附魔系统的四层——数据包、插件、触发器、运行时" width="880" />
+<SmartImage src="/images/developer/workflows/enchanting/layers.svg"
+  alt="附魔系统四层结构图：数据包、插件、触发器、运行时" caption="图 1：附魔系统的四层——数据包、插件、触发器、运行时" width="880" />
 
 四层的职责边界决定了写配置时该改哪一层：数据包提供原版与玩法模块效果，插件层是 Aiyatsbus 的注册与机制管理，触发器层是 Listener、Ticker、Skill、Builtin、Artifact，运行时层是脚本上下文、变量和容器。机制选择规则见 [机制总览](./mechanisms)。
 

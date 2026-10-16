@@ -3,6 +3,141 @@ title: 已注册物品速查
 description: McItem 组件可用的物品 id 与中文名速查——材质路径约定、19 个分类的数量统计，以及食物、食材原料、原材料与矿物三类的完整 id 对照表。
 outline: [2, 3]
 ---
+<script setup>
+// 物品 id 对照表数据源。改动此表即改动页面筛选结果，不要再另外维护一份 markdown 表。
+const itemColumns = [
+  { key: 'id', label: 'id' },
+  { key: 'name', label: '名称' },
+]
+
+const itemRows = [
+  // 食物（37）
+    { id: 'apple', name: '苹果', group: '食物' },
+    { id: 'beef', name: '生牛肉', group: '食物' },
+    { id: 'beetroot_soup', name: '甜菜汤', group: '食物' },
+    { id: 'bread', name: '面包', group: '食物' },
+    { id: 'cake', name: '蛋糕', group: '食物' },
+    { id: 'chicken', name: '生鸡肉', group: '食物' },
+    { id: 'chorus_fruit', name: '紫颂果', group: '食物' },
+    { id: 'cod', name: '生鳕鱼', group: '食物' },
+    { id: 'cooked_beef', name: '牛排', group: '食物' },
+    { id: 'cooked_chicken', name: '熟鸡肉', group: '食物' },
+    { id: 'cooked_cod', name: '熟鳕鱼', group: '食物' },
+    { id: 'cooked_mutton', name: '熟羊肉', group: '食物' },
+    { id: 'cooked_porkchop', name: '熟猪排', group: '食物' },
+    { id: 'cooked_rabbit', name: '熟兔肉', group: '食物' },
+    { id: 'cooked_salmon', name: '熟鲑鱼', group: '食物' },
+    { id: 'cookie', name: '曲奇', group: '食物' },
+    { id: 'fermented_spider_eye', name: '发酵蛛眼', group: '食物' },
+    { id: 'glistering_melon_slice', name: '闪烁的西瓜片', group: '食物' },
+    { id: 'golden_apple', name: '金苹果', group: '食物' },
+    { id: 'golden_carrot', name: '金胡萝卜', group: '食物' },
+    { id: 'melon_slice', name: '西瓜片', group: '食物' },
+    { id: 'mushroom_stew', name: '蘑菇煲', group: '食物' },
+    { id: 'mutton', name: '生羊肉', group: '食物' },
+    { id: 'poisonous_potato', name: '毒马铃薯', group: '食物' },
+    { id: 'popped_chorus_fruit', name: '爆裂紫颂果', group: '食物' },
+    { id: 'porkchop', name: '生猪排', group: '食物' },
+    { id: 'pufferfish', name: '河豚', group: '食物' },
+    { id: 'pumpkin_pie', name: '南瓜派', group: '食物' },
+    { id: 'rabbit_stew', name: '兔肉煲', group: '食物' },
+    { id: 'rotten_flesh', name: '腐肉', group: '食物' },
+    { id: 'salmon', name: '生鲑鱼', group: '食物' },
+    { id: 'spider_eye', name: '蜘蛛眼', group: '食物' },
+    { id: 'suspicious_stew', name: '谜之炖菜', group: '食物' },
+    { id: 'tropical_fish', name: '热带鱼', group: '食物' },
+    { id: 'sweet_berries', name: '甜浆果', group: '食物' },
+    { id: 'glow_berries', name: '发光浆果', group: '食物' },
+    { id: 'honey_bottle', name: '蜂蜜瓶', group: '食物' },
+  // 食材原料（45）
+    { id: 'wheat', name: '小麦', group: '食材原料' },
+    { id: 'wheat_seeds', name: '小麦种子', group: '食材原料' },
+    { id: 'sugar', name: '糖', group: '食材原料' },
+    { id: 'egg', name: '鸡蛋', group: '食材原料' },
+    { id: 'bowl', name: '碗', group: '食材原料' },
+    { id: 'carrot', name: '胡萝卜', group: '食材原料' },
+    { id: 'potato', name: '马铃薯', group: '食材原料' },
+    { id: 'beetroot', name: '甜菜根', group: '食材原料' },
+    { id: 'beetroot_seeds', name: '甜菜种子', group: '食材原料' },
+    { id: 'melon_seeds', name: '西瓜种子', group: '食材原料' },
+    { id: 'pumpkin_seeds', name: '南瓜种子', group: '食材原料' },
+    { id: 'torchflower_seeds', name: '火把花种子', group: '食材原料' },
+    { id: 'pitcher_pod', name: '投掷器豆荚', group: '食材原料' },
+    { id: 'kelp', name: '海带', group: '食材原料' },
+    { id: 'dried_kelp', name: '干海带', group: '食材原料' },
+    { id: 'seagrass', name: '海草', group: '食材原料' },
+    { id: 'sea_pickle', name: '海泡菜', group: '食材原料' },
+    { id: 'cocoa_beans', name: '可可豆', group: '食材原料' },
+    { id: 'nether_wart', name: '下界疣', group: '食材原料' },
+    { id: 'nether_sprouts', name: '下界苗', group: '食材原料' },
+    { id: 'bamboo', name: '竹子', group: '食材原料' },
+    { id: 'sugar_cane', name: '甘蔗', group: '食材原料' },
+    { id: 'paper', name: '纸', group: '食材原料' },
+    { id: 'leather', name: '皮革', group: '食材原料' },
+    { id: 'feather', name: '羽毛', group: '食材原料' },
+    { id: 'flint', name: '燧石', group: '食材原料' },
+    { id: 'clay_ball', name: '黏土球', group: '食材原料' },
+    { id: 'brick', name: '红砖', group: '食材原料' },
+    { id: 'nether_brick', name: '下界砖', group: '食材原料' },
+    { id: 'resin_brick', name: '树脂砖', group: '食材原料' },
+    { id: 'resin_clump', name: '树脂团', group: '食材原料' },
+    { id: 'quartz', name: '下界石英', group: '食材原料' },
+    { id: 'amethyst_shard', name: '紫水晶碎片', group: '食材原料' },
+    { id: 'blaze_powder', name: '烈焰粉', group: '食材原料' },
+    { id: 'blaze_rod', name: '烈焰棒', group: '食材原料' },
+    { id: 'breeze_rod', name: '涡流杆', group: '食材原料' },
+    { id: 'magma_cream', name: '岩浆膏', group: '食材原料' },
+    { id: 'ghast_tear', name: '恶魂之泪', group: '食材原料' },
+    { id: 'fermented_spider_eye', name: '发酵蛛眼', group: '食材原料' },
+    { id: 'popped_chorus_fruit', name: '爆裂紫颂果', group: '食材原料' },
+    { id: 'honeycomb', name: '蜜脾', group: '食材原料' },
+    { id: 'ink_sac', name: '墨囊', group: '食材原料' },
+    { id: 'glow_ink_sac', name: '荧光墨囊', group: '食材原料' },
+    { id: 'cactus', name: '仙人掌', group: '食材原料' },
+    { id: 'leaf_litter', name: '落叶', group: '食材原料' },
+  // 原材料与矿物（38）
+    { id: 'coal', name: '煤炭', group: '原材料与矿物' },
+    { id: 'charcoal', name: '木炭', group: '原材料与矿物' },
+    { id: 'iron_ingot', name: '铁锭', group: '原材料与矿物' },
+    { id: 'iron_nugget', name: '铁粒', group: '原材料与矿物' },
+    { id: 'gold_ingot', name: '金锭', group: '原材料与矿物' },
+    { id: 'gold_nugget', name: '金粒', group: '原材料与矿物' },
+    { id: 'copper_ingot', name: '铜锭', group: '原材料与矿物' },
+    { id: 'copper_nugget', name: '铜粒', group: '原材料与矿物' },
+    { id: 'diamond', name: '钻石', group: '原材料与矿物' },
+    { id: 'emerald', name: '绿宝石', group: '原材料与矿物' },
+    { id: 'lapis_lazuli', name: '青金石', group: '原材料与矿物' },
+    { id: 'redstone', name: '红石粉', group: '原材料与矿物' },
+    { id: 'glowstone_dust', name: '荧石粉', group: '原材料与矿物' },
+    { id: 'netherite_ingot', name: '下界合金锭', group: '原材料与矿物' },
+    { id: 'netherite_scrap', name: '下界合金碎片', group: '原材料与矿物' },
+    { id: 'raw_iron', name: '粗铁', group: '原材料与矿物' },
+    { id: 'raw_gold', name: '粗金', group: '原材料与矿物' },
+    { id: 'raw_copper', name: '粗铜', group: '原材料与矿物' },
+    { id: 'nether_star', name: '下界之星', group: '原材料与矿物' },
+    { id: 'ender_pearl', name: '末影珍珠', group: '原材料与矿物' },
+    { id: 'ender_eye', name: '末影之眼', group: '原材料与矿物' },
+    { id: 'dragon_breath', name: '龙息', group: '原材料与矿物' },
+    { id: 'shulker_shell', name: '潜影壳', group: '原材料与矿物' },
+    { id: 'nautilus_shell', name: '鹦鹉螺壳', group: '原材料与矿物' },
+    { id: 'phantom_membrane', name: '幻翼膜', group: '原材料与矿物' },
+    { id: 'prismarine_shard', name: '海晶碎片', group: '原材料与矿物' },
+    { id: 'prismarine_crystals', name: '海晶砂粒', group: '原材料与矿物' },
+    { id: 'echo_shard', name: '回响碎片', group: '原材料与矿物' },
+    { id: 'disc_fragment_5', name: '唱片碎片 5', group: '原材料与矿物' },
+    { id: 'heart_of_the_sea', name: '海洋之心', group: '原材料与矿物' },
+    { id: 'turtle_scute', name: '海龟鳞甲', group: '原材料与矿物' },
+    { id: 'armadillo_scute', name: '犰狳鳞甲', group: '原材料与矿物' },
+    { id: 'wind_charge', name: '风弹', group: '原材料与矿物' },
+    { id: 'fire_charge', name: '火焰弹', group: '原材料与矿物' },
+    { id: 'gunpowder', name: '火药', group: '原材料与矿物' },
+    { id: 'string', name: '线', group: '原材料与矿物' },
+    { id: 'bone', name: '骨头', group: '原材料与矿物' },
+    { id: 'bone_meal', name: '骨粉', group: '原材料与矿物' },
+]
+</script>
+
+
 
 # 已注册物品速查
 
@@ -48,148 +183,13 @@ public/mc-textures/item/{id}.png
 
 以下列出食物、食材原料、原材料与矿物三类的完整 id。其余分类的 id 见源文件注册表。
 
-<details>
-<summary>点击查看完整物品列表</summary>
-
-<!-- ITEMS_LIST_START -->
-
-**食物** (37)
-
-| id | 名称 |
-| :--- | :--- |
-| `apple` | 苹果 |
-| `beef` | 生牛肉 |
-| `beetroot_soup` | 甜菜汤 |
-| `bread` | 面包 |
-| `cake` | 蛋糕 |
-| `chicken` | 生鸡肉 |
-| `chorus_fruit` | 紫颂果 |
-| `cod` | 生鳕鱼 |
-| `cooked_beef` | 牛排 |
-| `cooked_chicken` | 熟鸡肉 |
-| `cooked_cod` | 熟鳕鱼 |
-| `cooked_mutton` | 熟羊肉 |
-| `cooked_porkchop` | 熟猪排 |
-| `cooked_rabbit` | 熟兔肉 |
-| `cooked_salmon` | 熟鲑鱼 |
-| `cookie` | 曲奇 |
-| `fermented_spider_eye` | 发酵蛛眼 |
-| `glistering_melon_slice` | 闪烁的西瓜片 |
-| `golden_apple` | 金苹果 |
-| `golden_carrot` | 金胡萝卜 |
-| `melon_slice` | 西瓜片 |
-| `mushroom_stew` | 蘑菇煲 |
-| `mutton` | 生羊肉 |
-| `poisonous_potato` | 毒马铃薯 |
-| `popped_chorus_fruit` | 爆裂紫颂果 |
-| `porkchop` | 生猪排 |
-| `pufferfish` | 河豚 |
-| `pumpkin_pie` | 南瓜派 |
-| `rabbit_stew` | 兔肉煲 |
-| `rotten_flesh` | 腐肉 |
-| `salmon` | 生鲑鱼 |
-| `spider_eye` | 蜘蛛眼 |
-| `suspicious_stew` | 谜之炖菜 |
-| `tropical_fish` | 热带鱼 |
-| `sweet_berries` | 甜浆果 |
-| `glow_berries` | 发光浆果 |
-| `honey_bottle` | 蜂蜜瓶 |
-
-**食材原料** (45)
-
-| id | 名称 |
-| :--- | :--- |
-| `wheat` | 小麦 |
-| `wheat_seeds` | 小麦种子 |
-| `sugar` | 糖 |
-| `egg` | 鸡蛋 |
-| `bowl` | 碗 |
-| `carrot` | 胡萝卜 |
-| `potato` | 马铃薯 |
-| `beetroot` | 甜菜根 |
-| `beetroot_seeds` | 甜菜种子 |
-| `melon_seeds` | 西瓜种子 |
-| `pumpkin_seeds` | 南瓜种子 |
-| `torchflower_seeds` | 火把花种子 |
-| `pitcher_pod` | 投掷器豆荚 |
-| `kelp` | 海带 |
-| `dried_kelp` | 干海带 |
-| `seagrass` | 海草 |
-| `sea_pickle` | 海泡菜 |
-| `cocoa_beans` | 可可豆 |
-| `nether_wart` | 下界疣 |
-| `nether_sprouts` | 下界苗 |
-| `bamboo` | 竹子 |
-| `sugar_cane` | 甘蔗 |
-| `paper` | 纸 |
-| `leather` | 皮革 |
-| `feather` | 羽毛 |
-| `flint` | 燧石 |
-| `clay_ball` | 黏土球 |
-| `brick` | 红砖 |
-| `nether_brick` | 下界砖 |
-| `resin_brick` | 树脂砖 |
-| `resin_clump` | 树脂团 |
-| `quartz` | 下界石英 |
-| `amethyst_shard` | 紫水晶碎片 |
-| `blaze_powder` | 烈焰粉 |
-| `blaze_rod` | 烈焰棒 |
-| `breeze_rod` | 涡流杆 |
-| `magma_cream` | 岩浆膏 |
-| `ghast_tear` | 恶魂之泪 |
-| `fermented_spider_eye` | 发酵蛛眼 |
-| `popped_chorus_fruit` | 爆裂紫颂果 |
-| `honeycomb` | 蜜脾 |
-| `ink_sac` | 墨囊 |
-| `glow_ink_sac` | 荧光墨囊 |
-| `cactus` | 仙人掌 |
-| `leaf_litter` | 落叶 |
-
-**原材料与矿物** (38)
-
-| id | 名称 |
-| :--- | :--- |
-| `coal` | 煤炭 |
-| `charcoal` | 木炭 |
-| `iron_ingot` | 铁锭 |
-| `iron_nugget` | 铁粒 |
-| `gold_ingot` | 金锭 |
-| `gold_nugget` | 金粒 |
-| `copper_ingot` | 铜锭 |
-| `copper_nugget` | 铜粒 |
-| `diamond` | 钻石 |
-| `emerald` | 绿宝石 |
-| `lapis_lazuli` | 青金石 |
-| `redstone` | 红石粉 |
-| `glowstone_dust` | 荧石粉 |
-| `netherite_ingot` | 下界合金锭 |
-| `netherite_scrap` | 下界合金碎片 |
-| `raw_iron` | 粗铁 |
-| `raw_gold` | 粗金 |
-| `raw_copper` | 粗铜 |
-| `nether_star` | 下界之星 |
-| `ender_pearl` | 末影珍珠 |
-| `ender_eye` | 末影之眼 |
-| `dragon_breath` | 龙息 |
-| `shulker_shell` | 潜影壳 |
-| `nautilus_shell` | 鹦鹉螺壳 |
-| `phantom_membrane` | 幻翼膜 |
-| `prismarine_shard` | 海晶碎片 |
-| `prismarine_crystals` | 海晶砂粒 |
-| `echo_shard` | 回响碎片 |
-| `disc_fragment_5` | 唱片碎片 5 |
-| `heart_of_the_sea` | 海洋之心 |
-| `turtle_scute` | 海龟鳞甲 |
-| `armadillo_scute` | 犰狳鳞甲 |
-| `wind_charge` | 风弹 |
-| `fire_charge` | 火焰弹 |
-| `gunpowder` | 火药 |
-| `string` | 线 |
-| `bone` | 骨头 |
-| `bone_meal` | 骨粉 |
-
-<!-- ITEMS_LIST_END -->
-
-</details>
+<DataTable
+  :columns="itemColumns"
+  :rows="itemRows"
+  group-key="group"
+  :page-size="0"
+  search-placeholder="输入 id 或中文名筛选"
+  note="共 120 个物品，覆盖食物、食材原料、原材料与矿物三类；全量 581 个物品见源文件注册表。"
+/>
 
 完整注册表见源文件 [mc-textures.ts](https://github.com/fwindemiko/MiragEdge-DocWeb/blob/main/.vitepress/theme/data/mc-textures.ts)。
