@@ -19,7 +19,11 @@ gameplay:
   enable-custom-content: true
 ```
 
-该配置启用 Geyser 的三种 mapping 系统：item、block 和 skull。关闭时它们都不会生效，变更后需要重启 Geyser。
+该配置启用 Geyser 的三种 mapping 系统。
+
+它们分别是 item、block 和 skull。
+
+关闭时它们都不会生效。变更后需要重启 Geyser。
 
 逻辑目录：
 
@@ -38,13 +42,17 @@ Rainbow 是当前优先的采集与生成工具。它仍是实验性工具，输
 
 ## 2. Custom Item v2
 
-Geyser API 2.9.3 与 Build 1062 及之后，把旧 custom item v1 标为 deprecated。当前推荐 v2。v2 处理：
+自 Geyser API 2.9.3 与 Build 1062 起，旧 custom item v1 被标为 deprecated。
+
+当前推荐 v2。v2 处理三类内容：
 
 - Java 1.21.4 以上的 `minecraft:item_model` 与 item components。
 - 旧式 `minecraft:custom_model_data` 的 legacy 定义。
 - 同一 Java 基础物品和 model 下由谓词选择多个预注册基岩版物品。
 
-基岩版 item components 不能在运行时任意改变，与 Java item stack 不同。因此 mapping 中声明的组件应是「该定义总会拥有」的稳定属性。不同组件组合要拆成不同定义和谓词。
+基岩版 item components 不能在运行时任意改变。它与 Java item stack 不同。
+
+因此 mapping 中声明的组件应是「该定义总会拥有」的稳定属性。不同组件组合要拆成不同定义和谓词。
 
 ### JSON 顶层
 

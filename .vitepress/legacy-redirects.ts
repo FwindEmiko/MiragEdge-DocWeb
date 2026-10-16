@@ -132,6 +132,9 @@ const exactRules: RedirectRule[] = [
   // 跨区归位
   { from: '/start/redstone', to: '/play/systems/redstone' },   // 目标页由阶段 2 拆页产出
   { from: '/plugins/fec-armor', to: '/features/body-size' },
+  // 玩家内容迁出后删除的插件文档页
+  { from: '/plugin-guides/fe-back/guide', to: '/features/death-return' },
+  { from: '/plugin-guides/fepvp/guide', to: '/features/pvp' },
   // 阶段 3 拆页/改名
   { from: '/developer/workflows/enchanting/aiyatsbus-fluxon-functions', to: '/developer/workflows/enchanting/host-functions' },
   { from: '/developer/workflows/enchanting/reference', to: '/developer/workflows/enchanting/fluxon-pitfalls' },

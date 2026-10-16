@@ -1,10 +1,10 @@
 ---
-title: Stellarity 5.5.3 末地批次
+title: Stellarity 5.5.3 批次
 description: Stellarity 5.5.3 末地内容纳入 Geyser 增量发布的操作单。涵盖输入锁定与只读预检、自动转换边界与静态通过项、Java 采集批次、首发输入组织与 Bridge 发布命令。
 outline: [2, 3]
 ---
 
-# Stellarity 5.5.3 末地批次
+# Stellarity 5.5.3 批次
 
 这页是当前 FCelestial 服务器的实际操作单。`Sparkles_26.2_v1.1.10.zip` 属于 Incendium 地狱内容，现有 `incendium-pack.mcpack` 已独立验证，本批次不处理它。缺少的是 `Stellarity-5.5.3.zip` 的末地内容。
 
@@ -50,7 +50,9 @@ tar -tf $java | Select-Object -First 10
 
 ## 3. Java Rainbow 采集
 
-在隔离的 Java 26.2 测试客户端中装好 Fabric Loader、Fabric API 和 Rainbow。版本需与服务端匹配。
+在隔离的 Java 26.2 测试客户端中装好三个组件。
+
+它们分别是 Fabric Loader、Fabric API 和 Rainbow。版本需与服务端匹配。
 
 加载 CE 最终未保护包。先确认 Stellarity 物品在 Java 客户端没有粉紫缺纹理，再开始导出。
 

@@ -2,7 +2,7 @@ import fs from 'node:fs'
 import path from 'node:path'
 
 const root = process.cwd()
-const documentRoots = ['start', 'community', 'play', 'plugins', 'plugin-guides', 'developer', 'archive']
+const documentRoots = ['start', 'community', 'play', 'features', 'plugin-guides', 'developer', 'archive']
 const configPath = path.join(root, '.vitepress', 'config.mts')
 
 function normalizeRoute(value) {
@@ -35,8 +35,11 @@ function localRoute(rawLink, sourceDirectory) {
   if (/^[a-z][a-z0-9_-]*=#[a-z0-9]+$/i.test(rawLink)) return null
   const link = rawLink.replace(/^<|>$/g, '').split(/[?#]/, 1)[0]
   if (!link || link.startsWith('#') || /^(https?:|mailto:|tel:)/i.test(link)) return null
-  if (link.startsWith('/')) return normalizeRoute(link.replace(/\.md$/, ''))
-  return normalizeRoute(path.posix.resolve(sourceDirectory, link).replace(/\.md$/, ''))
+  // 与 pageRecord 保持同一套归一化：去掉 .md 后再去掉尾部 /index，
+  // 否则显式的 `./index.md`、`x/index.md` 会被误报为「链接不存在」（它们指向的正是目录路由）。
+  const toRoute = (p) => normalizeRoute(p.replace(/\.md$/, '').replace(/\/index$/, ''))
+  if (link.startsWith('/')) return toRoute(link)
+  return toRoute(path.posix.resolve(sourceDirectory, link))
 }
 
 const pages = documentRoots

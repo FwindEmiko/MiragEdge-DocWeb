@@ -38,6 +38,14 @@
 ## 踩坑记录
 
 <!-- 遇到过的问题与解决办法（按时间倒序） -->
+- **`SmartImage` 用 `<img src>` 加载 SVG，SVG 内的 CSS 变量拿不到页面 `:root`**（全量重构阶段 4 实测）：`<img>` 中的 SVG 是独立文档，`fill="var(--vp-c-text-1)"` 解析为空、Chrome 回退成**纯黑填充**，卡片全成黑块。实测对照：同一段标记内联进页面能正确跟随主题，经 `<img>` 引入则恒为兜底色。**本仓库两种可行写法**：
+  1. 玩家区 11 张 SVG：直接写 `var(--vp-c-text-1, #1b1b1f)` 形式（带字面回退），`<img>` 时用浅色兜底；缺点是**跟不了站点手动切换主题**，只跟系统主题（站点初始主题取系统值，故首次访问正确）。
+  2. 开发者区 6 张 SVG：在 SVG 自己的 `<style>` 里 `:root { --d-text-1: var(--vp-c-text-1, #3c3c43); … }` 建立本地变量，再用 `@media (prefers-color-scheme: dark)` 覆盖。
+  两种都**不会被 `svg_check.py` 判错**（W1「写死颜色」把这些字面回退计入，属误报，不要为了消 W1 而删回退值）。
+- **`svg_check.py` 用宽松解析器，查不出编码损坏**：全量重构时 4 个 SVG 因 PowerShell `Get-Content/Set-Content` 按系统 ANSI 往返而被双重编码（UTF-8 字节被当 GBK 再存），mangled 字节还**吃掉了闭合的 `</`**（`</text>` 变 `?/text>`）。`svg_check.py` 报 0 ERROR，而 Python 标准库 `xml.etree.ElementTree` 严格解析报 `mismatched tag`。**判别方法**：`python -c "import xml.etree.ElementTree as ET; ET.parse('x.svg')"` + mojibake 密度检测（真实 mojibake 几乎逐字命中，命中率 >0.35；注意「界」「一」等是 Minecraft 常用字，**不能按个数判**）。
+- **`audit-doc-routes.mjs` 的两处硬编码会随重构失效**：`documentRoots` 里的 `'plugins'` 目录改名后，脚本无法解析任何 `/features/*` 链接，会误报大量「页面链接不存在」；另外它的 `localRoute()` 未做 `x/index.md → x` 归一化，会把显式的 `./index.md` 误报为死链。两处都已修。同名脚本与 `vitepress build` 的死链检查**口径不同，两边都要跑**。
+- **YAML frontmatter 的值含冒号会直接让 build 失败**：`description: … 上下文调用 :: 的写法`、`description: … 含 fs:time 时间 …` 会让 YAML 把值解析成嵌套映射，报 `YAMLException`。**凡 `title`/`description` 值里出现 `:` 一律加英文双引号**。
+- **`git rm` 对已修改文件需要 `-f`**，否则报 `the following file has local modifications`。
 - CI 的「依赖漏洞扫描 (osv-scanner)」是**门禁**：它失败会跳过同 job 的「构建/打包」，进而 deploy 永不执行，站点长期停在旧版本。排查 CI 失败先看失败的是哪个 step，别默认是代码问题
 - 无 Docker 时复刻 osv-scanner 门禁：脚本解析 `pnpm-lock.yaml` 的 snapshot 段（**注意 v9 格式里 `@scope/name` 是带引号的**，正则不兼容引号会漏掉整个 scope 包），逐个 POST 到 `https://api.osv.dev/v1/querybatch`，再扣掉 `osv-scanner.toml` 里已 ignore 的 id。这套复刻能给出与 CI 完全一致的清单
 - 升级依赖后要重跑 `pnpm run typecheck`：simple-git 4.x **移除了默认导出**，`import simpleGit from 'simple-git'` 会变成「模块对象不可调用」并报 TS2349，必须改成 `import { simpleGit } from 'simple-git'`
@@ -91,7 +99,16 @@
 - 事实旁证：`data/minecraft/loot_table/blocks/end_stone.json` 权重 98:2 印证「末地石约 2% 掉碎片」；remove_vanilla_trades.mcfunction 整条删除绿宝石交易印证「不收绿宝石」；priceMultiplier 实际只有 0.05/0.2 且无自定义折扣逻辑，印证「沿用原版打折」
 - 验证：typecheck / llms / vitepress build / pnpm test(220 passed) / git diff --check 全绿；audit:routes 的 3 条报错为 HEAD 既有，与本页无关
 
-### 2026-10 · 文档站全量重构（阶段 0 已完成，待用户确认后进阶段 1）
+### 2026-10 · 文档站全量重构（阶段 0–6 全部完成，分支 refactor/full-restructure-261016）
+
+- 纲领：`docs/文档站全量重构261016/00-重构纲领-交给DSH.md`。阶段 0 四份方案见同目录 `10-`/`11-`/`12-`/`13-`；阶段 6 验收见 `90-验收报告.md`；子代理共用规范 `99-写作规范速查.md`、事实红线 `90-未能验证清单.md`
+- **规模**：202 页 → **237 页**（拆页 19 新增 + 4 删除为净增 35）；`plugins/` → `features/` 顶层改名；`start/community/` 提为 `/community/`
+- **结构变化**：新增 `features/`（含 `/features/pvp/*` 4 页 PvP 玩家面，站主确认 FE_PVP 已上线）、`/start/login`（注册登录，原先只在开发者区教）、`/features/block-bank` 等；`start/redstone.md` 拆为玩家页 `/play/systems/redstone` + 管理员页 `/developer/reference/leaf-tuning`
+- **拆页（超 18KB 硬线）**：`datapack/modules`(37KB)→7 · `geyser/index`(29.6KB)→5 · `geyser/conversion`(24.8KB)→4 · `economy-audit-workflow`(38KB)→5 · `geyser/craftengine`(19.7KB)→2 · `aiyatsbus-fluxon-functions`(20.5KB)→3 · `villager-trades`(34KB)→14（交易数据逐行核对零差异）· `mcrecipe`→+`mc-textures`
+- **配图**：0 → **17 张手绘 SVG**（玩家区 11 + 开发者区 6）；`DataTable.vue` 新建并注册（阶段 5 大表用）
+- **门禁全绿**：`vitepress build` 0 死链 · `typecheck` 通过 · `pnpm test` 220 passed · `audit:routes` 通过（**修掉了 HEAD 上既有的 3 条报错**）· 六项禁词/元叙述/emoji 扫描全 PASS · 242/242 侧栏链接可达 · **0 条旧 URL 无归宿**（470 条重定向规则）· 存根/真实页同路由冲突 0 · SVG 0 XML 错误 0 mojibake
+- **两处未裁决事实**（不阻塞交付，已在验收报告登记）：① 死亡回程「返回是否收费／金粒能否拾取」玩家页与插件文档互相矛盾 → 玩家页按红线**不写数值**，只写会发生什么；② `developer/ops/compute.md` 是对外卖的云服务器价目表，与开发者文档主线不同族，暂留原位待定归属
+- **`start/install.md` 的「年龄必须填已成年」按站主指示保留**（站主说明为必要步骤），已在验收报告记合规备注；iOS 微信公号兑换正版账号一段按站主确认渠道失效而删除
 
 - 纲领：`docs/文档站全量重构261016/00-重构纲领-交给DSH.md`（791 行，含硬约束、目标 IA、写作/配图规范、阶段门禁、子代理编排）。基线：`02-现状体检-基线数据.md`
 - **阶段 0 四份交付物已产出**：`10-信息架构方案.md`（目标目录树 + 两套导航 + 旧→新 URL 映射表 74 条）· `11-内容分域清单.md`（**202 页逐页判定，脚本校验 202/202 无重复无遗漏**）· `12-组件与配图计划.md`（16 项必配图落位 + 组件决策）· `13-术语表.md`（唯一用词标准）

@@ -436,6 +436,8 @@ export default defineConfig({
             { text: '连接服务器', link: '/start/join' },
             { text: '账号绑定', link: '/start/account' },
             { text: '登录与注册', link: '/start/login' },
+            { text: '主城共建', link: '/start/main-city' },
+            { text: '新服规则与区域', link: '/start/new-server' },
           ]
         },
         {
@@ -512,7 +514,26 @@ export default defineConfig({
                   items: [
                     { text: '群系与结构', link: '/play/adventure/worlds/stellarity/biomes' },
                     { text: '生物与 Boss', link: '/play/adventure/worlds/stellarity/mobs' },
-                    { text: '末地村庄交易大全', link: '/play/adventure/worlds/stellarity/trades/' },
+                    {
+                      text: '末地村庄交易大全',
+                      collapsed: true,
+                      link: '/play/adventure/worlds/stellarity/trades/',
+                      items: [
+                        { text: '盔甲匠', link: '/play/adventure/worlds/stellarity/trades/armorer' },
+                        { text: '屠夫', link: '/play/adventure/worlds/stellarity/trades/butcher' },
+                        { text: '制图师', link: '/play/adventure/worlds/stellarity/trades/cartographer' },
+                        { text: '神职人员', link: '/play/adventure/worlds/stellarity/trades/cleric' },
+                        { text: '农民', link: '/play/adventure/worlds/stellarity/trades/farmer' },
+                        { text: '渔夫', link: '/play/adventure/worlds/stellarity/trades/fisherman' },
+                        { text: '制箭师', link: '/play/adventure/worlds/stellarity/trades/fletcher' },
+                        { text: '皮匠', link: '/play/adventure/worlds/stellarity/trades/leatherworker' },
+                        { text: '图书管理员', link: '/play/adventure/worlds/stellarity/trades/librarian' },
+                        { text: '石匠', link: '/play/adventure/worlds/stellarity/trades/mason' },
+                        { text: '牧羊人', link: '/play/adventure/worlds/stellarity/trades/shepherd' },
+                        { text: '工具匠', link: '/play/adventure/worlds/stellarity/trades/toolsmith' },
+                        { text: '武器匠', link: '/play/adventure/worlds/stellarity/trades/weaponsmith' },
+                      ]
+                    },
                     { text: '诅咒祭坛与合成', link: '/play/adventure/worlds/stellarity/altar' },
                     { text: '圣弓与光灵之怒', link: '/play/adventure/worlds/stellarity/sharanga' },
                     { text: '龙息炼药锅', link: '/play/adventure/worlds/stellarity/cauldron' },
@@ -658,7 +679,6 @@ export default defineConfig({
               collapsed: true,
               items: [
                 { text: '前置与环境', link: '/developer/workflows/datapack/prerequisites' },
-                { text: '模块总览', link: '/developer/workflows/datapack/modules/functions' },
                 { text: '函数 Functions', link: '/developer/workflows/datapack/modules/functions' },
                 { text: '战利品表 Loot Tables', link: '/developer/workflows/datapack/modules/loot-tables' },
                 { text: '配方 Recipes', link: '/developer/workflows/datapack/modules/recipes' },
@@ -685,12 +705,21 @@ export default defineConfig({
               link: '/developer/workflows/geyser/',
               collapsed: true,
               items: [
-                { text: '转换与发布', link: '/developer/workflows/geyser/conversion' },
+                { text: '资源包结构', link: '/developer/workflows/geyser/bedrock-pack' },
+                { text: '物品映射', link: '/developer/workflows/geyser/item-mapping' },
+                { text: '方块映射', link: '/developer/workflows/geyser/block-mapping' },
+                { text: 'Extension API 开发', link: '/developer/workflows/geyser/extension-dev' },
+                { text: '转换与发布', link: '/developer/workflows/geyser/conversion/' },
+                { text: '冻结与输入锁定', link: '/developer/workflows/geyser/conversion/input-lock' },
+                { text: 'Rainbow 采集与映射审查', link: '/developer/workflows/geyser/conversion/rainbow' },
+                { text: '受控部署与回滚', link: '/developer/workflows/geyser/conversion/deploy' },
+                { text: 'CE 资源来源', link: '/developer/workflows/geyser/craftengine/resource-sources' },
                 { text: 'Stellarity 5.5.3 末地批次', link: '/developer/workflows/geyser/stellarity' },
                 { text: 'CraftEngine 与合并资源包', link: '/developer/workflows/geyser/craftengine' },
                 { text: '复杂数据包实体与展示', link: '/developer/workflows/geyser/entities' },
                 { text: '验收与排错', link: '/developer/workflows/geyser/validation' },
                 { text: '协议与产物参考', link: '/developer/workflows/geyser/reference' },
+                { text: 'AI 交付规范（共享）', link: '/developer/workflows/_shared/ai-delivery' },
               ]
             },
             {
@@ -705,7 +734,6 @@ export default defineConfig({
                   link: '/developer/workflows/enchanting/development-methods',
                   collapsed: true,
                   items: [
-                    { text: '开发方式总览', link: '/developer/workflows/enchanting/development-methods' },
                     { text: '纯代码附魔', link: '/developer/workflows/enchanting/code-defined' },
                     { text: 'YAML 附魔', link: '/developer/workflows/enchanting/config-defined' },
                     { text: '附魔字段速查', link: '/developer/workflows/enchanting/enchantment-fields' },
@@ -765,6 +793,7 @@ export default defineConfig({
           collapsed: false,
           items: [
             { text: '服务器模块职责', link: '/developer/reference/server-modules' },
+            { text: 'Leaf 性能与生电调优', link: '/developer/reference/leaf-tuning' },
             { text: '附魔 ID 对照表', link: '/developer/reference/enchantment_ids' },
             { text: '内部隐藏技术附魔', link: '/developer/reference/stellarity-technical-enchantments' },
             { text: '祛魔成本计算器', link: '/developer/reference/enchantment-calculator' },

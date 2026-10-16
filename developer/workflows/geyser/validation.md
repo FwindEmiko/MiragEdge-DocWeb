@@ -6,7 +6,7 @@ outline: [2, 3]
 
 # 验收与排错
 
-Java 端、JSON、ZIP 或 Geyser 启动日志只能证明对应层级没有明显错误。基岩版兼容必须在目标客户端下载当前 Geyser 资源包后完成场景测试。
+Java 端、JSON、ZIP 或 Geyser 启动日志，只能证明该层没有明显错误。基岩版兼容必须在目标客户端下载当前 Geyser 资源包后完成场景测试。
 
 ## 四层验收模型
 
@@ -173,7 +173,7 @@ known_gaps:
 - 同类普通实体是否被错误套用自定义贴图。
 - 多人同时观察时是否出现实体 ID、状态或资源包缓存串扰。
 
-用干净基岩版 profile 和已有缓存 profile 各测一次。缓存 profile 能暴露一个常见问题：版本号、manifest UUID 或包文件名未变化，旧资源继续生效。
+用干净基岩版 profile 和已有缓存 profile 各测一次。缓存 profile 能暴露一个常见问题。版本号、manifest UUID 或包文件名未变化时，旧资源会继续生效。
 
 ## 常见故障定位
 
@@ -231,7 +231,7 @@ Rollback release:
 - Java 资源包新增 `items/` item model、实体动画、字体、atlas 或声音冲突。
 - 服务器从纯 Java 物品改成真实 CE serverside block、家具或 Display Entity。
 
-可信 Java 基线建立后，普通物品、贴图、声音或语言的新增与修改默认走增量采集。Bridge 只列出 SHA 改变的 Java 资产，再把新 Rainbow 输出合并进来。
+可信 Java 基线建立后，普通物品、贴图、声音或语言的新增与修改默认走增量采集。Bridge 只列出 SHA 改变的 Java 资产。随后把新 Rainbow 输出合并进来。
 
 合并目标是受管映射和单一基岩版包。
 
@@ -243,4 +243,4 @@ Rollback release:
 - Java 输入出现大范围删改。
 - 复杂实体与 Display 路线变化。
 
-每次 Rainbow 输出仍必须使用新的 release 目录，不能覆盖旧 release。
+每次 Rainbow 输出仍必须使用新的 release 目录。不要覆盖旧 release。

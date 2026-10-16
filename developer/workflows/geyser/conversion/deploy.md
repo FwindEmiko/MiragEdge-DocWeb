@@ -17,7 +17,7 @@ gameplay:
   enable-custom-content: true
 ```
 
-该开关关闭时，自定义 item、block 和 skull mapping 都会被禁用。修改它需要重启 Geyser。
+该开关关闭时，自定义的 item、block 和 skull mapping 全部禁用。修改它需要重启 Geyser。
 
 ::: danger 不要把「热重载没有报错」当成已注册
 开关是启动期读取的。只看热重载结果会误判。

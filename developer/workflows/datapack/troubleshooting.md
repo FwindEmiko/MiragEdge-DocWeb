@@ -129,9 +129,11 @@ outline: [2, 3]
 
 ## 下载与适配第三方数据包
 
-从 Modrinth、CurseForge、PlanetMinecraft 等平台下载的数据包，通常只针对某个 MC 版本编写。
+第三方平台下载的数据包，通常是针对某个 MC 版本编写的。
 
-部署到 Leaf 26.1.2 前必须做兼容性适配。
+常见来源包括 Modrinth、CurseForge 和 PlanetMinecraft。部署到 Leaf 26.1.2 前必须做兼容性适配。
+
+部署到 Leaf 26.1.2 前必须做兼容性适配。否则会触发 `pack.mcmeta` 校验失败或 `mcfunction` 语法错误。
 
 ### 适配工作流
 

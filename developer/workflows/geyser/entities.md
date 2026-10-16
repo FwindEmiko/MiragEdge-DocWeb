@@ -10,11 +10,15 @@ outline: [2, 3]
 
 Java 的实体模型常由多个来源组合出来。
 
-来源包括数据包、ModelEngine、EliteMobs、BetterModel、盔甲架和技术实体。
+来源包括数据包、ModelEngine、EliteMobs 和 BetterModel。
+
+还有盔甲架、Display Entity 和技术实体。
 
 基岩版需要自己的文件集合。
 
-它包含 entity definition、geometry、render controller、animation 和材质。
+它包含 entity definition、geometry 和 render controller。
+
+动画与材质同样是必需项。
 
 Geyser 只把 Java 侧实体状态翻译过来。它不能把 Java 客户端的渲染规则原样传递。
 
