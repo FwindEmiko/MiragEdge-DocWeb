@@ -1,45 +1,27 @@
 ---
 title: 建筑大师
-description: 锐界幻境建造便利功能说明，涵盖建材兑换、盔甲架编辑、铁块电梯和实用建造工具。
+description: 建筑大师的玩家使用说明，包含推荐的建造世界梦始之空、盔甲架编辑器的调节项目、铁块电梯的上下操作与间距，以及抹刀与锉刀的操作方式。
+outline: [2, 3]
 ---
 
 # 建筑大师
 
-> 为建筑师准备的各种便捷功能！
+给建筑师准备的建造便利功能，包含盔甲架编辑、铁块电梯和两件建造道具。
 
-**推荐建造世界**：「梦始之空」- 奇幻地形、永不重置！
+**推荐建造世界**：「梦始之空」，奇幻地形。
 
-## 目录
+## 建材兑换
 
-- [建筑便利](#建筑便利)
-- [便捷道具](#便捷道具)
+建材兑换与兑换货币由[方块银行](/features/block-bank)统一处理。常用建筑材料可以在那里低价取得，多余材料也能换成交换价值。
 
-## 建筑便利
+## 盔甲架编辑器
 
-###  建材等价交换
+制作各种盔甲架展示。
 
-也叫**方块银行**，建筑玩家的最爱！
+- Java 版：蹲下加右键。
+- 基岩版：蹲下加长按。
 
-- 低价获取：大量基础建筑方块
-- 赚钱功能：还能用来赚钱！
-
-<SmartImage
-  src="/images/web_image/features/base/建材等价交换.png"
-  alt="建材等价交换"
-  caption="建材等价交换"
-  maxWidth="300px"
-  radius="8px"
-  shadow
-/>
-
-###  盔甲架编辑器
-
-制作各种有趣的盔甲架展示！
-
-- Java版：蹲下 + 右键
-- 基岩版：蹲下 + 长按
-
-可控制：大小、姿势、无敌、发光、隐形、放置物品等
+可调整的项目：大小、姿势、无敌、发光、隐形、放置物品。
 
 <SmartImage
   src="/images/web_image/features/base/盔甲架编辑器.png"
@@ -50,36 +32,32 @@ description: 锐界幻境建造便利功能说明，涵盖建材兑换、盔甲�
   shadow
 />
 
-### 铁块电梯
+## 铁块电梯
 
-垂直交通的绝佳方案！
+在铁块上垂直移动。
 
-- 两格最大距离：14 格
-- 操作：跳跃 = 上升，蹲下 = 下降
-
-> 适合内部空间有限的建筑喵~
+- 两格最大间距：14 格。
+- 跳跃上升，蹲下下降。
 
 ## 便捷道具
 
-###  抹刀
+### 抹刀
 
-制作随机渐变方块小路的神器！
+抹刀用于铺设随机渐变的方块小路。右键从背包随机放置方块。
 
-- 右键：从背包随机放置方块
-- 切换来源：右键可切换材料来源
+右键可在四种材料来源之间切换：
 
-**材料来源模式**：
-- HOTBAR - 快捷栏
-- FIRST_ROW - 背包第一行
-- SECOND_ROW - 背包第二行
-- THIRD_ROW - 背包第三行
+- 快捷栏
+- 背包第一行
+- 背包第二行
+- 背包第三行
 
->  基岩版不兼容切换来源模式
+基岩版不支持切换材料来源。
 
 <SmartImage
   src="/images/web_image/features/pastoral/builder/trowel.png"
   alt="抹刀合成"
-  caption="合成配方"
+  caption="抹刀合成"
   maxWidth="250px"
   radius="8px"
   shadow
@@ -88,7 +66,7 @@ description: 锐界幻境建造便利功能说明，涵盖建材兑换、盔甲�
 <SmartImage
   src="/images/web_image/features/pastoral/builder/trowel_show.gif"
   alt="抹刀演示"
-  caption="功能展示"
+  caption="抹刀使用演示"
   maxWidth="300px"
   radius="8px"
   shadow
@@ -96,22 +74,22 @@ description: 锐界幻境建造便利功能说明，涵盖建材兑换、盔甲�
 
 ### 锉刀
 
-调整方块角度，告别繁琐摆放！
+锉刀调整方块的形态，效果与调试棒类似。
 
-- 操作：右键墙壁、栅栏、玻璃、楼梯等
-- 效果：改变方块形态
-- 类似：调试棒功能
+- 操作：右键墙壁、栅栏、玻璃、楼梯等方块。
+- 效果：改变方块形态。
 
 <SmartImage
   src="/images/web_image/features/pastoral/builder/file.png"
   alt="锉刀合成"
-  caption="合成配方"
+  caption="锉刀合成"
   maxWidth="250px"
   radius="8px"
   shadow
 />
 
-> **相关页面推荐**：
-> - [日常便利](/features/daily-tools) - 更多实用功能
-> - [领地系统](/play/systems/dom) - 保护你的建筑
-> - [季节系统](/play/life/seasons) - 探索世界风景
+## 相关页面
+
+- [方块银行](/features/block-bank)
+- [日常便利](/features/daily-tools)
+- [幻域领地](/play/systems/dom)

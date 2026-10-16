@@ -1,16 +1,18 @@
 ---
-title: 煎蛋系列
+title: 煎蛋与特色食物
+description: 锐界幻境煎蛋与特色食物图鉴：煎海龟蛋、煎嗅探兽蛋、煎龙蛋 3 种煎蛋料理，加粽子、草莓 2 种特色食物，含熔炉与合成台配方。
+outline: [2, 3]
 ---
 
-#  煎蛋系列
+# 煎蛋与特色食物
 
-从普通鸡蛋到传说中的龙蛋，煎制后的蛋类料理品质跨度极大。越是稀有的蛋，煎出来的效果越强大。
+这页收录 5 种食物：3 种用熔炉煎出来的蛋类料理，加 2 种节日与基础食材。
 
-::: tip 分类说明
-本页收录 3 种煎蛋料理，品质从普通到传说，全部通过熔炉煎制而成。
-:::
+## 煎蛋系列
 
-## 煎海龟蛋
+三种煎蛋都放进熔炉，用煤炭煎制。
+
+### 煎海龟蛋
 
 <FoodEntry
   name="煎海龟蛋"
@@ -18,7 +20,7 @@ title: 煎蛋系列
   :hunger="3"
   :saturation="2.0"
   effect="食用后获得 10秒 缓慢"
-  quote="好吃但是不建议吃，这...毕竟是一颗未来的小海龟"
+  quote="好吃，但这是一颗未来的小海龟，下嘴前先想想"
 >
   <Furnace
     :input="{id:'turtle_egg'}"
@@ -27,7 +29,7 @@ title: 煎蛋系列
   />
 </FoodEntry>
 
-## 煎嗅探兽蛋
+### 煎嗅探兽蛋
 
 <FoodEntry
   name="煎嗅探兽蛋"
@@ -44,7 +46,7 @@ title: 煎蛋系列
   />
 </FoodEntry>
 
-## 煎龙蛋
+### 煎龙蛋
 
 <FoodEntry
   name="煎龙蛋"
@@ -61,5 +63,38 @@ title: 煎蛋系列
   />
 </FoodEntry>
 
+## 特色食物
 
-*本页为煎蛋系列分类 · 设计与数值可能随游戏版本调整*
+### 粽子
+
+<FoodEntry
+  name="粽子"
+  quality="common"
+  :hunger="6"
+  :saturation="4.0"
+  effect="5秒跳跃提升 II + 8秒生命恢复"
+  quote="锐界幻境黏糊糊端午风味，感觉像吃下了一整个端午"
+>
+  <CraftingTable
+    shaped
+    :grid="[
+      [null, {id:'string'}, null],
+      [{id:'wheat'}, {id:'sweet_berries'}, {id:'wheat'}],
+      [null, {id:'seagrass'}, null]
+    ]"
+    :result="{id:'zongzi', count:2}"
+  />
+</FoodEntry>
+
+### 草莓
+
+<FoodEntry
+  name="草莓"
+  quality="common"
+  :hunger="3"
+  :saturation="1.0"
+  effect="无特殊效果，但很好吃。是制作多种甜品的基础原料"
+  quote="新鲜采摘的草莓，酸甜可口。也是制作多种甜品的基础原料"
+>
+  <McItem id="strawberry" size="lg" />
+</FoodEntry>

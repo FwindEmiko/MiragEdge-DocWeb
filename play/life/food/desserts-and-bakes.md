@@ -1,16 +1,16 @@
 ---
-title: 烘焙糕点
+title: 甜品与烘焙
+description: 锐界幻境甜品与烘焙食物图鉴：派、甜甜圈、纸杯蛋糕 5 种烘焙糕点，草莓甜筒、蜂蜜陶罐、七彩蛋羹 4 种甜品，含配方与完整效果。
+outline: [2, 3]
 ---
 
-#  烘焙糕点
+# 甜品与烘焙
 
-精致的面点料理，从小巧的派到华丽的纸杯蛋糕。烘焙是一门艺术，也是饱食与增益的完美结合。
+这页收录 9 种甜口食物：5 种烘焙糕点加 4 种甜品，全部带配方和效果。
 
-::: tip 分类说明
-本页收录 5 种烘焙糕点，精良品质居多，提供饱和、抗性、加速等强力 buff。
-:::
+## 烘焙糕点
 
-## 派
+### 派
 
 <FoodEntry
   name="派"
@@ -31,7 +31,7 @@ title: 烘焙糕点
   />
 </FoodEntry>
 
-## 草莓甜甜圈
+### 草莓甜甜圈
 
 <FoodEntry
   name="草莓甜甜圈"
@@ -52,7 +52,7 @@ title: 烘焙糕点
   />
 </FoodEntry>
 
-## 奶油纸杯蛋糕
+### 奶油纸杯蛋糕
 
 <FoodEntry
   name="奶油纸杯蛋糕"
@@ -73,7 +73,7 @@ title: 烘焙糕点
   />
 </FoodEntry>
 
-## 甜浆果纸杯蛋糕
+### 甜浆果纸杯蛋糕
 
 <FoodEntry
   name="甜浆果纸杯蛋糕"
@@ -94,7 +94,7 @@ title: 烘焙糕点
   />
 </FoodEntry>
 
-## 发光浆果纸杯蛋糕
+### 发光浆果纸杯蛋糕
 
 <FoodEntry
   name="发光浆果纸杯蛋糕"
@@ -115,5 +115,89 @@ title: 烘焙糕点
   />
 </FoodEntry>
 
+## 甜品
 
-*本页为烘焙糕点分类 · 设计与数值可能随游戏版本调整*
+### 草莓甜筒
+
+<FoodEntry
+  name="草莓甜筒"
+  quality="fine"
+  :hunger="8"
+  :saturation="6.0"
+  effect="30秒抗火。"
+  quote="冰冰凉凉香香甜甜的冰淇淋！吃下去火热的心都降温了"
+>
+  <CraftingTable
+    shaped
+    :grid="[
+      [null, {id:'sugar'}, null],
+      [{id:'milk_bucket'}, {id:'strawberry'}, {id:'snowball'}],
+      [null, {id:'sugar'}, null]
+    ]"
+    :result="{id:'strawberry_ice_cream'}"
+  />
+</FoodEntry>
+
+### 草莓巧克力冰淇淋
+
+<FoodEntry
+  name="草莓巧克力冰淇淋"
+  quality="fine"
+  :hunger="9"
+  :saturation="7.0"
+  effect="20秒内走过的水面冻结为临时浮冰（5秒后融化），周围 5格生物获得缓慢 II。"
+  quote="香香脆脆冰冰凉凉的巧克力草莓味！！你感到周围都凉快了起来"
+>
+  <CraftingTable
+    shaped
+    :grid="[
+      [null, {id:'sugar'}, null],
+      [{id:'cocoa_beans'}, {id:'strawberry'}, {id:'milk_bucket'}],
+      [null, {id:'snowball'}, null]
+    ]"
+    :result="{id:'strawberry_chocolate_ice_cream'}"
+  />
+</FoodEntry>
+
+### 蜂蜜陶罐
+
+<FoodEntry
+  name="蜂蜜陶罐"
+  quality="rare"
+  :hunger="14"
+  :saturation="12.0"
+  effect="45秒生命恢复 II + 2分钟急迫 I + 15秒失明。失明期间周围 5格生物同时获得缓慢 II。"
+  quote="满满当当的蜂蜜，和腐竹一样甜美诱人，但吃多会得糖尿病"
+>
+  <CraftingTable
+    shaped
+    :grid="[
+      [{id:'honey_bottle'}, {id:'honey_bottle'}, {id:'honey_bottle'}],
+      [{id:'honey_bottle'}, {id:'clay_ball'}, {id:'honey_bottle'}],
+      [{id:'honey_bottle'}, {id:'honey_bottle'}, {id:'honey_bottle'}]
+    ]"
+    :result="{id:'honey_clay_pots'}"
+  />
+</FoodEntry>
+
+### 七彩蛋羹
+
+<FoodEntry
+  name="七彩蛋羹"
+  quality="legendary"
+  :hunger="4"
+  :saturation="20.0"
+  effect="10分钟抗性 V + 力量 III + 速度 II + 生命恢复 II + 生命提升 V。食用时解锁永久称号「幻境食神」及专属进出服消息。30分钟冷却。"
+  quote="这...未免太奢侈了些？龙蛋做的蛋羹，吃下去你就是幻境最强战士"
+>
+  <CraftingTable
+    :ingredients="[
+      {name:'龙蛋', texture:'/mc-textures/item/dragon_egg.png'},
+      {id:'egg'}, {id:'egg'}, {id:'egg'}, {id:'egg'},
+      {id:'turtle_egg'}, {id:'sniffer_egg'},
+      {id:'sugar'},
+      {id:'bowl'}
+    ]"
+    :result="{id:'colorful_egg_custard'}"
+  />
+</FoodEntry>

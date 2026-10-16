@@ -33,9 +33,7 @@ const prefixRules: PrefixRule[] = [
   ['/develop/gameplay', '/developer/design'],
   ['/develop/webdev', '/developer/website'],
   ['/develop', '/developer'],
-  ['/plugins/fepvp', '/plugin-guides/fepvp'],
-  ['/plugins/pvp', '/plugin-guides/fepvp'],
-  ['/developer/archive/plugins/pvp', '/plugin-guides/fepvp'],
+  // PvP 已上线，/plugins/pvp* 的旧地址由下方 exactRules 指向玩家区 /features/pvp（不再映射到 plugin-guides）
   ['/plugins/bugenchantremover', '/plugin-guides/bug-enchant-remover'],
   ['/plugins/bug-enchant-remover', '/plugin-guides/bug-enchant-remover'],
   ['/developer/reference/plugins/bug-enchant-remover', '/plugin-guides/bug-enchant-remover'],
@@ -78,8 +76,9 @@ const exactRules: RedirectRule[] = [
   { from: '/plugins/miragedgetitle', to: '/features/title' },
   { from: '/plugins/SkyElytra', to: '/features/sky-elytra' },
   { from: '/plugins/fe_fly', to: '/developer/archive/plugins/fe-fly' },
-  { from: '/plugins/fepvp', to: '/plugin-guides/fepvp' },
-  { from: '/plugins/pvp', to: '/plugin-guides/fepvp' },
+  // PvP 已上线：旧 /plugins/pvp* 指向玩家区新页（而非插件文档）
+  { from: '/plugins/fepvp', to: '/features/pvp' },
+  { from: '/plugins/pvp', to: '/features/pvp' },
   { from: '/plugins/custom/items-core', to: '/developer/archive/plugins/items-core' },
   { from: '/plugins/custom/quests', to: '/developer/archive/plugins/quests' },
   // 注：/plugins/custom/sky-elytra 的旧跳转已移除——该功能现已上线，活页在 /features/sky-elytra，
@@ -151,6 +150,11 @@ const exactRules: RedirectRule[] = [
   { from: '/plugins/custom/flight-guard', to: '/features/flight-guard' },
   { from: '/plugins/custom/nophantom', to: '/features/nophantom' },
   { from: '/plugins/custom/piglin-talisman', to: '/features/piglin-talisman' },
+  // play/adventure 拆页（villager-trades 拆 14 页、items 拆 4 页、list 并入 index）
+  { from: '/play/adventure/worlds/stellarity/villager-trades', to: '/play/adventure/worlds/stellarity/trades' },
+  { from: '/play/adventure/worlds/stellarity/items', to: '/play/adventure/worlds/stellarity/equipment' },
+  { from: '/play/adventure/enchantments/list', to: '/play/adventure/enchantments' },
+  { from: '/play/adventure/enchantments/info', to: '/play/adventure/enchantments' },
   // play/life 重排
   { from: '/play/life/food/info', to: '/play/life/food' },
   { from: '/play/life/food/bakery', to: '/play/life/food/desserts-and-bakes' },

@@ -1,12 +1,16 @@
 ---
 title: 锻造升级
-description: 锐界幻境现有的鞘翅与镰刀锻造升级说明。
+description: 锻造升级的现有内容，包含下界合金鞘翅提供的护甲与耐久加值，以及由钻石镰刀升级而来的下界合金镰刀，并指明完整升阶路线的入口。
+outline: [2, 3]
 ---
 
 # 锻造升级
 
+锻造升级目前包含下界合金鞘翅与下界合金镰刀两件物品。鞘翅的完整升阶路线见[契约之翼](/features/elytra-bind)。
+
 ## 下界合金鞘翅
-在保持原鞘翅功能属性的情况下，可再提供2点护甲值，并提高100点装备耐久  
+
+下界合金鞘翅保留原版鞘翅的全部功能属性，并额外提供 2 点护甲值与 100 点装备耐久。
 
 <SmartImage align="left" margin="0"
   src="/images/web_image/features/adventure/mmo/reinforced_elytra.png"
@@ -16,9 +20,10 @@ description: 锐界幻境现有的鞘翅与镰刀锻造升级说明。
 />
 
 ## 下界合金镰刀
-是的钻石镰刀也是能升级下界合金材质的，但似乎只提升了耐久度  
-因为是升级，原“钻石镰刀”的名字甚至都没变，哈哈  
-如果你不会合成镰刀，可以看这个: [镰刀](/features/daily-tools#镰刀)  
+
+钻石镰刀可以升级为下界合金镰刀。升级完成后，物品名称仍然显示为钻石镰刀。
+
+如果还不清楚镰刀怎么合成，先看[镰刀](/features/daily-tools#镰刀)。
 
 <SmartImage align="left" margin="0"
   src="/images/web_image/features/adventure/mmo/netherite_sickle.png"
@@ -26,3 +31,8 @@ description: 锐界幻境现有的鞘翅与镰刀锻造升级说明。
   caption="下界合金镰刀"
   maxWidth="350px"
 />
+
+## 相关页面
+
+- [契约之翼](/features/elytra-bind)
+- [服务器功能总览](/features/)
