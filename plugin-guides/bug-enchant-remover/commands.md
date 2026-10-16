@@ -1,6 +1,7 @@
 ---
 title: 命令参考
-outline: deep
+description: BugEnchantRemover 的 3 条管理员命令参考——重载配置、扫描背包与检测手持物品，含每条命令的语法、权限节点、输出示例与预测结果表。
+outline: [2, 3]
 ---
 
 # 命令参考

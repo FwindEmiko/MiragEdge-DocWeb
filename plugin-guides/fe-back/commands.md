@@ -1,9 +1,10 @@
 ---
 title: 命令参考
-outline: deep
+description: FE_Back 的命令参考——/back 返回死亡点、/febsuicide 自杀与 /feb 管理子命令的别称、参数、权限、执行者要求与输出说明，全部命令支持 Tab 补全。
+outline: [2, 3]
 ---
 
-# 02 — 命令参考
+# 命令参考
 
 全部命令支持 Tab 补全。管理类子命令对「控制台」的支持情况见各节说明。
 

@@ -1,9 +1,10 @@
 ---
 title: UberEnchant 兼容
-outline: deep
+description: BugEnchantRemover 对 UberEnchant 的兼容性参考——PDC 与旧版注册表两种存储结构的读取差异、37 个附魔 ID 对照，以及 Java 反射实现的验证方法。
+outline: [2, 3]
 ---
 
-# UberEnchant 兼容（v1.3 新特性）
+# UberEnchant 兼容
 
 ## 背景
 

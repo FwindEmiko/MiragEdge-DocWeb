@@ -1,11 +1,10 @@
 ---
-title: "YAML 附魔"
-description: "通过 YAML 管理附魔基础信息，使用 Java Builtin 或 Fluxon 编写效果。"
+title: YAML 附魔
+description: 用 YAML 管理附魔信息的完整路线：Builtin 与 Fluxon 的选型、最小示例、根节点清单、可选获取数据和依赖声明，以及加载与失败行为。
+outline: [2, 3]
 ---
 
 # YAML 附魔
-
-> 本文档基于 Aiyatsbus 官方技能包 v0.0.2，以当前服务器源码和配置为准。
 
 YAML 附魔对应三种开发方式中的后两种：YAML + Builtin 和 YAML + Fluxon。两者都由 YAML 管理附魔基础信息，并由 Aiyatsbus 负责发现文件、创建对象、注册附魔、初始化机制和监听文件变化。
 
@@ -72,7 +71,7 @@ mechanisms:
         player = &event::player()
 ```
 
-示例只展示内嵌脚本位置。实际 Bukkit getter、setter、枚举和变量用法必须遵循 [fluxon-language](./fluxon-language) 与 [fluxon-bukkit-java-semantics](./fluxon-bukkit-java-semantics)，并根据 Listener 的实际事件变量编写效果。
+实际 Bukkit getter、setter、枚举和变量用法必须遵循 [fluxon-language](./fluxon-language) 与 [fluxon-bukkit-java-semantics](./fluxon-bukkit-java-semantics)，并根据 Listener 的实际事件变量编写效果。
 
 把文件放在 Aiyatsbus 数据目录的子目录中：
 

@@ -1,6 +1,7 @@
 ---
 title: 权限节点
-outline: deep
+description: HFcatLogin 的权限节点总表，列出每个 hfcatlogin 前缀节点对应的命令与默认值，并说明未认证玩家的命令白名单与 LuckPerms 上下文键。
+outline: [2, 3]
 ---
 
 # 权限节点

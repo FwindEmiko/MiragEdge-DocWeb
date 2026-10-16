@@ -1,9 +1,10 @@
 ---
 title: 权限节点
-outline: deep
+description: FE_PVP 的权限节点参考，含基础使用、观战、竞技场管理、押注与统计等节点的默认值与作用范围，并附 LuckPerms 授予示例。
+outline: [2, 3]
 ---
 
-# 06 — 权限节点
+# 权限节点
 
 ## 权限树
 

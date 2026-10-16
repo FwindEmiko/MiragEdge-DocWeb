@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 560" role="img"
+     font-family="-apple-system, 'Segoe UI', 'PingFang SC', sans-serif">
+  <title>Java 版与基岩版差异对照：左列 Java 版完整可用，右列基岩版受限项，中间为互通带来的硬限制</title>
+  <defs>
+    <marker id="jb-arrow" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="var(--vp-c-brand-1, #e05252)"/>
+    </marker>
+  </defs>
+
+  <text x="48" y="36" font-size="17" font-weight="700" fill="var(--vp-c-text-1, #1b1b1f)">Java 版与基岩版 · 差异对照</text>
+  <text x="48" y="60" font-size="13" fill="var(--vp-c-text-3, #8e8e93)">两版共用同一张地图；基岩版受互通机制限制，部分内容无法完全还原</text>
+
+  <text x="170" y="98" font-size="15" font-weight="700" fill="var(--vp-c-text-1, #1b1b1f)" text-anchor="middle">Java 版</text>
+  <text x="170" y="118" font-size="12" fill="var(--vp-c-text-3, #8e8e93)" text-anchor="middle">完整可用</text>
+  <text x="712" y="98" font-size="15" font-weight="700" fill="var(--vp-c-text-1, #1b1b1f)" text-anchor="middle">基岩版</text>
+  <text x="712" y="118" font-size="12" fill="var(--vp-c-text-3, #8e8e93)" text-anchor="middle">受限项对照</text>
+
+  <!-- 左列 Java -->
+  <rect x="48" y="132" width="244" height="268" rx="12"
+        fill="var(--vp-c-bg-soft, #f6f6f7)" stroke="var(--vp-c-divider, #e2e2e3)" stroke-width="1.5"/>
+  <text x="68" y="164" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">自定义模型与动画正常显示</text>
+  <text x="68" y="190" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">界面与操作不受互通限制</text>
+  <text x="68" y="216" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">全部物品显示自定义外观</text>
+  <text x="68" y="242" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">外观与功能可以兼得</text>
+  <line x1="68" y1="262" x2="272" y2="262" stroke="var(--vp-c-divider, #e2e2e3)" stroke-width="1"/>
+  <text x="68" y="290" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">需要完整功能时，</text>
+  <text x="68" y="310" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">优先使用 Java 版。</text>
+
+  <!-- 右列 基岩版 -->
+  <rect x="596" y="132" width="316" height="268" rx="12"
+        fill="var(--vp-c-bg-soft, #f6f6f7)" stroke="var(--vp-c-divider, #e2e2e3)" stroke-width="1.5"/>
+  <text x="616" y="164" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">铁砧/锻造台、菜单系统</text>
+  <text x="616" y="190" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">100+ 件自定义物品与盔甲</text>
+  <text x="616" y="216" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">10 种农场作物生长动画</text>
+  <text x="616" y="242" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">繁星末地、烬域内容正常使用</text>
+  <line x1="616" y1="262" x2="892" y2="262" stroke="var(--vp-c-divider, #e2e2e3)" stroke-width="1"/>
+  <text x="616" y="290" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">物品模型多为平面图标</text>
+  <text x="616" y="316" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">部分盔甲为默认铁盔甲外观</text>
+  <text x="616" y="342" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">部分生物显示为原版外观</text>
+  <text x="616" y="368" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">详情见页面「部分兼容」一节</text>
+
+  <!-- 中间 硬限制 -->
+  <rect x="340" y="96" width="208" height="38" rx="19"
+        fill="var(--vp-c-bg-soft, #f6f6f7)" stroke="var(--vp-c-brand-1, #e05252)" stroke-width="1.5"/>
+  <text x="444" y="121" font-size="14" font-weight="700" fill="var(--vp-c-brand-1, #e05252)" text-anchor="middle">互通后仍受限</text>
+
+  <rect x="340" y="156" width="208" height="232" rx="12"
+        fill="none" stroke="var(--vp-c-brand-1, #e05252)" stroke-width="1.5"/>
+  <text x="356" y="184" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">6 类物品行为动画固定</text>
+  <text x="356" y="206" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">在原版物品上，改用自</text>
+  <text x="356" y="228" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">定义外观后动画缺失。</text>
+  <line x1="356" y1="248" x2="532" y2="248" stroke="var(--vp-c-divider, #e2e2e3)" stroke-width="1"/>
+  <text x="356" y="274" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">弓 · 弩 · 三叉戟</text>
+  <text x="356" y="300" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">钓竿 · 鞘翅 · 盾牌</text>
+  <line x1="356" y1="320" x2="532" y2="320" stroke="var(--vp-c-divider, #e2e2e3)" stroke-width="1"/>
+  <text x="356" y="348" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">诅咒祭坛等方块不可见</text>
+  <text x="356" y="374" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">但功能正常可交互</text>
+
+  <path d="M292,175 H324" fill="none" stroke="var(--vp-c-brand-1, #e05252)"
+        stroke-width="1.5" marker-end="url(#jb-arrow)"/>
+  <path d="M556,175 H584" fill="none" stroke="var(--vp-c-brand-1, #e05252)"
+        stroke-width="1.5" marker-end="url(#jb-arrow)"/>
+
+  <!-- 底部说明 -->
+  <rect x="48" y="428" width="864" height="96" rx="12"
+        fill="none" stroke="var(--vp-c-brand-1, #e05252)" stroke-width="1.5"/>
+  <text x="76" y="460" font-size="14" font-weight="700" fill="var(--vp-c-brand-1, #e05252)">硬限制无法绕过</text>
+  <text x="76" y="488" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">这些物品在基岩版使用原版外观时功能正常，装上自定义外观才会出现问题，属于互通机制的已知转换限制。</text>
+  <text x="76" y="506" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">基岩版另有通用限制：仅支持左键或长按，含交互提示的消息无法点击，附魔简介可能错位。</text>
+</svg>

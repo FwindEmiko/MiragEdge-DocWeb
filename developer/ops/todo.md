@@ -1,7 +1,8 @@
 ---
 title: 待办事项
-description: 开发待办与近期计划
+description: 锐界幻境的开发待办维护约定——如何用一句话让 AI 新增、调整、完成或放弃待办，todo.json 的字段结构、5 个类别、6 种状态，以及归档节奏。
 aside: false
+outline: [2, 3]
 ---
 
 # 待办事项
@@ -81,6 +82,4 @@ aside: false
 
 ---
 
-直接在 GitHub 上点 [todo.json](https://github.com/fwindemiko/MiragEdge-DocWeb/edit/main/public/data/todo.json) 就能改，最快。
-
-本页面的 GitHub 路径：`developer/ops/todo.md` → [在 GitHub 编辑](https://github.com/fwindemiko/MiragEdge-DocWeb/edit/main/developer/ops/todo.md)
+直接在 GitHub 上打开 [todo.json](https://github.com/fwindemiko/MiragEdge-DocWeb/edit/main/public/data/todo.json) 即可编辑。

@@ -1,6 +1,6 @@
 ---
 title: 开发文档中心
-description: 锐界幻境服务器开发文档中心：插件配置教程（自定义作物/钓鱼/附魔）、玩法设计方案、网站开发组件、更新日志与节点状态，助力团队高效协作开发。
+description: 锐界幻境的开发团队页面——核心开发成员、社区贡献者与赞助者名单，开发者的话与对外服务说明，以及返回开发规范与插件文档的入口。
 head:
   - - meta
     - name: keywords
@@ -13,14 +13,10 @@ head:
   src="/avatars/MiragEdge.png" 
   maxWidth="450px"
   alt="锐界幻境"
-  caption="MiragEdge ☆ 锐界幻境"
+  caption="MiragEdge · 锐界幻境"
 />
 
-欢迎来到锐界幻境（MiragEdge）开发者文档平台，这里汇总了服务器开发相关的插件、规范与团队信息，助力开发者高效协作。
-
-本开发者模块旨在为所有玩家提供快速上手制作锐界幻境服务器内容的教程。这是我打造共创平台的一个关键步骤。
-
-最大的挑战不是创意，而是项目管理和持续运营。
+这页汇总锐界幻境的开发团队信息：核心成员、社区贡献者与赞助者名单，以及开发者的话与对外服务。
 
 ##  开发者的话
 
@@ -35,21 +31,11 @@ head:
 >
 > —— 狐风轩汐 (F.windEmiko)
 
-###  文档导航
+### 相关文档
 
-#### 原创插件列表
-
-| 插件 | 说明 | 文档 |
-|------|------|------|
-| EMCShop | 等价交换商店，集成物品银行系统，支持物品与货币双向兑换 | [EMCShop 文档](/features/block-bank) |
-| FE_Fly | 幻空翼飞行，限时飞行权限管理系统，支持飞行时长配置 | [历史文档](/developer/archive/plugins/fe-fly) |
-
-###  开发规范与协作
-- [贡献指南 v1.0](#贡献指南v1-0) - 插件开发、内容创作、测试反馈的贡献流程与标准
-
-###  备注
-- 若发现文档链接失效、内容错误，可联系核心团队成员反馈；
-- 新增插件/规范文档会持续更新至本导航栏，建议收藏本页便于查阅。
+- [插件开发规范与协作流程](/developer/process/plugin-lifecycle)：需求核对、实现边界、验证与交付规则。
+- [原创插件文档](/plugin-guides/)：独立插件的安装、配置与维护资料。
+- [开发者文档总入口](/developer/)：四块结构与全部页面索引。
 
 
 <script setup>
@@ -188,7 +174,7 @@ const givemoney = [
   {
     avatar: '/images/member/anan.jpg',
     name: '安安',
-    title: '依旧是安安啦🐶',
+    title: '依旧是安安',
     desc: '一句话',
     links: [
     ],
@@ -196,7 +182,7 @@ const givemoney = [
   {
     avatar: '/images/member/Zelova.png',
     name: '幻辰汐Zelova',
-    title: '🆙玩家',
+    title: '玩家',
     desc: '曾长期参与服务器测试，反馈大量BUG，超级在线王',
     links: [
       { icon: 'bilibili', link: 'https://space.bilibili.com/523518473' },

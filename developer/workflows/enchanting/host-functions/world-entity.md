@@ -1,48 +1,18 @@
 ---
-title: "Aiyatsbus Fluxon 函数"
-description: "Aiyatsbus 附魔脚本可用的宿主函数：block、cooldown、entity、guard、inventory、item、player、world、variables"
+title: 世界与实体
+description: Aiyatsbus 宿主函数的世界与实体命名空间参考：block 掉落与矿脉查找、弓蓄力事件扩展、entity 装备伤害药水、guard 保护查询和 world 昼夜粒子。
+outline: [2, 3]
 ---
 
-# Aiyatsbus Fluxon 函数用法
+# 世界与实体
 
-> 本文档基于 Aiyatsbus 官方技能包 v0.0.2，以当前服务器源码和配置为准。
-
-本文只描述 Aiyatsbus 附魔脚本可用的宿主函数。Fluxon 基础语法、标准库和 JVM 互操作分别见 [Fluxon 语言参考](./fluxon-language)、[内置函数与扩展函数](./fluxon-stdlib) 和 [JVM 互操作参考](./fluxon-jvm-interop)。调用 Bukkit 或其他 Java API 时，必须同时遵循 [Bukkit/Java API 调用语义](./fluxon-bukkit-java-semantics)。
-
-## API 优先级
-
-本文已经提供的 Aiyatsbus 宿主函数优先于自行通过 JVM 互操作实现同一能力。编写脚本前应同时检索本文、[内置函数与扩展函数](./fluxon-stdlib)、[Import 模块参考](./fluxon-modules)、[Fluxon 语言参考](./fluxon-language) 和 [JVM 互操作参考](./fluxon-jvm-interop)；已有 API 能完成需求时不要重复造轮子。只有这些参考均没有对应能力时，才使用 `static`、反射或自行构造 Java 工具。
-
-## 调用规则
-
-Aiyatsbus 会自动导入本文涉及的 `aiy:*` 包，附魔 YAML 的脚本块中通常不需要手动 `import`。
-
-普通模块使用上下文调用：
-
-```fluxon
-locations = block::getVein(&origin, 16)
-ready = cooldown::isReady(&player, &enchant, 5.0)
-```
-
-也可以显式调用模块访问器，但通常没有必要：
-
-```fluxon
-locations = block()::getVein(&origin, 16)
-```
-
-必须遵循以下规则：
-
-- 读取变量时使用 `&name`。裸标识符是字符串字面量，例如 `player` 表示字符串 `"player"`，`&player` 才表示玩家变量。
-- 省略可选参数时只能从参数列表末尾开始省略。若要跳过中间参数，传入 `null`。
-- 时间单位以具体函数说明为准。药水持续时间使用 tick，冷却使用秒，弓蓄力时间使用毫秒。
-- Bukkit 对象可以继续通过 Fluxon 的 `::` 扩展或 `.` JVM 互操作访问；getter、setter、跨版本类型函数、`static` 和 `new` 的强制规则见 [Bukkit/Java API 调用语义](./fluxon-bukkit-java-semantics)。
-- `FnBow` 没有 `bow()` 或 `bow::` 入口，只为弓蓄力事件对象提供扩展函数。
+这张表用来查 `block`、`world`、`entity` 和 `guard` 四个命名空间的宿主函数签名、参数含义和返回值。API 优先级与调用规则见 [宿主函数总览](./)，`cooldown`、`variables` 等其余命名空间见 [变量与运行时组合](./variables-combos)。
 
 ## `block`
 
 ### `getDrops`
 
-```text
+```fluxon
 block::getDrops(block, item?, entity?) -> Collection<ItemStack>
 ```
 
@@ -60,7 +30,7 @@ dropsWithEntity = block::getDrops(&brokenBlock, null, &player)
 
 ### `getVein`
 
-```text
+```fluxon
 block::getVein(block, amount?) -> List<Location>
 ```
 
@@ -108,7 +78,7 @@ item = &event::itemStack()
 &event::setAllowed(true)
 ```
 
-不要在当前 `Prepare` 事件的监听脚本中直接调用 `fire()`，否则会再次分发同一个事件，可能造成递归或重复执行。
+不要在 `Prepare` 事件的监听脚本中直接调用 `fire()`。这会再次分发同一个事件，可能造成递归或重复执行。
 
 ### `Released`
 
@@ -166,83 +136,13 @@ info = &event::chargeInfo()
 elapsed = &info::chargeTime()
 ```
 
-蓄力尚未停止时，`chargeTime()` 会随当前时间增长。`setStopTime(...)` 只修改时间字段，不会触发释放或中断事件，也不会清理玩家的蓄力状态；正常脚本通常不需要调用它。
-
-## `cooldown`
-
-### `isReady`
-
-```text
-cooldown::isReady(player, enchant, seconds, broadcast?, broadcastInActionBar?) -> Boolean
-```
-
-- `player`：检查冷却的玩家。
-- `enchant`：当前附魔对象；冷却以附魔 ID 为键。
-- `seconds`：冷却长度，单位为秒。
-- `broadcast`：冷却未结束时是否提示玩家，默认 `true`。
-- `broadcastInActionBar`：是否使用 Action Bar 提示；省略时读取全局配置。
-- 该函数只检查冷却，不会自动开始冷却。
-
-```fluxon
-if !cooldown::isReady(&player, &enchant, 5.0) {
-    return
-}
-
-cooldown::addCooldown(&player, &enchant)
-// 执行技能效果
-```
-
-静默检查：
-
-```fluxon
-if !cooldown::isReady(&player, &enchant, 5.0, false) {
-    return
-}
-```
-
-同一玩家、同一附魔的所有脚本分支共享同一个冷却键。当前 API 不支持传入自定义字符串冷却键。
-
-### `addCooldown`
-
-```text
-cooldown::addCooldown(player, enchant) -> void
-```
-
-以当前时间开始或重置指定玩家、指定附魔的冷却。
-
-```fluxon
-cooldown::addCooldown(&player, &enchant)
-```
-
-### `removeCooldown`
-
-```text
-cooldown::removeCooldown(player, enchant) -> void
-```
-
-删除指定玩家、指定附魔的冷却记录。
-
-```fluxon
-cooldown::removeCooldown(&player, &enchant)
-```
-
-### `clearCooldown`
-
-```text
-cooldown::clearCooldown(player) -> void
-```
-
-清除该玩家的全部 Aiyatsbus 冷却记录，不限于当前附魔。只重置当前附魔时应使用 `removeCooldown`。
-
-```fluxon
-cooldown::clearCooldown(&player)
-```
+蓄力尚未停止时，`chargeTime()` 会随当前时间增长。`setStopTime(...)` 只修改时间字段，不会触发释放或中断事件，也不会清理玩家的蓄力状态。
 
 ## `entity`
 
 ### `equippedItems`
 
-```text
+```fluxon
 entity::equippedItems(entity) -> Map<EquipmentSlot, ItemStack>
 ```
 
@@ -254,7 +154,7 @@ equipment = entity::equippedItems(&target)
 
 ### `realDamage`
 
-```text
+```fluxon
 entity::realDamage(entity, damage, by?) -> void
 ```
 
@@ -270,7 +170,7 @@ entity::realDamage(&target, 6.0, &player)
 
 ### `entityName`
 
-```text
+```fluxon
 entity::entityName(entity, player?) -> String
 ```
 
@@ -282,14 +182,14 @@ name = entity::entityName(&target, &player)
 
 ### `addSafetyVelocity`
 
-```text
+```fluxon
 entity::addSafetyVelocity(entity, vector, checkKnockback?) -> void
 ```
 
 - 设置经过安全处理的速度向量。
 - `checkKnockback` 默认 `false`；设为 `true` 时考虑实体抗击退属性。
 - 函数名中的 `add` 不表示与原速度相加，最终会设置实体速度。
-- 开启抗击退检查时，传入的 `Vector` 可能被缩放；之后仍需使用原值时应先克隆。
+- 开启抗击退检查时，传入的 `Vector` 可能被缩放。之后仍需使用原值时应先克隆。
 
 ```fluxon
 velocity = new org.bukkit.util.Vector(0.0, 1.0, 0.0)
@@ -298,7 +198,7 @@ entity::addSafetyVelocity(&target, &velocity, true)
 
 ### `isBehind`
 
-```text
+```fluxon
 entity::isBehind(entity1, entity2) -> Boolean
 ```
 
@@ -314,7 +214,7 @@ if entity::isBehind(&attacker, &victim) {
 
 ### `addPotionEffect`
 
-```text
+```fluxon
 entity::addPotionEffect(entity, type, duration, amplifier, ambient?, particles?, icon?) -> void
 ```
 
@@ -331,7 +231,7 @@ entity::addPotionEffect(&target, "GLOWING", 40, 0, false, true, true)
 
 ### `getActivePotionEffect`
 
-```text
+```fluxon
 entity::getActivePotionEffect(entity, type) -> PotionEffect?
 ```
 
@@ -346,7 +246,7 @@ if &effect != null {
 
 ### `hasPotionEffect`
 
-```text
+```fluxon
 entity::hasPotionEffect(entity, type) -> Boolean
 ```
 
@@ -358,7 +258,7 @@ if entity::hasPotionEffect(&target, "POISON") {
 
 ### `removePotionEffect`
 
-```text
+```fluxon
 entity::removePotionEffect(entity, type) -> void
 ```
 
@@ -370,7 +270,7 @@ entity::removePotionEffect(&player, "SLOWNESS")
 
 ### `isNPC`
 
-```text
+```fluxon
 entity::isNPC(entity) -> Boolean
 ```
 
@@ -384,7 +284,7 @@ if entity::isNPC(&target) {
 
 ### `isLivingEntity`
 
-```text
+```fluxon
 entity::isLivingEntity(entity) -> Boolean
 ```
 
@@ -398,13 +298,13 @@ if !entity::isLivingEntity(&target) {
 
 ### `isPlayer`
 
-```text
+```fluxon
 entity::isPlayer(entity) -> Boolean
 ```
 
 判断对象是否为 Bukkit `Player`。传入 `null` 时返回 `false`。
 
-该函数不是 Listener 的默认前置检查。执行者可以是任意 `LivingEntity` 且效果能正常运行时，不要调用它；只有效果明确要求玩家，或后续必须使用 Player 专属 API 时才判断。
+该函数不是 Listener 的默认前置检查。执行者可以是任意 `LivingEntity` 且效果能正常运行时不要调用它。只有效果明确要求玩家，或后续必须使用 Player 专属 API 时才判断。
 
 ```fluxon
 if entity::isPlayer(&target) {
@@ -418,7 +318,7 @@ if entity::isPlayer(&target) {
 
 ### `canBreak`
 
-```text
+```fluxon
 guard::canBreak(player, location) -> Boolean
 ```
 
@@ -432,7 +332,7 @@ if !guard::canBreak(&player, &location) {
 
 ### `canDamage`
 
-```text
+```fluxon
 guard::canDamage(player, entity) -> Boolean
 ```
 
@@ -446,7 +346,7 @@ if guard::canDamage(&player, &target) {
 
 ### `isGuardItem`
 
-```text
+```fluxon
 guard::isGuardItem(item, player?) -> Boolean
 ```
 
@@ -460,98 +360,11 @@ if guard::isGuardItem(&droppedItem, &player) {
 }
 ```
 
-## `inventory`
-
-### `hasItem`
-
-```text
-inventory::hasItem(player, amount, predicate) -> Boolean
-```
-
-检查玩家背包中是否有足够数量满足 Lambda 条件的物品。Lambda 的隐式参数 `&it` 是当前候选 `ItemStack`，必须返回布尔值。
-
-```fluxon
-materialType = &seedItem::type()
-hasSeed = inventory::hasItem(&player, 1, || &it::type() == &materialType)
-```
-
-### `takeItem`
-
-```text
-inventory::takeItem(player, amount, predicate) -> Boolean
-```
-
-从玩家背包扣除指定数量、满足条件的物品，并返回是否成功。该函数会直接修改背包，应检查返回值。
-
-```fluxon
-materialType = &seedItem::type()
-if !inventory::takeItem(&player, 1, || &it::type() == &materialType) {
-    return
-}
-```
-
-## `item`
-
-### `belongingTargetsId`
-
-```text
-item::belongingTargetsId(type: Material) -> List<String>
-item::belongingTargetsId(item: ItemStack) -> List<String>
-```
-
-返回材质或物品所属的全部 Aiyatsbus 附魔目标 ID。同一物品可能属于多个目标。
-
-```fluxon
-idsFromItem = item::belongingTargetsId(&itemStack)
-idsFromType = item::belongingTargetsId(&itemStack::type())
-```
-
-返回的是配置使用的目标 ID，不是本地化显示名称。不要传入 `null`。
-
-### `isUnbreakable`
-
-```text
-item::isUnbreakable(item) -> Boolean
-```
-
-判断物品是否具有不可破坏属性。
-
-```fluxon
-if item::isUnbreakable(&itemStack) {
-    return
-}
-```
-
-## `player`
-
-### `placeBlock`
-
-```text
-player::placeBlock(player, placedBlock, itemInHand?) -> Boolean
-```
-
-- 模拟触发一次 `BlockPlaceEvent`，返回该事件是否允许放置。
-- `itemInHand` 省略时使用玩家当前手持物品。
-- 该函数不会真正修改方块，也不会扣除物品。
-- 事件使用的装备槽固定为主手 `HAND`。
-
-正确用法是先检查事件，再由脚本完成方块修改和物品扣除：
-
-```fluxon
-if !player::placeBlock(&player, &targetBlock, &seedItem) {
-    return
-}
-if !inventory::takeItem(&player, 1, || &it::type() == &seedItem::type()) {
-    return
-}
-&targetBlock::setType(&cropMaterial)
-```
-
 ## `world`
 
 ### `isDay`
 
-```text
+```fluxon
 world::isDay(world) -> Boolean
 ```
 
@@ -566,7 +379,7 @@ if world::isDay(&currentWorld) {
 
 ### `isNight`
 
-```text
+```fluxon
 world::isNight(world) -> Boolean
 ```
 
@@ -579,11 +392,11 @@ if world::isNight(&currentWorld) {
 }
 ```
 
-在时间边界 `12300` 和 `23850` 上，`isDay` 与 `isNight` 都返回 `false`，不要假设二者始终互为相反值。
+在时间边界 `12300` 和 `23850` 上，`isDay` 与 `isNight` 都返回 `false`。不要假设二者始终互为相反值。
 
 ### `spawnCircleParticles`
 
-```text
+```fluxon
 world::spawnCircleParticles(particle, location, amount, option, range, factor?) -> void
 ```
 
@@ -608,7 +421,7 @@ world::spawnCircleParticles(
 
 ### `spawnRNAParticles`
 
-```text
+```fluxon
 world::spawnRNAParticles(particle, location, amount, option, height, range, factor?, circle?) -> void
 ```
 
@@ -631,130 +444,4 @@ world::spawnRNAParticles(
     20,
     2
 )
-```
-
-## `common`
-
-### `debug`
-
-```text
-common::debug(text) -> void
-```
-
-将字符串解析为聊天组件，构建颜色后输出到 Aiyatsbus 调试日志。该函数只用于调试，不向玩家发送消息，也不返回结果。
-
-```fluxon
-common::debug("附魔触发，等级: ${&level}")
-common::debug("目标: ${entity::entityName(&target)}")
-```
-
-需要输出变量时，先在 Fluxon 字符串插值中使用 `&变量`；裸标识符不会读取变量。`debug` 的参数必须是字符串，数值或 Bukkit 对象应先使用 `string(...)`，或放入字符串插值中。
-
-## `variables`
-
-### `ordinary`
-
-```text
-variables::ordinary(enchant, name) -> Any?
-```
-
-读取附魔的普通变量。变量不存在时返回 `null`。
-
-```fluxon
-value = variables::ordinary(&enchant, "最大深度")
-```
-
-### `leveled`
-
-```text
-variables::leveled(enchant, name, level, withUnit) -> Any
-```
-
-- 按指定等级计算 LEVELED 变量。
-- `withUnit = false` 时返回 `Int` 或 `Double`，适合参与计算。
-- `withUnit = true` 时返回带单位的 `String`，适合显示。
-- 四个参数都必须提供。
-- 变量不存在，或当前等级没有可用配置时会抛出错误。
-
-```fluxon
-damage = variables::leveled(&enchant, "伤害", &level, false)
-displayDamage = variables::leveled(&enchant, "伤害", &level, true)
-```
-
-当前触发器通常已经把当前等级的变量注入脚本，直接读取时优先使用 `&伤害`。需要动态变量名、不同等级或带单位文本时再调用 `leveled`。
-
-### `modifiable`
-
-```text
-variables::modifiable(enchant, item, name) -> Any
-```
-
-读取物品上的 MODIFIABLE 变量。变量可以存储在 PDC 或配置的 NBT 深层路径中；物品没有自定义值时返回变量默认值。
-
-```fluxon
-total = int(variables::modifiable(&enchant, &itemStack, "当前累计"))
-```
-
-PDC 存储值通常以字符串返回。参与数值运算前应使用 `int(...)` 或 `double(...)` 显式转换。变量名必须存在，物品不能为 `null`。
-
-### `setModifiable`
-
-```text
-variables::setModifiable(enchant, item, name, value) -> ItemStack
-```
-
-把 MODIFIABLE 变量写入物品，并返回修改后的物品。传入值会先转换成字符串；传入 `null` 会写入字符串 `"null"`，不会删除变量。
-
-```fluxon
-itemStack = variables::setModifiable(
-    &enchant,
-    &itemStack,
-    "当前累计",
-    &newTotal
-)
-```
-
-应接收返回的 `ItemStack`，不要依赖底层是否原地修改对象。变量名必须已经在附魔配置中定义。
-
-## 常见组合
-
-### 冷却技能
-
-```fluxon
-if !cooldown::isReady(&player, &enchant, 8.0) {
-    return
-}
-cooldown::addCooldown(&player, &enchant)
-
-entity::addPotionEffect(&player, "SPEED", 100, 1)
-```
-
-### 安全伤害实体
-
-```fluxon
-if !entity::isLivingEntity(&target) || entity::isNPC(&target) {
-    return
-}
-if !guard::canDamage(&player, &target) {
-    return
-}
-
-entity::realDamage(&target, &damage, &player)
-```
-
-### 消耗物品后模拟放置
-
-```fluxon
-materialType = &requiredItem::type()
-if !inventory::hasItem(&player, 1, || &it::type() == &materialType) {
-    return
-}
-if !player::placeBlock(&player, &targetBlock, &requiredItem) {
-    return
-}
-if !inventory::takeItem(&player, 1, || &it::type() == &materialType) {
-    return
-}
-
-&targetBlock::setType(&placedMaterial)
 ```

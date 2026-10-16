@@ -1,15 +1,14 @@
 ---
-title: "平台函数"
-description: "Fluxon 平台层提供的 String 扩展、任务调度和 Folia 区域调度"
+title: Fluxon 平台函数
+description: Fluxon 平台层提供的 String 扩展、任务调度与 Folia 区域调度参考，含 parseMillis 等单位换算、submit 任务构建器和资源释放规则。
+outline: [2, 3]
 ---
 
 # Fluxon 平台函数
 
-> 本文档基于 Aiyatsbus 官方技能包 v0.0.2，以当前服务器源码和配置为准。
+Fluxon 平台层提供 String 扩展、任务调度和 Folia 区域调度函数，它们不是 Aiyatsbus 的 `aiy:*` 游戏函数。
 
-本文描述 Fluxon 平台层提供的 String 扩展、任务调度和 Folia 区域调度函数。它们不是 Aiyatsbus 的 `aiy:*` 游戏函数。
-
-Aiyatsbus 附魔脚本可以直接使用这些函数，不需要手动导入平台模块。已有平台函数可以满足需求时，不要通过 JVM 互操作重复实现。
+Aiyatsbus 附魔脚本可以直接使用以下函数，不需要手动导入平台模块。已有平台函数可以满足需求时，不要通过 JVM 互操作重复实现。
 
 ## String 扩展
 
@@ -174,4 +173,4 @@ task = submit()
 
 ## 资源和容器
 
-任务对象属于运行时资源，不是持久化数据。需要在多个触发器之间保存手动创建的任务时，可以使用附魔私有 `container`；单一任务用途直接使用整个容器，多个任务用途才嵌套 Map。Ticker、Skill 或 Listener 重载时，不要假定手动创建的任务会自动执行触发器的退出清理。
+任务对象属于运行时资源，不能持久化。需要在多个触发器之间保存手动创建的任务时，可以使用附魔私有 `container`。单一任务用途直接使用整个容器，多个任务用途才嵌套 Map。Ticker、Skill 或 Listener 重载时，不要假定手动创建的任务会自动执行触发器的退出清理。容器的完整规则见 [运行时容器](./fluxon-containers)。

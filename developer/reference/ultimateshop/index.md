@@ -1,10 +1,16 @@
+---
+title: UltimateShop 商店系统配置
+description: UltimateShop 商店插件在 MiragEdge 的定制配置参考——目录结构、YAML 字段、动态价格与库存系统、每日商店和限量配置，含可直接照抄的配置片段。
+outline: [2, 3]
+---
+
 # UltimateShop 商店系统配置
 
-> 插件版本: 3.4.8+ Premium  
-> 官方Wiki: [ultimateshop.superiormc.cn](https://ultimateshop.superiormc.cn/)  
-> 插件目录: `plugins/UltimateShop/`  
+> 插件版本：3.4.8+ Premium
+> 官方 Wiki：[ultimateshop.superiormc.cn](https://ultimateshop.superiormc.cn/)
+> 插件目录：`plugins/UltimateShop/`
 
-UltimateShop 是一个高灵活性商店插件，支持多对多的商品-价格关系、动态价格、库存系统、每日商店等高级功能。本文档为 MiragEdge 服务器定制配置参考。
+UltimateShop 是一个高灵活性商店插件，支持多对多的商品与价格关系、动态价格、库存系统、每日商店等功能。本页是它在 MiragEdge 服务器上的定制配置参考。
 
 ## 目录结构
 

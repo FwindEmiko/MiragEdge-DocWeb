@@ -1,3 +1,9 @@
+---
+title: FE_Fly（客制化飞行插件）
+description: FE_Fly 限时飞行插件的工程归档——插件状态、基本信息、分级权限指令系统、PlaceholderAPI 占位符与消息自定义，作为历史工程记录保留。
+outline: [2, 3]
+---
+
 # FE_Fly（客制化飞行插件）
 
 ## 项目状态：D

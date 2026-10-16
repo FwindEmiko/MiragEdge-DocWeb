@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 360" role="img"
+     font-family="-apple-system, 'Segoe UI', 'PingFang SC', sans-serif">
+  <title>账号绑定三步：进服拿到 4 位验证码，回群发送「绑定 + 验证码」，绑定生效后即可自由进出</title>
+  <defs>
+    <marker id="bf-arrow" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="var(--vp-c-divider, #e2e2e3)"/>
+    </marker>
+  </defs>
+
+  <text x="40" y="34" font-size="17" font-weight="700" fill="var(--vp-c-text-1, #1b1b1f)">账号绑定 · 三步</text>
+  <text x="40" y="58" font-size="13" fill="var(--vp-c-text-3, #8e8e93)">首次进服必须绑定 QQ 号，否则无法正常游玩</text>
+
+  <!-- 1 进服拿码 -->
+  <rect x="40" y="88" width="448" height="88" rx="12"
+        fill="var(--vp-c-bg-soft, #f6f6f7)" stroke="var(--vp-c-divider, #e2e2e3)" stroke-width="1.5"/>
+  <circle cx="76" cy="132" r="22" fill="none" stroke="var(--vp-c-brand-1, #e05252)" stroke-width="2"/>
+  <text x="76" y="138" font-size="15" font-weight="700" fill="var(--vp-c-brand-1, #e05252)" text-anchor="middle">1</text>
+  <text x="116" y="122" font-size="16" font-weight="700" fill="var(--vp-c-text-1, #1b1b1f)">进服拿到 4 位验证码</text>
+  <text x="116" y="148" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">被踢出时弹出提示框，记下 4 位数字</text>
+  <text x="464" y="130" font-size="12" fill="var(--vp-c-text-3, #8e8e93)" text-anchor="end">验证码示例 3528</text>
+
+  <line x1="488" y1="132" x2="516" y2="132" stroke="var(--vp-c-divider, #e2e2e3)"
+        stroke-width="1.5" marker-end="url(#bf-arrow)"/>
+
+  <!-- 2 回群发送 -->
+  <rect x="520" y="88" width="400" height="88" rx="12"
+        fill="var(--vp-c-bg-soft, #f6f6f7)" stroke="var(--vp-c-divider, #e2e2e3)" stroke-width="1.5"/>
+  <circle cx="556" cy="132" r="22" fill="none" stroke="var(--vp-c-brand-1, #e05252)" stroke-width="2"/>
+  <text x="556" y="138" font-size="15" font-weight="700" fill="var(--vp-c-brand-1, #e05252)" text-anchor="middle">2</text>
+  <text x="596" y="122" font-size="16" font-weight="700" fill="var(--vp-c-text-1, #1b1b1f)">回群发送绑定指令</text>
+  <text x="596" y="148" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">在官方交流群发送「绑定 + 验证码」</text>
+  <text x="900" y="130" font-size="12" fill="var(--vp-c-text-3, #8e8e93)" text-anchor="end">绑定 3528</text>
+
+  <!-- 回到服务器校验 -->
+  <path d="M720,176 V200 H264 V192" fill="none" stroke="var(--vp-c-divider, #e2e2e3)"
+        stroke-width="1.5" stroke-dasharray="6 5"/>
+  <path d="M264,192 L259,204 L269,204 z" fill="var(--vp-c-divider, #e2e2e3)"/>
+  <text x="492" y="220" font-size="13" fill="var(--vp-c-text-3, #8e8e93)" text-anchor="middle">回到服务器，验证码校验通过后绑定生效</text>
+
+  <!-- 3 绑定生效 -->
+  <rect x="40" y="244" width="880" height="88" rx="12"
+        fill="none" stroke="var(--vp-c-brand-1, #e05252)" stroke-width="1.5"/>
+  <rect x="40" y="244" width="5" height="88" rx="2.5" fill="var(--vp-c-brand-1, #e05252)"/>
+  <text x="70" y="280" font-size="16" font-weight="700" fill="var(--vp-c-brand-1, #e05252)">绑定生效后</text>
+  <text x="70" y="306" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">可自由进出服务器，并使用群服互通功能。</text>
+  <text x="900" y="300" font-size="13" font-weight="700" fill="var(--vp-c-brand-1, #e05252)" text-anchor="end">一个 QQ 号最多绑定 3 个游戏 ID</text>
+</svg>

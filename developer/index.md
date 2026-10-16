@@ -1,36 +1,48 @@
 ---
 title: 开发者文档
-description: 锐界幻境的服务端维护、插件协作、数据包和资源制作工作流。面向服主与开发者。
+description: 锐界幻境开发者文档的总入口，按开发工作流、参考与规范、站点与协作、运维与归档四块组织，涵盖数据包、CraftEngine、附魔、Geyser 与服务器参考的入口。
+outline: [2, 3]
 ---
 
 # 开发者文档
 
-这里服务于服主、开发者和维护人员。普通玩家请从[开始游戏](/start/)或[生存玩法](/play/)进入。
+这页是开发者文档的总入口，按四块组织：开发工作流、参考与规范、站点与协作、运维与归档。
 
-> 现如今，AI已经成为我们必不可少的开发工具，维护更新锐界幻境每月消耗的Token数量已经达到了百亿级别  
-> 本开发文档中的工作流skills内容主要并不是让人类阅读的，而是让AI快速掌握  
-> 网站已集成LLMs.txt标准和完善的路由文件，这就是为了方便Agent进行访问阅读。
-
-## 从工作流开始
+## 开发工作流
 
 - [数据包工作流](./workflows/datapack/)：编写、验证与部署数据包。
 - [CraftEngine 工作流](./workflows/craftengine/)：创建物品、模型和资源。
 - [附魔配置工作流](./workflows/enchanting/)：维护自定义附魔内容。
 - [自定义作物工作流](./workflows/custom-crops)：维护作物配置与资源。
 - [钓鱼系统工作流](./workflows/fishing/)：维护钓鱼玩法和配置。
+- [Geyser 基岩版工作流](./workflows/geyser/)：资源包转换、映射与跨端验收。
+- [插件开发规范与协作流程](./process/plugin-lifecycle)：需求核对、实现边界、验证与交付规则。
 
-## 核对当前实现
+## 参考与规范
 
-- [服务器模块职责](./reference/server-modules)：查看当前专属模块的职责边界。
-- [自定义物理与反作弊桥接层](./reference/server-modules#自定义物理与反作弊桥接层)：为合法移速、鞘翅和碰撞变化设计最小化反作弊兼容。
-- [原创插件文档](/plugin-guides/)：查阅独立插件的安装、配置与维护资料。
-- [附魔 ID 对照表](./reference/enchantment_ids)：查阅字段、ID 与配置约定。
-- [插件开发规范](./process/plugin-lifecycle)：面向 AI 与开发者的需求核对、实现边界、验证与交付规则。
+- [服务器模块职责](./reference/server-modules)：专属模块的职责边界与反作弊桥接规范。
+- [经济基准参考](./reference/economy)：货币体系、日平衡表与定价锚点。
+- [经济审查工作流](./reference/economy-audit/)：改动经济数值前的五阶段审查流程。
+- [附魔 ID 对照表](./reference/enchantment_ids)：编写配置、命令或脚本时查询附魔 ID。
+- [Stellarity 技术附魔说明](./reference/stellarity-technical-enchantments)：数据包内部的技术附魔标记。
+- [祛魔成本计算器](./reference/enchantment-calculator)：拖动滑块查看祛魔消耗。
+- [UltimateShop 商店系统配置](./reference/ultimateshop/)：商店插件在 MiragEdge 的定制配置。
 
-## 日常维护
+## 站点与协作
 
-更新日志和待办事项位于侧栏的“运维资料”中；站点组件和图标维护位于“站点与协作”中。
+- [文档站内容维护工作流](./website/content-workflow)：内容新增、事实修订、页面迁移与验证规范。
+- [图片自动化模块](./website/autoimage)：`SmartImage` 组件的参数与用法。
+- [Minecraft 配方可视化组件](./website/mcrecipe)：`McItem` 配方组件套件的 props 与示例。
+- [已注册物品速查](./website/mc-textures)：581 个物品的 id 与中文名。
+- [统一图标系统](./website/vectoricons)：`MapIcon` 用法与语义映射表。
+- [AI Skills 系统](./ai-skills)：供 AI 读取的技能包与参考配置。
+- [开发团队](./team)：成员、贡献者与赞助者名单。
 
-## 事实边界
+## 运维与归档
 
-玩家文档以当前服务器配置为准。配置文件可以证明当前设置，不能单独证明所有运行时行为；涉及命令、权限、跨服和 Java/基岩版差异时，仍需完成日志与游戏内验收。未核对的玩法设计只保留在历史与待核对资料中，不进入玩家导航。
+- [更新日志](./ops/changelog)：服务器与文档站的变更记录。
+- [待办事项](./ops/todo)：开发待办与近期计划。
+- [云计算价格表](./ops/compute)：对外售卖的服务器租用价目表。
+- [原创插件归档](./archive/plugins/)：未核对暂存与已移除插件的清册。
+- [宣传推广方案](./archive/promotion)：历史的推广方案记录。
+- [原创插件文档](/plugin-guides/)：独立插件的安装、配置与维护资料。

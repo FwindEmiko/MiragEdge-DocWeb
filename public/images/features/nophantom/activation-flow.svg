@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" role="img"
+     font-family="-apple-system, 'Segoe UI', 'PingFang SC', sans-serif">
+  <title>免幻翼的激活判定：已在主世界、已解锁、守护开启时生效，否则维持原版幻翼行为</title>
+  <defs>
+    <marker id="np-arrow" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="var(--vp-c-divider, #e2e2e3)"/>
+    </marker>
+    <marker id="np-arrow-brand" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="var(--vp-c-brand-1, #e05252)"/>
+    </marker>
+  </defs>
+
+  <text x="40" y="36" font-size="17" font-weight="700" fill="var(--vp-c-text-1, #1b1b1f)">免幻翼 · 激活判定</text>
+  <text x="40" y="60" font-size="13" fill="var(--vp-c-text-3, #8e8e93)">累计击杀 15 只幻翼解锁；之后守护默认开启，可在设置菜单或命令中切换</text>
+
+  <!-- 条件 1 -->
+  <rect x="150" y="96" width="660" height="76" rx="12"
+        fill="var(--vp-c-bg-soft, #f6f6f7)" stroke="var(--vp-c-divider, #e2e2e3)" stroke-width="1.5"/>
+  <circle cx="190" cy="134" r="19" fill="none" stroke="var(--vp-c-brand-1, #e05252)" stroke-width="2"/>
+  <text x="190" y="139" font-size="14" font-weight="700" fill="var(--vp-c-brand-1, #e05252)" text-anchor="middle">1</text>
+  <text x="228" y="128" font-size="15" font-weight="700" fill="var(--vp-c-text-1, #1b1b1f)">当前在主世界</text>
+  <text x="228" y="152" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">下界与末地不会触发守护</text>
+
+  <line x1="480" y1="172" x2="480" y2="196" stroke="var(--vp-c-divider, #e2e2e3)"
+        stroke-width="1.5" marker-end="url(#np-arrow)"/>
+
+  <!-- 条件 2 -->
+  <rect x="150" y="200" width="660" height="76" rx="12"
+        fill="var(--vp-c-bg-soft, #f6f6f7)" stroke="var(--vp-c-divider, #e2e2e3)" stroke-width="1.5"/>
+  <circle cx="190" cy="238" r="19" fill="none" stroke="var(--vp-c-brand-1, #e05252)" stroke-width="2"/>
+  <text x="190" y="243" font-size="14" font-weight="700" fill="var(--vp-c-brand-1, #e05252)" text-anchor="middle">2</text>
+  <text x="228" y="232" font-size="15" font-weight="700" fill="var(--vp-c-text-1, #1b1b1f)">击杀进度已解锁</text>
+  <text x="228" y="256" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">累计击杀 15 只幻翼后自动解锁</text>
+
+  <line x1="480" y1="276" x2="480" y2="300" stroke="var(--vp-c-divider, #e2e2e3)"
+        stroke-width="1.5" marker-end="url(#np-arrow)"/>
+
+  <!-- 条件 3 -->
+  <rect x="150" y="304" width="660" height="76" rx="12"
+        fill="var(--vp-c-bg-soft, #f6f6f7)" stroke="var(--vp-c-divider, #e2e2e3)" stroke-width="1.5"/>
+  <circle cx="190" cy="342" r="19" fill="none" stroke="var(--vp-c-brand-1, #e05252)" stroke-width="2"/>
+  <text x="190" y="347" font-size="14" font-weight="700" fill="var(--vp-c-brand-1, #e05252)" text-anchor="middle">3</text>
+  <text x="228" y="336" font-size="15" font-weight="700" fill="var(--vp-c-text-1, #1b1b1f)">守护开关为开启</text>
+  <text x="228" y="360" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">/nophantom toggle 可切换，切换后立即生效</text>
+
+  <!-- 分叉 -->
+  <line x1="480" y1="380" x2="480" y2="416" stroke="var(--vp-c-divider, #e2e2e3)" stroke-width="1.5"/>
+  <path d="M480,416 V440 H244 V464" fill="none" stroke="var(--vp-c-divider, #e2e2e3)"
+        stroke-width="1.5" marker-end="url(#np-arrow)"/>
+  <path d="M480,440 H716 V464" fill="none" stroke="var(--vp-c-brand-1, #e05252)"
+        stroke-width="1.5" marker-end="url(#np-arrow-brand)"/>
+  <text x="466" y="434" font-size="13" font-weight="700" fill="var(--vp-c-text-2, #3c3c43)" text-anchor="end">不符合</text>
+  <text x="494" y="434" font-size="13" font-weight="700" fill="var(--vp-c-brand-1, #e05252)">全部符合</text>
+
+  <!-- 否 -->
+  <rect x="40" y="472" width="420" height="92" rx="12"
+        fill="none" stroke="var(--vp-c-divider, #e2e2e3)" stroke-width="1.5"/>
+  <text x="68" y="506" font-size="15" font-weight="700" fill="var(--vp-c-text-2, #3c3c43)">维持原版行为</text>
+  <text x="68" y="532" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">长时间不睡觉仍会遭遇幻翼；</text>
+  <text x="68" y="552" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">想刷幻翼膜时可主动关闭守护。</text>
+
+  <!-- 是 -->
+  <rect x="500" y="472" width="420" height="92" rx="12"
+        fill="none" stroke="var(--vp-c-brand-1, #e05252)" stroke-width="1.5"/>
+  <rect x="500" y="472" width="5" height="92" rx="2.5" fill="var(--vp-c-brand-1, #e05252)"/>
+  <text x="528" y="506" font-size="15" font-weight="700" fill="var(--vp-c-brand-1, #e05252)">守护生效</text>
+  <text x="528" y="532" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">周围约 3 个区块内不再生成新幻翼，</text>
+  <text x="528" y="552" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">范围内的其他玩家同样受庇护。</text>
+</svg>

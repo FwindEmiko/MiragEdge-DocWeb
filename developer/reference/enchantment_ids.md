@@ -1,6 +1,6 @@
 ---
 title: 附魔ID对照表
-description: 锐界幻境附魔 ID 对照表：供开发者编写配置、命令或脚本时查询附魔 ID 使用，与玩家侧附魔大全同源，按品质分组。
+description: 锐界幻境附魔 ID 对照表，供开发者编写配置、命令或脚本时查询附魔 ID 使用。数据与玩家侧的附魔大全同源，按品质分组展示，随附魔体系更新同步。
 head:
   - - meta
     - name: keywords
@@ -9,7 +9,6 @@ head:
 
 # 附魔ID对照表
 
-> 本对照表供开发者在编写配置、命令或脚本时查询附魔 ID 使用。  
-> 数据与玩家侧的[附魔大全](/play/adventure/enchantments/)同源，按品质分组展示。
+写配置、命令或脚本时用这页查附魔 ID。数据与玩家侧的[附魔大全（玩家版）](/play/adventure/enchantments/)同源，按品质分组展示。
 
 <EnchantmentIdTable />

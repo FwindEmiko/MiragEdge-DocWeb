@@ -435,6 +435,7 @@ export default defineConfig({
             { text: '客户端安装', link: '/start/install' },
             { text: '连接服务器', link: '/start/join' },
             { text: '账号绑定', link: '/start/account' },
+            { text: '登录与注册', link: '/start/login' },
           ]
         },
         {
@@ -657,7 +658,15 @@ export default defineConfig({
               collapsed: true,
               items: [
                 { text: '前置与环境', link: '/developer/workflows/datapack/prerequisites' },
-                { text: '模块实现', link: '/developer/workflows/datapack/modules' },
+                { text: '模块总览', link: '/developer/workflows/datapack/modules/functions' },
+                { text: '函数 Functions', link: '/developer/workflows/datapack/modules/functions' },
+                { text: '战利品表 Loot Tables', link: '/developer/workflows/datapack/modules/loot-tables' },
+                { text: '配方 Recipes', link: '/developer/workflows/datapack/modules/recipes' },
+                { text: '生物掉落 Mob Drops', link: '/developer/workflows/datapack/modules/mob-drops' },
+                { text: 'CE 自定义物品', link: '/developer/workflows/datapack/modules/ce-items' },
+                { text: '结构 Structures', link: '/developer/workflows/datapack/modules/structures' },
+                { text: 'CraftEngine 集成', link: '/developer/workflows/datapack/ce-integration' },
+                { text: 'AI 使用指南', link: '/developer/workflows/datapack/ai-guide' },
                 { text: '参考规则', link: '/developer/workflows/datapack/reference' },
                 { text: '排错与适配', link: '/developer/workflows/datapack/troubleshooting' },
               ]
@@ -726,10 +735,12 @@ export default defineConfig({
                     { text: 'Import 模块参考', link: '/developer/workflows/enchanting/fluxon-modules' },
                     { text: '平台函数', link: '/developer/workflows/enchanting/fluxon-platform-functions' },
                     { text: '运行时容器', link: '/developer/workflows/enchanting/fluxon-containers' },
-                    { text: 'Aiyatsbus 函数', link: '/developer/workflows/enchanting/aiyatsbus-fluxon-functions' },
+                    { text: '宿主函数总览', link: '/developer/workflows/enchanting/host-functions/' },
+                { text: '世界与实体函数', link: '/developer/workflows/enchanting/host-functions/world-entity' },
+                { text: '变量与常用组合', link: '/developer/workflows/enchanting/host-functions/variables-combos' },
                   ]
                 },
-                { text: 'Fluxon 参考(整合)', link: '/developer/workflows/enchanting/reference' },
+                { text: 'Fluxon 避坑与旧写法', link: '/developer/workflows/enchanting/fluxon-pitfalls' },
                 { text: '官方技能包文件浏览', link: '/developer/workflows/enchanting/skill-files' },
                 { text: '数据包边界', link: '/developer/workflows/enchanting/datapack-boundaries' },
                 { text: '验证与验收', link: '/developer/workflows/enchanting/validation' },
@@ -744,7 +755,6 @@ export default defineConfig({
               items: [
                 { text: '前置与环境', link: '/developer/workflows/fishing/prerequisites' },
                 { text: '模块实现', link: '/developer/workflows/fishing/modules' },
-                { text: '参考规则', link: '/developer/workflows/fishing/reference' },
                 { text: '排错与适配', link: '/developer/workflows/fishing/troubleshooting' },
               ]
             },
@@ -759,7 +769,11 @@ export default defineConfig({
             { text: '内部隐藏技术附魔', link: '/developer/reference/stellarity-technical-enchantments' },
             { text: '祛魔成本计算器', link: '/developer/reference/enchantment-calculator' },
             { text: '经济基准参考', link: '/developer/reference/economy' },
-            { text: '经济自动化审查', link: '/developer/reference/economy-audit-workflow' },
+            { text: '经济审查流程', link: '/developer/reference/economy-audit/' },
+            { text: '审查检查清单', link: '/developer/reference/economy-audit/checklist' },
+            { text: '定价方法论', link: '/developer/reference/economy-audit/pricing-methods' },
+            { text: '审查报告模板', link: '/developer/reference/economy-audit/report-template' },
+            { text: '全插件经济速查', link: '/developer/reference/economy-audit/plugin-economy-matrix' },
             { text: '高级商店系统', link: '/developer/reference/ultimateshop/' },
           ]
         },
@@ -772,6 +786,7 @@ export default defineConfig({
             { text: '文档站内容维护工作流', link: '/developer/website/content-workflow' },
             { text: '图片自动化模块', link: '/developer/website/autoimage' },
             { text: '配方可视化组件', link: '/developer/website/mcrecipe' },
+            { text: '已注册物品与材质', link: '/developer/website/mc-textures' },
             { text: '统一图标系统', link: '/developer/website/vectoricons' },
             { text: 'AI Skills 系统', link: '/developer/ai-skills' },
           ]
@@ -832,6 +847,7 @@ export default defineConfig({
                 { text: 'UberEnchant 兼容', link: '/plugin-guides/bug-enchant-remover/uber_enchant' },
               ]
             },
+            { text: 'BountyHunter 赏金猎人', link: '/plugin-guides/bounty-hunter/' },
             { text: 'DragonMiao', link: '/plugin-guides/dragonmiao/' },
             {
               text: 'HFcatLogin 登录插件',
@@ -848,7 +864,6 @@ export default defineConfig({
               link: '/plugin-guides/fepvp/',
               collapsed: false,
               items: [
-                { text: '玩家指南', link: '/plugin-guides/fepvp/guide' },
                 { text: '竞技场管理', link: '/plugin-guides/fepvp/arena' },
                 { text: '装备组合管理', link: '/plugin-guides/fepvp/kit' },
                 { text: '饥饿游戏模式', link: '/plugin-guides/fepvp/hunger-games' },
@@ -864,7 +879,6 @@ export default defineConfig({
               link: '/plugin-guides/fe-back/',
               collapsed: false,
               items: [
-                { text: '玩家指南', link: '/plugin-guides/fe-back/guide' },
                 { text: '命令参考', link: '/plugin-guides/fe-back/commands' },
                 { text: '配置参考', link: '/plugin-guides/fe-back/config' },
                 { text: '权限节点', link: '/plugin-guides/fe-back/permissions' },

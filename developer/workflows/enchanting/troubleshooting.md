@@ -1,11 +1,10 @@
 ---
-title: Aiyatsbus 附魔配置工作流 · 排错
-description: 按加载、事件、变量、数据包和实服边界定位 Aiyatsbus 附魔问题。
+title: 排错
+description: 按加载、事件、变量、数据包和实服边界定位附魔问题，含常见问题对照表、最小复现步骤、YAML 检查重点与证据优先级的顺序。
+outline: [2, 3]
 ---
 
 # 排错
-
-> 本文档基于 Aiyatsbus 官方技能包 v0.0.2，以当前服务器源码和配置为准。
 
 先把问题归到一个层次：YAML 没加载、脚本没编译、事件没触发、状态没保存、数值不对，或是另一个系统也在生效。不要在没有日志和最小复现的情况下同时修改多个节点。
 
@@ -14,7 +13,7 @@ description: 按加载、事件、变量、数据包和实服边界定位 Aiyats
 | 现象 | 优先检查 | 处理方式 |
 | --- | --- | --- |
 | reload 后没有附魔 | YAML 缩进、`basic.enable`、ID、配置目录、完整 reload 日志 | 先还原为最小骨架，逐段加回 |
-| `FunctionNotFoundException` | 实际 Fluxon 扩展、函数参数、事件类型 | 不要猜 Java getter；按 [Fluxon 参考](./reference) 或当前 JAR 源码改写 |
+| `FunctionNotFoundException` | 实际 Fluxon 扩展、函数参数、事件类型 | 不要猜 Java getter；按 [Fluxon 避坑](./fluxon-pitfalls) 或当前 JAR 源码改写 |
 | `modifiable` 每次都回到初始值 | 是否只写了 `&变量 = ...`，是否读写同一个 `&item` | 使用 `variables::modifiable(...)` 和 `variables::setModifiable(...)` |
 | `variables::modifiable` 报参数错误 | 是否传了第四个默认值 | 当前签名只接收 enchant、item、name 三个参数 |
 | 方块交互空指针或脚本错误 | 空气点击、左右手双触发、`clickedBlock` 语法 | 先判断 `isClickBlock()`，使用 `&event::clickedBlock()`，再按 `hand()` 过滤 |

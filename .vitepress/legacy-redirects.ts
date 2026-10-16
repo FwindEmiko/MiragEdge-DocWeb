@@ -132,6 +132,16 @@ const exactRules: RedirectRule[] = [
   // 跨区归位
   { from: '/start/redstone', to: '/play/systems/redstone' },   // 目标页由阶段 2 拆页产出
   { from: '/plugins/fec-armor', to: '/features/body-size' },
+  // 阶段 3 拆页/改名
+  { from: '/developer/workflows/enchanting/aiyatsbus-fluxon-functions', to: '/developer/workflows/enchanting/host-functions' },
+  { from: '/developer/workflows/enchanting/reference', to: '/developer/workflows/enchanting/fluxon-pitfalls' },
+  { from: '/developer/workflows/datapack/modules', to: '/developer/workflows/datapack/modules/functions' },
+  { from: '/developer/workflows/geyser/index', to: '/developer/workflows/geyser' },
+  { from: '/developer/workflows/geyser/conversion', to: '/developer/workflows/geyser/conversion/' },
+  { from: '/developer/workflows/geyser/craftengine', to: '/developer/workflows/geyser/craftengine/' },
+  { from: '/developer/workflows/fishing/reference', to: '/developer/workflows/fishing' },
+  // 拆页：经济审查方法论（38KB → 5 页）
+  { from: '/developer/reference/economy-audit-workflow', to: '/developer/reference/economy-audit' },
   // 未上线运营方案归位
   { from: '/developer/design/liveops_260107', to: '/developer/archive/design/liveops_260107' },
   // plugins/custom/ 打平后逐个改名

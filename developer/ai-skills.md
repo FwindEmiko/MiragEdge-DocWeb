@@ -1,6 +1,7 @@
 ---
 title: AI Skills 系统
-description: 锐界幻境文档站的 AI 技能系统，提供机器可读的技能参考文件、配置示例和 API 文档。
+description: 锐界幻境文档站的 AI Skills 系统——用文件树浏览技能包与真实服务器配置示例，支持在线预览、复制内容、查看原始文件与下载，含技能包目录结构与技能清单。
+outline: [2, 3]
 ---
 
 # AI Skills 系统

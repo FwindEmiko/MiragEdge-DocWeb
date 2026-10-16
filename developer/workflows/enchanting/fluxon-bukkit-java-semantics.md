@@ -1,15 +1,14 @@
 ---
-title: "Bukkit/Java API 调用语义"
-description: "Fluxon 调用 Bukkit API 的 getter/setter/跨版本函数/枚举/构造器规则"
+title: Bukkit/Java 调用语义
+description: 在 Fluxon 中调用 Bukkit 与 Java API 必须遵循的命名规则：无参 getter 去掉 get、有参 getter 保留 get、十个跨版本函数、static 与 new 的使用边界。
+outline: [2, 3]
 ---
 
-# Fluxon 调用 Bukkit 与 Java API 的语义
+# Bukkit/Java 调用语义
 
-> 本文档基于 Aiyatsbus 官方技能包 v0.0.2，以当前服务器源码和配置为准。
+Aiyatsbus Fluxon 脚本调用 Bukkit API 和其他 Java API 时必须遵循以下方法名、枚举值、静态成员和构造器规则。
 
-本文定义 Aiyatsbus Fluxon 脚本调用 Bukkit API 和其他 Java API 时必须遵循的方法名、枚举值、静态成员和构造器规则。
-
-调用 Java API 前先检查 [Aiyatsbus Fluxon 函数](./aiyatsbus-fluxon-functions)、[Import 模块参考](./fluxon-modules)、[内置函数与扩展函数](./fluxon-stdlib) 和 [Fluxon 语言参考](./fluxon-language)。已有 Fluxon 或 Aiyatsbus API 能完成需求时，必须使用现有 API，不要通过 `static`、反射或自建 Java 工具重复实现。本文的 `static` 和 `new` 规则只适用于确实需要 JVM 互操作的场景。
+调用 Java API 前先检查 [Aiyatsbus Fluxon 函数](./host-functions/)、[Import 模块参考](./fluxon-modules)、[内置函数与扩展函数](./fluxon-stdlib) 和 [Fluxon 语言参考](./fluxon-language)。已有 Fluxon 或 Aiyatsbus API 能完成需求时，必须使用现有 API，不要通过 `static`、反射或自建 Java 工具重复实现。下文 `static` 和 `new` 规则只适用于确实需要 JVM 互操作的场景。
 
 ## Getter
 

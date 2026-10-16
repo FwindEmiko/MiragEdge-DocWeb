@@ -1,3 +1,9 @@
+---
+title: MiragEdge 统一图标系统
+description: MiragEdge 统一图标系统说明——基于 Lucide 图标库的 MapIcon 组件用法、语义映射表与常用图标的检索方式，供页面编写时统一调用图标。
+outline: [2, 3]
+---
+
 <script setup>
 import MapIcon from '../../.vitepress/theme/components/vue/MapIcon.vue'
 import {
@@ -52,7 +58,7 @@ import { Home, User, Settings } from 'lucide-vue-next'
 ## 语义名称映射表
 
 <details>
-<summary>📁 导航 & 通用</summary>
+<summary>导航 & 通用</summary>
 
 | 语义名称 | 图标 | 预览 |
 |---------|------|------|
@@ -70,7 +76,7 @@ import { Home, User, Settings } from 'lucide-vue-next'
 </details>
 
 <details>
-<summary>🗄️ 服务器 & 硬件</summary>
+<summary>服务器 & 硬件</summary>
 
 | 语义名称 | 图标 | 预览 |
 |---------|------|------|
@@ -127,7 +133,7 @@ import { Home, User, Settings } from 'lucide-vue-next'
 </details>
 
 <details>
-<summary>📄 文档 & 开发</summary>
+<summary>文档 & 开发</summary>
 
 | 语义名称 | 图标 | 预览 |
 |---------|------|------|
@@ -142,7 +148,7 @@ import { Home, User, Settings } from 'lucide-vue-next'
 </details>
 
 <details>
-<summary>🦊 锐界幻境特色</summary>
+<summary>锐界幻境特色</summary>
 
 | 语义名称 | 图标 | 预览 |
 |---------|------|------|

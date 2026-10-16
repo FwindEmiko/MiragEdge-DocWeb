@@ -1,15 +1,14 @@
 ---
-title: "JVM 互操作参考"
-description: "在 Fluxon 中调用 Java API 的成员访问、静态成员、构造器和注解系统"
+title: Fluxon JVM 互操作参考
+description: 现有 Fluxon API 无法满足需求时的回退路线：反射成员访问、静态成员、构造器、匿名接口实现、并发异步和注解系统。
+outline: [2, 3]
 ---
 
 # Fluxon JVM 互操作参考
 
-> 本文档基于 Aiyatsbus 官方技能包 v0.0.2，以当前服务器源码和配置为准。
+在 Aiyatsbus 脚本中调用 Bukkit 或其他 Java API 时，还必须遵循 [Bukkit/Java 调用语义](./fluxon-bukkit-java-semantics) 中的 getter、setter、十个跨版本兼容函数、枚举值和构造器规则。
 
-在 Aiyatsbus 脚本中调用 Bukkit 或其他 Java API 时，还必须遵循 [Bukkit/Java API 调用语义](./fluxon-bukkit-java-semantics) 中的 getter、setter、十个跨版本兼容函数、枚举值和构造器规则。
-
-JVM 互操作是现有 Fluxon API 无法满足需求时的回退方案，不是默认实现方式。使用 `static`、反射或 Java 构造器前，必须先检查 [Aiyatsbus Fluxon 函数](./aiyatsbus-fluxon-functions)、[平台函数](./fluxon-platform-functions)、[Import 模块参考](./fluxon-modules)、[内置函数与扩展函数](./fluxon-stdlib) 和 [Fluxon 语言参考](./fluxon-language)。Aiyatsbus 附魔脚本已自动导入 `fs:time`、`fs:crypto`、`fs:reflect`、`fs:io`、`fs:jvm`；例如当前时间戳直接使用 `now()`，不要手动导入模块或调用 `static java.lang.System.currentTimeMillis()`。通过 `forName` 或 `static` 访问 Java 嵌套类时，必须使用 `$` 连接外部类和嵌套类。
+JVM 互操作是现有 Fluxon API 无法满足需求时的回退方案，不是默认实现方式。使用 `static`、反射或 Java 构造器前，必须先检查 [Aiyatsbus Fluxon 函数](./host-functions/)、[平台函数](./fluxon-platform-functions)、[Import 模块参考](./fluxon-modules)、[内置函数与扩展函数](./fluxon-stdlib) 和 [Fluxon 语言参考](./fluxon-language)。Aiyatsbus 附魔脚本已自动导入 `fs:time`、`fs:crypto`、`fs:reflect`、`fs:io`、`fs:jvm`；例如当前时间戳直接使用 `now()`，不要手动导入模块或调用 `static java.lang.System.currentTimeMillis()`。通过 `forName` 或 `static` 访问 Java 嵌套类时，必须使用 `$` 连接外部类和嵌套类。
 
 ## 1. 成员访问 `.`（Java 反射）
 

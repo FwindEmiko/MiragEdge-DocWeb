@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 560" role="img"
+     font-family="-apple-system, 'Segoe UI', 'PingFang SC', sans-serif">
+  <title>食物系统关系图：七个食物分类按品质分级，品质决定效果强度</title>
+  <defs>
+    <marker id="fm-arrow" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="var(--vp-c-divider, #e2e2e3)"/>
+    </marker>
+    <marker id="fm-arrow-brand" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="var(--vp-c-brand-1, #e05252)"/>
+    </marker>
+  </defs>
+
+  <text x="40" y="36" font-size="17" font-weight="700" fill="var(--vp-c-text-1, #1b1b1f)">食物 · 分类 · 品质 · 效果</text>
+  <text x="40" y="60" font-size="13" fill="var(--vp-c-text-3, #8e8e93)">品质越高，效果越强，材料也越稀有</text>
+
+  <!-- 第一层：分类 -->
+  <text x="40" y="96" font-size="14" font-weight="700" fill="var(--vp-c-text-1, #1b1b1f)">分类</text>
+  <rect x="40" y="112" width="232" height="296" rx="12"
+        fill="var(--vp-c-bg-soft, #f6f6f7)" stroke="var(--vp-c-divider, #e2e2e3)" stroke-width="1.5"/>
+  <text x="62" y="152" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">早餐简餐</text>
+  <text x="62" y="194" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">主菜肉食</text>
+  <text x="62" y="236" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">沙拉凉菜</text>
+  <text x="62" y="278" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">糖果零食</text>
+  <text x="62" y="320" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">甜品与烘焙</text>
+  <text x="62" y="362" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">饮品</text>
+  <text x="62" y="404" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">煎蛋与特色食物</text>
+
+  <path d="M276,272 H324" fill="none" stroke="var(--vp-c-divider, #e2e2e3)"
+        stroke-width="1.5" marker-end="url(#fm-arrow)"/>
+  <text x="300" y="256" font-size="12" fill="var(--vp-c-text-3, #8e8e93)" text-anchor="middle">按品质</text>
+  <text x="300" y="298" font-size="12" fill="var(--vp-c-text-3, #8e8e93)" text-anchor="middle">分级</text>
+
+  <!-- 第二层：品质 -->
+  <rect x="336" y="216" width="272" height="112" rx="14"
+        fill="none" stroke="var(--vp-c-brand-1, #e05252)" stroke-width="1.5"/>
+  <text x="472" y="252" font-size="17" font-weight="700" fill="var(--vp-c-brand-1, #e05252)" text-anchor="middle">品质分级</text>
+  <text x="472" y="278" font-size="13" fill="var(--vp-c-text-2, #3c3c43)" text-anchor="middle">普通 · 精良 · 稀有 · 传说</text>
+  <text x="472" y="302" font-size="13" fill="var(--vp-c-text-2, #3c3c43)" text-anchor="middle">四个等级</text>
+
+  <path d="M612,272 H660" fill="none" stroke="var(--vp-c-brand-1, #e05252)"
+        stroke-width="1.5" marker-end="url(#fm-arrow-brand)"/>
+  <text x="636" y="256" font-size="12" fill="var(--vp-c-text-3, #8e8e93)" text-anchor="middle">决定</text>
+
+  <!-- 第三层：效果 -->
+  <rect x="672" y="92" width="248" height="360" rx="12"
+        fill="var(--vp-c-bg-soft, #f6f6f7)" stroke="var(--vp-c-divider, #e2e2e3)" stroke-width="1.5"/>
+  <text x="696" y="124" font-size="14" font-weight="700" fill="var(--vp-c-text-1, #1b1b1f)">效果强度</text>
+  <line x1="696" y1="138" x2="896" y2="138" stroke="var(--vp-c-divider, #e2e2e3)" stroke-width="1"/>
+
+  <text x="696" y="170" font-size="13" font-weight="700" fill="var(--vp-c-text-2, #3c3c43)">普通</text>
+  <text x="696" y="192" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">基础饱食，无效果</text>
+  <text x="696" y="212" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">或弱效果</text>
+
+  <text x="696" y="248" font-size="13" font-weight="700" fill="var(--vp-c-text-2, #3c3c43)">精良</text>
+  <text x="696" y="270" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">有实用的日常效果</text>
+
+  <text x="696" y="306" font-size="13" font-weight="700" fill="var(--vp-c-text-2, #3c3c43)">稀有</text>
+  <text x="696" y="328" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">强力的战斗效果</text>
+
+  <text x="696" y="364" font-size="13" font-weight="700" fill="var(--vp-c-brand-1, #e05252)">传说</text>
+  <text x="696" y="386" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">终极增益</text>
+  <text x="696" y="406" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">材料极稀有</text>
+  <line x1="696" y1="424" x2="896" y2="424" stroke="var(--vp-c-divider, #e2e2e3)" stroke-width="1"/>
+  <text x="696" y="442" font-size="12" fill="var(--vp-c-text-3, #8e8e93)">效果细节见食物速查表</text>
+
+  <!-- 底注 -->
+  <rect x="40" y="456" width="880" height="72" rx="12"
+        fill="var(--vp-c-bg-soft, #f6f6f7)" stroke="var(--vp-c-divider, #e2e2e3)" stroke-width="1"/>
+  <text x="64" y="484" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">七类共收录 57 种食物：想知道某道菜吃什么效果，进分类页看配方；</text>
+  <text x="64" y="508" font-size="13" fill="var(--vp-c-text-2, #3c3c43)">想按效果反查食物，去食物速查表按生命恢复、抗性、抗火、速度分组查找。</text>
+</svg>

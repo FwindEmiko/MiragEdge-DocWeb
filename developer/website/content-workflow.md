@@ -1,13 +1,12 @@
 ---
 title: 文档站内容维护工作流
-description: 面向 AI agent 的 MiragEdge 文档站内容新增、修订、迁移与验证规范。
-icon: 🧭
-outline: deep
+description: 接手 MiragEdge 文档站时的内容维护规范——开工前的核对动作、页面落位表、玩家页与开发者页的写作边界、修改闭环与验证命令，以及必须遵守的禁止事项。
+outline: [2, 3]
 ---
 
 # 文档站内容维护工作流
 
-本页让接手 `F:\MiragEdge-DocWeb` 的 AI agent 能在不破坏现有信息架构、视觉风格和生成产物的前提下，完成内容新增、事实修订、页面迁移和导航调整。
+接手 `F:\MiragEdge-DocWeb` 时，按本页流程完成内容新增、事实修订、页面迁移和导航调整，不破坏现有信息架构、视觉风格和生成产物。
 
 先做事实核对，再修改源码页面；不要把旧页面、记忆或插件名称当成当前行为依据。
 
@@ -72,6 +71,8 @@ Get-Content -Raw package.json
 交接稿还包含"限制与冲突"说明（如 CraftEngine/Aiyatsbus 可能拦截的数据包物品组件），在写玩家页的"限制"段落时直接引用，不要凭空猜测插件兼容性。
 
 ## 修改闭环
+
+<SmartImage src="/images/developer/website/content-pipeline.svg" caption="图 1：文档站的内容流水线——源 markdown → 生成 llms → 构建 → 水印" width="880" />
 
 ### 轻量操作：待办维护
 

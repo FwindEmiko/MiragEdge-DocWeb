@@ -1,11 +1,12 @@
 ---
 title: BugEnchantRemover 使用文档
-outline: deep
+description: BugEnchantRemover 的简介与部署说明——它解决数据包残留附魔、UberEnchant PDC 附魔与自定义 GUI 道具误删三类问题，含环境要求、安装步骤与处理策略。
+outline: [2, 3]
 ---
 
 # BugEnchantRemover 使用文档
 
-> 自动检测并清除数据包/插件带来的异常附魔，支持 UberEnchant PDC 附魔兼容。
+自动检测并清除数据包与插件带来的异常附魔，兼容 UberEnchant 的 PDC 附魔存储。
 
 ## 简介
 

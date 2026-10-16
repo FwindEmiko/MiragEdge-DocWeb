@@ -1,13 +1,12 @@
 ---
-title: "Import 模块参考"
-description: "Fluxon 标准库模块：时间、文件、加密、反射、字节码注入"
+title: Fluxon Import 模块参考
+description: "Fluxon 标准库模块的查表页，含 fs:time 时间、fs:io 文件、fs:crypto 加密编码、fs:jvm 字节码注入和 fs:reflect 反射的 API 清单。"
+outline: [2, 3]
 ---
 
 # Fluxon Import 模块参考
 
-> 本文档基于 Aiyatsbus 官方技能包 v0.0.2，以当前服务器源码和配置为准。
-
-通用 Fluxon 脚本可以使用 `import 'fs:xxx'`（字符串或标识符均可，分号可选）。Aiyatsbus 附魔 YAML 的脚本块已经自动导入以下五个模块，通常不需要手动 `import`：`fs:time`、`fs:crypto`、`fs:reflect`、`fs:io`、`fs:jvm`。本文中的 `import` 主要用于说明模块归属和通用 Fluxon 用法。
+通用 Fluxon 脚本可以使用 `import 'fs:xxx'`（字符串或标识符均可，分号可选）。Aiyatsbus 附魔 YAML 的脚本块已经自动导入以下五个模块，通常不需要手动 `import`：`fs:time`、`fs:crypto`、`fs:reflect`、`fs:io`、`fs:jvm`。下文的 `import` 用于说明模块归属和通用 Fluxon 用法。
 
 模块 API 优先于 JVM 自实现。需要时间、文件、加密编码或反射能力时先查本文；已有模块函数能完成需求时不要调用等价 Java 静态方法。例如获取当前毫秒时间戳必须使用：
 

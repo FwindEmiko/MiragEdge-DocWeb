@@ -1,6 +1,7 @@
 ---
 title: 配置参考
-outline: deep
+description: HFcatLogin 的 HOCON 主配置参考——服务器路由、认证与会话、密码策略、数据库与 SMTP 分组，逐项标注默认值与作用，含命令白名单设置。
+outline: [2, 3]
 ---
 
 # 配置参考

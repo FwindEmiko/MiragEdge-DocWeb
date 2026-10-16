@@ -1,0 +1,123 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 660" role="img">
+  <title>MiragEdge 服务器整体架构分层图：客户端、代理层、后端层、内容层</title>
+  <desc>四层泳道。客户端（Java 版、基岩版）经代理层（Velocity、Geyser 桥接）进入后端层（Leaf 核心、插件与桥接层），最终落到内容层（数据包、资源包与配置）。</desc>
+  <defs>
+    <style>
+      /* These SVGs are loaded through an img element by SmartImage, so the
+         page CSS custom properties do not cascade in. Every token is
+         var(--vp-c-*, literal-fallback) and the dark branch is re-declared
+         for prefers-color-scheme. If an SVG is ever inlined instead, the real
+         VitePress variables win in both themes. */
+      :root {
+        --d-text-1: var(--vp-c-text-1, #3c3c43);
+        --d-text-2: var(--vp-c-text-2, #6b6b70);
+        --d-text-3: var(--vp-c-text-3, #8e8e93);
+        --d-line:   var(--vp-c-divider, #e2e2e4);
+        --d-panel:  var(--vp-c-bg, #ffffff);
+        --d-band:   var(--vp-c-bg-alt, #f6f6f7);
+        --d-soft:   var(--vp-c-bg-soft, #f6f6f7);
+        --d-brand:  var(--vp-c-brand-1, #e05252);
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --d-text-1: var(--vp-c-text-1, #e6e6e1);
+          --d-text-2: var(--vp-c-text-2, #b0b0b4);
+          --d-text-3: var(--vp-c-text-3, #85858a);
+          --d-line:   var(--vp-c-divider, #414146);
+          --d-panel:  var(--vp-c-bg, #1b1b1f);
+          --d-band:   var(--vp-c-bg-alt, #161618);
+          --d-soft:   var(--vp-c-bg-soft, #202127);
+        }
+      }
+      text { font-family: -apple-system, 'Segoe UI', 'PingFang SC', sans-serif; }
+      .h { font-size: 15px; font-weight: 600; fill: var(--d-text-1); }
+      .t { font-size: 14px; font-weight: 600; fill: var(--d-text-1); }
+      .d { font-size: 12.5px; fill: var(--d-text-2); }
+      .m { font-size: 12.5px; fill: var(--d-text-3); }
+      .a { font-size: 12.5px; font-weight: 600; fill: var(--d-brand); }
+      .n { font-size: 13px; font-weight: 700; fill: var(--d-brand); }
+      .p { font-size: 12.5px; fill: var(--d-text-2);
+           font-family: ui-monospace, SFMono-Regular, Consolas, 'Courier New', monospace; }
+      .box   { fill: var(--d-panel); stroke: var(--d-line); stroke-width: 1.5; }
+      .band  { fill: var(--d-band);  stroke: var(--d-line); stroke-width: 1; }
+      .soft  { fill: var(--d-soft);  stroke: var(--d-line); stroke-width: 1; }
+      .chip  { fill: var(--d-band);  stroke: var(--d-line); stroke-width: 1; }
+      .ln    { stroke: var(--d-line);  stroke-width: 1.5; fill: none; }
+      .ac    { stroke: var(--d-brand); stroke-width: 2; fill: none; }
+    </style>
+    <marker id="ar" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="var(--d-line)"/>
+    </marker>
+    <marker id="arb" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="var(--d-brand)"/>
+    </marker>
+  </defs>
+  <text class="h" x="24" y="34">MiragEdge 服务器整体架构</text>
+  <text class="m" x="24" y="56">客户端 → 代理 → 后端 → 内容层；跨版本由 Geyser 桥接</text>
+  <rect class="band" x="24" y="76" width="912" height="112" rx="10"/>
+  <circle cx="48" cy="132" r="12" fill="var(--d-brand)" fill-opacity="0.12" stroke="var(--d-brand)" stroke-width="1"/>
+  <text class="n" x="48" y="137" text-anchor="middle">1</text>
+  <text class="h" x="72" y="124">客户端</text>
+  <text class="m" x="72" y="146">终端设备</text>
+  <rect class="box" x="200" y="92" width="355" height="80" rx="8"/>
+  <rect x="211" y="106" width="3.5" height="52" rx="1.75" fill="var(--d-brand)"/>
+  <text class="t" x="226" y="122">Java 版客户端</text>
+  <text class="d" x="226" y="144">原版 Java 协议接入</text>
+  <text class="d" x="226" y="163">登录、切服与资源包下载</text>
+  <rect class="box" x="581" y="92" width="355" height="80" rx="8"/>
+  <rect x="592" y="106" width="3.5" height="52" rx="1.75" fill="var(--d-brand)"/>
+  <text class="t" x="607" y="122">基岩版客户端</text>
+  <text class="d" x="607" y="144">Bedrock 协议接入</text>
+  <text class="d" x="607" y="163">显示与玩法经 Geyser 对齐</text>
+  <rect class="band" x="24" y="224" width="912" height="112" rx="10"/>
+  <circle cx="48" cy="280" r="12" fill="var(--d-brand)" fill-opacity="0.12" stroke="var(--d-brand)" stroke-width="1"/>
+  <text class="n" x="48" y="285" text-anchor="middle">2</text>
+  <text class="h" x="72" y="272">代理层</text>
+  <text class="m" x="72" y="294">代理与桥接</text>
+  <rect class="box" x="200" y="240" width="355" height="80" rx="8"/>
+  <rect x="211" y="254" width="3.5" height="52" rx="1.75" fill="var(--d-brand)"/>
+  <text class="t" x="226" y="270">Velocity 代理</text>
+  <text class="d" x="226" y="292">统一入口：认证与转发</text>
+  <text class="d" x="226" y="311">玩家路由、跨服切换</text>
+  <rect class="box" x="581" y="240" width="355" height="80" rx="8"/>
+  <rect x="592" y="254" width="3.5" height="52" rx="1.75" fill="var(--d-brand)"/>
+  <text class="t" x="607" y="270">Geyser 桥接</text>
+  <text class="d" x="607" y="292">基岩协议 ↔ Java 协议</text>
+  <text class="d" x="607" y="311">跨版本内容与资源包转换</text>
+  <rect class="band" x="24" y="372" width="912" height="112" rx="10"/>
+  <circle cx="48" cy="428" r="12" fill="var(--d-brand)" fill-opacity="0.12" stroke="var(--d-brand)" stroke-width="1"/>
+  <text class="n" x="48" y="433" text-anchor="middle">3</text>
+  <text class="h" x="72" y="420">后端层</text>
+  <text class="m" x="72" y="442">Leaf 服务端</text>
+  <rect class="box" x="200" y="388" width="355" height="80" rx="8"/>
+  <rect x="211" y="402" width="3.5" height="52" rx="1.75" fill="var(--d-brand)"/>
+  <text class="t" x="226" y="418">Leaf 核心</text>
+  <text class="d" x="226" y="440">服务端主进程与调度</text>
+  <text class="d" x="226" y="459">加载数据包，执行函数与配方</text>
+  <rect class="box" x="581" y="388" width="355" height="80" rx="8"/>
+  <rect x="592" y="402" width="3.5" height="52" rx="1.75" fill="var(--d-brand)"/>
+  <text class="t" x="607" y="418">插件与桥接层</text>
+  <text class="d" x="607" y="440">经济、家园、称号等专有模块</text>
+  <text class="d" x="607" y="459">反作弊状态桥接 Matrix / Vulcan</text>
+  <rect class="band" x="24" y="520" width="912" height="112" rx="10"/>
+  <circle cx="48" cy="576" r="12" fill="var(--d-brand)" fill-opacity="0.12" stroke="var(--d-brand)" stroke-width="1"/>
+  <text class="n" x="48" y="581" text-anchor="middle">4</text>
+  <text class="h" x="72" y="568">内容层</text>
+  <text class="m" x="72" y="590">数据包与资源包</text>
+  <rect class="box" x="200" y="536" width="355" height="80" rx="8"/>
+  <rect x="211" y="550" width="3.5" height="52" rx="1.75" fill="var(--d-brand)"/>
+  <text class="t" x="226" y="566">数据包 datapacks/</text>
+  <text class="d" x="226" y="588">命名空间 miragedge</text>
+  <text class="d" x="226" y="607">函数 · 战利品表 · 配方 · 结构</text>
+  <rect class="box" x="581" y="536" width="355" height="80" rx="8"/>
+  <rect x="592" y="550" width="3.5" height="52" rx="1.75" fill="var(--d-brand)"/>
+  <text class="t" x="607" y="566">资源包与配置</text>
+  <text class="d" x="607" y="588">CE：plugins/CraftEngine/resources</text>
+  <text class="d" x="607" y="607">物品模型、贴图与字体图标</text>
+  <line class="ln" x1="377" y1="188" x2="377" y2="224" marker-end="url(#ar)"/>
+  <line class="ln" x1="758" y1="188" x2="758" y2="224" marker-end="url(#ar)"/>
+  <line class="ln" x1="377" y1="336" x2="377" y2="372" marker-end="url(#ar)"/>
+  <line class="ln" x1="758" y1="336" x2="758" y2="372" marker-end="url(#ar)"/>
+  <line class="ln" x1="377" y1="484" x2="377" y2="520" marker-end="url(#ar)"/>
+  <line class="ln" x1="758" y1="484" x2="758" y2="520" marker-end="url(#ar)"/>
+</svg>
