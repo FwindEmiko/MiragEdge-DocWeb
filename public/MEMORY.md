@@ -4,7 +4,9 @@
 # MiragEdge-DocWeb
 
 > 本项目工作区的长期记忆文件。所有会话启动时自动读取，会话中主动维护。
-> 大小限制 1.5MB，超过时必须整理压缩。结构按以下固定小节维护。
+> 大小上限 128KB（131072 字节，约 4.3 万中文字）。超过 80%（约 102KB）开始预警，超过上限必须整理压缩。
+> 超出时把已完结的历史细节移入同目录 MEMORY-ARCHIVE.md，主文件只保留长期有效的结论，**不要**靠删信息达标。
+> 结构按以下固定小节维护。大小上限由 DSH 的 project-memory 插件强制（可用 DSH_PROJECT_MEMORY_MAX_BYTES 覆盖）。
 
 ## 架构
 
@@ -36,6 +38,12 @@
 
 ## 踩坑记录
 
+- **VitePress 多 sidebar：页面落在所有前缀外就完全不渲染侧栏**（全量重构上线后站主发现）：`themeConfig.sidebar` 是「路径前缀 → 侧栏数组」的映射，页面路由不匹配任何前缀时**侧栏整块不见**（不是显示默认侧栏）。重构把 `start/community/` 提级成顶层 `/community/` 时只改了 nav 与 URL、漏加 `/community/` 块，于是社区 6 页全没侧栏。**改分区结构时必须同步加 sidebar 块**。
+  - 正向检查（`pnpm audit:routes`：sidebar 里的链接是否有效）**查不出**这类整区缺侧栏，需要**反向检查**：每个页面路由是否落在某个前缀内 → `scripts/refactor-check-orphan-sidebar.mjs`。
+  - `audit-doc-routes.mjs` 的判重必须**按 sidebar 块内部**判，不能跨块全局比对——`/` 块与 `/community/` 块都需要社区首页入口，这是正常的。
+- **`public/` 下的 llms 产物按分区目录生成，改了分区名必须重跑 `pnpm llms`**：`scripts/generate-llms.mjs` 的 `cleanOldOutputs()` 会按 `SECTIONS` + `LEGACY_SECTIONS` 清理旧目录，逻辑本身正确——但**只有跑过才会执行**。漏跑会让 `public/plugins/` 残留旧 `.md` 与 `llms.txt`，而且**它们会进构建产物、线上可访问**（旧内容 + 过期 llms）。检查脚本 `scripts/check-stale-public.mjs`。
+  - 源站阿里云 ESA 对 `.md`/`.txt` 有 **30 天缓存**（`x-swift-cachetime: 2592000`、`x-site-cache-status: HIT`），删文件后线上仍返回 200 且 `last-modified` 是旧时间。**要到 CDN 控制台刷缓存**才能真 404。
+- **配置文件里的注释可能与值不一致，有源码时以代码读写路径为准**：`FE_Back/src/main/resources/config.yml` 的 `tier-0` 注释写「前 30 次死亡不掉金粒不扣钱」，但值是 `min-drop: 0, max-drop: 10`，`PenaltyManager.computeDrop()` 走 `nextInt(0,11)` —— **实际是 0~10 随机**，注释错了。别照抄注释。另注意 `return-cost`（返回收费，`free-deaths: 30` 免费）与 `penalty-tiers`（死亡掉金粒）是**两个独立机制**。
 - **`SmartImage` 用 `` 加载 SVG，SVG 内的 CSS 变量拿不到页面 `:root`**（全量重构阶段 4 实测）：`` 中的 SVG 是独立文档，`fill="var(--vp-c-text-1)"` 解析为空、Chrome 回退成**纯黑填充**，卡片全成黑块。实测对照：同一段标记内联进页面能正确跟随主题，经 `` 引入则恒为兜底色。**本仓库两种可行写法**：
   1. 玩家区 11 张 SVG：直接写 `var(--vp-c-text-1, #1b1b1f)` 形式（带字面回退），`` 时用浅色兜底；缺点是**跟不了站点手动切换主题**，只跟系统主题（站点初始主题取系统值，故首次访问正确）。
   2. 开发者区 6 张 SVG：在 SVG 自己的 `` 里 `:root { --d-text-1: var(--vp-c-text-1, #3c3c43); … }` 建立本地变量，再用 `@media (prefers-color-scheme: dark)` 覆盖。
@@ -97,7 +105,7 @@
 - 事实旁证：`data/minecraft/loot_table/blocks/end_stone.json` 权重 98:2 印证「末地石约 2% 掉碎片」；remove_vanilla_trades.mcfunction 整条删除绿宝石交易印证「不收绿宝石」；priceMultiplier 实际只有 0.05/0.2 且无自定义折扣逻辑，印证「沿用原版打折」
 - 验证：typecheck / llms / vitepress build / pnpm test(220 passed) / git diff --check 全绿；audit:routes 的 3 条报错为 HEAD 既有，与本页无关
 
-### 2026-10 · 文档站全量重构（阶段 0–6 全部完成，分支 refactor/full-restructure-261016）
+### 2026-10 · 文档站全量重构（已完成并上线 main）
 
 - 纲领：`docs/文档站全量重构261016/00-重构纲领-交给DSH.md`。阶段 0 四份方案见同目录 `10-`/`11-`/`12-`/`13-`；阶段 6 验收见 `90-验收报告.md`；子代理共用规范 `99-写作规范速查.md`、事实红线 `90-未能验证清单.md`
 - **规模**：202 页 → **237 页**（拆页 19 新增 + 4 删除为净增 35）；`plugins/` → `features/` 顶层改名；`start/community/` 提为 `/community/`
