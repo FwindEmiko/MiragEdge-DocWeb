@@ -1,6 +1,9 @@
 # osv-scanner 配置：忽略已知可接受的 dev-server 专用漏洞
 # 这些是 vite 5.4.21 / esbuild 0.21.5 的 dev-server 模式漏洞，静态构建无暴露。
 # 待 vitepress 升级到不再捆绑 vite 5.4.21 后，删除本文件。
+# 2026-10-19：GitHub Dependabot 侧同步处理 —— 告警 #81-#84（与下方 4 条 GHSA 一一对应）
+# 已用 tolerable_risk 标记 dismissed。根因相同：dev-server 专用，静态构建产物无暴露；
+# 升级路径等 vitepress 2.0 稳定版（当前 2.0.0-alpha，不上生产）。
 # 配置说明见 https://google.github.io/osv-scanner/configuration/
 
 [[IgnoredVulns]]
