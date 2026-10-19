@@ -3,11 +3,8 @@
   <desc>自上而下四层。数据包负责静态定义（附魔 ID、等级、显示名与变量）；插件负责加载与注册并绑定触发器；触发器是效果入口（Listener、Ticker、Skill、Builtin、Artifact）；运行时才是真实玩家行为。底部说明归属裁决：同一效果只由一层实现。</desc>
   <defs>
     <style>
-      /* These SVGs are loaded through an img element by SmartImage, so the
-         page CSS custom properties do not cascade in. Every token is
-         var(--vp-c-*, literal-fallback) and the dark branch is re-declared
-         for prefers-color-scheme. If an SVG is ever inlined instead, the real
-         VitePress variables win in both themes. */
+            /* 由 img 元素加载，页面 CSS 不级联；配色固定浅色一套 + 自带白色背景，
+         不依赖 prefers-color-scheme（站点用 html.dark 切换，不会触发它）。 */
       :root {
         --d-text-1: var(--vp-c-text-1, #3c3c43);
         --d-text-2: var(--vp-c-text-2, #6b6b70);
@@ -18,17 +15,7 @@
         --d-soft:   var(--vp-c-bg-soft, #f6f6f7);
         --d-brand:  var(--vp-c-brand-1, #e05252);
       }
-      @media (prefers-color-scheme: dark) {
-        :root {
-          --d-text-1: var(--vp-c-text-1, #e6e6e1);
-          --d-text-2: var(--vp-c-text-2, #b0b0b4);
-          --d-text-3: var(--vp-c-text-3, #85858a);
-          --d-line:   var(--vp-c-divider, #414146);
-          --d-panel:  var(--vp-c-bg, #1b1b1f);
-          --d-band:   var(--vp-c-bg-alt, #161618);
-          --d-soft:   var(--vp-c-bg-soft, #202127);
-        }
-      }
+      
       text { font-family: -apple-system, 'Segoe UI', 'PingFang SC', sans-serif; }
       .h { font-size: 15px; font-weight: 600; fill: var(--d-text-1); }
       .t { font-size: 14px; font-weight: 600; fill: var(--d-text-1); }
@@ -52,6 +39,7 @@
       <path d="M0,0 L10,5 L0,10 Z" fill="var(--d-brand)"/>
     </marker>
   </defs>
+  <rect class="_svg-bg" x="0" y="0" width="100%" height="100%" fill="#ffffff"/>
   <text class="h" x="24" y="34">附魔系统的四层结构</text>
   <text class="m" x="24" y="56">数据包 → 插件 → 触发器 → 运行时，越往下越接近真实行为</text>
   <rect class="band" x="24" y="76" width="912" height="96" rx="10"/>

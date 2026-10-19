@@ -11,6 +11,7 @@
       <path d="M0,0 L10,5 L0,10 z" fill="var(--vp-c-brand-1, #e05252)"/>
     </marker>
   </defs>
+  <rect class="_svg-bg" x="0" y="0" width="100%" height="100%" fill="#ffffff"/>
 
   <text x="40" y="36" font-size="17" font-weight="700" fill="var(--vp-c-text-1, #1b1b1f)">飞行 · 四道判定</text>
   <text x="40" y="60" font-size="13" fill="var(--vp-c-text-3, #8e8e93)">只要有一道不通过，就无法开启飞行；正在飞行时会立即结束</text>

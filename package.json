@@ -61,10 +61,13 @@
   },
   "dependencies": {
     "@octokit/rest": "^22.0.1",
+    "@tresjs/cientos": "^5.9.3",
+    "@tresjs/core": "^5.9.3",
     "@vrcd-community/markdown-it-video": "^1.1.1",
     "dotenv": "^17.4.2",
     "lucide-vue-next": "^0.577.0",
     "simple-git": "^4.0.2",
+    "three": "^0.186.1",
     "vitepress-plugin-announcement": "^0.1.9",
     "vitepress-plugin-group-icons": "^1.7.6"
   }

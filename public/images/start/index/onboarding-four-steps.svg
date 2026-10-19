@@ -7,6 +7,7 @@
       <path d="M0,0 L10,5 L0,10 z" fill="var(--vp-c-divider, #e2e2e3)"/>
     </marker>
   </defs>
+  <rect class="_svg-bg" x="0" y="0" width="100%" height="100%" fill="#ffffff"/>
 
   <text x="36" y="34" font-size="17" font-weight="700" fill="var(--vp-c-text-1, #1b1b1f)">第一次进入服务器 · 四步</text>
   <text x="36" y="58" font-size="13" fill="var(--vp-c-text-3, #8e8e93)">按顺序完成后即可正常游玩；每一步对应一页详细说明</text>

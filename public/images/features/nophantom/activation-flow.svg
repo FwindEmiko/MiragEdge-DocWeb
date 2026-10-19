@@ -11,6 +11,7 @@
       <path d="M0,0 L10,5 L0,10 z" fill="var(--vp-c-brand-1, #e05252)"/>
     </marker>
   </defs>
+  <rect class="_svg-bg" x="0" y="0" width="100%" height="100%" fill="#ffffff"/>
 
   <text x="40" y="36" font-size="17" font-weight="700" fill="var(--vp-c-text-1, #1b1b1f)">免幻翼 · 激活判定</text>
   <text x="40" y="60" font-size="13" fill="var(--vp-c-text-3, #8e8e93)">累计击杀 15 只幻翼解锁；之后守护默认开启，可在设置菜单或命令中切换</text>

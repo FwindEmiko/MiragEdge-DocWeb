@@ -1,0 +1,1732 @@
+[
+{
+"profession": "盔甲匠",
+"slug": "armorer",
+"level": 1,
+"slot": "1",
+"pay": "煤炭 × 19",
+"get": "末影合金碎片 × 1",
+"note": "3 选 1",
+"uses": "12"
+},
+{
+"profession": "盔甲匠",
+"slug": "armorer",
+"level": 1,
+"slot": "1",
+"pay": "木炭 × 24",
+"get": "末影合金碎片 × 1",
+"note": "3 选 1",
+"uses": "10"
+},
+{
+"profession": "盔甲匠",
+"slug": "armorer",
+"level": 1,
+"slot": "1",
+"pay": "烈焰棒 × 3",
+"get": "末影合金碎片 × 1",
+"note": "3 选 1",
+"uses": "10"
+},
+{
+"profession": "盔甲匠",
+"slug": "armorer",
+"level": 1,
+"slot": "2",
+"pay": "末影合金碎片 × 9",
+"get": "铁胸甲 × 1",
+"note": "2 选 1　50% 概率带「尖塔」绿宝石纹饰，50% 概率随机附魔",
+"uses": "6"
+},
+{
+"profession": "盔甲匠",
+"slug": "armorer",
+"level": 1,
+"slot": "2",
+"pay": "末影合金碎片 × 7",
+"get": "铁头盔 × 1",
+"note": "2 选 1　50% 概率带「尖塔」绿宝石纹饰，50% 概率随机附魔",
+"uses": "6"
+},
+{
+"profession": "盔甲匠",
+"slug": "armorer",
+"level": 2,
+"slot": "1",
+"pay": "末影合金碎片 × 7",
+"get": "铁护腿 × 1",
+"note": "2 选 1　50% 概率带「尖塔」绿宝石纹饰，50% 概率随机附魔",
+"uses": "6"
+},
+{
+"profession": "盔甲匠",
+"slug": "armorer",
+"level": 2,
+"slot": "1",
+"pay": "末影合金碎片 × 6",
+"get": "铁靴子 × 1",
+"note": "2 选 1　50% 概率带「尖塔」绿宝石纹饰，50% 概率随机附魔",
+"uses": "6"
+},
+{
+"profession": "盔甲匠",
+"slug": "armorer",
+"level": 2,
+"slot": "2",
+"pay": "末影合金碎片 × 5",
+"get": "神圣锭 × 1",
+"note": "2 选 1",
+"uses": "8"
+},
+{
+"profession": "盔甲匠",
+"slug": "armorer",
+"level": 2,
+"slot": "2",
+"pay": "末影合金碎片 × 5",
+"get": "紫颂覆板 × 1",
+"note": "2 选 1",
+"uses": "8"
+},
+{
+"profession": "盔甲匠",
+"slug": "armorer",
+"level": 3,
+"slot": "1",
+"pay": "钻石 × 1",
+"get": "末影合金碎片 × 1",
+"note": "—",
+"uses": "8"
+},
+{
+"profession": "盔甲匠",
+"slug": "armorer",
+"level": 3,
+"slot": "2",
+"pay": "盾牌 × 1 ＋ 末影合金碎片 × 46",
+"get": "铜能量盾 × 1",
+"note": "—",
+"uses": "2"
+},
+{
+"profession": "盔甲匠",
+"slug": "armorer",
+"level": 4,
+"slot": "1",
+"pay": "紫珀块 × 24 ＋ 末影合金碎片 × 32",
+"get": "末影合金升级模板 × 1",
+"note": "—",
+"uses": "2"
+},
+{
+"profession": "盔甲匠",
+"slug": "armorer",
+"level": 4,
+"slot": "2",
+"pay": "末影合金碎片 × 27",
+"get": "钻石护腿 × 1",
+"note": "自带「眼睛」纹饰（绿宝石／紫水晶／末影合金／紫颂 中随机一种）＋ 15~31 级随机附魔",
+"uses": "3"
+},
+{
+"profession": "盔甲匠",
+"slug": "armorer",
+"level": 4,
+"slot": "3",
+"pay": "末影合金碎片 × 21",
+"get": "钻石靴子 × 1",
+"note": "自带「眼睛」纹饰（绿宝石／紫水晶／末影合金／紫颂 中随机一种）＋ 15~31 级随机附魔",
+"uses": "3"
+},
+{
+"profession": "盔甲匠",
+"slug": "armorer",
+"level": 5,
+"slot": "1",
+"pay": "末影合金碎片 × 24",
+"get": "钻石头盔 × 1",
+"note": "自带「眼睛」纹饰（绿宝石／紫水晶／末影合金／紫颂 中随机一种）＋ 15~31 级随机附魔",
+"uses": "3"
+},
+{
+"profession": "盔甲匠",
+"slug": "armorer",
+"level": 5,
+"slot": "2",
+"pay": "末影合金碎片 × 30",
+"get": "钻石胸甲 × 1",
+"note": "自带「眼睛」纹饰（绿宝石／紫水晶／末影合金／紫颂 中随机一种）＋ 15~31 级随机附魔",
+"uses": "3"
+},
+{
+"profession": "屠夫",
+"slug": "butcher",
+"level": 1,
+"slot": "1",
+"pay": "末影人肉 × 12",
+"get": "末影合金碎片 × 1",
+"note": "—",
+"uses": "14"
+},
+{
+"profession": "屠夫",
+"slug": "butcher",
+"level": 2,
+"slot": "1",
+"pay": "煤炭 × 18",
+"get": "末影合金碎片 × 1",
+"note": "2 选 1",
+"uses": "12"
+},
+{
+"profession": "屠夫",
+"slug": "butcher",
+"level": 2,
+"slot": "1",
+"pay": "木炭 × 24",
+"get": "末影合金碎片 × 1",
+"note": "2 选 1",
+"uses": "12"
+},
+{
+"profession": "屠夫",
+"slug": "butcher",
+"level": 2,
+"slot": "2",
+"pay": "末影人肉 × 3 ＋ 末影合金碎片 × 2",
+"get": "烤末影人肉 × 3",
+"note": "2 选 1",
+"uses": "8"
+},
+{
+"profession": "屠夫",
+"slug": "butcher",
+"level": 2,
+"slot": "2",
+"pay": "末影人肉 × 3 ＋ 末影合金碎片 × 2",
+"get": "冷冻生鲈鱼 × 3",
+"note": "2 选 1",
+"uses": "8"
+},
+{
+"profession": "屠夫",
+"slug": "butcher",
+"level": 3,
+"slot": "1",
+"pay": "潜影贝核心 × 2",
+"get": "末影合金碎片 × 1",
+"note": "—",
+"uses": "14"
+},
+{
+"profession": "屠夫",
+"slug": "butcher",
+"level": 4,
+"slot": "1",
+"pay": "末影合金碎片 × 5",
+"get": "干海带块 × 2",
+"note": "—",
+"uses": "8"
+},
+{
+"profession": "屠夫",
+"slug": "butcher",
+"level": 5,
+"slot": "1",
+"pay": "末影合金碎片 × 44",
+"get": "羊肉土豆泥派 × 1",
+"note": "—",
+"uses": "2"
+},
+{
+"profession": "制图师",
+"slug": "cartographer",
+"level": 1,
+"slot": "1",
+"pay": "纸 × 28",
+"get": "末影合金碎片 × 1",
+"note": "—",
+"uses": "12"
+},
+{
+"profession": "制图师",
+"slug": "cartographer",
+"level": 1,
+"slot": "2",
+"pay": "末影合金碎片 × 6",
+"get": "空地图 × 1",
+"note": "—",
+"uses": "10"
+},
+{
+"profession": "制图师",
+"slug": "cartographer",
+"level": 2,
+"slot": "1",
+"pay": "玻璃板 × 14",
+"get": "末影合金碎片 × 1",
+"note": "—",
+"uses": "14"
+},
+{
+"profession": "制图师",
+"slug": "cartographer",
+"level": 2,
+"slot": "2",
+"pay": "空地图 × 1 ＋ 末影合金碎片 × 40",
+"get": "末地城探险地图 × 1",
+"note": "—",
+"uses": "1"
+},
+{
+"profession": "制图师",
+"slug": "cartographer",
+"level": 3,
+"slot": "1",
+"pay": "末影合金碎片 × 2",
+"get": "物品展示框 × 4",
+"note": "—",
+"uses": "8"
+},
+{
+"profession": "制图师",
+"slug": "cartographer",
+"level": 3,
+"slot": "2",
+"pay": "空地图 × 1 ＋ 末影合金碎片 × 50",
+"get": "光之圣堂探险地图 × 1",
+"note": "—",
+"uses": "1"
+},
+{
+"profession": "制图师",
+"slug": "cartographer",
+"level": 4,
+"slot": "1",
+"pay": "末影合金碎片 × 3",
+"get": "荧光物品展示框 × 2",
+"note": "—",
+"uses": "8"
+},
+{
+"profession": "制图师",
+"slug": "cartographer",
+"level": 4,
+"slot": "2",
+"pay": "末影合金碎片 × 5",
+"get": "幻翼物品展示框 × 3",
+"note": "—",
+"uses": "4"
+},
+{
+"profession": "制图师",
+"slug": "cartographer",
+"level": 5,
+"slot": "1",
+"pay": "末影合金碎片 × 18",
+"get": "旗帜图案 × 1",
+"note": "—",
+"uses": "8"
+},
+{
+"profession": "牧师",
+"slug": "cleric",
+"level": 1,
+"slot": "1",
+"pay": "幻翼膜 × 16",
+"get": "末影合金碎片 × 1",
+"note": "3 选 1",
+"uses": "8"
+},
+{
+"profession": "牧师",
+"slug": "cleric",
+"level": 1,
+"slot": "1",
+"pay": "骨头 × 28",
+"get": "末影合金碎片 × 1",
+"note": "3 选 1",
+"uses": "12"
+},
+{
+"profession": "牧师",
+"slug": "cleric",
+"level": 1,
+"slot": "1",
+"pay": "末影人肉 × 40",
+"get": "末影合金碎片 × 1",
+"note": "3 选 1",
+"uses": "12"
+},
+{
+"profession": "牧师",
+"slug": "cleric",
+"level": 1,
+"slot": "2",
+"pay": "末影合金碎片 × 1",
+"get": "红石粉 × 4",
+"note": "2 选 1",
+"uses": "16"
+},
+{
+"profession": "牧师",
+"slug": "cleric",
+"level": 1,
+"slot": "2",
+"pay": "末影合金碎片 × 2",
+"get": "烈焰棒 × 1",
+"note": "2 选 1",
+"uses": "8"
+},
+{
+"profession": "牧师",
+"slug": "cleric",
+"level": 2,
+"slot": "1",
+"pay": "金锭 × 3",
+"get": "末影合金碎片 × 1",
+"note": "—",
+"uses": "8"
+},
+{
+"profession": "牧师",
+"slug": "cleric",
+"level": 2,
+"slot": "2",
+"pay": "末影合金碎片 × 1",
+"get": "青金石 × 3",
+"note": "2 选 1",
+"uses": "10"
+},
+{
+"profession": "牧师",
+"slug": "cleric",
+"level": 2,
+"slot": "2",
+"pay": "末影合金碎片 × 1",
+"get": "下界疣 × 2",
+"note": "2 选 1",
+"uses": "12"
+},
+{
+"profession": "牧师",
+"slug": "cleric",
+"level": 3,
+"slot": "1",
+"pay": "末影合金碎片 × 7",
+"get": "随机药水（治疗／迅捷／跳跃） × 1",
+"note": "—",
+"uses": "3"
+},
+{
+"profession": "牧师",
+"slug": "cleric",
+"level": 3,
+"slot": "2",
+"pay": "末影合金碎片 × 1",
+"get": "荧石 × 1",
+"note": "—",
+"uses": "12"
+},
+{
+"profession": "牧师",
+"slug": "cleric",
+"level": 4,
+"slot": "1",
+"pay": "末影珍珠 × 16 ＋ 末影珍珠 × 16",
+"get": "末影合金碎片 × 1",
+"note": "—",
+"uses": "12"
+},
+{
+"profession": "牧师",
+"slug": "cleric",
+"level": 4,
+"slot": "2",
+"pay": "末影合金碎片 × 7",
+"get": "随机药水（力量药水／耐力药水〔抗性提升 2 分钟〕） × 1",
+"note": "—",
+"uses": "3"
+},
+{
+"profession": "牧师",
+"slug": "cleric",
+"level": 5,
+"slot": "1",
+"pay": "末影合金碎片 × 12",
+"get": "随机药水（生命药水〔生命提升 3 分钟〕／红色药水〔一整套负面效果，慎饮〕） × 1",
+"note": "—",
+"uses": "2"
+},
+{
+"profession": "农民",
+"slug": "farmer",
+"level": 1,
+"slot": "1",
+"pay": "小麦 × 24",
+"get": "末影合金碎片 × 1",
+"note": "4 选 1",
+"uses": "8"
+},
+{
+"profession": "农民",
+"slug": "farmer",
+"level": 1,
+"slot": "1",
+"pay": "马铃薯 × 32",
+"get": "末影合金碎片 × 1",
+"note": "4 选 1",
+"uses": "8"
+},
+{
+"profession": "农民",
+"slug": "farmer",
+"level": 1,
+"slot": "1",
+"pay": "胡萝卜 × 32",
+"get": "末影合金碎片 × 1",
+"note": "4 选 1",
+"uses": "8"
+},
+{
+"profession": "农民",
+"slug": "farmer",
+"level": 1,
+"slot": "1",
+"pay": "甜菜根 × 20",
+"get": "末影合金碎片 × 1",
+"note": "4 选 1",
+"uses": "10"
+},
+{
+"profession": "农民",
+"slug": "farmer",
+"level": 1,
+"slot": "2",
+"pay": "末影合金碎片 × 1",
+"get": "面包 × 6",
+"note": "—",
+"uses": "12"
+},
+{
+"profession": "农民",
+"slug": "farmer",
+"level": 2,
+"slot": "1",
+"pay": "紫颂果 × 24",
+"get": "末影合金碎片 × 1",
+"note": "2 选 1",
+"uses": "6"
+},
+{
+"profession": "农民",
+"slug": "farmer",
+"level": 2,
+"slot": "1",
+"pay": "紫颂花 × 6",
+"get": "末影合金碎片 × 1",
+"note": "2 选 1",
+"uses": "12"
+},
+{
+"profession": "农民",
+"slug": "farmer",
+"level": 2,
+"slot": "2",
+"pay": "末影合金碎片 × 1",
+"get": "紫颂派 × 2",
+"note": "2 选 1",
+"uses": "6"
+},
+{
+"profession": "农民",
+"slug": "farmer",
+"level": 2,
+"slot": "2",
+"pay": "末影合金碎片 × 1",
+"get": "菌光体 × 2",
+"note": "2 选 1",
+"uses": "8"
+},
+{
+"profession": "农民",
+"slug": "farmer",
+"level": 3,
+"slot": "1",
+"pay": "末影合金碎片 × 2",
+"get": "砂糖紫颂果 × 1",
+"note": "—",
+"uses": "3"
+},
+{
+"profession": "农民",
+"slug": "farmer",
+"level": 3,
+"slot": "2",
+"pay": "小麦种子 × 12 ＋ 末影合金碎片 × 1",
+"get": "火把花种子 × 4",
+"note": "2 选 1",
+"uses": "12"
+},
+{
+"profession": "农民",
+"slug": "farmer",
+"level": 3,
+"slot": "2",
+"pay": "小麦种子 × 8 ＋ 末影合金碎片 × 1",
+"get": "瓶子草荚果 × 3",
+"note": "2 选 1",
+"uses": "8"
+},
+{
+"profession": "农民",
+"slug": "farmer",
+"level": 4,
+"slot": "1",
+"pay": "末影合金碎片 × 3",
+"get": "紫颂果汁 × 1",
+"note": "2 选 1",
+"uses": "8"
+},
+{
+"profession": "农民",
+"slug": "farmer",
+"level": 4,
+"slot": "1",
+"pay": "末影合金碎片 × 4",
+"get": "紫颂炖汤 × 1",
+"note": "2 选 1",
+"uses": "6"
+},
+{
+"profession": "农民",
+"slug": "farmer",
+"level": 4,
+"slot": "2",
+"pay": "末影合金碎片 × 6",
+"get": "炸紫颂果 × 2",
+"note": "—",
+"uses": "8"
+},
+{
+"profession": "农民",
+"slug": "farmer",
+"level": 5,
+"slot": "1",
+"pay": "末影合金碎片 × 14",
+"get": "汤粉 × 1",
+"note": "—",
+"uses": "3"
+},
+{
+"profession": "农民",
+"slug": "farmer",
+"level": 5,
+"slot": "2",
+"pay": "面包 × 10 ＋ 末影合金碎片 × 64",
+"get": "永恒面包 × 1",
+"note": "5 选 1，实际只有 1 项内容 —— 20% 概率出现，剩下的 4 种结果等于该格空着",
+"uses": "2"
+},
+{
+"profession": "渔夫",
+"slug": "fisherman",
+"level": 1,
+"slot": "1",
+"pay": "钓鱼竿 × 1",
+"get": "末影合金碎片 × 2",
+"note": "2 选 1",
+"uses": "1"
+},
+{
+"profession": "渔夫",
+"slug": "fisherman",
+"level": 1,
+"slot": "1",
+"pay": "末影合金碎片 × 3",
+"get": "钓鱼竿 × 1",
+"note": "2 选 1",
+"uses": "2"
+},
+{
+"profession": "渔夫",
+"slug": "fisherman",
+"level": 1,
+"slot": "2",
+"pay": "线 × 30",
+"get": "末影合金碎片 × 1",
+"note": "2 选 1",
+"uses": "6"
+},
+{
+"profession": "渔夫",
+"slug": "fisherman",
+"level": 1,
+"slot": "2",
+"pay": "煤炭 × 24",
+"get": "末影合金碎片 × 1",
+"note": "2 选 1",
+"uses": "8"
+},
+{
+"profession": "渔夫",
+"slug": "fisherman",
+"level": 2,
+"slot": "1",
+"pay": "末地鱼（末影锦鲤／赘生鳕鱼／霜鲦鱼／涎鱼 随机 1 种） × 6",
+"get": "末影合金碎片 × 1",
+"note": "—",
+"uses": "8"
+},
+{
+"profession": "渔夫",
+"slug": "fisherman",
+"level": 2,
+"slot": "2",
+"pay": "末影合金碎片 × 1",
+"get": "营火 × 1",
+"note": "2 选 1",
+"uses": "8"
+},
+{
+"profession": "渔夫",
+"slug": "fisherman",
+"level": 2,
+"slot": "2",
+"pay": "末影合金碎片 × 2",
+"get": "灵魂营火 × 1",
+"note": "2 选 1",
+"uses": "6"
+},
+{
+"profession": "渔夫",
+"slug": "fisherman",
+"level": 3,
+"slot": "1",
+"pay": "末影合金碎片 × 3",
+"get": "钓鱼竿 × 1",
+"note": "自带随机附魔（约 15~29 级等效）",
+"uses": "2"
+},
+{
+"profession": "渔夫",
+"slug": "fisherman",
+"level": 3,
+"slot": "2",
+"pay": "末地鱼（绯红虎鱼／血肉食人鱼／闪光锦鲤／钾鱼 随机 1 种） × 6",
+"get": "末影合金碎片 × 1",
+"note": "—",
+"uses": "8"
+},
+{
+"profession": "渔夫",
+"slug": "fisherman",
+"level": 4,
+"slot": "1",
+"pay": "末影合金碎片 × 10",
+"get": "书 × 1",
+"note": "2 选 1　附魔书内容：诱饵",
+"uses": "2"
+},
+{
+"profession": "渔夫",
+"slug": "fisherman",
+"level": 4,
+"slot": "1",
+"pay": "末影合金碎片 × 13",
+"get": "书 × 1",
+"note": "2 选 1　附魔书内容：海之眷顾",
+"uses": "2"
+},
+{
+"profession": "渔夫",
+"slug": "fisherman",
+"level": 4,
+"slot": "2",
+"pay": "末影合金碎片 × 14",
+"get": "虚空钓竿 × 1",
+"note": "—",
+"uses": "6"
+},
+{
+"profession": "渔夫",
+"slug": "fisherman",
+"level": 5,
+"slot": "1",
+"pay": "晶心鱼 × 1",
+"get": "末影合金碎片 × 5",
+"note": "—",
+"uses": "3"
+},
+{
+"profession": "制箭师",
+"slug": "fletcher",
+"level": 1,
+"slot": "1",
+"pay": "末影合金碎片 × 2",
+"get": "光灵箭 × 10",
+"note": "2 选 1",
+"uses": "12"
+},
+{
+"profession": "制箭师",
+"slug": "fletcher",
+"level": 1,
+"slot": "1",
+"pay": "末影合金碎片 × 1",
+"get": "箭 × 16",
+"note": "2 选 1",
+"uses": "8"
+},
+{
+"profession": "制箭师",
+"slug": "fletcher",
+"level": 1,
+"slot": "2",
+"pay": "木棍 × 48",
+"get": "末影合金碎片 × 1",
+"note": "—",
+"uses": "12"
+},
+{
+"profession": "制箭师",
+"slug": "fletcher",
+"level": 2,
+"slot": "1",
+"pay": "燧石 × 20",
+"get": "末影合金碎片 × 1",
+"note": "—",
+"uses": "12"
+},
+{
+"profession": "制箭师",
+"slug": "fletcher",
+"level": 2,
+"slot": "2",
+"pay": "末影合金碎片 × 8",
+"get": "弓 × 1",
+"note": "自带随机附魔（约 15~29 级等效）",
+"uses": "4"
+},
+{
+"profession": "制箭师",
+"slug": "fletcher",
+"level": 3,
+"slot": "1",
+"pay": "线 × 18",
+"get": "末影合金碎片 × 1",
+"note": "2 选 1",
+"uses": "12"
+},
+{
+"profession": "制箭师",
+"slug": "fletcher",
+"level": 3,
+"slot": "1",
+"pay": "羽毛 × 10",
+"get": "末影合金碎片 × 1",
+"note": "2 选 1",
+"uses": "6"
+},
+{
+"profession": "制箭师",
+"slug": "fletcher",
+"level": 3,
+"slot": "2",
+"pay": "末影合金碎片 × 10",
+"get": "弩 × 1",
+"note": "自带随机附魔（约 15~29 级等效）",
+"uses": "2"
+},
+{
+"profession": "制箭师",
+"slug": "fletcher",
+"level": 4,
+"slot": "1",
+"pay": "箭 × 8 ＋ 末影合金碎片 × 2",
+"get": "药箭 × 8",
+"note": "漂浮药箭（命中后施加漂浮，约 90 秒）",
+"uses": "6"
+},
+{
+"profession": "制箭师",
+"slug": "fletcher",
+"level": 4,
+"slot": "2",
+"pay": "紫珀块 × 24 ＋ 末影合金碎片 × 32",
+"get": "末影合金升级模板 × 1",
+"note": "—",
+"uses": "8"
+},
+{
+"profession": "制箭师",
+"slug": "fletcher",
+"level": 5,
+"slot": "1",
+"pay": "弓 × 1 ＋ 末影合金碎片 × 64",
+"get": "圣弓 × 1",
+"note": "—",
+"uses": "2"
+},
+{
+"profession": "皮匠",
+"slug": "leatherworker",
+"level": 1,
+"slot": "1",
+"pay": "皮革 × 10",
+"get": "末影合金碎片 × 1",
+"note": "—",
+"uses": "8"
+},
+{
+"profession": "皮匠",
+"slug": "leatherworker",
+"level": 1,
+"slot": "2",
+"pay": "燧石 × 16",
+"get": "末影合金碎片 × 1",
+"note": "—",
+"uses": "6"
+},
+{
+"profession": "皮匠",
+"slug": "leatherworker",
+"level": 2,
+"slot": "1",
+"pay": "末影合金碎片 × 3",
+"get": "鞍 × 1",
+"note": "—",
+"uses": "3"
+},
+{
+"profession": "皮匠",
+"slug": "leatherworker",
+"level": 2,
+"slot": "2",
+"pay": "末影合金碎片 × 1",
+"get": "皮革 × 3",
+"note": "—",
+"uses": "6"
+},
+{
+"profession": "皮匠",
+"slug": "leatherworker",
+"level": 3,
+"slot": "1",
+"pay": "末影合金碎片 × 1",
+"get": "炼药锅 × 1",
+"note": "—",
+"uses": "6"
+},
+{
+"profession": "皮匠",
+"slug": "leatherworker",
+"level": 3,
+"slot": "2",
+"pay": "兔子皮 × 6",
+"get": "末影合金碎片 × 1",
+"note": "—",
+"uses": "8"
+},
+{
+"profession": "皮匠",
+"slug": "leatherworker",
+"level": 4,
+"slot": "1",
+"pay": "物品展示框 × 2 ＋ 末影合金碎片 × 1",
+"get": "荧光物品展示框 × 2",
+"note": "—",
+"uses": "4"
+},
+{
+"profession": "皮匠",
+"slug": "leatherworker",
+"level": 4,
+"slot": "2",
+"pay": "末影合金碎片 × 1",
+"get": "海龟鳞甲 × 1",
+"note": "2 选 1",
+"uses": "8"
+},
+{
+"profession": "皮匠",
+"slug": "leatherworker",
+"level": 4,
+"slot": "2",
+"pay": "末影合金碎片 × 1",
+"get": "犰狳鳞甲 × 1",
+"note": "2 选 1",
+"uses": "8"
+},
+{
+"profession": "皮匠",
+"slug": "leatherworker",
+"level": 5,
+"slot": "1",
+"pay": "钻石马铠 × 1 ＋ 末影合金碎片 × 24",
+"get": "强化马铠 × 1",
+"note": "—",
+"uses": "2"
+},
+{
+"profession": "图书管理员",
+"slug": "librarian",
+"level": 1,
+"slot": "1",
+"pay": "纸 × 32",
+"get": "末影合金碎片 × 1",
+"note": "2 选 1",
+"uses": "6"
+},
+{
+"profession": "图书管理员",
+"slug": "librarian",
+"level": 1,
+"slot": "1",
+"pay": "书 × 3",
+"get": "末影合金碎片 × 1",
+"note": "2 选 1",
+"uses": "8"
+},
+{
+"profession": "图书管理员",
+"slug": "librarian",
+"level": 1,
+"slot": "2",
+"pay": "末影合金碎片 × 5",
+"get": "书架 × 1",
+"note": "2 选 1",
+"uses": "8"
+},
+{
+"profession": "图书管理员",
+"slug": "librarian",
+"level": 1,
+"slot": "2",
+"pay": "书 × 1 ＋ 末影合金碎片 × 15",
+"get": "书 × 1",
+"note": "2 选 1　附魔书内容：火焰附加／火矢／击退／水下速掘 随机一本",
+"uses": "3"
+},
+{
+"profession": "图书管理员",
+"slug": "librarian",
+"level": 2,
+"slot": "1",
+"pay": "末影合金碎片 × 1",
+"get": "灯笼 × 3",
+"note": "—",
+"uses": "8"
+},
+{
+"profession": "图书管理员",
+"slug": "librarian",
+"level": 2,
+"slot": "2",
+"pay": "书 × 1 ＋ 末影合金碎片 × 25",
+"get": "书 × 1",
+"note": "附魔书内容：保护／火焰保护／爆炸保护／弹射物保护／精准采集／摔落保护／耐久 随机一本",
+"uses": "3"
+},
+{
+"profession": "图书管理员",
+"slug": "librarian",
+"level": 3,
+"slot": "1",
+"pay": "末影合金碎片 × 1",
+"get": "墨囊 × 2",
+"note": "2 选 1",
+"uses": "8"
+},
+{
+"profession": "图书管理员",
+"slug": "librarian",
+"level": 3,
+"slot": "1",
+"pay": "末影合金碎片 × 1",
+"get": "荧光墨囊 × 1",
+"note": "2 选 1",
+"uses": "6"
+},
+{
+"profession": "图书管理员",
+"slug": "librarian",
+"level": 3,
+"slot": "2",
+"pay": "末影合金碎片 × 1",
+"get": "玻璃 × 6",
+"note": "—",
+"uses": "8"
+},
+{
+"profession": "图书管理员",
+"slug": "librarian",
+"level": 4,
+"slot": "1",
+"pay": "书 × 1 ＋ 末影合金碎片 × 40",
+"get": "书 × 1",
+"note": "2 选 1　附魔书内容：经验修补／时运／击退／深海探索者／破甲／致密／锋利 随机一本",
+"uses": "2"
+},
+{
+"profession": "图书管理员",
+"slug": "librarian",
+"level": 4,
+"slot": "1",
+"pay": "末影合金碎片 × 1",
+"get": "书与笔 × 1",
+"note": "2 选 1",
+"uses": "6"
+},
+{
+"profession": "图书管理员",
+"slug": "librarian",
+"level": 4,
+"slot": "2",
+"pay": "末影合金碎片 × 7",
+"get": "命名牌 × 1",
+"note": "—",
+"uses": "3"
+},
+{
+"profession": "图书管理员",
+"slug": "librarian",
+"level": 5,
+"slot": "1",
+"pay": "书 × 1 ＋ 末影合金碎片 × 64",
+"get": "随机法术书（腾跃之书／光明之书／障壁之书） × 1",
+"note": "—",
+"uses": "1"
+},
+{
+"profession": "石匠",
+"slug": "mason",
+"level": 1,
+"slot": "1",
+"pay": "末影合金碎片 × 1",
+"get": "紫珀块 × 4",
+"note": "—",
+"uses": "8"
+},
+{
+"profession": "石匠",
+"slug": "mason",
+"level": 1,
+"slot": "2",
+"pay": "末影合金碎片 × 1",
+"get": "末地石砖 × 4",
+"note": "—",
+"uses": "8"
+},
+{
+"profession": "石匠",
+"slug": "mason",
+"level": 2,
+"slot": "1",
+"pay": "紫水晶芽鱼 × 1",
+"get": "紫水晶碎片 × 4",
+"note": "2 选 1",
+"uses": "6"
+},
+{
+"profession": "石匠",
+"slug": "mason",
+"level": 2,
+"slot": "1",
+"pay": "紫水晶芽鱼 × 1",
+"get": "下界石英 × 8",
+"note": "2 选 1",
+"uses": "6"
+},
+{
+"profession": "石匠",
+"slug": "mason",
+"level": 2,
+"slot": "2",
+"pay": "末影合金碎片 × 2",
+"get": "黑曜石 × 3",
+"note": "2 选 1",
+"uses": "8"
+},
+{
+"profession": "石匠",
+"slug": "mason",
+"level": 2,
+"slot": "2",
+"pay": "末影合金碎片 × 2",
+"get": "平滑石英块 × 4",
+"note": "2 选 1",
+"uses": "6"
+},
+{
+"profession": "石匠",
+"slug": "mason",
+"level": 3,
+"slot": "1",
+"pay": "末影合金碎片 × 1",
+"get": "磨制黑石 × 4",
+"note": "4 选 1",
+"uses": "8"
+},
+{
+"profession": "石匠",
+"slug": "mason",
+"level": 3,
+"slot": "1",
+"pay": "末影合金碎片 × 1",
+"get": "磨制深板岩 × 4",
+"note": "4 选 1",
+"uses": "8"
+},
+{
+"profession": "石匠",
+"slug": "mason",
+"level": 3,
+"slot": "1",
+"pay": "深板岩圆石 × 20",
+"get": "末影合金碎片 × 1",
+"note": "4 选 1",
+"uses": "6"
+},
+{
+"profession": "石匠",
+"slug": "mason",
+"level": 3,
+"slot": "1",
+"pay": "黑石 × 20",
+"get": "末影合金碎片 × 1",
+"note": "4 选 1",
+"uses": "6"
+},
+{
+"profession": "石匠",
+"slug": "mason",
+"level": 3,
+"slot": "2",
+"pay": "末影合金碎片 × 1",
+"get": "石英块 × 4",
+"note": "2 选 1",
+"uses": "6"
+},
+{
+"profession": "石匠",
+"slug": "mason",
+"level": 3,
+"slot": "2",
+"pay": "末影合金碎片 × 1",
+"get": "石英柱 × 3",
+"note": "2 选 1",
+"uses": "6"
+},
+{
+"profession": "石匠",
+"slug": "mason",
+"level": 4,
+"slot": "1",
+"pay": "末影合金碎片 × 1",
+"get": "随机 1 种带釉陶瓦 × 2",
+"note": "—",
+"uses": "6"
+},
+{
+"profession": "石匠",
+"slug": "mason",
+"level": 4,
+"slot": "2",
+"pay": "末影合金碎片 × 1",
+"get": "随机 1 种染色陶瓦 × 2",
+"note": "—",
+"uses": "6"
+},
+{
+"profession": "石匠",
+"slug": "mason",
+"level": 4,
+"slot": "3",
+"pay": "末影合金碎片 × 9",
+"get": "末影合金块 × 1",
+"note": "—",
+"uses": "12"
+},
+{
+"profession": "石匠",
+"slug": "mason",
+"level": 5,
+"slot": "1",
+"pay": "末影合金碎片 × 3",
+"get": "哭泣的黑曜石 × 2",
+"note": "—",
+"uses": "4"
+},
+{
+"profession": "石匠",
+"slug": "mason",
+"level": 5,
+"slot": "2",
+"pay": "末影合金碎片 × 1",
+"get": "紫珀柱 × 4",
+"note": "2 选 1",
+"uses": "6"
+},
+{
+"profession": "石匠",
+"slug": "mason",
+"level": 5,
+"slot": "2",
+"pay": "末影合金碎片 × 1",
+"get": "錾制石英块 × 2",
+"note": "2 选 1",
+"uses": "6"
+},
+{
+"profession": "牧羊人",
+"slug": "shepherd",
+"level": 1,
+"slot": "1",
+"pay": "末影合金碎片 × 1",
+"get": "剪刀 × 1",
+"note": "—",
+"uses": "4"
+},
+{
+"profession": "牧羊人",
+"slug": "shepherd",
+"level": 1,
+"slot": "2",
+"pay": "白色羊毛 × 14",
+"get": "末影合金碎片 × 1",
+"note": "—",
+"uses": "6"
+},
+{
+"profession": "牧羊人",
+"slug": "shepherd",
+"level": 2,
+"slot": "1",
+"pay": "末影合金碎片 × 1",
+"get": "随机 1 种染料 × 3",
+"note": "—",
+"uses": "8"
+},
+{
+"profession": "牧羊人",
+"slug": "shepherd",
+"level": 2,
+"slot": "2",
+"pay": "末影合金碎片 × 1",
+"get": "随机 1 种羊毛 × 2",
+"note": "—",
+"uses": "8"
+},
+{
+"profession": "牧羊人",
+"slug": "shepherd",
+"level": 3,
+"slot": "1",
+"pay": "末影合金碎片 × 1",
+"get": "随机 1 种地毯 × 5",
+"note": "2 选 1",
+"uses": "6"
+},
+{
+"profession": "牧羊人",
+"slug": "shepherd",
+"level": 3,
+"slot": "1",
+"pay": "末影合金碎片 × 1",
+"get": "随机 1 种羊毛 × 2",
+"note": "2 选 1",
+"uses": "8"
+},
+{
+"profession": "牧羊人",
+"slug": "shepherd",
+"level": 3,
+"slot": "2",
+"pay": "末影合金碎片 × 1",
+"get": "随机 1 种床 × 1",
+"note": "—",
+"uses": "4"
+},
+{
+"profession": "牧羊人",
+"slug": "shepherd",
+"level": 4,
+"slot": "1",
+"pay": "末影合金碎片 × 1",
+"get": "随机 1 种旗帜 × 1",
+"note": "—",
+"uses": "6"
+},
+{
+"profession": "牧羊人",
+"slug": "shepherd",
+"level": 4,
+"slot": "2",
+"pay": "末影合金碎片 × 1",
+"get": "随机 1 种羊毛 × 2",
+"note": "2 选 1",
+"uses": "6"
+},
+{
+"profession": "牧羊人",
+"slug": "shepherd",
+"level": 4,
+"slot": "2",
+"pay": "末影合金碎片 × 1",
+"get": "随机 1 种染料 × 3",
+"note": "2 选 1",
+"uses": "6"
+},
+{
+"profession": "牧羊人",
+"slug": "shepherd",
+"level": 5,
+"slot": "1",
+"pay": "末影合金碎片 × 4",
+"get": "画 × 1",
+"note": "3 选 1　画作主题：火焰",
+"uses": "2"
+},
+{
+"profession": "牧羊人",
+"slug": "shepherd",
+"level": 5,
+"slot": "1",
+"pay": "末影合金碎片 × 4",
+"get": "画 × 1",
+"note": "3 选 1　画作主题：空气",
+"uses": "2"
+},
+{
+"profession": "牧羊人",
+"slug": "shepherd",
+"level": 5,
+"slot": "1",
+"pay": "末影合金碎片 × 1",
+"get": "随机 1 种羊毛 × 2",
+"note": "3 选 1",
+"uses": "6"
+},
+{
+"profession": "牧羊人",
+"slug": "shepherd",
+"level": 5,
+"slot": "2",
+"pay": "末影合金碎片 × 4",
+"get": "画 × 1",
+"note": "3 选 1　画作主题：大地",
+"uses": "2"
+},
+{
+"profession": "牧羊人",
+"slug": "shepherd",
+"level": 5,
+"slot": "2",
+"pay": "末影合金碎片 × 4",
+"get": "画 × 1",
+"note": "3 选 1　画作主题：水",
+"uses": "2"
+},
+{
+"profession": "牧羊人",
+"slug": "shepherd",
+"level": 5,
+"slot": "2",
+"pay": "末影合金碎片 × 1",
+"get": "随机 1 种染料 × 3",
+"note": "3 选 1",
+"uses": "8"
+},
+{
+"profession": "工具匠",
+"slug": "toolsmith",
+"level": 1,
+"slot": "1",
+"pay": "煤炭 × 20",
+"get": "末影合金碎片 × 1",
+"note": "3 选 1",
+"uses": "12"
+},
+{
+"profession": "工具匠",
+"slug": "toolsmith",
+"level": 1,
+"slot": "1",
+"pay": "木炭 × 24",
+"get": "末影合金碎片 × 1",
+"note": "3 选 1",
+"uses": "12"
+},
+{
+"profession": "工具匠",
+"slug": "toolsmith",
+"level": 1,
+"slot": "1",
+"pay": "烈焰棒 × 6",
+"get": "末影合金碎片 × 1",
+"note": "3 选 1",
+"uses": "6"
+},
+{
+"profession": "工具匠",
+"slug": "toolsmith",
+"level": 1,
+"slot": "2",
+"pay": "末影合金碎片 × 1",
+"get": "铁锄 × 1",
+"note": "2 选 1　自带随机附魔（约 15~29 级等效）",
+"uses": "3"
+},
+{
+"profession": "工具匠",
+"slug": "toolsmith",
+"level": 1,
+"slot": "2",
+"pay": "末影合金碎片 × 1",
+"get": "铁锹 × 1",
+"note": "2 选 1　自带随机附魔（约 15~29 级等效）",
+"uses": "3"
+},
+{
+"profession": "工具匠",
+"slug": "toolsmith",
+"level": 2,
+"slot": "1",
+"pay": "末影合金碎片 × 6",
+"get": "铁斧 × 1",
+"note": "2 选 1　自带随机附魔（约 15~29 级等效）",
+"uses": "3"
+},
+{
+"profession": "工具匠",
+"slug": "toolsmith",
+"level": 2,
+"slot": "1",
+"pay": "末影合金碎片 × 6",
+"get": "铁镐 × 1",
+"note": "2 选 1　自带随机附魔（约 15~29 级等效）",
+"uses": "3"
+},
+{
+"profession": "工具匠",
+"slug": "toolsmith",
+"level": 2,
+"slot": "2",
+"pay": "末影合金碎片 × 3",
+"get": "神圣锭 × 1",
+"note": "2 选 1",
+"uses": "6"
+},
+{
+"profession": "工具匠",
+"slug": "toolsmith",
+"level": 2,
+"slot": "2",
+"pay": "末影合金碎片 × 3",
+"get": "紫颂覆板 × 1",
+"note": "2 选 1",
+"uses": "8"
+},
+{
+"profession": "工具匠",
+"slug": "toolsmith",
+"level": 3,
+"slot": "1",
+"pay": "钻石 × 1",
+"get": "末影合金碎片 × 2",
+"note": "—",
+"uses": "12"
+},
+{
+"profession": "工具匠",
+"slug": "toolsmith",
+"level": 3,
+"slot": "2",
+"pay": "书 × 1 ＋ 末影合金碎片 × 20",
+"get": "书 × 1",
+"note": "附魔书内容：效率／精准采集／耐久 随机一本",
+"uses": "4"
+},
+{
+"profession": "工具匠",
+"slug": "toolsmith",
+"level": 4,
+"slot": "1",
+"pay": "末影合金碎片 × 32 ＋ 紫珀块 × 24",
+"get": "末影合金升级模板 × 1",
+"note": "—",
+"uses": "3"
+},
+{
+"profession": "工具匠",
+"slug": "toolsmith",
+"level": 4,
+"slot": "2",
+"pay": "末影合金碎片 × 15",
+"get": "钻石锄 × 1",
+"note": "2 选 1　自带随机附魔（约 21~35 级等效）",
+"uses": "2"
+},
+{
+"profession": "工具匠",
+"slug": "toolsmith",
+"level": 4,
+"slot": "2",
+"pay": "末影合金碎片 × 17",
+"get": "钻石锹 × 1",
+"note": "2 选 1　自带随机附魔（约 21~35 级等效）",
+"uses": "2"
+},
+{
+"profession": "工具匠",
+"slug": "toolsmith",
+"level": 5,
+"slot": "1",
+"pay": "末影合金碎片 × 21",
+"get": "钻石斧 × 1",
+"note": "2 选 1　自带随机附魔（约 21~35 级等效）",
+"uses": "2"
+},
+{
+"profession": "工具匠",
+"slug": "toolsmith",
+"level": 5,
+"slot": "1",
+"pay": "末影合金碎片 × 20",
+"get": "钻石镐 × 1",
+"note": "2 选 1　自带随机附魔（约 21~35 级等效）",
+"uses": "2"
+},
+{
+"profession": "武器匠",
+"slug": "weaponsmith",
+"level": 1,
+"slot": "1",
+"pay": "煤炭 × 20",
+"get": "末影合金碎片 × 1",
+"note": "3 选 1",
+"uses": "12"
+},
+{
+"profession": "武器匠",
+"slug": "weaponsmith",
+"level": 1,
+"slot": "1",
+"pay": "木炭 × 24",
+"get": "末影合金碎片 × 1",
+"note": "3 选 1",
+"uses": "12"
+},
+{
+"profession": "武器匠",
+"slug": "weaponsmith",
+"level": 1,
+"slot": "1",
+"pay": "烈焰棒 × 6",
+"get": "末影合金碎片 × 1",
+"note": "3 选 1",
+"uses": "6"
+},
+{
+"profession": "武器匠",
+"slug": "weaponsmith",
+"level": 1,
+"slot": "2",
+"pay": "末影合金碎片 × 5",
+"get": "铁剑 × 1",
+"note": "自带随机附魔（约 15~29 级等效）",
+"uses": "3"
+},
+{
+"profession": "武器匠",
+"slug": "weaponsmith",
+"level": 2,
+"slot": "1",
+"pay": "末影合金碎片 × 6",
+"get": "铁斧 × 1",
+"note": "自带随机附魔（约 15~29 级等效）",
+"uses": "3"
+},
+{
+"profession": "武器匠",
+"slug": "weaponsmith",
+"level": 2,
+"slot": "2",
+"pay": "末影合金碎片 × 3",
+"get": "神圣锭 × 1",
+"note": "2 选 1",
+"uses": "6"
+},
+{
+"profession": "武器匠",
+"slug": "weaponsmith",
+"level": 2,
+"slot": "2",
+"pay": "末影合金碎片 × 3",
+"get": "紫颂覆板 × 1",
+"note": "2 选 1",
+"uses": "8"
+},
+{
+"profession": "武器匠",
+"slug": "weaponsmith",
+"level": 3,
+"slot": "1",
+"pay": "钻石 × 1",
+"get": "末影合金碎片 × 2",
+"note": "—",
+"uses": "12"
+},
+{
+"profession": "武器匠",
+"slug": "weaponsmith",
+"level": 3,
+"slot": "2",
+"pay": "书 × 1 ＋ 末影合金碎片 × 20",
+"get": "书 × 1",
+"note": "附魔书内容：锋利／击退／火焰附加 随机一本",
+"uses": "4"
+},
+{
+"profession": "武器匠",
+"slug": "weaponsmith",
+"level": 4,
+"slot": "1",
+"pay": "末影合金碎片 × 32 ＋ 紫珀块 × 24",
+"get": "末影合金升级模板 × 1",
+"note": "—",
+"uses": "3"
+},
+{
+"profession": "武器匠",
+"slug": "weaponsmith",
+"level": 4,
+"slot": "2",
+"pay": "末影合金碎片 × 19",
+"get": "钻石剑 × 1",
+"note": "自带随机附魔（约 21~35 级等效）",
+"uses": "2"
+},
+{
+"profession": "武器匠",
+"slug": "weaponsmith",
+"level": 5,
+"slot": "1",
+"pay": "末影合金碎片 × 21",
+"get": "钻石斧 × 1",
+"note": "自带随机附魔（约 21~35 级等效）",
+"uses": "2"
+},
+{
+"profession": "武器匠",
+"slug": "weaponsmith",
+"level": 5,
+"slot": "2",
+"pay": "金剑 × 1 ＋ 末影合金碎片 × 64",
+"get": "星辉之刃 × 1",
+"note": "2 选 1，实际只有 1 项内容 —— 50% 概率出现，剩下的 1 种结果等于该格空着",
+"uses": "1"
+}
+]

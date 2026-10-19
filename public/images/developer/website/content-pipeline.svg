@@ -3,11 +3,8 @@
   <desc>横向四步：源 markdown（项目根的 start/、play/、features/、developer/、archive/）、生成 llms（generate-llms.mjs 产出 public/llms*.txt 与 public/**/*.md）、构建（vitepress build）、水印（watermark.mjs）。底部为 pnpm build 的实际脚本顺序。</desc>
   <defs>
     <style>
-      /* These SVGs are loaded through an img element by SmartImage, so the
-         page CSS custom properties do not cascade in. Every token is
-         var(--vp-c-*, literal-fallback) and the dark branch is re-declared
-         for prefers-color-scheme. If an SVG is ever inlined instead, the real
-         VitePress variables win in both themes. */
+            /* 由 img 元素加载，页面 CSS 不级联；配色固定浅色一套 + 自带白色背景，
+         不依赖 prefers-color-scheme（站点用 html.dark 切换，不会触发它）。 */
       :root {
         --d-text-1: var(--vp-c-text-1, #3c3c43);
         --d-text-2: var(--vp-c-text-2, #6b6b70);
@@ -18,17 +15,7 @@
         --d-soft:   var(--vp-c-bg-soft, #f6f6f7);
         --d-brand:  var(--vp-c-brand-1, #e05252);
       }
-      @media (prefers-color-scheme: dark) {
-        :root {
-          --d-text-1: var(--vp-c-text-1, #e6e6e1);
-          --d-text-2: var(--vp-c-text-2, #b0b0b4);
-          --d-text-3: var(--vp-c-text-3, #85858a);
-          --d-line:   var(--vp-c-divider, #414146);
-          --d-panel:  var(--vp-c-bg, #1b1b1f);
-          --d-band:   var(--vp-c-bg-alt, #161618);
-          --d-soft:   var(--vp-c-bg-soft, #202127);
-        }
-      }
+      
       text { font-family: -apple-system, 'Segoe UI', 'PingFang SC', sans-serif; }
       .h { font-size: 15px; font-weight: 600; fill: var(--d-text-1); }
       .t { font-size: 14px; font-weight: 600; fill: var(--d-text-1); }
@@ -52,6 +39,7 @@
       <path d="M0,0 L10,5 L0,10 Z" fill="var(--d-brand)"/>
     </marker>
   </defs>
+  <rect class="_svg-bg" x="0" y="0" width="100%" height="100%" fill="#ffffff"/>
   <text class="h" x="24" y="34">文档站内容流水线</text>
   <text class="m" x="24" y="56">源 markdown → 生成 llms → 构建 → 水印</text>
   <rect class="box" x="20" y="90" width="212" height="170" rx="10"/>
