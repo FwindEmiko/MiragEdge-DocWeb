@@ -426,8 +426,7 @@ export default defineConfig({
     // 只给一级分区加 emoji；二级及页面名称保持纯文字，便于扫描和搜索。
     sidebar: {
       '/': [
-        { text: '🧭 开始游戏', link: '/start/' },
-        { text: '💬 社区与支持', link: '/community/' },
+        { text: '👻 星玖的灵魂文档', link: '/soul' },
       ],
 
       '/start/': [
