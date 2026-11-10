@@ -62,7 +62,15 @@
 - **YAML frontmatter 的值含冒号会直接让 build 失败**：`description: … 上下文调用 :: 的写法`、`description: … 含 fs:time 时间 …` 会让 YAML 把值解析成嵌套映射，报 `YAMLException`。**凡 `title`/`description` 值里出现 `:` 一律加英文双引号**。
 - **`git rm` 对已修改文件需要 `-f`**，否则报 `the following file has local modifications`。
 - CI 的「依赖漏洞扫描 (osv-scanner)」是**门禁**：它失败会跳过同 job 的「构建/打包」，进而 deploy 永不执行，站点长期停在旧版本。排查 CI 失败先看失败的是哪个 step，别默认是代码问题
-- 无 Docker 时复刻 osv-scanner 门禁：脚本解析 `pnpm-lock.yaml` 的 snapshot 段（**注意 v9 格式里 `@scope/name` 是带引号的**，正则不兼容引号会漏掉整个 scope 包），逐个 POST 到 `https://api.osv.dev/v1/querybatch`，再扣掉 `osv-scanner.toml` 里已 ignore 的 id。这套复刻能给出与 CI 完全一致的清单
+- 无 Docker 时复刻 osv-scanner 门禁：脚本解析 `pnpm-lock.yaml` 的 snapshot 段（**注意 v9 格式里 `@scope/name` 是带引号的**，正则不兼容引号会漏掉整个 scope 包），逐个 POST 到 `https://api.osv.dev/v1/querybatch`，再扣掉 `osv-scanner.toml` 里已 ignore 的 id。这套复刻能给出与 CI 完全一致的清单。**该脚本已固化在仓库里：`pnpm run audit:deps`（`scripts/check-deps-osv.mjs`），推送前先跑它，别只靠 CI 才发现**
+- **2026-11-10 依赖门禁彻底清零（24 条 → 0 条，不再靠 ignore 名单）**。关键在于分清「真修」与「顶版本」两类手段，且**顶版本前必须核对 peer 范围**：
+  - vite 5.4.21 的 5 条 GHSA 只修到 6.4.4，而那是 vitepress 1.6.4 自己声明的 `^5.4.14`。实测 `@vitejs/plugin-vue@5.2.4` peer 为 `^5.0.0 || ^6.0.0`、`vitest@4.1.12` peer 为 `^6.0.0 || ^7.0.0 || ^8.0.0`，两者都吃 6.x → 用 `pnpm-workspace.yaml` 的 `overrides: vite: "6.4.6"` 顶掉，esbuild 也随之从 0.21.5 升到 0.25.12。**这是目前对 vitepress 1.6.4 唯一可行的修法**（等 2.0 稳定版才是正解）
+  - dompurify / follow-redirects 本来就有修复版本落在原声明范围内（mermaid 声明 `^3.3.3`、axios 1.21.1 声明 `^1.16.2`），只是 lockfile 钉在旧版本 —— 升 mermaid 的 dompurify 用 override 顶到 3.4.17，follow-redirects 先升 axios 到 1.21.1 再顶到 1.16.3
+  - glob@13 / minimatch@9,10 两条**不是靠顶版本，而是整条链根本没人用**：`@testing-library/vue` → `@vue/test-utils` → `js-beautify` → `editorconfig`/`glob`。全历史 `git log --all -S "from '@testing-library"` 为空、当前工作区也无 import，删掉三个 testing-library 包后这两条告警连同 119 个冗余包一起消失
+  - **vite 5 与 esbuild 0.21.5 一并从树上消失后，`osv-scanner.toml` 里原本 justify 的 4 条 dev-server 忽略项也失去存在理由，整个文件已删除** —— 以后再有人想靠 ignore 续命，先确认对应版本是否还在树上
+  - happy-dom 20.x 三条（含两条 HIGH）修在 21.0.4，且 20.14.6 只是部分修复 → 直接跳 21；`vue-tsc` 2.2.12 的 `@vue/language-core@2.2.12` 依赖 minimatch@9，升到 vue-tsc 3.3.14 后改用 picomatch，这条链也断了
+  - 验证口径：`pnpm run audit:deps` 归零 + `typecheck` + `test`（127 测试全过、覆盖率数字与改动前一致）+ `build`（退出码 0、1185 个 html 页与基线一致）
+- **不要用 `--frozen-lockfile` 之外的方式绕过 ERR_PNPM_LOCKFILE_CONFIG_MISMATCH**：改了 `pnpm-workspace.yaml` 的 overrides 后，必须先 `pnpm install --no-frozen-lockfile` 让 lockfile 重算 overrides 段，CI 用的 `pnpm install` 才会认
 - 升级依赖后要重跑 `pnpm run typecheck`：simple-git 4.x **移除了默认导出**，`import simpleGit from 'simple-git'` 会变成「模块对象不可调用」并报 TS2349，必须改成 `import { simpleGit } from 'simple-git'`
 - 判断某依赖能否直接删掉，用「源码 + 全历史」双重确认：`git log --all -S "from 'pkg'"` 为空且当前工作区无引用才可删。`vitepress-sidebar` 就是这样发现的——声明了但从未 import（README 里还写着它负责侧边栏，实际侧栏是 config.mts 手写的），删掉它顺带消除了灰色依赖链 argparse→sprintf-js 的无修复告警
 - 上游锁死有洞的传递依赖时，用 `pnpm-workspace.yaml` 的 `overrides`（pnpm 10 不再读 package.json#pnpm）。katex 即如此：mermaid 11/12 都声明 `^0.16.47`，而修复在 0.18.2；顶版本前先核对实际用到的 API（`renderToString(tex,{throwOnError,displayMode,output})`）并做运行时冒烟

@@ -145,6 +145,7 @@ pnpm dev          # 启动开发服务器（会先生成 llms.txt）
 pnpm typecheck        # vue-tsc 类型检查
 pnpm test             # vitest 单元测试 + 配置测试
 pnpm run audit:routes # 文档路由审计（查死链与游离页面）
+pnpm run audit:deps   # 依赖漏洞扫描（复刻 CI 的 osv-scanner 门禁，有漏洞则退出码 1）
 pnpm build            # 完整构建（跑通这条基本就不会挂 CI）
 ```
 
@@ -159,6 +160,7 @@ pnpm build            # 完整构建（跑通这条基本就不会挂 CI）
 | `pnpm typecheck` | TypeScript 类型检查 |
 | `pnpm run llms` | 单独生成 `llms.txt` / `llms-full.txt`（加 `--check` 只校验不写入） |
 | `pnpm run audit:routes` | 文档路由审计 |
+| `pnpm run audit:deps` | 依赖漏洞扫描（无需 Docker，走 OSV API） |
 | `pnpm run watermark` | 给站内图片加水印 |
 | `pnpm run contributors` | 重新生成贡献者数据 |
 
@@ -217,7 +219,7 @@ MiragEdge-DocWeb/
 | 可视化 | Mermaid、canvas-confetti | 流程图与粒子动效 |
 | 侧边栏 | VitePress 内置 `themeConfig.sidebar` | 在 `.vitepress/config.mts` 显式维护，分区与页面顺序可控 |
 | 搜索 | miniSearch（内置） | 标题权重 6 倍、模糊匹配、AND 组合 |
-| 测试 | Vitest + happy-dom + @testing-library/vue | 组件、composable、构建脚本、配置四类 |
+| 测试 | Vitest + happy-dom | 组件、composable、构建脚本、配置四类 |
 | 数据 | @octokit/rest | 拉取仓库活跃度、贡献者数据 |
 
 **自研构建脚本**（`scripts/`）：

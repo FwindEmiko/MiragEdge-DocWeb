@@ -2,10 +2,32 @@
 # 说明：package.json 中的 "pnpm".overrides 自 pnpm 10 起被忽略，需迁移到本文件。
 
 overrides:
-  glob: ">=10.5.0"
   js-yaml: "3.15.2"
   # katex 0.11.0–0.18.1 存在原型污染信任绕过（GHSA-238p-pmpm-9mq7，当前只有 LOW）。
   # mermaid（含 12.x）仍声明 ^0.16.47，故用 override 顶到已修复的 0.18.2。
   # 已核对 0.18.2 保留了 mermaid 唯一用到的 `renderToString(tex, {throwOnError,displayMode,output})`
   # 接口（含 mathml/htmlAndMathml 取值），并做了运行时冒烟验证。
   katex: "0.18.2"
+
+  # ── 以下三条为 2026-11-10 依赖漏洞门禁修复，逐条记录根因与验证方式 ──────────
+
+  # vitepress 1.6.4 声明 vite ^5.4.14，而 vite 5.x 全线的 5 条 GHSA 只修到 6.4.4。
+  # 顶版本前已核对：@vitejs/plugin-vue 5.2.4 的 peer 为 ^5.0.0 || ^6.0.0，
+  # vitest 4.1.12 的 peer 为 ^6.0.0 || ^7.0.0 || ^8.0.0，两者都接受 6.x。
+  # 升级路径仍是等 vitepress 2.0 稳定版（当前 2.0.0-alpha，不上生产）。
+  vite: "6.4.6"
+
+  # mermaid 11.17.2 声明 dompurify ^3.3.3，修复线为 3.4.17（含 CRITICAL 的 SAFE_FOR_TEMPLATES 绕过）。
+  # 3.4.17 落在原范围内，此处只是把 lockfile 里被钉住的 3.4.16 顶上去。
+  dompurify: "3.4.17"
+
+  # axios 1.21.1 声明 follow-redirects ^1.16.2，三条 GHSA 修复于 1.16.1/1.16.2。
+  # 顶到 1.16.3 覆盖全部三条。
+  follow-redirects: "1.16.3"
+
+  # 注意：这里删掉了历史上的 `glob: ">=10.5.0"`。
+  # glob 与 minimatch 的唯一来源是 @testing-library/vue → @vue/test-utils →
+  # js-beautify → editorconfig/glob 这条从未被 import 的链。三个 testing-library 包
+  # 已删除，glob@13 与 minimatch@9/10 随之彻底离开依赖树，override 已无作用对象。
+  # 若将来重新引入该链，先跑 `pnpm run audit:deps` 看是否带回了 GHSA-3g3m-2fjr-6pw4
+  # （glob <14.0.2）与 GHSA-g3hv-75wg-m249（minimatch <11.0.1），再决定是否重加 override。
