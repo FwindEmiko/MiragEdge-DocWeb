@@ -1,358 +1,81 @@
-/**
- * 条款页共享样式。
- *
- * 只作用于 frontmatter.pageClass = legal-page 的页面，
- * 避免影响站内其他文档。设计目标：
- * 1. 正文是主角：行长、行高、段距优先保证长时间阅读；
- * 2. 条款有「正式文件」感：章节编号、细分隔线、克制的品牌色；
- * 3. 与站点现有 Apple 风格一致：圆角、柔和阴影、跟随深浅色；
- * 4. 桌面 / 平板 / 手机与打印都有明确规则。
- */
-
+/* 条款沿用站点导航与目录，正文样式仅限 legal-page。 */
 .legal-page {
-  /* 条款页统一强调色：默认品牌红，后续如需分主题只改这里 */
-  --legal-accent: var(--vp-c-brand-1);
-  /* 小字号文本使用更深的品牌色，保证浅色背景下的对比度 */
-  --legal-accent-strong: var(--vp-c-brand-darker);
-  /* 实心胶囊用独立的填充色：浅色 #B03030、深色 #C94242，配白字均达到 AA */
-  --legal-accent-fill: var(--vp-c-brand-darker);
-  --legal-accent-on: #fff;
-  --legal-accent-soft: color-mix(in srgb, var(--legal-accent) 10%, transparent);
-  --legal-radius: 16px;
+  --legal-accent: var(--vp-c-brand-darker);
+  --legal-accent-soft: var(--vp-c-brand-soft);
+  letter-spacing: 0;
 }
+.dark .legal-page { --legal-accent: var(--vp-c-brand-light); }
 
-.dark .legal-page {
-  /* 深色模式下用浅品牌色承载文字；实心胶囊保持深红底白字 */
-  --legal-accent-strong: var(--vp-c-brand-light);
-  --legal-accent-fill: var(--vp-c-brand-darker);
-  --legal-accent-on: #fff;
-}
-
-/* ---------- 正文版式 ---------- */
-
-.legal-page .vp-doc {
-  color: var(--vp-c-text-1);
-  font-size: 15.5px;
-}
-
-.legal-page .vp-doc p,
-.legal-page .vp-doc li {
-  line-height: 1.85;
-}
-
-.legal-page .vp-doc p {
-  margin: 14px 0;
-}
-
-.legal-page .vp-doc ul,
-.legal-page .vp-doc ol {
-  padding-left: 1.45em;
-}
-
-.legal-page .vp-doc li + li {
-  margin-top: 7px;
-}
-
-.legal-page .vp-doc strong {
-  color: var(--vp-c-text-1);
-  font-weight: 650;
-}
-
-/* 章节标题：左侧品牌色竖线 + 细分隔线，形成可扫描的条款骨架。
-   编号写在标题文字里（一、二、……），避免与 CSS 计数器重复。 */
+.legal-page .vp-doc { font-size: 15px; line-height: 1.9; overflow-wrap: anywhere; }
+.legal-page .vp-doc p { margin: 16px 0; line-height: 1.9; }
+.legal-page .vp-doc li { line-height: 1.85; }
+.legal-page .vp-doc li + li { margin-top: 7px; }
+.legal-page .vp-doc strong { font-weight: 650; }
 .legal-page .vp-doc h2 {
-  position: relative;
-  margin-top: 54px;
-  padding-top: 26px;
-  padding-left: 18px;
-  border-top: 1px solid var(--vp-c-divider);
-  font-size: 23px;
-  font-weight: 700;
-  line-height: 1.4;
-  letter-spacing: -0.02em;
-  text-wrap: balance;
-}
-
-.legal-page .vp-doc h2::before {
-  content: '';
-  position: absolute;
-  top: 29px;
-  left: 0;
-  width: 3px;
-  height: 1.15em;
-  border-radius: 2px;
-  background: var(--legal-accent);
-}
-
-.legal-page .vp-doc h3 {
-  margin-top: 32px;
-  font-size: 17.5px;
-  font-weight: 650;
+  margin: 40px 0 20px;
+  padding-top: 24px;
+  font-size: 21px;
   line-height: 1.55;
-  letter-spacing: -0.01em;
+  letter-spacing: 0;
+  border-top: 1px solid var(--vp-c-divider);
 }
+.legal-page .vp-doc h3 { margin-top: 28px; font-size: 17px; line-height: 1.6; letter-spacing: 0; }
+.legal-page .vp-doc :is(h1, h2, h3) { scroll-margin-top: calc(var(--vp-nav-height) + 64px); }
+.legal-page .vp-doc table { margin: 20px 0; font-size: 13px; line-height: 1.75; }
+.legal-page .vp-doc th { font-weight: 600; white-space: nowrap; }
+.legal-page .vp-doc td { vertical-align: top; }
+.legal-page .vp-doc td:first-child { min-width: 100px; font-weight: 500; }
+.legal-page .vp-doc code { overflow-wrap: anywhere; }
 
-.legal-page .vp-doc h4 {
-  margin-top: 24px;
-  font-size: 15.5px;
-  font-weight: 650;
-}
+.legal-heading { margin-bottom: 28px; }
+.legal-page .legal-heading__eyebrow { margin: 0 0 16px; color: var(--legal-accent); font-size: 12px; font-weight: 600; }
+.legal-page .legal-heading h1 { margin: 0; font-size: 30px; font-weight: 700; line-height: 1.45; letter-spacing: 0; }
+.legal-page .legal-heading__summary { margin: 16px 0 24px; color: var(--vp-c-text-2); font-size: 15px; line-height: 1.8; }
+.legal-heading__meta { display: flex; flex-wrap: wrap; gap: 14px 28px; margin: 0; padding: 18px 0; border-top: 1px solid var(--vp-c-divider); border-bottom: 1px solid var(--vp-c-divider); font-size: 12px; line-height: 1.7; }
+.legal-heading__meta > div { display: flex; flex-direction: column; gap: 3px; }
+.legal-heading__meta dt { color: var(--vp-c-text-3); }
+.legal-heading__meta dd { margin: 0; color: var(--vp-c-text-2); font-variant-numeric: tabular-nums; }
+.legal-icon { display: block; flex: none; }
 
-/* 首个 h2 不需要那么大的上边距 */
-.legal-page .vp-doc h2:first-of-type {
-  margin-top: 36px;
-}
+.legal-doc-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 28px; margin: 8px 0 32px; }
+.legal-doc-card { display: flex; align-items: flex-start; gap: 14px; padding: 24px 0; border-bottom: 1px solid var(--vp-c-divider); color: var(--vp-c-text-1); text-decoration: none; }
+.legal-doc-card > .legal-icon { margin-top: 4px; color: var(--legal-accent); }
+.legal-doc-card > .legal-icon:last-child { margin-left: auto; color: var(--vp-c-text-3); }
+.legal-doc-card__body { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.legal-doc-card__title { color: var(--vp-c-text-1); font-size: 15px; font-weight: 600; line-height: 1.65; }
+.legal-doc-card__summary { color: var(--vp-c-text-2); font-size: 13px; line-height: 1.75; }
+.legal-doc-card__meta { color: var(--vp-c-text-3); font-size: 12px; }
+.legal-doc-card:hover .legal-doc-card__title { color: var(--legal-accent); }
+.legal-doc-card:focus-visible { outline: 2px solid var(--legal-accent); outline-offset: 4px; }
 
-/* ---------- 表格：信息密度高，但不能牺牲可读性 ---------- */
-
-.legal-page .vp-doc table {
-  margin: 18px 0;
-  font-size: 13.5px;
-  line-height: 1.65;
-}
-
-.legal-page .vp-doc th {
-  color: var(--vp-c-text-1);
-  font-weight: 650;
-  white-space: nowrap;
-}
-
-.legal-page .vp-doc td {
-  color: var(--vp-c-text-2);
-  vertical-align: top;
-}
-
-.legal-page .vp-doc td:first-child {
-  color: var(--vp-c-text-1);
-  font-weight: 500;
-}
-
-/* ---------- 提示块：把「三分钟读懂」「用户声明」做成摘要卡片 ---------- */
-
-.legal-page .vp-doc .custom-block {
-  margin: 20px 0;
-  padding: 16px 18px;
-  border: 1px solid var(--vp-c-divider);
-  border-radius: var(--legal-radius);
-}
-
-.legal-page .vp-doc .custom-block.tip {
-  padding: 18px 20px !important;
-  border-radius: 16px !important;
-  border-left-width: 4px !important;
-  border-left-color: var(--legal-accent) !important;
-  background:
-    linear-gradient(135deg, var(--legal-accent-soft) 0%, transparent 72%),
-    var(--vp-c-bg-soft) !important;
-}
-
-.legal-page .vp-doc .custom-block.tip .custom-block-title {
-  color: var(--legal-accent-strong) !important;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-}
-
-.dark .legal-page .vp-doc .custom-block.tip {
-  background:
-    linear-gradient(135deg, var(--legal-accent-soft) 0%, transparent 72%),
-    var(--vp-c-bg-soft) !important;
-}
-
-.dark .legal-page .vp-doc .custom-block.tip .custom-block-title {
-  color: var(--legal-accent) !important;
-}
-
-.legal-page .vp-doc .custom-block.warning {
-  border-left: 4px solid #d97706;
-  background: var(--vp-c-warning-soft);
-}
-
-.legal-page .vp-doc .custom-block.danger {
-  border-left: 4px solid var(--vp-c-danger-1);
-}
-
-.legal-page .vp-doc .custom-block.info {
-  border-left: 4px solid var(--vp-c-tip-1);
-}
-
-.legal-page .vp-doc .custom-block p:first-child {
-  margin-top: 0;
-}
-
-.legal-page .vp-doc .custom-block p:last-child {
-  margin-bottom: 0;
-}
-
-/* 引用块：用于「提示」「说明」类短段落 */
-.legal-page .vp-doc blockquote {
-  margin: 18px 0;
-  padding: 12px 16px 12px 18px;
-  border-left: 3px solid var(--legal-accent);
-  border-radius: 0 10px 10px 0;
-  background: var(--vp-c-bg-soft);
-  color: var(--vp-c-text-2);
-}
-
-.legal-page .vp-doc blockquote p {
-  margin: 0;
-}
-
-.legal-page .vp-doc blockquote p + p {
-  margin-top: 8px;
-}
-
-/* ---------- 页尾相关条款与版本信息 ---------- */
-
-.legal-page .vp-doc .legal-doc-grid {
-  margin-top: 22px;
-}
-
-.legal-page .vp-doc .legal-endnote {
-  margin-top: 30px;
-}
-
-/* ---------- 条款中心：加宽到三列卡片，但不影响正文页的阅读行长 ---------- */
-
-@media (min-width: 960px) {
-  .legal-hub .content-container {
-    max-width: 760px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .legal-hub .main {
-    max-width: 760px;
-  }
-}
-
-/* ---------- 窄屏 ---------- */
+.legal-endnote { margin-top: 48px; border-top: 1px solid var(--vp-c-divider); }
+.legal-pagination { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; padding: 24px 0; }
+.legal-pagination__link { display: flex; align-items: center; gap: 10px; min-height: 48px; color: var(--vp-c-text-1); font-size: 14px; text-decoration: none; }
+.legal-pagination__link > svg { flex: none; }
+.legal-pagination__link > span { display: flex; flex-direction: column; gap: 5px; min-width: 0; }
+.legal-pagination__link small { color: var(--vp-c-text-3); font-size: 12px; }
+.legal-pagination__link:hover { color: var(--legal-accent); }
+.legal-pagination__next { grid-column: 2; justify-content: flex-end; text-align: right; }
+.legal-endnote__meta { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 20px; padding: 16px 0; border-top: 1px solid var(--vp-c-divider); color: var(--vp-c-text-3); font-size: 12px; }
 
 @media (max-width: 767px) {
-  .legal-page .vp-doc {
-    font-size: 15px;
-  }
-
-  .legal-page .vp-doc h2 {
-    margin-top: 40px;
-    padding-top: 22px;
-    padding-left: 14px;
-    font-size: 20px;
-  }
-
-  .legal-page .vp-doc h2::before {
-    top: 24px;
-    width: 3px;
-  }
-
-  .legal-page .vp-doc h3 {
-    margin-top: 26px;
-    font-size: 16.5px;
-  }
-
-  .legal-page .vp-doc table {
-    font-size: 12.5px;
-  }
-
-  .legal-page .vp-doc .custom-block {
-    padding: 14px 15px;
-    border-radius: 14px;
-  }
-
-  .legal-page .vp-doc p,
-  .legal-page .vp-doc li {
-    line-height: 1.8;
-  }
+  .legal-page .legal-heading h1 { font-size: 25px; }
+  .legal-heading__meta { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+  .legal-page .vp-doc h2 { margin-top: 32px; padding-top: 20px; font-size: 19px; }
+  .legal-page .vp-doc h3 { font-size: 16px; }
+  .legal-doc-grid { grid-template-columns: minmax(0, 1fr); }
+  .legal-doc-card { padding: 20px 0; }
+  .legal-pagination { gap: 16px; }
+  .legal-pagination__link { font-size: 13px; }
 }
-
-/* 平板：正文略宽时保持舒适行长 */
-@media (min-width: 768px) and (max-width: 1023px) {
-  .legal-page .vp-doc {
-    font-size: 15.5px;
-  }
-}
-
-/* ---------- 打印：条款常被打印或导出 PDF ---------- */
 
 @media print {
-  /* 页脚、贡献者与返回顶部在 Layout 之外，需单独隐藏 */
-  .doc-footer,
-  .centerdss,
-  .back-to-top {
-    display: none !important;
-  }
-
-  .legal-page .VPNav,
-  .legal-page .VPSidebar,
-  .legal-page .VPLocalNav,
-  .legal-page .VPDocAside,
-  .legal-page .doc-footer,
-  .legal-page .centerdss,
-  .legal-page .back-to-top,
-  .legal-page .legal-pills {
-    display: none !important;
-  }
-
-  .legal-page,
-  .legal-page .VPContent,
-  .legal-page .VPDoc,
-  .legal-page .VPDoc .container,
-  .legal-page .VPDoc .content {
-    display: block !important;
-    max-width: none !important;
-    margin: 0 !important;
-    padding: 0 !important;
-  }
-
-  .legal-page .vp-doc {
-    max-width: none;
-    color: #111;
-    font-size: 11pt;
-  }
-
-  .legal-page .legal-hero {
-    margin: 0 0 18pt;
-    padding: 16pt;
-    border: 1px solid #bbb;
-    border-radius: 8pt;
-    background: none;
-    box-shadow: none;
-  }
-
-  .legal-page .legal-hero__pattern,
-  .legal-page .legal-hero__seal {
-    display: none;
-  }
-
-  .legal-page .vp-doc h2 {
-    break-after: avoid;
-    page-break-after: avoid;
-  }
-
-  .legal-page .vp-doc table,
-  .legal-page .vp-doc .custom-block,
-  .legal-page .vp-doc .legal-doc-grid {
-    break-inside: avoid;
-    page-break-inside: avoid;
-  }
-
-  .legal-page .vp-doc a[href^='http']::after {
-    content: ' (' attr(href) ')';
-    color: #555;
-    font-size: 9pt;
-  }
-
-  @page {
-    margin: 16mm;
-  }
-}
-
-/* ---------- 降低动态效果 ---------- */
-
-@media (prefers-reduced-motion: reduce) {
-  .legal-page *,
-  .legal-page *::before,
-  .legal-page *::after {
-    scroll-behavior: auto !important;
-  }
+  body:has(.legal-page) :is(.VPNav, .VPSidebar, .VPLocalNav, .aside, .VPDocFooter, .doc-footer, .centerdss, .back-to-top, .legal-endnote, .legal-doc-grid, .header-anchor, .scroll-progress, .atmosphere-details, .ambient-particles) { display: none !important; }
+  .legal-page .VPContent, .legal-page .VPDoc, .legal-page .VPDoc .container, .legal-page .VPDoc .content, .legal-page .VPDoc .content-container { display: block !important; width: 100% !important; min-width: 0 !important; max-width: none !important; margin: 0 !important; padding: 0 !important; }
+  .legal-page .vp-doc { color: #111; font-size: 11pt; }
+  .legal-page .legal-heading h1 { font-size: 22pt; }
+  .legal-page .vp-doc :is(h2, h3) { break-after: avoid; }
+  .legal-page .vp-doc tr { break-inside: avoid; }
+  .legal-page .vp-doc table { display: table; overflow: visible; font-size: 9pt; }
+  @page { margin: 16mm; }
 }

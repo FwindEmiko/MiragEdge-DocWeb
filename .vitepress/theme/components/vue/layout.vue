@@ -397,40 +397,23 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }) => {
       </div>
     </div>
 
-    <!-- 文档页脚 -->
-    <div class="doc-footer">
+    <footer class="doc-footer" aria-label="网站页脚">
       <div class="container">
-        <div class="doc-footer-content">
-          <a href="https://space.bilibili.com/359174372" target="_blank" class="doc-footer-link">© 2020-2026 锐界幻境与贡献者</a>
-          <span style="color: var(--vp-c-text-3); margin: 0 6px;">|</span>
-          <a :href="soulUrl" class="doc-footer-link" style="color: var(--vp-c-brand); font-weight: 600;" title="狐魇星玖 · 灵魂文档">SOUL</a>
+        <div class="doc-footer-content doc-footer-main">
+          <a href="https://space.bilibili.com/359174372" target="_blank" rel="noopener noreferrer" class="doc-footer-link">© 2020-2026 锐界幻境与贡献者</a>
+          <nav class="doc-footer-links" aria-label="站点信息">
+            <a :href="soulUrl" class="doc-footer-link" title="狐魇星玖 · 灵魂文档">SOUL</a>
+            <a :href="withBase('/legal/')" class="doc-footer-link">条款</a>
+          </nav>
         </div>
-        <nav class="doc-footer-legal" aria-label="站点条款">
-          <a :href="withBase('/legal/')" class="doc-footer-link">条款中心</a>
-          <span class="doc-footer-sep" aria-hidden="true">·</span>
-          <a :href="withBase('/legal/terms')" class="doc-footer-link">用户协议</a>
-          <span class="doc-footer-sep" aria-hidden="true">·</span>
-          <a :href="withBase('/legal/privacy')" class="doc-footer-link">隐私政策</a>
-          <span class="doc-footer-sep" aria-hidden="true">·</span>
-          <a :href="withBase('/legal/disclaimer')" class="doc-footer-link">免责声明</a>
-          <span class="doc-footer-sep" aria-hidden="true">·</span>
-          <a :href="withBase('/legal/copyright')" class="doc-footer-link">版权声明</a>
-          <span class="doc-footer-sep" aria-hidden="true">·</span>
-          <a :href="withBase('/legal/minors')" class="doc-footer-link">未成年人保护</a>
-          <span class="doc-footer-sep" aria-hidden="true">·</span>
-          <a :href="withBase('/legal/contact')" class="doc-footer-link">联系我们</a>
-        </nav>
         <div class="doc-footer-content">
-          <a href="https://beian.miit.gov.cn" target="_blank" rel="noopener noreferrer" style="color: var(--vp-c-text-2); text-decoration: none;">
-            苏ICP备2024133820号-1
-          </a>
+          <a href="https://beian.miit.gov.cn" target="_blank" rel="noopener noreferrer" class="doc-footer-record">苏ICP备2024133820号-1</a>
         </div>
-        <div class="doc-footer-content" v-if="buildId !== 'dev'" style="margin-top: 4px; font-size: 12px; color: var(--vp-c-text-3);">
-          Build #{{ buildId }}
-          <template v-if="buildSha"> · {{ buildSha }}</template>
+        <div v-if="buildId !== 'dev'" class="doc-footer-build">
+          Build #{{ buildId }}<template v-if="buildSha"> · {{ buildSha }}</template>
         </div>
       </div>
-    </div>
+    </footer>
 
     <!-- 返回顶部按钮：仅移动端文档页显示，阅读进度达 1/3 后出现，外圈进度环实时反映阅读进度 -->
     <button
@@ -663,58 +646,16 @@ html:not(.effects-disabled) .doc-footer::after {
   color: var(--vp-c-brand-dark);
 }
 
-/* 全局条款入口：放在版权行下方，桌面/平板/手机都保持可换行、可点按 */
-.doc-footer-legal {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: 2px 8px;
-  margin-top: 8px;
-  font-size: 13px;
-  line-height: 1.6;
-}
-
-.doc-footer-legal .doc-footer-link {
-  display: inline-flex;
-  align-items: center;
-  min-height: 32px;
-  margin: 0;
-  padding: 0 2px;
-  color: var(--vp-c-text-2);
-}
-
-.doc-footer-legal .doc-footer-link:hover {
-  color: var(--vp-c-brand-1);
-}
-
-.doc-footer-legal a:focus-visible {
-  outline: 2px solid color-mix(in srgb, var(--vp-c-brand-1) 55%, transparent);
-  outline-offset: 2px;
-  border-radius: 3px;
-}
-
-.doc-footer-sep {
-  color: var(--vp-c-text-3);
-  opacity: 0.55;
-  user-select: none;
-}
-
-@media (max-width: 767px) {
-  .doc-footer-legal {
-    gap: 0 6px;
-    margin-top: 6px;
-    font-size: 12.5px;
-  }
-
-  .doc-footer-legal .doc-footer-link {
-    min-height: 40px;
-    padding: 0 3px;
-  }
-
-  .doc-footer-sep {
-    display: none;
-  }
+.doc-footer-main { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 4px 16px; }
+.doc-footer-main > .doc-footer-link { margin: 0; }
+.doc-footer-links { display: inline-flex; align-items: center; gap: 16px; padding-left: 16px; border-left: 1px solid var(--vp-c-divider); }
+.doc-footer-links .doc-footer-link { display: inline-flex; align-items: center; min-height: 40px; margin: 0; font-weight: 600; }
+.doc-footer-record { color: var(--vp-c-text-2); font-size: 13px; text-decoration: none; }
+.doc-footer-build { margin-top: 4px; color: var(--vp-c-text-3); font-size: 12px; }
+.doc-footer a:focus-visible { outline: 2px solid var(--vp-c-brand-1); outline-offset: 3px; border-radius: 2px; }
+@media (max-width: 480px) {
+  .doc-footer-main { flex-direction: column; gap: 0; }
+  .doc-footer-links { padding-left: 0; border-left: 0; }
 }
 
 /* 返回顶部按钮：玻璃磨砂 + conic-gradient 进度环 + 弹性淡入

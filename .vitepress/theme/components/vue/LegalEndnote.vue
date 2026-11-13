@@ -1,107 +1,30 @@
 <script setup lang="ts">
-import { withBase } from 'vitepress'
-import { formatLegalDate } from '../../data/legal'
+import { computed } from 'vue'
+import { useData, withBase } from 'vitepress'
+import { ArrowLeft, ArrowRight } from 'lucide-vue-next'
+import { LEGAL_DOCS, LEGAL_VERSION, LEGAL_UPDATED, formatLegalDate } from '../../data/legal'
 
-/**
- * 条款页尾注：版本、更新日期与两个固定出口。
- * 用 <aside> 而不是 <footer>，避免与 VitePress 的页面级 footer 语义重叠。
- */
-withDefaults(
-  defineProps<{
-    version?: string
-    updated?: string
-  }>(),
-  {
-    version: 'v1.0',
-    updated: '2026-11-12',
-  },
-)
+const { frontmatter } = useData()
+const currentIndex = computed(() => LEGAL_DOCS.findIndex(doc => doc.key === frontmatter.value.legalDoc))
+const previous = computed(() => LEGAL_DOCS[currentIndex.value - 1])
+const next = computed(() => LEGAL_DOCS[currentIndex.value + 1])
 </script>
 
 <template>
-  <aside class="legal-endnote" aria-label="文档版本信息">
-    <p class="legal-endnote__meta">
-      <span>文档版本 <strong>{{ version }}</strong></span>
-      <span class="legal-endnote__sep" aria-hidden="true">·</span>
-      <span>最后更新 <time :datetime="updated">{{ formatLegalDate(updated) }}</time></span>
-    </p>
-    <p class="legal-endnote__links">
-      <a :href="withBase('/legal/contact')">对条款有疑问？联系我们</a>
-      <span class="legal-endnote__sep" aria-hidden="true">·</span>
-      <a :href="withBase('/legal/')">返回条款中心</a>
-    </p>
-  </aside>
+  <footer class="legal-endnote">
+    <nav class="legal-pagination" aria-label="相邻条款">
+      <a v-if="previous" :href="withBase(previous.href)" class="legal-pagination__link">
+        <ArrowLeft :size="18" aria-hidden="true" />
+        <span><small>上一份</small>{{ previous.title }}</span>
+      </a>
+      <a v-if="next" :href="withBase(next.href)" class="legal-pagination__link legal-pagination__next">
+        <span><small>下一份</small>{{ next.title }}</span>
+        <ArrowRight :size="18" aria-hidden="true" />
+      </a>
+    </nav>
+    <div class="legal-endnote__meta">
+      <span>{{ LEGAL_VERSION }} · 更新于 <time :datetime="LEGAL_UPDATED">{{ formatLegalDate(LEGAL_UPDATED) }}</time></span>
+      <a :href="withBase('/legal/contact')">联系与投诉</a>
+    </div>
+  </footer>
 </template>
-
-<style scoped>
-.legal-endnote {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px 20px;
-  margin: 32px 0 0;
-  padding: 16px 2px 0;
-  border-top: 1px solid var(--vp-c-divider);
-  color: var(--vp-c-text-3);
-  font-size: 12.5px;
-  line-height: 1.6;
-}
-
-.legal-endnote__meta,
-.legal-endnote__links {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 6px;
-  margin: 0;
-}
-
-.legal-endnote strong {
-  color: var(--vp-c-text-2);
-  font-weight: 600;
-  font-variant-numeric: tabular-nums;
-}
-
-.legal-endnote time {
-  font-variant-numeric: tabular-nums;
-}
-
-.legal-endnote__sep {
-  opacity: 0.5;
-}
-
-.legal-endnote__links a {
-  color: var(--vp-c-text-2);
-  text-decoration-line: underline;
-  text-decoration-color: color-mix(in srgb, var(--vp-c-text-2) 40%, transparent);
-  text-underline-offset: 3px;
-  transition: color 160ms ease, text-decoration-color 160ms ease;
-}
-
-.legal-endnote__links a:hover {
-  color: var(--legal-accent-strong, var(--vp-c-brand-darker));
-  text-decoration-color: color-mix(in srgb, var(--legal-accent-strong, var(--vp-c-brand-darker)) 70%, transparent);
-}
-
-.legal-endnote__links a:focus-visible {
-  outline: 2px solid var(--legal-accent, var(--vp-c-brand-1));
-  outline-offset: 2px;
-  border-radius: 2px;
-}
-
-@media (max-width: 767px) {
-  .legal-endnote {
-    flex-direction: column;
-    align-items: flex-start;
-    margin-top: 24px;
-    padding-top: 14px;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .legal-endnote__links a {
-    transition: none;
-  }
-}
-</style>

@@ -23,7 +23,7 @@ export interface LegalDoc {
   index: string
   /** 页面完整标题 */
   title: string
-  /** 导航与胶囊按钮里的短标题 */
+  /** 侧边栏中的短标题 */
   short: string
   /** 站内绝对路径，渲染时统一经 withBase 处理 */
   href: string
@@ -37,9 +37,9 @@ export interface LegalDoc {
 }
 
 /** 条款版本与日期：改条款时只改这里，所有页面与卡片同步 */
-export const LEGAL_VERSION = 'v1.0'
-export const LEGAL_EFFECTIVE = '2026-11-12'
-export const LEGAL_UPDATED = '2026-11-12'
+export const LEGAL_VERSION = 'v1.1'
+export const LEGAL_EFFECTIVE = '2026-11-13'
+export const LEGAL_UPDATED = '2026-11-13'
 
 export const LEGAL_DOCS: LegalDoc[] = [
   {
@@ -50,18 +50,18 @@ export const LEGAL_DOCS: LegalDoc[] = [
     href: '/legal/',
     icon: 'hub',
     summary: '六份文档的入口、适用关系、版本记录与联系渠道。',
-    reading: '约 6 分钟',
+    reading: '约 2 分钟',
     updated: LEGAL_UPDATED,
   },
   {
     key: 'terms',
     index: '01',
-    title: '用户协议与用户声明',
+    title: '用户协议',
     short: '用户协议',
     href: '/legal/terms',
     icon: 'terms',
-    summary: '使用本站与服务器时，双方的权利、义务与行为边界。',
-    reading: '约 12 分钟',
+    summary: '账号管理、使用规范、服务变更及双方权利义务。',
+    reading: '约 6 分钟',
     updated: LEGAL_UPDATED,
   },
   {
@@ -71,8 +71,8 @@ export const LEGAL_DOCS: LegalDoc[] = [
     short: '隐私政策',
     href: '/legal/privacy',
     icon: 'privacy',
-    summary: '我们收集哪些信息、为什么收集、保存多久，以及你可以怎么做。',
-    reading: '约 14 分钟',
+    summary: '个人信息处理范围、保存期限、共享规则与用户权利。',
+    reading: '约 7 分钟',
     updated: LEGAL_UPDATED,
   },
   {
@@ -83,7 +83,7 @@ export const LEGAL_DOCS: LegalDoc[] = [
     href: '/legal/disclaimer',
     icon: 'disclaimer',
     summary: '内容准确性、游戏操作风险、外部链接与责任边界。',
-    reading: '约 9 分钟',
+    reading: '约 3 分钟',
     updated: LEGAL_UPDATED,
   },
   {
@@ -93,19 +93,19 @@ export const LEGAL_DOCS: LegalDoc[] = [
     short: '版权声明',
     href: '/legal/copyright',
     icon: 'copyright',
-    summary: '原创内容如何授权、游戏素材归谁、侵权投诉怎么走。',
-    reading: '约 10 分钟',
+    summary: '内容权属、代码许可、转载授权与侵权投诉程序。',
+    reading: '约 4 分钟',
     updated: LEGAL_UPDATED,
   },
   {
     key: 'minors',
     index: '05',
     title: '未成年人保护与家长须知',
-    short: '未成年人',
+    short: '未成年人保护',
     href: '/legal/minors',
     icon: 'minors',
     summary: '未成年人的信息保护、游戏时长、消费提示与家长联系渠道。',
-    reading: '约 7 分钟',
+    reading: '约 3 分钟',
     updated: LEGAL_UPDATED,
   },
   {
@@ -116,7 +116,7 @@ export const LEGAL_DOCS: LegalDoc[] = [
     href: '/legal/contact',
     icon: 'contact',
     summary: '账号申诉、隐私请求、侵权投诉与安全漏洞报告。',
-    reading: '约 6 分钟',
+    reading: '约 3 分钟',
     updated: LEGAL_UPDATED,
   },
 ]

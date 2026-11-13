@@ -2,6 +2,7 @@ import { defineConfig } from 'vitepress'
 import { MermaidPlugin, MermaidMarkdown } from "vitepress-plugin-mermaid";
 import addContributorsPlugin from './theme/addContributors';
 import { legacyRedirectsPlugin } from './legacy-redirects';
+import { LEGAL_DOCS } from './theme/data/legal';
 import path from 'node:path'
 import fs from 'node:fs'
 import { fileURLToPath } from 'node:url'
@@ -427,6 +428,11 @@ export default defineConfig({
     sidebar: {
       '/': [
         { text: '👻 星玖的灵魂文档', link: '/soul' },
+        {
+          text: '📜 条款',
+          collapsed: false,
+          items: LEGAL_DOCS.map(doc => ({ text: doc.key === 'hub' ? '条款总览' : doc.short, link: doc.href })),
+        },
       ],
 
       '/start/': [
