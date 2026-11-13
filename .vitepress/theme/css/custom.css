@@ -106,7 +106,7 @@
 /* ===== 正文链接 =====
    正文以阅读为先：链接保持接近正文的颜色，通过稳定的细下划线表达可点击性；
    仅在 hover/focus 时提亮为品牌色，避免大段说明被高饱和红色切碎。 */
-.vp-doc a:not(.feature-card):not(.pager):not(.header-anchor) {
+.vp-doc a:not(.feature-card):not(.pager):not(.header-anchor):not(.legal-doc-card):not(.legal-pill) {
   color: var(--vp-c-text-1);
   text-decoration-line: underline;
   text-decoration-color: color-mix(in srgb, var(--vp-c-text-2) 62%, transparent);
@@ -115,13 +115,13 @@
   transition: color 160ms ease, text-decoration-color 160ms ease;
 }
 
-.vp-doc a:not(.feature-card):not(.pager):not(.header-anchor):hover,
-.vp-doc a:not(.feature-card):not(.pager):not(.header-anchor):focus-visible {
+.vp-doc a:not(.feature-card):not(.pager):not(.header-anchor):not(.legal-doc-card):not(.legal-pill):hover,
+.vp-doc a:not(.feature-card):not(.pager):not(.header-anchor):not(.legal-doc-card):not(.legal-pill):focus-visible {
   color: var(--vp-c-brand-1);
   text-decoration-color: color-mix(in srgb, var(--vp-c-brand-1) 78%, transparent);
 }
 
-.vp-doc a:not(.feature-card):not(.pager):not(.header-anchor):focus-visible {
+.vp-doc a:not(.feature-card):not(.pager):not(.header-anchor):not(.legal-doc-card):not(.legal-pill):focus-visible {
   outline: 2px solid color-mix(in srgb, var(--vp-c-brand-1) 45%, transparent);
   outline-offset: 3px;
   border-radius: 2px;

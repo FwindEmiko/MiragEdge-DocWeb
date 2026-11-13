@@ -1,4 +1,4 @@
-<!-- 来源页面: https://miragedge.top/plugin-guides/bug-enchant-remover -->
+<!-- 来源页面: https://miragedge.top/plugin-guides/bug-enchant-remover/ -->
 <!-- 由 llms.txt 标准生成器自动产出，源文件: plugin-guides/bug-enchant-remover/index.md -->
 
 # BugEnchantRemover 使用文档

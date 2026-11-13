@@ -26,6 +26,9 @@ import SkillBrowser from './components/vue/SkillBrowser.vue'
 import TreeNode from './components/vue/TreeNode.vue'
 import VillagerTradeNav from './components/vue/VillagerTradeNav.vue'
 import TradeSearch from './components/vue/TradeSearch.vue'
+import LegalHero from './components/vue/LegalHero.vue'
+import LegalDocGrid from './components/vue/LegalDocGrid.vue'
+import LegalEndnote from './components/vue/LegalEndnote.vue'
 import './css/custom.css'
 
 // 导入所有样式文件
@@ -44,6 +47,7 @@ import './css/base/overrides.css'
 import './style/dark.css'
 import './css/icons.css'
 import './css/datapack/datapack-guide.css'
+import './css/legal/legal.css'
 
 // 导入第三方库和组件
 import { inBrowser, withBase } from "vitepress"
@@ -101,6 +105,9 @@ export default {
     app.component('TreeNode', TreeNode)
     app.component('VillagerTradeNav', VillagerTradeNav)
     app.component('TradeSearch', TradeSearch)
+    app.component('LegalHero', LegalHero)
+    app.component('LegalDocGrid', LegalDocGrid)
+    app.component('LegalEndnote', LegalEndnote)
 
     // 注入图片查看器全局配置（可在子组件中通过 inject('lightboxConfig') 覆盖）
     setLightboxConfig({

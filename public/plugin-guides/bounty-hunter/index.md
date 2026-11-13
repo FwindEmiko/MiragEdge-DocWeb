@@ -1,4 +1,4 @@
-<!-- 来源页面: https://miragedge.top/plugin-guides/bounty-hunter -->
+<!-- 来源页面: https://miragedge.top/plugin-guides/bounty-hunter/ -->
 <!-- 由 llms.txt 标准生成器自动产出，源文件: plugin-guides/bounty-hunter/index.md -->
 
 # 赏金猎人管理

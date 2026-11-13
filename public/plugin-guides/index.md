@@ -1,4 +1,4 @@
-<!-- 来源页面: https://miragedge.top/plugin-guides -->
+<!-- 来源页面: https://miragedge.top/plugin-guides/ -->
 <!-- 由 llms.txt 标准生成器自动产出，源文件: plugin-guides/index.md -->
 
 # 原创插件文档

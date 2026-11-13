@@ -1,4 +1,4 @@
-<!-- 来源页面: https://miragedge.top/plugin-guides/fepvp -->
+<!-- 来源页面: https://miragedge.top/plugin-guides/fepvp/ -->
 <!-- 由 llms.txt 标准生成器自动产出，源文件: plugin-guides/fepvp/index.md -->
 
 # FE_PVP 使用文档

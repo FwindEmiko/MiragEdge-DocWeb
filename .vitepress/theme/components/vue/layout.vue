@@ -37,7 +37,7 @@ const isHome = computed(() => route.path === '/' || route.path === '/index.html'
 // 覆盖所有公开文档区，排除首页与 404
 const showFloatButtons = computed(() => {
   if (is404.value || isHome.value) return false
-  return /^\/(start|play|plugins|developer|archive)\//.test(route.path)
+  return /^\/(start|play|plugins|developer|archive|legal)\//.test(route.path)
 });
 
 const prefersReducedMotion = ref(false)
@@ -405,6 +405,21 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }) => {
           <span style="color: var(--vp-c-text-3); margin: 0 6px;">|</span>
           <a :href="soulUrl" class="doc-footer-link" style="color: var(--vp-c-brand); font-weight: 600;" title="狐魇星玖 · 灵魂文档">SOUL</a>
         </div>
+        <nav class="doc-footer-legal" aria-label="站点条款">
+          <a :href="withBase('/legal/')" class="doc-footer-link">条款中心</a>
+          <span class="doc-footer-sep" aria-hidden="true">·</span>
+          <a :href="withBase('/legal/terms')" class="doc-footer-link">用户协议</a>
+          <span class="doc-footer-sep" aria-hidden="true">·</span>
+          <a :href="withBase('/legal/privacy')" class="doc-footer-link">隐私政策</a>
+          <span class="doc-footer-sep" aria-hidden="true">·</span>
+          <a :href="withBase('/legal/disclaimer')" class="doc-footer-link">免责声明</a>
+          <span class="doc-footer-sep" aria-hidden="true">·</span>
+          <a :href="withBase('/legal/copyright')" class="doc-footer-link">版权声明</a>
+          <span class="doc-footer-sep" aria-hidden="true">·</span>
+          <a :href="withBase('/legal/minors')" class="doc-footer-link">未成年人保护</a>
+          <span class="doc-footer-sep" aria-hidden="true">·</span>
+          <a :href="withBase('/legal/contact')" class="doc-footer-link">联系我们</a>
+        </nav>
         <div class="doc-footer-content">
           <a href="https://beian.miit.gov.cn" target="_blank" rel="noopener noreferrer" style="color: var(--vp-c-text-2); text-decoration: none;">
             苏ICP备2024133820号-1
@@ -646,6 +661,60 @@ html:not(.effects-disabled) .doc-footer::after {
 
 .doc-footer-link:hover {
   color: var(--vp-c-brand-dark);
+}
+
+/* 全局条款入口：放在版权行下方，桌面/平板/手机都保持可换行、可点按 */
+.doc-footer-legal {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 2px 8px;
+  margin-top: 8px;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.doc-footer-legal .doc-footer-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  margin: 0;
+  padding: 0 2px;
+  color: var(--vp-c-text-2);
+}
+
+.doc-footer-legal .doc-footer-link:hover {
+  color: var(--vp-c-brand-1);
+}
+
+.doc-footer-legal a:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--vp-c-brand-1) 55%, transparent);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+
+.doc-footer-sep {
+  color: var(--vp-c-text-3);
+  opacity: 0.55;
+  user-select: none;
+}
+
+@media (max-width: 767px) {
+  .doc-footer-legal {
+    gap: 0 6px;
+    margin-top: 6px;
+    font-size: 12.5px;
+  }
+
+  .doc-footer-legal .doc-footer-link {
+    min-height: 40px;
+    padding: 0 3px;
+  }
+
+  .doc-footer-sep {
+    display: none;
+  }
 }
 
 /* 返回顶部按钮：玻璃磨砂 + conic-gradient 进度环 + 弹性淡入

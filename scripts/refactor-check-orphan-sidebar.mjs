@@ -16,9 +16,12 @@ const prefixes = [...sidebarSrc.matchAll(/^\s*'(\/[^']*)':\s*\[/gm)].map((m) => 
 console.log('=== sidebar 前缀 ===')
 prefixes.forEach((p) => console.log('  ' + p))
 
-const dirs = ['start', 'play', 'features', 'community', 'plugin-guides', 'developer', 'archive']
+const dirs = ['start', 'play', 'features', 'community', 'plugin-guides', 'developer', 'archive', 'legal']
+// 仅通过全局页脚进入的分区，不参与侧栏覆盖检查
+const footerOnlyDirs = new Set(['legal'])
 const routes = []
 for (const d of dirs) {
+  if (footerOnlyDirs.has(d)) continue
   const abs = path.join(ROOT, d)
   if (!fs.existsSync(abs)) continue
   const stack = [abs]

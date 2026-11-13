@@ -91,6 +91,11 @@ const SECTIONS = [
     title: '历史归档',
     description: '已经结束的活动与历史事件记录，不代表当前服务器状态',
   },
+  {
+    name: 'legal',
+    title: '条款与隐私',
+    description: '用户协议、隐私政策、免责声明、版权声明、未成年人保护与联系投诉',
+  },
 ];
 
 // 旧分区下的生成物是构建缓存，不属于当前公开文档；清理时只删除脚本自己生成的文件。
@@ -120,8 +125,11 @@ function sourceRelPosix(rel) {
 function pageUrl(relPosixPath) {
   // index.md → 目录根；其余去掉 .md 后缀
   let urlPath = relPosixPath.replace(/\\/g, '/').replace(/\.md$/, '');
+  const isIndex = /(^|\/)index$/.test(urlPath);
   urlPath = urlPath.replace(/(^|\/)index$/, '$1');
-  // 去掉结尾斜杠后拼到站点根
+  // 索引页保留结尾斜杠，mdUrl 才能拼成 /start/index.md；
+  // 普通页面去掉结尾斜杠后拼到站点根。
+  if (isIndex) return `${SITE_HOST}/${urlPath}`;
   urlPath = urlPath.replace(/\/$/, '');
   return urlPath ? `${SITE_HOST}/${urlPath}` : `${SITE_HOST}/`;
 }

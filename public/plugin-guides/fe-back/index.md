@@ -1,4 +1,4 @@
-<!-- 来源页面: https://miragedge.top/plugin-guides/fe-back -->
+<!-- 来源页面: https://miragedge.top/plugin-guides/fe-back/ -->
 <!-- 由 llms.txt 标准生成器自动产出，源文件: plugin-guides/fe-back/index.md -->
 
 # FE_Back 使用文档

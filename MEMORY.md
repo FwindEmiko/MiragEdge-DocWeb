@@ -28,6 +28,8 @@
 - **`/features/` 重定向碰撞（全量重构阶段 0 实测确认，未修）**：`legacy-redirects.ts` 的 `prefixRules` 含 `['/features','/play']`，`generateBundle()` 会为每个现存 `/play/**` 路由反推并 `emitFile` 出重定向存根。实测 `dist/features/` 下 **211 个 html 全是「页面已迁移」存根**，`dist/features/index.html` 是存根**而不是**真实页 → **存根覆盖真实页**。根因：存根经 VitePress 的 `fs.writeFile` 落盘，而页面不进 Rollup bundle，故**无警告、退出码 0**。既有缺陷佐证：`dist/plugins/custom/sky-elytra.html` 是真实页，同路径 `.../index.html` 仍是存根。裁决：保留 `/features/`（删该前缀规则会一次丢掉 106 条旧 `/features/*` 路由），但必须加「`from` 已是当前真实页路由则不生成存根」的通用守卫
 - **`plugins/` → `/features/` 改名必须同批修改 4 个非 md 文件**，漏改会让 `pnpm test` 直接变红：`scripts/generate-llms.mjs`（`SECTIONS` 的 `plugins`）、`.vitepress/test/config/config.test.ts:120`、`.vitepress/test/unit/scripts/generate-llms.test.mts:407`、`.vitepress/theme/components/vue/NotFound.vue:59`
 - **全站没有 `<DataTable>` / `<StepFlow>` / `<CompareTable>` / `<Tabs>`**：纲领 §8.2 把它们列为「候选组件」，实测 `theme/components/vue/` 下不存在。所以「超 18 KB 改组件」这条路径当前无法落地，7 个超重页只能走拆页
+- 条款页统一用 `pageClass: legal-page` + `LegalHero`/`LegalDocGrid`；条款中心 `legal-hub` 在 ≥960px 加宽到 760 且 `aside: false`，正文页保持 688 阅读行长；小字强调色用 `--legal-accent-strong`（浅色 #B03030 / 深色 #FCA5A5），实心胶囊用 `--legal-accent-fill`（#B03030 / #C94242）保证白字对比度
+- 全局条款入口只放在页脚 `doc-footer-legal`（条款中心/用户协议/隐私/免责/版权/未成年人/联系我们），不加入顶部导航与侧栏；legal 为页脚专用分区，`audit-doc-routes` 对 legal 跳过侧栏要求但仍审计站内链接，`refactor-check-orphan-sidebar` 跳过 legal；不要在 account/rules/welcome/review 等其他页面另加入口
 
 ## 模块/组件
 
@@ -36,6 +38,7 @@
 - useAdaptiveEffects（.vitepress/theme/composables/）：自适应性能探针，采样 rAF 帧间隔 + PerformanceObserver(longtask/event) + 静态信号，判定后经 applyAutoEffects 落地；sessionStorage 缓存 60s（miragedge-effects-auto）；探针通过后启动交互期掉帧监测（scroll/touchmove/wheel 短采样，isInteractionJank），捕捉「空闲满帧、交互掉帧」的设备
 - layout.vue onMounted 依次调用 initEffectsToggleState → initAdaptiveEffects，onUnmounted 时调用返回的 cleanup
 - VillagerTradeNav.vue（.vitepress/theme/components/vue/）：末地村庄交易页的「职业快速跳转 + 筛选」导航。不维护交易数据副本，而是挂载后扫描本页 `.vp-doc` 内的 h3（职业）/h4（等级）标题动态生成，页面增删职业或等级时导航自动跟随，永不与正文脱节；等级标题须含「共 N 个交易格」才能被解析。已在 theme/index.ts 全局注册
+- LegalHero / LegalDocGrid / LegalEndnote / LegalIcon（.vitepress/theme/components/vue/）：条款页统一页头、卡片网格、版本尾注与内联图标；数据源 `.vitepress/theme/data/legal.ts`，条款正文在 `legal/`，共享样式 `.vitepress/theme/css/legal/legal.css`
 
 ## 踩坑记录
 
@@ -90,6 +93,16 @@
 - 推送凭据：.env 的 GITHUB_TOKEN 是 FwindEmiko 的 fine-grained PAT（无 Contents 写权限，推主仓库 403）；实际推送用 gh hosts.yml 里 FCelestial 的 classic token（export GH_TOKEN 后走 gh api，勿在输出回显 token）
 
 ## 进行中的工作
+
+### 2026-11 · 站点合规条款中心（legal/）
+
+- 新增 7 页：`legal/index.md`（条款与隐私中心）、`terms.md`（用户协议与用户声明）、`privacy.md`（隐私政策）、`disclaimer.md`（免责声明）、`copyright.md`（版权与知识产权声明）、`minors.md`（未成年人保护与家长须知）、`contact.md`（联系我们与投诉）
+- 共享组件：`LegalHero.vue`（页头 + 文档胶囊）、`LegalDocGrid.vue`（卡片网格，`compact` 用于页尾三列）、`LegalEndnote.vue`（版本/更新/出口）、`LegalIcon.vue`（内联 SVG）；数据源 `.vitepress/theme/data/legal.ts`；样式 `.vitepress/theme/css/legal/legal.css`
+- 入口：全局页脚 `doc-footer-legal`（唯一入口，7 个链接：条款中心/用户协议/隐私/免责/版权/未成年人/联系我们）；legal 页面内部用 Hero 胶囊、中心卡片与页尾相关条款切换；不加入顶部导航、侧栏或其他页面，避免入口分散
+- 响应式：条款中心桌面 3 列卡片（760px 容器）、平板 688px 居中、手机单列 + 2×2 元信息 + 胶囊换行；正文页 688px 行长、H2 左侧品牌色竖线、打印样式、`prefers-reduced-motion`、对比度修正均已落地
+- 脚本同步：`scripts/audit-doc-routes.mjs` 增加 `legal` 与根级 `soul.md`，并对 legal 设页脚专用例外（不要求侧栏、仍审计链接）；`scripts/refactor-check-orphan-sidebar.mjs` 跳过 legal；`scripts/generate-llms.mjs` 增加 `legal` 分区并修复 index 页 `mdUrl`（保留尾斜杠，输出 `/start/index.md` 而非 `/start.md`）；测试补 `sectionCounts.legal`
+- 验证：`typecheck` 通过、`pnpm test` 220 passed、`audit:routes` 244 页通过、`llms:check` 251 文件 / legal 7 页通过、`vitepress build` 退出码 0（contributor 插件对 `star.fox@miragedge.top` 的 404 为既有现象）
+- 待站主确认的运营口径：隐私政策中的保留期限（账号注销 30 日、审核表/日志 180 日、访问日志 30 日）、15 个工作日隐私回复、7 个工作日侵权确认、安全漏洞 3 个工作日；以及文档正文「保留所有权利」与代码 Apache-2.0 的边界是否符合预期
 
 ### 2026-08 · HFcatLogin 原创插件文档（plugin-guides/hfcatlogin/）
 

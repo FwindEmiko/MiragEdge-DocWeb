@@ -1,4 +1,4 @@
-<!-- 来源页面: https://miragedge.top/community -->
+<!-- 来源页面: https://miragedge.top/community/ -->
 <!-- 由 llms.txt 标准生成器自动产出，源文件: community/index.md -->
 
 # 社区支持

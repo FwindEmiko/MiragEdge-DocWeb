@@ -408,6 +408,7 @@ describe('generateLlms', () => {
     expect(result.sectionCounts.community).toBeGreaterThan(0)
     expect(result.sectionCounts.developer).toBeGreaterThan(0)
     expect(result.sectionCounts.archive).toBeGreaterThan(0)
+    expect(result.sectionCounts.legal).toBeGreaterThan(0)
     expect(result.rootCount).toBeGreaterThan(0)
   })
 

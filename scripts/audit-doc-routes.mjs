@@ -2,7 +2,7 @@ import fs from 'node:fs'
 import path from 'node:path'
 
 const root = process.cwd()
-const documentRoots = ['start', 'community', 'play', 'features', 'plugin-guides', 'developer', 'archive']
+const documentRoots = ['start', 'community', 'play', 'features', 'plugin-guides', 'developer', 'archive', 'legal']
 const configPath = path.join(root, '.vitepress', 'config.mts')
 
 function normalizeRoute(value) {
@@ -42,9 +42,13 @@ function localRoute(rawLink, sourceDirectory) {
   return toRoute(path.posix.resolve(sourceDirectory, link))
 }
 
-const pages = documentRoots
-  .flatMap((directory) => walk(path.join(root, directory)))
-  .map(pageRecord)
+const pages = [
+  ...documentRoots.flatMap((directory) => walk(path.join(root, directory))),
+  // 根级独立页面（不在任何分区目录下，但确实有侧栏入口）
+  ...['soul.md']
+    .filter((file) => fs.existsSync(path.join(root, file)))
+    .map((file) => path.join(root, file)),
+].map(pageRecord)
 const routes = new Map(pages.map((page) => [page.route, page.file]))
 
 const config = fs.readFileSync(configPath, 'utf8')
@@ -88,8 +92,15 @@ for (const route of sidebarRouteSet) {
   if (!routes.has(route)) problems.push(`侧栏链接不存在: ${route}`)
 }
 
+// 这些分区只在全局页脚提供入口，不要求进入侧栏；站内链接仍参与审计。
+const footerOnlyPrefixes = ['/legal']
+const isFooterOnly = (route) =>
+  footerOnlyPrefixes.some((prefix) => route === prefix || route.startsWith(`${prefix}/`))
+
 for (const page of pages) {
-  if (!sidebarRouteSet.has(page.route)) problems.push(`页面未进入侧栏: ${page.route} (${path.relative(root, page.file)})`)
+  if (!sidebarRouteSet.has(page.route) && !isFooterOnly(page.route)) {
+    problems.push(`页面未进入侧栏: ${page.route} (${path.relative(root, page.file)})`)
+  }
 
   const content = fs.readFileSync(page.file, 'utf8')
   for (const match of content.matchAll(/\[[^\]]*\]\(([^)\s]+)(?:\s+['"][^'"]*['"])?\)/g)) {
@@ -104,5 +115,6 @@ if (problems.length) {
   console.error(problems.join('\n'))
   process.exitCode = 1
 } else {
-  console.log(`文档路由审计通过：${pages.length} 个页面均有有效侧栏入口。`)
+  const footerOnlyCount = pages.filter((page) => isFooterOnly(page.route)).length
+  console.log(`文档路由审计通过：${pages.length} 个页面，其中 ${footerOnlyCount} 个为页脚专用入口。`)
 }
