@@ -402,8 +402,8 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }) => {
         <div class="doc-footer-content doc-footer-main">
           <a href="https://space.bilibili.com/359174372" target="_blank" rel="noopener noreferrer" class="doc-footer-link">© 2020-2026 锐界幻境与贡献者</a>
           <nav class="doc-footer-links" aria-label="站点信息">
-            <a :href="soulUrl" class="doc-footer-link" title="狐魇星玖 · 灵魂文档">SOUL</a>
-            <a :href="withBase('/legal/')" class="doc-footer-link">条款</a>
+            <a :href="soulUrl" class="doc-footer-link" title="狐魇星玖 · 灵魂文档">🦊SOUL</a>
+            <a :href="withBase('/legal/')" class="doc-footer-link"> · 条款</a>
           </nav>
         </div>
         <div class="doc-footer-content">
